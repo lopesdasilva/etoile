@@ -1,0 +1,28 @@
+@(blogs: List[Blog]) @main("etoile project") {
+    <form class="navbar-form pull-right">
+	<input class="span2" type="text" placeholder="Email"> <input
+		class="span2" type="password" placeholder="Password">
+	<button type="submit" class="btn">Sign in</button>
+</form><!-- Main hero unit for a primary marketing message or call to action -->
+<br>
+<div class="hero-unit">
+	<h1>étoile platform</h1>
+	<p>Enhanced Technology for Open Intelligent Learning Environments</p>
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+	@for(blog <- blogs) {
+	<div class="span12">
+		<h2>@blog.header</h2>
+		<p>@blog.text</p>
+		@for(comment <- blog.comments) {
+		<blockquote>
+			<p>@comment.text</p>
+			<small>By a random Person</small>
+		</blockquote>
+		}
+	</div>
+	}
+</div>
+}

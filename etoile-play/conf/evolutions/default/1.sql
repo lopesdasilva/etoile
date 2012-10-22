@@ -1,0 +1,34 @@
+# --- Created by Ebean DDL
+# To stop Ebean DDL generation, remove this comment and start using Evolutions
+
+# --- !Ups
+
+create table blog (
+  id                        bigint auto_increment not null,
+  header                    varchar(255),
+  text                      TEXT,
+  constraint pk_blog primary key (id))
+;
+
+create table comment (
+  id                        bigint auto_increment not null,
+  text                      varchar(255),
+  blog_id                   bigint,
+  constraint pk_comment primary key (id))
+;
+
+alter table comment add constraint fk_comment_blog_1 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
+create index ix_comment_blog_1 on comment (blog_id);
+
+
+
+# --- !Downs
+
+SET FOREIGN_KEY_CHECKS=0;
+
+drop table blog;
+
+drop table comment;
+
+SET FOREIGN_KEY_CHECKS=1;
+

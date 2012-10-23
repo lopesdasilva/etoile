@@ -34,27 +34,20 @@ public class Application extends Controller {
 		return ok(index.render(form(Login.class),blogs));
 	}
 	
-	public static Result submit() {
-		Form<User> filledform = userForm.bindFromRequest();
-		List<Blog> blog = Blog.getAllBlogs();
-		User created = filledform.get();
-		return ok(submit.render(blog, created));
-	}
+
 	
 	/**
      * Login page.
      */
     public static Result login() {
-    	
-        return ok(
-            login.render(form(Login.class))
-        );
+        return ok(login.render(form(Login.class)));
     }
     
     /**
      * Handle login form submission.
      */
     public static Result authenticate() {
+    	
         Form<Login> loginForm = form(Login.class).bindFromRequest();
         if(loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));

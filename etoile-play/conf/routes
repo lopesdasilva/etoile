@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                           controllers.Profile.index()
-POST 	/signup						controllers.Application.submit()
 
 # Authentication
 GET     /login                              controllers.Application.login()

@@ -1,0 +1,25 @@
+package models;
+
+public class User {
+
+	public String username;
+	public String password;
+
+
+
+	/**
+     * Authenticate a User.
+     */
+    public static User authenticate(String email, String password) {
+//        return find.where()
+//            .eq("email", email)
+//            .eq("password", password)
+//            .findUnique();
+    	return new User("rui","123");
+    }
+    
+    public String toString() {
+        return "User(" + username + ")";
+    }
+	
+}

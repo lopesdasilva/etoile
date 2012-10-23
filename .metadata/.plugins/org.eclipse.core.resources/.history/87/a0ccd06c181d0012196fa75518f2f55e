@@ -1,0 +1,10 @@
+package controllers;
+
+import play.mvc.Controller;
+
+/**
+ * Manage Profile related operations.
+ */
+public class Profile extends Controller {
+
+}

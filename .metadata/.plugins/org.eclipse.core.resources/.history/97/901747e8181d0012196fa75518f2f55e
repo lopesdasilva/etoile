@@ -1,0 +1,20 @@
+package controllers;
+
+
+import models.User;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+
+/**
+ * Manage Profile related operations.
+ */
+@Security.Authenticated(Secured.class)
+public class Profile extends Controller {
+	/**
+     * Display the dashboard.
+     */
+    public static Result h() {
+        return ok(home.render());
+    }
+}

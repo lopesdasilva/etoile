@@ -17,6 +17,13 @@ create table comment (
   constraint pk_comment primary key (id))
 ;
 
+create table account (
+  email                     varchar(255) not null,
+  name                      varchar(255),
+  password                  varchar(255),
+  constraint pk_account primary key (email))
+;
+
 alter table comment add constraint fk_comment_blog_1 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
 create index ix_comment_blog_1 on comment (blog_id);
 
@@ -29,6 +36,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table blog;
 
 drop table comment;
+
+drop table account;
 
 SET FOREIGN_KEY_CHECKS=1;
 

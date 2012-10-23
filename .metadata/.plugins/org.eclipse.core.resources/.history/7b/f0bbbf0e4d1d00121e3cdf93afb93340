@@ -50,6 +50,10 @@
 
    
 <div class="container">
+    <div class="row">
+        <div class="span12" style="float:right">
+            <div class="span7" style="float:left;">
+                <!-- centered stuff goes here-->
    
     
         @helper.form(routes.Application.authenticate) {
@@ -78,7 +82,10 @@
                 <button class="btn btn-primary" type="submit">Login</button>
             </p>
             
-}
+        }	 
+         </div>
+        </div>
+    </div>
 </div>
    </body>
 </html>

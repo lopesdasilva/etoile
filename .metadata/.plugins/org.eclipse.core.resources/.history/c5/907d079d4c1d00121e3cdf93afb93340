@@ -1,6 +1,5 @@
 @(form: Form[Application.Login])
 
-
 <html>
     <head>
 <title>etoile platform</title>
@@ -49,8 +48,7 @@
         
 
    
-<div class="container">
-   
+<div class="container" style="margin: 0 auto">
     
         @helper.form(routes.Application.authenticate) {
             
@@ -78,7 +76,7 @@
                 <button class="btn btn-primary" type="submit">Login</button>
             </p>
             
-}
+        }	 
 </div>
    </body>
 </html>

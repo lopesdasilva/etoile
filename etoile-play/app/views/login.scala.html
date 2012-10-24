@@ -1,88 +1,204 @@
-@(form: Form[Application.Login])
-
-
-<html>
-    <head>
-<title>etoile platform</title>
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-<!-- bootstrap css-->
-<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
-<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-<script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
-<!-- bootstrap css-->
-<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
-  <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-</head>
-    <body>
-        
-        <header>
-           <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">etoile platform</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href=""about">About</a></li>
-              <li><a href=""contact">Contact</a></li>
-            </ul>
-            <form class="navbar-form pull-right">
-             <!--<a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">Login</a>-->
- 
-
- 
-            </form>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-      </div>
-        </header>
-        
-
-   
-<div class="container">
-   
-    
-        @helper.form(routes.Application.authenticate) {
-            
-            <h1>Sign in</h1>
-            
-            @if(form.hasGlobalErrors) { 
-                <p class="error">
-                    @form.globalError.message
-                </p>
-            }
-            
-            @if(flash.contains("success")) {
-                <p class="success">
-                    @flash.get("success")
-                </p>
-            }
-            
-            <p>
-                <input type="email" name="email" placeholder="Email" value="@form("username").value">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="Password">
-            </p>
-            <p>
-                <button class="btn btn-primary" type="submit">Login</button>
-            </p>
-            
-}
+@(form: Form[Application.Login]) @main("etoile project") {
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a> <a class="brand" href="#">etoile platform</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href=""about">About</a></li>
+					<li><a href=""contact">Contact</a></li>
+				</ul>
+				
+			</div>
+			<!-- /.nav-collapse -->
+		</div>
+	</div>
 </div>
-   </body>
-</html>
-       
- 
+<div class="tabbable">
+	<!-- Only required for left/right tabs -->
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab">Login</a></li>
+		<li><a href="#tab2" data-toggle="tab">Register</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab1">
+			@helper.form(routes.Application.authenticate,
+			'class->"form-horizontal") {
 
+			<p class="muted">Please insert your credentials</p>
+
+			@if(form.hasGlobalErrors) {
+			<p class="error">@form.globalError.message</p>
+			} @if(flash.contains("success")) {
+			<p class="success">@flash.get("success")</p>
+			}
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">Email</label>
+				<div class="controls">
+					<input type="email" class="span2" name="email" placeholder="Email"
+						value="@form("username").value">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">Password</label>
+				<div class="controls">
+					<input type="password" name="password" placeholder="Password">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<!--       <label class="checkbox"> -->
+					<!--         <input type="checkbox"> Remember me -->
+					<!--       </label> -->
+					<button class="btn btn-primary" type="submit">Login</button>
+					<p>
+					<div align="">
+						Forgot password? <a href="#">Click here to reset</a>
+					</div>
+					<div align="">
+						New User? <a href="#tab2" data-toggle="tab">Click here to
+							register</a>
+					</div>
+				</div>
+			</div>
+			}
+
+		</div>
+
+
+		<div class="tab-pane" id="tab2">
+		<form class="form-horizontal">
+  <div class="control-group">
+   <legend>New account</legend>
+    <label class="control-label" for="inputUsername">Username</label>
+    <div class="controls">
+      <input type="text" id="inputUsername" placeholder="Username">
+      <span class="help-inline"></span>
+        <span class="help-block">Please choose a valid username.</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="email" id="inputEmail" placeholder="Email">
+      <span class="help-inline"></span>
+        <span class="help-block">Enter a valid email address.</span> 
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Password</label>
+    <div class="controls">
+      <input type="password" id="inputPassword" placeholder="Password">
+       <span class="help-inline"></span>
+        <span class="help-block">A password must be at least 6 characters. </span> 
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+    <div class="controls">
+      <input type="password" id="inputRepeatPassword" placeholder="Repeat Password">
+       <span class="help-inline"></span>
+        <span class="help-block">Please repeat your password again. </span> 
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="profile_country">Country</label>
+    <div class="controls">
+        
+    <select id="profile_country" name="profile.country" >
+        
+            <option class="blank" value="">--- Choose a country ---</option>
+        
+        
+            <option value="France" >France</option>
+        
+            <option value="Austria" >Austria</option>
+        
+            <option value="Belgium" >Belgium</option>
+        
+            <option value="Bulgaria" >Bulgaria</option>
+        
+            <option value="Cyprus" >Cyprus</option>
+        
+            <option value="Czech Republic" >Czech Republic</option>
+        
+            <option value="Denmark" >Denmark</option>
+        
+            <option value="Estonia" >Estonia</option>
+        
+            <option value="Finland" >Finland</option>
+        
+            <option value="French Guiana" >French Guiana</option>
+        
+            <option value="Germany" >Germany</option>
+        
+            <option value="Gibraltar" >Gibraltar</option>
+        
+            <option value="Greece" >Greece</option>
+        
+            <option value="Guadeloupe" >Guadeloupe</option>
+        
+            <option value="Hungary" >Hungary</option>
+        
+            <option value="Ireland" >Ireland</option>
+        
+            <option value="Italy" >Italy</option>
+        
+            <option value="Latvia" >Latvia</option>
+        
+            <option value="Lithuania" >Lithuania</option>
+        
+            <option value="Luxembourg" >Luxembourg</option>
+        
+            <option value="Malta" >Malta</option>
+        
+            <option value="Martinique" >Martinique</option>
+        
+            <option value="Netherlands" >Netherlands</option>
+        
+            <option value="Poland" >Poland</option>
+        
+            <option value="Portugal" >Portugal</option>
+        
+            <option value="Reunion" >Reunion</option>
+        
+            <option value="Romania" >Romania</option>
+        
+            <option value="Slovak (Republic)" >Slovak (Republic)</option>
+        
+            <option value="Slovenia" >Slovenia</option>
+        
+            <option value="Spain" >Spain</option>
+        
+            <option value="Sweden" >Sweden</option>
+        
+            <option value="United Kingdom" >United Kingdom</option>
+        
+    </select>
+
+        <span class="help-inline"></span>
+        <span class="help-block"></span> 
+    </div>
+</div>
+  
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </div>
+  </div>
+</form>
+		</div>
+	</div>
+</div>
+
+}
 

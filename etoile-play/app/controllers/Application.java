@@ -66,7 +66,7 @@ public class Application extends Controller {
         session().clear();
         flash("success", "You've been logged out");
         return redirect(
-            routes.Application.login()
+            routes.Application.index()
         );
     }
 	

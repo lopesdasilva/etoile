@@ -33,21 +33,16 @@
 <div class="hero-unit">
 	<h1>etoile platform</h1>
 	<p>Enhanced Technology for Open Intelligent Learning Environments</p>
-	 <p><a href="login" class="btn btn-primary btn-large">Login &raquo;</a></p>
+	 <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
-
+               
 <!-- Example row of columns -->
 <div class="row" >
 	@for(blog <- blogs) {
-	<div class="span12">
+	<div class="span4">
 		<h2>@blog.header</h2>
 		<p>@blog.text</p>
-		@for(comment <- blog.comments) {
-		<blockquote>
-			<p>@comment.text</p>
-			<small>By a random Person</small>
-		</blockquote>
-		}
+		<p><a class="btn" href="#">View details &raquo;</a></p>
 	</div>
 	}
 </div>
@@ -57,35 +52,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 id="myModalLabel">Please insert your login information</h3>
   </div>
-  <div class="modal-body">
- @helper.form(routes.Application.authenticate) {
-            
-            <h1>Sign in</h1>
-            
-            @if(form.hasGlobalErrors) { 
-                <p class="error">
-                    @form.globalError.message
-                </p>
-            }
-            
-            @if(flash.contains("success")) {
-                <p class="success">
-                    @flash.get("success")
-                </p>
-            }
-            
-            <p>
-                <input type="email" name="email" placeholder="Email" value="@form("username").value">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="Password">
-            </p>
-            <p>
-                <button class="btn btn-primary" type="submit">Login</button>
-            </p>
-            
-        }
-  </div>
+  
 </div>
 
 }

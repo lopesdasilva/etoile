@@ -31,7 +31,7 @@ public class User extends Model {
     @Constraints.Required
     public String password;
     
-	@OneToMany
+	@ManyToMany
 	public List<Course> courses;
     
     // -- Queries

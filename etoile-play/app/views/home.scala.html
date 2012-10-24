@@ -30,11 +30,12 @@
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              <li class="nav-header">Courses</li>
+              @for(course <- user.courses) {
+	<li><a href="#">@course.text</a></li>
+		
+	}
+              
               <li class="nav-header">Sidebar</li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
@@ -64,14 +65,6 @@
 	</div>
 	}
 	
-	@for(course <- user.courses) {
-	<div class="span4">
-		<h2>@course.id</h2>
-		<p>@course.text</p>
-		<p><a class="btn" href="#">View details &raquo;</a></p>
-	</div>
-	}
-       
        
         </div>
         </div>

@@ -17,7 +17,7 @@ public class Course extends Model {
 	@Constraints.Required
 	public String text;
 
-	@ManyToOne
+	@ManyToMany
 	public User user;
 
 	//public Date created;

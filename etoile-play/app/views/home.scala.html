@@ -63,6 +63,14 @@
 		<p><a class="btn" href="#">View details &raquo;</a></p>
 	</div>
 	}
+	
+	@for(course <- user.courses) {
+	<div class="span4">
+		<h2>@course.id</h2>
+		<p>@course.text</p>
+		<p><a class="btn" href="#">View details &raquo;</a></p>
+	</div>
+	}
        
        
         </div>

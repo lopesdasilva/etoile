@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -15,7 +16,10 @@ import com.avaje.ebean.*;
 @Entity 
 @Table(name="account")
 public class User extends Model {
-
+	
+    @Constraints.Required
+    public Long id;
+	
     @Id
     @Constraints.Required
     @Formats.NonEmpty
@@ -26,6 +30,9 @@ public class User extends Model {
     
     @Constraints.Required
     public String password;
+    
+	@OneToMany
+	public List<Course> courses;
     
     // -- Queries
     

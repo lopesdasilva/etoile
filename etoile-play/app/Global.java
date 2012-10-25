@@ -59,8 +59,7 @@ public class Global extends GlobalSettings {
 			user.email = "rui@rui.pt";
 			user.password = "123";
 			user.name = "Rui Lopes da Silva";
-			user.save();		
-			
+			user.save();					
 
 		}
 	}

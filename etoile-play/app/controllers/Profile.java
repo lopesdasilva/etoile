@@ -4,6 +4,7 @@ package controllers;
 import java.util.List;
 
 import models.Blog;
+import models.Course;
 import models.User;
 import play.db.ebean.Model;
 import play.mvc.Controller;
@@ -25,13 +26,17 @@ public class Profile extends Controller {
         return ok(home.render(user,blogs) );
     }
     
-    public static Result course(Long course){
-    	System.out.println("COURSE ID: "+course);
+    public static Result course(Long course_id){
+    	System.out.println("COURSE ID: "+course_id);
     	
     	
-    	List<Blog> blogs = Blog.getAllBlogs();
+    	Course course = Course.find.byId(course_id);
     	User user=User.find.byId(request().username());
+<<<<<<< HEAD
     	return ok(views.html.statics.blank.render());
+=======
+    	return ok(views.html.secured.course.render(user,course));
+>>>>>>> Modules Update
     	
     }
     

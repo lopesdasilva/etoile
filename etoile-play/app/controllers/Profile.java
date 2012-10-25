@@ -29,14 +29,11 @@ public class Profile extends Controller {
     public static Result course(Long course_id){
     	System.out.println("COURSE ID: "+course_id);
     	
-    	
     	Course course = Course.find.byId(course_id);
     	User user=User.find.byId(request().username());
-<<<<<<< HEAD
-    	return ok(views.html.statics.blank.render());
-=======
+
     	return ok(views.html.secured.course.render(user,course));
->>>>>>> Modules Update
+
     	
     }
     

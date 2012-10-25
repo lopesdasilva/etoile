@@ -25,6 +25,16 @@ public class Profile extends Controller {
         return ok(home.render(user,blogs) );
     }
     
+    public static Result course(Long course){
+    	System.out.println("COURSE ID: "+course);
+    	
+    	
+    	List<Blog> blogs = Blog.getAllBlogs();
+    	User user=User.find.byId(request().username());
+    	return ok(blank.render());
+    	
+    }
+    
 // -- Queries
     
     public static Model.Finder<Long,Profile> find = new Model.Finder(Long.class, Profile.class);

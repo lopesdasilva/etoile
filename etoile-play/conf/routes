@@ -15,5 +15,9 @@ GET     /login                              controllers.Application.login()
 POST    /login                              controllers.Application.authenticate()
 GET     /logout                             controllers.Application.logout()
 
+#Disciplines
+GET		/profile						controllers.Profile.index()
+GET  	/profile/course:course					controllers.Profile.course(course: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

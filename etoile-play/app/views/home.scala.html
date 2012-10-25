@@ -35,7 +35,7 @@
             <ul class="nav nav-list">
               	<li class="nav-header">Courses</li>
 				              @for(course <- user.courses) {
-					<li><a href="#">@course.name</a></li>
+					<li><a href="@routes.Profile.course(course.id)">@course.name</a></li>
 
 					}
               <li class="nav-header">Sidebar</li>

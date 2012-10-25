@@ -31,15 +31,21 @@ public class Application extends Controller {
 
 	public static Result index() {
 		List<Blog> blogs = Blog.getAllBlogs();
-		return ok(index.render(form(Login.class),blogs));
+		return ok(index.render(blogs));
 	}
 	
 	public static Result about() {
-		return ok(about.render(form(Login.class)));
+		return ok(views.html.statics.about.render());
 	}
 	
 	public static Result contact() {
-		return ok(contact.render(form(Login.class)));
+		return ok(views.html.statics.contact.render());
+	}
+	
+	
+	public static Result blog(Long blog){
+		
+		return ok(views.html.blog.blog.render(Blog.find.byId(blog)));
 	}
 
 	

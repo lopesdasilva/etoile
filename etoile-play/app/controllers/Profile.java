@@ -31,7 +31,7 @@ public class Profile extends Controller {
     	
     	List<Blog> blogs = Blog.getAllBlogs();
     	User user=User.find.byId(request().username());
-    	return ok(blank.render());
+    	return ok(views.html.statics.blank.render());
     	
     }
     

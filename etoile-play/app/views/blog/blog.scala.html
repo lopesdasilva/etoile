@@ -1,7 +1,5 @@
-@(blogs: List[Blog])
-
+@(blog: Blog) 
 @main("etoile project") {
-  
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -28,30 +26,15 @@
       </div>
     </div>
  
-
-<div class="hero-unit">
-	<h1>etoile platform</h1>
-	<p>Enhanced Technology for Open Intelligent Learning Environments</p>
-	 <p><a href="about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
-               
-<!-- Example row of columns -->
-<div class="row" >
-	@for(blog <- blogs) {
-	<div class="span4">
-		<h4>@blog.header</h4>
-		<p>@blog.text</p>
-		<p><a class="btn" href="@routes.Application.blog(blog.id)">Read more&raquo;</a></p>
-	</div>
-	}
-</div>
-
-<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 id="myModalLabel">Please insert your login information</h3>
-  </div>
-  
-</div>
+ <div class="span9" >
+ <h3>@blog.header</h3>
+ <p>@blog.text</p>
+ @for(comment <- blog.comments) {
+		<blockquote>
+			<p>@comment.text</p>
+			<small>By a random Person</small>
+		</blockquote>
+		}
+ </div>
 
 }

@@ -16,23 +16,34 @@ public class Global extends GlobalSettings {
 
 
 			Blog blog = new Blog();
-			blog.header = "The Complex Systems Digital Campus goes to Latin-America";
-			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network welcomed new members...";
+			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
+			blog.alternateHeader= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
+			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
+			blog.alternateText = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
+			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			
 			blog.save();
 			
-				blog = new Blog();
-				blog.header = "Étoile course on “Emergence, Multi-Agent Simulation, and...”";
-				blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented at the Université Paris Dauphine, École doctorale EDDIMO...";
-				blog.save();
-				
-				blog = new Blog();
-				blog.header = "Étoile course on “Complex Networks and Graph Theory”";
-				blog.text = "Jeff Johnson presented the Complex Networks and Graph Theory component of the 2nd Ph.D. School on ”Mathematical Modeling of Complex Systems”, Italy...";
-				blog.save();
+			blog = new Blog();
+			blog.header = "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
+			blog.alternateHeader= "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
+			blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
+			blog.alternateText = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
+			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/emergence.tiff";
 			
+			blog.save();
+			
+			blog = new Blog();
+			blog.header = "Étoile will run on tablet !";
+			blog.alternateHeader= "Étoile will run on tablet !";
+			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
+			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
+			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
+			
+			blog.save();
 
 			Comment c = new Comment();
-			c.text = "Suspendisse malesuada pellentesque sapien et aliquet. Duis varius neque vel enim mattis consectetur. Cras ac nisl urna. Duis ornare, erat nec aliquet dapibus, ligula ante congue dolor, sit amet consectetur metus mi ac metus. ";
+			c.text = "Great! I can't wait to try it!";
 			c.blog = blog;
 			c.save();
 

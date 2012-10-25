@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">etoile platform</a>
+          <a class="brand" href="/">étoile platform</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
@@ -30,7 +30,7 @@
  
 
 <div class="hero-unit">
-	<h1>etoile platform</h1>
+	<h1>étoile platform</h1>
 	<p>Enhanced Technology for Open Intelligent Learning Environments</p>
 	 <p><a href="about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
@@ -39,8 +39,12 @@
 <div class="row" >
 	@for(blog <- blogs) {
 	<div class="span4">
-		<h4>@blog.header</h4>
-		<p>@blog.text</p>
+	
+		<h4>@blog.alternateHeader</h4>
+		<div class="storycontent">
+		<img class="image img-circle" src="@blog.articleImageURL" alt="placeholder image" height="50" width="50">
+		<p>@blog.alternateText</p>
+		</div>
 		<p><a class="btn" href="@routes.Application.blog(blog.id)">Read more&raquo;</a></p>
 	</div>
 	}

@@ -6,7 +6,10 @@
 create table blog (
   id                        bigint auto_increment not null,
   header                    varchar(255),
+  alternate_header          varchar(255),
   text                      TEXT,
+  alternate_text            TEXT,
+  article_image_url         varchar(255),
   constraint pk_blog primary key (id))
 ;
 

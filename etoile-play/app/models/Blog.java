@@ -3,6 +3,7 @@ package models;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 
 import com.avaje.ebean.Ebean;
 
@@ -16,10 +17,25 @@ public class Blog extends Model {
 
 	@Constraints.Required
 	public String header;
-
+	
+	@Constraints.Required
+	@Constraints.MaxLength(value = 45)
+	public String alternateHeader;
+	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String text;
+	
+	@Constraints.Required
+	@Constraints.MaxLength(value = 255)
+	@Column(columnDefinition="TEXT")
+	public String alternateText;
+	
+	@Constraints.Required
+	public String articleImageURL;
+	
+	
+	
 
 	//public Date created;
 

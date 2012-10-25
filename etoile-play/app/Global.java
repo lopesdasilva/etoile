@@ -16,12 +16,23 @@ public class Global extends GlobalSettings {
 
 
 			Blog blog = new Blog();
-			blog.header = "Test Comment #1";
-			blog.text = "This is just a test.";
+			blog.header = "The Complex Systems Digital Campus goes to Latin-America";
+			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network welcomed new members...";
 			blog.save();
+			
+				blog = new Blog();
+				blog.header = "Étoile course on “Emergence, Multi-Agent Simulation, and...”";
+				blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented at the Université Paris Dauphine, École doctorale EDDIMO...";
+				blog.save();
+				
+				blog = new Blog();
+				blog.header = "Étoile course on “Complex Networks and Graph Theory”";
+				blog.text = "Jeff Johnson presented the Complex Networks and Graph Theory component of the 2nd Ph.D. School on ”Mathematical Modeling of Complex Systems”, Italy...";
+				blog.save();
+			
 
 			Comment c = new Comment();
-			c.text = " Suspendisse malesuada pellentesque sapien et aliquet. Duis varius neque vel enim mattis consectetur. Cras ac nisl urna. Duis ornare, erat nec aliquet dapibus, ligula ante congue dolor, sit amet consectetur metus mi ac metus. ";
+			c.text = "Suspendisse malesuada pellentesque sapien et aliquet. Duis varius neque vel enim mattis consectetur. Cras ac nisl urna. Duis ornare, erat nec aliquet dapibus, ligula ante congue dolor, sit amet consectetur metus mi ac metus. ";
 			c.blog = blog;
 			c.save();
 
@@ -31,18 +42,24 @@ public class Global extends GlobalSettings {
 			c1.save();
 			
 			Module module = new Module();
-			module.name = "First Module";
+			module.name = "Sum Module";
 			module.save();
 			
 			Course course = new Course();
-			course.name = "First Course";
+			course.name = "Mathematics 101";
 			course.save();
 			
 			User user = new User();
 			user.email = "rub@rub.pt";
 			user.password = "123";
 			user.name = "Ruben";
-			user.save();			
+			user.save();	
+			
+			user = new User();
+			user.email = "rui@rui.pt";
+			user.password = "123";
+			user.name = "Rui Lopes da Silva";
+			user.save();		
 			
 
 		}

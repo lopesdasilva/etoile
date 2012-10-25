@@ -29,6 +29,21 @@ public class Global extends GlobalSettings {
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 			c1.blog = blog;
 			c1.save();
+			
+			Module module = new Module();
+			module.name = "First Module";
+			module.save();
+			
+			Course course = new Course();
+			course.name = "First Course";
+			course.save();
+			
+			User user = new User();
+			user.email = "rub@rub.pt";
+			user.password = "123";
+			user.name = "Ruben";
+			user.save();			
+			
 
 		}
 	}

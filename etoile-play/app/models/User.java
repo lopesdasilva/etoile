@@ -18,6 +18,7 @@ import com.avaje.ebean.*;
 public class User extends Model {
 	
     @Constraints.Required
+    @GeneratedValue
     public Long id;
 	
     @Id

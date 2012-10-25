@@ -34,6 +34,13 @@ public class Application extends Controller {
 		return ok(index.render(form(Login.class),blogs));
 	}
 	
+	public static Result about() {
+		return ok(about.render(form(Login.class)));
+	}
+	
+	public static Result contact() {
+		return ok(contact.render(form(Login.class)));
+	}
 
 	
 	/**

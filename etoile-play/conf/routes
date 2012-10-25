@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
+
+#Static pages
+GET		/about						controllers.Application.about()
+GET		/contact					controllers.Application.contact()
+
 # Authentication
 GET     /login                              controllers.Application.login()
 POST    /login                              controllers.Application.authenticate()

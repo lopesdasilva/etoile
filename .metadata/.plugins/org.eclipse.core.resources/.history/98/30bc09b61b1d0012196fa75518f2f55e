@@ -1,6 +1,0 @@
-@(user: User)
-@main("etoileplatform"){
-
-@user.email
-
-}

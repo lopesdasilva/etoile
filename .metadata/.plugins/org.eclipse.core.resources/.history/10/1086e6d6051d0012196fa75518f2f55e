@@ -1,5 +1,0 @@
-@(user: User)
-@main("etoile"){
-<h1>etoile platform</h1>
-@user.username
-}

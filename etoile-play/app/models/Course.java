@@ -33,6 +33,9 @@ public class Course extends Model {
 	@ManyToMany
 	public List<Module> modules;
 
+	@ManyToMany
+	public Category category;
+	
 	//public Date created;
 
 	public static Model.Finder<Long, Course> find = new Model.Finder<Long, Course>(

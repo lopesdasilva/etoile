@@ -6,9 +6,12 @@
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
 
+
 #Static pages
 GET		/about						controllers.Application.about()
 GET		/contact					controllers.Application.contact()
+
+
 
 # Authentication
 GET     /login                              controllers.Application.login()
@@ -19,9 +22,12 @@ GET     /logout                             controllers.Application.logout()
 GET		/blog:blog						controllers.Application.blog(blog: Long)
 
 
-#Disciplines
-GET		/profile						controllers.Profile.index()
-GET  	/profile/course:course					controllers.Profile.course(course: Long)
+#Courses
+GET		/courses						controllers.Application.courses()
+GET  	/course:course					controllers.Profile.course(course: Long)
+
+#Modules
+GET		/course:course/module:module			controllers.Profile.module(module: Long, course: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

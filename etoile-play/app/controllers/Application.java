@@ -31,7 +31,8 @@ public class Application extends Controller {
 
 	public static Result index() {
 		List<Blog> blogs = Blog.getAllBlogs();
-		return ok(index.render(blogs));
+		List<Category> categories = Category.getAllCategories();
+		return ok(index.render(blogs,categories));
 	}
 	
 	public static Result about() {
@@ -42,6 +43,11 @@ public class Application extends Controller {
 		return ok(views.html.statics.contact.render());
 	}
 	
+	
+	public static Result courses(){
+		List<Course> allCourses = Course.getAllCourses();
+		return ok(courses.render(allCourses));
+	}
 	
 	public static Result blog(Long blog){
 		

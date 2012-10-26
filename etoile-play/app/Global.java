@@ -1,6 +1,4 @@
 import play.*;
-import java.math.BigDecimal;
-import java.util.*;
 
 import com.avaje.ebean.*;
 
@@ -13,7 +11,26 @@ public class Global extends GlobalSettings {
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
 			Logger.info("Init Data");
 
-
+			Category category = new Category();
+			category.name="Biology & Life Sciences";
+			category.description="";
+			category.save();
+			
+			category = new Category();
+			category.name="Mathematics";
+			category.description="";
+			category.save();
+			
+			category = new Category();
+			category.name="Computer Science";
+			category.description="";
+			category.save();
+			
+			category = new Category();
+			category.name="Social Sciences";
+			category.description="";
+			category.save();
+			
 
 			Blog blog = new Blog();
 			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";

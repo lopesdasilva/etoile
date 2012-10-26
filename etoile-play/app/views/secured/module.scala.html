@@ -1,4 +1,4 @@
-@(user: User, course: Course)
+@(user: User, module: Module)
 @main("etoileplatform"){
 
 
@@ -53,24 +53,39 @@
         </div><!--/span-->
  		<div class="span9">
           <div class="hero-unit">
-          <img class="image img-circle" src="@course.courseImageURL" alt="placeholder image" height="50" width="50">
-            <h1>@course.name</h1>
-            <p>@course.description</p>
+          <img class="image img-circle" src="module.moduleImageURL" alt="placeholder image" height="50" width="50">
+            <h1>@module.name</h1>
+            <p>@module.alternateText</p>
             <p><a class="btn btn-primary btn-large" href="about">Learn more &raquo;</a></p>
           </div>
        <div class="span9">
         
           <div class="row-fluid">
-          <h1>@course.name Modules</h1>
-            @for(module <- course.modules) {
-	<div class="span4">
-		<img class="image img-circle" src="@module.moduleImageURL" alt="placeholder image" height="50" width="50">
-		<h4>@module.name</h4>
-		<p>@module.alternateText</p>
-		<p><a class="btn" href="@routes.Profile.module(module.id,course.id)">View details &raquo;</a></p>
-	</div>
-	}
-      
+       
+       <table class="table">  
+        <thead>  
+          <tr>  
+            <th>Test-ID</th>  
+            <th>Test Name</th>  
+            <th>Test text</th>  
+            <th>Grade</th> 
+            <th></th> 
+          </tr>  
+        </thead>  
+        <tbody>  
+         
+          @for(test <- module.tests) {
+           <tr>  
+            <td>@test.id</td>
+            <td>@test.name</td>
+            <td>@test.text</td>
+            <td>A+</td>
+            <td><a class="btn btn-primary btn-small" href="about">Resolve Test &raquo;</a></td>
+             </tr>
+            }
+         
+        </tbody>
+        </table>   
             
         </div>
         </div>

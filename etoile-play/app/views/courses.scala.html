@@ -1,0 +1,65 @@
+@(courses: List[Course]) 
+@main("etoile project") {
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a> <a class="brand" href="/">etoile platform</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="about">About</a></li>
+					<li><a href="courses">Courses</a></li>
+					<li><a href="contact">Contact</a></li>
+				</ul>
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Sidebar</li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li class="nav-header">Sidebar</li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9">
+			<div class="row-fluid">
+				@for(course <- courses) {
+				<div class="span4">
+					<h4>@course.name</h4>
+					<p>@course.description</p>
+					<p>
+						<a class="btn" href="#">View details &raquo;</a>
+					</p>
+				</div>
+				}
+
+
+			</div>
+		</div>
+		}

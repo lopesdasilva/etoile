@@ -13,6 +13,13 @@ create table blog (
   constraint pk_blog primary key (id))
 ;
 
+create table category (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  description               varchar(255),
+  constraint pk_category primary key (id))
+;
+
 create table comment (
   id                        bigint auto_increment not null,
   text                      varchar(255),
@@ -54,6 +61,12 @@ create table account (
 ;
 
 
+create table category_course (
+  category_id                    bigint not null,
+  course_id                      bigint not null,
+  constraint pk_category_course primary key (category_id, course_id))
+;
+
 create table course_module (
   course_id                      bigint not null,
   module_id                      bigint not null,
@@ -76,6 +89,10 @@ create index ix_comment_blog_1 on comment (blog_id);
 
 
 
+alter table category_course add constraint fk_category_course_category_01 foreign key (category_id) references category (id) on delete restrict on update restrict;
+
+alter table category_course add constraint fk_category_course_course_02 foreign key (course_id) references course (id) on delete restrict on update restrict;
+
 alter table course_module add constraint fk_course_module_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
 
 alter table course_module add constraint fk_course_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
@@ -93,6 +110,10 @@ alter table account_course add constraint fk_account_course_course_02 foreign ke
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table blog;
+
+drop table category;
+
+drop table category_course;
 
 drop table comment;
 

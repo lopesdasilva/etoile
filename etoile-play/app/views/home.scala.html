@@ -16,11 +16,12 @@
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
               <li><a href="about">About</a></li>
+              <li><a href="courses">Courses</a></li>
               <li><a href="contact">Contact</a></li>
             </ul>
             <form class="navbar-form pull-right">
             @user.email
-             <a href="logout" role="button" class="btn btn-primary" >Logout</a>
+             <a href="/logout" role="button" class="btn btn-primary" >Logout</a>
             </form>
           </div><!--/.nav-collapse -->
         </div>
@@ -31,13 +32,17 @@
  <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          <div class="well sidebar-nav">
+          <div class="well sidebar-nav" style="background: aqua;">
             <ul class="nav nav-list">
-              	<li class="nav-header">Courses</li>
+              	<li class="nav-header" >My Courses</li>
 				              @for(course <- user.courses) {
 					<li><a href="@routes.Profile.course(course.id)">@course.name</a></li>
 
 					}
+					 </ul>
+					 </div>
+					 <div class="well sidebar-nav">
+					  <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
@@ -49,7 +54,7 @@
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
-            </ul>
+           </ul>
           </div><!--/.well -->
         </div><!--/span-->
        <div class="span9">
@@ -58,6 +63,20 @@
             <p>Enhanced Technology for Open Intelligent Learning Environments</p>
             <p><a class="btn btn-primary btn-large" href="about">Learn more &raquo;</a></p>
           </div>
+           <div class="row-fluid">
+            @for(course <- user.courses) {
+	<div class="span4">
+		<h4>@course.name</h4>
+		<p>@course.description</p>
+		<p><a class="btn" href="@routes.Profile.course(course.id)">View details &raquo;</a></p>
+	</div>
+	}
+       
+       <div class="span12">
+       <a href="">Apply for more courses</a>
+       </div>
+        </div>
+          
           <div class="row-fluid">
             @for(blog <- blogs) {
 	<div class="span4">

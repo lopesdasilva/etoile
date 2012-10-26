@@ -19,6 +19,13 @@ public class Course extends Model {
 
 	@Constraints.Required
 	public String name;
+	
+	@Constraints.Required
+	public String description;
+	
+	@Constraints.Required
+	public String courseImageURL;
+	
 
 	@ManyToMany
 	public User user;

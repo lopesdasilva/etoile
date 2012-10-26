@@ -27,7 +27,6 @@
       </div>
     </div>
     
-    
  <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -52,13 +51,22 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
+ 		<div class="span9">
+          <div class="hero-unit">
+          <img class="image img-circle" src="@course.courseImageURL" alt="placeholder image" height="50" width="50">
+            <h1>@course.name</h1>
+            <p>@course.description</p>
+            <p><a class="btn btn-primary btn-large" href="about">Learn more &raquo;</a></p>
+          </div>
        <div class="span9">
         
           <div class="row-fluid">
+          <h1>@course.name Modules</h1>
             @for(module <- course.modules) {
 	<div class="span4">
-		<h4>id: @module.id</h4>
-		<p>@module.name</p>
+		<img class="image img-circle" src="@module.moduleImageURL" alt="placeholder image" height="50" width="50">
+		<h4>@module.name</h4>
+		<p>@module.alternateText</p>
 		<p><a class="btn" href="#">View details &raquo;</a></p>
 	</div>
 	}

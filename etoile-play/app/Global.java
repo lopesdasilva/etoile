@@ -69,24 +69,40 @@ public class Global extends GlobalSettings {
 			c1.blog = blog;
 			c1.save();
 			
-			Module module = new Module();
-			module.name = "Sum Module";
-			module.text = "Summation is the operation of adding a sequence of numbers; the result is their sum or total. If numbers are added sequentially from left to right, any intermediate result is a partial sum, prefix sum, or running total of the summation. The numbers to be summed (called addends, or sometimes summands) may be integers, rational numbers, real numbers, or complex numbers. Besides numbers, other types of values can be added as well: vectors, matrices, polynomials and, in general, elements of any additive group (or even monoid). For finite sequences of such elements, summation always produces a well-defined sum (possibly by virtue of the convention for empty sums).";
-			module.alternateText = "Summation is the operation of adding a sequence of numbers";
-			module.moduleImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			module.save();
+			Test test_one = new Test();
+			test_one.name = "First Sum Test";
+			test_one.text = "Improve your Sum Skills!";
+			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			test_one.save();
 			
-			module = new Module();
-			module.name = "Division Module";
-			module.text = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
-			module.alternateText = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
-			module.moduleImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			module.save();
+			Test test_two = new Test();
+			test_two.name="Final Sum Test";
+			test_two.text = "Final Evaluation of Sum Module";
+			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			test_two.save();
+			
+			Module module_one = new Module();
+			module_one.name = "Sum Module";
+			module_one.text = "Summation is the operation of adding a sequence of numbers; the result is their sum or total. If numbers are added sequentially from left to right, any intermediate result is a partial sum, prefix sum, or running total of the summation. The numbers to be summed (called addends, or sometimes summands) may be integers, rational numbers, real numbers, or complex numbers. Besides numbers, other types of values can be added as well: vectors, matrices, polynomials and, in general, elements of any additive group (or even monoid). For finite sequences of such elements, summation always produces a well-defined sum (possibly by virtue of the convention for empty sums).";
+			module_one.alternateText = "Summation is the operation of adding a sequence of numbers";
+			module_one.moduleImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			module_one.tests.add(test_one);
+			module_one.tests.add(test_two);
+			module_one.save();
+			
+			Module module_two = new Module();
+			module_two.name = "Division Module";
+			module_two.text = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
+			module_two.alternateText = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
+			module_two.moduleImageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
+			module_two.save();
 			
 			Course course = new Course();
 			course.name = "Mathematics 101";
 			course.courseImageURL = "http://www.clare.cam.ac.uk/data/uploads/admissions/undergraduate/subjects/Mathematics.jpg";
 			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
+			course.modules.add(module_one);
+			course.modules.add(module_two);
 			course.save();
 
 			Course course_two = new Course();

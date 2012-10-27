@@ -23,7 +23,6 @@ public class User extends Model {
 	
     @Id
     @Constraints.Required
-    @Column(name="ACCOUNT_EMAIL")
     @Formats.NonEmpty
     public String email;
     

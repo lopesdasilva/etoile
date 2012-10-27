@@ -28,7 +28,7 @@ public class Test extends Model{
 	@Constraints.Required
 	public String testImageURL;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="modules")
 	public Module module;
 	
 

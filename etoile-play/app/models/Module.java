@@ -32,10 +32,10 @@ public class Module extends Model{
 	@Constraints.Required
 	public String moduleImageURL;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="modules")
 	public Course course;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;
 	
 	public static Model.Finder<Long, Module> find = new Model.Finder<Long, Module>(

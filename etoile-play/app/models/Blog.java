@@ -13,6 +13,7 @@ import play.data.validation.*;
 @Entity
 public class Blog extends Model {
 	@Id
+	@GeneratedValue
 	public Long id;
 
 	@Constraints.Required

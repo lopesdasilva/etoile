@@ -1,4 +1,4 @@
-@(blog: Blog,categories: List[Category]) 
+@(user: User,blog: Blog,categories: List[Category], courses: List[Course]) 
 @main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
       <div class="navbar-inner">
@@ -32,6 +32,29 @@
       </div>
     </div>
  
+ <div class="container-fluid">
+ 	<div class="row-fluid">
+		<div class="span3">
+<div class="well sidebar-nav" style="background: #0088CC;">
+            <ul class="nav nav-list">
+              	<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Courses</li>
+				              @for(course <- user.courses) {
+					<li><a href="@routes.Profile.course(course.id)" style="text-shadow: #0088CC; color: #999999 ">@course.name</a></li>
+					}
+					 </ul>
+					 </div>
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Categories (@categories.size)</li>
+					@for(category <- categories) {
+					<li><a href="#">@category.name</a></li> }
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+	
+ 
  <div class="span9" >
  <h3>@blog.header</h3>
  <p>@blog.text</p>
@@ -42,5 +65,6 @@
 		</blockquote>
 		}
  </div>
-
+ </div>
+  </div>
 }

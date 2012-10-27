@@ -91,7 +91,7 @@ public class Global extends GlobalSettings {
 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
-			course_two.courseImageURL = "http://www2.icao.int/en/ism/iStars/PublishingImages/statistics.jpg";
+			course_two.courseImageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			course_two.save();
 			

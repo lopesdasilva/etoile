@@ -16,22 +16,33 @@
               <li><a href="courses">Courses</a></li>
               <li><a href="contact">Contact</a></li>
             </ul>
-            <form class="navbar-form pull-right">
+            <div class="navbar-form pull-right">
               @if( session.get("email")==null) {
              <a href="login" role="button" class="btn btn-primary" >Login</a>
  			}
  			  @if( session.get("email")!=null) {
              <a href="/logout" role="button" class="btn btn-primary" >Logout</a>
  			}
-
-
- 
-            </form>
+            </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
- 
+
+
+<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Categories (@categories.size)</li>
+					@for(category <- categories) {
+					<li><a href="#">@category.name</a></li> }
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+	 
  <div class="span9" >
  <h3>@blog.header</h3>
  <p>@blog.text</p>
@@ -41,6 +52,7 @@
 			<small>By a random Person</small>
 		</blockquote>
 		}
+ </div>
  </div>
 
 }

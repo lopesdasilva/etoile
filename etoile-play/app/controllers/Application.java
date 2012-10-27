@@ -36,13 +36,21 @@ public class Application extends Controller {
 	}
 	
 	public static Result about() {
-		List<Category> categories = Category.getAllCategories();
-		return ok(views.html.statics.about.render(categories));
+		if(session("email")!=null){
+			return Profile.about();
+		}
+		return ok(views.html.statics.about.render(
+				Category.getAllCategories()
+				));
 	}
 	
 	public static Result contact() {
-		List<Category> categories = Category.getAllCategories();
-		return ok(views.html.statics.contact.render(categories));
+		if(session("email")!=null){
+			return Profile.contact();
+		}
+		return ok(views.html.statics.contact.render(
+				Category.getAllCategories()
+				));
 	}
 
 
@@ -57,6 +65,9 @@ public class Application extends Controller {
 	
 	public static Result blog(Long blog){
 		List<Category> categories = Category.getAllCategories();
+		if(session("email")!=null){
+			return Profile.blog(blog);
+		}
 		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories));
 	}
 

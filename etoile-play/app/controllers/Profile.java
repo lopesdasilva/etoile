@@ -35,8 +35,8 @@ public class Profile extends Controller {
     	
     	Course course = Course.find.byId(course_id);
     	User user=User.find.byId(request().username());
-
-    	return ok(views.html.secured.course.render(user,course));
+    	List<Category> categories = Category.getAllCategories();
+    	return ok(views.html.secured.course.render(user,categories,course));
 
     	
     }
@@ -52,6 +52,42 @@ public class Profile extends Controller {
     	
     }
     
+    public static Result courses() {
+		List<Course> allCourses = Course.getAllCourses();
+		List<Category> categories = Category.getAllCategories();
+		
+		//check this line
+		User user=User.find.byId(session("email"));
+		return ok(views.html.secured.courses.render(user,allCourses,categories));
+	}
+    
+    public static Result contact() {
+		List<Category> categories = Category.getAllCategories();
+		
+		//check this line
+		User user=User.find.byId(session("email"));
+		return ok(views.html.secured.contact.render(user,categories));
+	}
+    
+    public static Result about() {
+		List<Category> categories = Category.getAllCategories();
+		
+		//check this line
+		User user=User.find.byId(session("email"));
+		return ok(views.html.secured.about.render(user,categories));
+	}
+    
+	public static Result blog(Long blog){
+		List<Course> allCourses = Course.getAllCourses();
+		List<Category> categories = Category.getAllCategories();
+		
+		//check this line
+		User user=User.find.byId(session("email"));
+			return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,allCourses));
+		}
+    
+    
+    
 // -- Queries
     
     public static Model.Finder<Long,Profile> find = new Model.Finder(Long.class, Profile.class);
@@ -64,17 +100,5 @@ public class Profile extends Controller {
             .eq("members.email", user)
             .eq("id", project)
             .findRowCount() > 0;
-    }
-
-
-
-	public static Result courses() {
-		List<Course> allCourses = Course.getAllCourses();
-		List<Category> categories = Category.getAllCategories();
-		System.out.println();
-		
-		//check this line
-		User user=User.find.byId(session("email"));
-		return ok(views.html.secured.courses.render(user,allCourses,categories));
-	} 
+    } 
 }

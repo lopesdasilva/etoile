@@ -14,6 +14,7 @@ import play.data.validation.*;
 public class Course extends Model {
 	@Id
 	@GeneratedValue
+	@Column(name="COURSE_ID")
     @Formats.NonEmpty
 	public Long id;
 
@@ -27,7 +28,7 @@ public class Course extends Model {
 	public String courseImageURL;
 	
 
-	@ManyToMany
+	@ManyToMany(mappedBy="courses")
 	public User user;
 
 	@ManyToMany

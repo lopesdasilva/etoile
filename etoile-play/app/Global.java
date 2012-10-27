@@ -89,16 +89,16 @@ public class Global extends GlobalSettings {
 			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
 			course.save();
 
-			course = new Course();
-			course.name = "Statistics 101";
-			course.courseImageURL = "http://www2.icao.int/en/ism/iStars/PublishingImages/statistics.jpg";
-			course.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
-			course.save();
+			Course course_two = new Course();
+			course_two.name = "Statistics 101";
+			course_two.courseImageURL = "http://www2.icao.int/en/ism/iStars/PublishingImages/statistics.jpg";
+			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
+			course_two.save();
 			
-			course = new Course();
-			course.name = "Social Science";
-			course.courseImageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
-			course.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
+			Course course_three = new Course();
+			course_three.name = "Social Science";
+			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 
 
 			course.save();
@@ -107,12 +107,22 @@ public class Global extends GlobalSettings {
 			user.email = "rub@rub.pt";
 			user.password = "123";
 			user.name = "Ruben";
+			user.courses.add(course);
+			user.courses.add(course_two);
+			user.courses.add(course_three);
+			course.save();
+			course_two.save();
+			course_three.save();
 			user.save();	
 			
 			user = new User();
 			user.email = "rui@rui.pt";
 			user.password = "123";
 			user.name = "Rui Lopes da Silva";
+			user.courses.add(course);
+			user.courses.add(course_two);
+			course.save();
+			course_two.save();
 			user.save();					
 
 		}

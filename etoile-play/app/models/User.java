@@ -23,6 +23,7 @@ public class User extends Model {
 	
     @Id
     @Constraints.Required
+    @Column(name="ACCOUNT_EMAIL")
     @Formats.NonEmpty
     public String email;
     
@@ -32,7 +33,8 @@ public class User extends Model {
     @Constraints.Required
     public String password;
     
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
+//	@JoinTable(name="account_course", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="course_id")})
 	public List<Course> courses;
     
     // -- Queries

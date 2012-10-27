@@ -63,7 +63,8 @@
 			<div class="row-fluid">
 				<ul class="thumbnails">
 					@for(module <- course.modules) {
-					<li class="span4">
+					<li class="span4" >
+					<a href="@routes.Profile.module(module.id,course.id)">
 						<div class="thumbnail">
 							<img src="@module.moduleImageURL" height="100" width="100"
 								alt="@module.name">
@@ -71,12 +72,14 @@
 								<h3>@module.name</h3>
 								<p>@module.alternateText</p>
 								<p>
-									<a href="@routes.Profile.module(module.id,course.id)"
-										class="btn btn-info">View details</a>
+									
 								</p>
 							</div>
 						</div>
-					</li> }
+						</a>
+					</li>
+					
+					 }
 
 				</ul>
 			</div>

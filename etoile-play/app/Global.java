@@ -97,7 +97,7 @@ public class Global extends GlobalSettings {
 			
 			course = new Course();
 			course.name = "Social Science";
-			course.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			course.courseImageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			course.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 
 

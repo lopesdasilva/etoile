@@ -23,6 +23,7 @@ GET		/blog:blog						controllers.Application.blog(blog: Long)
 
 
 #Courses
+##CHECK THIS ROUTE
 GET		/courses						controllers.Application.courses()
 GET  	/course:course					controllers.Profile.course(course: Long)
 

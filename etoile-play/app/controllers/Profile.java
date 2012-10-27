@@ -64,5 +64,17 @@ public class Profile extends Controller {
             .eq("members.email", user)
             .eq("id", project)
             .findRowCount() > 0;
-    } 
+    }
+
+
+
+	public static Result courses() {
+		List<Course> allCourses = Course.getAllCourses();
+		List<Category> categories = Category.getAllCategories();
+		System.out.println();
+		
+		//check this line
+		User user=User.find.byId(session("email"));
+		return ok(views.html.secured.courses.render(user,allCourses,categories));
+	} 
 }

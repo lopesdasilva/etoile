@@ -46,10 +46,13 @@ public class Application extends Controller {
 	}
 
 
+	//CHECK THIS METHOD
 	public static Result courses(){
-		List<Course> allCourses = Course.getAllCourses();
-		List<Category> categories = Category.getAllCategories();
-		return ok(courses.render(allCourses,categories));
+		
+		if(session("email")!=null){
+			return Profile.courses();
+		}
+		return ok(courses.render(Course.getAllCourses(),Category.getAllCategories()));
 	}
 	
 	public static Result blog(Long blog){

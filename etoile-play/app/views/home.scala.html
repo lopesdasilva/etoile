@@ -1,4 +1,4 @@
-@(user: User,blogs: List[Blog])
+@(user: User,blogs: List[Blog],categories : List[Category])
 @main("etoileplatform"){
 
 
@@ -32,29 +32,23 @@
  <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          <div class="well sidebar-nav" style="background: aqua;">
+          <div class="well sidebar-nav" style="background: #0088CC;">
             <ul class="nav nav-list">
-              	<li class="nav-header" >My Courses</li>
+              	<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Courses</li>
 				              @for(course <- user.courses) {
-					<li><a href="@routes.Profile.course(course.id)">@course.name</a></li>
+					<li><a href="@routes.Profile.course(course.id)" style="text-shadow: #0088CC; color: #999999 ">@course.name</a></li>
 
 					}
 					 </ul>
 					 </div>
 					 <div class="well sidebar-nav">
-					  <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-           </ul>
+					 		  <ul class="nav nav-list">
+              <li class="nav-header">Categories (@categories.size)</li>
+              @for(category <- categories) {
+					<li><a href="#">@category.name</a></li>
+
+					}
+					 </ul>
           </div><!--/.well -->
         </div><!--/span-->
        <div class="span9">

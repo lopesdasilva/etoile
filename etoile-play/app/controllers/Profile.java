@@ -4,6 +4,7 @@ package controllers;
 import java.util.List;
 
 import models.Blog;
+import models.Category;
 import models.Course;
 import models.Module;
 import models.User;
@@ -24,7 +25,8 @@ public class Profile extends Controller {
     public static Result index() {
     	List<Blog> blogs = Blog.getAllBlogs();
     	User user=User.find.byId(request().username());
-        return ok(home.render(user,blogs) );
+    	List<Category> categories = Category.getAllCategories();
+        return ok(home.render(user,blogs,categories) );
     }
     
     

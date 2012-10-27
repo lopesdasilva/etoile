@@ -16,7 +16,13 @@
 					<li><a href="contact">Contact</a></li>
 				</ul>
 				<div class="navbar-form pull-right">
-					<a href="login" role="button" class="btn btn-primary">Login</a>
+					 @if( session.get("email")==null) {
+             <a href="login" role="button" class="btn btn-primary" >Login</a>
+ 			}
+ 			  @if( session.get("email")!=null) {
+             <a href="/logout" role="button" class="btn btn-primary" >Logout</a>
+ 			}
+
 				</div>
 			</div>
 			<!--/.nav-collapse -->
@@ -47,6 +53,35 @@
 			<!--/.well -->
 		</div>
 		<!--/span-->
+	
+	<div class="span9">
+	<div id="myCarousel" class="carousel slide" >
+                <div class="carousel-inner" >
+                <div class="item active"  style="max-height: 300px;min-height: 300px">
+                    <img src="http://resources2.news.com.au/images/2011/12/17/1226224/763178-student-survey.jpg" alt="" width="400px" height="300px">
+                    <div class="carousel-caption">
+                      <h4>New Courses</h4>
+                      <p>Aply for a new course today!</p>
+                    </div>
+                  </div>
+                @for(course <- courses) {
+              
+                  <div class="item"  style="max-height: 300px;min-height: 300px">
+                    <img src="@course.courseImageURL" alt="@course.name" width="400px" height="300px">
+                    <div class="carousel-caption">
+                      <h4>@course.name</h4>
+                      <p>@course.description</p>
+                    </div>
+                  </div>
+                  }
+            
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+              </div>
+              </div>
+
+		
 		<div class="span9">
 			<div class="row-fluid">
 				@for(course <- courses) {

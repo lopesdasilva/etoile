@@ -85,8 +85,20 @@ public class Global extends GlobalSettings {
 			
 			Course course = new Course();
 			course.name = "Mathematics 101";
-			course.courseImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. /n Professor Diogo Pinheiro";
+			course.courseImageURL = "http://www.clare.cam.ac.uk/data/uploads/admissions/undergraduate/subjects/Mathematics.jpg";
+			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
+			course.save();
+
+			course = new Course();
+			course.name = "Statistics 101";
+			course.courseImageURL = "http://www2.icao.int/en/ism/iStars/PublishingImages/statistics.jpg";
+			course.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
+			course.save();
+			
+			course = new Course();
+			course.name = "Social Science";
+			course.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			course.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 
 
 			course.save();

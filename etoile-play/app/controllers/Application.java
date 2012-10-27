@@ -42,8 +42,8 @@ public class Application extends Controller {
 	public static Result contact() {
 		return ok(views.html.statics.contact.render());
 	}
-	
-	
+
+
 	public static Result courses(){
 		List<Course> allCourses = Course.getAllCourses();
 		return ok(courses.render(allCourses));

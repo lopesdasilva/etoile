@@ -44,10 +44,11 @@ public class Profile extends Controller {
     public static Result module(Long module_id, Long course_id){
     	System.out.println("MODULE ID: "+module_id);
     	
+    	List<Category> categories = Category.getAllCategories();
     	Module module = Module.find.byId(module_id);
     	User user=User.find.byId(request().username());
 
-    	return ok(views.html.secured.module.render(user,module));
+    	return ok(views.html.secured.module.render(user,categories,module));
 
     	
     }

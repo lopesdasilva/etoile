@@ -1,4 +1,4 @@
-@(courses: List[Course]) 
+@(courses: List[Course],categories: List[Category]) 
 @main("etoile project") {
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -10,9 +10,9 @@
 			</a> <a class="brand" href="/">etoile platform</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/">Home</a></li>
 					<li><a href="about">About</a></li>
-					<li><a href="courses">Courses</a></li>
+					<li class="active"><a href="courses">Courses</a></li>
 					<li><a href="contact">Contact</a></li>
 				</ul>
 				<div class="navbar-form pull-right">
@@ -37,17 +37,9 @@
 
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
-					<li class="nav-header">Sidebar</li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li class="nav-header">Sidebar</li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
+					<li class="nav-header">Categories (@categories.size)</li>
+					@for(category <- categories) {
+					<li><a href="#">@category.name</a></li> }
 				</ul>
 			</div>
 			<!--/.well -->
@@ -79,10 +71,7 @@
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
-              </div>
-
-		
-		<div class="span9">
+              
 			<div class="row-fluid">
 				@for(course <- courses) {
 				<div class="span4">

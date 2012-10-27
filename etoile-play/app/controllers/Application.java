@@ -36,22 +36,25 @@ public class Application extends Controller {
 	}
 	
 	public static Result about() {
-		return ok(views.html.statics.about.render());
+		List<Category> categories = Category.getAllCategories();
+		return ok(views.html.statics.about.render(categories));
 	}
 	
 	public static Result contact() {
-		return ok(views.html.statics.contact.render());
+		List<Category> categories = Category.getAllCategories();
+		return ok(views.html.statics.contact.render(categories));
 	}
 
 
 	public static Result courses(){
 		List<Course> allCourses = Course.getAllCourses();
-		return ok(courses.render(allCourses));
+		List<Category> categories = Category.getAllCategories();
+		return ok(courses.render(allCourses,categories));
 	}
 	
 	public static Result blog(Long blog){
-		
-		return ok(views.html.blog.blog.render(Blog.find.byId(blog)));
+		List<Category> categories = Category.getAllCategories();
+		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories));
 	}
 
 	

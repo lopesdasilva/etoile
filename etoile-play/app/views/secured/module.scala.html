@@ -15,8 +15,9 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
-              <li><a href="about">About</a></li>
-              <li><a href="contact">Contact</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/courses">Courses</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
             <form class="navbar-form pull-right">
             @user.email
@@ -55,23 +56,24 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
     <li><a href="#tab2" data-toggle="tab">Extra</a></li>
+    <li><a href="#tab3" data-toggle="tab">Tests</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
+    <div class="row-fluid">
+    <div class="span2">
+   <img src="@module.moduleImageURL" height="100" width="100"/>
+    </div>
+    <div class="span9">
       <p>@module.text</p>
+      </div>
+    </div>
     </div>
     <div class="tab-pane" id="tab2">
       <p>Please insert new content for this module</p>
     </div>
-  </div>
-</div>
-          </div>
-     </div>
-       <div class="span9">
-        
-          <div class="row-fluid">
-       
-       <table class="table">  
+    <div class="tab-pane" id="tab3">
+        <table class="table">  
         <thead>  
           <tr>  
             <th>Test-ID</th>  
@@ -94,7 +96,17 @@
             }
          
         </tbody>
-        </table>   
+        </table>  
+    </div>
+  </div>
+</div>
+          </div>
+     </div>
+       <div class="span9">
+        
+          <div class="row-fluid">
+       
+    
             
         </div>
         </div>

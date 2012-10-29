@@ -30,5 +30,8 @@ GET  	/course:course					controllers.Profile.course(course: Long)
 #Modules
 GET		/course:course/module:module			controllers.Profile.module(module: Long, course: Long)
 
+#Tests
+GET /course/module:module/test:test  controllers.Profile.test(test: Long, module: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

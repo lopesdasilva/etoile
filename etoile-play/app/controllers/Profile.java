@@ -10,6 +10,7 @@ import models.Category;
 import models.Comment;
 import models.Course;
 import models.Module;
+import models.Test;
 import models.User;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
@@ -56,6 +57,17 @@ public class Profile extends Controller {
     	List<Category> categories = Category.getAllCategories();
     	return ok(views.html.secured.course.render(user,categories,course));
 
+    	
+    }
+    
+
+    
+    public static Result test(Long test_id, Long module_id){
+    	System.out.println("TEST ID: " + test_id);
+    	List<Category> categories = Category.getAllCategories();
+    	Test test = Test.find.byId(test_id);
+    	User user = User.find.byId(request().username());
+		return ok(views.html.secured.test.render(user,categories,test));
     	
     }
     

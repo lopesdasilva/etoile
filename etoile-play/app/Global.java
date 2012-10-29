@@ -35,15 +35,24 @@ public class Global extends GlobalSettings {
 			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
-			
 			blog.save();
-
 			
+			OpenQuestion question_one = new OpenQuestion();
+			question_one.question = "This is the First Open Question.";
+			question_one.save();
+			
+			OpenQuestion question_two = new OpenQuestion();
+			question_two.question = "This is the Second Open Question.";
+			question_two.save();
 			
 			Test test_one = new Test();
 			test_one.name = "First Sum Test";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			test_one.openquestions.add(question_one);
+			test_one.openquestions.add(question_two);
+			question_one.save();
+			question_two.save();
 			test_one.save();
 			
 			Test test_two = new Test();

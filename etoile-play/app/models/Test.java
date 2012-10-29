@@ -31,6 +31,9 @@ public class Test extends Model{
 	@ManyToMany(mappedBy="modules")
 	public Module module;
 	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	public List<OpenQuestion> openquestions;
+	
 
 	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(

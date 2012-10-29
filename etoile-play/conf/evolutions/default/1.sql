@@ -45,6 +45,13 @@ create table module (
   constraint pk_module primary key (id))
 ;
 
+create table open_question (
+  id                        bigint auto_increment not null,
+  question                  varchar(255),
+  question_image_url        varchar(255),
+  constraint pk_open_question primary key (id))
+;
+
 create table test (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -81,6 +88,12 @@ create table module_test (
   constraint pk_module_test primary key (module_id, test_id))
 ;
 
+create table test_open_question (
+  test_id                        bigint not null,
+  open_question_id               bigint not null,
+  constraint pk_test_open_question primary key (test_id, open_question_id))
+;
+
 create table account_course (
   account_email                  varchar(255) not null,
   course_id                      bigint not null,
@@ -104,6 +117,10 @@ alter table course_module add constraint fk_course_module_module_02 foreign key 
 alter table module_test add constraint fk_module_test_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
 alter table module_test add constraint fk_module_test_test_02 foreign key (test_id) references test (id) on delete restrict on update restrict;
+
+alter table test_open_question add constraint fk_test_open_question_test_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
+
+alter table test_open_question add constraint fk_test_open_question_open_qu_02 foreign key (open_question_id) references open_question (id) on delete restrict on update restrict;
 
 alter table account_course add constraint fk_account_course_account_01 foreign key (account_email) references account (email) on delete restrict on update restrict;
 
@@ -129,7 +146,11 @@ drop table module;
 
 drop table module_test;
 
+drop table open_question;
+
 drop table test;
+
+drop table test_open_question;
 
 drop table account;
 

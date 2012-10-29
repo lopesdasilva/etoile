@@ -32,6 +32,9 @@ public class User extends Model {
     @Constraints.Required
     public String password;
     
+    @Constraints.Required
+    public String account_type;
+    
 	@ManyToMany(cascade = {CascadeType.ALL})
 //	@JoinTable(name="account_course", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="course_id")})
 	public List<Course> courses;

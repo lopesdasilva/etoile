@@ -100,6 +100,7 @@ public class Global extends GlobalSettings {
 			user.email = "rub@rub.pt";
 			user.password = "123";
 			user.name = "Ruben";
+			user.account_type = "student";
 			user.courses.add(course);
 			user.courses.add(course_two);
 			user.courses.add(course_three);
@@ -112,10 +113,18 @@ public class Global extends GlobalSettings {
 			user.email = "rui@rui.pt";
 			user.password = "123";
 			user.name = "Rui Lopes da Silva";
+			user.account_type = "student";
 			user.courses.add(course);
 			user.courses.add(course_two);
 			course.save();
 			course_two.save();
+			user.save();
+			
+			user = new User();
+			user.email = "prof@prof.pt";
+			user.password="123";
+			user.name = "Professor";
+			user.account_type = "professor";
 			user.save();
 			
 			Category category_one = new Category();

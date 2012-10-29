@@ -57,6 +57,7 @@ create table account (
   id                        bigint,
   name                      varchar(255),
   password                  varchar(255),
+  account_type              varchar(255),
   constraint pk_account primary key (email))
 ;
 

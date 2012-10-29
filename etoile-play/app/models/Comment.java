@@ -19,6 +19,9 @@ public class Comment extends Model {
 
 	@ManyToOne
 	public Blog blog;
+	
+	@ManyToOne
+	public User user;
 
 	//public Date created;
 

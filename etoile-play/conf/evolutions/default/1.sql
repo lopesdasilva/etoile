@@ -24,6 +24,7 @@ create table comment (
   id                        bigint auto_increment not null,
   text                      varchar(255),
   blog_id                   bigint,
+  user_email                varchar(255),
   constraint pk_comment primary key (id))
 ;
 
@@ -87,6 +88,8 @@ create table account_course (
 ;
 alter table comment add constraint fk_comment_blog_1 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
 create index ix_comment_blog_1 on comment (blog_id);
+alter table comment add constraint fk_comment_user_2 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_comment_user_2 on comment (user_email);
 
 
 

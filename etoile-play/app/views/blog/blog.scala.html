@@ -49,7 +49,7 @@
  @for(comment <- blog.comments) {
 		<blockquote>
 			<p>@comment.text</p>
-			<small>By a random Person</small>
+			<small>By @comment.user</small>
 		</blockquote>
 		}
  </div>

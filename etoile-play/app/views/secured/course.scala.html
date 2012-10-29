@@ -66,10 +66,10 @@
 					@for(module <- course.modules) {
 					<li class="span4" >
 					<a href="@routes.Profile.module(module.id,course.id)">
-						<div class="thumbnail">
+						<div class="thumbnail well" style="min-height: 250px;max-height: 250px">
 							<img src="@module.moduleImageURL" height="100" width="100"
 								alt="@module.name">
-							<div class="caption">
+							<div class="caption" style="max-height: 50px">
 								<h3>@module.name</h3>
 								<p>@module.alternateText</p>
 								<p>

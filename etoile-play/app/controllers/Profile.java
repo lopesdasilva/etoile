@@ -107,18 +107,19 @@ public class Profile extends Controller {
 	public static Result postcomment(Long blog){
 		 Form<Profile.Comment> form = form(Profile.Comment.class).bindFromRequest();
 		 List<Category> categories = Category.getAllCategories();
-		System.out.println("Post Comment:");
-		System.out.println(form.get().comment);
+		 User user=User.find.byId(session("email"));
+		 	
+		 //DEBUG
+		System.out.println("DEBUG: User:"+user.email+" is adding a new comment to blog id: "+blog);
+		System.out.println("DEBUG: Comment text: "+form.get().comment);
+		
+		//New Comment
 		models.Comment c=new models.Comment();
 		c.text=form.get().comment;
 		c.blog=Blog.find.byId(blog);
+		c.user=user;
 		c.save();
-////		
-//		Blog.find.byId(blog).comments.add(c);
-//		Blog.find.byId(blog).save();
-//		c.save();
-		
-		User user=User.find.byId(session("email"));
+
 		return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
 	}
     

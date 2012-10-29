@@ -38,7 +38,9 @@ public class User extends Model {
 	@ManyToMany(cascade = {CascadeType.ALL})
 //	@JoinTable(name="account_course", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="course_id")})
 	public List<Course> courses;
-    
+	
+	@OneToMany
+	public List<Comment> comments;
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

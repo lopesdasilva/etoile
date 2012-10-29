@@ -38,15 +38,7 @@ public class Global extends GlobalSettings {
 			
 			blog.save();
 
-			Comment c = new Comment();
-			c.text = "Great! I can't wait to try it!";
-			c.blog = blog;
-			c.save();
-
-			Comment c1 = new Comment();
-			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-			c1.blog = blog;
-			c1.save();
+			
 			
 			Test test_one = new Test();
 			test_one.name = "First Sum Test";
@@ -61,10 +53,10 @@ public class Global extends GlobalSettings {
 			test_two.save();
 			
 			Module module_one = new Module();
-			module_one.name = "Sum Module";
-			module_one.text = "Summation is the operation of adding a sequence of numbers; the result is their sum or total. If numbers are added sequentially from left to right, any intermediate result is a partial sum, prefix sum, or running total of the summation. The numbers to be summed (called addends, or sometimes summands) may be integers, rational numbers, real numbers, or complex numbers. Besides numbers, other types of values can be added as well: vectors, matrices, polynomials and, in general, elements of any additive group (or even monoid). For finite sequences of such elements, summation always produces a well-defined sum (possibly by virtue of the convention for empty sums).";
-			module_one.alternateText = "Summation is the operation of adding a sequence of numbers";
-			module_one.moduleImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			module_one.name = "Multiplication Module";
+			module_one.text = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			module_one.alternateText = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			module_one.moduleImageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
 			module_one.tests.add(test_one);
 			module_one.tests.add(test_two);
 			module_one.save();
@@ -109,6 +101,13 @@ public class Global extends GlobalSettings {
 			course_three.save();
 			user.save();	
 			
+			Comment c = new Comment();
+			c.text = "Great! I can't wait to try it!";
+			c.blog = blog;
+			c.user = user;
+			c.save();
+
+			
 			user = new User();
 			user.email = "rui@rui.pt";
 			user.password = "123";
@@ -119,6 +118,16 @@ public class Global extends GlobalSettings {
 			course.save();
 			course_two.save();
 			user.save();
+			
+			
+
+			Comment c1 = new Comment();
+			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+			c1.blog = blog;
+			c1.user = user;
+			c1.save();
+			
+			
 			
 			user = new User();
 			user.email = "prof@prof.pt";

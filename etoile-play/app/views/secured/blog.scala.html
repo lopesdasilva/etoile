@@ -37,9 +37,9 @@
  <div class="container-fluid">
  	<div class="row-fluid">
 		<div class="span3">
-<div class="well sidebar-nav" style="background: #0088CC;">
-            <ul class="nav nav-list">
-              	<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Courses</li>
+			<div class="well sidebar-nav" style="background: #0088CC;">
+            	<ul class="nav nav-list">
+              		<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Courses</li>
 				              @for(course <- user.courses) {
 					<li><a href="@routes.Profile.course(course.id)" style="text-shadow: #0088CC; color: #999999 ">@course.name</a></li>
 					}
@@ -53,8 +53,7 @@
 				</ul>
 			</div>
 			<!--/.well -->
-		</div>
-		<!--/span-->
+		</div>		<!--/span-->
 	
  
  <div class="span9" >
@@ -66,8 +65,7 @@
 			<small>By a random Person</small>
 		</blockquote>
 		}
- </div>
-  <div class="span9" >
+
  <hr>
  
   <h3>Insert your comment below</h3>

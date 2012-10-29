@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.course.Course;
+
 import com.avaje.ebean.Ebean;
 
 import play.db.ebean.*;

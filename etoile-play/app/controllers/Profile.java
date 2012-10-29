@@ -8,10 +8,11 @@ import controllers.Application.Login;
 import models.Blog;
 import models.Category;
 import models.Comment;
-import models.Course;
-import models.Module;
-import models.Test;
+
+
 import models.User;
+import models.course.Course;
+import models.course.Module;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -55,6 +56,13 @@ public class Profile extends Controller {
     	Course course = Course.find.byId(course_id);
     	User user=User.find.byId(request().username());
     	List<Category> categories = Category.getAllCategories();
+    	
+    	
+    	System.out.println();
+    	if(!user.courses.contains(course))
+    	return ok(views.html.secured.courseGeneral.render(user,categories,course));
+    	else
+    	//Has this course
     	return ok(views.html.secured.course.render(user,categories,course));
 
     	
@@ -65,7 +73,7 @@ public class Profile extends Controller {
     public static Result test(Long test_id, Long module_id){
     	System.out.println("TEST ID: " + test_id);
     	List<Category> categories = Category.getAllCategories();
-    	Test test = Test.find.byId(test_id);
+    	models.test.Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
 		return ok(views.html.secured.test.render(user,categories,test));
     	

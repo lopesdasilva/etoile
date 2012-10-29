@@ -3,6 +3,10 @@ import play.*;
 import com.avaje.ebean.*;
 
 import models.*;
+import models.course.Course;
+import models.course.Module;
+import models.test.OpenQuestion;
+import models.test.Test;
 
 public class Global extends GlobalSettings {
 

@@ -1,4 +1,4 @@
-@(user: User, categories: List[Category],course: models.course.Course) 
+@(user: User, categories: List[Category],course: models.course.Course)
 @main("etoileplatform"){
 
 
@@ -48,43 +48,31 @@
 			<!--/.well -->
 		</div>
 		<!--/span-->
-	
+
 
 		<div class="span9">
-			<div class="hero-unit">
-
-				<h1>@course.name</h1>
-				<p>@course.description</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="about">Learn more
-						&raquo;</a>
-				</p>
+			<div class="page-header">
+				<div class="row-fluid">
+					<div class="span6">
+						<h2>@course.name</h2>
+					</div>
+					<div class="span2 offset3 pull-right">
+						<h2>
+							<a href="#" role="button" class="btn btn-info">Sign Up</a>
+						</h2>
+					</div>
+				</div>
 			</div>
 
 			<div class="row-fluid">
-				<ul class="thumbnails">
-					@for(module <- course.modules) {
-					<li class="span4" >
-					<a href="@routes.Profile.module(module.id,course.id)">
-						<div class="thumbnail well" style="min-height: 250px;max-height: 250px">
-							<img src="@module.moduleImageURL" height="100" width="100"
-								alt="@module.name">
-							<div class="caption" style="max-height: 50px">
-								<h3>@module.name</h3>
-								<p>@module.alternateText</p>
-								<p>
-									
-								</p>
-							</div>
-						</div>
-						</a>
-					</li>
-					
-					 }
-
-				</ul>
+				<div class="span3">
+					<img src="@course.courseImageURL" height="200" width="200" />
+				</div>
+				<div class="span9">
+					<p>@course.description</p>
+				</div>
 			</div>
+
+			<p></p>
 		</div>
-	</div>
-	</div>
-	}
+		}

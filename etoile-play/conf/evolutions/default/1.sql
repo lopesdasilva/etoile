@@ -28,12 +28,26 @@ create table comment (
   constraint pk_comment primary key (id))
 ;
 
+create table content (
+  id                        bigint auto_increment not null,
+  title                     varchar(255),
+  text                      TEXT,
+  course_id                 bigint,
+  constraint pk_content primary key (id))
+;
+
 create table course (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   description               varchar(255),
   course_image_url          varchar(255),
   constraint pk_course primary key (id))
+;
+
+create table forum (
+  id                        bigint auto_increment not null,
+  description               varchar(255),
+  constraint pk_forum primary key (id))
 ;
 
 create table module (
@@ -52,12 +66,27 @@ create table open_question (
   constraint pk_open_question primary key (id))
 ;
 
+create table reply (
+  id                        bigint auto_increment not null,
+  text                      varchar(255),
+  topic_id                  bigint,
+  user_email                varchar(255),
+  constraint pk_reply primary key (id))
+;
+
 create table test (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      TEXT,
   test_image_url            varchar(255),
   constraint pk_test primary key (id))
+;
+
+create table topic (
+  id                        bigint auto_increment not null,
+  text                      varchar(255),
+  forum_id                  bigint,
+  constraint pk_topic primary key (id))
 ;
 
 create table account (
@@ -103,6 +132,14 @@ alter table comment add constraint fk_comment_blog_1 foreign key (blog_id) refer
 create index ix_comment_blog_1 on comment (blog_id);
 alter table comment add constraint fk_comment_user_2 foreign key (user_email) references account (email) on delete restrict on update restrict;
 create index ix_comment_user_2 on comment (user_email);
+alter table content add constraint fk_content_course_3 foreign key (course_id) references course (id) on delete restrict on update restrict;
+create index ix_content_course_3 on content (course_id);
+alter table reply add constraint fk_reply_topic_4 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_4 on reply (topic_id);
+alter table reply add constraint fk_reply_user_5 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_5 on reply (user_email);
+alter table topic add constraint fk_topic_forum_6 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_6 on topic (forum_id);
 
 
 
@@ -138,9 +175,13 @@ drop table category_course;
 
 drop table comment;
 
+drop table content;
+
 drop table course;
 
 drop table course_module;
+
+drop table forum;
 
 drop table module;
 
@@ -148,9 +189,13 @@ drop table module_test;
 
 drop table open_question;
 
+drop table reply;
+
 drop table test;
 
 drop table test_open_question;
+
+drop table topic;
 
 drop table account;
 

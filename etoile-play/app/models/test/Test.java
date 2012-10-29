@@ -1,8 +1,10 @@
-package models;
+package models.test;
 
 import java.util.*;
 
 import javax.persistence.*;
+
+import models.course.Module;
 
 import com.avaje.ebean.Ebean;
 

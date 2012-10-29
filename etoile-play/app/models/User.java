@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.course.Course;
+
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;

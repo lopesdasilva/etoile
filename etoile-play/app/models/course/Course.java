@@ -1,8 +1,11 @@
-package models;
+package models.course;
 
 import java.util.*;
 
 import javax.persistence.*;
+
+import models.Category;
+import models.User;
 
 import com.avaje.ebean.Ebean;
 
@@ -35,6 +38,9 @@ public class Course extends Model {
 
 	@ManyToMany(mappedBy="categories")
 	public Category category;
+	
+	@OneToMany
+	public List<Content> content;
 	
 	//public Date created;
 

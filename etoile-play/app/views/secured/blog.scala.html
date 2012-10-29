@@ -1,4 +1,6 @@
-@(user: User,blog: Blog,categories: List[Category], courses: List[Course]) 
+
+@(user: User,blog: Blog,categories: List[Category],formComment : Form[Profile.Comment])
+@import helper._
 @main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
       <div class="navbar-inner">
@@ -64,6 +66,27 @@
 			<small>By a random Person</small>
 		</blockquote>
 		}
+ </div>
+  <div class="span9" >
+ <hr>
+ 
+  <h3>Insert your comment below</h3>
+  
+   <div class="control-group">
+   @helper.form(routes.Profile.postcomment(blog.id)) {
+ <div class="controls">
+	 @textarea(
+            field = formComment("comment"),
+            args = '_label -> "",    'placeholder -> "Insert your comment", 'class->"span8"
+        )
+    </div>   
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Submit</button>
+   
+    </div>
+     }
+  </div>
+  
  </div>
  </div>
   </div>

@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import controllers.Profile.Comment;
+
 import models.*;
 import play.*;
 import play.data.Form;
@@ -34,6 +36,18 @@ public class Application extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		return ok(index.render(blogs,categories));
 	}
+	
+	public static Result postcomment(){
+		 Form<Comment> form = form(Comment.class).bindFromRequest();
+		 List<Category> categories = Category.getAllCategories();
+		System.out.println("Post Comment");
+	
+		
+//		User user=User.find.byId(session("email"));
+		return ok(views.html.statics.about.render(categories));
+	}
+	
+	
 	
 	public static Result about() {
 		if(session("email")!=null){

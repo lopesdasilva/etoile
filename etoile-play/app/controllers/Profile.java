@@ -3,11 +3,16 @@ package controllers;
 
 import java.util.List;
 
+import controllers.Application.Login;
+
 import models.Blog;
 import models.Category;
+import models.Comment;
 import models.Course;
 import models.Module;
 import models.User;
+import play.data.Form;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,6 +24,19 @@ import views.html.*;
  */
 @Security.Authenticated(Secured.class)
 public class Profile extends Controller {
+	
+	
+	/**
+     * Describes the comment form.
+     */
+	public static class Comment{
+		
+		public String comment;
+	}
+	
+	
+	
+	
 	/**
      * Display the dashboard.
      */
@@ -79,13 +97,30 @@ public class Profile extends Controller {
 	}
     
 	public static Result blog(Long blog){
-		List<Course> allCourses = Course.getAllCourses();
 		List<Category> categories = Category.getAllCategories();
 		
 		//check this line
 		User user=User.find.byId(session("email"));
-			return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,allCourses));
+			return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
 		}
+	
+	public static Result postcomment(Long blog){
+		 Form<Profile.Comment> form = form(Profile.Comment.class).bindFromRequest();
+		 List<Category> categories = Category.getAllCategories();
+		System.out.println("Post Comment:");
+		System.out.println(form.get().comment);
+		models.Comment c=new models.Comment();
+		c.text=form.get().comment;
+		c.blog=Blog.find.byId(blog);
+		c.save();
+////		
+//		Blog.find.byId(blog).comments.add(c);
+//		Blog.find.byId(blog).save();
+//		c.save();
+		
+		User user=User.find.byId(session("email"));
+		return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
+	}
     
     
     

@@ -11,27 +11,6 @@ public class Global extends GlobalSettings {
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
 			Logger.info("Init Data");
 
-			Category category = new Category();
-			category.name="Biology & Life Sciences";
-			category.description="";
-			category.save();
-			
-			category = new Category();
-			category.name="Mathematics";
-			category.description="";
-			category.save();
-			
-			category = new Category();
-			category.name="Computer Science";
-			category.description="";
-			category.save();
-			
-			category = new Category();
-			category.name="Social Sciences";
-			category.description="";
-			category.save();
-			
-
 			Blog blog = new Blog();
 			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
 			blog.alternateHeader= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
@@ -115,8 +94,6 @@ public class Global extends GlobalSettings {
 			course_three.name = "Social Science";
 			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
 			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
-
-
 			course.save();
 			
 			User user = new User();
@@ -139,7 +116,32 @@ public class Global extends GlobalSettings {
 			user.courses.add(course_two);
 			course.save();
 			course_two.save();
-			user.save();					
+			user.save();
+			
+			Category category_one = new Category();
+			category_one.name="Biology & Life Sciences";
+			category_one.description="";
+			category_one.save();
+			
+			Category category_two = new Category();
+			category_two.name="Mathematics";
+			category_two.description="";
+			category_two.courses.add(course);
+			category_two.courses.add(course_two);
+			course_two.save();
+			category_two.save();
+			
+			Category category_three = new Category();
+			category_three.name="Computer Science";
+			category_three.description="";
+			category_three.save();
+			
+			Category category_four = new Category();
+			category_four.name="Social Sciences";
+			category_four.description="";
+			category_four.courses.add(course_three);
+			course_three.save();
+			category_four.save();
 
 		}
 	}

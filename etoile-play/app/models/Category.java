@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -25,7 +26,7 @@ public class Category extends Model {
 	@Constraints.Required
 	public String description;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Course> courses;
 	
 	public static Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(

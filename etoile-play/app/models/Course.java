@@ -33,7 +33,7 @@ public class Course extends Model {
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Module> modules;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="categories")
 	public Category category;
 	
 	//public Date created;

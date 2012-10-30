@@ -84,6 +84,17 @@
 
 				</ul>
 			</div>
+		
+		@if(course.categories.size!=0) {
+			@if(course.categories.size==1) {
+			<h3>Category</h3>
+			} else{
+			<h3>Categories</h3>
+			} 
+			@for(category <- course.categories){
+			<a href="#" class="">category.name</a>
+			}
+			}
 		</div>
 	</div>
 	</div>

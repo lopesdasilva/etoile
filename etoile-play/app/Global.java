@@ -3,6 +3,7 @@ import play.*;
 import com.avaje.ebean.*;
 
 import models.*;
+import models.course.Content;
 import models.course.Course;
 import models.course.Module;
 import models.test.OpenQuestion;
@@ -88,6 +89,8 @@ public class Global extends GlobalSettings {
 			course.modules.add(module_one);
 			course.modules.add(module_two);
 			course.save();
+			
+
 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
@@ -99,7 +102,32 @@ public class Global extends GlobalSettings {
 			course_three.name = "Social Science";
 			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
 			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
-			course.save();
+			course_three.save();
+			
+			Content content= new Content();
+			content.course=course_three;
+			content.title="About the Professor";
+			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
+			content.save();
+			
+			content= new Content();
+			content.course=course_three;
+			content.title="About the Professor";
+			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
+			content.save();
+			
+			content= new Content();
+			content.course=course_three;
+			content.title="Course format";
+			content.text="The class will consist of lecture videos totaling about 2 hours a week. These will several enrichment and evaluation questions. There will also be optional reading and a final essay.";
+			content.save();
+			
+			content= new Content();
+			content.course=course;
+			content.title="Recommended Background";
+			content.text="Most of this course will be accessible to non-technical students. We will provide optional materials for those with some college-level computer science background.";
+			content.save();
+			
 			
 			User user = new User();
 			user.email = "rub@rub.pt";

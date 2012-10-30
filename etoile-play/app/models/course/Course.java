@@ -24,6 +24,7 @@ public class Course extends Model {
 	public String name;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String description;
 	
 	@Constraints.Required
@@ -36,11 +37,11 @@ public class Course extends Model {
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Module> modules;
 
-	@ManyToMany(mappedBy="categories")
-	public Category category;
+	@ManyToMany (cascade = {CascadeType.ALL})
+	public List<Category> categories;
 	
 	@OneToMany
-	public List<Content> content;
+	public List<Content> contents;
 	
 	//public Date created;
 

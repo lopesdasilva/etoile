@@ -39,7 +39,7 @@ create table content (
 create table course (
   id                        bigint auto_increment not null,
   name                      varchar(255),
-  description               varchar(255),
+  description               TEXT,
   course_image_url          varchar(255),
   constraint pk_course primary key (id))
 ;
@@ -111,6 +111,12 @@ create table course_module (
   constraint pk_course_module primary key (course_id, module_id))
 ;
 
+create table course_category (
+  course_id                      bigint not null,
+  category_id                    bigint not null,
+  constraint pk_course_category primary key (course_id, category_id))
+;
+
 create table module_test (
   module_id                      bigint not null,
   test_id                        bigint not null,
@@ -151,6 +157,10 @@ alter table course_module add constraint fk_course_module_course_01 foreign key 
 
 alter table course_module add constraint fk_course_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
+alter table course_category add constraint fk_course_category_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
+
+alter table course_category add constraint fk_course_category_category_02 foreign key (category_id) references category (id) on delete restrict on update restrict;
+
 alter table module_test add constraint fk_module_test_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
 alter table module_test add constraint fk_module_test_test_02 foreign key (test_id) references test (id) on delete restrict on update restrict;
@@ -180,6 +190,8 @@ drop table content;
 drop table course;
 
 drop table course_module;
+
+drop table course_category;
 
 drop table forum;
 

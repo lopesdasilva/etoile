@@ -64,14 +64,40 @@
 				</div>
 			</div>
 
+			<h3>Description</h3>
 			<div class="row-fluid">
 				<div class="span3">
 					<img src="@course.courseImageURL" height="200" width="200" />
 				</div>
 				<div class="span9">
+
 					<p>@course.description</p>
 				</div>
 			</div>
+			<hr>
+			
+			@for(content <- course.contents) {
+			<h3>@content.title</h3>
+			<p>@content.text</p>
+			<hr>
+			} 
+			
+			
+			@if(course.categories.size!=0) {
+			@if(course.categories.size==1) {
+			<h3>Category</h3>
+			} else{
+			<h3>Categories</h3>
+			} 
+			@for(category <- course.categories){
+			<a href="#" class="">@category.name</a>
+			<br>
+			}
+			}
+			
+			
+
+
 
 			<p></p>
 		</div>

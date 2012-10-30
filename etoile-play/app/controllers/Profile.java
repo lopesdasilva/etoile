@@ -6,7 +6,7 @@ import java.util.List;
 import controllers.Application.Login;
 
 import models.Blog;
-import models.Category;
+import models.curriculum.Category;
 import models.Comment;
 
 

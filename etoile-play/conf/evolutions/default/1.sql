@@ -44,6 +44,24 @@ create table course (
   constraint pk_course primary key (id))
 ;
 
+create table curriculumcourse (
+  id                        bigint auto_increment not null,
+  text                      TEXT,
+  constraint pk_curriculumcourse primary key (id))
+;
+
+create table curriculummodule (
+  id                        bigint auto_increment not null,
+  text                      TEXT,
+  constraint pk_curriculummodule primary key (id))
+;
+
+create table curriculumtopic (
+  id                        bigint auto_increment not null,
+  text                      TEXT,
+  constraint pk_curriculumtopic primary key (id))
+;
+
 create table forum (
   id                        bigint auto_increment not null,
   description               varchar(255),
@@ -57,6 +75,15 @@ create table module (
   alternate_text            TEXT,
   module_image_url          varchar(255),
   constraint pk_module primary key (id))
+;
+
+create table modulecontent (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  text                      varchar(255),
+  url                       varchar(255),
+  module_content_image_url  varchar(255),
+  constraint pk_modulecontent primary key (id))
 ;
 
 create table open_question (
@@ -99,6 +126,12 @@ create table account (
 ;
 
 
+create table category_curriculumcourse (
+  category_id                    bigint not null,
+  curriculumcourse_id            bigint not null,
+  constraint pk_category_curriculumcourse primary key (category_id, curriculumcourse_id))
+;
+
 create table course_module (
   course_id                      bigint not null,
   module_id                      bigint not null,
@@ -111,10 +144,28 @@ create table course_category (
   constraint pk_course_category primary key (course_id, category_id))
 ;
 
+create table curriculumcourse_curriculummodul (
+  curriculumcourse_id            bigint not null,
+  curriculummodule_id            bigint not null,
+  constraint pk_curriculumcourse_curriculummodul primary key (curriculumcourse_id, curriculummodule_id))
+;
+
+create table curriculummodule_curriculumtopic (
+  curriculummodule_id            bigint not null,
+  curriculumtopic_id             bigint not null,
+  constraint pk_curriculummodule_curriculumtopic primary key (curriculummodule_id, curriculumtopic_id))
+;
+
 create table module_test (
   module_id                      bigint not null,
   test_id                        bigint not null,
   constraint pk_module_test primary key (module_id, test_id))
+;
+
+create table module_modulecontent (
+  module_id                      bigint not null,
+  modulecontent_id               bigint not null,
+  constraint pk_module_modulecontent primary key (module_id, modulecontent_id))
 ;
 
 create table test_open_question (
@@ -143,6 +194,10 @@ create index ix_topic_forum_6 on topic (forum_id);
 
 
 
+alter table category_curriculumcourse add constraint fk_category_curriculumcourse__01 foreign key (category_id) references category (id) on delete restrict on update restrict;
+
+alter table category_curriculumcourse add constraint fk_category_curriculumcourse__02 foreign key (curriculumcourse_id) references curriculumcourse (id) on delete restrict on update restrict;
+
 alter table course_module add constraint fk_course_module_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
 
 alter table course_module add constraint fk_course_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
@@ -151,9 +206,21 @@ alter table course_category add constraint fk_course_category_course_01 foreign 
 
 alter table course_category add constraint fk_course_category_category_02 foreign key (category_id) references category (id) on delete restrict on update restrict;
 
+alter table curriculumcourse_curriculummodul add constraint fk_curriculumcourse_curriculu_01 foreign key (curriculumcourse_id) references curriculumcourse (id) on delete restrict on update restrict;
+
+alter table curriculumcourse_curriculummodul add constraint fk_curriculumcourse_curriculu_02 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
+
+alter table curriculummodule_curriculumtopic add constraint fk_curriculummodule_curriculu_01 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
+
+alter table curriculummodule_curriculumtopic add constraint fk_curriculummodule_curriculu_02 foreign key (curriculumtopic_id) references curriculumtopic (id) on delete restrict on update restrict;
+
 alter table module_test add constraint fk_module_test_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
 alter table module_test add constraint fk_module_test_test_02 foreign key (test_id) references test (id) on delete restrict on update restrict;
+
+alter table module_modulecontent add constraint fk_module_modulecontent_modul_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
+
+alter table module_modulecontent add constraint fk_module_modulecontent_modul_02 foreign key (modulecontent_id) references modulecontent (id) on delete restrict on update restrict;
 
 alter table test_open_question add constraint fk_test_open_question_test_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
 
@@ -173,6 +240,8 @@ drop table category;
 
 drop table course_category;
 
+drop table category_curriculumcourse;
+
 drop table comment;
 
 drop table content;
@@ -181,11 +250,25 @@ drop table course;
 
 drop table course_module;
 
+drop table curriculumcourse;
+
+drop table curriculumcourse_curriculummodul;
+
+drop table curriculummodule;
+
+drop table curriculummodule_curriculumtopic;
+
+drop table curriculumtopic;
+
 drop table forum;
 
 drop table module;
 
 drop table module_test;
+
+drop table module_modulecontent;
+
+drop table modulecontent;
 
 drop table open_question;
 

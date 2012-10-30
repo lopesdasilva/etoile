@@ -1,5 +1,5 @@
-@(user: User, categories: List[Category], module: models.course.Module)
-@main("etoileplatform"){
+@(user: User, categories: List[models.curriculum.Category], module:
+models.course.Module) @main("etoileplatform"){
 
 
 
@@ -69,7 +69,19 @@
 							</div>
 						</div>
 						<div class="tab-pane" id="tab2">
-							<p>Please insert new content for this module</p>
+							@for(mc <- module.modulecontents) {
+							<div class="row-fluid">
+								<div class="span2">
+									<img src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA" height="50" width="50" />
+								</div>
+								<div class="span9">
+									<p>@mc.text</p>
+									<p>
+									<a href="@mc.url" target="_blank">@mc.name</a> 
+									</p>
+								</div>
+							</div>
+							}
 						</div>
 						<div class="tab-pane" id="tab3">
 							<table class="table table-striped" style="background: #DDDDDD;">
@@ -90,7 +102,9 @@
 										<td>@test.name</td>
 										<td>@test.text</td>
 										<td>A+</td>
-										<td><a class="btn btn-primary btn-small" href="@routes.Profile.test(test.id,module.id)">Resolve Test &raquo;</a></td>
+										<td><a class="btn btn-primary btn-small"
+											href="@routes.Profile.test(test.id,module.id)">Resolve
+												Test &raquo;</a></td>
 									</tr>
 									}
 

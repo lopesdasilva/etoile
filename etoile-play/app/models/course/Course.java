@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import models.Category;
+import models.curriculum.Category;
 import models.User;
 
 import com.avaje.ebean.Ebean;

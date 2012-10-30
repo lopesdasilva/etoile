@@ -6,6 +6,12 @@ import models.*;
 import models.course.Content;
 import models.course.Course;
 import models.course.Module;
+import models.course.Modulecontent;
+import models.curriculum.Category;
+import models.curriculum.Curriculumcourse;
+import models.curriculum.Curriculummodule;
+import models.curriculum.Curriculumtopic;
+import models.forum.Topic;
 import models.test.OpenQuestion;
 import models.test.Test;
 
@@ -15,7 +21,9 @@ public class Global extends GlobalSettings {
 		System.out.println(Ebean.find(Blog.class).findRowCount());
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
 			Logger.info("Init Data");
-
+			
+			createCurriculum();
+			
 			Blog blog = new Blog();
 			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
 			blog.alternateHeader= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
@@ -66,6 +74,13 @@ public class Global extends GlobalSettings {
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
 			
+			Modulecontent mcontent = new Modulecontent();
+			mcontent.name = "Content";
+			mcontent.text = "This is a new Content.";
+			mcontent.url = "http://www.benkler.org/Benkler_Wealth_Of_Networks.pdf";
+			mcontent.moduleContentImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			mcontent.save();
+			
 			Module module_one = new Module();
 			module_one.name = "Multiplication Module";
 			module_one.text = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
@@ -73,6 +88,8 @@ public class Global extends GlobalSettings {
 			module_one.moduleImageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
 			module_one.tests.add(test_one);
 			module_one.tests.add(test_two);
+			module_one.modulecontents.add(mcontent);
+			mcontent.save();
 			module_one.save();
 			
 			Module module_two = new Module();
@@ -212,6 +229,36 @@ public class Global extends GlobalSettings {
 			category_two.save();
 			
 		}
+	}
+
+	private void createCurriculum() {
+		Curriculumtopic topic_one = new Curriculumtopic();
+		topic_one.text = "Discuss what kind of problems can be computed.";
+		topic_one.save();
+		
+		Curriculumtopic topic_two = new Curriculumtopic();
+		topic_two.text = "Describe and relate the notions of formal system.";
+		topic_two.save();
+		
+		Curriculummodule cmodule_one= new Curriculummodule();
+		cmodule_one.text = "Discussion";
+		cmodule_one.curriculumtopics.add(topic_one);
+		cmodule_one.curriculumtopics.add(topic_two);
+		topic_one.save();
+		topic_two.save();
+		cmodule_one.save();
+		
+		Curriculumcourse ccourse = new Curriculumcourse();
+		ccourse.text = "Algorithmic Theory Basics";
+		ccourse.curriculummodules.add(cmodule_one);
+		cmodule_one.save();
+		ccourse.save();
+		
+		Category cat = new Category();
+		cat.name = "Algorithms";
+		cat.curriculumcourses.add(ccourse);
+		ccourse.save();
+		cat.save();
 	}
 
 	public void onStop(Application app) {

@@ -40,6 +40,9 @@ public class Module extends Model{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;
 	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	public List<Modulecontent> modulecontents;
+	
 	public static Model.Finder<Long, Module> find = new Model.Finder<Long, Module>(
 			Long.class, Module.class);
 

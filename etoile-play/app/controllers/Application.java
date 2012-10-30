@@ -6,6 +6,7 @@ import controllers.Profile.Comment;
 
 import models.*;
 import models.course.Course;
+import models.curriculum.Category;
 import play.*;
 import play.data.Form;
 import play.mvc.*;

@@ -1,4 +1,4 @@
-package models;
+package models.curriculum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,9 @@ public class Category extends Model {
 	
 	@ManyToMany(mappedBy="categories")
 	public List<Course> courses;
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	public List<Curriculumcourse> curriculumcourses;
 	
 	public static Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(
 			Long.class, Category.class);

@@ -28,7 +28,7 @@ public class Category extends Model {
 	@Constraints.Required
 	public String description;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy="categories")
 	public List<Course> courses;
 	
 	public static Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(

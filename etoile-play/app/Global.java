@@ -185,8 +185,6 @@ public class Global extends GlobalSettings {
 			Category category_two = new Category();
 			category_two.name="Mathematics";
 			category_two.description="";
-			category_two.courses.add(course);
-			category_two.courses.add(course_two);
 			course_two.save();
 			category_two.save();
 			
@@ -198,10 +196,21 @@ public class Global extends GlobalSettings {
 			Category category_four = new Category();
 			category_four.name="Social Sciences";
 			category_four.description="";
-			category_four.courses.add(course_three);
 			course_three.save();
 			category_four.save();
 
+			course_three.categories.add(category_four);
+			course_three.save();
+			category_four.save();
+			
+			course.categories.add(category_two);
+			course.save();
+			category_two.save();
+			
+			course_two.categories.add(category_two);
+			course_two.save();
+			category_two.save();
+			
 		}
 	}
 

@@ -20,7 +20,7 @@ GET     /logout                             controllers.Application.logout()
 
 #Blog
 GET		/blog:blog						controllers.Application.blog(blog: Long)
-GET		/blog:blog/postcomment					controllers.Profile.postcomment(blog: Long)
+POST		/blog:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 
 #Courses
 ##CHECK THIS ROUTE

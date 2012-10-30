@@ -99,12 +99,6 @@ create table account (
 ;
 
 
-create table category_course (
-  category_id                    bigint not null,
-  course_id                      bigint not null,
-  constraint pk_category_course primary key (category_id, course_id))
-;
-
 create table course_module (
   course_id                      bigint not null,
   module_id                      bigint not null,
@@ -149,10 +143,6 @@ create index ix_topic_forum_6 on topic (forum_id);
 
 
 
-alter table category_course add constraint fk_category_course_category_01 foreign key (category_id) references category (id) on delete restrict on update restrict;
-
-alter table category_course add constraint fk_category_course_course_02 foreign key (course_id) references course (id) on delete restrict on update restrict;
-
 alter table course_module add constraint fk_course_module_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
 
 alter table course_module add constraint fk_course_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
@@ -181,7 +171,7 @@ drop table blog;
 
 drop table category;
 
-drop table category_course;
+drop table course_category;
 
 drop table comment;
 
@@ -190,8 +180,6 @@ drop table content;
 drop table course;
 
 drop table course_module;
-
-drop table course_category;
 
 drop table forum;
 

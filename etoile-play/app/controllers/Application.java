@@ -49,7 +49,12 @@ public class Application extends Controller {
 		return ok(views.html.statics.about.render(categories));
 	}
 	
-	
+	public static Result curriculum() {
+		
+		return ok(views.html.statics.curriculum.render(
+				Category.getAllCategories()
+				));
+	}
 	
 	public static Result about() {
 		if(session("email")!=null){

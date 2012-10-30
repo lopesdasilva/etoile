@@ -10,7 +10,7 @@ GET		/index						controllers.Application.index()
 #Static pages
 GET		/about						controllers.Application.about()
 GET		/contact					controllers.Application.contact()
-
+GET		/curriculum					controllers.Application.curriculum()
 
 
 # Authentication

@@ -1,32 +1,6 @@
-@(categories: List[Category])
+@(categories: List[models.curriculum.Category])
+@main("etoile"){
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>étoile curriculum</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Le styles -->
-<link rel="stylesheet"href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
-<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/docs.css")">
-<!-- <link rel="stylesheet" href="@routes.Assets.at("stylesheets/prettify.css")"> -->
-
-<style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
-</head>
-
-<body data-spy="scroll" data-target=".sidebar-nav">
 
 	<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
       <div class="navbar-inner">
@@ -66,6 +40,7 @@
 		
 			<div class="span3  sidebar-nav">
 				<ul class="nav well nav-list affix">
+				<li class="nav-header">Curriculum</li>
 					 @for(category <- categories) {
 					<li><a href="#@category.id"><i class="icon-chevron-right"></i>@category.name</a></li>
 
@@ -92,49 +67,4 @@
 		</div>
 
 	</div>
-
-
-
-	<!-- Footer
-    ================================================== -->
-	<footer class="footer">
-		<div class="container">
-			<p class="pull-right">
-				<a href="#">Back to top</a>
-			</p>
-			
-			<ul class="footer-links">
-				<li><a href="/index">&copy; étoile platform 2012</a></li>
-				
-			</ul>
-		</div>
-	</footer>
-
-
-
-	<!-- Le javascript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-<!-- <script type="text/javascript" src="@routes.Assets.at("javascripts/widgets.js")"></script> -->
-<script src="@routes.Assets.at("javascripts/jquery.js")"></script>
-<!-- <script src="@routes.Assets.at("javascripts/prettify.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-alert.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-modal.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-dropdown.js")"></script> -->
-<script src="@routes.Assets.at("javascripts/bootstrap-scrollspy.js")"></script>
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-tab.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-tooltip.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-popover.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-button.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-collapse.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-carousel.js")"></script> -->
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-typeahead.js")"></script> -->
-<script src="@routes.Assets.at("javascripts/bootstrap-affix.js")"></script>
-<!-- <script src="@routes.Assets.at("javascripts/js/application.js")"></script> -->
-
-
-	
-</body>
-</html>
-
+}

@@ -27,12 +27,11 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab1">
-		 <div class="row show-grid">
+		 <div class="row">
 		<div class="span6" >
-			@helper.form(routes.Application.authenticate,
-			'class->"form-horizontal") {
+			@helper.form(routes.Application.authenticate,'class->"form-horizontal") {
 
-			<p class="muted">Please insert your credentials</p>
+			<p>Please insert your credentials</p>
 
 			@if(form.hasGlobalErrors) {
 			<div class="alert alert-danger">
@@ -98,11 +97,6 @@
 		
 		</div>
 </div>
-
-
-
-
-
 
 		<div class="tab-pane" id="tab2">
 		<form class="form-horizontal">

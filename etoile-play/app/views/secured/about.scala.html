@@ -13,6 +13,7 @@
 					<li><a href="/">Home</a></li>
 					<li class="active"><a href="about">About</a></li>
 					<li><a href="courses">Courses</a></li>
+					<li><a href="/curriculum">Curriculum</a></li>
 					<li><a href="contact">Contact</a></li>
 				</ul>
 				<form class="navbar-form pull-right">
@@ -42,7 +43,8 @@
 			<ul class="nav nav-list">
 				<li class="nav-header">Categories (@categories.size)</li>
 				@for(category <- categories) {
-				<li><a href="#">@category.name</a></li> }
+				<li><a href="/curriculum#@category.id">@category.name</a></li>
+				}
 			</ul>
 		</div>
 		<!--/.well -->

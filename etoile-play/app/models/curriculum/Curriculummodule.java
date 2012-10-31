@@ -17,12 +17,18 @@ public class Curriculummodule extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
+	
+	
+	@Constraints.Required
+	@Column(unique = true)
+	public String keyword;
 
+	@Constraints.Required
+	public String name;
+	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String text;
-	
-
 
 	@ManyToMany(mappedBy="curriculummodules")
 	public Curriculumcourse curriculumcourse;

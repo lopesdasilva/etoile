@@ -15,8 +15,10 @@ create table blog (
 
 create table category (
   id                        bigint auto_increment not null,
+  keyword                   varchar(255),
   name                      varchar(255),
   description               varchar(255),
+  constraint uq_category_keyword unique (keyword),
   constraint pk_category primary key (id))
 ;
 
@@ -46,19 +48,27 @@ create table course (
 
 create table curriculumcourse (
   id                        bigint auto_increment not null,
+  keyword                   varchar(255),
+  name                      varchar(255),
   text                      TEXT,
+  constraint uq_curriculumcourse_keyword unique (keyword),
   constraint pk_curriculumcourse primary key (id))
 ;
 
 create table curriculummodule (
   id                        bigint auto_increment not null,
+  keyword                   varchar(255),
+  name                      varchar(255),
   text                      TEXT,
+  constraint uq_curriculummodule_keyword unique (keyword),
   constraint pk_curriculummodule primary key (id))
 ;
 
 create table curriculumtopic (
   id                        bigint auto_increment not null,
+  keyword                   varchar(255),
   text                      TEXT,
+  constraint uq_curriculumtopic_keyword unique (keyword),
   constraint pk_curriculumtopic primary key (id))
 ;
 

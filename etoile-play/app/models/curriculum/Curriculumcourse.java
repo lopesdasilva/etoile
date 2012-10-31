@@ -20,7 +20,14 @@ public class Curriculumcourse extends Model {
 	@GeneratedValue
     @Formats.NonEmpty
 	public Long id;
+	
+	
+	@Constraints.Required
+	@Column(unique = true)
+	public String keyword;
 
+	@Constraints.Required
+	public String name;
 	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")

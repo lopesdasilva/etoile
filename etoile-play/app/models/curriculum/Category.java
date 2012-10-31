@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 
 import models.course.Course;
 
@@ -21,6 +23,11 @@ public class Category extends Model {
 
 	@Id
 	public Long id;
+	
+	
+	@Constraints.Required
+	@Column(unique = true)
+	public String keyword;
 	
 	@Constraints.Required
 	public String name;

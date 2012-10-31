@@ -17,6 +17,11 @@ public class Curriculumtopic extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
+	
+	
+	@Constraints.Required
+	@Column(unique = true)
+	public String keyword;
 
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")

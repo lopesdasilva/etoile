@@ -241,7 +241,9 @@ public class Global extends GlobalSettings {
 		topic_two.save();
 		
 		Curriculummodule cmodule_one= new Curriculummodule();
-		cmodule_one.text = "Discussion";
+		cmodule_one.keyword = "Discussion";
+		cmodule_one.name = "Discussion";
+		cmodule_one.text = "Discussion module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon.";
 		cmodule_one.curriculumtopics.add(topic_one);
 		cmodule_one.curriculumtopics.add(topic_two);
 		topic_one.save();
@@ -249,13 +251,16 @@ public class Global extends GlobalSettings {
 		cmodule_one.save();
 		
 		Curriculumcourse ccourse = new Curriculumcourse();
-		ccourse.text = "Algorithmic Theory Basics";
+		ccourse.keyword = "algorithmic";
+		ccourse.name = "Algorithmic Theory Basics";
+		ccourse.text = "Algorithmic Theory basics Course presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon.";
 		ccourse.curriculummodules.add(cmodule_one);
 		cmodule_one.save();
 		ccourse.save();
 		
 		Category cat = new Category();
-		cat.name = "Algorithms";
+		cat.keyword = "algorithmic";
+		cat.name = "Algorithmic";
 		cat.curriculumcourses.add(ccourse);
 		ccourse.save();
 		cat.save();

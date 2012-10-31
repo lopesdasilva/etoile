@@ -49,22 +49,45 @@
 				</ul>
 			</div>
 			<div class="span9">
+			<dl>
 			@for(category <- categories) {
 			<section id="@category.id">
-        		  <div class="page-header">
-         		 	  <h1>@category.name</h1>
-        		</div>
-        		<p>@category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name</p>
-        		<p>@category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name</p>
-        		<p>@category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name</p>
-        		<p>@category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name</p>
-        		<p>@category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name  @category.name</p>
-        		
+				<dt>
+				<h1><span class="label">C</span>@category.name</h1>
+				</dt>
+				<dd>
+				<dl>
+				@for(curriculumcourse <- category.curriculumcourses) {
+					<dt>
+					<h2><span class="label label-success">C</span>@curriculumcourse.text</h2> 
+					</dt>
+					<dd>
+					<dl>
+					@for(curriculummodule <- curriculumcourse.curriculummodules) {
+						<dt>
+						<h3><span class="label label-info">M</span>@curriculummodule.text</h3> 
+						</dt>
+						<dd>
+						<dl>
+							@for(curriculumtopic <- curriculummodule.curriculumtopics)	{
+								<dt>
+									<h4><span class="label label-warning">Topic</span>@curriculumtopic.text</h4>
+								</dt>
+								<dd>Topic Description</dd>
+
+							}
+						</dl>
+						</dd>
+				 
+				 	}
+				 	</dl></dd>
+				}</dl></dd>
+				  
 			</section>
-					}
+			}</dl>
 
 
-			</div>
+		</div>
 		</div>
 
 	</div>

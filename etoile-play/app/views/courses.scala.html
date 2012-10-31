@@ -64,7 +64,14 @@
                     <img src="@course.courseImageURL" alt="@course.name" width="700px" height="300px">
                     <div class="carousel-caption">
                       <h4>@course.name</h4>
+                      <div>
+                      <div class="span8">
                       <p>@course.description</p>
+                      </div>
+                      <div class="span3 pull-right">
+                      <a class="btn btn-info" class="pull-right" href="@routes.Profile.course(course.id)">View details &raquo;</a>
+                      </div>
+                      </div>
                     </div>
                   </div>
                   }
@@ -80,7 +87,7 @@
 					<h4>@course.name</h4>
 					<p>@course.description</p>
 					<p>
-						<a class="btn" href="#">courses before login &raquo;</a>
+						<a class="btn btn-info" href="#">View details &raquo;</a>
 					</p>
 				</div>
 				}

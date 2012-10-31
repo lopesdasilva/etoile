@@ -43,7 +43,7 @@
 				<ul class="nav well nav-list affix">
 				<li class="nav-header">Curriculum</li>
 					 @for(category <- categories) {
-					<li><a href="#@category.id"><i class="icon-chevron-right"></i>@category.name</a></li>
+					<li><a href="#@category.keyword"><i class="icon-chevron-right"></i>@category.name</a></li>
 
 					}
 				</ul>
@@ -51,37 +51,44 @@
 			<div class="span9">
 			<dl>
 			@for(category <- categories) {
-			<section id="@category.id">
+			<section id="@category.keyword">
 				<dt>
 				<h1><span class="label">C</span>@category.name</h1>
 				</dt>
 				<dd>
 				<dl>
 				@for(curriculumcourse <- category.curriculumcourses) {
+				<section id="@category.keyword@curriculumcourse.keyword">
 					<dt>
-					<h2><span class="label label-success">C</span>@curriculumcourse.text</h2> 
+					<h2><span class="label label-success">C</span>@curriculumcourse.name</h2> 
 					</dt>
 					<dd>
 					<dl>
 					@for(curriculummodule <- curriculumcourse.curriculummodules) {
+					<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword">
 						<dt>
-						<h3><span class="label label-info">M</span>@curriculummodule.text</h3> 
+						<h3><span class="label label-info">M</span>@curriculummodule.name</h3> 
 						</dt>
 						<dd>
 						<dl>
 							@for(curriculumtopic <- curriculummodule.curriculumtopics)	{
+							<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword@curriculumtopic.keyword">
 								<dt>
 									<h4><span class="label label-warning">Topic</span>@curriculumtopic.text</h4>
 								</dt>
 								<dd>Topic Description</dd>
 
 							}
+							</section>
 						</dl>
 						</dd>
 				 
 				 	}
+				 	</section>
 				 	</dl></dd>
-				}</dl></dd>
+				}
+				</section>
+				</dl></dd>
 				  
 			</section>
 			}</dl>

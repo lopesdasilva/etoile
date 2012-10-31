@@ -27,6 +27,9 @@ POST		/blog:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 GET		/courses						controllers.Application.courses()
 GET  	/course:course					controllers.Profile.course(course: Long)
 
+#Curriculum Courses
+GET /category:category					controllers.Application.categoryCourses(category: Long)
+
 #Modules
 GET		/course:course/module:module			controllers.Profile.module(module: Long, course: Long)
 

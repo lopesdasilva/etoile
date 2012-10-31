@@ -56,6 +56,12 @@ public class Application extends Controller {
 				));
 	}
 	
+	public static Result categoryCourses(Long category_id){
+		Category category = Category.find.byId(category_id);
+		List<Category> categories = Category.getAllCategories();
+		return ok(categorycourses.render(category,categories));
+	}
+	
 	public static Result about() {
 		if(session("email")!=null){
 			return Profile.about();

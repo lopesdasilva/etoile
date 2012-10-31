@@ -53,7 +53,7 @@
 			@for(category <- categories) {
 			<section id="@category.keyword">
 				<dt>
-				<h1><span class="label">C</span>@category.name</h1>
+				<h1><span title="title" href="@routes.Application.categoryCourses(category.id)">@category.name</a></h1>
 				</dt>
 				<dd>
 				<dl>
@@ -98,4 +98,6 @@
 		</div>
 
 	</div>
+	
+	
 }

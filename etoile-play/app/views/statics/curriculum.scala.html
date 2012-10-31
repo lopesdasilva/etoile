@@ -53,9 +53,12 @@
 			@for(category <- categories) {
 			<section id="@category.keyword">
 				<dt>
-				<h1><span title="title" href="@routes.Application.categoryCourses(category.id)">@category.name</a></h1>
-				</dt>
+				<h1><span rel="tooltip" data-placement="top" title="This is a Category."class="label">C</span><a href="@routes.Application.categoryCourses(category.id)">@category.name</a></h1>
+				
+		</dt>
+		
 				<dd>
+				<p>@category.description</p>
 				<dl>
 				@for(curriculumcourse <- category.curriculumcourses) {
 				<section id="@category.keyword@curriculumcourse.keyword">
@@ -63,6 +66,7 @@
 					<h2><span class="label label-success">C</span>@curriculumcourse.name</h2> 
 					</dt>
 					<dd>
+					<p>@curriculumcourse.text</p>
 					<dl>
 					@for(curriculummodule <- curriculumcourse.curriculummodules) {
 					<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword">
@@ -70,11 +74,12 @@
 						<h3><span class="label label-info">M</span>@curriculummodule.name</h3> 
 						</dt>
 						<dd>
+						<p>@curriculummodule.text</p>
 						<dl>
 							@for(curriculumtopic <- curriculummodule.curriculumtopics)	{
 							<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword@curriculumtopic.keyword">
 								<dt>
-									<h4><span class="label label-warning">Topic</span>@curriculumtopic.text</h4>
+									<h4><span class="label label-warning">T</span>@curriculumtopic.text</h4>
 								</dt>
 								<dd>Topic Description</dd>
 
@@ -101,3 +106,7 @@
 	
 	
 }
+
+<script> $(function(){
+    $('a[rel=tooltip]').tooltip();
+});​</script>

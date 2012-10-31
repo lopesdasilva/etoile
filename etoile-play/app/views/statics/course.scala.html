@@ -1,4 +1,4 @@
-@(user: User, categories: List[models.curriculum.Category],course: models.course.Course)
+@(categories: List[models.curriculum.Category],course: models.course.Course)
 @main("etoileplatform"){
 
 
@@ -19,7 +19,8 @@
 					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<form class="navbar-form pull-right">
-					@user.email <a href="/logout" role="button" class="btn btn-primary">Logout</a>
+					<a href="login" role="button"
+						class="btn btn-primary">Login</a>
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -31,14 +32,7 @@
 
 	<div class="row-fluid">
 		<div class="span3">
-			<div class="well sidebar-nav" style="background: #0088CC;">
-				<ul class="nav nav-list">
-					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
-						Courses</li> @for(course <- user.courses) {
-					<li><a href="@routes.Application.course(course.id)"
-						style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
-				</ul>
-			</div>
+			
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 					<li class="nav-header">Categories (@categories.size)</li>
@@ -58,11 +52,7 @@
 					<div class="span6">
 						<h2>@course.name</h2>
 					</div>
-					<div class="span2 offset3 pull-right">
-						<h2>
-							<a href="#" role="button" class="btn btn-info">Sign Up</a>
-						</h2>
-					</div>
+					
 				</div>
 			</div>
 
@@ -92,7 +82,7 @@
 			<h3>Categories</h3>
 			} 
 			@for(category <- course.categories){
-			<a href="#" class="">@category.name</a>
+			<a href="/curriculum#@category.keyword" class="">@category.name</a>
 			<br>
 			}
 			}

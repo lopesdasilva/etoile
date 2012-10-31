@@ -35,7 +35,7 @@
 			<ul class="nav nav-list">
 				<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
 					Courses</li> @for(course <- user.courses) {
-				<li><a href="@routes.Profile.course(course.id)"
+				<li><a href="@routes.Application.course(course.id)"
 					style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
 			</ul>
 		</div>

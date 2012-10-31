@@ -42,7 +42,6 @@ public class Application extends Controller {
 	public static Result postcomment(){
 		 Form<Comment> form = form(Comment.class).bindFromRequest();
 		 List<Category> categories = Category.getAllCategories();
-		System.out.println("Post Comment");
 	
 		
 //		User user=User.find.byId(session("email"));
@@ -61,6 +60,21 @@ public class Application extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		return ok(categorycourses.render(category,categories));
 	}
+	
+	
+	 public static Result course(Long course_id){
+	    	
+	    	Course course = Course.find.byId(course_id);
+	    	
+	    	List<Category> categories = Category.getAllCategories();
+	    	
+	    	
+	    	if(session("email")!=null){
+				return Profile.course(course_id);
+			}
+	    	
+	    	return ok(views.html.statics.course.render(categories,course));
+	    }
 	
 	public static Result about() {
 		if(session("email")!=null){

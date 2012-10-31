@@ -25,7 +25,7 @@ POST		/blog:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 #Courses
 ##CHECK THIS ROUTE
 GET		/courses						controllers.Application.courses()
-GET  	/course:course					controllers.Profile.course(course: Long)
+GET  	/course:course					controllers.Application.course(course: Long)
 
 #Curriculum Courses
 GET /category:category					controllers.Application.categoryCourses(category: Long)

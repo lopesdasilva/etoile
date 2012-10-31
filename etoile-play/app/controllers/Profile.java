@@ -51,14 +51,11 @@ public class Profile extends Controller {
     
     
     public static Result course(Long course_id){
-    	System.out.println("COURSE ID: "+course_id);
-    	
     	Course course = Course.find.byId(course_id);
-    	User user=User.find.byId(request().username());
+    	User user=User.find.byId(session("email"));
     	List<Category> categories = Category.getAllCategories();
     	
     	
-    	System.out.println();
     	if(!user.courses.contains(course))
     	return ok(views.html.secured.courseGeneral.render(user,categories,course));
     	else
@@ -71,7 +68,6 @@ public class Profile extends Controller {
 
     
     public static Result test(Long test_id, Long module_id){
-    	System.out.println("TEST ID: " + test_id);
     	List<Category> categories = Category.getAllCategories();
     	models.test.Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
@@ -80,7 +76,6 @@ public class Profile extends Controller {
     }
     
     public static Result module(Long module_id, Long course_id){
-    	System.out.println("MODULE ID: "+module_id);
     	
     	List<Category> categories = Category.getAllCategories();
     	Module module = Module.find.byId(module_id);
@@ -129,10 +124,6 @@ public class Profile extends Controller {
 		 List<Category> categories = Category.getAllCategories();
 		 User user=User.find.byId(session("email"));
 		 	
-		 //DEBUG
-		System.out.println("DEBUG: User:"+user.email+" is adding a new comment to blog id: "+blog);
-		System.out.println("DEBUG: Comment text: "+form.get().comment);
-		
 		//New Comment
 		models.Comment c=new models.Comment();
 		c.text=form.get().comment;

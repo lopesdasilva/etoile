@@ -196,22 +196,26 @@ public class Global extends GlobalSettings {
 			
 			Category category_one = new Category();
 			category_one.name="Biology & Life Sciences";
+			category_one.keyword = "biology";
 			category_one.description="";
 			category_one.save();
 			
 			Category category_two = new Category();
 			category_two.name="Mathematics";
+			category_two.keyword = "mathematics";
 			category_two.description="";
 			course_two.save();
 			category_two.save();
 			
 			Category category_three = new Category();
 			category_three.name="Computer Science";
+			category_three.keyword = "computerscience";
 			category_three.description="";
 			category_three.save();
 			
 			Category category_four = new Category();
 			category_four.name="Social Sciences";
+			category_four.keyword = "socialsciences";
 			category_four.description="";
 			course_three.save();
 			category_four.save();
@@ -233,10 +237,12 @@ public class Global extends GlobalSettings {
 
 	private void createCurriculum() {
 		Curriculumtopic topic_one = new Curriculumtopic();
+		topic_one.keyword = "discuss";
 		topic_one.text = "Discuss what kind of problems can be computed.";
 		topic_one.save();
 		
 		Curriculumtopic topic_two = new Curriculumtopic();
+		topic_two.keyword = "describe";
 		topic_two.text = "Describe and relate the notions of formal system.";
 		topic_two.save();
 		

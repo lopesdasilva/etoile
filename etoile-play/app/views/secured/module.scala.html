@@ -42,12 +42,28 @@ models.course.Module) @main("etoileplatform"){
 				<ul class="nav nav-list">
 					<li class="nav-header">Categories (@categories.size)</li>
 					@for(category <- categories) {
-									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
+					<li><a href="/curriculum#@category.keyword">@category.name</a></li>
+					}
 
 				</ul>
 			</div>
 			<!--/.well -->
 		</div>
+		<div class="span9">
+			<div class="accordion" id="accordion2">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse"
+							data-parent="#accordion2" href="#collapseOne"> @module.name
+							Description </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse">
+						<div class="accordion-inner">@module.text</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!--/span-->
 		<div class="span9">
 			<div class="page-header">
@@ -55,7 +71,7 @@ models.course.Module) @main("etoileplatform"){
 				<div class="tabbable">
 					<!-- Only required for left/right tabs -->
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
+						<li class="active"><a href="#tab1" data-toggle="tab">Information</a></li>
 						<li><a href="#tab2" data-toggle="tab">Extra</a></li>
 						<li><a href="#tab3" data-toggle="tab">Tests</a></li>
 					</ul>
@@ -66,7 +82,7 @@ models.course.Module) @main("etoileplatform"){
 									<img src="@module.moduleImageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
-									<p>@module.text</p>
+									<p>New Allert </p>
 								</div>
 							</div>
 						</div>
@@ -74,12 +90,14 @@ models.course.Module) @main("etoileplatform"){
 							@for(mc <- module.modulecontents) {
 							<div class="row-fluid">
 								<div class="span2">
-									<img src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA" height="50" width="50" />
+									<img
+										src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA"
+										height="50" width="50" />
 								</div>
 								<div class="span9">
 									<p>@mc.text</p>
 									<p>
-									<a href="@mc.url" target="_blank">@mc.name</a> 
+										<a href="@mc.url" target="_blank">@mc.name</a>
 									</p>
 								</div>
 							</div>
@@ -117,9 +135,10 @@ models.course.Module) @main("etoileplatform"){
 				</div>
 			</div>
 		</div>
-		<div class="span9">
 
-			<div class="row-fluid"></div>
-		</div>
+
+
+		<div class="row-fluid"></div>
 	</div>
-	<div class="row-fluid">}
+</div>
+<div class="row-fluid">}

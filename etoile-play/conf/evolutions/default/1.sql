@@ -42,6 +42,7 @@ create table course (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   description               TEXT,
+  course_video_url          TEXT,
   course_image_url          varchar(255),
   constraint pk_course primary key (id))
 ;

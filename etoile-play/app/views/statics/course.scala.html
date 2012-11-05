@@ -1,5 +1,5 @@
-@(categories: List[models.curriculum.Category],course: models.course.Course)
-@main("etoileplatform"){
+@(categories: List[models.curriculum.Category],course:
+models.course.Course) @main("etoileplatform"){
 
 
 
@@ -19,8 +19,7 @@
 					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<form class="navbar-form pull-right">
-					<a href="login" role="button"
-						class="btn btn-primary">Login</a>
+					<a href="login" role="button" class="btn btn-primary">Login</a>
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -32,13 +31,14 @@
 
 	<div class="row-fluid">
 		<div class="span3">
-			
+
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 					<li class="nav-header">Categories (@categories.size)</li>
 					@for(category <- categories) {
-										<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
-					
+					<li><a href="/curriculum#@category.keyword">@category.name</a></li>
+					}
+
 				</ul>
 			</div>
 			<!--/.well -->
@@ -52,14 +52,43 @@
 					<div class="span6">
 						<h2>@course.name</h2>
 					</div>
-					
+
 				</div>
 			</div>
 
 			<h3>Description</h3>
 			<div class="row-fluid">
 				<div class="span3">
-					<img src="@course.courseImageURL" height="200" width="200" />
+					<a href="#myModal" role="button" class="btn" data-toggle="modal"><img
+						src="@course.courseImageURL" height="200" width="200" /></a>
+					<!-- Button to trigger modal -->
+
+
+					<!-- Modal -->
+					<div id="myModal" class="modal hide fade" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">×</button>
+							<h3 id="myModalLabel">@course.name Video</h3>
+						</div>
+						<div class="modal-body">
+							<p>
+								<object width="415" height="350">
+									<param name="movie"
+										value="@course.courseVideoURL" />
+									<param name="wmode" value="transparent" />
+									<embed src="@course.courseVideoURL"
+										type="application/x-shockwave-flash" wmode="transparent"
+										width="415" height="350" />
+								</object>
+
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						</div>
+					</div>
 				</div>
 				<div class="span9">
 
@@ -67,27 +96,20 @@
 				</div>
 			</div>
 			<hr>
-			
+
 			@for(content <- course.contents) {
 			<h3>@content.title</h3>
 			<p>@content.text</p>
 			<hr>
-			} 
-			
-			
-			@if(course.categories.size!=0) {
-			@if(course.categories.size==1) {
+			} @if(course.categories.size!=0) { @if(course.categories.size==1) {
 			<h3>Category</h3>
 			} else{
 			<h3>Categories</h3>
-			} 
-			@for(category <- course.categories){
-			<a href="/curriculum#@category.keyword" class="">@category.name</a>
-			<br>
-			}
-			}
-			
-			
+			} @for(category <- course.categories){ <a
+				href="/curriculum#@category.keyword" class="">@category.name</a> <br>
+			} }
+
+
 
 
 

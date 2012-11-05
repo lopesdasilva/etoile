@@ -124,7 +124,8 @@ public class Global extends GlobalSettings {
 			
 			Course course = new Course();
 			course.name = "Mathematics 101";
-			course.courseImageURL = "http://www.clare.cam.ac.uk/data/uploads/admissions/undergraduate/subjects/Mathematics.jpg";
+			course.courseImageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
+			course.courseVideoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
 			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
 			course.modules.add(module_one);
 			course.modules.add(module_two);

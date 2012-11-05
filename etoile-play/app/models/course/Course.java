@@ -26,6 +26,10 @@ public class Course extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String description;
+
+	@Constraints.Required
+	@Column(columnDefinition="TEXT")
+	public String courseVideoURL;
 	
 	@Constraints.Required
 	public String courseImageURL;

@@ -78,6 +78,13 @@ create table forum (
   constraint pk_forum primary key (id))
 ;
 
+create table hypothesis (
+  id                        bigint auto_increment not null,
+  text                      varchar(255),
+  question_image_url        varchar(255),
+  constraint pk_hypothesis primary key (id))
+;
+
 create table module (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -94,6 +101,14 @@ create table modulecontent (
   url                       varchar(255),
   module_content_image_url  varchar(255),
   constraint pk_modulecontent primary key (id))
+;
+
+create table one_choice_question (
+  id                        bigint auto_increment not null,
+  question                  varchar(255),
+  correct_hypothesis        varchar(255),
+  question_image_url        varchar(255),
+  constraint pk_one_choice_question primary key (id))
 ;
 
 create table open_question (
@@ -178,10 +193,22 @@ create table module_modulecontent (
   constraint pk_module_modulecontent primary key (module_id, modulecontent_id))
 ;
 
+create table one_choice_question_hypothesis (
+  one_choice_question_id         bigint not null,
+  hypothesis_id                  bigint not null,
+  constraint pk_one_choice_question_hypothesis primary key (one_choice_question_id, hypothesis_id))
+;
+
 create table test_open_question (
   test_id                        bigint not null,
   open_question_id               bigint not null,
   constraint pk_test_open_question primary key (test_id, open_question_id))
+;
+
+create table test_one_choice_question (
+  test_id                        bigint not null,
+  one_choice_question_id         bigint not null,
+  constraint pk_test_one_choice_question primary key (test_id, one_choice_question_id))
 ;
 
 create table account_course (
@@ -232,9 +259,17 @@ alter table module_modulecontent add constraint fk_module_modulecontent_modul_01
 
 alter table module_modulecontent add constraint fk_module_modulecontent_modul_02 foreign key (modulecontent_id) references modulecontent (id) on delete restrict on update restrict;
 
+alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_01 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
+
+alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_02 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
+
 alter table test_open_question add constraint fk_test_open_question_test_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
 
 alter table test_open_question add constraint fk_test_open_question_open_qu_02 foreign key (open_question_id) references open_question (id) on delete restrict on update restrict;
+
+alter table test_one_choice_question add constraint fk_test_one_choice_question_t_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
+
+alter table test_one_choice_question add constraint fk_test_one_choice_question_o_02 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
 
 alter table account_course add constraint fk_account_course_account_01 foreign key (account_email) references account (email) on delete restrict on update restrict;
 
@@ -272,6 +307,8 @@ drop table curriculumtopic;
 
 drop table forum;
 
+drop table hypothesis;
+
 drop table module;
 
 drop table module_test;
@@ -280,6 +317,10 @@ drop table module_modulecontent;
 
 drop table modulecontent;
 
+drop table one_choice_question;
+
+drop table one_choice_question_hypothesis;
+
 drop table open_question;
 
 drop table reply;
@@ -287,6 +328,8 @@ drop table reply;
 drop table test;
 
 drop table test_open_question;
+
+drop table test_one_choice_question;
 
 drop table topic;
 

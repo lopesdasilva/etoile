@@ -12,6 +12,8 @@ import models.curriculum.Curriculumcourse;
 import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
+import models.test.Hypothesis;
+import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
 
@@ -50,6 +52,26 @@ public class Global extends GlobalSettings {
 			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
 			blog.save();
 			
+			Hypothesis hypothesis_one = new Hypothesis();
+			hypothesis_one.text = "H1";
+			hypothesis_one.save();
+			
+			Hypothesis hypothesis_two = new Hypothesis();
+			hypothesis_two.text = "H2";
+			hypothesis_two.save();
+			
+			Hypothesis hypothesis_three = new Hypothesis();
+			hypothesis_three.text = "H3";
+			hypothesis_three.save();
+			
+			OneChoiceQuestion onechoicequestion_one = new OneChoiceQuestion();
+			onechoicequestion_one.question = "This is the First OneChoice Question.";
+			onechoicequestion_one.correct_hypothesis = hypothesis_one.text;
+			onechoicequestion_one.hypothesyslist.add(hypothesis_one);
+			onechoicequestion_one.hypothesyslist.add(hypothesis_two);
+			onechoicequestion_one.hypothesyslist.add(hypothesis_three);
+			onechoicequestion_one.save();
+			
 			OpenQuestion question_one = new OpenQuestion();
 			question_one.question = "This is the First Open Question.";
 			question_one.save();
@@ -64,6 +86,7 @@ public class Global extends GlobalSettings {
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_one.openquestions.add(question_one);
 			test_one.openquestions.add(question_two);
+			test_one.onechoicequestions.add(onechoicequestion_one);
 			question_one.save();
 			question_two.save();
 			test_one.save();

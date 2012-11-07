@@ -58,16 +58,29 @@
 		<!--/span-->
 	 
 
- <div class="span9" >
-            @for(blog <- blogs) {
-		<h4>@blog.header</h4>
-		<p>@blog.text</p>
-		<p><a class="btn" href="@routes.Application.blog(blog.id)">View details &raquo;</a></p>
+     <div class="span9" >
+			@for(blog <- blogs) {
+			<div class="row-fluid">
+				<h4>@blog.header</h4>
+				<div class="span2">
+					<img src="@blog.articleImageURL" height="200" width="200" />
+				</div>
+				<div class="span9">
+					<p>@blog.text</p>
+					<p>
+						
+					</p>
 
-	}
-</div>
+				</div>
+				<a class="btn" href="@routes.Application.blog(blog.id)">View
+							details &raquo;</a>
 
- </div>
+			
+			</div>
+				<hr>
+			}
+		</div>
+
  </div>
  </div>
 

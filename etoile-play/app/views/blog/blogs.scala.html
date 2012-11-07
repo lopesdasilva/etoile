@@ -12,13 +12,13 @@
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li ><a href="/">Home</a>
+					<li><a href="/">Home</a>
 					</li>
 					<li><a href="/digitalcampus">Digital Campus</a>
 					</li>
 					<li><a href="/courses">Courses</a>
 					</li>
-					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li class="active"><a href="/news">News</a>
 					</li>
 					<li><a href="/about">About</a>
@@ -61,9 +61,9 @@
      <div class="span9" >
 			@for(blog <- blogs) {
 			<div class="row-fluid">
-				<h4>@blog.header</h4>
+				<a href="@routes.Application.blog(blog.id)"><h4>@blog.header</h4></a>
 				<div class="span2">
-					<img src="@blog.articleImageURL" height="200" width="200" />
+					<img src="@blog.articleImageURL" height="100" width="100" />
 				</div>
 				<div class="span9">
 					<p>@blog.text</p>
@@ -72,11 +72,13 @@
 					</p>
 
 				</div>
-				<a class="btn" href="@routes.Application.blog(blog.id)">View
-							details &raquo;</a>
+				
 
 			
 			</div>
+			<br>
+			<a class="btn btn-info" href="@routes.Application.blog(blog.id)">View
+							details &raquo;</a>
 				<hr>
 			}
 		</div>

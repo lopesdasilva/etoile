@@ -13,19 +13,28 @@
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/digitalcampus">Digital Campus</a></li>
-					<li><a href="/courses">Courses</a></li>
-					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/courses">Courses</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li class="active"><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
 				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="login" role="button"
-						class="btn btn-primary">Login</a> } @if(
-					session.get("email")!=null) { <a href="/logout" role="button"
-						class="btn btn-primary">Logout</a> }
+					@if( session.get("email")==null) { <a href="login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -54,7 +63,7 @@
 			<div class="span9">
 		<div class="page-header">
 			<h2>
-				Contact étoile <br>
+				Contact √©toile <br>
 				<small>Enhanced Technology for Open Intelligent Learning
 					Environments</small>
 			</h2>

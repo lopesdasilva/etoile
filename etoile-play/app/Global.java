@@ -46,7 +46,7 @@ public class Global extends GlobalSettings {
 			blog.alternateHeader= "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
 			blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
 			blog.alternateText = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
-			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/emergence.tiff";
+			blog.articleImageURL="http://cs.gmu.edu/~eclab/projects/mason/HeatBugs.png";
 			
 			blog.save();
 			
@@ -55,7 +55,7 @@ public class Global extends GlobalSettings {
 			blog.alternateHeader= "Étoile will run on tablet !";
 			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
-			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
+			blog.articleImageURL="http://techbeat.com/wp-content/uploads/2012/10/school-tablet.jpg";
 			blog.save();
 			
 			

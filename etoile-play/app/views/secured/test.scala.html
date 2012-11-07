@@ -73,8 +73,7 @@ models.test.Test) @main("etoileplatform"){
 
 					<section id="@onechoicequestion.id">
 						<h3>@onechoicequestion.question</h3>
-						<label class="radio"> @for(hypothesis <-
-							onechoicequestion.hypothesyslist) { <label class="radio">
+						<label class="radio"> @for(hypothesis <-onechoicequestion.hypothesyslist) { <label class="radio">
 								<input type="radio" value="@hypothesis.id" name="group">
 								@hypothesis.text
 						</label> }

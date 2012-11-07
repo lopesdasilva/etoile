@@ -11,6 +11,7 @@ import models.curriculum.Category;
 import models.curriculum.Curriculumcourse;
 import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
+import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
@@ -108,6 +109,8 @@ public class Global extends GlobalSettings {
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
 			
+
+			
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
@@ -203,6 +206,21 @@ public class Global extends GlobalSettings {
 			course_three.save();
 			user.save();	
 			
+			//ANSWERS ++++++++++++++++++++++++++++++++++++++++++
+			Answer answer = new Answer();
+			answer.answer = "Ruben Answer 1";
+			answer.test = test_one;
+			answer.openQuestion = question_one;
+			answer.user = user;
+			answer.save();
+			
+			Answer answer_two = new Answer();
+			answer_two.answer = "Ruben Answer 2";
+			answer_two.test = test_one;
+			answer_two.openQuestion = question_two;
+			answer_two.user = user;
+			answer_two.save();
+			
 			Comment c = new Comment();
 			c.text = "Great! I can't wait to try it!";
 			c.blog = blog;
@@ -221,6 +239,13 @@ public class Global extends GlobalSettings {
 			course_two.save();
 			user.save();
 
+			Answer answer_three = new Answer();
+			answer_three.answer = "Rui Answer 1";
+			answer_three.test = test_one;
+			answer_three.openQuestion = question_one;
+			answer_three.user = user;
+			answer_three.save();
+			
 			Comment c1 = new Comment();
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 			c1.blog = blog;

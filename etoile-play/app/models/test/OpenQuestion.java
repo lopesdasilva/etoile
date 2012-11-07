@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.Comment;
+
 import com.avaje.ebean.Ebean;
 
 import play.db.ebean.*;
@@ -27,6 +29,8 @@ public class OpenQuestion extends Model{
 	@ManyToMany(mappedBy="tests")
 	public Test test;
 	
+	@OneToMany
+	public List<Answer> answers;
 
 	
 	public static Model.Finder<Long, OpenQuestion> find = new Model.Finder<Long, OpenQuestion>(

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.course.Course;
+import models.test.Answer;
 
 import play.db.ebean.*;
 import play.data.format.*;
@@ -43,6 +44,10 @@ public class User extends Model {
 	
 	@OneToMany
 	public List<Comment> comments;
+    // -- Queries
+	
+	@OneToMany
+	public List<Answer> answers;
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

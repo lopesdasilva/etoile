@@ -39,7 +39,8 @@ public class Test extends Model{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<OneChoiceQuestion> onechoicequestions;
 	
-
+	@OneToMany
+	public List<Answer> answers;
 	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);

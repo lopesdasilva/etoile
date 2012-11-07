@@ -35,17 +35,15 @@ models.test.Test) @main("etoileplatform"){
 
 		<div class="span3  sidebar-nav">
 			<ul class="nav well nav-list affix">
-				<li class="nav-header">@test.name</li> @for(question <-
-				test.openquestions) {
+				<li class="nav-header">@test.name</li> @for(question
+				<-test.openquestions) {
 				<li><a href="#@question.id"><i class="icon-chevron-right"></i>Question
-						@question.id</a></li> }
-						
-						@for(onechoicequestion <-
-				test.onechoicequestions) {
-				<li><a href="#@onechoicequestion.id"><i class="icon-chevron-right"></i>OneChoiceQuestion
+						@question.id</a></li> } @for(onechoicequestion <- test.onechoicequestions){
+				<li><a href="#@onechoicequestion.id"><i
+						class="icon-chevron-right"></i>OneChoiceQuestion
 						@onechoicequestion.id</a></li> }
-						
-						
+
+
 			</ul>
 		</div>
 
@@ -62,7 +60,12 @@ models.test.Test) @main("etoileplatform"){
 
 					<section id="@question.id">
 						<h3>@question.question</h3>
-						<textarea contenteditable="false" rows="6"></textarea>
+						@for(answer <- test.answers){
+						@if(answer.openQuestion.id==question.id){
+
+						<textarea contenteditable="false" rows="6">@answer.answer</textarea>
+						} }
+
 					</section>
 
 
@@ -70,11 +73,10 @@ models.test.Test) @main("etoileplatform"){
 
 					<section id="@onechoicequestion.id">
 						<h3>@onechoicequestion.question</h3>
-						<label class="radio">
-						@for(hypothesis <- onechoicequestion.hypothesyslist) { 
-						<label
-							class="radio"> <input type="radio" value="@hypothesis.id"
-							name="group"> @hypothesis.text
+						<label class="radio"> @for(hypothesis <-
+							onechoicequestion.hypothesyslist) { <label class="radio">
+								<input type="radio" value="@hypothesis.id" name="group">
+								@hypothesis.text
 						</label> }
 						</label>
 					</section>
@@ -87,6 +89,8 @@ models.test.Test) @main("etoileplatform"){
 			</div>
 		</div>
 	</div>
+	
+						<button class="btn btn-success" type="submit">Save</button>
 	<div class="span9">
 
 		<div class="row-fluid"></div>

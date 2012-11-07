@@ -1,6 +1,7 @@
 package controllers;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import controllers.Application.Login;
@@ -13,12 +14,16 @@ import models.Comment;
 import models.User;
 import models.course.Course;
 import models.course.Module;
+import models.test.Answer;
+import models.test.OpenQuestion;
+import models.test.Test;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import scala.collection.mutable.ArrayLike;
 import views.html.*;
 
 /**
@@ -69,9 +74,13 @@ public class Profile extends Controller {
     
     public static Result test(Long test_id, Long module_id){
     	List<Category> categories = Category.getAllCategories();
-    	models.test.Test test = models.test.Test.find.byId(test_id);
+    	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
-		return ok(views.html.secured.test.render(user,categories,test));
+    	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
+    	Test test_aux = test;
+    	test_aux.answers = answers;
+    	
+		return ok(views.html.secured.test.render(user,categories,test_aux));
     	
     }
     

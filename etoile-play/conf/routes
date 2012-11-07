@@ -11,6 +11,7 @@ GET		/index						controllers.Application.index()
 GET		/about						controllers.Application.about()
 GET		/contact					controllers.Application.contact()
 GET		/curriculum					controllers.Application.curriculum()
+GET		/digitalcampus					controllers.Application.digitalcampus()
 
 
 # Authentication
@@ -19,8 +20,9 @@ POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout()
 
 #Blog
-GET		/blog:blog						controllers.Application.blog(blog: Long)
-POST		/blog:blog/postcomment					controllers.Profile.postcomment(blog: Long)
+GET		/news							controllers.Application.news()
+GET		/news:blog						controllers.Application.blog(blog: Long)
+POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 
 #Courses
 ##CHECK THIS ROUTE

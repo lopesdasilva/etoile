@@ -54,6 +54,18 @@ public class Application extends Controller {
 				Category.getAllCategories()
 				));
 	}
+	public static Result digitalcampus() {
+		
+		return ok(views.html.statics.digitalcampus.render(
+				Category.getAllCategories()
+				));
+	}
+public static Result news() {
+		
+		return ok(views.html.blog.blogs.render(
+				Blog.getAllBlogs(),Category.getAllCategories()
+				));
+	}
 	
 	public static Result categoryCourses(Long category_id){
 		Category category = Category.find.byId(category_id);

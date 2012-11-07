@@ -1,7 +1,5 @@
-@(blogs: List[Blog], categories: List[models.curriculum.Category])
-
+@(blogs: List[Blog],categories: List[models.curriculum.Category]) 
 @main("etoile project") {
-
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -14,17 +12,29 @@
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/digitalcampus">Digital Campus</a></li>
-					<li><a href="/courses">Courses</a></li>
+					<li ><a href="/">Home</a>
+					</li>
+					<li><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/courses">Courses</a>
+					</li>
 					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
+					<li class="active"><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
 				</ul>
+				<!--  
 				<div class="navbar-form pull-right">
 					<a href="login" role="button" class="btn btn-primary">Login</a>
 				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
 			</div>
 			<!--/.nav-collapse -->
 
@@ -32,51 +42,33 @@
 	</div>
 </div>
 
-
 <div class="container-fluid">
-	<div class="row-fluid">
+<div class="row-fluid">
 		<div class="span3">
-
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 					<li class="nav-header">Categories (@categories.size)</li>
 					@for(category <- categories) {
-					<li><a href="/curriculum#@category.keyword">@category.name</a>
-					</li> }
+										<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
 
 				</ul>
 			</div>
 			<!--/.well -->
 		</div>
 		<!--/span-->
-		<div class="span9">
-			<div class="hero-unit">
-				<h1>etoile platform</h1>
-				<p>Enhanced Technology for Open Intelligent Learning
-					Environments</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="about">Learn more
-						&raquo;</a>
-				</p>
-			</div>
+	 
 
+ <div class="span9" >
+            @for(blog <- blogs) {
+		<h4>@blog.header</h4>
+		<p>@blog.text</p>
+		<p><a class="btn" href="@routes.Application.blog(blog.id)">View details &raquo;</a></p>
 
-			<div class="row-fluid">
+	}
+</div>
 
-				@for(blog <- blogs) {
-				<div class="span4">
-					<h4>@blog.header</h4>
-					<p>@blog.text</p>
-					<p>
-						<a class="btn" href="@routes.Application.blog(blog.id)">View
-							details &raquo;</a>
-					</p>
-				</div>
-				}
+ </div>
+ </div>
+ </div>
 
-
-			</div>
-		</div>
-		</div>
-		</div>
-		}
+}

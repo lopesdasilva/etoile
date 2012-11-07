@@ -1,0 +1,67 @@
+@(categories: List[models.curriculum.Category])
+@main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li class="active"><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/courses">Courses</a>
+					</li>
+					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          
+					 <div class="well sidebar-nav">
+					  <ul class="nav nav-list">
+              <li class="nav-header">Categories (@categories.size)</li>
+              @for(category <- categories) {
+									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
+
+					 </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+  <div class="page-header">
+              <h2>Digital Campus<br><small>Enhanced Technology for Open Intelligent Learning Environments</small></h2>
+             
+            </div>
+</div>
+</div>
+</div>
+}

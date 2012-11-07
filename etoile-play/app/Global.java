@@ -11,20 +11,25 @@ import models.curriculum.Category;
 import models.curriculum.Curriculumcourse;
 import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
-import models.forum.Topic;
 import models.test.Hypothesis;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
 
 public class Global extends GlobalSettings {
+	
+	public Category mathcat;
+	public Category phycat;
+	public Category biocat;
+	public Category soccat;
+	public Category comcat;
 
 	public void onStart(Application app) {
 		System.out.println(Ebean.find(Blog.class).findRowCount());
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
-			Logger.info("Init Data");
+			Logger.info("Init Data");			
 			
-			createCurriculum();
+			// NEWS ++++++++++++++++++++++++++++++++++++++++++
 			
 			Blog blog = new Blog();
 			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
@@ -51,6 +56,9 @@ public class Global extends GlobalSettings {
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
 			blog.save();
+			
+			
+			// QUESTIONS ++++++++++++++++++++++++++++++++++++++++
 			
 			Hypothesis hypothesis_one = new Hypothesis();
 			hypothesis_one.text = "H1";
@@ -80,6 +88,9 @@ public class Global extends GlobalSettings {
 			question_two.question = "This is the Second Open Question.";
 			question_two.save();
 			
+		
+			// TESTS ++++++++++++++++++++++++++++++++++++++++++++
+			
 			Test test_one = new Test();
 			test_one.name = "First Sum Test";
 			test_one.text = "Improve your Sum Skills!";
@@ -96,6 +107,9 @@ public class Global extends GlobalSettings {
 			test_two.text = "Final Evaluation of Sum Module";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
+			
+			
+			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Modulecontent mcontent = new Modulecontent();
 			mcontent.name = "Content";
@@ -122,6 +136,9 @@ public class Global extends GlobalSettings {
 			module_two.moduleImageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
 			module_two.save();
 			
+			
+			// COURSES +++++++++++++++++++++++++++++++++++++++++
+			
 			Course course = new Course();
 			course.name = "Mathematics 101";
 			course.courseImageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
@@ -130,8 +147,6 @@ public class Global extends GlobalSettings {
 			course.modules.add(module_one);
 			course.modules.add(module_two);
 			course.save();
-			
-
 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
@@ -144,6 +159,9 @@ public class Global extends GlobalSettings {
 			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
 			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 			course_three.save();
+			
+			
+			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			
 			Content content= new Content();
 			content.course=course_three;
@@ -169,6 +187,8 @@ public class Global extends GlobalSettings {
 			content.text="Most of this course will be accessible to non-technical students. We will provide optional materials for those with some college-level computer science background.";
 			content.save();
 			
+			
+			// USERS ++++++++++++++++++++++++++++++++++++++++++++
 			
 			User user = new User();
 			user.email = "rub@rub.pt";
@@ -200,15 +220,12 @@ public class Global extends GlobalSettings {
 			course.save();
 			course_two.save();
 			user.save();
-			
-			
 
 			Comment c1 = new Comment();
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 			c1.blog = blog;
 			c1.user = user;
 			c1.save();
-			
 			
 			
 			user = new User();
@@ -218,82 +235,97 @@ public class Global extends GlobalSettings {
 			user.account_type = "professor";
 			user.save();
 			
-			Category category_one = new Category();
-			category_one.name="Biology & Life Sciences";
-			category_one.keyword = "biology";
-			category_one.description="";
-			category_one.save();
 			
-			Category category_two = new Category();
-			category_two.name="Mathematics";
-			category_two.keyword = "mathematics";
-			category_two.description="";
-			course_two.save();
-			category_two.save();
 			
-			Category category_three = new Category();
-			category_three.name="Computer Science";
-			category_three.keyword = "computerscience";
-			category_three.description="";
-			category_three.save();
+			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			
-			Category category_four = new Category();
-			category_four.name="Social Sciences";
-			category_four.keyword = "socialsciences";
-			category_four.description="";
-			course_three.save();
-			category_four.save();
+				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++
+			
+		    mathcat = new Category();
+			mathcat.name = "Mathematics";
+			mathcat.description="";
+			mathcat.keyword = "mathematics";
+			mathcat.save();
+			
+				// 2. PHYSICS ++++++++++++++++++++++++++++++++++++++
+			
+		    phycat = new Category();
+			phycat.name = "Physics";
+			phycat.description="";
+			phycat.keyword = "physics";
+			phycat.save();
+			
+				// 3. BIOLOGY AND LIFE SCIENCES ++++++++++++++++++++++++++++++++++++++
+			
+		    biocat = new Category();
+			biocat.name = "Biology & Life Sciences";
+			biocat.keyword = "biology";
+			biocat.description="";
+			biocat.save();
+			
+				// 4. SOCIAL SCIENCES ++++++++++++++++++++++++++++++++++++++
+			
+		    soccat = new Category();
+			soccat.name = "Social Sciences";
+			soccat.keyword = "social_sciences";
+			soccat.description="";
+			soccat.save();
+			
+				// 5. COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++
 
+		    comcat = new Category();
+			comcat.name = "Computer Science";
+			comcat.keyword = "computer_science";
+			comcat.description="";
+			comcat.save();
+
+			// CURRICULUM
+			createCurriculum();
+			
+			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
+			/*
 			course_three.categories.add(category_four);
 			course_three.save();
 			category_four.save();
-			
-			course.categories.add(category_two);
-			course.save();
-			category_two.save();
-			
-			course_two.categories.add(category_two);
-			course_two.save();
-			category_two.save();
+			*/
 			
 		}
 	}
 
 	private void createCurriculum() {
-		Curriculumtopic topic_one = new Curriculumtopic();
-		topic_one.keyword = "discuss";
-		topic_one.text = "Discuss what kind of problems can be computed.";
-		topic_one.save();
 		
-		Curriculumtopic topic_two = new Curriculumtopic();
-		topic_two.keyword = "describe";
-		topic_two.text = "Describe and relate the notions of formal system.";
-		topic_two.save();
+		// 5. COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++
+		//faltam modules: (5.1.2) algorithms; (5.1.3) complexity classes
 		
-		Curriculummodule cmodule_one= new Curriculummodule();
-		cmodule_one.keyword = "Discussion";
-		cmodule_one.name = "Discussion";
-		cmodule_one.text = "Discussion module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon.";
-		cmodule_one.curriculumtopics.add(topic_one);
-		cmodule_one.curriculumtopics.add(topic_two);
-		topic_one.save();
-		topic_two.save();
-		cmodule_one.save();
+		// 5.1.1.1 Formal System
+		Curriculumtopic formalSystemsTopic= new Curriculumtopic();
+		formalSystemsTopic.keyword = "formal_systems";
+		//formalSystemsTopic.name = "Formal System";
+		formalSystemsTopic.text = "Formal system:  notions of formal language, inference rule, premise, axiom and theorem.";
+		formalSystemsTopic.save();
 		
-		Curriculumcourse ccourse = new Curriculumcourse();
-		ccourse.keyword = "algorithmic";
-		ccourse.name = "Algorithmic Theory Basics";
-		ccourse.text = "Algorithmic Theory basics Course presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon.";
-		ccourse.curriculummodules.add(cmodule_one);
-		cmodule_one.save();
-		ccourse.save();
+		// 5.1.1 Formal Systems
+		Curriculummodule formalSystemsModule= new Curriculummodule();
+		formalSystemsModule.keyword = "formal_systems";
+		formalSystemsModule.name = "Formal Systems";
+		formalSystemsModule.text = "Learning Objectives: (1) Discuss what kind of problems can be computed, and what are the limitations of actual computers; (2) Describe and relate the notions of formal system, formal language, model and logical system.";
+		formalSystemsModule.curriculumtopics.add(formalSystemsTopic);
+		formalSystemsTopic.save();
+		formalSystemsModule.save();
 		
-		Category cat = new Category();
-		cat.keyword = "algorithmic";
-		cat.name = "Algorithmic";
-		cat.curriculumcourses.add(ccourse);
-		ccourse.save();
-		cat.save();
+		// 5.1 Algorithmics
+		Curriculumcourse algocourse = new Curriculumcourse();
+		algocourse.keyword = "algorithmics";
+		algocourse.name = "Algorithmics";
+		algocourse.text = "Understand and know how to apply the main concepts of Algorithmic Theory";
+		algocourse.curriculummodules.add(formalSystemsModule);
+		formalSystemsModule.save();
+		algocourse.save();
+		
+		comcat.curriculumcourses.add(algocourse);
+		algocourse.save();
+		comcat.save();	
+		
 	}
 
 	public void onStop(Application app) {

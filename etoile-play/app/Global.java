@@ -338,7 +338,7 @@ public class Global extends GlobalSettings {
 		formalSystemsTopic.save();
 		formalSystemsModule.save();
 		
-		// 5//.1 Algorithmics
+		// 5.1 Algorithmics
 		Curriculumcourse algocourse = new Curriculumcourse();
 		algocourse.keyword = "algorithmics";
 		algocourse.name = "Algorithmics";

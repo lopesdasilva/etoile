@@ -41,7 +41,10 @@ public class Profile extends Controller {
 		public String comment;
 	}
 	
-	
+public static class QuestionAnswer{
+		
+		public String qanswer;
+	}
 	
 	
 	/**
@@ -80,7 +83,7 @@ public class Profile extends Controller {
     	Test test_aux = test;
     	test_aux.answers = answers;
     	
-		return ok(views.html.secured.test.render(user,categories,test_aux));
+		return ok(views.html.secured.test.render(user,categories,test_aux,form(QuestionAnswer.class)));
     	
     }
     
@@ -141,6 +144,28 @@ public class Profile extends Controller {
 		c.save();
 
 		return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
+	}
+	
+	public static Result postquestionanswer(Long module_id, Long test_id, Long question_id){
+		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
+		System.out.println("Answer: " + form.get().qanswer + "Question: " +question_id);
+		
+		OpenQuestion question = OpenQuestion.find.byId(question_id);
+		Answer answer = new Answer();
+		answer.answer = form.get().qanswer;
+		answer.save();
+		question.answers.add(answer);
+		question.save();
+
+		List<Category> categories = Category.getAllCategories();
+    	Test test = models.test.Test.find.byId(test_id);
+    	User user = User.find.byId(request().username());
+    	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
+    	Test test_aux = test;
+    	test_aux.answers = answers;
+		
+		return ok(views.html.secured.test.render(user,categories,test_aux,form(QuestionAnswer.class)));
+
 	}
     
     

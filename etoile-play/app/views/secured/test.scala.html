@@ -1,5 +1,7 @@
-@(user: User, categories: List[models.curriculum.Category], test:
-models.test.Test) @main("etoileplatform"){
+@(user: User, categories: List[models.curriculum.Category],module: models.course.Model , test:
+models.test.Test, formAnswer : Form[Profile.QuestionAnswer]) 
+@import helper._ 
+@main("etoileplatform"){
 
 
 
@@ -8,26 +10,21 @@ models.test.Test) @main("etoileplatform"){
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
 			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="/">Home</a>
-					</li>
-					<li><a href="/digitalcampus">Digital Campus</a>
-					</li>
-					<li><a href="/courses">Courses</a>
-					</li>
-<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
-					</li>
-					<li><a href="/about">About</a>
-					</li>
-					<li><a href="/contact">Contact</a>
-					</li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/courses">Courses</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<!--  
 				<div class="navbar-form pull-right">
@@ -35,8 +32,10 @@ models.test.Test) @main("etoileplatform"){
 				</div>
 				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="login" role="button" class="btn btn-primary">Login</a> } 
-					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+					@if( session.get("email")==null) { <a href="login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -79,7 +78,22 @@ models.test.Test) @main("etoileplatform"){
 						@if(answer.openQuestion.id==question.id){
 
 						<textarea contenteditable="false" rows="6">@answer.answer</textarea>
+
 						} }
+
+
+						<div class="control-group">
+							@helper.form(routes.Profile.postquestionanswer(test.module.id, test.id,
+							question.id)) {
+							<div class="controls">@textarea( field =
+								formAnswer("qanswer"), args = '_label -> "", 'placeholder ->
+								"Answer Here", 'class->"span8" )</div>
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Save</button>
+
+							</div>
+							}
+						</div>
 
 					</section>
 
@@ -88,7 +102,8 @@ models.test.Test) @main("etoileplatform"){
 
 					<section id="@onechoicequestion.id">
 						<h3>@onechoicequestion.question</h3>
-						<label class="radio"> @for(hypothesis <-onechoicequestion.hypothesyslist) { <label class="radio">
+						<label class="radio"> @for(hypothesis
+							<-onechoicequestion.hypothesyslist) { <label class="radio">
 								<input type="radio" value="@hypothesis.id" name="group">
 								@hypothesis.text
 						</label> }
@@ -103,8 +118,8 @@ models.test.Test) @main("etoileplatform"){
 			</div>
 		</div>
 	</div>
-	
-						<button class="btn btn-success" type="submit">Save</button>
+
+	<button class="btn btn-success" type="submit">Save</button>
 	<div class="span9">
 
 		<div class="row-fluid"></div>

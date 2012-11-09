@@ -67,16 +67,18 @@
 		</div>		<!--/span-->
 	
  
- <div class="span9" >
- <h3>@blog.header</h3>
- <p>@blog.text</p>
- @for(comment <- blog.comments) {
+ <div class="span9">
+		<h3>@blog.header</h3>
+		<br> <img src="@blog.articleImageURL" height="200" width="200" />
+
+		<p>@blog.text</p>
+		@for(comment <- blog.comments) {
 		<blockquote>
 			<p>@comment.text</p>
-			<small>By @comment.user.email</small>
+			<small>By @comment.user</small>
 		</blockquote>
 		}
-
+	</div>
  <hr>
  
   <h3>Insert your comment below</h3>

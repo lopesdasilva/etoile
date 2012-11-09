@@ -53,7 +53,7 @@
 				<ul class="nav nav-list">
 					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
 						Courses</li> @for(course <- user.courses) {
-					<li><a href="@routes.Application.course(course.id)"
+					<li><a href="@routes.Application.course(course.acronym)"
 						style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
 				</ul>
 			</div>
@@ -90,8 +90,8 @@
 					<li class="span4">
 						<div class="carousel-inner">
 							<div class="item" style="min-height: 150px; max-height: 150px">
-								<a href="@routes.Profile.module(module.id,course.id)"> <img
-									src="@module.moduleImageURL" alt="">
+								<a href="@routes.Profile.module(module.acronym,course.acronym)"> <img
+									src="@module.imageURL" alt="">
 									<div class="carousel-caption" style="max-height: 30px;min-height: 30px">
 										<h4>@module.name</h4>
 										

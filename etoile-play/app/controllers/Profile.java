@@ -55,8 +55,8 @@ public class Profile extends Controller {
     }
     
     
-    public static Result course(Long course_id){
-    	Course course = Course.find.byId(course_id);
+    public static Result course(String course_acronym){
+    	Course course = Course.findByAcronym(course_acronym);
     	User user=User.find.byId(session("email"));
     	List<Category> categories = Category.getAllCategories();
     	
@@ -72,7 +72,7 @@ public class Profile extends Controller {
     
 
     
-    public static Result test(Long test_id, Long module_id){
+    public static Result test(Long test_id, String module_acronym, String course_acronym){
     	List<Category> categories = Category.getAllCategories();
     	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
@@ -84,13 +84,14 @@ public class Profile extends Controller {
     	
     }
     
-    public static Result module(Long module_id, Long course_id){
+    public static Result module(String module_acronym, String course_acronym){
     	
     	List<Category> categories = Category.getAllCategories();
-    	Module module = Module.find.byId(module_id);
+    	Course course=Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	User user=User.find.byId(request().username());
 
-    	return ok(views.html.secured.module.render(user,categories,module));
+    	return ok(views.html.secured.module.render(user,categories,module,course));
 
     	
     }

@@ -100,9 +100,11 @@ create table hypothesis (
 create table module (
   id                        bigint auto_increment not null,
   name                      varchar(255),
-  text                      TEXT,
-  alternate_text            TEXT,
-  module_image_url          varchar(255),
+  acronym                   varchar(255),
+  description               TEXT,
+  short_description         TEXT,
+  image_url                 varchar(255),
+  video_url                 varchar(255),
   constraint pk_module primary key (id))
 ;
 

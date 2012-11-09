@@ -142,8 +142,9 @@ public class Global extends GlobalSettings {
 			
 			Course course = new Course();
 			course.name = "Mathematics 101";
-			course.courseImageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
-			course.courseVideoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
+			course.acronym="math101";
+			course.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
+			course.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
 			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
 			course.modules.add(module_one);
 			course.modules.add(module_two);
@@ -151,13 +152,15 @@ public class Global extends GlobalSettings {
 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
-			course_two.courseImageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
+			course_two.acronym="stats101";
+			course_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			course_two.save();
 			
 			Course course_three = new Course();
 			course_three.name = "Social Science";
-			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			course_three.acronym="socscience";
+			course_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
 			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 			course_three.save();
 			

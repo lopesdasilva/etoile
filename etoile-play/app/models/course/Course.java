@@ -24,15 +24,21 @@ public class Course extends Model {
 	public String name;
 	
 	@Constraints.Required
+	public String acronym;
+	
+	@Constraints.Required
+	public String duration;
+	
+	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String description;
 
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
-	public String courseVideoURL;
+	public String videoURL;
 	
 	@Constraints.Required
-	public String courseImageURL;
+	public String imageURL;
 	
 
 	@ManyToMany(mappedBy="courses")

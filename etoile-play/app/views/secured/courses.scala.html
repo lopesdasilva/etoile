@@ -81,7 +81,7 @@
                 @for(course <- courses) {
               
                   <div class="item"  style="max-height: 300px;min-height: 300px">
-                    <img src="@course.courseImageURL" alt="@course.name" width="700px" height="300px">
+                    <img src="@course.imageURL" alt="@course.name" width="700px" height="300px">
                     <div class="carousel-caption">
                       <h4>@course.name</h4>
                       <div>
@@ -108,7 +108,7 @@
 		<div class="carousel-inner">
 		     <div class="item"  style="min-height: 150px; max-height: 150px">
 		     <a href="@routes.Application.course(course.id)">
-                    <img src="@course.courseImageURL" alt="">
+                    <img src="@course.imageURL" alt="">
                     <div class="carousel-caption">
                       <h4>@course.name</h4>
                       <p>Aply for a new course today!</p>

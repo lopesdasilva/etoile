@@ -50,9 +50,11 @@ create table content (
 create table course (
   id                        bigint auto_increment not null,
   name                      varchar(255),
+  acronym                   varchar(255),
+  duration                  varchar(255),
   description               TEXT,
-  course_video_url          TEXT,
-  course_image_url          varchar(255),
+  video_url                 TEXT,
+  image_url                 varchar(255),
   constraint pk_course primary key (id))
 ;
 
@@ -149,6 +151,12 @@ create table topic (
   text                      varchar(255),
   forum_id                  bigint,
   constraint pk_topic primary key (id))
+;
+
+create table university (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  constraint pk_university primary key (id))
 ;
 
 create table account (
@@ -350,6 +358,8 @@ drop table test_open_question;
 drop table test_one_choice_question;
 
 drop table topic;
+
+drop table university;
 
 drop table account;
 

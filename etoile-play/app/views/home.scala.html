@@ -21,7 +21,7 @@
 					</li>
 					<li><a href="/courses">Courses</a>
 					</li>
-					  <li><a href="/curriculum">Curriculum</a></li> 
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
 					</li>
 					<li><a href="/about">About</a>
@@ -53,7 +53,7 @@
             <ul class="nav nav-list">
               	<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Courses</li>
 				              @for(course <- user.courses) {
-					<li><a href="@routes.Application.course(course.id)" style="text-shadow: #0088CC; color: #999999 ">@course.name</a></li>
+					<li><a href="@routes.Application.course(course.acronym)" style="text-shadow: #0088CC; color: #999999 ">@course.name</a></li>
 
 					}
 					 </ul>
@@ -84,8 +84,8 @@
 					<li class="span4">
 						<div class="carousel-inner">
 							<div class="item" style="min-height: 150px; max-height: 150px">
-								<a href="@routes.Application.course(course.id)"> <img
-									src="@course.courseImageURL" alt="">
+								<a href="@routes.Application.course(course.acronym)"> <img
+									src="@course.imageURL" alt="">
 									<div class="carousel-caption">
 										<h4>@course.name</h4>
 										<p>Aply for a new course today!</p>

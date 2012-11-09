@@ -53,7 +53,7 @@
 				<ul class="nav nav-list">
 					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
 						Courses</li> @for(course <- user.courses) {
-					<li><a href="@routes.Application.course(course.id)"
+					<li><a href="@routes.Application.course(course.acronym)"
 						style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
 				</ul>
 			</div>
@@ -87,7 +87,7 @@
 			<h3>Description</h3>
 			<div class="row-fluid">
 				<div class="span3">
-					<img src="@course.courseImageURL" height="200" width="200" />
+					<img src="@course.imageURL" height="200" width="200" />
 				</div>
 				<div class="span9">
 

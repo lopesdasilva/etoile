@@ -77,7 +77,7 @@ models.course.Course) @main("etoileplatform"){
 			<div class="row-fluid">
 				<div class="span3">
 					<a href="#myModal" class="thumbnail" data-toggle="modal"><img
-						src="@course.courseImageURL" height="200" width="200" /></a>
+						src="@course.imageURL" height="200" width="200" /></a>
 					<!-- Button to trigger modal -->
 
 
@@ -93,9 +93,9 @@ models.course.Course) @main("etoileplatform"){
 							<p>
 								<object width="415" height="350">
 									<param name="movie"
-										value="@course.courseVideoURL" />
+										value="@course.videoURL" />
 									<param name="wmode" value="transparent" />
-									<embed src="@course.courseVideoURL"
+									<embed src="@course.videoURL"
 										type="application/x-shockwave-flash" wmode="transparent"
 										width="415" height="350" />
 								</object>

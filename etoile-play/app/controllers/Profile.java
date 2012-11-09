@@ -58,8 +58,8 @@ public static class QuestionAnswer{
     }
     
     
-    public static Result course(Long course_id){
-    	Course course = Course.find.byId(course_id);
+    public static Result course(String course_acronym){
+    	Course course = Course.findByAcronym(course_acronym);
     	User user=User.find.byId(session("email"));
     	List<Category> categories = Category.getAllCategories();
     	
@@ -75,7 +75,7 @@ public static class QuestionAnswer{
     
 
     
-    public static Result test(Long test_id, Long module_id){
+    public static Result test(Long test_id, String module_acronym, String course_acronym){
     	List<Category> categories = Category.getAllCategories();
     	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
@@ -83,17 +83,21 @@ public static class QuestionAnswer{
     	Test test_aux = test;
     	test_aux.answers = answers;
     	
-		return ok(views.html.secured.test.render(user,categories,test_aux,form(QuestionAnswer.class)));
+    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
+    	
+		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class)));
     	
     }
     
-    public static Result module(Long module_id, Long course_id){
+    public static Result module(String module_acronym, String course_acronym){
     	
     	List<Category> categories = Category.getAllCategories();
-    	Module module = Module.find.byId(module_id);
+    	Course course=Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	User user=User.find.byId(request().username());
 
-    	return ok(views.html.secured.module.render(user,categories,module));
+    	return ok(views.html.secured.module.render(user,categories,module,course));
 
     	
     }
@@ -146,25 +150,40 @@ public static class QuestionAnswer{
 		return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
 	}
 	
-	public static Result postquestionanswer(Long module_id, Long test_id, Long question_id){
+	public static Result postquestionanswer(String course_acronym, String module_acronym, Long test_id, Long question_id){
 		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
 		System.out.println("Answer: " + form.get().qanswer + "Question: " +question_id);
 		
 		OpenQuestion question = OpenQuestion.find.byId(question_id);
+		Test test = Test.find.byId(test_id);
+		
+		Answer userAnswer = Answer.findByUserAndQuestion(question_id, request().username());
+		if(userAnswer==null){
+		
 		Answer answer = new Answer();
 		answer.answer = form.get().qanswer;
+		answer.openQuestion = question;
+		answer.test = test;
+		answer.user = User.find.byId(request().username());
 		answer.save();
-		question.answers.add(answer);
-		question.save();
 
+		
+		}else{
+			userAnswer.answer = form.get().qanswer;
+			userAnswer.save();
+		}
+		
 		List<Category> categories = Category.getAllCategories();
-    	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	test_aux.answers = answers;
+    	
+    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
+    	
+		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class)));
 		
-		return ok(views.html.secured.test.render(user,categories,test_aux,form(QuestionAnswer.class)));
 
 	}
     

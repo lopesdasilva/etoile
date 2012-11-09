@@ -121,9 +121,10 @@ public class Global extends GlobalSettings {
 			
 			Module module_one = new Module();
 			module_one.name = "Multiplication Module";
-			module_one.text = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
-			module_one.alternateText = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
-			module_one.moduleImageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
+			module_one.acronym = "multiplication";
+			module_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			module_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			module_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
 			module_one.tests.add(test_one);
 			module_one.tests.add(test_two);
 			module_one.modulecontents.add(mcontent);
@@ -132,9 +133,10 @@ public class Global extends GlobalSettings {
 			
 			Module module_two = new Module();
 			module_two.name = "Division Module";
-			module_two.text = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
-			module_two.alternateText = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
-			module_two.moduleImageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
+			module_two.acronym = "divison";
+			module_two.description = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
+			module_two.shortDescription = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
+			module_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
 			module_two.save();
 			
 			
@@ -142,8 +144,9 @@ public class Global extends GlobalSettings {
 			
 			Course course = new Course();
 			course.name = "Mathematics 101";
-			course.courseImageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
-			course.courseVideoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
+			course.acronym="math101";
+			course.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
+			course.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
 			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
 			course.modules.add(module_one);
 			course.modules.add(module_two);
@@ -151,13 +154,15 @@ public class Global extends GlobalSettings {
 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
-			course_two.courseImageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
+			course_two.acronym="stats101";
+			course_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			course_two.save();
 			
 			Course course_three = new Course();
 			course_three.name = "Social Science";
-			course_three.courseImageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			course_three.acronym="socscience";
+			course_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
 			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
 			course_three.save();
 			

@@ -1,5 +1,6 @@
 @(user: User, categories: List[models.curriculum.Category], module:
-models.course.Module) @main("etoileplatform"){
+models.course.Module, course: models.course.Course) 
+@main("etoileplatform"){
 
 
 
@@ -52,7 +53,7 @@ models.course.Module) @main("etoileplatform"){
 				<ul class="nav nav-list">
 					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
 						Courses</li> @for(course <- user.courses) {
-					<li><a href="@routes.Application.course(course.id)"
+					<li><a href="@routes.Application.course(course.acronym)"
 						style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
 				</ul>
 			</div>
@@ -76,7 +77,7 @@ models.course.Module) @main("etoileplatform"){
 							Description </a>
 					</div>
 					<div id="collapseOne" class="accordion-body collapse">
-						<div class="accordion-inner">@module.text</div>
+						<div class="accordion-inner">@module.description</div>
 					</div>
 				</div>
 			</div>
@@ -97,7 +98,7 @@ models.course.Module) @main("etoileplatform"){
 						<div class="tab-pane active" id="tab1">
 							<div class="row-fluid">
 								<div class="span2">
-									<img src="@module.moduleImageURL" height="100" width="100" />
+									<img src="@module.imageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
 									<p>New Allert </p>
@@ -141,7 +142,7 @@ models.course.Module) @main("etoileplatform"){
 										<td>@test.text</td>
 										<td>A+</td>
 										<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.test(test.id,module.id)">Resolve
+											href="@routes.Profile.test(test.id,module.acronym,course.acronym)">Resolve
 												Test &raquo;</a></td>
 									</tr>
 									}

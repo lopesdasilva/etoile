@@ -74,15 +74,15 @@ public static Result news() {
 	}
 	
 	
-	 public static Result course(Long course_id){
+	 public static Result course(String course_acronym){
 	    	
-	    	Course course = Course.find.byId(course_id);
+	    	Course course = Course.findByAcronym(course_acronym);
 	    	
 	    	List<Category> categories = Category.getAllCategories();
 	    	
 	    	
 	    	if(session("email")!=null){
-				return Profile.course(course_id);
+				return Profile.course(course_acronym);
 			}
 	    	
 	    	return ok(views.html.statics.course.render(categories,course));

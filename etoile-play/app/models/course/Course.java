@@ -24,15 +24,21 @@ public class Course extends Model {
 	public String name;
 	
 	@Constraints.Required
+	public String acronym;
+	
+	@Constraints.Required
+	public String duration;
+	
+	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String description;
 
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
-	public String courseVideoURL;
+	public String videoURL;
 	
 	@Constraints.Required
-	public String courseImageURL;
+	public String imageURL;
 	
 
 	@ManyToMany(mappedBy="courses")
@@ -51,6 +57,10 @@ public class Course extends Model {
 
 	public static Model.Finder<Long, Course> find = new Model.Finder<Long, Course>(
 			Long.class, Course.class);
+	
+	public static Course findByAcronym(String acronym) {
+        return find.where().eq("acronym", acronym).findUnique();
+    }
 
 	public static List<Course> getAllCourses() {
 		List<Course> courses = new ArrayList<Course>();

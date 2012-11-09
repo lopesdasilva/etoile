@@ -27,17 +27,18 @@ POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 #Courses
 ##CHECK THIS ROUTE
 GET		/courses						controllers.Application.courses()
-GET  	/course:course					controllers.Application.course(course: Long)
+GET  	/:course					controllers.Application.course(course: String)
 
 #Curriculum Courses
 GET /category:category					controllers.Application.categoryCourses(category: Long)
 
 #Modules
-GET		/course:course/module:module			controllers.Profile.module(module: Long, course: Long)
+GET		/:course/:module			controllers.Profile.module(module: String, course: String)
 
 #Tests
-GET /course/module:module/test:test  controllers.Profile.test(test: Long, module: Long)
-POST /course/module:module/test:test/				 controllers.Profile.postquestionanswer(module: Long, test: Long, question: Long)
+GET /:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)
+POST /:course/:module/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, module: String, test: Long, question: Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

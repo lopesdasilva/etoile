@@ -1,4 +1,4 @@
-@(user: User, categories: List[models.curriculum.Category],module: models.course.Model , test:
+@(user: User,course: models.course.Course, module: models.course.Module, categories: List[models.curriculum.Category], test:
 models.test.Test, formAnswer : Form[Profile.QuestionAnswer]) 
 @import helper._ 
 @main("etoileplatform"){
@@ -77,19 +77,21 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 						@for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
 
-						<textarea contenteditable="false" rows="6">@answer.answer</textarea>
+					<dl class="dl-horizontal">
+					<dt>Saved Answer:</dt>
+					<dd>@answer.answer</dd>
+					</dl>
 
 						} }
 
 
 						<div class="control-group">
-							@helper.form(routes.Profile.postquestionanswer(test.module.id, test.id,
-							question.id)) {
+							@helper.form(routes.Profile.postquestionanswer(course.acronym, module.acronym,test.id,question.id)) {
 							<div class="controls">@textarea( field =
 								formAnswer("qanswer"), args = '_label -> "", 'placeholder ->
 								"Answer Here", 'class->"span8" )</div>
 							<div class="controls">
-								<button type="submit" class="btn btn-primary">Save</button>
+								<button type="submit#2" class="btn btn-primary">Save</button>
 
 							</div>
 							}

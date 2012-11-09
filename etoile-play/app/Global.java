@@ -11,7 +11,7 @@ import models.curriculum.Category;
 import models.curriculum.Curriculumcourse;
 import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
-import models.test.Answer;
+import models.forum.Topic;
 import models.test.Hypothesis;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
@@ -46,7 +46,7 @@ public class Global extends GlobalSettings {
 			blog.alternateHeader= "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
 			blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
 			blog.alternateText = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
-			blog.articleImageURL="http://cs.gmu.edu/~eclab/projects/mason/HeatBugs.png";
+			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/emergence.tiff";
 			
 			blog.save();
 			
@@ -55,7 +55,7 @@ public class Global extends GlobalSettings {
 			blog.alternateHeader= "Étoile will run on tablet !";
 			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
-			blog.articleImageURL="http://techbeat.com/wp-content/uploads/2012/10/school-tablet.jpg";
+			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/tab.tiff";
 			blog.save();
 			
 			
@@ -89,7 +89,7 @@ public class Global extends GlobalSettings {
 			question_two.question = "This is the Second Open Question.";
 			question_two.save();
 			
-		
+			
 			// TESTS ++++++++++++++++++++++++++++++++++++++++++++
 			
 			Test test_one = new Test();
@@ -108,8 +108,6 @@ public class Global extends GlobalSettings {
 			test_two.text = "Final Evaluation of Sum Module";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
-			
-
 			
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
@@ -206,21 +204,6 @@ public class Global extends GlobalSettings {
 			course_three.save();
 			user.save();	
 			
-			//ANSWERS ++++++++++++++++++++++++++++++++++++++++++
-			Answer answer = new Answer();
-			answer.answer = "Ruben Answer 1";
-			answer.test = test_one;
-			answer.openQuestion = question_one;
-			answer.user = user;
-			answer.save();
-			
-			Answer answer_two = new Answer();
-			answer_two.answer = "Ruben Answer 2";
-			answer_two.test = test_one;
-			answer_two.openQuestion = question_two;
-			answer_two.user = user;
-			answer_two.save();
-			
 			Comment c = new Comment();
 			c.text = "Great! I can't wait to try it!";
 			c.blog = blog;
@@ -239,13 +222,6 @@ public class Global extends GlobalSettings {
 			course_two.save();
 			user.save();
 
-			Answer answer_three = new Answer();
-			answer_three.answer = "Rui Answer 1";
-			answer_three.test = test_one;
-			answer_three.openQuestion = question_one;
-			answer_three.user = user;
-			answer_three.save();
-			
 			Comment c1 = new Comment();
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 			c1.blog = blog;
@@ -305,7 +281,7 @@ public class Global extends GlobalSettings {
 			comcat.save();
 
 			// CURRICULUM
-			createCurriculum();
+			createCurriculumComputerScience();
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
 			/*
@@ -317,35 +293,131 @@ public class Global extends GlobalSettings {
 		}
 	}
 
-	private void createCurriculum() {
+	
+	// 5. CURRICULUM COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	private void createCurriculumComputerScience() {
+				
+		/* */
 		
-		// 5. COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++
-		//faltam modules: (5.1.2) algorithms; (5.1.3) complexity classes
+		// 5.1.1.3 Topic - Logical System
+		Curriculumtopic logicalSystemTopic= new Curriculumtopic();
+		logicalSystemTopic.keyword = "logical_system";
+		//logicalSystemTopic.name = "Logical System";
+		logicalSystemTopic.text = "Logical system: formal system with semantics.";
+		logicalSystemTopic.save();
 		
-		// 5.1.1.1 Formal System
+		// 5.1.1.2 Topic - Formal Language
+		Curriculumtopic formalLanguageTopic= new Curriculumtopic();
+		formalLanguageTopic.keyword = "formal_language";
+		//formalLanguageTopic.name = "Formal Language";
+		formalLanguageTopic.text = "Formal language: symbols, grammar, and inference from axiom schemata. Syntax and semantics.";
+		formalLanguageTopic.save();
+		
+		// 5.1.1.1 Topic - Formal System
 		Curriculumtopic formalSystemsTopic= new Curriculumtopic();
 		formalSystemsTopic.keyword = "formal_systems";
 		//formalSystemsTopic.name = "Formal System";
 		formalSystemsTopic.text = "Formal system:  notions of formal language, inference rule, premise, axiom and theorem.";
 		formalSystemsTopic.save();
 		
-		// 5.1.1 Formal Systems
+		// 5.1.1 Module - Formal Systems
 		Curriculummodule formalSystemsModule= new Curriculummodule();
 		formalSystemsModule.keyword = "formal_systems";
 		formalSystemsModule.name = "Formal Systems";
 		formalSystemsModule.text = "Learning Objectives: (1) Discuss what kind of problems can be computed, and what are the limitations of actual computers; (2) Describe and relate the notions of formal system, formal language, model and logical system.";
 		formalSystemsModule.curriculumtopics.add(formalSystemsTopic);
+		formalSystemsModule.curriculumtopics.add(formalLanguageTopic);
+		formalSystemsModule.curriculumtopics.add(logicalSystemTopic);
+		formalLanguageTopic.save();
 		formalSystemsTopic.save();
+		logicalSystemTopic.save();
 		formalSystemsModule.save();
 		
-		//123 5.1 Algorithmics
+		
+		// 5.1.2.3 Topic - Algorithmic Methods
+		Curriculumtopic algorithmicMethodsTopic= new Curriculumtopic();
+		algorithmicMethodsTopic.keyword = "algorithmic_methods";
+		//algorithmicMethodsTopic.name = "Algorithmic Methods";
+		algorithmicMethodsTopic.text = "Alternative algorithmic methods. Recursive methods.";
+		algorithmicMethodsTopic.save();
+		
+		// 5.1.2.2 Topic - Example of an algorithm
+		Curriculumtopic exampleAlgorithmTopic= new Curriculumtopic();
+		exampleAlgorithmTopic.keyword = "hanoi_tower";
+		//exampleAlgorithmTopic.name = "Example of an algorithm";
+		exampleAlgorithmTopic.text = "Example of an algorithm: Hanoi Tower.";
+		exampleAlgorithmTopic.save();
+		
+		// 5.1.2.1 Topic - Algorithms
+		Curriculumtopic algorithmsTopic= new Curriculumtopic();
+		algorithmsTopic.keyword = "algorithms";
+		//algorithmsTopic.name = "Algorithms";
+		algorithmsTopic.text = "Algorithms: basic notions, structure and data manipulation.";
+		algorithmsTopic.save();
+		
+		// 5.1.2 Module - Algorithms
+		Curriculummodule algorithmsModule= new Curriculummodule();
+		algorithmsModule.keyword = "algorithms_module";
+		algorithmsModule.name = "Algorithms";
+		algorithmsModule.text = "Learning Objectives: (1) Discuss what it is an algorithm, what kind of data can be manipulated by algorithms, and whether algorithms are efficient; (2) List the different algorithmic methods.";
+		algorithmsModule.curriculumtopics.add(algorithmsTopic);
+		algorithmsModule.curriculumtopics.add(exampleAlgorithmTopic);
+		algorithmsModule.curriculumtopics.add(algorithmicMethodsTopic);
+		algorithmsTopic.save();
+		exampleAlgorithmTopic.save();
+		algorithmicMethodsTopic.save();
+		algorithmsModule.save();
+		
+		
+		// 5.1.2.3 Topic - Touring Test
+		Curriculumtopic touringTestTopic= new Curriculumtopic();
+		touringTestTopic.keyword = "touring_test";
+		//touringTestTopic.name = "Touring Test";
+		touringTestTopic.text = "The Touring test.";
+		touringTestTopic.save();
+		
+		// 5.1.2.2 Topic - Unsolvable Problems
+		Curriculumtopic unsolvableProblemsTopic= new Curriculumtopic();
+		unsolvableProblemsTopic.keyword = "unsolvable_problems";
+		//unsolvableProblemsTopic.name = "Unsolvable Problems";
+		unsolvableProblemsTopic.text = "Unsolvable problems. Example: the Halting problem.";
+		unsolvableProblemsTopic.save();
+		
+		// 5.1.3.1 Topic - Classification
+		Curriculumtopic classificationTopic= new Curriculumtopic();
+		classificationTopic.keyword = "classification";
+		//classificationTopic.name = "Classification";
+		classificationTopic.text = "Classification of problems according to their complexity.";
+		classificationTopic.save();
+		
+		// 5.1.3 Module - Complexity Classes
+		Curriculummodule complexityClassesModule= new Curriculummodule();
+		complexityClassesModule.keyword = "complexity_classes";
+		complexityClassesModule.name = "Complexity Classes";
+		complexityClassesModule.text = "Learning Objectives: (1) Discuss the existing algorithmic complexity classes. (2) Identify the complexity class of a given algorithm.";
+		complexityClassesModule.curriculumtopics.add(classificationTopic);
+		complexityClassesModule.curriculumtopics.add(unsolvableProblemsTopic);
+		complexityClassesModule.curriculumtopics.add(touringTestTopic);
+		classificationTopic.save();
+		unsolvableProblemsTopic.save();
+		touringTestTopic.save();
+		complexityClassesModule.save();
+		
+
+		// 5.1 Course - Algorithmics
 		Curriculumcourse algocourse = new Curriculumcourse();
 		algocourse.keyword = "algorithmics";
 		algocourse.name = "Algorithmics";
 		algocourse.text = "Understand and know how to apply the main concepts of Algorithmic Theory";
 		algocourse.curriculummodules.add(formalSystemsModule);
 		formalSystemsModule.save();
+		algocourse.curriculummodules.add(algorithmsModule);
+		algorithmsModule.save();
+		algocourse.curriculummodules.add(complexityClassesModule);
+		complexityClassesModule.save();
 		algocourse.save();
+		
 		
 		comcat.curriculumcourses.add(algocourse);
 		algocourse.save();

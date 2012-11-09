@@ -7,6 +7,7 @@ import models.course.Content;
 import models.course.Course;
 import models.course.Module;
 import models.course.Modulecontent;
+import models.course.University;
 import models.curriculum.Category;
 import models.curriculum.Curriculumcourse;
 import models.curriculum.Curriculummodule;
@@ -241,6 +242,18 @@ public class Global extends GlobalSettings {
 			user.account_type = "professor";
 			user.save();
 			
+			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++
+				
+				// 1. ISCTE-IUL ++++++++++++++++++++++++++++++++++++++
+			University university = new University();
+			university.name="ISCTE-IUL";
+			university.acronym="iscte-iul";
+			university.imageURL="http://www.globalevents.ws/Portals/scml-ees/logo%20ISCTE.png";
+			university.save();
+			course.university=university;
+			course_three.university=university;
+			course_two.university=university;
+			course.save();
 			
 			
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++

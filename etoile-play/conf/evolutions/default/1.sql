@@ -55,6 +55,7 @@ create table course (
   description               TEXT,
   video_url                 TEXT,
   image_url                 varchar(255),
+  university_id             bigint,
   constraint pk_course primary key (id))
 ;
 
@@ -158,6 +159,8 @@ create table topic (
 create table university (
   id                        bigint auto_increment not null,
   name                      varchar(255),
+  acronym                   varchar(255),
+  image_url                 varchar(255),
   constraint pk_university primary key (id))
 ;
 
@@ -248,12 +251,14 @@ alter table comment add constraint fk_comment_user_5 foreign key (user_email) re
 create index ix_comment_user_5 on comment (user_email);
 alter table content add constraint fk_content_course_6 foreign key (course_id) references course (id) on delete restrict on update restrict;
 create index ix_content_course_6 on content (course_id);
-alter table reply add constraint fk_reply_topic_7 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_7 on reply (topic_id);
-alter table reply add constraint fk_reply_user_8 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_8 on reply (user_email);
-alter table topic add constraint fk_topic_forum_9 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_9 on topic (forum_id);
+alter table course add constraint fk_course_university_7 foreign key (university_id) references university (id) on delete restrict on update restrict;
+create index ix_course_university_7 on course (university_id);
+alter table reply add constraint fk_reply_topic_8 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_8 on reply (topic_id);
+alter table reply add constraint fk_reply_user_9 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_9 on reply (user_email);
+alter table topic add constraint fk_topic_forum_10 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_10 on topic (forum_id);
 
 
 

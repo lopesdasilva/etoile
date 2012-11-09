@@ -54,6 +54,7 @@ public static class QuestionAnswer{
     	List<Blog> blogs = Blog.getAllBlogs();
     	User user=User.find.byId(request().username());
     	List<Category> categories = Category.getAllCategories();
+    	System.out.println(user.courses.get(1).university.name);
         return ok(home.render(user,blogs,categories) );
     }
     

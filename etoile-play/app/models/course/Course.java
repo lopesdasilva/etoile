@@ -53,6 +53,9 @@ public class Course extends Model {
 	@OneToMany
 	public List<Content> contents;
 	
+	@ManyToOne
+	public University university;
+	
 	//public Date created;
 
 	public static Model.Finder<Long, Course> find = new Model.Finder<Long, Course>(

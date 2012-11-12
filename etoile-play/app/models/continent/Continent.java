@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 import com.avaje.ebean.Ebean;
 
+import models.course.Course;
 import models.course.University;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -32,7 +33,7 @@ public class Continent extends Model {
 	
 	@Constraints.Required
 	public String imageURL;
-
+	
 	
 	@OneToMany
 	public List<University> universities;
@@ -46,4 +47,8 @@ public class Continent extends Model {
 				.findList(); 
 		return continents; 
 	}
+	
+	public static Continent findByAcronym(String acronym) {
+        return find.where().eq("acronym", acronym).findUnique();
+    }
 }

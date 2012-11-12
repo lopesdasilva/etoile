@@ -6,18 +6,17 @@
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
 
+# Authentication
+GET     /login                              controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+GET     /logout                             controllers.Application.logout()
 
 #Static pages
 GET		/about						controllers.Application.about()
 GET		/contact					controllers.Application.contact()
 GET		/curriculum					controllers.Application.curriculum()
 GET		/digitalcampus					controllers.Application.digitalcampus()
-
-
-# Authentication
-GET     /login                              controllers.Application.login()
-POST    /login                              controllers.Application.authenticate()
-GET     /logout                             controllers.Application.logout()
+GET		/:continent					controllers.Application.continent(continent: String)
 
 #Blog
 GET		/news							controllers.Application.news()

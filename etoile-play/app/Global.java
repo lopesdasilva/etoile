@@ -249,31 +249,46 @@ public class Global extends GlobalSettings {
 			Continent europe = new Continent();
 			europe.name="Europe";
 			europe.acronym="europe";
+			europe.imageURL="assets/images/continent/europe.png";
 			europe.save();
 			
 			// 2. America ++++++++++++++++++++++++++++++++++++++
-			Continent america = new Continent();
-			america.name="America";
-			america.acronym="america";
-			america.save();
+			Continent northamerica = new Continent();
+			northamerica.name="North America";
+			northamerica.acronym="northamerica";
+			northamerica.imageURL="assets/images/continent/northamerica.png";
+			northamerica.save();
 			
-			// 3. Asia ++++++++++++++++++++++++++++++++++++++
+			// 3. America ++++++++++++++++++++++++++++++++++++++
+			Continent southamerica = new Continent();
+			southamerica.name="South America";
+			southamerica.acronym="southamerica";
+			southamerica.imageURL="assets/images/continent/southamerica.png";
+			southamerica.save();
+			
+			// 4. Asia ++++++++++++++++++++++++++++++++++++++
 			Continent asia = new Continent();
 			asia.name="Asia";
 			asia.acronym="asia";
+			asia.imageURL="assets/images/continent/asia.png";
 			asia.save();
 			
-			// 4. Africa ++++++++++++++++++++++++++++++++++++++
+			// 5. Africa ++++++++++++++++++++++++++++++++++++++
 			Continent africa = new Continent();
 			africa.name="Africa";
 			africa.acronym="africa";
+			africa.imageURL="assets/images/continent/africa.png";
 			africa.save();
 			
-			// 5. Oceania ++++++++++++++++++++++++++++++++++++++
+			// 6. Oceania ++++++++++++++++++++++++++++++++++++++
 			Continent oceania = new Continent();
 			oceania.name="Oceania";
 			oceania.acronym="oceania";
+			oceania.imageURL="assets/images/continent/australia.png";
 			oceania.save();
+			
+			
+			
 			
 			
 			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++

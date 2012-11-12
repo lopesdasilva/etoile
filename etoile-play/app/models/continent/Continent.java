@@ -1,4 +1,4 @@
-package models.course;
+package models.continent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,23 +6,19 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import models.continent.Continent;
-
 
 import com.avaje.ebean.Ebean;
 
-
+import models.course.University;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
-@Entity
-public class University extends Model {
 
-	
+@Entity
+public class Continent extends Model {
+
 	@Id
 	@GeneratedValue
     @Formats.NonEmpty
@@ -39,18 +35,15 @@ public class University extends Model {
 
 	
 	@OneToMany
-	public List<Course> courses;
+	public List<University> universities;
 	
-	@ManyToOne
-	public Continent continent;
-	
-	public static Model.Finder<Long, University> find = new Model.Finder<Long, University>(
-			Long.class, University.class);
+	public static Model.Finder<Long, Continent> find = new Model.Finder<Long, Continent>(
+			Long.class, Continent.class);
 
-	public static List<University> getAllUniversities() {
-		List<University> universities = new ArrayList<University>();
-		universities = Ebean.find(University.class)
+	public static List<Continent> getAllContinents() {
+		List<Continent> continents = new ArrayList<Continent>();
+		continents = Ebean.find(Continent.class)
 				.findList(); 
-		return universities; 
+		return continents; 
 	}
 }

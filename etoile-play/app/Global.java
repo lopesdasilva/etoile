@@ -3,6 +3,7 @@ import play.*;
 import com.avaje.ebean.*;
 
 import models.*;
+import models.continent.Continent;
 import models.course.Content;
 import models.course.Course;
 import models.course.Module;
@@ -241,6 +242,39 @@ public class Global extends GlobalSettings {
 			user.name = "Professor";
 			user.account_type = "professor";
 			user.save();
+	
+			// Continents ++++++++++++++++++++++++++++++++++++++++++++++++++++
+			
+			// 1. Europe ++++++++++++++++++++++++++++++++++++++
+			Continent europe = new Continent();
+			europe.name="Europe";
+			europe.acronym="europe";
+			europe.save();
+			
+			// 2. America ++++++++++++++++++++++++++++++++++++++
+			Continent america = new Continent();
+			america.name="America";
+			america.acronym="america";
+			america.save();
+			
+			// 3. Asia ++++++++++++++++++++++++++++++++++++++
+			Continent asia = new Continent();
+			asia.name="Asia";
+			asia.acronym="asia";
+			asia.save();
+			
+			// 4. Africa ++++++++++++++++++++++++++++++++++++++
+			Continent africa = new Continent();
+			africa.name="Africa";
+			africa.acronym="africa";
+			africa.save();
+			
+			// 5. Oceania ++++++++++++++++++++++++++++++++++++++
+			Continent oceania = new Continent();
+			oceania.name="Oceania";
+			oceania.acronym="oceania";
+			oceania.save();
+			
 			
 			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++
 				
@@ -249,13 +283,17 @@ public class Global extends GlobalSettings {
 			university.name="ISCTE-IUL";
 			university.acronym="iscte-iul";
 			university.imageURL="http://www.globalevents.ws/Portals/scml-ees/logo%20ISCTE.png";
+			university.continent=europe;
 			university.save();
+			
 			course.university=university;
 			course_three.university=university;
 			course_two.university=university;
 			course.save();
+			course_two.save();
+			course_three.save();
 			
-			
+		
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			
 				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++
@@ -297,6 +335,9 @@ public class Global extends GlobalSettings {
 			comcat.keyword = "computer_science";
 			comcat.description="";
 			comcat.save();
+			
+			
+			
 
 			// CURRICULUM
 			createCurriculumComputerScience();

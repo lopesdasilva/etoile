@@ -5,9 +5,7 @@ import java.util.List;
 import controllers.Profile.Comment;
 
 import models.*;
-import models.continent.Continent;
 import models.course.Course;
-import models.course.University;
 import models.curriculum.Category;
 import play.*;
 import play.data.Form;
@@ -38,8 +36,7 @@ public class Application extends Controller {
 	public static Result index() {
 		List<Blog> blogs = Blog.getAllBlogs();
 		List<Category> categories = Category.getAllCategories();
-		List <Continent> continents = Continent.getAllContinents();
-		return ok(index.render(blogs,categories,continents));
+		return ok(index.render(blogs,categories));
 	}
 	
 	public static Result postcomment(){
@@ -75,21 +72,6 @@ public static Result news() {
 		List<Category> categories = Category.getAllCategories();
 		return ok(categorycourses.render(category,categories));
 	}
-	
-
-	 public static Result continent(String continent_acronym){
-	    	Continent continent = Continent.findByAcronym(continent_acronym);
-	    
-	    	
-	    	List<Category> categories = Category.getAllCategories();
-	    	List <Continent> continents = Continent.getAllContinents();
-	    	
-//	    	if(session("email")!=null){
-//				return Profile.course(course_acronym);
-//			}
-	    	
-	    	return ok(views.html.statics.continent.render(categories,continents,continent,continent.universities));
-	    }
 	
 	
 	 public static Result course(String course_acronym){

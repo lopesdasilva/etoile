@@ -14,7 +14,6 @@ import models.Comment;
 import models.User;
 import models.course.Course;
 import models.course.Module;
-import models.course.University;
 import models.test.Answer;
 import models.test.OpenQuestion;
 import models.test.Test;
@@ -55,13 +54,7 @@ public static class QuestionAnswer{
     	List<Blog> blogs = Blog.getAllBlogs();
     	User user=User.find.byId(request().username());
     	List<Category> categories = Category.getAllCategories();
-    	
-    	
-    	//This is to load Universities(weird)
-    	for (Course c:user.courses){
-    		System.out.println(c.university.name);	
-    	}
-    	 
+    	System.out.println(user.courses.get(1).university.name);
         return ok(home.render(user,blogs,categories) );
     }
     

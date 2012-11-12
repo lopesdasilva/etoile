@@ -6,10 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import models.continent.Continent;
 
 
 import com.avaje.ebean.Ebean;
@@ -40,9 +37,6 @@ public class University extends Model {
 	
 	@OneToMany
 	public List<Course> courses;
-	
-	@ManyToOne
-	public Continent continent;
 	
 	public static Model.Finder<Long, University> find = new Model.Finder<Long, University>(
 			Long.class, University.class);

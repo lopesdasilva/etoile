@@ -3,7 +3,6 @@ import play.*;
 import com.avaje.ebean.*;
 
 import models.*;
-import models.continent.Continent;
 import models.course.Content;
 import models.course.Course;
 import models.course.Module;
@@ -242,54 +241,6 @@ public class Global extends GlobalSettings {
 			user.name = "Professor";
 			user.account_type = "professor";
 			user.save();
-	
-			// Continents ++++++++++++++++++++++++++++++++++++++++++++++++++++
-			
-			// 1. Europe ++++++++++++++++++++++++++++++++++++++
-			Continent europe = new Continent();
-			europe.name="Europe";
-			europe.acronym="europe";
-			europe.imageURL="assets/images/continent/europe.png";
-			europe.save();
-			
-			// 2. America ++++++++++++++++++++++++++++++++++++++
-			Continent northamerica = new Continent();
-			northamerica.name="North America";
-			northamerica.acronym="northamerica";
-			northamerica.imageURL="assets/images/continent/northamerica.png";
-			northamerica.save();
-			
-			// 3. America ++++++++++++++++++++++++++++++++++++++
-			Continent southamerica = new Continent();
-			southamerica.name="South America";
-			southamerica.acronym="southamerica";
-			southamerica.imageURL="assets/images/continent/southamerica.png";
-			southamerica.save();
-			
-			// 4. Asia ++++++++++++++++++++++++++++++++++++++
-			Continent asia = new Continent();
-			asia.name="Asia";
-			asia.acronym="asia";
-			asia.imageURL="assets/images/continent/asia.png";
-			asia.save();
-			
-			// 5. Africa ++++++++++++++++++++++++++++++++++++++
-			Continent africa = new Continent();
-			africa.name="Africa";
-			africa.acronym="africa";
-			africa.imageURL="assets/images/continent/africa.png";
-			africa.save();
-			
-			// 6. Oceania ++++++++++++++++++++++++++++++++++++++
-			Continent oceania = new Continent();
-			oceania.name="Oceania";
-			oceania.acronym="oceania";
-			oceania.imageURL="assets/images/continent/australia.png";
-			oceania.save();
-			
-			
-			
-			
 			
 			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++
 				
@@ -298,17 +249,13 @@ public class Global extends GlobalSettings {
 			university.name="ISCTE-IUL";
 			university.acronym="iscte-iul";
 			university.imageURL="http://www.globalevents.ws/Portals/scml-ees/logo%20ISCTE.png";
-			university.continent=europe;
 			university.save();
-			
 			course.university=university;
 			course_three.university=university;
 			course_two.university=university;
 			course.save();
-			course_two.save();
-			course_three.save();
 			
-		
+			
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			
 				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++
@@ -350,9 +297,6 @@ public class Global extends GlobalSettings {
 			comcat.keyword = "computer_science";
 			comcat.description="";
 			comcat.save();
-			
-			
-			
 
 			// CURRICULUM
 			createCurriculumComputerScience();

@@ -47,14 +47,6 @@ create table content (
   constraint pk_content primary key (id))
 ;
 
-create table continent (
-  id                        bigint auto_increment not null,
-  name                      varchar(255),
-  acronym                   varchar(255),
-  image_url                 varchar(255),
-  constraint pk_continent primary key (id))
-;
-
 create table course (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -169,7 +161,6 @@ create table university (
   name                      varchar(255),
   acronym                   varchar(255),
   image_url                 varchar(255),
-  continent_id              bigint,
   constraint pk_university primary key (id))
 ;
 
@@ -268,8 +259,6 @@ alter table reply add constraint fk_reply_user_9 foreign key (user_email) refere
 create index ix_reply_user_9 on reply (user_email);
 alter table topic add constraint fk_topic_forum_10 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
 create index ix_topic_forum_10 on topic (forum_id);
-alter table university add constraint fk_university_continent_11 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_11 on university (continent_id);
 
 
 
@@ -334,8 +323,6 @@ drop table category_curriculumcourse;
 drop table comment;
 
 drop table content;
-
-drop table continent;
 
 drop table course;
 

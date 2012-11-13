@@ -6,6 +6,12 @@
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
 
+# Authentication
+GET     /login                              controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+GET     /logout                             controllers.Application.logout()
+
+
 
 #Static pages
 GET		/about						controllers.Application.about()
@@ -13,31 +19,29 @@ GET		/contact					controllers.Application.contact()
 GET		/curriculum					controllers.Application.curriculum()
 GET		/digitalcampus					controllers.Application.digitalcampus()
 
-
-# Authentication
-GET     /login                              controllers.Application.login()
-POST    /login                              controllers.Application.authenticate()
-GET     /logout                             controllers.Application.logout()
-
 #Blog
 GET		/news							controllers.Application.news()
 GET		/news:blog						controllers.Application.blog(blog: Long)
 POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 
+
+
 #Courses
 ##CHECK THIS ROUTE
 GET		/courses						controllers.Application.courses()
-GET  	/:course					controllers.Application.course(course: String)
+GET  	/courses/:course					controllers.Application.course(course: String)
+GET    /:continent          controllers.Application.continent(continent: String)
+
 
 #Curriculum Courses
 GET /category:category					controllers.Application.categoryCourses(category: Long)
 
 #Modules
-GET		/:course/:module			controllers.Profile.module(module: String, course: String)
+GET		/courses/:course/:module			controllers.Profile.module(module: String, course: String)
 
 #Tests
-GET /:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)
-POST /:course/:module/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, module: String, test: Long, question: Long)
+GET 	/courses/:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)
+POST 	/courses/:course/:module/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, module: String, test: Long, question: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

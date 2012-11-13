@@ -35,7 +35,7 @@ public class Global extends GlobalSettings {
 			// NEWS ++++++++++++++++++++++++++++++++++++++++++
 			
 			Blog blog = new Blog();
-			blog.header = "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
+			blog.header = "The Digital Campus goes to Latin-America";
 			blog.alternateHeader= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
 			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
 			blog.alternateText = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
@@ -44,7 +44,7 @@ public class Global extends GlobalSettings {
 			blog.save();
 			
 			blog = new Blog();
-			blog.header = "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
+			blog.header = "New course on Emergence";
 			blog.alternateHeader= "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
 			blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
 			blog.alternateText = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
@@ -153,13 +153,14 @@ public class Global extends GlobalSettings {
 			course.modules.add(module_one);
 			course.modules.add(module_two);
 			course.save();
-
+			/* 
 			Course course_two = new Course();
 			course_two.name = "Statistics 101";
 			course_two.acronym="stats101";
 			course_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			course_two.save();
+			*/
 			
 			Course course_three = new Course();
 			course_three.name = "Social Science";
@@ -169,15 +170,34 @@ public class Global extends GlobalSettings {
 			course_three.save();
 			
 			
+			Course course_four = new Course();
+			course_four.name = "Network Science";
+			course_four.acronym="netsci_01";
+			course_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
+			course_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
+			course_four.description = "Course presented during Spring 2012 at the Center for Complex Network Research, Northeastern University Physics Department, by Prof. Albert-László Barabási, assisted by Dr. Baruch Barzel, and for network visualizations by Prof. Mauro Martino";
+			//course_four.modules.add(module_one);
+			//course_four.modules.add(module_two);
+			course_four.save();
+			
+			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			
-			Content content= new Content();
-			content.course=course_three;
-			content.title="About the Professor";
-			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
+			Content content;
+			
+			content = new Content();
+			content.course=course_four;
+			content.title="Textbook (Recommended)";
+			content.text="Linked – The New Science of Networks, Albert-László Barabási. Perseus Publishing /n Networks – an Introduction, Mark Newman, Oxford University Press";
 			content.save();
 			
-			content= new Content();
+			content = new Content();
+			content.course=course_four;
+			content.title="Course description and objectives";
+			content.text="The course is an interdisciplinary course, focused on the emerging science of complex networks and their applications. The material includes the mathematics of networks, their applications to biology, sociology, technology and other fields, and their use in the research of real complex systems in nature and in man made systems. The students will learn about the ongoing research in the field, and apply their knowledge in the analysis of real network systems, as the main objective of their final project.";
+			content.save();
+			
+			content = new Content();
 			content.course=course_three;
 			content.title="About the Professor";
 			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
@@ -204,10 +224,10 @@ public class Global extends GlobalSettings {
 			user.name = "Ruben";
 			user.account_type = "student";
 			user.courses.add(course);
-			user.courses.add(course_two);
+			//user.courses.add(course_two);
 			user.courses.add(course_three);
 			course.save();
-			course_two.save();
+			//course_two.save();
 			course_three.save();
 			user.save();	
 			
@@ -224,9 +244,9 @@ public class Global extends GlobalSettings {
 			user.name = "Rui Lopes da Silva";
 			user.account_type = "student";
 			user.courses.add(course);
-			user.courses.add(course_two);
+			//user.courses.add(course_two);
 			course.save();
-			course_two.save();
+			//course_two.save();
 			user.save();
 
 			Comment c1 = new Comment();
@@ -303,10 +323,12 @@ public class Global extends GlobalSettings {
 			
 			course.university=university;
 			course_three.university=university;
-			course_two.university=university;
+			//course_two.university=university;
+			course_four.university=university;
 			course.save();
-			course_two.save();
+			//course_two.save();
 			course_three.save();
+			course_four.save();
 			
 		
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -358,11 +380,11 @@ public class Global extends GlobalSettings {
 			createCurriculumComputerScience();
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
-			/*
-			course_three.categories.add(category_four);
+			
+			course_three.categories.add(soccat);
 			course_three.save();
-			category_four.save();
-			*/
+			soccat.save();
+			
 			
 		}
 	}

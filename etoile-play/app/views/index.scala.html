@@ -1,6 +1,5 @@
-@(blogs: List[Blog], categories: List[models.curriculum.Category], continents: List[models.continent.Continent])
-
-@main("etoile project") {
+@(blogs: List[Blog], categories: List[models.curriculum.Category],
+continents: List[models.continent.Continent]) @main("etoile project") {
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -9,18 +8,25 @@
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span> </a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
-			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+			<a class="brand" href="/"><b><i>&eacute;</i>
+			</b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/digitalcampus">Digital Campus</a></li>
-					<li><a href="/courses">Courses</a></li>
-<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
+					<li class="active"><a href="/">Home</a>
+					</li>
+					<li><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/courses">Courses</a>
+					</li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
 				</ul>
 				<div class="navbar-form pull-right">
 					<a href="login" role="button" class="btn btn-primary">Login</a>
@@ -36,30 +42,51 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3">
-
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
-					<li class="nav-header">Categories (@categories.size)</li>
-					@for(category <- categories) {
-					<li><a href="/curriculum#@category.keyword">@category.name</a>
-					</li> }
-
+					<li class="nav-header">Community</li>
+					<li><a href="#">* Why should you join &eacute;toile</a></li> 
+					<li><a href="#">* Is it free ?</a></li> 
+					<li><a href="#">* How to register in &eacute;toile</a></li> 
+					<li><a href="#">* Forum</a></li>
+					<li><a href="#">* Twitter</a></li>
 				</ul>
 			</div>
 			<!--/.well -->
-		
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Categories in the Curriculum (@categories.size)</li>
+					@for(category <- categories) {
+					<li><a href="/curriculum#@category.keyword">@category.name</a>
+					</li> }
+				</ul>
+			</div>
+			<!--/.well -->
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 					<li class="nav-header">Universities within the digital campus</li>
 					@for(continent <- continents) {
-					<li><a href="/@continent.acronym">@continent.name (@continent.universities.size)</a>
-					</li> }
-
+					<li><a href="/@continent.acronym">@continent.name
+							(@continent.universities.size)</a></li> }
+				</ul>
+			</div>
+			<!--/.well -->
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Digital Library</li>
+					<li><a href="/curriculum">Curriculum in Complex Systems
+							Sciences</a></li>
+					<li><a href="#">* Manuals - How to use the &eacute;toile
+							Platform</a></li>
+					<li><a href="#">* Video: "&eacute;toile Cascades Ideas",
+							Jeff Johnson at ECCS'11</a></li>
+					<li><a href="#">* Other resources</a></li>
 				</ul>
 			</div>
 			<!--/.well -->
 		</div>
 		<!--/span-->
+		
 		<div class="span9">
 			<div class="hero-unit">
 				<h1>étoile platform</h1>
@@ -88,6 +115,6 @@
 
 			</div>
 		</div>
-		</div>
-		</div>
-		}
+	</div>
+</div>
+}

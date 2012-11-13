@@ -16,6 +16,9 @@ import models.course.Course;
 import models.course.Module;
 import models.course.University;
 import models.test.Answer;
+import models.test.Hypothesis;
+import models.test.OneChoiceAnswer;
+import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
 import play.data.Form;
@@ -46,6 +49,11 @@ public static class QuestionAnswer{
 		
 		public String qanswer;
 	}
+
+public static class OneChoiceQuestionAnswer{
+	
+	public Long ocqanswer;
+}
 	
 	
 	/**
@@ -90,11 +98,24 @@ public static class QuestionAnswer{
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	test_aux.answers = answers;
+    	if(test_aux.answers.isEmpty()){
+    		for(OpenQuestion openquestion: test_aux.openquestions){
+    			Answer emptyAnswer = new Answer();
+    			emptyAnswer.answer = "";
+    			emptyAnswer.openQuestion = openquestion;
+    			emptyAnswer.test=test;
+    			emptyAnswer.user = user;
+    			emptyAnswer.save();
+    			test.answers.add(emptyAnswer);
+    			test.save();
+    		}
+    	}
+    	test_aux=test;
     	
     	Course course = Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);
     	
-		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class)));
+		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class),form(OneChoiceQuestionAnswer.class)));
     	
     }
     
@@ -190,9 +211,46 @@ public static class QuestionAnswer{
     	Course course = Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);
     	
-		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class)));
+    	
+		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 		
 
+	}
+	
+	public static Result postonechoicequestionanswer(String course_acronym, String module_acronym, Long test_id, Long question_id){
+		Form<Profile.OneChoiceQuestionAnswer> form = form(Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
+		System.out.println("One Choice: " + form.get().ocqanswer);
+		
+		OneChoiceQuestion question = OneChoiceQuestion.find.byId(question_id);
+		Test test = Test.find.byId(test_id);
+		
+		OneChoiceAnswer userAnswer = OneChoiceAnswer.findByUserAndQuestion(question_id, request().username());
+		
+		if(userAnswer == null){
+			userAnswer = new OneChoiceAnswer();
+			userAnswer.oneChoiceQuestion = question;
+			userAnswer.test = test;
+			userAnswer.user = User.find.byId(request().username());
+			userAnswer.save();
+		}
+		
+		
+		Hypothesis answer = Hypothesis.find.byId(form.get().ocqanswer);
+		
+		userAnswer.hypothesis = answer;
+		userAnswer.save();
+		
+		List<Category> categories = Category.getAllCategories();
+    	User user = User.find.byId(request().username());
+    	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
+    	Test test_aux = test;
+    	test_aux.answers = answers;
+    	
+    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
+    	
+    	
+		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 	}
     
     

@@ -1,6 +1,7 @@
-@(user: User,course: models.course.Course, module: models.course.Module, categories: List[models.curriculum.Category], test:
-models.test.Test, formAnswer : Form[Profile.QuestionAnswer]) 
-@import helper._ 
+@(user: User,course: models.course.Course, module: models.course.Module,
+categories: List[models.curriculum.Category], test: models.test.Test,
+formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer : Form[Profile.OneChoiceQuestionAnswer]) 
+@import helper._
 @main("etoileplatform"){
 
 
@@ -66,12 +67,12 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 		<div class="span9">
 			<div class="page-header">
 				<h1>@test.name</h1>
-				
 
-<h3>Open Questions</h3>
-					@for(question <- test.openquestions) {
 
-					<section id="@question.id">
+				<h3>Open Questions</h3>
+				@for(question <- test.openquestions) {
+
+				<section id="@question.id">
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
@@ -87,7 +88,8 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 							module.acronym,test.id,question.id)) {
 							<div class="controls">
 
-								<textarea class="span20" rows="10" name="qanswer" style="resize:none">@answer.answer</textarea>
+								<textarea class="span20" rows="10" name="qanswer"
+									style="resize: none">@answer.answer</textarea>
 
 								<div class="controls">
 									<button type="submit#1" class="btn btn-info">Save</button>
@@ -95,39 +97,55 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 								</div>
 								}
 							</div>
-							</div>
-					</section>
-					}}
-					
+						</div>
+				</section>
+				}} }
+				<hr>
+				<h3>One Choice Questions</h3>
+				@for(onechoicequestion <- test.onechoicequestions) {
 
-
-					}
-<hr>
-					<h3>One Choice Questions</h3>
-					 @for(onechoicequestion <- test.onechoicequestions) {
-
-					<section id="OneChoice@onechoicequestion.id">
+				<section id="OneChoice@onechoicequestion.id">
+					<div class="well">
 						<h4>Question @onechoicequestion.id</h4>
 						<p>@onechoicequestion.question</p>
-						<label class="radio"> @for(hypothesis
-							<-onechoicequestion.hypothesyslist) { <label class="radio">
-								<input type="radio" value="@hypothesis.id" name="group">
-								@hypothesis.text
-						</label> }
-						</label>
-					</section>
+
+						<div class="control-group">
+							@helper.form(routes.Profile.postonechoicequestionanswer(course.acronym,
+							module.acronym,test.id,onechoicequestion.id)) {
+							<div class="controls">
+
+								<label class="radio">
+									@for(hypothesis<-onechoicequestion.hypothesyslist) { 
+									<label class="radio"> <input type="radio"
+										value="@hypothesis.id" name="ocqanswer"> @hypothesis.text
+								</label> }
+								</label>
+
+								<div class="controls">
+									<button type="submit#1" class="btn btn-info">Save</button>
+
+								</div>
+								}
+							</div>
+						</div>
 
 
-					}
+
+					</div>
+				</section>
 
 
-				</div>
+				}
+
+
 			</div>
 		</div>
 	</div>
+</div>
 
-	<button class="btn btn-success" type="submit">Save</button>
-	<div class="span9">
+<button class="btn btn-success" type="submit">Save</button>
+<div class="span9">
 
-		<div class="row-fluid"></div>
-	</div>}
+	<div class="row-fluid"></div>
+</div>
+}

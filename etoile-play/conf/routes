@@ -9,8 +9,9 @@ GET		/index						controllers.Application.index()
 # Authentication
 GET     /login                              controllers.Application.login()
 POST    /login                              controllers.Application.authenticate()
-GET     /logout                             controllers.Application.logout()
-
+GET     /logout    
+                         controllers.Application.logout()
+#asd
 
 
 #Static pages

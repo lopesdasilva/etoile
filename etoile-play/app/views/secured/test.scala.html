@@ -53,7 +53,7 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 				<-test.openquestions) {
 				<li><a href="#@question.id"><i class="icon-chevron-right"></i>Question
 						@question.id</a></li> } @for(onechoicequestion <- test.onechoicequestions){
-				<li><a href="#@onechoicequestion.id"><i
+				<li><a href="#OneChoice@onechoicequestion.id"><i
 						class="icon-chevron-right"></i>OneChoiceQuestion
 						@onechoicequestion.id</a></li> }
 
@@ -81,28 +81,29 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 					<dt>Saved Answer:</dt>
 					<dd>@answer.answer</dd>
 					</dl>
-
-						} }
+				
+						 
 
 
 						<div class="control-group">
 							@helper.form(routes.Profile.postquestionanswer(course.acronym, module.acronym,test.id,question.id)) {
-							<div class="controls">@textarea( field =
-								formAnswer("qanswer"), args = '_label -> "", 'placeholder ->
-								"Answer Here", 'class->"span8" )</div>
 							<div class="controls">
-								<button type="submit#2" class="btn btn-primary">Save</button>
+							
+							<textarea  class="span8" name="qanswer">@answer.answer</textarea>
+							
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Save</button>
 
 							</div>
 							}
 						</div>
 
 					</section>
-
+}}
 
 					} @for(onechoicequestion <- test.onechoicequestions) {
 
-					<section id="@onechoicequestion.id">
+					<section id="OneChoice@onechoicequestion.id">
 						<h3>@onechoicequestion.question</h3>
 						<label class="radio"> @for(hypothesis
 							<-onechoicequestion.hypothesyslist) { <label class="radio">

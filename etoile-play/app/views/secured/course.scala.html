@@ -35,7 +35,7 @@
 				</div>
 				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="login" role="button" class="btn btn-primary">Login</a> } 
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
 					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
 				</form>
 			</div>

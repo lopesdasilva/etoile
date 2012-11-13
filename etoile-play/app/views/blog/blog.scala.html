@@ -39,7 +39,7 @@
 	</div>
 </div>
 
-
+<div class="container-fluid">
 <div class="row-fluid">
 	<div class="span3">
 		<div class="well sidebar-nav">
@@ -55,18 +55,28 @@
 	</div>
 	<!--/span-->
 
+
+
 	<div class="span9">
 		<h3>@blog.header</h3>
 		<br> <img src="@blog.articleImageURL" height="200" width="200" />
 
 		<p>@blog.text</p>
+		<hr>
+		
+		
+		
+		<h3>Comments</h3>
 		@for(comment <- blog.comments) {
+		<div class="span9 offset1">
 		<blockquote>
 			<p>@comment.text</p>
 			<small>By @comment.user</small>
 		</blockquote>
+		</div>
 		}
-	</div>
+
+</div>
 </div>
 
 }

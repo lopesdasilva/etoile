@@ -42,7 +42,8 @@ public class Application extends Controller {
 		List<Course> courses= Course.getAllCourses();
 		//This is to load Universities(weird)
     	for (Course c: courses){
-    		System.out.println(c.university.name);	
+//    		System.out.println(c.university.name);
+    		String s=c.university.name;
     	}
 		
 		return ok(index.render(blogs,categories,continents,courses));

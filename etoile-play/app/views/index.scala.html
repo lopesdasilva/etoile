@@ -124,9 +124,9 @@ continents: List[models.continent.Continent],courses: List[models.course.Course]
 			<div class="row-fluid">
 
 				@for(blog <- blogs) {
-				<div class="span4">
-					<h4>@blog.header</h4>
-					<p>@blog.text</p>
+				<div class="span4" >
+					<h4>@blog.alternateHeader</h4>
+					<p>@blog.alternateText</p>
 					<p>
 						<a class="btn" href="@routes.Application.blog(blog.id)">View
 							details &raquo;</a>

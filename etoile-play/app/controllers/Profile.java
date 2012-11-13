@@ -96,8 +96,10 @@ public static class OneChoiceQuestionAnswer{
     	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
+    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	test_aux.answers = answers;
+    	test_aux.onechoiceanswers = onechoiceanswers;
     	if(test_aux.answers.isEmpty()){
     		for(OpenQuestion openquestion: test_aux.openquestions){
     			Answer emptyAnswer = new Answer();
@@ -204,8 +206,10 @@ public static class OneChoiceQuestionAnswer{
 		
 		List<Category> categories = Category.getAllCategories();
     	User user = User.find.byId(request().username());
+    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
+    	test_aux.onechoiceanswers = onechoiceanswers;
     	test_aux.answers = answers;
     	
     	Course course = Course.findByAcronym(course_acronym);
@@ -233,7 +237,8 @@ public static class OneChoiceQuestionAnswer{
 			userAnswer.user = User.find.byId(request().username());
 			userAnswer.save();
 		}
-		
+		User user = User.find.byId(request().username());
+		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email, test_id);
 		
 		Hypothesis answer = Hypothesis.find.byId(form.get().ocqanswer);
 		
@@ -241,10 +246,10 @@ public static class OneChoiceQuestionAnswer{
 		userAnswer.save();
 		
 		List<Category> categories = Category.getAllCategories();
-    	User user = User.find.byId(request().username());
-    	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
+    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
-    	test_aux.answers = answers;
+    	test_aux.answers = openanswers;
+    	test_aux.onechoiceanswers = onechoiceanswers;
     	
     	Course course = Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);

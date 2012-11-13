@@ -40,6 +40,9 @@ public class Test extends Model{
 	public List<OneChoiceQuestion> onechoicequestions;
 	
 	@OneToMany
+	public List<OneChoiceAnswer> onechoiceanswers;
+	
+	@OneToMany
 	public List<Answer> answers;
 	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(

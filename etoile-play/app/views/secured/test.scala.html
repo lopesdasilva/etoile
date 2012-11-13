@@ -1,6 +1,7 @@
 @(user: User,course: models.course.Course, module: models.course.Module,
 categories: List[models.curriculum.Category], test: models.test.Test,
-formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer : Form[Profile.OneChoiceQuestionAnswer]) 
+formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer :
+Form[Profile.OneChoiceQuestionAnswer]) 
 @import helper._
 @main("etoileplatform"){
 
@@ -116,9 +117,22 @@ formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer : Form[Profile.On
 
 								<label class="radio">
 									@for(hypothesis<-onechoicequestion.hypothesyslist) { 
-									<label class="radio"> <input type="radio"
-										value="@hypothesis.id" name="ocqanswer"> @hypothesis.text
-								</label> }
+								<label
+									class="radio">
+										@for(onechoiceanswer<-test.onechoiceanswers){
+										@if(onechoiceanswer.hypothesis.id==hypothesis.id){ 
+										<input
+										type="radio" value="@hypothesis.id" name="ocqanswer"
+										checked="checked"> @hypothesis.text</input> 
+										}
+										@if(onechoiceanswer.hypothesis.id!=hypothesis.id){ 
+										<input
+										type="radio" value="@hypothesis.id" name="ocqanswer">
+										@hypothesis.text</input> 
+										} 
+										}
+								</label> 
+								}
 								</label>
 
 								<div class="controls">

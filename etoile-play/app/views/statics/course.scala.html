@@ -76,34 +76,31 @@ models.course.Course) @main("etoileplatform"){
 			<h3>Description</h3>
 			<div class="row-fluid">
 				<div class="span3">
-					<a href="#myModal" class="thumbnail" data-toggle="modal"><img
-						src="@course.imageURL" height="200" width="200" /></a>
+					<a href="#myModal" class="thumbnail" data-toggle="modal">
+					<img src="@course.imageURL" height="200" width="200" />
+					<div class="caption">Watch the video</div>
+					</a>
 					<!-- Button to trigger modal -->
 
 
 					<!-- Modal -->
-					<div id="myModal" class="modal hide fade" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div id="myModal" class="modal hide fade" >
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">√ó</button>
+							<button type="button" class="close" data-dismiss="modal">X</button>
 							<h3 id="myModalLabel">@course.name Video</h3>
 						</div>
 						<div class="modal-body">
 							<p>
-								<object width="415" height="350">
+								<object>
 									<param name="movie"
 										value="@course.videoURL" />
 									<param name="wmode" value="transparent" />
 									<embed src="@course.videoURL"
 										type="application/x-shockwave-flash" wmode="transparent"
-										width="415" height="350" />
+										width="530" height="385" />
 								</object>
 
 							</p>
-						</div>
-						<div class="modal-footer">
-							<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 						</div>
 					</div>
 				</div>

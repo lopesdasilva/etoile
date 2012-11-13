@@ -71,7 +71,8 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 <h3>Open Questions</h3>
 					@for(question <- test.openquestions) {
 
-					<section id="@question.id" class="well">
+					<section id="@question.id">
+					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
 						@for(answer <- test.answers){
@@ -93,6 +94,7 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 
 								</div>
 								}
+							</div>
 							</div>
 					</section>
 					}}

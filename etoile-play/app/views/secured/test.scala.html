@@ -66,45 +66,47 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 		<div class="span9">
 			<div class="page-header">
 				<h1>@test.name</h1>
-				<div class="tabbable">
-					<!-- Only required for left/right tabs -->
+				
 
-
+<h3>Open Questions</h3>
 					@for(question <- test.openquestions) {
 
-					<section id="@question.id">
-						<h3>@question.question</h3>
+					<section id="@question.id" class="well">
+						<h4>Question @question.id</h4>
+						<p>@question.question</p>
 						@for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
 
-					<dl class="dl-horizontal">
-					<dt>Saved Answer:</dt>
-					<dd>@answer.answer</dd>
-					</dl>
-				
-						 
+
+
 
 
 						<div class="control-group">
-							@helper.form(routes.Profile.postquestionanswer(course.acronym, module.acronym,test.id,question.id)) {
+							@helper.form(routes.Profile.postquestionanswer(course.acronym,
+							module.acronym,test.id,question.id)) {
 							<div class="controls">
-							
-							<textarea  class="span8" name="qanswer">@answer.answer</textarea>
-							
-							<div class="controls">
-								<button type="submit" class="btn btn-primary">Save</button>
 
+								<textarea class="span20" rows="10" name="qanswer" style="resize:none">@answer.answer</textarea>
+
+								<div class="controls">
+									<button type="submit#1" class="btn btn-info">Save</button>
+
+								</div>
+								}
 							</div>
-							}
-						</div>
-
 					</section>
-}}
+					}}
+					
 
-					} @for(onechoicequestion <- test.onechoicequestions) {
+
+					}
+<hr>
+					<h3>One Choice Questions</h3>
+					 @for(onechoicequestion <- test.onechoicequestions) {
 
 					<section id="OneChoice@onechoicequestion.id">
-						<h3>@onechoicequestion.question</h3>
+						<h4>Question @onechoicequestion.id</h4>
+						<p>@onechoicequestion.question</p>
 						<label class="radio"> @for(hypothesis
 							<-onechoicequestion.hypothesyslist) { <label class="radio">
 								<input type="radio" value="@hypothesis.id" name="group">
@@ -126,6 +128,4 @@ models.test.Test, formAnswer : Form[Profile.QuestionAnswer])
 	<div class="span9">
 
 		<div class="row-fluid"></div>
-	</div>
-</div>
-<div class="row-fluid">}
+	</div>}

@@ -39,7 +39,13 @@ public class Application extends Controller {
 		List<Blog> blogs = Blog.getAllBlogs();
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
-		return ok(index.render(blogs,categories,continents));
+		List<Course> courses= Course.getAllCourses();
+		//This is to load Universities(weird)
+    	for (Course c: courses){
+    		System.out.println(c.university.name);	
+    	}
+		
+		return ok(index.render(blogs,categories,continents,courses));
 	}
 	
 	public static Result postcomment(){

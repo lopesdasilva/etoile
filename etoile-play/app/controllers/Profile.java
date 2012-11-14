@@ -88,6 +88,25 @@ public static class OneChoiceQuestionAnswer{
 
     	
     }
+    public static Result signupcourse(String course_acronym){
+    	Course course = Course.findByAcronym(course_acronym);
+    	User user=User.find.byId(session("email"));
+    	List<Category> categories = Category.getAllCategories();
+    	
+    	//Trying to add the course to user
+    	
+    	if(!user.courses.contains(course)){
+    	user.courses.add(course);
+    	user.save();
+    	course.save();	
+    	return ok(views.html.secured.courseGeneral.render(user,categories,course));
+    	}
+    	else
+    	//Has this course
+    	return ok(views.html.secured.course.render(user,categories,course));
+
+    	
+    }
     
 
     

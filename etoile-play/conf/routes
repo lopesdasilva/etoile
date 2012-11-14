@@ -30,6 +30,7 @@ POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 ##CHECK THIS ROUTE
 GET		/courses						controllers.Application.courses()
 GET  	/courses/:course					controllers.Application.course(course: String)
+GET	/courses/:course/signup				controllers.Profile.signupcourse(course: String)
 GET    /:continent          controllers.Application.continent(continent: String)
 
 

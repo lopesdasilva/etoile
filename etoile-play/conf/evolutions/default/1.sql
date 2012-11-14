@@ -150,6 +150,15 @@ create table open_question (
   constraint pk_open_question primary key (id))
 ;
 
+create table professor (
+  id                        bigint auto_increment not null,
+  firstname                 varchar(255),
+  lastname                  varchar(255),
+  degree                    varchar(255),
+  image_url                 varchar(255),
+  constraint pk_professor primary key (id))
+;
+
 create table reply (
   id                        bigint auto_increment not null,
   text                      varchar(255),
@@ -240,6 +249,12 @@ create table one_choice_question_hypothesis (
   constraint pk_one_choice_question_hypothesis primary key (one_choice_question_id, hypothesis_id))
 ;
 
+create table professor_course (
+  professor_id                   bigint not null,
+  course_id                      bigint not null,
+  constraint pk_professor_course primary key (professor_id, course_id))
+;
+
 create table test_open_question (
   test_id                        bigint not null,
   open_question_id               bigint not null,
@@ -322,6 +337,10 @@ alter table one_choice_question_hypothesis add constraint fk_one_choice_question
 
 alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_02 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
 
+alter table professor_course add constraint fk_professor_course_professor_01 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+
+alter table professor_course add constraint fk_professor_course_course_02 foreign key (course_id) references course (id) on delete restrict on update restrict;
+
 alter table test_open_question add constraint fk_test_open_question_test_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
 
 alter table test_open_question add constraint fk_test_open_question_open_qu_02 foreign key (open_question_id) references open_question (id) on delete restrict on update restrict;
@@ -356,6 +375,8 @@ drop table continent;
 
 drop table course;
 
+drop table professor_course;
+
 drop table course_module;
 
 drop table curriculumcourse;
@@ -387,6 +408,8 @@ drop table one_choice_question;
 drop table one_choice_question_hypothesis;
 
 drop table open_question;
+
+drop table professor;
 
 drop table reply;
 

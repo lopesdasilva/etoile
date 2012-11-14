@@ -74,9 +74,11 @@
 
 				<h1>@course.name</h1>
 				<p>@course.description</p>
+				@for(professor <- course.professors) {
+				<a href="#"><p>@professor</p></a> 
+				}
 				<p>
-					<a class="btn btn-primary btn-large" href="about">Learn more
-						&raquo;</a>
+<!-- 					<a class="btn btn-primary btn-large" href="about">Learn more&raquo;</a> -->
 				</p>
 			</div>
 

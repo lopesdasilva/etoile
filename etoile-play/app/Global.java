@@ -248,6 +248,10 @@ public class Global extends GlobalSettings {
 			course.save();
 			//course_two.save();
 			user.save();
+			
+			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
+			
+			// 1. 
 
 			Comment c1 = new Comment();
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";

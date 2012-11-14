@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.curriculum.Category;
+import models.Professor;
 import models.User;
 
 import com.avaje.ebean.Ebean;
@@ -43,6 +44,9 @@ public class Course extends Model {
 
 	@ManyToMany(mappedBy="courses")
 	public User user;
+	
+	@ManyToMany(mappedBy="courses")
+	public List<Professor> professors;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Module> modules;

@@ -62,6 +62,9 @@ public class Global extends GlobalSettings {
 			
 			
 			// QUESTIONS ++++++++++++++++++++++++++++++++++++++++
+			Hypothesis hypothesis_zero = new Hypothesis();
+			hypothesis_zero.text = "No answer";
+			hypothesis_zero.save();
 			
 			Hypothesis hypothesis_one = new Hypothesis();
 			hypothesis_one.text = "H1";

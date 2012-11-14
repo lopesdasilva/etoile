@@ -64,6 +64,14 @@ public class Application extends Controller {
 				Category.getAllCategories()
 				));
 	}
+	
+public static Result professorprofile(String professor_acronym) {
+		Professor professor = Professor.findByAcronym(professor_acronym);
+	
+		
+		return ok(views.html.statics.professorprofile.render(professor));
+	}
+
 	public static Result digitalcampus() {
 		
 		return ok(views.html.statics.digitalcampus.render(

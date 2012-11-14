@@ -3,10 +3,12 @@ package models;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import models.course.Course;
 
@@ -16,32 +18,52 @@ import play.db.ebean.Model;
 
 @Entity 
 public class Professor extends Model {
-	
+
 	@Id
 	@GeneratedValue
-    @Formats.NonEmpty
+	@Formats.NonEmpty
 	public Long id;
+	
+	@Constraints.Required
+	public String email;
+	
+	@Constraints.Required
+	public String acronym;
 
 	@Constraints.Required
-	private String firstname;
+	public String firstname;
 
 	@Constraints.Required
-	private String lastname;
+	public String lastname;
+
+	@Constraints.Required
+	public String degree;
+
+	@Constraints.Required
+	public String imageURL;
+
+	@Constraints.Required
+	@Column(columnDefinition="TEXT")
+	public String contact;
 	
 	@Constraints.Required
-	private String degree;
+	@Column(columnDefinition="TEXT")
+	public String shortdescription;
 	
 	
-	@Constraints.Required
-	private String imageURL;
-	
+	@OneToMany
+	public List<ProfessorContent> contents;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Course> courses;
-	
-	  public static Model.Finder<Long,Professor> find = new Model.Finder(Long.class, Professor.class);
-	   
-	  public String toString() {
-	        return degree+" "+firstname +" "+lastname;
-	    }
+
+	public static Model.Finder<Long,Professor> find = new Model.Finder(Long.class, Professor.class);
+
+	public static Professor findByAcronym(String acronym) {
+		return find.where().eq("acronym", acronym).findUnique();
+	}
+
+	public String toString() {
+		return degree+" "+firstname +" "+lastname;
+	}
 }

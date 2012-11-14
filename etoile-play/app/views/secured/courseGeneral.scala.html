@@ -96,6 +96,12 @@
 			</div>
 			<hr>
 			
+			<h3>About the Professor(s)</h3>
+			@for(professor <- course.professors) {
+			<p><a href="@routes.Application.professorprofile(professor.acronym)">@professor</a> @professor.shortdescription</p>
+			
+			}
+			
 			@for(content <- course.contents) {
 			<h3>@content.title</h3>
 			<p>@content.text</p>

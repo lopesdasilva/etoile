@@ -75,7 +75,7 @@
 				<h1>@course.name</h1>
 				<p>@course.description</p>
 				@for(professor <- course.professors) {
-				<a href="#"><p>@professor</p></a> 
+				<a href="@routes.Application.professorprofile(professor.acronym)"><p>@professor</p></a> 
 				}
 				<p>
 <!-- 					<a class="btn btn-primary btn-large" href="about">Learn more&raquo;</a> -->

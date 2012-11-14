@@ -152,11 +152,24 @@ create table open_question (
 
 create table professor (
   id                        bigint auto_increment not null,
+  email                     varchar(255),
+  acronym                   varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
   degree                    varchar(255),
   image_url                 varchar(255),
+  contact                   TEXT,
+  shortdescription          TEXT,
   constraint pk_professor primary key (id))
+;
+
+create table professor_content (
+  id                        bigint auto_increment not null,
+  title                     varchar(255),
+  image_url                 varchar(255),
+  description               TEXT,
+  professor_id              bigint,
+  constraint pk_professor_content primary key (id))
 ;
 
 create table reply (
@@ -294,14 +307,16 @@ alter table one_choice_answer add constraint fk_one_choice_answer_user_10 foreig
 create index ix_one_choice_answer_user_10 on one_choice_answer (user_email);
 alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_11 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
 create index ix_one_choice_answer_hypothes_11 on one_choice_answer (hypothesis_id);
-alter table reply add constraint fk_reply_topic_12 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_12 on reply (topic_id);
-alter table reply add constraint fk_reply_user_13 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_13 on reply (user_email);
-alter table topic add constraint fk_topic_forum_14 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_14 on topic (forum_id);
-alter table university add constraint fk_university_continent_15 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_15 on university (continent_id);
+alter table professor_content add constraint fk_professor_content_professo_12 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+create index ix_professor_content_professo_12 on professor_content (professor_id);
+alter table reply add constraint fk_reply_topic_13 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_13 on reply (topic_id);
+alter table reply add constraint fk_reply_user_14 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_14 on reply (user_email);
+alter table topic add constraint fk_topic_forum_15 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_15 on topic (forum_id);
+alter table university add constraint fk_university_continent_16 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_16 on university (continent_id);
 
 
 
@@ -410,6 +425,8 @@ drop table one_choice_question_hypothesis;
 drop table open_question;
 
 drop table professor;
+
+drop table professor_content;
 
 drop table reply;
 

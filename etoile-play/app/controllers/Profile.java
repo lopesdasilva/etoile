@@ -131,7 +131,23 @@ public static class OneChoiceQuestionAnswer{
     			test.save();
     		}
     	}
+    	
+    	if(test_aux.onechoiceanswers.isEmpty()){
+    		System.out.println("Entrei");
+    		for(OneChoiceQuestion onechoicequestion: test_aux.onechoicequestions){
+    			OneChoiceAnswer emptyAnswer = new OneChoiceAnswer();
+    			emptyAnswer.oneChoiceQuestion = onechoicequestion;
+    			long  a = 1;
+    			emptyAnswer.hypothesis = Hypothesis.find.byId(a);
+    			emptyAnswer.test=test;
+    			emptyAnswer.user = user;
+    			emptyAnswer.save();
+    			test.onechoiceanswers.add(emptyAnswer);
+    			test.save();
+    		}
+    	}
     	test_aux=test;
+    	System.out.println("SIZE"+test_aux.onechoiceanswers.size());
     	
     	Course course = Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);

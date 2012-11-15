@@ -1,0 +1,252 @@
+@(registerForm: Form[Register.NewUser]) 
+@main("etoile project") {
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/courses">Courses</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+<!-- 					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> } -->
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<br>
+<h3>New user registration</h3>
+<div class="container">
+ <div class="row">
+		<div class="span6" >
+			@helper.form(routes.Register.register,'class->"form-horizontal") {
+
+			@if(registerForm.hasGlobalErrors) {
+			<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Error!</strong> @registerForm.globalError.message
+			</div>
+			} @if(flash.contains("success")) {
+			<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Success!</strong> @flash.get("success")
+			</div>
+			}
+		<div class="control-group">
+    <label class="control-label" for="inputName">Name</label>
+    <div class="controls">
+      <input type="text" class="required" name="inputName" id="Name" placeholder="Name"  required="required">
+      <span class="help-inline"></span>
+        <span class="help-block">Please write your name.</span>
+    </div>
+  </div>
+
+			<div class="control-group">
+    <label class="control-label" for="inputUsername">Username</label>
+    <div class="controls">
+      <input type="text" class="required" name="inputUsername" id="inputUsername" placeholder="Username"  required="required">
+      <span class="help-inline"></span>
+        <span class="help-block">Please choose a valid username.</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="email" name="inputEmail" placeholder="Email" required="required">
+      <span class="help-inline"></span>
+        <span class="help-block">Enter a valid email address.</span> 
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Password</label>
+    <div class="controls">
+      <input type="password" id="inputPassword" name="inputPassword" placeholder="Password" required="required">
+       <span class="help-inline"></span>
+        <span class="help-block">A password must be at least 6 characters. </span> 
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+    <div class="controls">
+      <input type="password" id="inputRepeatPassword" name="inputRepeatPassword" placeholder="Repeat Password" required="required">
+       <span class="help-inline"></span>
+        <span class="help-block">Please repeat your password again. </span> 
+        
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="profile_country">Country</label>
+    <div class="controls">
+        
+    <select id="profile_country" name="inputCountry" required="required">
+        
+            <option class="blank" value="">--- Choose a country ---</option>
+        
+        
+            <option value="France" >France</option>
+        
+            <option value="Austria" >Austria</option>
+        
+            <option value="Belgium" >Belgium</option>
+        
+            <option value="Bulgaria" >Bulgaria</option>
+        
+            <option value="Cyprus" >Cyprus</option>
+        
+            <option value="Czech Republic" >Czech Republic</option>
+        
+            <option value="Denmark" >Denmark</option>
+        
+            <option value="Estonia" >Estonia</option>
+        
+            <option value="Finland" >Finland</option>
+        
+            <option value="French Guiana" >French Guiana</option>
+        
+            <option value="Germany" >Germany</option>
+        
+            <option value="Gibraltar" >Gibraltar</option>
+        
+            <option value="Greece" >Greece</option>
+        
+            <option value="Guadeloupe" >Guadeloupe</option>
+        
+            <option value="Hungary" >Hungary</option>
+        
+            <option value="Ireland" >Ireland</option>
+        
+            <option value="Italy" >Italy</option>
+        
+            <option value="Latvia" >Latvia</option>
+        
+            <option value="Lithuania" >Lithuania</option>
+        
+            <option value="Luxembourg" >Luxembourg</option>
+        
+            <option value="Malta" >Malta</option>
+        
+            <option value="Martinique" >Martinique</option>
+        
+            <option value="Netherlands" >Netherlands</option>
+        
+            <option value="Poland" >Poland</option>
+        
+            <option value="Portugal" >Portugal</option>
+        
+            <option value="Reunion" >Reunion</option>
+        
+            <option value="Romania" >Romania</option>
+        
+            <option value="Slovak (Republic)" >Slovak (Republic)</option>
+        
+            <option value="Slovenia" >Slovenia</option>
+        
+            <option value="Spain" >Spain</option>
+        
+            <option value="Sweden" >Sweden</option>
+        
+            <option value="United Kingdom" >United Kingdom</option>
+        
+    </select>
+
+        <span class="help-inline"></span>
+        <span class="help-block"></span> 
+    </div>
+</div>
+  
+  
+  
+  <div class="control-group">
+    <div class="controls">
+      
+      <button type="submit" class="btn btn-primary" >Sign up</button>
+      <p class="text-error"id="validate-status"></p>​
+    </div>
+  </div>
+}
+</div>
+<div class="span6">
+			<div class="well">
+				  <p></p>
+              <legend>Already have an account? <a href="/login">Login now!</a></legend> 
+              If you don't have an account in the étoile platform, you can register quickly. There are many features that are available in the student's area. 
+              <p>
+                <ul>
+                <p>
+                  <li>Access to pedagogical resources for Master and PhD levels.</li>
+                </p>
+                <p>
+                  <li>Check your knowledge using the étoile evaluation tests.</li>
+                </p>
+                <p>
+                  <li>Interact with a worldwide community of students and scientific researchers within the <a href="digitalcampus">Digital Campus</a>.</li>
+                </p>
+              </ul>
+            </p>
+            </div>
+			</div>
+</div>
+
+</div>
+
+
+}
+<script type='text/javascript'>
+$(document).ready(function() {
+	  $("#inputRepeatPassword").keyup(validate);
+	});
+$(document).ready(function() {
+	  $("#inputPassword").keyup(validate);
+	});
+
+
+	function validate() {
+	  var password1 = $("#inputPassword").val();
+	  var password2 = $("#inputRepeatPassword").val();
+
+	    
+	    if(password1 == password2) {
+	       $("#validate-status").text("");
+	       
+	    }
+	    else {
+	        $("#validate-status").text("Passwords should Match"); 
+	        $('#signup').text("true");
+	    }
+	    
+	}
+
+</script>
+

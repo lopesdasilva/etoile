@@ -120,10 +120,8 @@ public static class OneChoiceQuestionAnswer{
         	}
     		}
     	}
-    	
-    	return ok(views.html.secured.courseGeneral.render(user,categories,course));
     	}
-    	else
+
     	//Has this course
     	return ok(views.html.secured.course.render(user,categories,course));
 

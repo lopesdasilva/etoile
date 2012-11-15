@@ -10,7 +10,8 @@ GET		/index						controllers.Application.index()
 GET     /login                              controllers.Application.login()
 POST    /login                              controllers.Application.authenticate()
 GET     /logout                             controllers.Application.logout()
-
+GET		/register							controllers.Register.register2()
+POST		/register							controllers.Register.register()
 
 
 #Static pages

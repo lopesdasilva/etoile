@@ -14,12 +14,15 @@ import play.data.validation.*;
 
 import com.avaje.ebean.*;
 
+import controllers.sha1;
+
 /**
  * User entity managed by Ebean
  */
 @Entity 
 @Table(name="account")
 public class User extends Model {
+	
 	
     @Constraints.Required
     @GeneratedValue
@@ -35,7 +38,13 @@ public class User extends Model {
     
     @Constraints.Required
     public String password;
-    
+
+    @Constraints.Required
+    public String username;
+
+    @Constraints.Required
+    public String country;
+
     @Constraints.Required
     public String account_type;
     
@@ -78,7 +87,7 @@ public class User extends Model {
     	System.out.println("Password: "+password);
         return find.where()
             .eq("email", email)
-            .eq("password", password)
+            .eq("password",sha1.parseSHA1Password(  password))
             .findUnique();
     }
     

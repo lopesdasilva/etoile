@@ -17,7 +17,6 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	final static Form<User> userForm = form(User.class);
 	
 	// -- Authentication
     

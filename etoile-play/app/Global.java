@@ -2,6 +2,8 @@ import play.*;
 
 import com.avaje.ebean.*;
 
+import controllers.sha1;
+
 import models.*;
 import models.continent.Continent;
 import models.course.Content;
@@ -223,7 +225,8 @@ public class Global extends GlobalSettings {
 			
 			User user = new User();
 			user.email = "rub@rub.pt";
-			user.password = "123";
+			user.username="rub";
+			user.password = sha1.parseSHA1Password("123");
 			user.name = "Ruben";
 			user.account_type = "student";
 //			user.courses.add(course);
@@ -243,7 +246,8 @@ public class Global extends GlobalSettings {
 			
 			user = new User();
 			user.email = "rui@rui.pt";
-			user.password = "123";
+			user.username="rui";
+			user.password = sha1.parseSHA1Password("123");
 			user.name = "Rui Lopes da Silva";
 			user.account_type = "student";
 //			user.courses.add(course);
@@ -307,7 +311,8 @@ public class Global extends GlobalSettings {
 			
 			user = new User();
 			user.email = "prof@prof.pt";
-			user.password="123";
+			user.username="prof";
+			user.password=sha1.parseSHA1Password("123");
 			user.name = "Professor";
 			user.account_type = "professor";
 			user.save();

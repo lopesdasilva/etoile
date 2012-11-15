@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import models.course.Course;
 import models.test.Answer;
+import models.manytomany.UserTest;
 
 import play.db.ebean.*;
 import play.data.format.*;
@@ -48,6 +49,9 @@ public class User extends Model {
 	
 	@OneToMany
 	public List<Answer> answers;
+	
+	@OneToMany
+	public List<UserTest> tests;
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

@@ -21,6 +21,7 @@ public class Answer extends Model{
 
 	@Constraints.Required
     @Formats.NonEmpty
+    @Column(columnDefinition="TEXT")
 	public String answer;
 	
 	@ManyToOne

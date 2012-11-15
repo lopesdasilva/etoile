@@ -5,7 +5,7 @@
 
 create table answer (
   id                        bigint auto_increment not null,
-  answer                    varchar(255),
+  answer                    TEXT,
   open_question_id          bigint,
   test_id                   bigint,
   user_email                varchar(255),
@@ -213,6 +213,16 @@ create table account (
   constraint pk_account primary key (email))
 ;
 
+create table user_test (
+  id                        bigint auto_increment not null,
+  incourse                  tinyint(1) default 0,
+  submited                  tinyint(1) default 0,
+  expired                   tinyint(1) default 0,
+  user_email                varchar(255),
+  test_id                   bigint,
+  constraint pk_user_test primary key (id))
+;
+
 
 create table category_curriculumcourse (
   category_id                    bigint not null,
@@ -317,6 +327,10 @@ alter table topic add constraint fk_topic_forum_15 foreign key (forum_id) refere
 create index ix_topic_forum_15 on topic (forum_id);
 alter table university add constraint fk_university_continent_16 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
 create index ix_university_continent_16 on university (continent_id);
+alter table user_test add constraint fk_user_test_user_17 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_17 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_18 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_18 on user_test (test_id);
 
 
 
@@ -443,6 +457,8 @@ drop table university;
 drop table account;
 
 drop table account_course;
+
+drop table user_test;
 
 SET FOREIGN_KEY_CHECKS=1;
 

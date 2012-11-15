@@ -15,6 +15,7 @@ import models.User;
 import models.course.Course;
 import models.course.Module;
 import models.course.University;
+import models.manytomany.UserTest;
 import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.OneChoiceAnswer;
@@ -99,6 +100,27 @@ public static class OneChoiceQuestionAnswer{
     	user.courses.add(course);
     	user.save();
     	course.save();	
+    	
+    	for(Module module: course.modules){
+    		for(Test test: module.tests){
+    			UserTest usertest = UserTest.findByUserAndTest(user.email, test.id);
+    	    	if(usertest==null){
+        		UserTest user_test = new UserTest();
+        		user_test.user = user;
+        		user_test.test = test;
+        		user_test.expired = false;
+        		user_test.incourse = false;
+        		user_test.submited = false;
+        		user_test.save();
+        		user.tests.add(user_test);
+        		test.users.add(user_test);
+        		user.save();
+        		test.save();
+        		user_test.save();
+        	}
+    		}
+    	}
+    	
     	return ok(views.html.secured.courseGeneral.render(user,categories,course));
     	}
     	else
@@ -108,7 +130,22 @@ public static class OneChoiceQuestionAnswer{
     	
     }
     
+    public static Result addQuestion(Long test_id, String module_acronym, String course_acronym){
+    	System.out.println("Entrei meu.");
+    	User user = User.find.byId(request().username());
+    	Test test = models.test.Test.find.byId(test_id);
+    	UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+    	usertest.incourse = true;
+    	usertest.save();
 
+    	List<Category> categories = Category.getAllCategories();
+    	Course course=Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
+    	
+
+
+    	return ok(views.html.secured.module.render(user,categories,module,course));
+    }
     
     public static Result test(Long test_id, String module_acronym, String course_acronym){
     	List<Category> categories = Category.getAllCategories();
@@ -117,6 +154,9 @@ public static class OneChoiceQuestionAnswer{
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
+    	
+
+    	
     	test_aux.answers = answers;
     	test_aux.onechoiceanswers = onechoiceanswers;
     	if(test_aux.answers.isEmpty()){
@@ -162,6 +202,8 @@ public static class OneChoiceQuestionAnswer{
     	Course course=Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);
     	User user=User.find.byId(request().username());
+    	
+
 
     	return ok(views.html.secured.module.render(user,categories,module,course));
 

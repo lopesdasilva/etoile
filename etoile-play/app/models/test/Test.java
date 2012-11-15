@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.course.Module;
+import models.manytomany.UserTest;
 
 import com.avaje.ebean.Ebean;
 
@@ -44,6 +45,9 @@ public class Test extends Model{
 	
 	@OneToMany
 	public List<Answer> answers;
+	
+	@OneToMany
+	public List<UserTest> users;
 	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);

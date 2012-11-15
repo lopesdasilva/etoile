@@ -226,12 +226,12 @@ public class Global extends GlobalSettings {
 			user.password = "123";
 			user.name = "Ruben";
 			user.account_type = "student";
-			user.courses.add(course);
+//			user.courses.add(course);
 			//user.courses.add(course_two);
-			user.courses.add(course_three);
-			course.save();
+//			user.courses.add(course_three);
+//			course.save();
 			//course_two.save();
-			course_three.save();
+//			course_three.save();
 			user.save();	
 			
 			Comment c = new Comment();
@@ -246,9 +246,9 @@ public class Global extends GlobalSettings {
 			user.password = "123";
 			user.name = "Rui Lopes da Silva";
 			user.account_type = "student";
-			user.courses.add(course);
+//			user.courses.add(course);
 			//user.courses.add(course_two);
-			course.save();
+//			course.save();
 			//course_two.save();
 			user.save();
 			

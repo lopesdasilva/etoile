@@ -6,6 +6,7 @@ import controllers.sha1;
 
 import models.*;
 import models.continent.Continent;
+import models.course.Bibliography;
 import models.course.Content;
 import models.course.Course;
 import models.course.Module;
@@ -146,6 +147,8 @@ public class Global extends GlobalSettings {
 			module_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
 			module_two.save();
 			
+		
+			
 			
 			// COURSES +++++++++++++++++++++++++++++++++++++++++
 			
@@ -185,6 +188,22 @@ public class Global extends GlobalSettings {
 			//course_four.modules.add(module_two);
 			course_four.save();
 			
+			// Bibliography +++++++++++++++++++++++++++++++++++++++++
+			Bibliography bibliography = new Bibliography();
+			bibliography.title="T. Bynum and S. Rogerdson, eds., Computer Ethics and Professional Res- ponsibility, (Wiley, 2003).";
+			bibliography.link="http://books.google.co.uk/books/about/Computer_Ethics_and_Professional_Respons.html?id=FOxqAjC8iHkC";
+			bibliography.description="This clear and accessible textbookand its associated website offer a state of the art introduction to the burgeoning field of computer ethics and professional responsibility. ";
+			bibliography.imageURL="http://bks5.books.google.co.uk/books?id=FOxqAjC8iHkC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71rwGQTfyj97JTxptwM-URC0Iy5eY0fJwpy3wsNs0pYpeltEtL334XnHw2ZigcJ8ylnypoG91BHhVYFSQoh5ID13NZ_eGEk4FfyLvZC3tb15cbuOIWj5PAFEte6MsjiB8-QaxZL";
+			bibliography.course=course;
+			bibliography.save();
+			
+			bibliography = new Bibliography();
+			bibliography.title="Mathematics: Teaching School Subjects 11-19.";
+			bibliography.link="http://books.google.co.uk/books?id=wb3X3xNSntkC&dq=mathematics&hl=pt-PT&source=gbs_navlinks_s";
+			bibliography.description="This accessible and thought-provoking book considers what beginning teachers need to know about learning, teaching, assessment, curriculum and professional development, in the context of teaching mathematics to eleven to nineteen year olds. It is part of a new series of books that has as its starting point the fact that PGCE students are already subject specialists.";
+			bibliography.imageURL="http://bks9.books.google.co.uk/books?id=wb3X3xNSntkC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE70zfpHHuBmkjMmKgszdfIZYNSN2UKVkhMjtAbAGEqDsePekXhaSmjxwqM2g8PBtzvomBeclI1ovd3ofdXAm_iasy6k2YY8MGyQJEP9HLd-EfOL8XPQiDxSSukg_oN3yDg4ElZ7q";
+			bibliography.course=course;
+			bibliography.save();
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			

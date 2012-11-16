@@ -102,6 +102,26 @@
 			
 			}
 			
+			<div class="row-fluid">
+			<h3>Bibliography</h3>
+				@for(bibliography <- course.bibliography) {
+				
+				<div  class="media-list">
+			    <div class="media">
+                <a class="pull-right" href="@bibliography.link">
+                  <img class="media-object" src="@bibliography.imageURL" height="50px" width="50px">
+                </a>
+                <div class="media-body">
+                  <a href="@bibliography.link"><h4 class="media-heading">@bibliography.title</h4></a>
+                  @bibliography.description
+                </div>
+              </div>
+			</div>
+				
+
+			}
+			</div>
+			
 			@for(content <- course.contents) {
 			<h3>@content.title</h3>
 			<p>@content.text</p>
@@ -116,7 +136,7 @@
 			<h3>Categories</h3>
 			} 
 			@for(category <- course.categories){
-			<a href="#" class="">@category.name</a>
+			<a href="/curriculum#@category.keyword" class="">@category.name</a>
 			<br>
 			}
 			}

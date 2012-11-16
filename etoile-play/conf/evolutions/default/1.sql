@@ -12,6 +12,16 @@ create table answer (
   constraint pk_answer primary key (id))
 ;
 
+create table bibliography (
+  id                        bigint auto_increment not null,
+  title                     varchar(255),
+  description               TEXT,
+  image_url                 varchar(255),
+  link                      varchar(255),
+  course_id                 bigint,
+  constraint pk_bibliography primary key (id))
+;
+
 create table blog (
   id                        bigint auto_increment not null,
   header                    varchar(255),
@@ -305,6 +315,7 @@ alter table answer add constraint fk_answer_test_2 foreign key (test_id) referen
 create index ix_answer_test_2 on answer (test_id);
 alter table answer add constraint fk_answer_user_3 foreign key (user_email) references account (email) on delete restrict on update restrict;
 create index ix_answer_user_3 on answer (user_email);
+
 alter table comment add constraint fk_comment_blog_4 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
 create index ix_comment_blog_4 on comment (blog_id);
 alter table comment add constraint fk_comment_user_5 foreign key (user_email) references account (email) on delete restrict on update restrict;
@@ -339,6 +350,39 @@ alter table user_test add constraint fk_user_test_user_19 foreign key (user_emai
 create index ix_user_test_user_19 on user_test (user_email);
 alter table user_test add constraint fk_user_test_test_20 foreign key (test_id) references test (id) on delete restrict on update restrict;
 create index ix_user_test_test_20 on user_test (test_id);
+alter table bibliography add constraint fk_bibliography_course_4 foreign key (course_id) references course (id) on delete restrict on update restrict;
+create index ix_bibliography_course_4 on bibliography (course_id);
+alter table comment add constraint fk_comment_blog_5 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
+create index ix_comment_blog_5 on comment (blog_id);
+alter table comment add constraint fk_comment_user_6 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_comment_user_6 on comment (user_email);
+alter table content add constraint fk_content_course_7 foreign key (course_id) references course (id) on delete restrict on update restrict;
+create index ix_content_course_7 on content (course_id);
+alter table course add constraint fk_course_university_8 foreign key (university_id) references university (id) on delete restrict on update restrict;
+create index ix_course_university_8 on course (university_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_oneChoice_9 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_oneChoice_9 on one_choice_answer (one_choice_question_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_test_10 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_test_10 on one_choice_answer (test_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_user_11 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_one_choice_answer_user_11 on one_choice_answer (user_email);
+alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_12 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_hypothes_12 on one_choice_answer (hypothesis_id);
+alter table professor_content add constraint fk_professor_content_professo_13 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+create index ix_professor_content_professo_13 on professor_content (professor_id);
+alter table reply add constraint fk_reply_topic_14 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_14 on reply (topic_id);
+alter table reply add constraint fk_reply_user_15 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_15 on reply (user_email);
+alter table topic add constraint fk_topic_forum_16 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_16 on topic (forum_id);
+alter table university add constraint fk_university_continent_17 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_17 on university (continent_id);
+alter table user_test add constraint fk_user_test_user_18 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_18 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_19 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_19 on user_test (test_id);
+
 
 
 
@@ -395,6 +439,8 @@ alter table account_course add constraint fk_account_course_course_02 foreign ke
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table answer;
+
+drop table bibliography;
 
 drop table blog;
 

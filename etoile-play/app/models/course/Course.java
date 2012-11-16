@@ -57,6 +57,9 @@ public class Course extends Model {
 	@OneToMany
 	public List<Content> contents;
 	
+	@OneToMany
+	public List<Bibliography> bibliography;
+	
 	@ManyToOne
 	public University university;
 	

@@ -55,6 +55,12 @@ public static class OneChoiceQuestionAnswer{
 	
 	public Long ocqanswer;
 }
+
+public static class OpenQuestionSuggestion{
+	
+	public Long openquestionsuggestion;
+	
+}
 	
 	
 	/**
@@ -128,21 +134,23 @@ public static class OneChoiceQuestionAnswer{
     	
     }
     
-    public static Result addQuestion(Long test_id, String module_acronym, String course_acronym){
-    	System.out.println("Entrei meu.");
+    public static Result addquestion(Long test_id, String module_acronym, String course_acronym){
     	User user = User.find.byId(request().username());
-    	Test test = models.test.Test.find.byId(test_id);
+    	//Test test = models.test.Test.find.byId(test_id);
     	UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
     	usertest.incourse = true;
     	usertest.save();
 
+    	System.out.println(usertest.incourse);	
+    	
     	List<Category> categories = Category.getAllCategories();
     	Course course=Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);
     	
+//    	Form<Profile.OpenQuestionSuggestion> form = form(Profile.OpenQuestionSuggestion.class).bindFromRequest();
+//    	System.out.println("SUGGESTION: "+ form.get().openquestionsuggestion);
 
-
-    	return ok(views.html.secured.module.render(user,categories,module,course));
+    	return ok(views.html.secured.module.render(user,categories,module,course,form(OpenQuestionSuggestion.class)));
     }
     
     public static Result test(Long test_id, String module_acronym, String course_acronym){
@@ -203,7 +211,7 @@ public static class OneChoiceQuestionAnswer{
     	
 
 
-    	return ok(views.html.secured.module.render(user,categories,module,course));
+    	return ok(views.html.secured.module.render(user,categories,module,course,form(OpenQuestionSuggestion.class)));
 
     	
     }

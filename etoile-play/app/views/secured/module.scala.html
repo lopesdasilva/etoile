@@ -1,5 +1,6 @@
 @(user: User, categories: List[models.curriculum.Category], module:
-models.course.Module, course: models.course.Course) 
+models.course.Module, course: models.course.Course,formSuggestQuestion
+:Form[Profile.OpenQuestionSuggestion]) @import helper._
 @main("etoileplatform"){
 
 
@@ -9,26 +10,21 @@ models.course.Module, course: models.course.Course)
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
 			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="/">Home</a>
-					</li>
-					<li><a href="/digitalcampus">Digital Campus</a>
-					</li>
-					<li><a href="/courses">Courses</a>
-					</li>
-<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
-					</li>
-					<li><a href="/about">About</a>
-					</li>
-					<li><a href="/contact">Contact</a>
-					</li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/courses">Courses</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<!--  
 				<div class="navbar-form pull-right">
@@ -36,8 +32,10 @@ models.course.Module, course: models.course.Course)
 				</div>
 				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
-					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -101,7 +99,7 @@ models.course.Module, course: models.course.Course)
 									<img src="@module.imageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
-									<p>New Allert </p>
+									<p>New Allert</p>
 								</div>
 							</div>
 						</div>
@@ -133,27 +131,52 @@ models.course.Module, course: models.course.Course)
 									</tr>
 								</thead>
 								<tbody>
-
 									@for(test <- module.tests) {
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
-										<td>@test.text</td>
-										@for(usertest<-user.tests){
-											@if(usertest.test.id==test.id && usertest.incourse){
+										<td>@test.text</td> @for(usertest<-user.tests){
+										@if(usertest.test.id==test.id && usertest.incourse){
 										<td><a class="btn btn-primary btn-small"
 											href="@routes.Profile.test(test.id,module.acronym,course.acronym)">Resolve
-												Test &raquo;</a></td>
+												Test &raquo;</a></td> 
+												} 
+												@if(usertest.test.id==test.id && !usertest.incourse){
+										<td><a href="#myModal" class="thumbnail" data-toggle="modal">signUp Test &raquo;</a></td> 
+												
+												} 
 												}
-											@if(usertest.test.id==test.id && !usertest.incourse){
-											<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.addQuestion(test.id,module.acronym,course.acronym)">signUp
-												Test &raquo;</a></td>
-											}	
-										}
 									</tr>
-									}
+									
+									</tr>
 
+									<!-- MODAL -->
+									<div id="myModal" class="modal hide shown">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">X</button>
+											<h3 id="myModalLabel">New Question</h3>
+										</div>
+										<div class="modal-body">
+											<p>
+											<div class="control-group">
+												@helper.form(routes.Profile.addquestion(test.id,module.acronym,course.acronym)){
+											
+											<div class="controls">
+												<textarea class="span20" rows="10"
+													name="openquestionsuggestion" style="resize: none">Insert your suggestion here.</textarea>
+
+												<div class="controls">
+													<button type="submit#1" class="btn btn-info">Save</button>
+
+												</div>
+												}
+												</div>
+
+												</td>
+												</p>
+											</div>
+										</div>
+										}
 								</tbody>
 							</table>
 						</div>

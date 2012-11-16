@@ -42,7 +42,7 @@ GET /curriculum/category:category					controllers.Application.categoryCourses(ca
 
 #Modules
 GET		/courses/:course/:module			controllers.Profile.module(module: String, course: String)
-GET 	/courses/:course/:module/addquestion 				controllers.Profile.addQuestion(test: Long, module: String, course: String)
+POST 	/courses/:course/:module/addquestion 				controllers.Profile.addquestion(test: Long, module: String, course: String)
 
 #Tests
 GET 	/courses/:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)

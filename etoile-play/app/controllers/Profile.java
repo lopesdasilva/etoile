@@ -58,7 +58,7 @@ public static class OneChoiceQuestionAnswer{
 
 public static class OpenQuestionSuggestion{
 	
-	public Long openquestionsuggestion;
+	public String openquestionsuggestion;
 	
 }
 	
@@ -141,15 +141,26 @@ public static class OpenQuestionSuggestion{
     	usertest.incourse = true;
     	usertest.save();
 
-    	System.out.println(usertest.incourse);	
     	
     	List<Category> categories = Category.getAllCategories();
     	Course course=Course.findByAcronym(course_acronym);
     	Module module = Module.findByAcronym(module_acronym);
     	
-//    	Form<Profile.OpenQuestionSuggestion> form = form(Profile.OpenQuestionSuggestion.class).bindFromRequest();
-//    	System.out.println("SUGGESTION: "+ form.get().openquestionsuggestion);
 
+    	
+    	Form<Profile.OpenQuestionSuggestion> form = form(Profile.OpenQuestionSuggestion.class).bindFromRequest();
+
+    	System.out.println("MODULESIZE: "+module.questions.size());
+    	OpenQuestion new_question = new OpenQuestion();
+    	new_question.question = form.get().openquestionsuggestion;
+    	new_question.module = module;
+    	new_question.user = user;
+    	new_question.questionImageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
+    	new_question.save();
+    	module.save();
+    	System.out.println("MODULESIZE2: "+module.questions.size());
+
+    	
     	return ok(views.html.secured.module.render(user,categories,module,course,form(OpenQuestionSuggestion.class)));
     }
     

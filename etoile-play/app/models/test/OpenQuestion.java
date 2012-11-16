@@ -5,8 +5,10 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.Comment;
+import models.User;
 
 import com.avaje.ebean.Ebean;
+import models.course.Module;
 
 import play.db.ebean.*;
 import play.data.format.Formats;
@@ -22,7 +24,6 @@ public class OpenQuestion extends Model{
     @Formats.NonEmpty
 	public String question;
 	
-	
 	@Constraints.Required
 	public String questionImageURL;
 
@@ -31,6 +32,12 @@ public class OpenQuestion extends Model{
 	
 	@OneToMany
 	public List<Answer> answers;
+	
+	@ManyToOne
+	public Module module;
+	
+	@ManyToOne
+	public User user;
 
 	
 	public static Model.Finder<Long, OpenQuestion> find = new Model.Finder<Long, OpenQuestion>(

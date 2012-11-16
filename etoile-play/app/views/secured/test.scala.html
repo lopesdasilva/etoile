@@ -77,6 +77,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
+						<p><img src="@question.questionImageURL" height="100" width="100" /></p>
 						@for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
 

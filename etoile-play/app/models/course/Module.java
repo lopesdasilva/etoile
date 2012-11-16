@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
+import models.test.OpenQuestion;
 import models.test.Test;
 
 import com.avaje.ebean.Ebean;
@@ -48,6 +49,9 @@ public class Module extends Model{
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Modulecontent> modulecontents;
+	
+	@OneToMany
+	public List<OpenQuestion> questions;
 	
 	public static Model.Finder<Long, Module> find = new Model.Finder<Long, Module>(
 			Long.class, Module.class);

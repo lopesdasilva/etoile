@@ -147,6 +147,8 @@ create table open_question (
   id                        bigint auto_increment not null,
   question                  varchar(255),
   question_image_url        varchar(255),
+  module_id                 bigint,
+  user_email                varchar(255),
   constraint pk_open_question primary key (id))
 ;
 
@@ -319,20 +321,24 @@ alter table one_choice_answer add constraint fk_one_choice_answer_user_10 foreig
 create index ix_one_choice_answer_user_10 on one_choice_answer (user_email);
 alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_11 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
 create index ix_one_choice_answer_hypothes_11 on one_choice_answer (hypothesis_id);
-alter table professor_content add constraint fk_professor_content_professo_12 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
-create index ix_professor_content_professo_12 on professor_content (professor_id);
-alter table reply add constraint fk_reply_topic_13 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_13 on reply (topic_id);
-alter table reply add constraint fk_reply_user_14 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_14 on reply (user_email);
-alter table topic add constraint fk_topic_forum_15 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_15 on topic (forum_id);
-alter table university add constraint fk_university_continent_16 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_16 on university (continent_id);
-alter table user_test add constraint fk_user_test_user_17 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_user_test_user_17 on user_test (user_email);
-alter table user_test add constraint fk_user_test_test_18 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_user_test_test_18 on user_test (test_id);
+alter table open_question add constraint fk_open_question_module_12 foreign key (module_id) references module (id) on delete restrict on update restrict;
+create index ix_open_question_module_12 on open_question (module_id);
+alter table open_question add constraint fk_open_question_user_13 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_open_question_user_13 on open_question (user_email);
+alter table professor_content add constraint fk_professor_content_professo_14 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+create index ix_professor_content_professo_14 on professor_content (professor_id);
+alter table reply add constraint fk_reply_topic_15 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_15 on reply (topic_id);
+alter table reply add constraint fk_reply_user_16 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_16 on reply (user_email);
+alter table topic add constraint fk_topic_forum_17 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_17 on topic (forum_id);
+alter table university add constraint fk_university_continent_18 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_18 on university (continent_id);
+alter table user_test add constraint fk_user_test_user_19 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_19 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_20 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_20 on user_test (test_id);
 
 
 

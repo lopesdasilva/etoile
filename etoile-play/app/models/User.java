@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import models.course.Course;
 import models.test.Answer;
+import models.test.OpenQuestion;
 import models.manytomany.UserTest;
 
 import play.db.ebean.*;
@@ -54,6 +55,9 @@ public class User extends Model {
 	
 	@OneToMany
 	public List<Comment> comments;
+	
+	@OneToMany
+	public List<OpenQuestion> openquestions;
     // -- Queries
 	
 	@OneToMany

@@ -3,7 +3,6 @@ package models;
 import java.util.*;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 
 import com.avaje.ebean.Ebean;
 
@@ -35,12 +34,9 @@ public class Blog extends Model {
 	@Constraints.Required
 	public String articleImageURL;
 	
-	
-	
-
 	//public Date created;
 
-	@OneToMany
+	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)
 	public List<Comment> comments;
 
 	public static Model.Finder<Long, Blog> find = new Model.Finder<Long, Blog>(

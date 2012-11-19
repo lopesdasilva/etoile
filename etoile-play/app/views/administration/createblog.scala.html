@@ -1,0 +1,54 @@
+@(formBlog : Form[Administration.Blog_Aux])
+@import helper._
+@main("etoile project") {
+
+<div span="span12 well">
+ @helper.form(routes.Administration.addblog(),'class->"form-horizontal") {
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">New blog article</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Title</label>
+          <div class="controls">
+            <input type="text" name="title" placeholder="Article title" class="input-xlarge">
+            <p class="help-block">Please insert the title</p>
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Image URL</label>
+          <div class="controls">
+            <input type="text" name="articleImageURL" placeholder="URL" class="input-xlarge">
+            <p class="help-block">Please insert a valid url</p>
+          </div>
+        </div><div class="control-group">
+
+          <!-- Textarea -->
+          <label class="control-label">Article Text</label>
+          <div class="controls">
+            <div class="textarea">
+                 <textarea type="" class="" name="text" style="margin: 0px; width: 522px; height: 270px;"> </textarea>
+            </div>
+          </div>
+        </div>
+  <div class="control-group">
+         
+
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">Save</button>
+          </div>
+        </div>
+
+    </fieldset>
+}
+
+</div>
+}
+
+

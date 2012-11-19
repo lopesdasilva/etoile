@@ -1,0 +1,117 @@
+@(users: List[User], courses: List[models.course.Course],blogs: List[Blog])
+@main("admin etoile"){
+ @if(flash.contains("success")) {
+			<div class="alert alert-success">
+			<strong>Success!</strong> @flash.get("success")
+			</div>
+			}
+<div class="span12 well">
+<h2>Users (@users.size)</h2>
+ <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Name</th>
+                  <th>Account type</th>
+                  <th>#comments</th>
+                  <th>#courses</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              @for(user <- users) {
+                <tr>
+                  <td>@user.id</td>
+                  <td>@user.username</td>
+                  <td>@user.email</td>
+                  <td><a href="#" rel="tooltip" data-placement="top" title="@user.password">Hidden</a></td>
+                  <td>@user.name</td>
+                  <td>@user.account_type</td>
+                  <td>@user.comments.size</td>
+                  <td>@user.courses.size</td>
+                  <td><a class="btn btn-small btn-danger" href="@routes.Administration.removeuser(user.email)">Remove</a></td>
+                </tr>
+                }
+               
+              </tbody>
+            </table>
+            <a class="btn btn-success pull-right" href="#" disabled="disabled">Add user</a>
+</div>
+            
+<div class="span12 well">
+<h2>Courses (@courses.size)</h2>
+ <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>name</th>
+                  <th>acronym</th>
+                  <th>duration</th>
+                  <th>description</th>
+                  <th>videoURL</th>
+                  <th>imageURL</th>
+                  <th>university</th>
+                  <th></th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+              @for(course <- courses) {
+                <tr>
+                  <td>@course.id</td>
+                  <td>@course.name</td>
+                  <td>@course.acronym</td>
+                  <td>@course.duration</td>
+                  <td><a href="#" rel="tooltip" data-placement="top" title="@course.description">Description</a></td>
+                  <td><a href="@course.videoURL">Link</a></td>
+                  <td><a href="@course.imageURL">Link</a></td>
+                    <td>@course.university</td>
+                <td><button type="button" class="btn btn-info btn-small" disabled="disabled">+ info</button></td>
+                </tr> 
+               }
+              </tbody>
+            </table>
+ </div>      
+ 
+
+  
+            
+<div class="span12 well">
+<h2>Blogs (@blogs.size)</h2>
+ <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>alternateHeader</th>
+                  <th>text</th>
+                  <th>alternateText</th>
+                  <th>articleImageURL</th>
+                  <th>Number of comments</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              @for(blog <- blogs) {
+                <tr>
+                  <td>@blog.id</td>
+                   <td><a href="#" rel="tooltip" data-placement="top" title="@blog.header">Header</a></td>
+                  <td>@blog.alternateHeader</td>
+                  <td><a href="#" rel="tooltip" data-placement="top" title="@blog.text">Text</a></td>
+                  <td>@blog.alternateText</td>
+                  <td>@blog.articleImageURL</td>
+                  <td>@blog.comments.size</td>
+                  <td><a class="btn btn-small btn-danger" href="@routes.Administration.removeblog(blog.id)">Remove</a></td>
+               
+                </tr>
+                }
+               
+              </tbody>
+            </table>
+             <a class="btn btn-success pull-right" href="/admin/createblog">Add blog</a>
+            </div>
+
+}

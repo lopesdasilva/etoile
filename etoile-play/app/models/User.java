@@ -53,17 +53,17 @@ public class User extends Model {
 //	@JoinTable(name="account_course", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="course_id")})
 	public List<Course> courses;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Comment> comments;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<OpenQuestion> openquestions;
     // -- Queries
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Answer> answers;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<UserTest> tests;
     // -- Queries
     

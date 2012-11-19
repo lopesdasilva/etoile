@@ -43,7 +43,7 @@ public class Course extends Model {
 	
 
 	@ManyToMany(mappedBy="courses")
-	public User user;
+	public List<User> users;
 	
 	@ManyToMany(mappedBy="courses")
 	public List<Professor> professors;

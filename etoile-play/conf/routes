@@ -11,7 +11,8 @@ GET     /login                              controllers.Application.login()
 POST    /login                              controllers.Application.authenticate()
 GET     /logout                             controllers.Application.logout()
 GET		/register							controllers.Register.register2()
-POST		/register							controllers.Register.register()
+POST	/register							controllers.Register.register()
+
 
 
 #Static pages
@@ -28,6 +29,12 @@ POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
 #Professors
 GET		/professors/:professor			controllers.Application.professorprofile(professor: String)
 
+#Admin
+GET		/admin							controllers.Administration.index()
+GET		/admin/createblog				controllers.Administration.createblog()
+POST	/admin/addblog					controllers.Administration.addblog()
+GET		/admin/removeblog				controllers.Administration.removeblog(blog: Long)
+GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 
 #Courses
 ##CHECK THIS ROUTE

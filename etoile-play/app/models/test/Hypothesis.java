@@ -25,7 +25,10 @@ public class Hypothesis extends Model{
 	public String questionImageURL;
 
 	@ManyToMany(mappedBy="hypothesyslist")
-	public Hypothesis onechoicequestion;
+	public OneChoiceQuestion onechoicequestion;
+	
+	@ManyToMany(mappedBy="hypothesislist")
+	public MultipleChoiceQuestion multiplechoicequestion;
 	
 
 	

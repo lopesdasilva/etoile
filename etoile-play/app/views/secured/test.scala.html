@@ -152,6 +152,49 @@ Form[Profile.OneChoiceQuestionAnswer])
 
 				}
 
+				<h3>Multiple Choice Questions</h3>
+				@for(multiplechoicequestion <- test.multiplechoicequestions) {
+
+				<section id="OneChoice@multiplechoicequestion.id">
+					<div class="well">
+						<h4>Question @multiplechoicequestion.id</h4>
+						<p>@multiplechoicequestion.question</p>
+
+						<div class="control-group">
+							@helper.form(routes.Profile.postmultiplechoicequestionanswer(course.acronym,
+							module.acronym,test.id,multiplechoicequestion.id)) {
+							<div class="controls">
+           						 <div class="input">
+              					<ul class="inputs-list">
+									@for(hypothesis<-multiplechoicequestion.hypothesyslist) { 
+									<li>
+									<label>
+										
+										<input type="checkbox" name="optionsCheckboxes" value="option1" >
+										<span>@hypothesis.text</span></>
+										
+									</label> 
+									</li>
+								}
+								</ul>
+								</div>
+								
+
+								<div class="controls">
+									<button type="submit#1" class="btn btn-info">Save</button>
+
+								</div>
+								}
+							</div>
+						</div>
+
+
+
+					</div>
+				</section>
+
+
+				}
 
 			</div>
 		</div>

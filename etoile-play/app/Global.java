@@ -18,6 +18,7 @@ import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
 import models.test.Hypothesis;
+import models.test.MultipleChoiceQuestion;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
@@ -88,6 +89,13 @@ public class Global extends GlobalSettings {
 			onechoicequestion_one.hypothesyslist.add(hypothesis_two);
 			onechoicequestion_one.hypothesyslist.add(hypothesis_three);
 			onechoicequestion_one.save();
+			
+			
+			MultipleChoiceQuestion multiplechoicequestion_one = new MultipleChoiceQuestion();
+			multiplechoicequestion_one.question = "This is the First MultipleChoice Question";
+			multiplechoicequestion_one.hypothesyslist.add(hypothesis_two);
+			multiplechoicequestion_one.hypothesyslist.add(hypothesis_three);
+			multiplechoicequestion_one.save();
 			
 			OpenQuestion question_one = new OpenQuestion();
 			question_one.question = "This is the First Open Question.";

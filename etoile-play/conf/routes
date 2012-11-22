@@ -55,6 +55,7 @@ POST 	/courses/:course/:module/addquestion 				controllers.Profile.addquestion(t
 GET 	/courses/:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)
 POST 	/courses/:course/:module/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, module: String, test: Long, question: Long)
 POST 	/courses/:course/:module/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(course: String, module: String, test: Long, question: Long)
+POST 	/courses/:course/:module/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(course: String, module: String, test: Long, question: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -56,6 +56,11 @@ public static class OneChoiceQuestionAnswer{
 	public Long ocqanswer;
 }
 
+public static class MultipleChoiceQuestionAnswer{
+	
+	public List<Long> mcqanswers;
+}
+
 public static class OpenQuestionSuggestion{
 	
 	public String openquestionsuggestion;
@@ -350,6 +355,13 @@ public static class OpenQuestionSuggestion{
     	
     	
 		return ok(views.html.secured.test.render(user,course,module,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
+	}
+	
+	public static Result postmultiplechoicequestionanswer(String course_acronym, String module_acronym, Long test_id, Long question_id){
+		System.out.println("Save - MultipleChoiceQuestion");
+		Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
+		
+		return null;
 	}
     
     

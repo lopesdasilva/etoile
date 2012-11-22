@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import models.User;
 import models.course.Course;
-import models.course.Module;
+import models.course.Lesson;
 import models.test.Test;
 
 import com.avaje.ebean.Ebean;

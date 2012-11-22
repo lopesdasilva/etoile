@@ -9,12 +9,12 @@ import models.continent.Continent;
 import models.course.Bibliography;
 import models.course.Content;
 import models.course.Course;
-import models.course.Module;
-import models.course.Modulecontent;
+import models.course.Lesson;
+import models.course.Lessoncontent;
 import models.course.University;
 import models.curriculum.Category;
 import models.curriculum.Curriculumcourse;
-import models.curriculum.Curriculummodule;
+import models.curriculum.Curriculumlesson;
 import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
 import models.test.Hypothesis;
@@ -121,39 +121,39 @@ public class Global extends GlobalSettings {
 			
 			Test test_two = new Test();
 			test_two.name="Final Sum Test";
-			test_two.text = "Final Evaluation of Sum Module";
+			test_two.text = "Final Evaluation of Sum Lesson";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
 			
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
-			Modulecontent mcontent = new Modulecontent();
+			Lessoncontent mcontent = new Lessoncontent();
 			mcontent.name = "Content";
 			mcontent.text = "This is a new Content.";
 			mcontent.url = "http://www.benkler.org/Benkler_Wealth_Of_Networks.pdf";
-			mcontent.moduleContentImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			mcontent.lessonContentImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			mcontent.save();
 			
-			Module module_one = new Module();
-			module_one.name = "Multiplication Module";
-			module_one.acronym = "multiplication";
-			module_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
-			module_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
-			module_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
-			module_one.tests.add(test_one);
-			module_one.tests.add(test_two);
-			module_one.modulecontents.add(mcontent);
+			Lesson lesson_one = new Lesson();
+			lesson_one.name = "Multiplication Lesson";
+			lesson_one.acronym = "multiplication";
+			lesson_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			lesson_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			lesson_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
+			lesson_one.tests.add(test_one);
+			lesson_one.tests.add(test_two);
+			lesson_one.lessoncontents.add(mcontent);
 			mcontent.save();
-			module_one.save();
+			lesson_one.save();
 			
-			Module module_two = new Module();
-			module_two.name = "Division Module";
-			module_two.acronym = "divison";
-			module_two.description = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
-			module_two.shortDescription = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
-			module_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
-			module_two.save();
+			Lesson lesson_two = new Lesson();
+			lesson_two.name = "Division Lesson";
+			lesson_two.acronym = "divison";
+			lesson_two.description = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
+			lesson_two.shortDescription = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";
+			lesson_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
+			lesson_two.save();
 			
 		
 			
@@ -165,9 +165,9 @@ public class Global extends GlobalSettings {
 			course.acronym="math101";
 			course.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			course.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
-			course.description = "Mathematics module presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
-			course.modules.add(module_one);
-			course.modules.add(module_two);
+			course.description = "Mathematics lesson presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
+			course.lessons.add(lesson_one);
+			course.lessons.add(lesson_two);
 			course.save();
 			/* 
 			Course course_two = new Course();
@@ -192,8 +192,8 @@ public class Global extends GlobalSettings {
 			course_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			course_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
 			course_four.description = "Course presented during Spring 2012 at the Center for Complex Network Research, Northeastern University Physics Department, by Prof. Albert-László Barabási, assisted by Dr. Baruch Barzel, and for network visualizations by Prof. Mauro Martino";
-			//course_four.modules.add(module_one);
-			//course_four.modules.add(module_two);
+			//course_four.lessons.add(lesson_one);
+			//course_four.lessons.add(lesson_two);
 			course_four.save();
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
@@ -398,7 +398,7 @@ public class Global extends GlobalSettings {
 			University university = new University();
 			university.name="ISCTE-IUL";
 			university.acronym="iscte-iul";
-			university.imageURL="http://www.globalevents.ws/Portals/scml-ees/logo%20ISCTE.png";
+			university.imageURL="http://noticias.universia.pt/pt/images/universia/i/is/isc/iscte_iul_logo.jpg";
 			university.continent=europe;
 			university.save();
 			
@@ -498,18 +498,18 @@ public class Global extends GlobalSettings {
 		formalSystemsTopic.text = "Formal system:  notions of formal language, inference rule, premise, axiom and theorem.";
 		formalSystemsTopic.save();
 		
-		// 5.1.1 Module - Formal Systems
-		Curriculummodule formalSystemsModule= new Curriculummodule();
-		formalSystemsModule.keyword = "formal_systems";
-		formalSystemsModule.name = "Formal Systems";
-		formalSystemsModule.text = "Learning Objectives: (1) Discuss what kind of problems can be computed, and what are the limitations of actual computers; (2) Describe and relate the notions of formal system, formal language, model and logical system.";
-		formalSystemsModule.curriculumtopics.add(formalSystemsTopic);
-		formalSystemsModule.curriculumtopics.add(formalLanguageTopic);
-		formalSystemsModule.curriculumtopics.add(logicalSystemTopic);
+		// 5.1.1 Lesson - Formal Systems
+		Curriculumlesson formalSystemsLesson= new Curriculumlesson();
+		formalSystemsLesson.keyword = "formal_systems";
+		formalSystemsLesson.name = "Formal Systems";
+		formalSystemsLesson.text = "Learning Objectives: (1) Discuss what kind of problems can be computed, and what are the limitations of actual computers; (2) Describe and relate the notions of formal system, formal language, model and logical system.";
+		formalSystemsLesson.curriculumtopics.add(formalSystemsTopic);
+		formalSystemsLesson.curriculumtopics.add(formalLanguageTopic);
+		formalSystemsLesson.curriculumtopics.add(logicalSystemTopic);
 		formalLanguageTopic.save();
 		formalSystemsTopic.save();
 		logicalSystemTopic.save();
-		formalSystemsModule.save();
+		formalSystemsLesson.save();
 		
 		
 		// 5.1.2.3 Topic - Algorithmic Methods
@@ -533,18 +533,18 @@ public class Global extends GlobalSettings {
 		algorithmsTopic.text = "Algorithms: basic notions, structure and data manipulation.";
 		algorithmsTopic.save();
 		
-		// 5.1.2 Module - Algorithms
-		Curriculummodule algorithmsModule= new Curriculummodule();
-		algorithmsModule.keyword = "algorithms_module";
-		algorithmsModule.name = "Algorithms";
-		algorithmsModule.text = "Learning Objectives: (1) Discuss what it is an algorithm, what kind of data can be manipulated by algorithms, and whether algorithms are efficient; (2) List the different algorithmic methods.";
-		algorithmsModule.curriculumtopics.add(algorithmsTopic);
-		algorithmsModule.curriculumtopics.add(exampleAlgorithmTopic);
-		algorithmsModule.curriculumtopics.add(algorithmicMethodsTopic);
+		// 5.1.2 Lesson - Algorithms
+		Curriculumlesson algorithmsLesson= new Curriculumlesson();
+		algorithmsLesson.keyword = "algorithms_lesson";
+		algorithmsLesson.name = "Algorithms";
+		algorithmsLesson.text = "Learning Objectives: (1) Discuss what it is an algorithm, what kind of data can be manipulated by algorithms, and whether algorithms are efficient; (2) List the different algorithmic methods.";
+		algorithmsLesson.curriculumtopics.add(algorithmsTopic);
+		algorithmsLesson.curriculumtopics.add(exampleAlgorithmTopic);
+		algorithmsLesson.curriculumtopics.add(algorithmicMethodsTopic);
 		algorithmsTopic.save();
 		exampleAlgorithmTopic.save();
 		algorithmicMethodsTopic.save();
-		algorithmsModule.save();
+		algorithmsLesson.save();
 		
 		
 		// 5.1.2.3 Topic - Touring Test
@@ -568,18 +568,18 @@ public class Global extends GlobalSettings {
 		classificationTopic.text = "Classification of problems according to their complexity.";
 		classificationTopic.save();
 		
-		// 5.1.3 Module - Complexity Classes
-		Curriculummodule complexityClassesModule= new Curriculummodule();
-		complexityClassesModule.keyword = "complexity_classes";
-		complexityClassesModule.name = "Complexity Classes";
-		complexityClassesModule.text = "Learning Objectives: (1) Discuss the existing algorithmic complexity classes. (2) Identify the complexity class of a given algorithm.";
-		complexityClassesModule.curriculumtopics.add(classificationTopic);
-		complexityClassesModule.curriculumtopics.add(unsolvableProblemsTopic);
-		complexityClassesModule.curriculumtopics.add(touringTestTopic);
+		// 5.1.3 Lesson - Complexity Classes
+		Curriculumlesson complexityClassesLesson= new Curriculumlesson();
+		complexityClassesLesson.keyword = "complexity_classes";
+		complexityClassesLesson.name = "Complexity Classes";
+		complexityClassesLesson.text = "Learning Objectives: (1) Discuss the existing algorithmic complexity classes. (2) Identify the complexity class of a given algorithm.";
+		complexityClassesLesson.curriculumtopics.add(classificationTopic);
+		complexityClassesLesson.curriculumtopics.add(unsolvableProblemsTopic);
+		complexityClassesLesson.curriculumtopics.add(touringTestTopic);
 		classificationTopic.save();
 		unsolvableProblemsTopic.save();
 		touringTestTopic.save();
-		complexityClassesModule.save();
+		complexityClassesLesson.save();
 		
 
 		// 5.1 Course - Algorithmics
@@ -587,12 +587,12 @@ public class Global extends GlobalSettings {
 		algocourse.keyword = "algorithmics";
 		algocourse.name = "Algorithmics";
 		algocourse.text = "Understand and know how to apply the main concepts of Algorithmic Theory";
-		algocourse.curriculummodules.add(formalSystemsModule);
-		formalSystemsModule.save();
-		algocourse.curriculummodules.add(algorithmsModule);
-		algorithmsModule.save();
-		algocourse.curriculummodules.add(complexityClassesModule);
-		complexityClassesModule.save();
+		algocourse.curriculumlessons.add(formalSystemsLesson);
+		formalSystemsLesson.save();
+		algocourse.curriculumlessons.add(algorithmsLesson);
+		algorithmsLesson.save();
+		algocourse.curriculumlessons.add(complexityClassesLesson);
+		complexityClassesLesson.save();
 		algocourse.save();
 		
 		

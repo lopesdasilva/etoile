@@ -15,7 +15,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class Module extends Model{
+public class Lesson extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -41,29 +41,29 @@ public class Module extends Model{
 	@Constraints.Required
 	public String videoURL;
 
-	@ManyToMany(mappedBy="modules")
+	@ManyToMany(mappedBy="lessons")
 	public Course course;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Modulecontent> modulecontents;
+	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany
 	public List<OpenQuestion> questions;
 	
-	public static Model.Finder<Long, Module> find = new Model.Finder<Long, Module>(
-			Long.class, Module.class);
+	public static Model.Finder<Long, Lesson> find = new Model.Finder<Long, Lesson>(
+			Long.class, Lesson.class);
 	
-	public static Module findByAcronym(String acronym) {
+	public static Lesson findByAcronym(String acronym) {
         return find.where().eq("acronym", acronym).findUnique();
     }
 
-	public static List<Module> getAllModules() {
-		List<Module> modules = new ArrayList<Module>();
-		modules = Ebean.find(Module.class).findList(); 
-		return modules; 
+	public static List<Lesson> getAllLessons() {
+		List<Lesson> lessons = new ArrayList<Lesson>();
+		lessons = Ebean.find(Lesson.class).findList(); 
+		return lessons; 
 	}
 	
 }

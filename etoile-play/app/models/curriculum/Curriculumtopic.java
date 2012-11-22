@@ -28,16 +28,16 @@ public class Curriculumtopic extends Model{
 	public String text;
 
 	@ManyToMany(mappedBy="curriculumtopics")
-	public Curriculummodule curriculummodule;
+	public Curriculumlesson curriculumlesson;
 	
 	
 	public static Model.Finder<Long, Curriculumtopic> find = new Model.Finder<Long,Curriculumtopic>(
 			Long.class, Curriculumtopic.class);
 
-	public static List<Curriculumtopic> getAllModules() {
-		List<Curriculumtopic> modules = new ArrayList<Curriculumtopic>();
-		modules = Ebean.find(Curriculumtopic.class).findList(); 
-		return modules; 
+	public static List<Curriculumtopic> getAllLessons() {
+		List<Curriculumtopic> lessons = new ArrayList<Curriculumtopic>();
+		lessons = Ebean.find(Curriculumtopic.class).findList(); 
+		return lessons; 
 	}
 	
 }

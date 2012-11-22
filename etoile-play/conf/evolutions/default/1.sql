@@ -86,13 +86,13 @@ create table curriculumcourse (
   constraint pk_curriculumcourse primary key (id))
 ;
 
-create table curriculummodule (
+create table curriculumlesson (
   id                        bigint auto_increment not null,
   keyword                   varchar(255),
   name                      varchar(255),
   text                      TEXT,
-  constraint uq_curriculummodule_keyword unique (keyword),
-  constraint pk_curriculummodule primary key (id))
+  constraint uq_curriculumlesson_keyword unique (keyword),
+  constraint pk_curriculumlesson primary key (id))
 ;
 
 create table curriculumtopic (
@@ -116,7 +116,7 @@ create table hypothesis (
   constraint pk_hypothesis primary key (id))
 ;
 
-create table module (
+create table lesson (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
@@ -124,16 +124,16 @@ create table module (
   short_description         TEXT,
   image_url                 varchar(255),
   video_url                 varchar(255),
-  constraint pk_module primary key (id))
+  constraint pk_lesson primary key (id))
 ;
 
-create table modulecontent (
+create table lessoncontent (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      varchar(255),
   url                       varchar(255),
-  module_content_image_url  varchar(255),
-  constraint pk_modulecontent primary key (id))
+  lesson_content_image_url  varchar(255),
+  constraint pk_lessoncontent primary key (id))
 ;
 
 create table multiple_choice_question (
@@ -164,7 +164,7 @@ create table open_question (
   id                        bigint auto_increment not null,
   question                  varchar(255),
   question_image_url        varchar(255),
-  module_id                 bigint,
+  lesson_id                 bigint,
   user_email                varchar(255),
   constraint pk_open_question primary key (id))
 ;
@@ -251,10 +251,10 @@ create table category_curriculumcourse (
   constraint pk_category_curriculumcourse primary key (category_id, curriculumcourse_id))
 ;
 
-create table course_module (
+create table course_lesson (
   course_id                      bigint not null,
-  module_id                      bigint not null,
-  constraint pk_course_module primary key (course_id, module_id))
+  lesson_id                      bigint not null,
+  constraint pk_course_lesson primary key (course_id, lesson_id))
 ;
 
 create table course_category (
@@ -263,28 +263,28 @@ create table course_category (
   constraint pk_course_category primary key (course_id, category_id))
 ;
 
-create table curriculumcourse_curriculummodul (
+create table curriculumcourse_curriculumlesso (
   curriculumcourse_id            bigint not null,
-  curriculummodule_id            bigint not null,
-  constraint pk_curriculumcourse_curriculummodul primary key (curriculumcourse_id, curriculummodule_id))
+  curriculumlesson_id            bigint not null,
+  constraint pk_curriculumcourse_curriculumlesso primary key (curriculumcourse_id, curriculumlesson_id))
 ;
 
-create table curriculummodule_curriculumtopic (
-  curriculummodule_id            bigint not null,
+create table curriculumlesson_curriculumtopic (
+  curriculumlesson_id            bigint not null,
   curriculumtopic_id             bigint not null,
-  constraint pk_curriculummodule_curriculumtopic primary key (curriculummodule_id, curriculumtopic_id))
+  constraint pk_curriculumlesson_curriculumtopic primary key (curriculumlesson_id, curriculumtopic_id))
 ;
 
-create table module_test (
-  module_id                      bigint not null,
+create table lesson_test (
+  lesson_id                      bigint not null,
   test_id                        bigint not null,
-  constraint pk_module_test primary key (module_id, test_id))
+  constraint pk_lesson_test primary key (lesson_id, test_id))
 ;
 
-create table module_modulecontent (
-  module_id                      bigint not null,
-  modulecontent_id               bigint not null,
-  constraint pk_module_modulecontent primary key (module_id, modulecontent_id))
+create table lesson_lessoncontent (
+  lesson_id                      bigint not null,
+  lessoncontent_id               bigint not null,
+  constraint pk_lesson_lessoncontent primary key (lesson_id, lessoncontent_id))
 ;
 
 create table multiple_choice_question_hypothe (
@@ -352,8 +352,8 @@ alter table one_choice_answer add constraint fk_one_choice_answer_user_11 foreig
 create index ix_one_choice_answer_user_11 on one_choice_answer (user_email);
 alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_12 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
 create index ix_one_choice_answer_hypothes_12 on one_choice_answer (hypothesis_id);
-alter table open_question add constraint fk_open_question_module_13 foreign key (module_id) references module (id) on delete restrict on update restrict;
-create index ix_open_question_module_13 on open_question (module_id);
+alter table open_question add constraint fk_open_question_lesson_13 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
+create index ix_open_question_lesson_13 on open_question (lesson_id);
 alter table open_question add constraint fk_open_question_user_14 foreign key (user_email) references account (email) on delete restrict on update restrict;
 create index ix_open_question_user_14 on open_question (user_email);
 alter table professor_content add constraint fk_professor_content_professo_15 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
@@ -377,29 +377,29 @@ alter table category_curriculumcourse add constraint fk_category_curriculumcours
 
 alter table category_curriculumcourse add constraint fk_category_curriculumcourse__02 foreign key (curriculumcourse_id) references curriculumcourse (id) on delete restrict on update restrict;
 
-alter table course_module add constraint fk_course_module_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
+alter table course_lesson add constraint fk_course_lesson_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
 
-alter table course_module add constraint fk_course_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
+alter table course_lesson add constraint fk_course_lesson_lesson_02 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
 
 alter table course_category add constraint fk_course_category_course_01 foreign key (course_id) references course (id) on delete restrict on update restrict;
 
 alter table course_category add constraint fk_course_category_category_02 foreign key (category_id) references category (id) on delete restrict on update restrict;
 
-alter table curriculumcourse_curriculummodul add constraint fk_curriculumcourse_curriculu_01 foreign key (curriculumcourse_id) references curriculumcourse (id) on delete restrict on update restrict;
+alter table curriculumcourse_curriculumlesso add constraint fk_curriculumcourse_curriculu_01 foreign key (curriculumcourse_id) references curriculumcourse (id) on delete restrict on update restrict;
 
-alter table curriculumcourse_curriculummodul add constraint fk_curriculumcourse_curriculu_02 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
+alter table curriculumcourse_curriculumlesso add constraint fk_curriculumcourse_curriculu_02 foreign key (curriculumlesson_id) references curriculumlesson (id) on delete restrict on update restrict;
 
-alter table curriculummodule_curriculumtopic add constraint fk_curriculummodule_curriculu_01 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
+alter table curriculumlesson_curriculumtopic add constraint fk_curriculumlesson_curriculu_01 foreign key (curriculumlesson_id) references curriculumlesson (id) on delete restrict on update restrict;
 
-alter table curriculummodule_curriculumtopic add constraint fk_curriculummodule_curriculu_02 foreign key (curriculumtopic_id) references curriculumtopic (id) on delete restrict on update restrict;
+alter table curriculumlesson_curriculumtopic add constraint fk_curriculumlesson_curriculu_02 foreign key (curriculumtopic_id) references curriculumtopic (id) on delete restrict on update restrict;
 
-alter table module_test add constraint fk_module_test_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
+alter table lesson_test add constraint fk_lesson_test_lesson_01 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
 
-alter table module_test add constraint fk_module_test_test_02 foreign key (test_id) references test (id) on delete restrict on update restrict;
+alter table lesson_test add constraint fk_lesson_test_test_02 foreign key (test_id) references test (id) on delete restrict on update restrict;
 
-alter table module_modulecontent add constraint fk_module_modulecontent_modul_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
+alter table lesson_lessoncontent add constraint fk_lesson_lessoncontent_lesso_01 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
 
-alter table module_modulecontent add constraint fk_module_modulecontent_modul_02 foreign key (modulecontent_id) references modulecontent (id) on delete restrict on update restrict;
+alter table lesson_lessoncontent add constraint fk_lesson_lessoncontent_lesso_02 foreign key (lessoncontent_id) references lessoncontent (id) on delete restrict on update restrict;
 
 alter table multiple_choice_question_hypothe add constraint fk_multiple_choice_question_h_01 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
 
@@ -457,15 +457,15 @@ drop table account_course;
 
 drop table professor_course;
 
-drop table course_module;
+drop table course_lesson;
 
 drop table curriculumcourse;
 
-drop table curriculumcourse_curriculummodul;
+drop table curriculumcourse_curriculumlesso;
 
-drop table curriculummodule;
+drop table curriculumlesson;
 
-drop table curriculummodule_curriculumtopic;
+drop table curriculumlesson_curriculumtopic;
 
 drop table curriculumtopic;
 
@@ -473,13 +473,13 @@ drop table forum;
 
 drop table hypothesis;
 
-drop table module;
+drop table lesson;
 
-drop table module_test;
+drop table lesson_test;
 
-drop table module_modulecontent;
+drop table lesson_lessoncontent;
 
-drop table modulecontent;
+drop table lessoncontent;
 
 drop table multiple_choice_question;
 

@@ -1,4 +1,4 @@
-@(user: User,course: models.course.Course, module: models.course.Module,
+@(user: User,course: models.course.Course, lesson: models.course.Lesson,
 categories: List[models.curriculum.Category], test: models.test.Test,
 formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer :
 Form[Profile.OneChoiceQuestionAnswer]) 
@@ -87,7 +87,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 
 						<div class="control-group">
 							@helper.form(routes.Profile.postquestionanswer(course.acronym,
-							module.acronym,test.id,question.id)) {
+							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
 
 								<textarea class="span20" rows="10" name="qanswer"
@@ -113,7 +113,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 
 						<div class="control-group">
 							@helper.form(routes.Profile.postonechoicequestionanswer(course.acronym,
-							module.acronym,test.id,onechoicequestion.id)) {
+							lesson.acronym,test.id,onechoicequestion.id)) {
 							<div class="controls">
 
 								<label class="radio">

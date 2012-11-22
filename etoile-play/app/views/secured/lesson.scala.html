@@ -1,5 +1,5 @@
-@(user: User, categories: List[models.curriculum.Category], module:
-models.course.Module, course: models.course.Course,formSuggestQuestion
+@(user: User, categories: List[models.curriculum.Category], lesson:
+models.course.Lesson, course: models.course.Course,formSuggestQuestion
 :Form[Profile.OpenQuestionSuggestion]) @import helper._
 @main("etoileplatform"){
 
@@ -71,11 +71,11 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 				<div class="accordion-group">
 					<div class="accordion-heading">
 						<a class="accordion-toggle" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseOne"> @module.name
+							data-parent="#accordion2" href="#collapseOne"> @lesson.name
 							Description </a>
 					</div>
 					<div id="collapseOne" class="accordion-body collapse">
-						<div class="accordion-inner">@module.description</div>
+						<div class="accordion-inner">@lesson.description</div>
 					</div>
 				</div>
 			</div>
@@ -84,7 +84,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 		<!--/span-->
 		<div class="span9">
 			<div class="page-header">
-				<h1>@module.name</h1>
+				<h1>@lesson.name</h1>
 				<div class="tabbable">
 					<!-- Only required for left/right tabs -->
 					<ul class="nav nav-tabs">
@@ -96,7 +96,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 						<div class="tab-pane active" id="tab1">
 							<div class="row-fluid">
 								<div class="span2">
-									<img src="@module.imageURL" height="100" width="100" />
+									<img src="@lesson.imageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
 									<p>New Allert</p>
@@ -104,7 +104,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 							</div>
 						</div>
 						<div class="tab-pane" id="tab2">
-							@for(mc <- module.modulecontents) {
+							@for(mc <- lesson.lessoncontents) {
 							<div class="row-fluid">
 								<div class="span2">
 									<img
@@ -132,7 +132,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 									</tr>
 								</thead>
 								<tbody>
-									@for(test <- module.tests) {
+									@for(test <- lesson.tests) {
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
@@ -142,7 +142,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 										@if(usertest.test.id==test.id && usertest.incourse){
 										<td><a class="btn btn-success btn-small disabled" >Suggest Question&raquo;</a></td>
 										<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.test(test.id,module.acronym,course.acronym)">Resolve
+											href="@routes.Profile.test(test.id,lesson.acronym,course.acronym)">Resolve
 												Test&raquo;</a></td> 
 										}
 										 @if(usertest.test.id==test.id && !usertest.incourse){
@@ -159,7 +159,7 @@ models.course.Module, course: models.course.Course,formSuggestQuestion
 											<div class="modal-body">
 												<p>
 												<div class="control-group">
-													@helper.form(routes.Profile.addquestion(test.id,module.acronym,course.acronym)){
+													@helper.form(routes.Profile.addquestion(test.id,lesson.acronym,course.acronym)){
 
 													<div class="controls">
 														<p>In order to resolve the test you need to make a question suggestion.</p>

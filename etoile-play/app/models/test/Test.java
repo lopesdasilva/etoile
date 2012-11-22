@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import models.course.Module;
+import models.course.Lesson;
 import models.manytomany.UserTest;
 
 import com.avaje.ebean.Ebean;
@@ -31,8 +31,8 @@ public class Test extends Model{
 	@Constraints.Required
 	public String testImageURL;
 
-	@ManyToMany(mappedBy="modules")
-	public Module module;
+	@ManyToMany(mappedBy="lessons")
+	public Lesson lesson;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<OpenQuestion> openquestions;

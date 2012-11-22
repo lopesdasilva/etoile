@@ -13,7 +13,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class Curriculummodule extends Model{
+public class Curriculumlesson extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -30,19 +30,19 @@ public class Curriculummodule extends Model{
 	@Column(columnDefinition="TEXT")
 	public String text;
 
-	@ManyToMany(mappedBy="curriculummodules")
+	@ManyToMany(mappedBy="curriculumlessons")
 	public Curriculumcourse curriculumcourse;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Curriculumtopic> curriculumtopics;
 	
-	public static Model.Finder<Long, Curriculummodule> find = new Model.Finder<Long,Curriculummodule>(
-			Long.class, Curriculummodule.class);
+	public static Model.Finder<Long, Curriculumlesson> find = new Model.Finder<Long,Curriculumlesson>(
+			Long.class, Curriculumlesson.class);
 
-	public static List<Curriculummodule> getAllModules() {
-		List<Curriculummodule> modules = new ArrayList<Curriculummodule>();
-		modules = Ebean.find(Curriculummodule.class).findList(); 
-		return modules; 
+	public static List<Curriculumlesson> getAllLessons() {
+		List<Curriculumlesson> lessons = new ArrayList<Curriculumlesson>();
+		lessons = Ebean.find(Curriculumlesson.class).findList(); 
+		return lessons; 
 	}
 	
 }

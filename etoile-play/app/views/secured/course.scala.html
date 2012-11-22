@@ -86,16 +86,16 @@
 
 
 			<div class="row-fluid">
-			<h3>Modules</h3>
+			<h3>Lessons</h3>
 				<ul class="thumbnails">
-					@for(module <- course.modules) {
+					@for(lesson <- course.lessons) {
 					<li class="span4">
 						<div class="carousel-inner">
 							<div class="item" style="min-height: 150px; max-height: 150px">
-								<a href="@routes.Profile.module(module.acronym,course.acronym)"> <img
-									src="@module.imageURL" alt="">
+								<a href="@routes.Profile.lesson(lesson.acronym,course.acronym)"> <img
+									src="@lesson.imageURL" alt="">
 									<div class="carousel-caption" style="max-height: 30px;min-height: 30px">
-										<h4>@module.name</h4>
+										<h4>@lesson.name</h4>
 										
 									</div>
 								</a>

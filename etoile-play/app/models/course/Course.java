@@ -49,7 +49,7 @@ public class Course extends Model {
 	public List<Professor> professors;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Module> modules;
+	public List<Lesson> lessons;
 
 	@ManyToMany (cascade = {CascadeType.ALL})
 	public List<Category> categories;

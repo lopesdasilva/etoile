@@ -80,16 +80,16 @@
 					<dd>
 					<p>@curriculumcourse.text</p>
 					<dl>
-					@for(curriculummodule <- curriculumcourse.curriculummodules) {
-					<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword">
+					@for(curriculumlesson <- curriculumcourse.curriculumlessons) {
+					<section id="@category.keyword@curriculumcourse.keyword@curriculumlesson.keyword">
 						<dt>
-						<h3><span class="label label-info">M</span>@curriculummodule.name</h3> 
+						<h3><span class="label label-info">M</span>@curriculumlesson.name</h3> 
 						</dt>
 						<dd>
-						<p>@curriculummodule.text</p>
+						<p>@curriculumlesson.text</p>
 						<dl>
-							@for(curriculumtopic <- curriculummodule.curriculumtopics)	{
-							<section id="@category.keyword@curriculumcourse.keyword@curriculummodule.keyword@curriculumtopic.keyword">
+							@for(curriculumtopic <- curriculumlesson.curriculumtopics)	{
+							<section id="@category.keyword@curriculumcourse.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
 								<dt>
 									<h4><span class="label label-warning">T</span>@curriculumtopic.text</h4>
 								</dt>

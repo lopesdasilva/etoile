@@ -8,7 +8,7 @@ import models.Comment;
 import models.User;
 
 import com.avaje.ebean.Ebean;
-import models.course.Module;
+import models.course.Lesson;
 
 import play.db.ebean.*;
 import play.data.format.Formats;
@@ -34,7 +34,7 @@ public class OpenQuestion extends Model{
 	public List<Answer> answers;
 	
 	@ManyToOne
-	public Module module;
+	public Lesson lesson;
 	
 	@ManyToOne
 	public User user;

@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import models.course.Module;
+import models.course.Lesson;
 
 import com.avaje.ebean.Ebean;
 
@@ -13,7 +13,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class Modulecontent extends Model{
+public class Lessoncontent extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -26,8 +26,8 @@ public class Modulecontent extends Model{
     @Formats.NonEmpty
 	public String text;
 
-	@ManyToMany(mappedBy="modulescontents")
-	public Module module;
+	@ManyToMany(mappedBy="lessonscontents")
+	public Lesson lesson;
 	
 	@Constraints.Required
     @Formats.NonEmpty
@@ -35,17 +35,17 @@ public class Modulecontent extends Model{
 	
 	@Constraints.Required
     @Formats.NonEmpty
-	public String moduleContentImageURL;
+	public String lessonContentImageURL;
 	
 	
 
 	
-	public static Model.Finder<Long, Modulecontent> find = new Model.Finder<Long, Modulecontent>(
-			Long.class, Modulecontent.class);
+	public static Model.Finder<Long, Lessoncontent> find = new Model.Finder<Long, Lessoncontent>(
+			Long.class, Lessoncontent.class);
 
-	public static List<Modulecontent> getAllTests() {
-		List<Modulecontent> tests = new ArrayList<Modulecontent>();
-		tests = Ebean.find(Modulecontent.class).findList(); 
+	public static List<Lessoncontent> getAllTests() {
+		List<Lessoncontent> tests = new ArrayList<Lessoncontent>();
+		tests = Ebean.find(Lessoncontent.class).findList(); 
 		return tests; 
 	}
 	

@@ -52,16 +52,10 @@ GET		/courses/:course/:lesson			controllers.Profile.lesson(lesson: String, cours
 POST 	/courses/:course/:lesson/addquestion 				controllers.Profile.addquestion(test: Long, lesson: String, course: String)
 
 #Tests
-<<<<<<< HEAD
-GET 	/courses/:course/:module/test:test  controllers.Profile.test(test: Long, module: String,course: String)
-POST 	/courses/:course/:module/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, module: String, test: Long, question: Long)
-POST 	/courses/:course/:module/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(course: String, module: String, test: Long, question: Long)
-POST 	/courses/:course/:module/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(course: String, module: String, test: Long, question: Long)
-=======
 GET 	/courses/:course/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,course: String)
 POST 	/courses/:course/:lesson/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, lesson: String, test: Long, question: Long)
 POST 	/courses/:course/:lesson/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(course: String, lesson: String, test: Long, question: Long)
->>>>>>> [Module] passou a ser [Lesson]
+POST 	/courses/:course/:lesson/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(course: String, lesson: String, test: Long, question: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

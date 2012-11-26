@@ -18,6 +18,7 @@ import models.curriculum.Curriculumlesson;
 import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
 import models.test.Hypothesis;
+import models.test.MultipleChoiceHypothesis;
 import models.test.MultipleChoiceQuestion;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
@@ -82,6 +83,17 @@ public class Global extends GlobalSettings {
 			hypothesis_three.text = "H3";
 			hypothesis_three.save();
 			
+			MultipleChoiceHypothesis hypothesis_four = new MultipleChoiceHypothesis();
+			hypothesis_four.text = "H4 - This is the first MultipleChoice Hypothesis";
+			hypothesis_four.number = 0;
+			hypothesis_four.save();
+			
+			MultipleChoiceHypothesis hypothesis_five = new MultipleChoiceHypothesis();
+			hypothesis_five.text = "H5 - This is the second MultipleChoice Hypothesis";
+			hypothesis_five.number = 1;
+			hypothesis_five.save();
+			
+			
 			OneChoiceQuestion onechoicequestion_one = new OneChoiceQuestion();
 			onechoicequestion_one.question = "This is the First OneChoice Question.";
 			onechoicequestion_one.correct_hypothesis = hypothesis_one.text;
@@ -93,8 +105,8 @@ public class Global extends GlobalSettings {
 			
 			MultipleChoiceQuestion multiplechoicequestion_one = new MultipleChoiceQuestion();
 			multiplechoicequestion_one.question = "This is the First MultipleChoice Question";
-			multiplechoicequestion_one.hypothesyslist.add(hypothesis_two);
-			multiplechoicequestion_one.hypothesyslist.add(hypothesis_three);
+			multiplechoicequestion_one.hypothesislist.add(hypothesis_four);
+			multiplechoicequestion_one.hypothesislist.add(hypothesis_five);
 			multiplechoicequestion_one.save();
 			
 			OpenQuestion question_one = new OpenQuestion();
@@ -118,6 +130,9 @@ public class Global extends GlobalSettings {
 			question_one.save();
 			question_two.save();
 			test_one.save();
+			
+			multiplechoicequestion_one.test = test_one;
+			multiplechoicequestion_one.save();
 			
 			Test test_two = new Test();
 			test_two.name="Final Sum Test";

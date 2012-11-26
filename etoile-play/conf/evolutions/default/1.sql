@@ -111,6 +111,7 @@ create table forum (
 
 create table hypothesis (
   id                        bigint auto_increment not null,
+  number                    integer,
   text                      varchar(255),
   question_image_url        varchar(255),
   constraint pk_hypothesis primary key (id))
@@ -134,6 +135,22 @@ create table lessoncontent (
   url                       varchar(255),
   lesson_content_image_url  varchar(255),
   constraint pk_lessoncontent primary key (id))
+;
+
+create table multiple_choice_answer (
+  id                        bigint auto_increment not null,
+  multiple_choice_question_id bigint,
+  test_id                   bigint,
+  user_email                varchar(255),
+  constraint pk_multiple_choice_answer primary key (id))
+;
+
+create table multiple_choice_hypothesis (
+  id                        bigint auto_increment not null,
+  number                    integer,
+  text                      varchar(255),
+  question_image_url        varchar(255),
+  constraint pk_multiple_choice_hypothesis primary key (id))
 ;
 
 create table multiple_choice_question (
@@ -288,10 +305,16 @@ create table lesson_lessoncontent (
   constraint pk_lesson_lessoncontent primary key (lesson_id, lessoncontent_id))
 ;
 
-create table multiple_choice_question_hypothe (
+create table multiple_choice_answer_multiple_ (
+  multiple_choice_answer_id      bigint not null,
+  multiple_choice_hypothesis_id  bigint not null,
+  constraint pk_multiple_choice_answer_multiple_ primary key (multiple_choice_answer_id, multiple_choice_hypothesis_id))
+;
+
+create table multiple_choice_question_multipl (
   multiple_choice_question_id    bigint not null,
-  hypothesis_id                  bigint not null,
-  constraint pk_multiple_choice_question_hypothe primary key (multiple_choice_question_id, hypothesis_id))
+  multiple_choice_hypothesis_id  bigint not null,
+  constraint pk_multiple_choice_question_multipl primary key (multiple_choice_question_id, multiple_choice_hypothesis_id))
 ;
 
 create table one_choice_question_hypothesis (
@@ -339,34 +362,40 @@ alter table content add constraint fk_content_course_7 foreign key (course_id) r
 create index ix_content_course_7 on content (course_id);
 alter table course add constraint fk_course_university_8 foreign key (university_id) references university (id) on delete restrict on update restrict;
 create index ix_course_university_8 on course (university_id);
-alter table multiple_choice_question add constraint fk_multiple_choice_question_te_9 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_multiple_choice_question_te_9 on multiple_choice_question (test_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_oneChoic_10 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_oneChoic_10 on one_choice_answer (one_choice_question_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_test_11 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_test_11 on one_choice_answer (test_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_user_12 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_one_choice_answer_user_12 on one_choice_answer (user_email);
-alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_13 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_hypothes_13 on one_choice_answer (hypothesis_id);
-alter table open_question add constraint fk_open_question_lesson_14 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
-create index ix_open_question_lesson_14 on open_question (lesson_id);
-alter table open_question add constraint fk_open_question_user_15 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_open_question_user_15 on open_question (user_email);
-alter table professor_content add constraint fk_professor_content_professo_16 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
-create index ix_professor_content_professo_16 on professor_content (professor_id);
-alter table reply add constraint fk_reply_topic_17 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_17 on reply (topic_id);
-alter table reply add constraint fk_reply_user_18 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_18 on reply (user_email);
-alter table topic add constraint fk_topic_forum_19 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_19 on topic (forum_id);
-alter table university add constraint fk_university_continent_20 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_20 on university (continent_id);
-alter table user_test add constraint fk_user_test_user_21 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_user_test_user_21 on user_test (user_email);
-alter table user_test add constraint fk_user_test_test_22 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_user_test_test_22 on user_test (test_id);
+alter table multiple_choice_answer add constraint fk_multiple_choice_answer_mult_9 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
+create index ix_multiple_choice_answer_mult_9 on multiple_choice_answer (multiple_choice_question_id);
+alter table multiple_choice_answer add constraint fk_multiple_choice_answer_tes_10 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_multiple_choice_answer_tes_10 on multiple_choice_answer (test_id);
+alter table multiple_choice_answer add constraint fk_multiple_choice_answer_use_11 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_multiple_choice_answer_use_11 on multiple_choice_answer (user_email);
+alter table multiple_choice_question add constraint fk_multiple_choice_question_t_12 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_multiple_choice_question_t_12 on multiple_choice_question (test_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_oneChoic_13 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_oneChoic_13 on one_choice_answer (one_choice_question_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_test_14 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_test_14 on one_choice_answer (test_id);
+alter table one_choice_answer add constraint fk_one_choice_answer_user_15 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_one_choice_answer_user_15 on one_choice_answer (user_email);
+alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_16 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
+create index ix_one_choice_answer_hypothes_16 on one_choice_answer (hypothesis_id);
+alter table open_question add constraint fk_open_question_lesson_17 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
+create index ix_open_question_lesson_17 on open_question (lesson_id);
+alter table open_question add constraint fk_open_question_user_18 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_open_question_user_18 on open_question (user_email);
+alter table professor_content add constraint fk_professor_content_professo_19 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+create index ix_professor_content_professo_19 on professor_content (professor_id);
+alter table reply add constraint fk_reply_topic_20 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_20 on reply (topic_id);
+alter table reply add constraint fk_reply_user_21 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_21 on reply (user_email);
+alter table topic add constraint fk_topic_forum_22 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_22 on topic (forum_id);
+alter table university add constraint fk_university_continent_23 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_23 on university (continent_id);
+alter table user_test add constraint fk_user_test_user_24 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_24 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_25 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_25 on user_test (test_id);
 
 
 
@@ -398,9 +427,13 @@ alter table lesson_lessoncontent add constraint fk_lesson_lessoncontent_lesso_01
 
 alter table lesson_lessoncontent add constraint fk_lesson_lessoncontent_lesso_02 foreign key (lessoncontent_id) references lessoncontent (id) on delete restrict on update restrict;
 
-alter table multiple_choice_question_hypothe add constraint fk_multiple_choice_question_h_01 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
+alter table multiple_choice_answer_multiple_ add constraint fk_multiple_choice_answer_mul_01 foreign key (multiple_choice_answer_id) references multiple_choice_answer (id) on delete restrict on update restrict;
 
-alter table multiple_choice_question_hypothe add constraint fk_multiple_choice_question_h_02 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
+alter table multiple_choice_answer_multiple_ add constraint fk_multiple_choice_answer_mul_02 foreign key (multiple_choice_hypothesis_id) references multiple_choice_hypothesis (id) on delete restrict on update restrict;
+
+alter table multiple_choice_question_multipl add constraint fk_multiple_choice_question_m_01 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
+
+alter table multiple_choice_question_multipl add constraint fk_multiple_choice_question_m_02 foreign key (multiple_choice_hypothesis_id) references multiple_choice_hypothesis (id) on delete restrict on update restrict;
 
 alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_01 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
 
@@ -474,9 +507,15 @@ drop table lesson_lessoncontent;
 
 drop table lessoncontent;
 
+drop table multiple_choice_answer;
+
+drop table multiple_choice_answer_multiple_;
+
+drop table multiple_choice_hypothesis;
+
 drop table multiple_choice_question;
 
-drop table multiple_choice_question_hypothe;
+drop table multiple_choice_question_multipl;
 
 drop table one_choice_answer;
 

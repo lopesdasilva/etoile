@@ -24,7 +24,7 @@ public class MultipleChoiceQuestion extends Model{
 //	public List<Hypothesis> correct_hypothesis;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Hypothesis> hypothesyslist;
+	public List<MultipleChoiceHypothesis> hypothesislist;
 	
 	@Constraints.Required
 	public String questionImageURL;

@@ -18,6 +18,9 @@ import models.course.University;
 import models.manytomany.UserTest;
 import models.test.Answer;
 import models.test.Hypothesis;
+import models.test.MultipleChoiceAnswer;
+import models.test.MultipleChoiceHypothesis;
+import models.test.MultipleChoiceQuestion;
 import models.test.OneChoiceAnswer;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
@@ -58,7 +61,7 @@ public static class OneChoiceQuestionAnswer{
 
 public static class MultipleChoiceQuestionAnswer{
 	
-	public List<Long> mcqanswers;
+	public int[] mcqanswers = new int[4];
 }
 
 public static class OpenQuestionSuggestion{
@@ -208,8 +211,27 @@ public static class OpenQuestionSuggestion{
     			test.save();
     		}
     	}
+    	
+    	if(test_aux.multiplechoiceanswers.isEmpty()){
+    		System.out.println("Entrei");
+    		for(MultipleChoiceQuestion multiplechoicequestion: test_aux.multiplechoicequestions){
+    			MultipleChoiceAnswer emptyAnswer = new MultipleChoiceAnswer();
+    			emptyAnswer.multipleChoiceQuestion = multiplechoicequestion;
+    			long  a = 1;
+    			emptyAnswer.hypothesislist.add(MultipleChoiceHypothesis.find.byId(a));
+    			emptyAnswer.test=test;
+    			emptyAnswer.user = user;
+    			emptyAnswer.save();
+    			test.multiplechoiceanswers.add(emptyAnswer);
+    			test.save();
+    		}
+    	}
+    	
     	test_aux=test;
     	System.out.println("SIZE"+test_aux.onechoiceanswers.size());
+    	for(MultipleChoiceQuestion q: test_aux.multiplechoicequestions){
+    		System.out.println("SIZE QUESTIONS" + q.hypothesislist.size());
+    	}
     	
     	Course course = Course.findByAcronym(course_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -358,8 +380,43 @@ public static class OpenQuestionSuggestion{
 	}
 	
 	public static Result postmultiplechoicequestionanswer(String course_acronym, String module_acronym, Long test_id, Long question_id){
-		System.out.println("Save - MultipleChoiceQuestion");
 		Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
+		
+		MultipleChoiceAnswer userMultipleChoiceAnswer = MultipleChoiceAnswer.findByUserAndQuestion(question_id, request().username());
+		MultipleChoiceQuestion question = MultipleChoiceQuestion.find.byId(question_id);
+		Test test = Test.find.byId(test_id);
+		
+		if(userMultipleChoiceAnswer == null){
+			userMultipleChoiceAnswer = new MultipleChoiceAnswer();
+			userMultipleChoiceAnswer.multipleChoiceQuestion = question;
+			userMultipleChoiceAnswer.test = test;
+			userMultipleChoiceAnswer.user = User.find.byId(request().username());
+			userMultipleChoiceAnswer.save();
+		}
+		
+		if(userMultipleChoiceAnswer.hypothesislist.size()!=0){
+		for(MultipleChoiceHypothesis hyp: userMultipleChoiceAnswer.hypothesislist){
+			userMultipleChoiceAnswer.hypothesislist.remove(hyp);
+			hyp.save();
+			userMultipleChoiceAnswer.save();
+		}
+		}
+		
+		System.out.println("SIZE OF LIST: " + userMultipleChoiceAnswer.hypothesislist.size());
+
+//		for(int h: form.get().mcqanswers){
+//			if(h!=0){
+//			System.out.println("VOu adicionar: "+h);
+//			MultipleChoiceHypothesis hypothesis_selected = MultipleChoiceHypothesis.find.byId((long)h);
+//			System.out.println("Encontrei? " + hypothesis_selected.text);
+//			userMultipleChoiceAnswer.hypothesislist.add(hypothesis_selected);
+//			hypothesis_selected.save();
+//			
+//			userMultipleChoiceAnswer.save();
+//			System.out.println("Salvei " + userMultipleChoiceAnswer.hypothesislist.size());
+//			
+//			}
+//		}
 		
 		return null;
 	}

@@ -47,6 +47,9 @@ public class Test extends Model{
 	public List<OneChoiceAnswer> onechoiceanswers;
 	
 	@OneToMany
+	public List<MultipleChoiceAnswer> multiplechoiceanswers;
+	
+	@OneToMany
 	public List<Answer> answers;
 	
 	@OneToMany

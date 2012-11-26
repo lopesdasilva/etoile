@@ -166,11 +166,11 @@ Form[Profile.OneChoiceQuestionAnswer])
 							<div class="controls">
            						 <div class="input">
               					<ul class="inputs-list">
-									@for(hypothesis<-multiplechoicequestion.hypothesyslist) { 
+									@for(hypothesis<-multiplechoicequestion.hypothesislist) { 
 									<li>
 									<label>
 										
-										<input type="checkbox" name="optionsCheckboxes" value="option1" >
+										<input type="checkbox" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
 										<span>@hypothesis.text</span></>
 										
 									</label> 

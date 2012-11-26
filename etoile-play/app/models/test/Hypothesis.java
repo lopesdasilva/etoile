@@ -15,6 +15,8 @@ public class Hypothesis extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
+	
+	public int number;
 
 	@Constraints.Required
     @Formats.NonEmpty
@@ -35,7 +37,7 @@ public class Hypothesis extends Model{
 	public static Model.Finder<Long, Hypothesis> find = new Model.Finder<Long, Hypothesis>(
 			Long.class, Hypothesis.class);
 
-	public static List<Hypothesis> getAllOpenQuestions() {
+	public static List<Hypothesis> getAllHypothesis() {
 		List<Hypothesis> questions = new ArrayList<Hypothesis>();
 		questions = Ebean.find(Hypothesis.class).findList(); 
 		return questions; 

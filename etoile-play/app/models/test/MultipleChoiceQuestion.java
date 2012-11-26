@@ -29,7 +29,7 @@ public class MultipleChoiceQuestion extends Model{
 	@Constraints.Required
 	public String questionImageURL;
 
-	@ManyToMany(mappedBy="tests")
+	@ManyToOne
 	public Test test;
 	
 

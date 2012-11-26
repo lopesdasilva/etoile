@@ -40,7 +40,7 @@ public class Test extends Model{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<OneChoiceQuestion> onechoicequestions;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@OneToMany
 	public List<MultipleChoiceQuestion> multiplechoicequestions;
 	
 	@OneToMany

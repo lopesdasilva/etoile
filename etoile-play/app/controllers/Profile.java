@@ -379,7 +379,7 @@ public static class OpenQuestionSuggestion{
 		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 	}
 	
-	public static Result postmultiplechoicequestionanswer(String course_acronym, String module_acronym, Long test_id, Long question_id){
+	public static Result postmultiplechoicequestionanswer(String course_acronym, String lesson_acronym, Long test_id, Long question_id){
 		Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
 		
 		MultipleChoiceAnswer userMultipleChoiceAnswer = MultipleChoiceAnswer.findByUserAndQuestion(question_id, request().username());
@@ -404,21 +404,34 @@ public static class OpenQuestionSuggestion{
 		
 		System.out.println("SIZE OF LIST: " + userMultipleChoiceAnswer.hypothesislist.size());
 
-//		for(int h: form.get().mcqanswers){
-//			if(h!=0){
-//			System.out.println("VOu adicionar: "+h);
-//			MultipleChoiceHypothesis hypothesis_selected = MultipleChoiceHypothesis.find.byId((long)h);
-//			System.out.println("Encontrei? " + hypothesis_selected.text);
-//			userMultipleChoiceAnswer.hypothesislist.add(hypothesis_selected);
-//			hypothesis_selected.save();
-//			
-//			userMultipleChoiceAnswer.save();
-//			System.out.println("Salvei " + userMultipleChoiceAnswer.hypothesislist.size());
-//			
-//			}
-//		}
+		for(int h: form.get().mcqanswers){
+			if(h!=0){
+			System.out.println("VOu adicionar: "+h);
+			MultipleChoiceHypothesis hypothesis_selected = MultipleChoiceHypothesis.find.byId((long)h);
+			System.out.println("Encontrei? " + hypothesis_selected.text);
+			userMultipleChoiceAnswer.hypothesislist.add(hypothesis_selected);
+			hypothesis_selected.save();
+			
+			userMultipleChoiceAnswer.save();
+			System.out.println("Salvei " + userMultipleChoiceAnswer.hypothesislist.size());
+			
+			}
+		}
 		
-		return null;
+		User user = User.find.byId(request().username());
+		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email, test_id);
+		
+		List<Category> categories = Category.getAllCategories();
+    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
+    	Test test_aux = test;
+    	test_aux.answers = openanswers;
+    	test_aux.onechoiceanswers = onechoiceanswers;
+    	
+    	Course course = Course.findByAcronym(course_acronym);
+    	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+    	
+    	
+		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 	}
     
     

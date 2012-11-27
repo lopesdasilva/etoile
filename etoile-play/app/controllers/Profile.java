@@ -424,6 +424,12 @@ public static class OpenQuestionSuggestion{
 			
 			}
 		}
+		System.out.println("SIZE DA LISTA: " + userMultipleChoiceAnswer_aux.hypothesislist.size());
+		if(userMultipleChoiceAnswer_aux.hypothesislist.size()==0){
+			long a = 1;
+			userMultipleChoiceAnswer_aux.hypothesislist.add(MultipleChoiceHypothesis.find.byId(a));
+			userMultipleChoiceAnswer_aux.save();
+		}
 		
 		User user = User.find.byId(request().username());
 		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email, test_id);

@@ -83,6 +83,10 @@ public class Global extends GlobalSettings {
 			hypothesis_three.text = "H3";
 			hypothesis_three.save();
 			
+			MultipleChoiceHypothesis hypothesis_zerozero = new MultipleChoiceHypothesis();
+			hypothesis_zerozero.text = "No Answer";
+			hypothesis_zerozero.save();
+			
 			MultipleChoiceHypothesis hypothesis_four = new MultipleChoiceHypothesis();
 			hypothesis_four.text = "H4 - This is the first MultipleChoice Hypothesis";
 			hypothesis_four.number = 0;

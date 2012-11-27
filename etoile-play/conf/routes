@@ -36,26 +36,26 @@ POST	/admin/addblog					controllers.Administration.addblog()
 GET		/admin/removeblog				controllers.Administration.removeblog(blog: Long)
 GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 
-#Courses
+#Modules
 ##CHECK THIS ROUTE
-GET		/courses						controllers.Application.courses()
-GET  	/courses/:course					controllers.Application.course(course: String)
-GET	/courses/:course/signup				controllers.Profile.signupcourse(course: String)
+GET		/modules						controllers.Application.modules()
+GET  	/modules/:module					controllers.Application.module(module: String)
+GET	/modules/:module/signup				controllers.Profile.signupmodule(module: String)
 GET    /:continent          controllers.Application.continent(continent: String)
 
 
-#Curriculum Courses
-GET /curriculum/category:category					controllers.Application.categoryCourses(category: Long)
+#Curriculum Modules
+GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)
 
 #Lessons
-GET		/courses/:course/:lesson			controllers.Profile.lesson(lesson: String, course: String)
-POST 	/courses/:course/:lesson/addquestion 				controllers.Profile.addquestion(test: Long, lesson: String, course: String)
+GET		/modules/:module/:lesson			controllers.Profile.lesson(lesson: String, module: String)
+POST 	/modules/:module/:lesson/addquestion 				controllers.Profile.addquestion(test: Long, lesson: String, module: String)
 
 #Tests
-GET 	/courses/:course/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,course: String)
-POST 	/courses/:course/:lesson/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(course: String, lesson: String, test: Long, question: Long)
-POST 	/courses/:course/:lesson/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(course: String, lesson: String, test: Long, question: Long)
-POST 	/courses/:course/:lesson/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(course: String, lesson: String, test: Long, question: Long)
+GET 	/modules/:module/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,module: String)
+POST 	/modules/:module/:lesson/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(module: String, lesson: String, test: Long, question: Long)
+POST 	/modules/:module/:lesson/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(module: String, lesson: String, test: Long, question: Long)
+POST 	/modules/:module/:lesson/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(module: String, lesson: String, test: Long, question: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

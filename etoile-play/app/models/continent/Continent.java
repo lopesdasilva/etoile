@@ -10,8 +10,8 @@ import javax.persistence.OneToMany;
 
 import com.avaje.ebean.Ebean;
 
-import models.course.Course;
-import models.course.University;
+import models.module.Module;
+import models.module.University;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;

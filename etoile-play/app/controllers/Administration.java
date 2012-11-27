@@ -5,8 +5,8 @@ import java.util.List;
 import controllers.Profile.Comment;
 
 import models.*;
-import models.course.Course;
 import models.curriculum.Category;
+import models.module.Module;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,10 +23,10 @@ public static class Blog_Aux{
 	
     public static Result index() {
     	List<User> users = User.findAll();
-    	List<Course> courses = Course.getAllCourses();
+    	List<Module> modules = Module.getAllModules();
     	List<Blog> blogs = Blog.getAllBlogs();
     	 
-    	return ok(views.html.administration.admin.render(users,courses,blogs));
+    	return ok(views.html.administration.admin.render(users,modules,blogs));
     }
     
     public static Result removeuser(String email){
@@ -38,10 +38,10 @@ public static class Blog_Aux{
     	 user.delete();
     	
     	 List<User> users = User.findAll();
-    	List<Course> courses = Course.getAllCourses();
+    	List<Module> modules = Module.getAllModules();
     	List<Blog> blogs = Blog.getAllBlogs();
     	 
-    	return ok(views.html.administration.admin.render(users,courses,blogs));
+    	return ok(views.html.administration.admin.render(users,modules,blogs));
     }
     
     
@@ -51,10 +51,10 @@ public static class Blog_Aux{
     	Blog blog =Blog.find.byId(blog_id);
     	blog.delete();
 		List<User> users = User.findAll();
-    	List<Course> courses = Course.getAllCourses();
+    	List<Module> modules = Module.getAllModules();
     	List<Blog> blogs = Blog.getAllBlogs();
     	 
-    	return ok(views.html.administration.admin.render(users,courses,blogs));
+    	return ok(views.html.administration.admin.render(users,modules,blogs));
 	}
     
     public static Result createblog(){
@@ -80,10 +80,10 @@ public static class Blog_Aux{
     	 
     	 
     	List<User> users = User.findAll();
-    	List<Course> courses = Course.getAllCourses();
+    	List<Module> modules = Module.getAllModules();
     	List<Blog> blogs = Blog.getAllBlogs();
     	flash("success", "New Article created!");
-    	return ok(views.html.administration.admin.render(users,courses,blogs));
+    	return ok(views.html.administration.admin.render(users,modules,blogs));
     }
     
     

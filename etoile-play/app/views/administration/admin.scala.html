@@ -1,4 +1,4 @@
-@(users: List[User], courses: List[models.course.Course],blogs: List[Blog])
+@(users: List[User], modules: List[models.module.Module],blogs: List[Blog])
 @main("admin etoile"){
  @if(flash.contains("success")) {
 			<div class="alert alert-success">
@@ -17,7 +17,7 @@
                   <th>Name</th>
                   <th>Account type</th>
                   <th>#comments</th>
-                  <th>#courses</th>
+                  <th>#modules</th>
                   <th></th>
                 </tr>
               </thead>
@@ -31,7 +31,7 @@
                   <td>@user.name</td>
                   <td>@user.account_type</td>
                   <td>@user.comments.size</td>
-                  <td>@user.courses.size</td>
+                  <td>@user.modules.size</td>
                   <td><a class="btn btn-small btn-danger" href="@routes.Administration.removeuser(user.email)">Remove</a></td>
                 </tr>
                 }
@@ -42,7 +42,7 @@
 </div>
             
 <div class="span12 well">
-<h2>Courses (@courses.size)</h2>
+<h2>Modules (@modules.size)</h2>
  <table class="table table-striped">
               <thead>
                 <tr>
@@ -59,16 +59,16 @@
                 </tr>
               </thead>
               <tbody>
-              @for(course <- courses) {
+              @for(module <- modules) {
                 <tr>
-                  <td>@course.id</td>
-                  <td>@course.name</td>
-                  <td>@course.acronym</td>
-                  <td>@course.duration</td>
-                  <td><a href="#" rel="tooltip" data-placement="top" title="@course.description">Description</a></td>
-                  <td><a href="@course.videoURL">Link</a></td>
-                  <td><a href="@course.imageURL">Link</a></td>
-                    <td>@course.university</td>
+                  <td>@module.id</td>
+                  <td>@module.name</td>
+                  <td>@module.acronym</td>
+                  <td>@module.duration</td>
+                  <td><a href="#" rel="tooltip" data-placement="top" title="@module.description">Description</a></td>
+                  <td><a href="@module.videoURL">Link</a></td>
+                  <td><a href="@module.imageURL">Link</a></td>
+                    <td>@module.university</td>
                 <td><button type="button" class="btn btn-info btn-small" disabled="disabled">+ info</button></td>
                 </tr> 
                }

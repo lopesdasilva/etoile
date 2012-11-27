@@ -17,7 +17,7 @@
 					</li>
 					<li><a href="/digitalcampus">Digital Campus</a>
 					</li>
-					<li><a href="/courses">Courses</a>
+					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
@@ -49,9 +49,9 @@
 		<div class="well sidebar-nav" style="background: #0088CC;">
 			<ul class="nav nav-list">
 				<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
-					Courses</li> @for(course <- user.courses) {
-				<li><a href="@routes.Application.course(course.acronym)"
-					style="text-shadow: #0088CC; color: #999999">@course.name</a></li> }
+					Modules</li> @for(module <- user.modules) {
+				<li><a href="@routes.Application.module(module.acronym)"
+					style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
 			</ul>
 		</div>
 		<div class="well sidebar-nav">

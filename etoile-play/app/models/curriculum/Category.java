@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 
-import models.course.Course;
+import models.module.Module;
 
 import com.avaje.ebean.Ebean;
 
@@ -36,10 +36,10 @@ public class Category extends Model {
 	public String description;
 	
 	@ManyToMany(mappedBy="categories")
-	public List<Course> courses;
+	public List<Module> modules;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Curriculumcourse> curriculumcourses;
+	public List<Curriculummodule> curriculummodules;
 	
 	public static Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(
 			Long.class, Category.class);

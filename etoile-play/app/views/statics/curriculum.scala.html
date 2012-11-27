@@ -18,7 +18,7 @@
 					</li>
 					<li><a href="/digitalcampus">Digital Campus</a>
 					</li>
-					<li><a href="/courses">Courses</a>
+					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li class="active"><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
@@ -65,23 +65,23 @@
 			@for(category <- categories) {
 			<section id="@category.keyword">
 				<dt>
-				<h1><span rel="tooltip" data-placement="top" title="This is a Category."class="label">C</span><a href="@routes.Application.categoryCourses(category.id)">@category.name</a></h1>
+				<h1><span rel="tooltip" data-placement="top" title="This is a Category."class="label">C</span><a href="@routes.Application.categoryModules(category.id)">@category.name</a></h1>
 				
 		</dt>
 		
 				<dd>
 				<p>@category.description</p>
 				<dl>
-				@for(curriculumcourse <- category.curriculumcourses) {
-				<section id="@category.keyword@curriculumcourse.keyword">
+				@for(curriculummodule <- category.curriculummodules) {
+				<section id="@category.keyword@curriculummodule.keyword">
 					<dt>
-					<h2><span class="label label-success">C</span>@curriculumcourse.name</h2> 
+					<h2><span class="label label-success">C</span>@curriculummodule.name</h2> 
 					</dt>
 					<dd>
-					<p>@curriculumcourse.text</p>
+					<p>@curriculummodule.text</p>
 					<dl>
-					@for(curriculumlesson <- curriculumcourse.curriculumlessons) {
-					<section id="@category.keyword@curriculumcourse.keyword@curriculumlesson.keyword">
+					@for(curriculumlesson <- curriculummodule.curriculumlessons) {
+					<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
 						<dt>
 						<h3><span class="label label-info">M</span>@curriculumlesson.name</h3> 
 						</dt>
@@ -89,7 +89,7 @@
 						<p>@curriculumlesson.text</p>
 						<dl>
 							@for(curriculumtopic <- curriculumlesson.curriculumtopics)	{
-							<section id="@category.keyword@curriculumcourse.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
+							<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
 								<dt>
 									<h4><span class="label label-warning">T</span>@curriculumtopic.text</h4>
 								</dt>

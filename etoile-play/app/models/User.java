@@ -4,10 +4,10 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import models.course.Course;
 import models.test.Answer;
 import models.test.OpenQuestion;
 import models.manytomany.UserTest;
+import models.module.Module;
 
 import play.db.ebean.*;
 import play.data.format.*;
@@ -50,8 +50,8 @@ public class User extends Model {
     public String account_type;
     
 	@ManyToMany(cascade = {CascadeType.ALL})
-//	@JoinTable(name="account_course", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="course_id")})
-	public List<Course> courses;
+//	@JoinTable(name="account_module", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="module_id")})
+	public List<Module> modules;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Comment> comments;

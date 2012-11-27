@@ -1,4 +1,4 @@
-package models.course;
+package models.module;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Bibliography extends Model{
 	public String link;
 	
 	@ManyToOne
-	public Course course;
+	public Module module;
 	
 	public static Model.Finder<Long, Bibliography> find = new Model.Finder<Long, Bibliography>(
 			Long.class, Bibliography.class);

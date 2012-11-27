@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import models.course.Course;
+import models.module.Module;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -55,7 +55,7 @@ public class Professor extends Model {
 	public List<ProfessorContent> contents;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Course> courses;
+	public List<Module> modules;
 
 	public static Model.Finder<Long,Professor> find = new Model.Finder(Long.class, Professor.class);
 

@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import models.course.Course;
+import models.module.Module;
 
 
 import com.avaje.ebean.Ebean;

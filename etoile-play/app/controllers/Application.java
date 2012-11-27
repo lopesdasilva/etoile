@@ -6,9 +6,9 @@ import controllers.Profile.Comment;
 
 import models.*;
 import models.continent.Continent;
-import models.course.Course;
-import models.course.University;
 import models.curriculum.Category;
+import models.module.Module;
+import models.module.University;
 import play.*;
 import play.data.Form;
 import play.mvc.*;
@@ -38,14 +38,14 @@ public class Application extends Controller {
 		List<Blog> blogs = Blog.getAllBlogs();
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
-		List<Course> courses= Course.getAllCourses();
+		List<Module> modules= Module.getAllModules();
 		//This is to load Universities(weird)
-    	for (Course c: courses){
+    	for (Module c: modules){
 //    		System.out.println(c.university.name);
     		String s=c.university.name;
     	}
 		
-		return ok(index.render(blogs,categories,continents,courses));
+		return ok(index.render(blogs,categories,continents,modules));
 	}
 	
 	public static Result postcomment(){
@@ -84,10 +84,10 @@ public static Result news() {
 				));
 	}
 	
-	public static Result categoryCourses(Long category_id){
+	public static Result categoryModules(Long category_id){
 		Category category = Category.find.byId(category_id);
 		List<Category> categories = Category.getAllCategories();
-		return ok(categorycourses.render(category,categories));
+		return ok(categorymodules.render(category,categories));
 	}
 	
 
@@ -99,25 +99,25 @@ public static Result news() {
 	    	List <Continent> continents = Continent.getAllContinents();
 	    	
 //	    	if(session("email")!=null){
-//				return Profile.course(course_acronym);
+//				return Profile.module(module_acronym);
 //			}
 	    	
 	    	return ok(views.html.statics.continent.render(categories,continents,continent,continent.universities));
 	    }
 	
 	
-	 public static Result course(String course_acronym){
+	 public static Result module(String module_acronym){
 	    	
-	    	Course course = Course.findByAcronym(course_acronym);
+	    	Module module = Module.findByAcronym(module_acronym);
 	    	
 	    	List<Category> categories = Category.getAllCategories();
 	    	
 	    	
 	    	if(session("email")!=null){
-				return Profile.course(course_acronym);
+				return Profile.module(module_acronym);
 			}
 	    	
-	    	return ok(views.html.statics.course.render(categories,course));
+	    	return ok(views.html.statics.module.render(categories,module));
 	    }
 	
 	public static Result about() {
@@ -140,12 +140,12 @@ public static Result news() {
 
 
 	//CHECK THIS METHOD
-	public static Result courses(){
+	public static Result modules(){
 		
 		if(session("email")!=null){
-			return Profile.courses();
+			return Profile.modules();
 		}
-		return ok(courses.render(Course.getAllCourses(),Category.getAllCategories()));
+		return ok(modules.render(Module.getAllModules(),Category.getAllCategories()));
 	}
 	
 	public static Result blog(Long blog){

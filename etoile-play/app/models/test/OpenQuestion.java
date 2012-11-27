@@ -8,7 +8,8 @@ import models.Comment;
 import models.User;
 
 import com.avaje.ebean.Ebean;
-import models.course.Lesson;
+
+import models.module.Lesson;
 
 import play.db.ebean.*;
 import play.data.format.Formats;

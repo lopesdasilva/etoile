@@ -17,7 +17,7 @@
 					</li>
 					<li><a href="/digitalcampus">Digital Campus</a>
 					</li>
-					<li><a href="/courses">Courses</a>
+					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
@@ -56,9 +56,9 @@
             </div>
             <div class="span8">
             <p>@professor.contact</p>
-            <h4>Courses on étoile</h4>
-             @for(course <- professor.courses) {
-             <a href="@routes.Application.course(course.acronym)"><p>@course.name</p></a>
+            <h4>Modules on étoile</h4>
+             @for(module <- professor.modules) {
+             <a href="@routes.Application.module(module.acronym)"><p>@module.name</p></a>
              }
             </div>
             

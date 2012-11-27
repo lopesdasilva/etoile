@@ -6,17 +6,17 @@ import controllers.sha1;
 
 import models.*;
 import models.continent.Continent;
-import models.course.Bibliography;
-import models.course.Content;
-import models.course.Course;
-import models.course.Lesson;
-import models.course.Lessoncontent;
-import models.course.University;
 import models.curriculum.Category;
-import models.curriculum.Curriculumcourse;
+import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumlesson;
 import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
+import models.module.Bibliography;
+import models.module.Content;
+import models.module.Module;
+import models.module.Lesson;
+import models.module.Lessoncontent;
+import models.module.University;
 import models.test.Hypothesis;
 import models.test.MultipleChoiceHypothesis;
 import models.test.MultipleChoiceQuestion;
@@ -49,10 +49,10 @@ public class Global extends GlobalSettings {
 			blog.save();
 			
 			blog = new Blog();
-			blog.alternateHeader = "New course on Emergence";
-			blog.header= "Étoile course on “Emergence, Multi-Agent Simulation, and Network Theory”";
-			blog.text = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
-			blog.alternateText = "A new Étoile course entitled “Emergence, Multi-Agent Simulation, and Network Theory”...";
+			blog.alternateHeader = "New module on Emergence";
+			blog.header= "Étoile module on “Emergence, Multi-Agent Simulation, and Network Theory”";
+			blog.text = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
+			blog.alternateText = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory”...";
 			blog.articleImageURL="https://dl.dropbox.com/u/124850/emergence.jpg";
 			
 			blog.save();
@@ -179,41 +179,41 @@ public class Global extends GlobalSettings {
 			
 			// COURSES +++++++++++++++++++++++++++++++++++++++++
 			
-			Course course = new Course();
-			course.name = "Mathematics 101";
-			course.acronym="math101";
-			course.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
-			course.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
-			course.description = "Mathematics lesson presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
-			course.lessons.add(lesson_one);
-			course.lessons.add(lesson_two);
-			course.save();
+			Module module = new Module();
+			module.name = "Mathematics 101";
+			module.acronym="math101";
+			module.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
+			module.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
+			module.description = "Mathematics lesson presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
+			module.lessons.add(lesson_one);
+			module.lessons.add(lesson_two);
+			module.save();
 			/* 
-			Course course_two = new Course();
-			course_two.name = "Statistics 101";
-			course_two.acronym="stats101";
-			course_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
-			course_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
-			course_two.save();
+			Module module_two = new Module();
+			module_two.name = "Statistics 101";
+			module_two.acronym="stats101";
+			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
+			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
+			module_two.save();
 			*/
 			
-			Course course_three = new Course();
-			course_three.name = "Social Science";
-			course_three.acronym="socscience";
-			course_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
-			course_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
-			course_three.save();
+			Module module_three = new Module();
+			module_three.name = "Social Science";
+			module_three.acronym="socscience";
+			module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			module_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
+			module_three.save();
 			
 			
-			Course course_four = new Course();
-			course_four.name = "Network Science";
-			course_four.acronym="netsci_01";
-			course_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
-			course_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
-			course_four.description = "Course presented during Spring 2012 at the Center for Complex Network Research, Northeastern University Physics Department, by Prof. Albert-László Barabási, assisted by Dr. Baruch Barzel, and for network visualizations by Prof. Mauro Martino";
-			//course_four.lessons.add(lesson_one);
-			//course_four.lessons.add(lesson_two);
-			course_four.save();
+			Module module_four = new Module();
+			module_four.name = "Network Science";
+			module_four.acronym="netsci_01";
+			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
+			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
+			module_four.description = "Module presented during Spring 2012 at the Center for Complex Network Research, Northeastern University Physics Department, by Prof. Albert-László Barabási, assisted by Dr. Baruch Barzel, and for network visualizations by Prof. Mauro Martino";
+			//module_four.lessons.add(lesson_one);
+			//module_four.lessons.add(lesson_two);
+			module_four.save();
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
 			Bibliography bibliography = new Bibliography();
@@ -221,7 +221,7 @@ public class Global extends GlobalSettings {
 			bibliography.link="http://books.google.co.uk/books/about/Computer_Ethics_and_Professional_Respons.html?id=FOxqAjC8iHkC";
 			bibliography.description="This clear and accessible textbookand its associated website offer a state of the art introduction to the burgeoning field of computer ethics and professional responsibility. ";
 			bibliography.imageURL="http://bks5.books.google.co.uk/books?id=FOxqAjC8iHkC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71rwGQTfyj97JTxptwM-URC0Iy5eY0fJwpy3wsNs0pYpeltEtL334XnHw2ZigcJ8ylnypoG91BHhVYFSQoh5ID13NZ_eGEk4FfyLvZC3tb15cbuOIWj5PAFEte6MsjiB8-QaxZL";
-			bibliography.course=course;
+			bibliography.module=module;
 			bibliography.save();
 			
 			bibliography = new Bibliography();
@@ -229,7 +229,7 @@ public class Global extends GlobalSettings {
 			bibliography.link="http://books.google.co.uk/books?id=wb3X3xNSntkC&dq=mathematics&hl=pt-PT&source=gbs_navlinks_s";
 			bibliography.description="This accessible and thought-provoking book considers what beginning teachers need to know about learning, teaching, assessment, curriculum and professional development, in the context of teaching mathematics to eleven to nineteen year olds. It is part of a new series of books that has as its starting point the fact that PGCE students are already subject specialists.";
 			bibliography.imageURL="http://bks9.books.google.co.uk/books?id=wb3X3xNSntkC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE70zfpHHuBmkjMmKgszdfIZYNSN2UKVkhMjtAbAGEqDsePekXhaSmjxwqM2g8PBtzvomBeclI1ovd3ofdXAm_iasy6k2YY8MGyQJEP9HLd-EfOL8XPQiDxSSukg_oN3yDg4ElZ7q";
-			bibliography.course=course;
+			bibliography.module=module;
 			bibliography.save();
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
@@ -237,33 +237,33 @@ public class Global extends GlobalSettings {
 			Content content;
 			
 			content = new Content();
-			content.course=course_four;
+			content.module=module_four;
 			content.title="Textbook (Recommended)";
 			content.text="Linked – The New Science of Networks, Albert-László Barabási. Perseus Publishing /n Networks – an Introduction, Mark Newman, Oxford University Press";
 			content.save();
 			
 			content = new Content();
-			content.course=course_four;
-			content.title="Course description and objectives";
-			content.text="The course is an interdisciplinary course, focused on the emerging science of complex networks and their applications. The material includes the mathematics of networks, their applications to biology, sociology, technology and other fields, and their use in the research of real complex systems in nature and in man made systems. The students will learn about the ongoing research in the field, and apply their knowledge in the analysis of real network systems, as the main objective of their final project.";
+			content.module=module_four;
+			content.title="Module description and objectives";
+			content.text="The module is an interdisciplinary module, focused on the emerging science of complex networks and their applications. The material includes the mathematics of networks, their applications to biology, sociology, technology and other fields, and their use in the research of real complex systems in nature and in man made systems. The students will learn about the ongoing research in the field, and apply their knowledge in the analysis of real network systems, as the main objective of their final project.";
 			content.save();
 			
 			content = new Content();
-			content.course=course_three;
+			content.module=module_three;
 			content.title="About the Professor";
 			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
 			content.save();
 			
 			content= new Content();
-			content.course=course_three;
-			content.title="Course format";
+			content.module=module_three;
+			content.title="Module format";
 			content.text="The class will consist of lecture videos totaling about 2 hours a week. These will several enrichment and evaluation questions. There will also be optional reading and a final essay.";
 			content.save();
 			
 			content= new Content();
-			content.course=course;
+			content.module=module;
 			content.title="Recommended Background";
-			content.text="Most of this course will be accessible to non-technical students. We will provide optional materials for those with some college-level computer science background.";
+			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some college-level computer science background.";
 			content.save();
 			
 			
@@ -275,12 +275,12 @@ public class Global extends GlobalSettings {
 			user.password = sha1.parseSHA1Password("123");
 			user.name = "Ruben";
 			user.account_type = "student";
-//			user.courses.add(course);
-			//user.courses.add(course_two);
-//			user.courses.add(course_three);
-//			course.save();
-			//course_two.save();
-//			course_three.save();
+//			user.modules.add(module);
+			//user.modules.add(module_two);
+//			user.modules.add(module_three);
+//			module.save();
+			//module_two.save();
+//			module_three.save();
 			user.save();	
 			
 			Comment c = new Comment();
@@ -296,10 +296,10 @@ public class Global extends GlobalSettings {
 			user.password = sha1.parseSHA1Password("123");
 			user.name = "Rui Lopes da Silva";
 			user.account_type = "student";
-//			user.courses.add(course);
-			//user.courses.add(course_two);
-//			course.save();
-			//course_two.save();
+//			user.modules.add(module);
+			//user.modules.add(module_two);
+//			module.save();
+			//module_two.save();
 			user.save();
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -332,9 +332,9 @@ public class Global extends GlobalSettings {
 			p.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
 			p.save();
 			
-			p.courses.add(course);
+			p.modules.add(module);
 			p.save();
-			course.save();
+			module.save();
 			
 			p.contents.add(pc);
 			pc.professor=p;
@@ -421,14 +421,14 @@ public class Global extends GlobalSettings {
 			university.continent=europe;
 			university.save();
 			
-			course.university=university;
-			course_three.university=university;
-			//course_two.university=university;
-			course_four.university=university;
-			course.save();
-			//course_two.save();
-			course_three.save();
-			course_four.save();
+			module.university=university;
+			module_three.university=university;
+			//module_two.university=university;
+			module_four.university=university;
+			module.save();
+			//module_two.save();
+			module_three.save();
+			module_four.save();
 			
 		
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -481,8 +481,8 @@ public class Global extends GlobalSettings {
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
 			
-			course_three.categories.add(soccat);
-			course_three.save();
+			module_three.categories.add(soccat);
+			module_three.save();
 			soccat.save();
 			
 			
@@ -601,22 +601,22 @@ public class Global extends GlobalSettings {
 		complexityClassesLesson.save();
 		
 
-		// 5.1 Course - Algorithmics
-		Curriculumcourse algocourse = new Curriculumcourse();
-		algocourse.keyword = "algorithmics";
-		algocourse.name = "Algorithmics";
-		algocourse.text = "Understand and know how to apply the main concepts of Algorithmic Theory";
-		algocourse.curriculumlessons.add(formalSystemsLesson);
+		// 5.1 Module - Algorithmics
+		Curriculummodule algomodule = new Curriculummodule();
+		algomodule.keyword = "algorithmics";
+		algomodule.name = "Algorithmics";
+		algomodule.text = "Understand and know how to apply the main concepts of Algorithmic Theory";
+		algomodule.curriculumlessons.add(formalSystemsLesson);
 		formalSystemsLesson.save();
-		algocourse.curriculumlessons.add(algorithmsLesson);
+		algomodule.curriculumlessons.add(algorithmsLesson);
 		algorithmsLesson.save();
-		algocourse.curriculumlessons.add(complexityClassesLesson);
+		algomodule.curriculumlessons.add(complexityClassesLesson);
 		complexityClassesLesson.save();
-		algocourse.save();
+		algomodule.save();
 		
 		
-		comcat.curriculumcourses.add(algocourse);
-		algocourse.save();
+		comcat.curriculummodules.add(algomodule);
+		algomodule.save();
 		comcat.save();	
 		
 	}

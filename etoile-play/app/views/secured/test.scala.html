@@ -1,4 +1,4 @@
-@(user: User,course: models.course.Course, lesson: models.course.Lesson,
+@(user: User,module: models.module.Module, lesson: models.module.Lesson,
 categories: List[models.curriculum.Category], test: models.test.Test,
 formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer :
 Form[Profile.OneChoiceQuestionAnswer]) 
@@ -22,7 +22,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 				<ul class="nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="/digitalcampus">Digital Campus</a></li>
-					<li><a href="/courses">Courses</a></li>
+					<li><a href="/modules">Modules</a></li>
 					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a></li>
 					<li><a href="/about">About</a></li>
@@ -86,7 +86,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 
 
 						<div class="control-group">
-							@helper.form(routes.Profile.postquestionanswer(course.acronym,
+							@helper.form(routes.Profile.postquestionanswer(module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
 
@@ -112,7 +112,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 						<p>@onechoicequestion.question</p>
 
 						<div class="control-group">
-							@helper.form(routes.Profile.postonechoicequestionanswer(course.acronym,
+							@helper.form(routes.Profile.postonechoicequestionanswer(module.acronym,
 							lesson.acronym,test.id,onechoicequestion.id)) {
 							<div class="controls">
 
@@ -161,7 +161,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 						<p>@multiplechoicequestion.question</p>
 
 						<div class="control-group">
-							@helper.form(routes.Profile.postmultiplechoicequestionanswer(course.acronym,
+							@helper.form(routes.Profile.postmultiplechoicequestionanswer(module.acronym,
 							lesson.acronym,test.id,multiplechoicequestion.id)) {
 							<div class="controls">
            						 <div class="input">

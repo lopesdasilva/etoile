@@ -1,4 +1,4 @@
-package models.course;
+package models.module;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class University extends Model {
 
 	
 	@OneToMany
-	public List<Course> courses;
+	public List<Module> modules;
 	
 	@ManyToOne
 	public Continent continent;

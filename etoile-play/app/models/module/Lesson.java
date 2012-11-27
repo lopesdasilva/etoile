@@ -1,4 +1,4 @@
-package models.course;
+package models.module;
 
 import java.util.*;
 
@@ -42,7 +42,7 @@ public class Lesson extends Model{
 	public String videoURL;
 
 	@ManyToMany(mappedBy="lessons")
-	public Course course;
+	public Module module;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;

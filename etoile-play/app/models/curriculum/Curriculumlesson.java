@@ -31,7 +31,7 @@ public class Curriculumlesson extends Model{
 	public String text;
 
 	@ManyToMany(mappedBy="curriculumlessons")
-	public Curriculumcourse curriculumcourse;
+	public Curriculummodule curriculummodule;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Curriculumtopic> curriculumtopics;

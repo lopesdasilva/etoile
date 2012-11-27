@@ -4,8 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import models.course.Lesson;
 import models.manytomany.UserTest;
+import models.module.Lesson;
 
 import com.avaje.ebean.Ebean;
 

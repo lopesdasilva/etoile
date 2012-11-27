@@ -5,8 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.User;
-import models.course.Course;
-import models.course.Lesson;
+import models.module.Module;
+import models.module.Lesson;
 import models.test.Test;
 
 import com.avaje.ebean.Ebean;
@@ -23,7 +23,7 @@ public class UserTest extends Model{
 
 	@Constraints.Required
     @Formats.NonEmpty
-	public boolean incourse;
+	public boolean inmodule;
 	
 	@Constraints.Required
     @Formats.NonEmpty

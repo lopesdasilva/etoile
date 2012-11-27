@@ -1,4 +1,4 @@
-package models.course;
+package models.module;
 
 import java.util.*;
 
@@ -15,7 +15,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class Course extends Model {
+public class Module extends Model {
 	@Id
 	@GeneratedValue
     @Formats.NonEmpty
@@ -42,10 +42,10 @@ public class Course extends Model {
 	public String imageURL;
 	
 
-	@ManyToMany(mappedBy="courses")
+	@ManyToMany(mappedBy="modules")
 	public List<User> users;
 	
-	@ManyToMany(mappedBy="courses")
+	@ManyToMany(mappedBy="modules")
 	public List<Professor> professors;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -65,16 +65,16 @@ public class Course extends Model {
 	
 	//public Date created;
 
-	public static Model.Finder<Long, Course> find = new Model.Finder<Long, Course>(
-			Long.class, Course.class);
+	public static Model.Finder<Long, Module> find = new Model.Finder<Long, Module>(
+			Long.class, Module.class);
 	
-	public static Course findByAcronym(String acronym) {
+	public static Module findByAcronym(String acronym) {
         return find.where().eq("acronym", acronym).findUnique();
     }
 
-	public static List<Course> getAllCourses() {
-		List<Course> courses = new ArrayList<Course>();
-		courses = Ebean.find(Course.class).findList(); 
-		return courses; 
+	public static List<Module> getAllModules() {
+		List<Module> modules = new ArrayList<Module>();
+		modules = Ebean.find(Module.class).findList(); 
+		return modules; 
 	}
 }

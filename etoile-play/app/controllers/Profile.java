@@ -12,10 +12,10 @@ import models.Comment;
 
 
 import models.User;
-import models.course.Course;
-import models.course.Lesson;
-import models.course.University;
 import models.manytomany.UserTest;
+import models.module.Module;
+import models.module.Lesson;
+import models.module.University;
 import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.MultipleChoiceAnswer;
@@ -81,7 +81,7 @@ public static class OpenQuestionSuggestion{
     	
     	
     	//This is to load Universities(weird)
-    	for (Course c:user.courses){
+    	for (Module c:user.modules){
     		System.out.println(c.university.name);	
     	}
     	 
@@ -89,33 +89,33 @@ public static class OpenQuestionSuggestion{
     }
     
     
-    public static Result course(String course_acronym){
-    	Course course = Course.findByAcronym(course_acronym);
+    public static Result module(String module_acronym){
+    	Module module = Module.findByAcronym(module_acronym);
     	User user=User.find.byId(session("email"));
     	List<Category> categories = Category.getAllCategories();
     	
     	
-    	if(!user.courses.contains(course))
-    	return ok(views.html.secured.courseGeneral.render(user,categories,course));
+    	if(!user.modules.contains(module))
+    	return ok(views.html.secured.moduleGeneral.render(user,categories,module));
     	else
-    	//Has this course
-    	return ok(views.html.secured.course.render(user,categories,course));
+    	//Has this module
+    	return ok(views.html.secured.module.render(user,categories,module));
 
     	
     }
-    public static Result signupcourse(String course_acronym){
-    	Course course = Course.findByAcronym(course_acronym);
+    public static Result signupmodule(String module_acronym){
+    	Module module = Module.findByAcronym(module_acronym);
     	User user=User.find.byId(session("email"));
     	List<Category> categories = Category.getAllCategories();
     	
-    	//Trying to add the course to user
+    	//Trying to add the module to user
     	
-    	if(!user.courses.contains(course)){
-    	user.courses.add(course);
+    	if(!user.modules.contains(module)){
+    	user.modules.add(module);
     	user.save();
-    	course.save();	
+    	module.save();	
     	
-    	for(Lesson lesson: course.lessons){
+    	for(Lesson lesson: module.lessons){
     		for(Test test: lesson.tests){
     			UserTest usertest = UserTest.findByUserAndTest(user.email, test.id);
     	    	if(usertest==null){
@@ -123,7 +123,7 @@ public static class OpenQuestionSuggestion{
         		user_test.user = user;
         		user_test.test = test;
         		user_test.expired = false;
-        		user_test.incourse = false;
+        		user_test.inmodule = false;
         		user_test.submited = false;
         		user_test.save();
         		user.tests.add(user_test);
@@ -136,22 +136,22 @@ public static class OpenQuestionSuggestion{
     	}
     	}
 
-    	//Has this course
-    	return ok(views.html.secured.course.render(user,categories,course));
+    	//Has this module
+    	return ok(views.html.secured.module.render(user,categories,module));
 
     	
     }
     
-    public static Result addquestion(Long test_id, String lesson_acronym, String course_acronym){
+    public static Result addquestion(Long test_id, String lesson_acronym, String module_acronym){
     	User user = User.find.byId(request().username());
     	//Test test = models.test.Test.find.byId(test_id);
     	UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
-    	usertest.incourse = true;
+    	usertest.inmodule = true;
     	usertest.save();
 
     	
     	List<Category> categories = Category.getAllCategories();
-    	Course course=Course.findByAcronym(course_acronym);
+    	Module module=Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	
 
@@ -169,10 +169,10 @@ public static class OpenQuestionSuggestion{
     	System.out.println("MODULESIZE2: "+lesson.questions.size());
 
     	
-    	return ok(views.html.secured.lesson.render(user,categories,lesson,course,form(OpenQuestionSuggestion.class)));
+    	return ok(views.html.secured.lesson.render(user,categories,lesson,module,form(OpenQuestionSuggestion.class)));
     }
     
-    public static Result test(Long test_id, String lesson_acronym, String course_acronym){
+    public static Result test(Long test_id, String lesson_acronym, String module_acronym){
     	List<Category> categories = Category.getAllCategories();
     	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
@@ -233,34 +233,34 @@ public static class OpenQuestionSuggestion{
     		System.out.println("SIZE QUESTIONS" + q.hypothesislist.size());
     	}
     	
-    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	
-		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class),form(OneChoiceQuestionAnswer.class)));
+		return ok(views.html.secured.test.render(user,module,lesson,categories,test_aux,form(QuestionAnswer.class),form(OneChoiceQuestionAnswer.class)));
     	
     }
     
-    public static Result lesson(String lesson_acronym, String course_acronym){
+    public static Result lesson(String lesson_acronym, String module_acronym){
     	
     	List<Category> categories = Category.getAllCategories();
-    	Course course=Course.findByAcronym(course_acronym);
+    	Module module=Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	User user=User.find.byId(request().username());
     	
 
 
-    	return ok(views.html.secured.lesson.render(user,categories,lesson,course,form(OpenQuestionSuggestion.class)));
+    	return ok(views.html.secured.lesson.render(user,categories,lesson,module,form(OpenQuestionSuggestion.class)));
 
     	
     }
     
-    public static Result courses() {
-		List<Course> allCourses = Course.getAllCourses();
+    public static Result modules() {
+		List<Module> allModules = Module.getAllModules();
 		List<Category> categories = Category.getAllCategories();
 		
 		//check this line
 		User user=User.find.byId(session("email"));
-		return ok(views.html.secured.courses.render(user,allCourses,categories));
+		return ok(views.html.secured.modules.render(user,allModules,categories));
 	}
     
     public static Result contact() {
@@ -302,7 +302,7 @@ public static class OpenQuestionSuggestion{
 		return ok(views.html.secured.blog.render(user,Blog.find.byId(blog),categories,form(Comment.class)));
 	}
 	
-	public static Result postquestionanswer(String course_acronym, String lesson_acronym, Long test_id, Long question_id){
+	public static Result postquestionanswer(String module_acronym, String lesson_acronym, Long test_id, Long question_id){
 		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
 		System.out.println("Answer: " + form.get().qanswer + "Question: " +question_id);
 		
@@ -333,16 +333,16 @@ public static class OpenQuestionSuggestion{
     	test_aux.onechoiceanswers = onechoiceanswers;
     	test_aux.answers = answers;
     	
-    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	
     	
-		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
+		return ok(views.html.secured.test.render(user,module,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 		
 
 	}
 	
-	public static Result postonechoicequestionanswer(String course_acronym, String lesson_acronym, Long test_id, Long question_id){
+	public static Result postonechoicequestionanswer(String module_acronym, String lesson_acronym, Long test_id, Long question_id){
 		Form<Profile.OneChoiceQuestionAnswer> form = form(Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
 		System.out.println("One Choice: " + form.get().ocqanswer);
 		
@@ -372,14 +372,14 @@ public static class OpenQuestionSuggestion{
     	test_aux.answers = openanswers;
     	test_aux.onechoiceanswers = onechoiceanswers;
     	
-    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	
     	
-		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
+		return ok(views.html.secured.test.render(user,module,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 	}
 	
-	public static Result postmultiplechoicequestionanswer(String course_acronym, String lesson_acronym, Long test_id, Long question_id){
+	public static Result postmultiplechoicequestionanswer(String module_acronym, String lesson_acronym, Long test_id, Long question_id){
 		Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
 		
 		MultipleChoiceAnswer userMultipleChoiceAnswer = MultipleChoiceAnswer.findByUserAndQuestion(question_id, request().username());
@@ -440,11 +440,11 @@ public static class OpenQuestionSuggestion{
     	test_aux.answers = openanswers;
     	test_aux.onechoiceanswers = onechoiceanswers;
     	
-    	Course course = Course.findByAcronym(course_acronym);
+    	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
     	
     	
-		return ok(views.html.secured.test.render(user,course,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
+		return ok(views.html.secured.test.render(user,module,lesson,categories,test_aux,form(QuestionAnswer.class), form(OneChoiceQuestionAnswer.class)));
 	}
     
     

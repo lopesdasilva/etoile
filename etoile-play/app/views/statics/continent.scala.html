@@ -1,4 +1,4 @@
-@(categories: List[models.curriculum.Category], continents: List[models.continent.Continent],continent:  models.continent.Continent, universities: List[models.course.University])
+@(categories: List[models.curriculum.Category], continents: List[models.continent.Continent],continent:  models.continent.Continent, universities: List[models.module.University])
 @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -17,7 +17,7 @@
 					</li>
 					<li><a href="/digitalcampus">Digital Campus</a>
 					</li>
-					<li><a href="/courses">Courses</a>
+					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
@@ -88,7 +88,7 @@
 									<div class="carousel-caption">
 										<h4>@university.name</h4>
 										
-										<p>Courses: @university.courses.size</p>
+										<p>Modules: @university.modules.size</p>
 									</div>
 								</a>
 							</div>

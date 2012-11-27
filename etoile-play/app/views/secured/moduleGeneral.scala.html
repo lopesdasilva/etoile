@@ -1,0 +1,150 @@
+@(user: User, categories: List[models.curriculum.Category],module: models.module.Module)
+@main("etoileplatform"){
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="/digitalcampus">Digital Campus</a>
+					</li>
+					<li><a href="/modules">Modules</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav" style="background: #0088CC;">
+				<ul class="nav nav-list">
+					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
+						Modules</li> @for(module <- user.modules) {
+					<li><a href="@routes.Application.module(module.acronym)"
+						style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
+				</ul>
+			</div>
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Categories (@categories.size)</li>
+					@for(category <- categories) {
+										<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
+					
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+
+
+		<div class="span9">
+			<div class="page-header">
+				<div class="row-fluid">
+					<div class="span6">
+						<h2>@module.name</h2>
+					</div>
+					<div class="span2 offset3 pull-right">
+						<h2>
+							<a href="@routes.Profile.signupmodule(module.acronym)" class="btn btn-info">Sign Up</a>
+						</h2>
+					</div>
+				</div>
+			</div>
+
+			<h3>Description</h3>
+			<div class="row-fluid">
+				<div class="span3">
+					<img src="@module.imageURL" height="200" width="200" />
+				</div>
+				<div class="span9">
+
+					<p>@module.description</p>
+				</div>
+			</div>
+			<hr>
+			
+			<h3>About the Professor(s)</h3>
+			@for(professor <- module.professors) {
+			<p><a href="@routes.Application.professorprofile(professor.acronym)">@professor</a> @professor.shortdescription</p>
+			
+			}
+			
+			<div class="row-fluid">
+			<h3>Bibliography</h3>
+				@for(bibliography <- module.bibliography) {
+				
+				<div  class="media-list">
+			    <div class="media">
+                <a class="pull-right" href="@bibliography.link">
+                  <img class="media-object" src="@bibliography.imageURL" height="50px" width="50px">
+                </a>
+                <div class="media-body">
+                  <a href="@bibliography.link"><h4 class="media-heading">@bibliography.title</h4></a>
+                  @bibliography.description
+                </div>
+              </div>
+			</div>
+				
+
+			}
+			</div>
+			
+			@for(content <- module.contents) {
+			<h3>@content.title</h3>
+			<p>@content.text</p>
+			<hr>
+			} 
+			
+			
+			@if(module.categories.size!=0) {
+			@if(module.categories.size==1) {
+			<h3>Category</h3>
+			} else{
+			<h3>Categories</h3>
+			} 
+			@for(category <- module.categories){
+			<a href="/curriculum#@category.keyword" class="">@category.name</a>
+			<br>
+			}
+			}
+			
+			
+
+
+
+			<p></p>
+		</div>
+		}

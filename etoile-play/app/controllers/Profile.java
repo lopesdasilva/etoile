@@ -393,27 +393,34 @@ public static class OpenQuestionSuggestion{
 			userMultipleChoiceAnswer.user = User.find.byId(request().username());
 			userMultipleChoiceAnswer.save();
 		}
+//		
+//		if(userMultipleChoiceAnswer.hypothesislist.size()!=0){
+//		for(MultipleChoiceHypothesis hyp: userMultipleChoiceAnswer.hypothesislist){
+//			userMultipleChoiceAnswer.hypothesislist.remove(hyp);
+//			hyp.save();
+//			userMultipleChoiceAnswer.save();
+//		}
+//		}
 		
-		if(userMultipleChoiceAnswer.hypothesislist.size()!=0){
-		for(MultipleChoiceHypothesis hyp: userMultipleChoiceAnswer.hypothesislist){
-			userMultipleChoiceAnswer.hypothesislist.remove(hyp);
-			hyp.save();
-			userMultipleChoiceAnswer.save();
-		}
-		}
+		userMultipleChoiceAnswer.delete();
+		MultipleChoiceAnswer userMultipleChoiceAnswer_aux = new MultipleChoiceAnswer();
+		userMultipleChoiceAnswer_aux.multipleChoiceQuestion = question;
+		userMultipleChoiceAnswer_aux.test = test;
+		userMultipleChoiceAnswer_aux.user = User.find.byId(request().username());
+		userMultipleChoiceAnswer_aux.save();
 		
-		System.out.println("SIZE OF LIST: " + userMultipleChoiceAnswer.hypothesislist.size());
+		System.out.println("SIZE OF LIST: " + userMultipleChoiceAnswer_aux.hypothesislist.size());
 
 		for(int h: form.get().mcqanswers){
 			if(h!=0){
 			System.out.println("VOu adicionar: "+h);
 			MultipleChoiceHypothesis hypothesis_selected = MultipleChoiceHypothesis.find.byId((long)h);
 			System.out.println("Encontrei? " + hypothesis_selected.text);
-			userMultipleChoiceAnswer.hypothesislist.add(hypothesis_selected);
+			userMultipleChoiceAnswer_aux.hypothesislist.add(hypothesis_selected);
 			hypothesis_selected.save();
 			
-			userMultipleChoiceAnswer.save();
-			System.out.println("Salvei " + userMultipleChoiceAnswer.hypothesislist.size());
+			userMultipleChoiceAnswer_aux.save();
+			System.out.println("Salvei " + userMultipleChoiceAnswer_aux.hypothesislist.size());
 			
 			}
 		}

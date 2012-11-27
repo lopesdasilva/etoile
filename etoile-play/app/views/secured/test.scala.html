@@ -166,13 +166,24 @@ Form[Profile.OneChoiceQuestionAnswer])
 							<div class="controls">
            						 <div class="input">
               					<ul class="inputs-list">
-									@for(hypothesis<-multiplechoicequestion.hypothesislist) { 
+									@for(hypothesis<-multiplechoicequestion.hypothesislist) {
+									
 									<li>
 									<label>
+										@for(answer <- test.multiplechoiceanswers){
 										
+										@for(multiplechoiceanswer <- answer.hypothesislist){
+										
+										@if(hypothesis.id == multiplechoiceanswer.id){
+										<input type="checkbox" checked="checked" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
+										<span>@hypothesis.text</span></>
+										}
+										@if(hypothesis.id != multiplechoiceanswer.id){
 										<input type="checkbox" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
 										<span>@hypothesis.text</span></>
-										
+										}
+										}
+										}
 									</label> 
 									</li>
 								}

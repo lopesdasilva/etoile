@@ -77,7 +77,25 @@ Form[Profile.OneChoiceQuestionAnswer])
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
-						<p><img src="@question.questionImageURL" /></p>
+						<ul class="thumbnails">
+						<li class="span4">
+						<div >
+						<p><img src="@question.imageURL" /></p>
+						</div>
+						</li>
+						<li class="span4">
+						<div >
+						<object>
+									<param name="movie"
+										value="@question.videoURL" />
+									<param name="wmode" value="transparent" />
+									<embed src="@question.videoURL"
+										type="application/x-shockwave-flash" wmode="transparent"
+										 />
+								</object>
+						</div>
+						</li>
+						</ul>
 						@for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
 

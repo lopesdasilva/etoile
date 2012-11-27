@@ -26,7 +26,10 @@ public class OpenQuestion extends Model{
 	public String question;
 	
 	@Constraints.Required
-	public String questionImageURL;
+	public String imageURL;
+	
+	@Constraints.Required
+	public String videoURL;
 
 	@ManyToMany(mappedBy="tests")
 	public Test test;

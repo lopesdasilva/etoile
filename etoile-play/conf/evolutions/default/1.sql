@@ -156,7 +156,8 @@ create table multiple_choice_hypothesis (
 create table multiple_choice_question (
   id                        bigint auto_increment not null,
   question                  varchar(255),
-  question_image_url        varchar(255),
+  image_url                 varchar(255),
+  video_url                 varchar(255),
   test_id                   bigint,
   constraint pk_multiple_choice_question primary key (id))
 ;
@@ -174,14 +175,16 @@ create table one_choice_question (
   id                        bigint auto_increment not null,
   question                  varchar(255),
   correct_hypothesis        varchar(255),
-  question_image_url        varchar(255),
+  image_url                 varchar(255),
+  video_url                 varchar(255),
   constraint pk_one_choice_question primary key (id))
 ;
 
 create table open_question (
   id                        bigint auto_increment not null,
   question                  varchar(255),
-  question_image_url        varchar(255),
+  image_url                 varchar(255),
+  video_url                 varchar(255),
   lesson_id                 bigint,
   user_email                varchar(255),
   constraint pk_open_question primary key (id))

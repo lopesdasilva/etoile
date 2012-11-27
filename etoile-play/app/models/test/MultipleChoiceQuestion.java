@@ -27,7 +27,10 @@ public class MultipleChoiceQuestion extends Model{
 	public List<MultipleChoiceHypothesis> hypothesislist;
 	
 	@Constraints.Required
-	public String questionImageURL;
+	public String imageURL;
+	
+	@Constraints.Required
+	public String videoURL;
 
 	@ManyToOne
 	public Test test;

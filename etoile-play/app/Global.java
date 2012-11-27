@@ -115,6 +115,8 @@ public class Global extends GlobalSettings {
 			
 			OpenQuestion question_one = new OpenQuestion();
 			question_one.question = "This is the First Open Question.";
+			question_one.imageURL= "http://www.psdgraphics.com/wp-content/uploads/2009/04/growth-chart.jpg";
+			question_one.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
 			question_one.save();
 			
 			OpenQuestion question_two = new OpenQuestion();

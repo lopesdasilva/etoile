@@ -28,7 +28,10 @@ public class OneChoiceQuestion extends Model{
 	public List<Hypothesis> hypothesyslist;
 	
 	@Constraints.Required
-	public String questionImageURL;
+	public String imageURL;
+	
+	@Constraints.Required
+	public String videoURL;
 
 	@ManyToMany(mappedBy="tests")
 	public Test test;

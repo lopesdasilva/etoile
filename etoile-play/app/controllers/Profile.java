@@ -25,6 +25,9 @@ import models.test.OneChoiceAnswer;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
+import models.test.question.Question;
+import models.test.question.QuestionChildren;
+import models.test.question.QuestionChildrenTwo;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -163,7 +166,7 @@ public static class OpenQuestionSuggestion{
     	new_question.question = form.get().openquestionsuggestion;
     	new_question.lesson = lesson;
     	new_question.user = user;
-    	new_question.questionImageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
+    	new_question.imageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
     	new_question.save();
     	lesson.save();
     	System.out.println("MODULESIZE2: "+lesson.questions.size());

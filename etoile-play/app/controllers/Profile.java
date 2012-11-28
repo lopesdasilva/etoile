@@ -25,9 +25,6 @@ import models.test.OneChoiceAnswer;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
-import models.test.question.Question;
-import models.test.question.QuestionChildren;
-import models.test.question.QuestionChildrenTwo;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -181,12 +178,14 @@ public static class OpenQuestionSuggestion{
     	User user = User.find.byId(request().username());
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
+    	List<MultipleChoiceAnswer> multiplechoiceanswers = MultipleChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	
 
     	
     	test_aux.answers = answers;
     	test_aux.onechoiceanswers = onechoiceanswers;
+    	test_aux.multiplechoiceanswers = multiplechoiceanswers;
     	if(test_aux.answers.isEmpty()){
     		for(OpenQuestion openquestion: test_aux.openquestions){
     			Answer emptyAnswer = new Answer();
@@ -439,9 +438,12 @@ public static class OpenQuestionSuggestion{
 		
 		List<Category> categories = Category.getAllCategories();
     	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
+    	List<MultipleChoiceAnswer> multiplechoiceanswers = MultipleChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	test_aux.answers = openanswers;
     	test_aux.onechoiceanswers = onechoiceanswers;
+    	test_aux.multiplechoiceanswers = multiplechoiceanswers;
+
     	
     	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);

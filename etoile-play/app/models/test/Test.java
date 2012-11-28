@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.Comment;
 import models.manytomany.UserTest;
 import models.module.Lesson;
 
@@ -33,6 +34,7 @@ public class Test extends Model{
 
 	@ManyToMany(mappedBy="lessons")
 	public Lesson lesson;
+	
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<OpenQuestion> openquestions;

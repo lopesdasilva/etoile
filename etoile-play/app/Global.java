@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import play.*;
 
 import com.avaje.ebean.*;
@@ -23,7 +25,6 @@ import models.test.MultipleChoiceQuestion;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
-
 public class Global extends GlobalSettings {
 	
 	public Category mathcat;
@@ -36,6 +37,9 @@ public class Global extends GlobalSettings {
 		System.out.println(Ebean.find(Blog.class).findRowCount());
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
 			Logger.info("Init Data");			
+			
+			//INHERITANCE TESTS
+
 			
 			// NEWS ++++++++++++++++++++++++++++++++++++++++++
 			

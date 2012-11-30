@@ -25,6 +25,8 @@ import models.test.MultipleChoiceQuestion;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
+import models.test.question.Question;
+import models.test.question.enums.QuestionType;
 public class Global extends GlobalSettings {
 	
 	public Category mathcat;
@@ -39,7 +41,44 @@ public class Global extends GlobalSettings {
 			Logger.info("Init Data");			
 			
 			//INHERITANCE TESTS
-
+			
+			Question q = new Question();
+			q.question = "This is the First Open Question.";
+			q.imageURL= "http://www.psdgraphics.com/wp-content/uploads/2009/04/growth-chart.jpg";
+			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
+			q.typeOfQuestion = 0;
+			q.save();
+			
+			Hypothesis hyp_one = new Hypothesis();
+			hyp_one.text = "Hypothesis 1";
+			hyp_one.save();
+			
+			Hypothesis hyp_two = new Hypothesis();
+			hyp_two.text = "Hypothesis 2";
+			hyp_two.save();
+			
+			Hypothesis hyp_three = new Hypothesis();
+			hyp_three.text = "Hypothesis 3";
+			hyp_three.save();
+			
+			Hypothesis hyp_four = new Hypothesis();
+			hyp_four.text = "Hypothesis 4";
+			hyp_four.save();
+			
+			Question q_two = new Question();
+			q_two.question= "This is the First One Choice Question.";
+			q_two.typeOfQuestion =1;
+			q_two.hypothesyslist.add(hyp_one);
+			q_two.hypothesyslist.add(hyp_two);
+			q_two.hypothesyslist.add(hyp_three);
+			q_two.hypothesyslist.add(hyp_four);
+			q_two.save();
+			
+			Question q_three = new Question();
+			q_three.question= "This is the First Multiple Choice Question.";
+			q_three.typeOfQuestion = 2;
+			q_three.save();
+			
 			
 			// NEWS ++++++++++++++++++++++++++++++++++++++++++
 			
@@ -137,9 +176,22 @@ public class Global extends GlobalSettings {
 			test_one.openquestions.add(question_one);
 			test_one.openquestions.add(question_two);
 			test_one.onechoicequestions.add(onechoicequestion_one);
+			test_one.questions.add(q);
+			test_one.questions.add(q_two);
+			test_one.questions.add(q_three);
+
 			question_one.save();
 			question_two.save();
 			test_one.save();
+			
+			q.test = test_one;
+			q.save();
+			
+			q_two.test = test_one;
+			q_two.save();
+			
+			q_three.test = test_one;
+			q_three.save();
 			
 			multiplechoicequestion_one.test = test_one;
 			multiplechoicequestion_one.save();

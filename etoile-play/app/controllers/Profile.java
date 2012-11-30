@@ -25,6 +25,7 @@ import models.test.OneChoiceAnswer;
 import models.test.OneChoiceQuestion;
 import models.test.OpenQuestion;
 import models.test.Test;
+import models.test.question.Question;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -237,6 +238,10 @@ public static class OpenQuestionSuggestion{
     	
     	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+    	
+    	for(Question que : test_aux.questions){
+    		System.out.println(que.typeOfQuestion);
+    	}
     	
 		return ok(views.html.secured.test.render(user,module,lesson,categories,test_aux,form(QuestionAnswer.class),form(OneChoiceQuestionAnswer.class)));
     	

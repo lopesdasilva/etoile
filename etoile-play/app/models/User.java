@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import models.test.Answer;
 import models.test.OpenQuestion;
+import models.test.question.Question;
 import models.manytomany.UserTest;
 import models.module.Module;
 
@@ -58,6 +59,10 @@ public class User extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<OpenQuestion> openquestions;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Question> questions;
+	
     // -- Queries
 	
 	@OneToMany(cascade = {CascadeType.ALL})

@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.test.question.Question;
+
 import com.avaje.ebean.Ebean;
 
 import play.db.ebean.*;
@@ -32,6 +34,8 @@ public class Hypothesis extends Model{
 	@ManyToMany(mappedBy="hypothesislist")
 	public MultipleChoiceQuestion multiplechoicequestion;
 	
+	@ManyToMany(mappedBy="hypothesyslist")
+	public Question question;
 
 	
 	public static Model.Finder<Long, Hypothesis> find = new Model.Finder<Long, Hypothesis>(

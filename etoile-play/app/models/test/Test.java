@@ -7,6 +7,7 @@ import javax.persistence.*;
 import models.Comment;
 import models.manytomany.UserTest;
 import models.module.Lesson;
+import models.test.question.Question;
 
 import com.avaje.ebean.Ebean;
 
@@ -35,6 +36,8 @@ public class Test extends Model{
 	@ManyToMany(mappedBy="lessons")
 	public Lesson lesson;
 	
+	@OneToMany
+	public List<Question> questions;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<OpenQuestion> openquestions;

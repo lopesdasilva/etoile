@@ -51,6 +51,9 @@ public class Lesson extends Model{
 	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany
+	public List<OpenQuestion> openQuestions;
+	
+	@OneToMany
 	public List<OpenQuestion> questions;
 	
 	public static Model.Finder<Long, Lesson> find = new Model.Finder<Long, Lesson>(

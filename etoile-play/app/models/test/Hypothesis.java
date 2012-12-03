@@ -31,6 +31,9 @@ public class Hypothesis extends Model{
 	
 	@Constraints.Required
 	public String questionImageURL;
+	
+	@ManyToMany(mappedBy="hypothesislist")
+	public ChoiceAnswer answer;
 
 	@ManyToOne
 	public Question question;

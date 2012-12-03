@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import models.Blog;
 import models.User;
 import models.module.Lesson;
+import models.test.Answer;
+import models.test.ChoiceAnswer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.enums.QuestionType;
@@ -40,8 +42,6 @@ public class Question extends Model {
 	
 	@ManyToOne
 	public User user;
-	
-	
 	//ARGUMENTOS COMUNS
 	
 	@Id
@@ -62,10 +62,14 @@ public class Question extends Model {
 
 	
 	//ARGUMENTOS OPEN QUESTION
-		//answers?
+		@OneToMany
+		List<Answer> openanswers;
 		
 	//ARGUMENTOS ONE CHOICE QUESTION
-	
+		
+	@OneToMany
+	List<ChoiceAnswer> choiceanswers;
+		
 	@OneToMany
 	public List<Hypothesis> hypothesislist;
 	

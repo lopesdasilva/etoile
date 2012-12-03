@@ -65,8 +65,6 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 			<div class="page-header">
 				<h1>@test.name</h1>
 
-
-				<h3>Open Questions</h3>
 				@for(question <- test.questions) { @if(question.typeOfQuestion==0){
 				<section id="@question.id">
 					<div class="well">
@@ -94,28 +92,20 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 						</ul>
 						} @for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
-
-
-
-
-
 						<div class="control-group">
 							@helper.form(routes.Profile.postquestionanswer(module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
-
 								<textarea class="span20" rows="10" name="qanswer"
 									style="resize: none">@answer.answer</textarea>
-
 								<div class="controls">
 									<button type="submit#1" class="btn btn-info">Save</button>
 
 								</div>
 								}
-							</div>
-						</div>
 				</section>
-				}} } @if(question.typeOfQuestion==1){
+				}}
+				 } @if(question.typeOfQuestion==1){
 				<section id="@question.id">
 					<div class="well">
 						<h4>Question @question.id</h4>
@@ -147,13 +137,27 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 							<div class="controls">
 
 								<label class="radio">
-									@for(hypothesis<-question.hypothesislist) { <label
-									class="radio"> <input type="radio"
-										value="@hypothesis.id" name="ocqanswer">
-										@hypothesis.text</input>
-								</label> }
+									@for(hypothesis<-question.hypothesislist) {
+									
+									 <label class="radio"> 
+									<input type="radio" value="@hypothesis.id" name="ocqanswer"> @hypothesis.text</input> 
+									</label> 
+									
+								}
 								</label>
-
+									<br />
+										<div class="alert alert-success">
+										Last Answer: <br/>
+										@for(hypothesis <- question.hypothesislist){
+										@for(answer <- test.choiceanswers){
+										@for(hyp <- answer.hypothesislist){
+										@if(hyp.id ==hypothesis.id ){
+										    - @hyp.text
+										}
+										}
+										}
+										}
+										</div>
 								<div class="controls">
 									<button type="submit#1" class="btn btn-info">Save</button>
 
@@ -194,7 +198,7 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 						</ul>
 						}
 						<div class="control-group">
-							@helper.form(routes.Profile.postmultiplechoicequestionanswer(module.acronym,
+							@helper.form(routes.Profile.postonechoicequestionanswer(module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
 								<div class="input">
@@ -207,8 +211,18 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 
 										</label></li> }
 										<br />
-										<div class="alert alert-success">This is your last
-											answer (TODO)</div>
+										<div class="alert alert-success">
+										Last Answer: <br/>
+										@for(hypothesis <- question.hypothesislist){
+										@for(answer <- test.choiceanswers){
+										@for(hyp <- answer.hypothesislist){
+										@if(hyp.id ==hypothesis.id ){
+										     - @hyp.text <br/>
+										}
+										}
+										}
+										}
+										</div>
 									</ul>
 								</div>
 

@@ -48,18 +48,22 @@ public class Global extends GlobalSettings {
 			
 			Hypothesis hyp_one = new Hypothesis();
 			hyp_one.text = "Hypothesis 1";
+			hyp_one.number = 0;
 			hyp_one.save();
 			
 			Hypothesis hyp_two = new Hypothesis();
 			hyp_two.text = "Hypothesis 2";
+			hyp_two.number = 1;
 			hyp_two.save();
 			
 			Hypothesis hyp_three = new Hypothesis();
 			hyp_three.text = "Hypothesis 3";
+			hyp_three.number = 2;
 			hyp_three.save();
 			
 			Hypothesis hyp_four = new Hypothesis();
 			hyp_four.text = "Hypothesis 4";
+			hyp_four.number = 3;
 			hyp_four.save();
 			
 			Question q_two = new Question();
@@ -122,16 +126,19 @@ public class Global extends GlobalSettings {
 			
 			Hypothesis hypothesis_one = new Hypothesis();
 			hypothesis_one.text = "H1";
+			hypothesis_one.number = 0;
 			hypothesis_one.question = q_three;
 			hypothesis_one.save();
 			
 			Hypothesis hypothesis_two = new Hypothesis();
 			hypothesis_two.text = "H2";
+			hypothesis_two.number = 1;
 			hypothesis_two.question = q_three;
 			hypothesis_two.save();
 			
 			Hypothesis hypothesis_three = new Hypothesis();
 			hypothesis_three.text = "H3";
+			hypothesis_three.number = 2;
 			hypothesis_three.question = q_three;
 			hypothesis_three.save();
 			

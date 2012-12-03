@@ -11,6 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -18,6 +19,7 @@ import models.Blog;
 import models.User;
 import models.module.Lesson;
 import models.test.Hypothesis;
+import models.test.MultipleChoiceHypothesis;
 import models.test.Test;
 import models.test.question.enums.QuestionType;
 import models.test.question.enums.QuestionType.Type;
@@ -65,11 +67,13 @@ public class Question extends Model {
 		
 	//ARGUMENTOS ONE CHOICE QUESTION
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Hypothesis> hypothesyslist;
+	@OneToMany
+	public List<Hypothesis> hypothesislist;
 	
 	//ARGUMENTOS MULTIPLE CHOICE QUESTION
 	
+//	@ManyToMany(cascade = {CascadeType.ALL})
+//	public List<Hypothesis> hypothesislist;
 	
 	
 	public static Model.Finder<Long, Question> find = new Model.Finder<Long, Question>(

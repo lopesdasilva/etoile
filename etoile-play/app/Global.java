@@ -68,10 +68,10 @@ public class Global extends GlobalSettings {
 			Question q_two = new Question();
 			q_two.question= "This is the First One Choice Question.";
 			q_two.typeOfQuestion =1;
-			q_two.hypothesyslist.add(hyp_one);
-			q_two.hypothesyslist.add(hyp_two);
-			q_two.hypothesyslist.add(hyp_three);
-			q_two.hypothesyslist.add(hyp_four);
+			q_two.hypothesislist.add(hyp_one);
+			q_two.hypothesislist.add(hyp_two);
+			q_two.hypothesislist.add(hyp_three);
+			q_two.hypothesislist.add(hyp_four);
 			q_two.save();
 			
 			Question q_three = new Question();

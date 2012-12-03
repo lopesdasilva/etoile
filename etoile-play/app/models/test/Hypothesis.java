@@ -34,7 +34,7 @@ public class Hypothesis extends Model{
 	@ManyToMany(mappedBy="hypothesislist")
 	public MultipleChoiceQuestion multiplechoicequestion;
 	
-	@ManyToMany(mappedBy="hypothesyslist")
+	@ManyToOne
 	public Question question;
 
 	

@@ -32,6 +32,10 @@ public class MultipleChoiceHypothesis extends Model{
 	
 	@ManyToMany(mappedBy="hypothesislist")
 	public MultipleChoiceAnswer multiplechoiceanswer;
+	
+	@ManyToMany(mappedBy="hypothesislist")
+	public MultipleChoiceQuestion question;
+	
 
 	
 	public static Model.Finder<Long, MultipleChoiceHypothesis> find = new Model.Finder<Long, MultipleChoiceHypothesis>(

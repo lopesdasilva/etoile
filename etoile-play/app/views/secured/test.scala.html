@@ -150,7 +150,7 @@ Form[Profile.OneChoiceQuestionAnswer])
 							<div class="controls">
 
 								<label class="radio">
-									@for(hypothesis<-question.hypothesyslist) { 
+									@for(hypothesis<-question.hypothesislist) { 
 								<label
 									class="radio">
 										<input
@@ -174,7 +174,52 @@ Form[Profile.OneChoiceQuestionAnswer])
 				</section>
 				}
 				@if(question.typeOfQuestion==2){
-				THIS IS A MULTIPLE CHOICE QUESTION
+				
+				<section id="MultipleChoice@question.id">
+					<div class="well">
+						<h4>Question @question.id</h4>
+						<p>@question.question</p>
+
+						<div class="control-group">
+							@helper.form(routes.Profile.postmultiplechoicequestionanswer(module.acronym,
+							lesson.acronym,test.id,question.id)) {
+							<div class="controls">
+           						 <div class="input">
+              					<ul class="inputs-list">
+									@for(hypothesis<-question.hypothesislist) {
+									
+									<li>
+									<label>
+									
+										<input type="checkbox" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
+										<span>@hypothesis.text</span></>
+										
+									</label> 
+									</li>
+								}
+								<br/>
+								<div class="alert alert-success">
+
+								This is your last answer (TODO)
+								</div>
+								</ul>
+								</div>
+								
+
+								<div class="controls">
+									<button type="submit#1" class="btn btn-info">Save</button>
+
+								</div>
+								}
+							</div>
+						</div>
+
+
+
+					</div>
+				</section>
+				
+
 				}
 				}
 				<hr>

@@ -18,12 +18,6 @@ import models.module.Lesson;
 import models.module.University;
 import models.test.Answer;
 import models.test.Hypothesis;
-import models.test.MultipleChoiceAnswer;
-import models.test.MultipleChoiceHypothesis;
-import models.test.MultipleChoiceQuestion;
-import models.test.OneChoiceAnswer;
-import models.test.OneChoiceQuestion;
-import models.test.OpenQuestion;
 import models.test.Test;
 import models.test.question.Question;
 import play.data.Form;
@@ -160,7 +154,7 @@ public static class OpenQuestionSuggestion{
     	Form<Profile.OpenQuestionSuggestion> form = form(Profile.OpenQuestionSuggestion.class).bindFromRequest();
 
     	System.out.println("MODULESIZE: "+lesson.questions.size());
-    	OpenQuestion new_question = new OpenQuestion();
+    	Question new_question = new Question();
     	new_question.question = form.get().openquestionsuggestion;
     	new_question.lesson = lesson;
     	new_question.user = user;
@@ -177,64 +171,8 @@ public static class OpenQuestionSuggestion{
     	List<Category> categories = Category.getAllCategories();
     	Test test = models.test.Test.find.byId(test_id);
     	User user = User.find.byId(request().username());
-    	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
-    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
-    	List<MultipleChoiceAnswer> multiplechoiceanswers = MultipleChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
+    	
     	Test test_aux = test;
-    	
-
-    	
-    	test_aux.answers = answers;
-    	test_aux.onechoiceanswers = onechoiceanswers;
-    	test_aux.multiplechoiceanswers = multiplechoiceanswers;
-    	if(test_aux.answers.isEmpty()){
-    		for(OpenQuestion openquestion: test_aux.openquestions){
-    			Answer emptyAnswer = new Answer();
-    			emptyAnswer.answer = "";
-    			emptyAnswer.openQuestion = openquestion;
-    			emptyAnswer.test=test;
-    			emptyAnswer.user = user;
-    			emptyAnswer.save();
-    			test.answers.add(emptyAnswer);
-    			test.save();
-    		}
-    	}
-    	
-    	if(test_aux.onechoiceanswers.isEmpty()){
-    		System.out.println("Entrei");
-    		for(OneChoiceQuestion onechoicequestion: test_aux.onechoicequestions){
-    			OneChoiceAnswer emptyAnswer = new OneChoiceAnswer();
-    			emptyAnswer.oneChoiceQuestion = onechoicequestion;
-    			long  a = 1;
-    			emptyAnswer.hypothesis = Hypothesis.find.byId(a);
-    			emptyAnswer.test=test;
-    			emptyAnswer.user = user;
-    			emptyAnswer.save();
-    			test.onechoiceanswers.add(emptyAnswer);
-    			test.save();
-    		}
-    	}
-    	
-    	if(test_aux.multiplechoiceanswers.isEmpty()){
-    		System.out.println("Entrei");
-    		for(MultipleChoiceQuestion multiplechoicequestion: test_aux.multiplechoicequestions){
-    			MultipleChoiceAnswer emptyAnswer = new MultipleChoiceAnswer();
-    			emptyAnswer.multipleChoiceQuestion = multiplechoicequestion;
-    			long  a = 1;
-    			emptyAnswer.hypothesislist.add(MultipleChoiceHypothesis.find.byId(a));
-    			emptyAnswer.test=test;
-    			emptyAnswer.user = user;
-    			emptyAnswer.save();
-    			test.multiplechoiceanswers.add(emptyAnswer);
-    			test.save();
-    		}
-    	}
-    	
-    	test_aux=test;
-    	System.out.println("SIZE"+test_aux.onechoiceanswers.size());
-    	for(MultipleChoiceQuestion q: test_aux.multiplechoicequestions){
-    		System.out.println("SIZE QUESTIONS" + q.hypothesislist.size());
-    	}
     	
     	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -313,7 +251,7 @@ public static class OpenQuestionSuggestion{
 		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
 		System.out.println("Answer: " + form.get().qanswer + "Question: " +question_id);
 		
-		OpenQuestion question = OpenQuestion.find.byId(question_id);
+		Question question = Question.find.byId(question_id);
 		Test test = Test.find.byId(test_id);
 		
 		Answer userAnswer = Answer.findByUserAndQuestion(question_id, request().username());
@@ -334,11 +272,9 @@ public static class OpenQuestionSuggestion{
 		
 		List<Category> categories = Category.getAllCategories();
     	User user = User.find.byId(request().username());
-    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	List<Answer> answers = Answer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
-    	test_aux.onechoiceanswers = onechoiceanswers;
-    	test_aux.answers = answers;
+
     	
     	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -353,31 +289,22 @@ public static class OpenQuestionSuggestion{
 		Form<Profile.OneChoiceQuestionAnswer> form = form(Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
 		System.out.println("One Choice: " + form.get().ocqanswer);
 		
-		OneChoiceQuestion question = OneChoiceQuestion.find.byId(question_id);
+		
 		Test test = Test.find.byId(test_id);
 		
-		OneChoiceAnswer userAnswer = OneChoiceAnswer.findByUserAndQuestion(question_id, request().username());
 		
-		if(userAnswer == null){
-			userAnswer = new OneChoiceAnswer();
-			userAnswer.oneChoiceQuestion = question;
-			userAnswer.test = test;
-			userAnswer.user = User.find.byId(request().username());
-			userAnswer.save();
-		}
+		
+		
 		User user = User.find.byId(request().username());
 		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email, test_id);
 		
 		Hypothesis answer = Hypothesis.find.byId(form.get().ocqanswer);
 		
-		userAnswer.hypothesis = answer;
-		userAnswer.save();
 		
 		List<Category> categories = Category.getAllCategories();
-    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
+    	
     	Test test_aux = test;
     	test_aux.answers = openanswers;
-    	test_aux.onechoiceanswers = onechoiceanswers;
     	
     	Module module = Module.findByAcronym(module_acronym);
     	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -389,17 +316,9 @@ public static class OpenQuestionSuggestion{
 	public static Result postmultiplechoicequestionanswer(String module_acronym, String lesson_acronym, Long test_id, Long question_id){
 		Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
 		
-		MultipleChoiceAnswer userMultipleChoiceAnswer = MultipleChoiceAnswer.findByUserAndQuestion(question_id, request().username());
-		MultipleChoiceQuestion question = MultipleChoiceQuestion.find.byId(question_id);
+		
 		Test test = Test.find.byId(test_id);
 		
-		if(userMultipleChoiceAnswer == null){
-			userMultipleChoiceAnswer = new MultipleChoiceAnswer();
-			userMultipleChoiceAnswer.multipleChoiceQuestion = question;
-			userMultipleChoiceAnswer.test = test;
-			userMultipleChoiceAnswer.user = User.find.byId(request().username());
-			userMultipleChoiceAnswer.save();
-		}
 //		
 //		if(userMultipleChoiceAnswer.hypothesislist.size()!=0){
 //		for(MultipleChoiceHypothesis hyp: userMultipleChoiceAnswer.hypothesislist){
@@ -409,45 +328,19 @@ public static class OpenQuestionSuggestion{
 //		}
 //		}
 		
-		userMultipleChoiceAnswer.delete();
-		MultipleChoiceAnswer userMultipleChoiceAnswer_aux = new MultipleChoiceAnswer();
-		userMultipleChoiceAnswer_aux.multipleChoiceQuestion = question;
-		userMultipleChoiceAnswer_aux.test = test;
-		userMultipleChoiceAnswer_aux.user = User.find.byId(request().username());
-		userMultipleChoiceAnswer_aux.save();
 		
-		System.out.println("SIZE OF LIST: " + userMultipleChoiceAnswer_aux.hypothesislist.size());
-
-		for(int h: form.get().mcqanswers){
-			if(h!=0){
-			System.out.println("VOu adicionar: "+h);
-			MultipleChoiceHypothesis hypothesis_selected = MultipleChoiceHypothesis.find.byId((long)h);
-			System.out.println("Encontrei? " + hypothesis_selected.text);
-			userMultipleChoiceAnswer_aux.hypothesislist.add(hypothesis_selected);
-			hypothesis_selected.save();
-			
-			userMultipleChoiceAnswer_aux.save();
-			System.out.println("Salvei " + userMultipleChoiceAnswer_aux.hypothesislist.size());
-			
-			}
-		}
-		System.out.println("SIZE DA LISTA: " + userMultipleChoiceAnswer_aux.hypothesislist.size());
-		if(userMultipleChoiceAnswer_aux.hypothesislist.size()==0){
-			long a = 1;
-			userMultipleChoiceAnswer_aux.hypothesislist.add(MultipleChoiceHypothesis.find.byId(a));
-			userMultipleChoiceAnswer_aux.save();
-		}
+		
+		
+		
+		
+		
 		
 		User user = User.find.byId(request().username());
 		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email, test_id);
 		
 		List<Category> categories = Category.getAllCategories();
-    	List<OneChoiceAnswer> onechoiceanswers = OneChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
-    	List<MultipleChoiceAnswer> multiplechoiceanswers = MultipleChoiceAnswer.findByUserEmailAndTestId(user.email, test_id);
     	Test test_aux = test;
     	test_aux.answers = openanswers;
-    	test_aux.onechoiceanswers = onechoiceanswers;
-    	test_aux.multiplechoiceanswers = multiplechoiceanswers;
 
     	
     	Module module = Module.findByAcronym(module_acronym);

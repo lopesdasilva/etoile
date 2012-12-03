@@ -39,21 +39,6 @@ public class Test extends Model{
 	@OneToMany
 	public List<Question> questions;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<OpenQuestion> openquestions;
-	
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<OneChoiceQuestion> onechoicequestions;
-	
-	@OneToMany
-	public List<MultipleChoiceQuestion> multiplechoicequestions;
-	
-	@OneToMany
-	public List<OneChoiceAnswer> onechoiceanswers;
-	
-	@OneToMany
-	public List<MultipleChoiceAnswer> multiplechoiceanswers;
-	
 	@OneToMany
 	public List<Answer> answers;
 	

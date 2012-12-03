@@ -101,6 +101,7 @@ create table hypothesis (
   id                        bigint auto_increment not null,
   number                    integer,
   text                      varchar(255),
+  is_correct                tinyint(1) default 0,
   question_image_url        varchar(255),
   question_id               bigint,
   constraint pk_hypothesis primary key (id))
@@ -136,59 +137,6 @@ create table module (
   image_url                 varchar(255),
   university_id             bigint,
   constraint pk_module primary key (id))
-;
-
-create table multiple_choice_answer (
-  id                        bigint auto_increment not null,
-  multiple_choice_question_id bigint,
-  test_id                   bigint,
-  user_email                varchar(255),
-  constraint pk_multiple_choice_answer primary key (id))
-;
-
-create table multiple_choice_hypothesis (
-  id                        bigint auto_increment not null,
-  number                    integer,
-  text                      varchar(255),
-  question_image_url        varchar(255),
-  constraint pk_multiple_choice_hypothesis primary key (id))
-;
-
-create table multiple_choice_question (
-  id                        bigint auto_increment not null,
-  question                  varchar(255),
-  image_url                 varchar(255),
-  video_url                 varchar(255),
-  test_id                   bigint,
-  constraint pk_multiple_choice_question primary key (id))
-;
-
-create table one_choice_answer (
-  id                        bigint auto_increment not null,
-  one_choice_question_id    bigint,
-  test_id                   bigint,
-  user_email                varchar(255),
-  hypothesis_id             bigint,
-  constraint pk_one_choice_answer primary key (id))
-;
-
-create table one_choice_question (
-  id                        bigint auto_increment not null,
-  question                  varchar(255),
-  correct_hypothesis        varchar(255),
-  image_url                 varchar(255),
-  video_url                 varchar(255),
-  constraint pk_one_choice_question primary key (id))
-;
-
-create table open_question (
-  id                        bigint auto_increment not null,
-  question                  varchar(255),
-  image_url                 varchar(255),
-  video_url                 varchar(255),
-  lesson_id                 bigint,
-  user_email                varchar(255),
-  constraint pk_open_question primary key (id))
 ;
 
 create table professor (
@@ -321,40 +269,10 @@ create table module_category (
   constraint pk_module_category primary key (module_id, category_id))
 ;
 
-create table multiple_choice_answer_multiple_ (
-  multiple_choice_answer_id      bigint not null,
-  multiple_choice_hypothesis_id  bigint not null,
-  constraint pk_multiple_choice_answer_multiple_ primary key (multiple_choice_answer_id, multiple_choice_hypothesis_id))
-;
-
-create table multiple_choice_question_multipl (
-  multiple_choice_question_id    bigint not null,
-  multiple_choice_hypothesis_id  bigint not null,
-  constraint pk_multiple_choice_question_multipl primary key (multiple_choice_question_id, multiple_choice_hypothesis_id))
-;
-
-create table one_choice_question_hypothesis (
-  one_choice_question_id         bigint not null,
-  hypothesis_id                  bigint not null,
-  constraint pk_one_choice_question_hypothesis primary key (one_choice_question_id, hypothesis_id))
-;
-
 create table professor_module (
   professor_id                   bigint not null,
   module_id                      bigint not null,
   constraint pk_professor_module primary key (professor_id, module_id))
-;
-
-create table test_open_question (
-  test_id                        bigint not null,
-  open_question_id               bigint not null,
-  constraint pk_test_open_question primary key (test_id, open_question_id))
-;
-
-create table test_one_choice_question (
-  test_id                        bigint not null,
-  one_choice_question_id         bigint not null,
-  constraint pk_test_one_choice_question primary key (test_id, one_choice_question_id))
 ;
 
 create table account_module (
@@ -362,7 +280,7 @@ create table account_module (
   module_id                      bigint not null,
   constraint pk_account_module primary key (account_email, module_id))
 ;
-alter table answer add constraint fk_answer_openQuestion_1 foreign key (open_question_id) references open_question (id) on delete restrict on update restrict;
+alter table answer add constraint fk_answer_openQuestion_1 foreign key (open_question_id) references question (id) on delete restrict on update restrict;
 create index ix_answer_openQuestion_1 on answer (open_question_id);
 alter table answer add constraint fk_answer_test_2 foreign key (test_id) references test (id) on delete restrict on update restrict;
 create index ix_answer_test_2 on answer (test_id);
@@ -380,46 +298,26 @@ alter table hypothesis add constraint fk_hypothesis_question_8 foreign key (ques
 create index ix_hypothesis_question_8 on hypothesis (question_id);
 alter table module add constraint fk_module_university_9 foreign key (university_id) references university (id) on delete restrict on update restrict;
 create index ix_module_university_9 on module (university_id);
-alter table multiple_choice_answer add constraint fk_multiple_choice_answer_mul_10 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
-create index ix_multiple_choice_answer_mul_10 on multiple_choice_answer (multiple_choice_question_id);
-alter table multiple_choice_answer add constraint fk_multiple_choice_answer_tes_11 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_multiple_choice_answer_tes_11 on multiple_choice_answer (test_id);
-alter table multiple_choice_answer add constraint fk_multiple_choice_answer_use_12 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_multiple_choice_answer_use_12 on multiple_choice_answer (user_email);
-alter table multiple_choice_question add constraint fk_multiple_choice_question_t_13 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_multiple_choice_question_t_13 on multiple_choice_question (test_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_oneChoic_14 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_oneChoic_14 on one_choice_answer (one_choice_question_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_test_15 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_test_15 on one_choice_answer (test_id);
-alter table one_choice_answer add constraint fk_one_choice_answer_user_16 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_one_choice_answer_user_16 on one_choice_answer (user_email);
-alter table one_choice_answer add constraint fk_one_choice_answer_hypothes_17 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
-create index ix_one_choice_answer_hypothes_17 on one_choice_answer (hypothesis_id);
-alter table open_question add constraint fk_open_question_lesson_18 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
-create index ix_open_question_lesson_18 on open_question (lesson_id);
-alter table open_question add constraint fk_open_question_user_19 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_open_question_user_19 on open_question (user_email);
-alter table professor_content add constraint fk_professor_content_professo_20 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
-create index ix_professor_content_professo_20 on professor_content (professor_id);
-alter table question add constraint fk_question_test_21 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_question_test_21 on question (test_id);
-alter table question add constraint fk_question_lesson_22 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
-create index ix_question_lesson_22 on question (lesson_id);
-alter table question add constraint fk_question_user_23 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_question_user_23 on question (user_email);
-alter table reply add constraint fk_reply_topic_24 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_24 on reply (topic_id);
-alter table reply add constraint fk_reply_user_25 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_25 on reply (user_email);
-alter table topic add constraint fk_topic_forum_26 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_26 on topic (forum_id);
-alter table university add constraint fk_university_continent_27 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_27 on university (continent_id);
-alter table user_test add constraint fk_user_test_user_28 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_user_test_user_28 on user_test (user_email);
-alter table user_test add constraint fk_user_test_test_29 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_user_test_test_29 on user_test (test_id);
+alter table professor_content add constraint fk_professor_content_professo_10 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
+create index ix_professor_content_professo_10 on professor_content (professor_id);
+alter table question add constraint fk_question_test_11 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_question_test_11 on question (test_id);
+alter table question add constraint fk_question_lesson_12 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
+create index ix_question_lesson_12 on question (lesson_id);
+alter table question add constraint fk_question_user_13 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_question_user_13 on question (user_email);
+alter table reply add constraint fk_reply_topic_14 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_14 on reply (topic_id);
+alter table reply add constraint fk_reply_user_15 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_15 on reply (user_email);
+alter table topic add constraint fk_topic_forum_16 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_16 on topic (forum_id);
+alter table university add constraint fk_university_continent_17 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_17 on university (continent_id);
+alter table user_test add constraint fk_user_test_user_18 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_18 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_19 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_19 on user_test (test_id);
 
 
 
@@ -451,29 +349,9 @@ alter table module_category add constraint fk_module_category_module_01 foreign 
 
 alter table module_category add constraint fk_module_category_category_02 foreign key (category_id) references category (id) on delete restrict on update restrict;
 
-alter table multiple_choice_answer_multiple_ add constraint fk_multiple_choice_answer_mul_01 foreign key (multiple_choice_answer_id) references multiple_choice_answer (id) on delete restrict on update restrict;
-
-alter table multiple_choice_answer_multiple_ add constraint fk_multiple_choice_answer_mul_02 foreign key (multiple_choice_hypothesis_id) references multiple_choice_hypothesis (id) on delete restrict on update restrict;
-
-alter table multiple_choice_question_multipl add constraint fk_multiple_choice_question_m_01 foreign key (multiple_choice_question_id) references multiple_choice_question (id) on delete restrict on update restrict;
-
-alter table multiple_choice_question_multipl add constraint fk_multiple_choice_question_m_02 foreign key (multiple_choice_hypothesis_id) references multiple_choice_hypothesis (id) on delete restrict on update restrict;
-
-alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_01 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
-
-alter table one_choice_question_hypothesis add constraint fk_one_choice_question_hypoth_02 foreign key (hypothesis_id) references hypothesis (id) on delete restrict on update restrict;
-
 alter table professor_module add constraint fk_professor_module_professor_01 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
 
 alter table professor_module add constraint fk_professor_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
-
-alter table test_open_question add constraint fk_test_open_question_test_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
-
-alter table test_open_question add constraint fk_test_open_question_open_qu_02 foreign key (open_question_id) references open_question (id) on delete restrict on update restrict;
-
-alter table test_one_choice_question add constraint fk_test_one_choice_question_t_01 foreign key (test_id) references test (id) on delete restrict on update restrict;
-
-alter table test_one_choice_question add constraint fk_test_one_choice_question_o_02 foreign key (one_choice_question_id) references one_choice_question (id) on delete restrict on update restrict;
 
 alter table account_module add constraint fk_account_module_account_01 foreign key (account_email) references account (email) on delete restrict on update restrict;
 
@@ -531,24 +409,6 @@ drop table professor_module;
 
 drop table module_lesson;
 
-drop table multiple_choice_answer;
-
-drop table multiple_choice_answer_multiple_;
-
-drop table multiple_choice_hypothesis;
-
-drop table multiple_choice_question;
-
-drop table multiple_choice_question_multipl;
-
-drop table one_choice_answer;
-
-drop table one_choice_question;
-
-drop table one_choice_question_hypothesis;
-
-drop table open_question;
-
 drop table professor;
 
 drop table professor_content;
@@ -558,10 +418,6 @@ drop table question;
 drop table reply;
 
 drop table test;
-
-drop table test_open_question;
-
-drop table test_one_choice_question;
 
 drop table topic;
 

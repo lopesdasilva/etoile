@@ -1,8 +1,7 @@
 @(user: User,module: models.module.Module, lesson: models.module.Lesson,
 categories: List[models.curriculum.Category], test: models.test.Test,
 formAnswer : Form[Profile.QuestionAnswer], formOneChoiceAnswer :
-Form[Profile.OneChoiceQuestionAnswer]) 
-@import helper._
+Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 @main("etoileplatform"){
 
 
@@ -52,12 +51,9 @@ Form[Profile.OneChoiceQuestionAnswer])
 		<div class="span3  sidebar-nav">
 			<ul class="nav well nav-list affix">
 				<li class="nav-header">@test.name</li> @for(question
-				<-test.openquestions) {
+				<-test.questions) {
 				<li><a href="#@question.id"><i class="icon-chevron-right"></i>Question
-						@question.id</a></li> } @for(onechoicequestion <- test.onechoicequestions){
-				<li><a href="#OneChoice@onechoicequestion.id"><i
-						class="icon-chevron-right"></i>OneChoiceQuestion
-						@onechoicequestion.id</a></li> }
+						@question.id</a></li> }
 
 
 			</ul>
@@ -69,34 +65,34 @@ Form[Profile.OneChoiceQuestionAnswer])
 			<div class="page-header">
 				<h1>@test.name</h1>
 
-				
+
 				<h3>Open Questions</h3>
-				@for(question <- test.questions) {
-				@if(question.typeOfQuestion==0){
+				@for(question <- test.questions) { @if(question.typeOfQuestion==0){
 				<section id="@question.id">
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
+						@if(question.imageURL!= null || question.videoURL!=null){
 						<ul class="thumbnails">
-						<li class="span4">
-						<div >
-						<p><img src="@question.imageURL" /></p>
-						</div>
-						</li>
-						<li class="span4">
-						<div >
-						<object>
-									<param name="movie"
-										value="@question.videoURL" />
-									<param name="wmode" value="transparent" />
-									<embed src="@question.videoURL"
-										type="application/x-shockwave-flash" wmode="transparent"
-										 />
-								</object>
-						</div>
-						</li>
+							<li class="span4">
+								<div>
+									<p>
+										<img src="@question.imageURL" />
+									</p>
+								</div>
+							</li>
+							<li class="span4">
+								<div>
+									<object>
+										<param name="movie" value="@question.videoURL" />
+										<param name="wmode" value="transparent" />
+										<embed src="@question.videoURL"
+											type="application/x-shockwave-flash" wmode="transparent" />
+									</object>
+								</div>
+							</li>
 						</ul>
-						@for(answer <- test.answers){
+						} @for(answer <- test.answers){
 						@if(answer.openQuestion.id==question.id){
 
 
@@ -119,45 +115,43 @@ Form[Profile.OneChoiceQuestionAnswer])
 							</div>
 						</div>
 				</section>
-				}} }
-				@if(question.typeOfQuestion==1){
-							<section id="OneChoice@question.id">
+				}} } @if(question.typeOfQuestion==1){
+				<section id="@question.id">
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
-<ul class="thumbnails">
-						<li class="span4">
-						<div >
-						<p><img src="@question.imageURL" /></p>
-						</div>
-						</li>
-						<li class="span4">
-						<div >
-						<object>
-									<param name="movie"
-										value="@question.videoURL" />
-									<param name="wmode" value="transparent" />
-									<embed src="@question.videoURL"
-										type="application/x-shockwave-flash" wmode="transparent"
-										 />
-								</object>
-						</div>
-						</li>
+						@if(question.imageURL!= null || question.videoURL!=null){
+						<ul class="thumbnails">
+							<li class="span4">
+								<div>
+									<p>
+										<img src="@question.imageURL" />
+									</p>
+								</div>
+							</li>
+							<li class="span4">
+								<div>
+									<object>
+										<param name="movie" value="@question.videoURL" />
+										<param name="wmode" value="transparent" />
+										<embed src="@question.videoURL"
+											type="application/x-shockwave-flash" wmode="transparent" />
+									</object>
+								</div>
+							</li>
 						</ul>
+						}
 						<div class="control-group">
 							@helper.form(routes.Profile.postonechoicequestionanswer(module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
 
 								<label class="radio">
-									@for(hypothesis<-question.hypothesislist) { 
-								<label
-									class="radio">
-										<input
-										type="radio" value="@hypothesis.id" name="ocqanswer">
-										@hypothesis.text</input> 
-								</label> 
-								}
+									@for(hypothesis<-question.hypothesislist) { <label
+									class="radio"> <input type="radio"
+										value="@hypothesis.id" name="ocqanswer">
+										@hypothesis.text</input>
+								</label> }
 								</label>
 
 								<div class="controls">
@@ -172,89 +166,52 @@ Form[Profile.OneChoiceQuestionAnswer])
 
 					</div>
 				</section>
-				}
-				@if(question.typeOfQuestion==2){
-				
-				<section id="MultipleChoice@question.id">
+				} @if(question.typeOfQuestion==2){
+
+				<section id="@question.id">
 					<div class="well">
 						<h4>Question @question.id</h4>
 						<p>@question.question</p>
-
+						@if(question.imageURL!= null || question.videoURL!=null){
+						<ul class="thumbnails">
+							<li class="span4">
+								<div>
+									<p>
+										<img src="@question.imageURL" />
+									</p>
+								</div>
+							</li>
+							<li class="span4">
+								<div>
+									<object>
+										<param name="movie" value="@question.videoURL" />
+										<param name="wmode" value="transparent" />
+										<embed src="@question.videoURL"
+											type="application/x-shockwave-flash" wmode="transparent" />
+									</object>
+								</div>
+							</li>
+						</ul>
+						}
 						<div class="control-group">
 							@helper.form(routes.Profile.postmultiplechoicequestionanswer(module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
-           						 <div class="input">
-              					<ul class="inputs-list">
-									@for(hypothesis<-question.hypothesislist) {
-									
-									<li>
-									<label>
-									
-										<input type="checkbox" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
-										<span>@hypothesis.text</span></>
-										
-									</label> 
-									</li>
-								}
-								<br/>
-								<div class="alert alert-success">
+								<div class="input">
+									<ul class="inputs-list">
+										@for(hypothesis<-question.hypothesislist) {
 
-								This is your last answer (TODO)
+										<li><label> <input type="checkbox"
+												name="mcqanswers[@hypothesis.number]" value="@hypothesis.id">
+												<span>@hypothesis.text</span></>
+
+										</label></li> }
+										<br />
+										<div class="alert alert-success">This is your last
+											answer (TODO)</div>
+									</ul>
 								</div>
-								</ul>
-								</div>
-								
 
-								<div class="controls">
-									<button type="submit#1" class="btn btn-info">Save</button>
-
-								</div>
-								}
-							</div>
-						</div>
-
-
-
-					</div>
-				</section>
-				
-
-				}
-				}
-				<hr>
-				<h3>(OLD METHOD)One Choice Questions</h3>
-				@for(onechoicequestion <- test.onechoicequestions) {
-
-				<section id="OneChoice@onechoicequestion.id">
-					<div class="well">
-						<h4>Question @onechoicequestion.id</h4>
-						<p>@onechoicequestion.question</p>
-
-						<div class="control-group">
-							@helper.form(routes.Profile.postonechoicequestionanswer(module.acronym,
-							lesson.acronym,test.id,onechoicequestion.id)) {
-							<div class="controls">
-
-								<label class="radio">
-									@for(hypothesis<-onechoicequestion.hypothesyslist) { 
-								<label
-									class="radio">
-										@for(onechoiceanswer<-test.onechoiceanswers){
-										@if(onechoiceanswer.hypothesis.id==hypothesis.id){ 
-										<input
-										type="radio" value="@hypothesis.id" name="ocqanswer"
-										checked="checked"> @hypothesis.text</input> 
-										}
-										@if(onechoiceanswer.hypothesis.id!=hypothesis.id){ 
-										<input
-										type="radio" value="@hypothesis.id" name="ocqanswer">
-										@hypothesis.text</input> 
-										} 
-										}
-								</label> 
-								}
-								</label>
 
 								<div class="controls">
 									<button type="submit#1" class="btn btn-info">Save</button>
@@ -270,66 +227,8 @@ Form[Profile.OneChoiceQuestionAnswer])
 				</section>
 
 
-				}
+				} }
 
-				<h3>(OLD METHOD)Multiple Choice Questions</h3>
-				@for(multiplechoicequestion <- test.multiplechoicequestions) {
-
-				<section id="OneChoice@multiplechoicequestion.id">
-					<div class="well">
-						<h4>Question @multiplechoicequestion.id</h4>
-						<p>@multiplechoicequestion.question</p>
-
-						<div class="control-group">
-							@helper.form(routes.Profile.postmultiplechoicequestionanswer(module.acronym,
-							lesson.acronym,test.id,multiplechoicequestion.id)) {
-							<div class="controls">
-           						 <div class="input">
-              					<ul class="inputs-list">
-									@for(hypothesis<-multiplechoicequestion.hypothesislist) {
-									
-									<li>
-									<label>
-									
-										<input type="checkbox" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" >
-										<span>@hypothesis.text</span></>
-										
-									</label> 
-									</li>
-								}
-								<br/>
-								<div class="alert alert-success">
-
-								Last Answer:
-								@for(hypothesis<-multiplechoicequestion.hypothesislist) {
-								@for(answer <- test.multiplechoiceanswers){
-								@for(multiplechoiceanswer <- answer.hypothesislist){
-								@if(multiplechoiceanswer.id == hypothesis.id){
-									<br/> - @multiplechoiceanswer.text
-								}	
-								}
-								}
-								}
-								</div>
-								</ul>
-								</div>
-								
-
-								<div class="controls">
-									<button type="submit#1" class="btn btn-info">Save</button>
-
-								</div>
-								}
-							</div>
-						</div>
-
-
-
-					</div>
-				</section>
-
-
-				}
 
 			</div>
 		</div>

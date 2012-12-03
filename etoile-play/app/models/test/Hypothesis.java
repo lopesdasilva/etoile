@@ -26,14 +26,12 @@ public class Hypothesis extends Model{
 	
 	
 	@Constraints.Required
+    @Formats.NonEmpty
+	public boolean isCorrect;
+	
+	@Constraints.Required
 	public String questionImageURL;
 
-	@ManyToMany(mappedBy="hypothesyslist")
-	public OneChoiceQuestion onechoicequestion;
-	
-	@ManyToMany(mappedBy="hypothesislist")
-	public MultipleChoiceQuestion multiplechoicequestion;
-	
 	@ManyToOne
 	public Question question;
 

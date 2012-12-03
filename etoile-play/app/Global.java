@@ -20,13 +20,10 @@ import models.module.Lesson;
 import models.module.Lessoncontent;
 import models.module.University;
 import models.test.Hypothesis;
-import models.test.MultipleChoiceHypothesis;
-import models.test.MultipleChoiceQuestion;
-import models.test.OneChoiceQuestion;
-import models.test.OpenQuestion;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.enums.QuestionType;
+
 public class Global extends GlobalSettings {
 	
 	public Category mathcat;
@@ -74,6 +71,15 @@ public class Global extends GlobalSettings {
 			q_two.hypothesislist.add(hyp_four);
 			q_two.save();
 			
+			hyp_one.question = q_two;
+			hyp_one.save();
+			hyp_two.question = q_two;
+			hyp_two.save();
+			hyp_three.question = q_two;
+			hyp_three.save();
+			hyp_four.question = q_two;
+			hyp_four.save();
+			
 			Question q_three = new Question();
 			q_three.question= "This is the First Multiple Choice Question.";
 			q_three.typeOfQuestion = 2;
@@ -116,55 +122,18 @@ public class Global extends GlobalSettings {
 			
 			Hypothesis hypothesis_one = new Hypothesis();
 			hypothesis_one.text = "H1";
+			hypothesis_one.question = q_three;
 			hypothesis_one.save();
 			
 			Hypothesis hypothesis_two = new Hypothesis();
 			hypothesis_two.text = "H2";
+			hypothesis_two.question = q_three;
 			hypothesis_two.save();
 			
 			Hypothesis hypothesis_three = new Hypothesis();
 			hypothesis_three.text = "H3";
+			hypothesis_three.question = q_three;
 			hypothesis_three.save();
-			
-			MultipleChoiceHypothesis hypothesis_zerozero = new MultipleChoiceHypothesis();
-			hypothesis_zerozero.text = "No Answer";
-			hypothesis_zerozero.save();
-			
-			MultipleChoiceHypothesis hypothesis_four = new MultipleChoiceHypothesis();
-			hypothesis_four.text = "H4 - This is the first MultipleChoice Hypothesis";
-			hypothesis_four.number = 0;
-			hypothesis_four.save();
-			
-			MultipleChoiceHypothesis hypothesis_five = new MultipleChoiceHypothesis();
-			hypothesis_five.text = "H5 - This is the second MultipleChoice Hypothesis";
-			hypothesis_five.number = 1;
-			hypothesis_five.save();
-			
-			
-			OneChoiceQuestion onechoicequestion_one = new OneChoiceQuestion();
-			onechoicequestion_one.question = "This is the First OneChoice Question.";
-			onechoicequestion_one.correct_hypothesis = hypothesis_one.text;
-			onechoicequestion_one.hypothesyslist.add(hypothesis_one);
-			onechoicequestion_one.hypothesyslist.add(hypothesis_two);
-			onechoicequestion_one.hypothesyslist.add(hypothesis_three);
-			onechoicequestion_one.save();
-			
-			
-			MultipleChoiceQuestion multiplechoicequestion_one = new MultipleChoiceQuestion();
-			multiplechoicequestion_one.question = "This is the First MultipleChoice Question";
-			multiplechoicequestion_one.hypothesislist.add(hypothesis_four);
-			multiplechoicequestion_one.hypothesislist.add(hypothesis_five);
-			multiplechoicequestion_one.save();
-			
-			OpenQuestion question_one = new OpenQuestion();
-			question_one.question = "This is the First Open Question.";
-			question_one.imageURL= "http://www.psdgraphics.com/wp-content/uploads/2009/04/growth-chart.jpg";
-			question_one.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
-			question_one.save();
-			
-			OpenQuestion question_two = new OpenQuestion();
-			question_two.question = "This is the Second Open Question.";
-			question_two.save();
 			
 			
 			// TESTS ++++++++++++++++++++++++++++++++++++++++++++
@@ -173,15 +142,9 @@ public class Global extends GlobalSettings {
 			test_one.name = "First Sum Test";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			test_one.openquestions.add(question_one);
-			test_one.openquestions.add(question_two);
-			test_one.onechoicequestions.add(onechoicequestion_one);
 			test_one.questions.add(q);
 			test_one.questions.add(q_two);
 			test_one.questions.add(q_three);
-
-			question_one.save();
-			question_two.save();
 			test_one.save();
 			
 			q.test = test_one;
@@ -192,9 +155,6 @@ public class Global extends GlobalSettings {
 			
 			q_three.test = test_one;
 			q_three.save();
-			
-			multiplechoicequestion_one.test = test_one;
-			multiplechoicequestion_one.save();
 			
 			Test test_two = new Test();
 			test_two.name="Final Sum Test";

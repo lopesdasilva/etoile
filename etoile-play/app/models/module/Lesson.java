@@ -5,8 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
-import models.test.OpenQuestion;
 import models.test.Test;
+import models.test.question.Question;
 
 import com.avaje.ebean.Ebean;
 
@@ -51,10 +51,7 @@ public class Lesson extends Model{
 	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany
-	public List<OpenQuestion> openQuestions;
-	
-	@OneToMany
-	public List<OpenQuestion> questions;
+	public List<Question> questions;
 	
 	public static Model.Finder<Long, Lesson> find = new Model.Finder<Long, Lesson>(
 			Long.class, Lesson.class);

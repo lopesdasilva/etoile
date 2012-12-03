@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import models.Blog;
 import models.User;
+import models.test.question.Question;
 
 import com.avaje.ebean.Ebean;
 
@@ -25,7 +26,7 @@ public class Answer extends Model{
 	public String answer;
 	
 	@ManyToOne
-	public OpenQuestion openQuestion;
+	public Question openQuestion;
 
 	@ManyToOne
 	public Test test;

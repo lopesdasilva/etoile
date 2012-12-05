@@ -122,20 +122,23 @@ continents: List[models.continent.Continent],modules: List[models.module.Module]
 			</div>
 
 			<div class="row-fluid">
-
-				@for(blog <- blogs) {
-				<div class="span4" >
-					<h4>@blog.alternateHeader</h4>
-					<p>@blog.alternateText</p>
-					<p>
-						<a class="btn" href="@routes.Application.blog(blog.id)">View
-							details &raquo;</a>
-					</p>
-				</div>
-				}
-
-
-			</div>
+			<h3>Latest news</h3>
+            <ul class="thumbnails">
+            	@for(blog <- blogs) {
+              <li class="span4">
+                <div class="thumbnail">
+                  <img src="@blog.articleImageURL" class="img-rounded" style="height: 100px" >
+                  <div class="caption">
+                    <h5>@blog.alternateHeader</h5>
+                    <p>@blog.alternateText</p>
+                    <p><a class="btn" href="@routes.Application.blog(blog.id)">View
+							details &raquo;</a></p>
+                  </div>
+                </div>
+              </li>
+              }
+              </ul>
+              </div>
 		</div>
 	</div>
 </div>

@@ -90,7 +90,7 @@ public class Global extends GlobalSettings {
 			Question q_three = new Question();
 			q_three.question= "This is the First Multiple Choice Question.";
 			q_three.typeOfQuestion = 2;
-			q.number = 1;
+			q_three.number = 1;
 			q_three.save();
 			
 			

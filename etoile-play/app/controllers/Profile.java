@@ -221,20 +221,21 @@ public class Profile extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		System.out.println("A imprimir as questoes");
-		for (Question q: test.questions){
-		System.out.println(q.question);
-		}
-		Question question = test.questions.get(question_number-1);
-		if (question!=null){
-		switch (question.typeOfQuestion){
-		case(0):
-			return ok(views.html.secured.question.openquestion.render(user,module,lesson,test,question));
-		case(1):
-			return ok(views.html.secured.question.onechoicequestion.render());
-		case(2):
-			return ok(views.html.secured.question.multiplechoicequestion.render());
-		}
-		}
+//		
+//		for (Question q: test.questions){
+//		System.out.println(q.question);
+//		}
+//		Question question = test.questions.get(question_number-1);
+//		if (question!=null){
+//		switch (question.typeOfQuestion){
+//		case(0):
+//			return ok(views.html.secured.question.openquestion.render(user,module,lesson,test,question));
+//		case(1):
+//			return ok(views.html.secured.question.onechoicequestion.render());
+//		case(2):
+//			return ok(views.html.secured.question.multiplechoicequestion.render());
+//		}
+//		}
 		return ok(views.html.statics.blank.render());
 	}
 	

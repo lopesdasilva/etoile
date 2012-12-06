@@ -163,8 +163,7 @@ public class Profile extends Controller {
 				module, form(OpenQuestionSuggestion.class)));
 	}
 
-	public static Result test(Long test_id, String lesson_acronym,
-			String module_acronym) {
+	public static Result test(Long test_id, String lesson_acronym,String module_acronym) {
 		List<Category> categories = Category.getAllCategories();
 		Test test = models.test.Test.find.byId(test_id);
 		//DEBUG
@@ -215,6 +214,30 @@ public class Profile extends Controller {
 
 	}
 
+	
+	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
+		Test test = models.test.Test.find.byId(test_id);
+		User user = User.find.byId(request().username());
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		System.out.println("A imprimir as questoes");
+		for (Question q: test.questions){
+		System.out.println(q.question);
+		}
+		Question question = test.questions.get(question_number-1);
+		if (question!=null){
+		switch (question.typeOfQuestion){
+		case(0):
+			return ok(views.html.secured.question.openquestion.render(user,module,lesson,test,question));
+		case(1):
+			return ok(views.html.secured.question.onechoicequestion.render());
+		case(2):
+			return ok(views.html.secured.question.multiplechoicequestion.render());
+		}
+		}
+		return ok(views.html.statics.blank.render());
+	}
+	
 	public static Result lesson(String lesson_acronym, String module_acronym) {
 
 		List<Category> categories = Category.getAllCategories();

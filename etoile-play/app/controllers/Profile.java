@@ -220,23 +220,16 @@ public class Profile extends Controller {
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		
+		if (question_number<=test.groups.size() && question_number>0){
 		System.out.println("A imprimir as questoes");
-//		
-//		for (Question q: test.questions){
-//		System.out.println(q.question);
-//		}
-//		Question question = test.questions.get(question_number-1);
-//		if (question!=null){
-//		switch (question.typeOfQuestion){
-//		case(0):
-//			return ok(views.html.secured.question.openquestion.render(user,module,lesson,test,question));
-//		case(1):
-//			return ok(views.html.secured.question.onechoicequestion.render());
-//		case(2):
-//			return ok(views.html.secured.question.multiplechoicequestion.render());
-//		}
-//		}
-		return ok(views.html.statics.blank.render());
+		
+		QuestionGroup group = test.groups.get(question_number-1);
+		
+		return ok(views.html.secured.question.question.render(user,module,lesson,test,group));
+		}
+		else
+			return badRequest("Error finding your question");
 	}
 	
 	public static Result lesson(String lesson_acronym, String module_acronym) {

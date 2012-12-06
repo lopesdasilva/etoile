@@ -1,4 +1,4 @@
-@(user: User,module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, question: models.test.question.Question)
+@(user: User,module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup)
 @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -41,7 +41,6 @@
 </div>
 
 <div class="container">
-
 	<div class="well  ">
 	
 	
@@ -55,19 +54,29 @@
 <div class="row-fluid">
 		<div class="span11">
 			<h3>
-				Question 1<small><a href="#">URLs to help you answer this question</a></small>
+				Group @group.number
 			</h3>
 		</div>
 </div>
 <div class="row-fluid">
 		<div class="span11">
-			<p>@question.question</p>
+			<p>@group.question</p>
 		</div>
 </div>
+<hr>
+<div class="offset1">
+@for(question <- group.questions) {
+<div class="row-fluid">
+<h4>Question @question.number<small><a href="#">URLs to help you answer this question</a></small></h4>
+<p>@question.question</p>
+</div>
+
+@if(question.typeOfQuestion==0){
 		<div class="row-fluid">
+		
 				<div class="span6">
-					<textarea class="span50" rows="10" name="qanswer"
-									> ` int_0^1 f(x) dx`</textarea>
+				
+					<textarea class="span50" rows="10" name="qanswer">` int_0^1 f(x) dx`</textarea>
 				</div>
 				<div class="span6">
 				<div class="alert alert-block alert-success">
@@ -78,22 +87,64 @@
 
 			</div>
 			</div>
+			}
+
+@if(question.typeOfQuestion==1){
+<div class="row-fluid ">
+		<div class="span10 offset1 ">
+		<p class="text-warning"><span class="label label-warning">Warning</span>Only one answer is the correct one.</p>
+		
+		<div class="alert alert-info">
+		@for(hypothesis <- question.hypothesislist){
+<label class="radio">
+  <input type="radio" name="optionsRadios" id="optionRadios" value="option1">
+   @hypothesis.text
+</label>
+}
+
+</div>
+</div>
+			</div>	
+			}
+			@if(question.typeOfQuestion==2){
+			<div class="row-fluid ">
+				<div class="span10 offset1 ">
+					<p class="text-warning">
+						<span class="label label-warning">Warning</span>Multiple answers <strong>can</strong>
+						be the correct one.
+					</p>
+
+					<div class="alert alert-info">
+					@for(hypothesis <- question.hypothesislist){
+						<label class="checkbox"> <input type="checkbox"
+							name="optionsRadios" id="optionsRadios1" value="option1">
+							@hypothesis.text
+						</label>
+						}
+					</div>
+				</div>
+			</div>
+			}
+			
+			
+			<hr>
+			}
+			</div>
+	
 		<div class="row-fluid">
 		     <div class="pagination pagination-centered pagination-small">
               <ul>
-                <li class="disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
+                @for(group_aux<-test.groups){
+                @if(group.number==group_aux.number){
+                  <li class="active"><a>@group_aux.number</a></li>
+                }
+                @if(group.number!=group_aux.number){
+                <li><a href="@routes.Profile.question(group_aux.number,test.id, lesson.acronym,module.acronym)">@group_aux.number</a></li>
+                }
+              }
               </ul>
             </div>
           </div>
 		</div>
-		
-		
-		
 	</div>
 }

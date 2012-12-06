@@ -67,8 +67,23 @@
 <div class="offset1">
 @for(question <- group.questions) {
 <div class="row-fluid">
-<h4>Question @question.number<small><a href="#">URLs to help you answer this question</a></small></h4>
+<div class="span2">
+<h4>Question @question.number</h4>
+</div>
+<div class="span4 pull-right">
+<div class="btn-group">
+                <button class="btn btn-mini btn-info  dropdown-toggle" data-toggle="dropdown">URLs to help you answer this question<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">View top</a></li>
+                  <li><a href="#">View All</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Add new</a></li>
+                </ul>
+              </div><!-- /btn-group -->
+              </div>
+              <div class="span11">
 <p>@question.question</p>
+</div>
 </div>
 
 @if(question.typeOfQuestion==0){

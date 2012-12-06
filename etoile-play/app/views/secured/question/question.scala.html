@@ -83,6 +83,17 @@
               </div>
               <div class="span11">
 <p>@question.question</p>
+@if(question.imageURL!=null){
+<div class="alert">
+<strong data-toggle="collapse" data-target="#@question.id">Click to expand and view media</strong>
+<button type="button" class="close" data-toggle="collapse" data-target="#@question.id">
+  -
+</button>
+ 
+<div id="@question.id" class="collapse"><p><img src="@question.imageURL"  /></p> </div>
+
+</div>
+}			
 </div>
 </div>
 

@@ -42,34 +42,34 @@ public class Global extends GlobalSettings {
 			
 			Question q = new Question();
 			q.question = " What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ?";
-			q.imageURL= "http://www.psdgraphics.com/wp-content/uploads/2009/04/growth-chart.jpg";
+			q.imageURL= "http://www.polymath-software.com/PolymathHelp/MatlabGraph.jpg";
 			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
 			q.typeOfQuestion = 0;
 			q.number = 1;
 			q.save();
 			
 			Hypothesis hyp_one = new Hypothesis();
-			hyp_one.text = "Hypothesis 1";
+			hyp_one.text = "a) `d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`	";
 			hyp_one.number = 0;
 			hyp_one.save();
 			
 			Hypothesis hyp_two = new Hypothesis();
-			hyp_two.text = "Hypothesis 2";
+			hyp_two.text = "b) `f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`";
 			hyp_two.number = 1;
 			hyp_two.save();
 			
 			Hypothesis hyp_three = new Hypothesis();
-			hyp_three.text = "Hypothesis 3";
+			hyp_three.text = "c) `(a,b]={x in RR | a < x <= b}`";
 			hyp_three.number = 2;
 			hyp_three.save();
 			
 			Hypothesis hyp_four = new Hypothesis();
-			hyp_four.text = "Hypothesis 4";
+			hyp_four.text = "d) `hat(ab) bar(xy) ulA vec v dotx ddot y`";
 			hyp_four.number = 3;
 			hyp_four.save();
 			
 			Question q_two = new Question();
-			q_two.question= "This is the First One Choice Question.";
+			q_two.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
 			q_two.typeOfQuestion =1;
 			q_two.hypothesislist.add(hyp_one);
 			q_two.hypothesislist.add(hyp_two);
@@ -88,7 +88,7 @@ public class Global extends GlobalSettings {
 			hyp_four.save();
 			
 			Question q_three = new Question();
-			q_three.question= "This is the First Multiple Choice Question.";
+			q_three.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
 			q_three.typeOfQuestion = 2;
 			q_three.number = 1;
 			q_three.save();
@@ -129,19 +129,19 @@ public class Global extends GlobalSettings {
 			hypothesis_zero.save();
 			
 			Hypothesis hypothesis_one = new Hypothesis();
-			hypothesis_one.text = "H1";
+			hypothesis_one.text = "a) `int_0^1f(x)dx`";
 			hypothesis_one.number = 0;
 			hypothesis_one.question = q_three;
 			hypothesis_one.save();
 			
 			Hypothesis hypothesis_two = new Hypothesis();
-			hypothesis_two.text = "H2";
+			hypothesis_two.text = "b) `[[a,b],[c,d]]((n),(k))`	";
 			hypothesis_two.number = 1;
 			hypothesis_two.question = q_three;
 			hypothesis_two.save();
 			
 			Hypothesis hypothesis_three = new Hypothesis();
-			hypothesis_three.text = "H3";
+			hypothesis_three.text = "c) `x/x={(1,if x!=0),(text{undefined},if x=0):}`	";
 			hypothesis_three.number = 2;
 			hypothesis_three.question = q_three;
 			hypothesis_three.save();
@@ -149,14 +149,14 @@ public class Global extends GlobalSettings {
 			
 			// TESTS ++++++++++++++++++++++++++++++++++++++++++++
 			QuestionGroup g = new QuestionGroup();
-			g.question = "First Group";
+			g.question = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor.";
 			g.questions.add(q);
 			g.questions.add(q_two);
 			g.number = 1;
 			g.save();
 			
 			QuestionGroup g_two = new QuestionGroup();
-			g_two.question = "Second Group";
+			g_two.question = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor.";
 			g_two.questions.add(q_three);
 			g_two.number = 2;
 			g_two.save();

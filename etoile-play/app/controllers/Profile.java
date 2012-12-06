@@ -19,6 +19,7 @@ import models.test.ChoiceAnswer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
+import models.test.question.QuestionGroup;
 import play.data.Form;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -166,12 +167,18 @@ public class Profile extends Controller {
 			String module_acronym) {
 		List<Category> categories = Category.getAllCategories();
 		Test test = models.test.Test.find.byId(test_id);
+		//DEBUG
+		for(QuestionGroup g : test.groups){
+			System.out.println("GROUP: " + g.question);
+		}
+		
 		User user = User.find.byId(request().username());
 
 		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
 				test_id);
 		if (test_answers.isEmpty()) {
-			for (Question q : test.questions) {
+			for(QuestionGroup g: test.groups){
+			for (Question q : g.questions) {
 				if (q.typeOfQuestion == 0) {
 					Answer empty_answer = new Answer();
 					empty_answer.answer = "No answer.";
@@ -182,6 +189,7 @@ public class Profile extends Controller {
 					test.answers.add(empty_answer);
 					test.save();
 				}
+			}
 			}
 		}
 
@@ -199,9 +207,7 @@ public class Profile extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 
-		for (Question que : test_aux.questions) {
-			System.out.println(que.typeOfQuestion);
-		}
+
 
 		return ok(views.html.secured.test.render(user, module, lesson,
 				categories, test_aux, form(QuestionAnswer.class),

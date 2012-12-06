@@ -8,6 +8,7 @@ import models.Comment;
 import models.manytomany.UserTest;
 import models.module.Lesson;
 import models.test.question.Question;
+import models.test.question.QuestionGroup;
 
 import com.avaje.ebean.Ebean;
 
@@ -37,7 +38,7 @@ public class Test extends Model{
 	public Lesson lesson;
 	
 	@OneToMany
-	public List<Question> questions;
+	public List<QuestionGroup> groups;
 	
 	@OneToMany
 	public List<Answer> answers;

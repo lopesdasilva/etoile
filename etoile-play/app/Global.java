@@ -22,6 +22,7 @@ import models.module.University;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
+import models.test.question.QuestionGroup;
 import models.test.question.enums.QuestionType;
 
 public class Global extends GlobalSettings {
@@ -44,6 +45,7 @@ public class Global extends GlobalSettings {
 			q.imageURL= "http://www.psdgraphics.com/wp-content/uploads/2009/04/growth-chart.jpg";
 			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
 			q.typeOfQuestion = 0;
+			q.number = 1;
 			q.save();
 			
 			Hypothesis hyp_one = new Hypothesis();
@@ -73,6 +75,7 @@ public class Global extends GlobalSettings {
 			q_two.hypothesislist.add(hyp_two);
 			q_two.hypothesislist.add(hyp_three);
 			q_two.hypothesislist.add(hyp_four);
+			q_two.number = 2;
 			q_two.save();
 			
 			hyp_one.question = q_two;
@@ -87,6 +90,7 @@ public class Global extends GlobalSettings {
 			Question q_three = new Question();
 			q_three.question= "This is the First Multiple Choice Question.";
 			q_three.typeOfQuestion = 2;
+			q.number = 1;
 			q_three.save();
 			
 			
@@ -144,24 +148,30 @@ public class Global extends GlobalSettings {
 			
 			
 			// TESTS ++++++++++++++++++++++++++++++++++++++++++++
+			QuestionGroup g = new QuestionGroup();
+			g.question = "First Group";
+			g.questions.add(q);
+			g.questions.add(q_two);
+			g.number = 1;
+			g.save();
+			
+			QuestionGroup g_two = new QuestionGroup();
+			g_two.question = "Second Group";
+			g_two.questions.add(q_three);
+			g_two.number = 2;
+			g_two.save();
 			
 			Test test_one = new Test();
 			test_one.name = "First Sum Test";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			test_one.questions.add(q);
-			test_one.questions.add(q_two);
-			test_one.questions.add(q_three);
 			test_one.save();
 			
-			q.test = test_one;
-			q.save();
+			g.test = test_one;
+			g.save();
 			
-			q_two.test = test_one;
-			q_two.save();
-			
-			q_three.test = test_one;
-			q_three.save();
+			g_two.test = test_one;
+			g_two.save();
 			
 			Test test_two = new Test();
 			test_two.name="Final Sum Test";

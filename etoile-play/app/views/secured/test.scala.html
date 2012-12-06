@@ -50,10 +50,11 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 
 		<div class="span3  sidebar-nav">
 			<ul class="nav well nav-list affix">
-				<li class="nav-header">@test.name</li> @for(question
-				<-test.questions) {
+				<li class="nav-header">@test.name</li> 
+				@for(group <- test.groups){
+				@for(question <- group.questions) {
 				<li><a href="#@question.id"><i class="icon-chevron-right"></i>Question
-						@question.id</a></li> }
+						@question.id</a></li> }}
 
 
 			</ul>
@@ -64,11 +65,12 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 		<div class="span9">
 			<div class="page-header">
 				<h1>@test.name</h1>
-
-				@for(question <- test.questions) { @if(question.typeOfQuestion==0){
+				@for(group <- test.groups){
+				@group.question
+				@for(question <- group.questions) { @if(question.typeOfQuestion==0){
 				<section id="@question.id">
 					<div class="well">
-						<h4>Question @question.id</h4>
+						<h4>Question @question.number</h4>
 						<p>@question.question</p>
 						@if(question.imageURL!= null || question.videoURL!=null){
 						<ul class="thumbnails">
@@ -108,7 +110,7 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 				 } @if(question.typeOfQuestion==1){
 				<section id="@question.id">
 					<div class="well">
-						<h4>Question @question.id</h4>
+						<h4>Question @question.number</h4>
 						<p>@question.question</p>
 						@if(question.imageURL!= null || question.videoURL!=null){
 						<ul class="thumbnails">
@@ -174,7 +176,7 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 
 				<section id="@question.id">
 					<div class="well">
-						<h4>Question @question.id</h4>
+						<h4>Question @question.number</h4>
 						<p>@question.question</p>
 						@if(question.imageURL!= null || question.videoURL!=null){
 						<ul class="thumbnails">
@@ -241,7 +243,7 @@ Form[Profile.OneChoiceQuestionAnswer]) @import helper._
 				</section>
 
 
-				} }
+				} } }
 
 
 			</div>

@@ -30,27 +30,19 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 @Entity
-public class Question extends Model {
+public class QuestionGroup extends Model {
 	
 	//ASSOCIAÕES
 	
 	@ManyToOne
-	public Lesson lesson;
+	public Test test;
 	
-	@ManyToOne
-	public User user;
-	//ARGUMENTOS COMUNS
-	@ManyToMany(mappedBy="questions")
-	List<QuestionGroup> group;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	public List<Question> questions;
+	
 	@Id
 	@GeneratedValue
 	public Long id;
-	
-	@Constraints.Required
-    @Formats.NonEmpty
-	public int number;
-	
-	public int typeOfQuestion;
 	
 	@Constraints.Required
     @Formats.NonEmpty
@@ -61,21 +53,12 @@ public class Question extends Model {
 	
 	@Constraints.Required
 	public String videoURL;
-
 	
-	//ARGUMENTOS OPEN QUESTION
-		@OneToMany
-		List<Answer> openanswers;
-		
-	//ARGUMENTOS ONE CHOICE QUESTION
-		
-	@OneToMany
-	List<ChoiceAnswer> choiceanswers;
-		
-	@OneToMany
-	public List<Hypothesis> hypothesislist;
+	@Constraints.Required
+    @Formats.NonEmpty
+	public int number;
 	
 	
-	public static Model.Finder<Long, Question> find = new Model.Finder<Long, Question>(
-			Long.class, Question.class);
+	public static Model.Finder<Long, QuestionGroup> find = new Model.Finder<Long, QuestionGroup>(
+			Long.class, QuestionGroup.class);
 }

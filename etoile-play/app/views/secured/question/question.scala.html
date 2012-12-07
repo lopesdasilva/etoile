@@ -1,6 +1,6 @@
 @(user: User,module: models.module.Module, lesson: models.module.Lesson,
-test: models.test.Test, group: models.test.question.QuestionGroup, usertest: models.manytomany.UserTest)
-@main("etoile"){
+test: models.test.Test, group: models.test.question.QuestionGroup,
+usertest: models.manytomany.UserTest) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -76,10 +76,13 @@ test: models.test.Test, group: models.test.question.QuestionGroup, usertest: mod
 							URLs to help you answer this question<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href="#URLTop@question.number" data-toggle="modal">View top</a></li>
-							<li><a href="#URLALL@question.number" data-toggle="modal">View All</a></li>
+							<li><a href="#URLTop@question.number" data-toggle="modal">View
+									top</a></li>
+							<li><a href="#URLALL@question.number" data-toggle="modal">View
+									All</a></li>
 							<li class="divider"></li>
-							<li><a href="#ADDURL@question.number" data-toggle="modal">Add new</a></li>
+							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
+									new</a></li>
 						</ul>
 					</div>
 					<!-- /btn-group -->
@@ -289,42 +292,46 @@ test: models.test.Test, group: models.test.question.QuestionGroup, usertest: mod
 				</div>
 				<!-- END All URL Modal -->
 
-	<!-- ALL URL Modal -->
+				<!-- ALL URL Modal -->
 				<div id="ADDURL@question.number" class="modal hide fade">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">X</button>
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-					  <form class="form-horizontal">
-					<fieldset>
-						<div class="control-group">
+						<form class="form-horizontal">
+							<fieldset>
+								<div class="control-group">
 
-							<!-- Text input-->
-							<label class="control-label" for="input01">New URL</label>
-							<div class="controls">
-								<input type="text" placeholder="Insert the new URL"
-									class="input-xlarge">
-								<p class="help-block">A valid URL that you used to answer
-									this question</p>
-							</div>
-						</div>
+									<!-- Text input-->
+									<label class="control-label" for="input01">New URL</label>
+									<div class="controls">
+										<input type="text" placeholder="Insert the new URL"
+											class="input-xlarge">
+										<p class="help-block">A valid URL that you used to answer
+											this question</p>
+									</div>
+								</div>
 
-						<div class="control-group">
-							<label class="control-label"></label>
+								<div class="control-group">
+									<label class="control-label"></label>
 
-							<!-- Button -->
-							<div class="controls">
-								<button class="btn btn-success">Add</button>
-							</div>
-						</div>
-						</fieldset>
+									<!-- Button -->
+									<div class="controls">
+										<button class="btn btn-success">Add</button>
+									</div>
+								</div>
+							</fieldset>
 						</form>
 					</div>
 				</div>
 				<!-- END All URL Modal -->
 
 
+
+			</div>
+
+			<div class="row-fluid">
 				<div class="span11">
 					<p>@question.question</p>
 					@if(question.imageURL!=null || question.videoURL!=null){
@@ -361,21 +368,21 @@ test: models.test.Test, group: models.test.question.QuestionGroup, usertest: mod
 
 				</div>
 			</div>
-
 			@if(question.typeOfQuestion==0){
 			<div class="row-fluid">
+				<div class="span11">
+					<div class="span6">
 
-				<div class="span6">
-
-					<textarea class="span50" rows="10" name="qanswer">` int_0^1 f(x) dx`</textarea>
-				</div>
-				<div class="span6">
-					<div class="alert alert-block alert-success">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						<h4>Your answer</h4>
-						` int_0^1 f(x) dx`
+						<textarea class="span50" rows="10" name="qanswer">` int_0^1 f(x) dx`</textarea>
 					</div>
+					<div class="span6">
+						<div class="alert alert-block alert-success">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<h4>Your answer</h4>
+							` int_0^1 f(x) dx`
+						</div>
 
+					</div>
 				</div>
 			</div>
 			} @if(question.typeOfQuestion==1){
@@ -414,7 +421,13 @@ test: models.test.Test, group: models.test.question.QuestionGroup, usertest: mod
 			</div>
 			}
 
-
+			<div class="row-fluid">
+				<div class="span11">
+					<p>
+						<button class="btn btn-success pull-right" type="button">Save</button>
+					</p>
+				</div>
+			</div>
 			<hr>
 			}
 		</div>

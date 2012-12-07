@@ -47,7 +47,7 @@
 	<div class="row-fluid">
 		<div class="span4">
 			<div class="progress">
-				<div class="bar"  style="width: 10%;"></div>
+				<div class="bar"  style="width:10%;"></div>
 			</div>
 		</div>
 </div>
@@ -83,17 +83,38 @@
               </div>
               <div class="span11">
 <p>@question.question</p>
-@if(question.imageURL!=null){
+@if(question.imageURL!=null || question.videoURL!=null){
 <div class="alert">
 <strong data-toggle="collapse" data-target="#@question.id">Click to expand and view media</strong>
 <button type="button" class="close" data-toggle="collapse" data-target="#@question.id">
   -
 </button>
  
-<div id="@question.id" class="collapse"><p><img src="@question.imageURL"  /></p> </div>
+<div id="@question.id" class="collapse row-fluid">
+@if(question.imageURL!=null){
+<div class="span6">
+<p><img src="@question.imageURL" height="300"  /></p>
+</div> 
+}
+@if(question.videoURL!=null){
+<div class="span6">
+	<p>
+								<object style="float: none;">
+									<param name="movie"
+										value="@module.videoURL" />
+									<embed src="@question.videoURL"
+										type="application/x-shockwave-flash" wmode="transparent"
+										height="300" >
+								</object>
+
+							</p>
+							</div>
+							}		
+</div>
 
 </div>
-}			
+}	
+
 </div>
 </div>
 

@@ -68,12 +68,12 @@ public class Question extends Model {
 	
 	//ARGUMENTOS OPEN QUESTION
 		@OneToMany
-		List<Answer> openanswers;
+	List<Answer> openanswers;
 		
 	//ARGUMENTOS ONE CHOICE QUESTION
 		
 	@OneToMany
-	List<ChoiceAnswer> choiceanswers;
+	public List<ChoiceAnswer> choiceanswers;
 		
 	@OneToMany
 	public List<Hypothesis> hypothesislist;

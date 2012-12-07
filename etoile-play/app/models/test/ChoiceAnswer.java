@@ -19,7 +19,7 @@ public class ChoiceAnswer extends Model {
 	@Id
 	@GeneratedValue
 	public Long id;
-
+	
 	@ManyToOne
 	public Question question;
 
@@ -28,6 +28,7 @@ public class ChoiceAnswer extends Model {
 
 	@ManyToOne
 	public User user;
+	
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Hypothesis> hypothesislist;

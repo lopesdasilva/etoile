@@ -228,7 +228,75 @@ public class Profile extends Controller {
 		
 		QuestionGroup group = test.groups.get(question_number-1);
 		
-		return ok(views.html.secured.question.question.render(user,module,lesson,test,group,usertest));
+		QuestionGroup group_aux = new QuestionGroup();
+		group_aux=new QuestionGroup();
+		group_aux.id = group.id;
+		group_aux.imageURL = group.imageURL;
+		group_aux.number = group.number;
+		group_aux.question = group.question;
+		group_aux.test = group.test;
+		group_aux.videoURL = group.videoURL;
+		
+		System.out.println("Group_aux created");
+		
+		for(Question q: group.questions){
+			Question q_aux = new Question();
+			q_aux.id = q.id;
+			q_aux.imageURL = q.imageURL;
+			q_aux.lesson = q.lesson;
+			q_aux.number = q.number;
+			q_aux.question = q.question;
+			q_aux.typeOfQuestion = q.typeOfQuestion;
+			q_aux.user = q.user;
+			q_aux.videoURL = q.videoURL;
+			//q_aux.hypothesislist?????
+			group_aux.questions.add(q_aux);
+			System.out.println("QUESTION: "+q.id);
+			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
+			List<ChoiceAnswer> choiceanswers = ChoiceAnswer.findByUserEmailAndTestId(user.email, test.id);
+			System.out.println("Question_aux created: " + choiceanswers.size());
+					for (Hypothesis h : q.hypothesislist) {
+						boolean searching = true;
+						Hypothesis new_hypothesis = new Hypothesis();
+						new_hypothesis.answer = h.answer;
+						new_hypothesis.id = h.id;
+						new_hypothesis.isCorrect = h.isCorrect;
+						new_hypothesis.number = h.number;
+						new_hypothesis.question = h.question;
+						new_hypothesis.questionImageURL = h.questionImageURL;
+						new_hypothesis.text = h.text;
+						
+						for (ChoiceAnswer ca : choiceanswers) {
+							if (ca.question.id == q.id) {
+								for (Hypothesis h_answered : ca.hypothesislist) {
+									if (h_answered.id==h.id && searching == true) {
+										System.out.println("#####DEBUGGGGG####: "+ h.id + " = "+ h_answered.id);
+										new_hypothesis.selected = true;
+										searching = false;
+										q_aux.hypothesislist.add(new_hypothesis);
+										System.out.println("Hypothesis_aux added");
+									}
+
+								}
+							}
+						}
+						System.out.println(searching);
+						if (searching==true) {
+							new_hypothesis.selected = false;
+							q_aux.hypothesislist.add(new_hypothesis);
+							searching=false;
+						}
+					}
+			for(Hypothesis h: q_aux.hypothesislist){
+				System.out.println("LIST:" + h.id + "SELECTED: " + h.selected);
+			}
+			}
+			
+			
+			}
+		
+		
+		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
 		else
 			return ok(views.html.statics.error.render());

@@ -112,6 +112,7 @@ create table hypothesis (
   is_correct                tinyint(1) default 0,
   question_image_url        varchar(255),
   question_id               bigint,
+  selected                  tinyint(1) default 0,
   constraint pk_hypothesis primary key (id))
 ;
 

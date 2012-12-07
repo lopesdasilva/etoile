@@ -38,6 +38,7 @@ public class Hypothesis extends Model{
 	@ManyToOne
 	public Question question;
 
+	public boolean selected;
 	
 	public static Model.Finder<Long, Hypothesis> find = new Model.Finder<Long, Hypothesis>(
 			Long.class, Hypothesis.class);

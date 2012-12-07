@@ -241,6 +241,7 @@ create table user_test (
   expired                   tinyint(1) default 0,
   user_email                varchar(255),
   test_id                   bigint,
+  progress                  varchar(255),
   constraint pk_user_test primary key (id))
 ;
 

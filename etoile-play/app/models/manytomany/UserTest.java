@@ -41,6 +41,8 @@ public class UserTest extends Model{
 	@ManyToOne
 	public Test test;
 	
+	public String progress="0%";
+	
 	
 	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(
 			Long.class, UserTest.class);

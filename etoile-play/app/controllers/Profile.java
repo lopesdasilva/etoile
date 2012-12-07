@@ -220,13 +220,15 @@ public class Profile extends Controller {
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		UserTest usertest = UserTest.findByUserAndTest(user.email,
+				test.id);
 		
 		if (question_number<=test.groups.size() && question_number>0){
 		System.out.println("A imprimir as questoes");
 		
 		QuestionGroup group = test.groups.get(question_number-1);
 		
-		return ok(views.html.secured.question.question.render(user,module,lesson,test,group));
+		return ok(views.html.secured.question.question.render(user,module,lesson,test,group,usertest));
 		}
 		else
 			return badRequest("Error finding your question");

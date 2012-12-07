@@ -23,6 +23,7 @@ import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionGroup;
+import models.test.question.URL;
 import models.test.question.enums.QuestionType;
 
 public class Global extends GlobalSettings {
@@ -521,6 +522,65 @@ public class Global extends GlobalSettings {
 			soccat.save();
 			
 			
+			URL url1= new URL();
+			url1.adress="http://www.google.com";
+			url1.description="A missão da Google é organizar a informação do mundo e torná-la universalmente acessível e útil.";
+			url1.imageURL="http://icons.iconarchive.com/icons/graphics-vibe/simple-rounded-social/256/google-icon.png";
+			url1.name="Google";		
+			url1.likes=9;
+			url1.question=q;
+			url1.user=user;
+			url1.save();
+			
+			
+			URL url2= new URL();
+			url2.adress="http://www.twitter.com/";
+			url2.description="A forma mais rápida e simples de ficar perto de tudo que você gosta.";
+			url2.imageURL="http://cdn1.iconfinder.com/data/icons/yooicons_set01_socialbookmarks/512/social_twitter_box_blue.png";
+			url2.name="Twitter";
+			url2.likes=53;
+			url2.question=q;
+			url2.user=user;
+			url2.save();
+			
+			URL url3= new URL();
+			url3.adress="http://www.facebook.com/";
+			url3.description="O Facebook é uma aplicação social que liga pessoas a amigos e a outros com quem trabalham, estudam ou vivem.";
+			url3.imageURL="http://2.bp.blogspot.com/-52-7unEYeD0/TWr7rccZ_KI/AAAAAAAAAhk/qOqfeFD8FzM/s1600/Facebook-icon.png";
+			url3.name="Facebook";
+			url3.likes=50;
+			url3.question=q;
+			url3.user=user;
+			url3.save();
+			
+			URL url4= new URL();
+			url4.adress="http://www.sapo.pt/";
+			url4.description="Portal com directório que usa o Open Directory Project.";
+			url4.imageURL="https://www.lusoaloja.pt/images/sapo.png";
+			url4.name="Sapo";
+			url4.question=q;
+			url4.user=user;
+			url4.save();
+			
+			URL url5= new URL();
+			url5.adress="http://www.paypal.com/";
+			url5.description="Send money and shop online. Shop securely without revealing your credit card or bank account information; Pay conveniently and quickly when you shop online.";
+			url5.imageURL="http://www.stoneage.pt/content/tiny_images/Paypal_stoneage%20technology.JPG";
+			url5.name="Paypal";
+			url5.likes=23;
+			url5.question=q;
+			url5.user=user;
+			url5.save();
+			
+			URL url6= new URL();
+			url6.adress="http://www.amazon.co.uk/";
+			url6.description="Online retailer of books, movies, music and games along with electronics, toys, apparel, sports, tools, groceries and general home and garden items.";
+			url6.imageURL="http://www.eastbayexpress.com/binary/2449/1347917999-amazon.jpg";
+			url6.name="Amazon";
+			url6.likes=100;
+			url6.question=q;
+			url6.user=user;
+			url6.save();
 		}
 	}
 

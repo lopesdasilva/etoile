@@ -1,5 +1,7 @@
 package models.test.question;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +18,7 @@ import javax.persistence.OneToOne;
 
 
 import models.Blog;
+import models.Comment;
 import models.User;
 import models.module.Lesson;
 import models.test.Answer;
@@ -75,7 +78,24 @@ public class Question extends Model {
 	@OneToMany
 	public List<Hypothesis> hypothesislist;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	public List<URL> urls;
+	
 	
 	public static Model.Finder<Long, Question> find = new Model.Finder<Long, Question>(
 			Long.class, Question.class);
+	
+
+	
+	public List<URL> getTopUrls(long question_id) {
+		List<URL> aux=	URL.findByQuestion(question_id);
+		if(aux.size()>0){
+			Collections.sort(aux);
+			if(aux.size()>5){
+				aux=aux.subList(0, 4);
+			}
+		}
+		
+		return aux;
+	}
 }

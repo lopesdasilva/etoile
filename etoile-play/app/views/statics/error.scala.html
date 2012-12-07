@@ -1,5 +1,7 @@
-@(categories: List[models.curriculum.Category]) 
+
 @main("etoile"){
+
+
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -21,9 +23,9 @@
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a>
 					</li>
-					<li><a href="/about">About</a>
+					<li class="active"><a href="/about">About</a>
 					</li>
-					<li class="active"><a href="/contact">Contact</a>
+					<li><a href="/contact">Contact</a>
 					</li>
 				</ul>
 				<!--  
@@ -41,42 +43,10 @@
 		</div>
 	</div>
 </div>
-
-<div class="container-fluid">
-<div class="row-fluid">
-	<div class="span3">
-		<div class="well sidebar-nav">
-			<ul class="nav nav-list">
-				<li class="nav-header">Categories (@categories.size)</li>
-				@for(category <- categories) {
-									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
-
-			</ul>
-		</div>
-		<!--/.well -->
-	</div>
-	<!--/span-->
-
-			<div class="span9">
-		<div class="page-header">
-			<h2>
-				Contact étoile <br>
-				<small>Enhanced Technology for Open Intelligent Learning
-					Environments</small>
-			</h2>
-
-		</div>
-		
-			<address>
-				<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-				San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr> (123)
-				456-7890
-			</address>
-
-			<address>
-				<strong>Full Name</strong><br> <a href="mailto:#">first.last[at]gmail.com</a>
-			</address>
-		</div>
-	</div>
-</div>
+    
+  <div class="container">
+        <h1>Sorry, that page doesn't exist!</h1>
+        <p class="lead">Thanks for noticing - we're going to fix it up and have things back to normal soon.</p>
+        <a class="btn btn-large btn-success" href="/">return home</a>
+      </div>
 }

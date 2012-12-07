@@ -231,7 +231,7 @@ public class Profile extends Controller {
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group,usertest));
 		}
 		else
-			return badRequest("Error finding your question");
+			return ok(views.html.statics.error.render());
 	}
 	
 	public static Result lesson(String lesson_acronym, String module_acronym) {

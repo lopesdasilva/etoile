@@ -7,6 +7,7 @@ import javax.persistence.*;
 import models.test.Answer;
 import models.test.ChoiceAnswer;
 import models.test.question.Question;
+import models.test.question.URL;
 import models.manytomany.UserTest;
 import models.module.Module;
 
@@ -73,6 +74,10 @@ public class User extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<UserTest> tests;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<URL> urls;
+	
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

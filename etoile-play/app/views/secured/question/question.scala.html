@@ -95,19 +95,17 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 						<h3 id="myModalLabel">Top 5</h3>
 					</div>
 					<div class="modal-body">
+					@for(url<- question.getTopUrls(question.id)){
 						<div class="well">
 							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
+								<a class="pull-left" href="@url.adress"> <img class="media-object"
+									src="@url.imageURL" height="70" width="70">
 								</a>
 								<div class="media-body">
 									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
+										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+										<div class="media pull-right">@url.likes likes</div>
+										<small>@url.adress</small></br> </br>@url.description
 										<button class="btn btn-mini btn-primary pull-right">Like</button>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
@@ -117,75 +115,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 								</div>
 							</div>
 						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
+						}
 					</div>
 				</div>
 				<!-- END TOP 5Modal -->
@@ -197,19 +127,17 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 						<h3 id="myModalLabel">All</h3>
 					</div>
 					<div class="modal-body">
+					@for(url<- question.urls){
 						<div class="well">
 							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
+								<a class="pull-left" href="@url.adress"> <img class="media-object"
+									src="@url.imageURL" height="70" width="70">
 								</a>
 								<div class="media-body">
 									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
+										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+										<div class="media pull-right">@url.likes likes</div>
+										<small>@url.adress</small></br> </br>@url.description
 										<button class="btn btn-mini btn-primary pull-right">Like</button>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
@@ -219,75 +147,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 								</div>
 							</div>
 						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-
-						<div class="well">
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="http://placehold.it/64x64">
-								</a>
-								<div class="media-body">
-									<div>
-										<a href="#"><h4 class="media-heading">Example Math
-												URL</h4></a>
-										<div class="media pull-right">10 likes</div>
-										<small>www.example.pt/math</small></br> </br>Cras sit amet nibh libero,
-										in gravida nulla. Nulla vel metus scelerisque ante
-										sollicitudin commodo.
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
-										<!-- Nested media object -->
-										<!-- <div class="media pull-right"></div> -->
-									</div>
-
-
-								</div>
-							</div>
-						</div>
+						}
 					</div>
 				</div>
 				<!-- END All URL Modal -->

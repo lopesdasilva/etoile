@@ -264,8 +264,9 @@ public class Profile extends Controller {
 					new_h.user=user;
 					new_h.save();
 				}
+				hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 			}
-
+			
 			q_aux.hypothesislist=hypothesis_aux;
 			q=q_aux;
 			}

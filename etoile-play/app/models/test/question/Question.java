@@ -17,12 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
-import models.Blog;
-import models.Comment;
+
 import models.User;
 import models.module.Lesson;
 import models.test.Answer;
-import models.test.ChoiceAnswer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.enums.QuestionType;
@@ -67,14 +65,11 @@ public class Question extends Model {
 
 	
 	//ARGUMENTOS OPEN QUESTION
-		@OneToMany
-	List<Answer> openanswers;
+	@OneToOne
+	public Answer openanswer;
 		
 	//ARGUMENTOS ONE CHOICE QUESTION
-		
-	@OneToMany
-	public List<ChoiceAnswer> choiceanswers;
-		
+
 	@OneToMany
 	public List<Hypothesis> hypothesislist;
 	

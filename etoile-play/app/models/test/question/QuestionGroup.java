@@ -19,7 +19,6 @@ import models.Blog;
 import models.User;
 import models.module.Lesson;
 import models.test.Answer;
-import models.test.ChoiceAnswer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.enums.QuestionType;

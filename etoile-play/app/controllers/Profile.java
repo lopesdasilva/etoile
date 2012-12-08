@@ -15,7 +15,6 @@ import models.module.Module;
 import models.module.Lesson;
 import models.module.University;
 import models.test.Answer;
-import models.test.ChoiceAnswer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -192,13 +191,10 @@ public class Profile extends Controller {
 			}
 		}
 
-		List<ChoiceAnswer> test_choiceanswers = ChoiceAnswer
-				.findByUserEmailAndTestId(user.email, test_id);
 		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
 				test_id);
 
 		Test test_aux = test;
-		test_aux.choiceanswers = test_choiceanswers;
 		test_aux.answers = openanswers;
 
 		System.out.println(test.answers);
@@ -249,48 +245,35 @@ public class Profile extends Controller {
 			q_aux.typeOfQuestion = q.typeOfQuestion;
 			q_aux.user = q.user;
 			q_aux.videoURL = q.videoURL;
+			q_aux.urls=q.urls;
+			
+			
 			//q_aux.hypothesislist?????
 			group_aux.questions.add(q_aux);
+			
 			System.out.println("QUESTION: "+q.id);
 			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
-			List<ChoiceAnswer> choiceanswers = ChoiceAnswer.findByUserEmailAndTestId(user.email, test.id);
-			System.out.println("Question_aux created: " + choiceanswers.size());
-					for (Hypothesis h : q.hypothesislist) {
-						boolean searching = true;
-						Hypothesis new_hypothesis = new Hypothesis();
-						new_hypothesis.answer = h.answer;
-						new_hypothesis.id = h.id;
-						new_hypothesis.isCorrect = h.isCorrect;
-						new_hypothesis.number = h.number;
-						new_hypothesis.question = h.question;
-						new_hypothesis.questionImageURL = h.questionImageURL;
-						new_hypothesis.text = h.text;
-						
-						for (ChoiceAnswer ca : choiceanswers) {
-							if (ca.question.id == q.id) {
-								for (Hypothesis h_answered : ca.hypothesislist) {
-									if (h_answered.id==h.id && searching == true) {
-										System.out.println("#####DEBUGGGGG####: "+ h.id + " = "+ h_answered.id);
-										new_hypothesis.selected = true;
-										searching = false;
-										q_aux.hypothesislist.add(new_hypothesis);
-										System.out.println("Hypothesis_aux added");
-									}
+				
+			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+			if (hypothesis_aux.size()<1){
+				for (Hypothesis h: q.hypothesislist){
+					Hypothesis new_h=new Hypothesis();
+					new_h.number=h.number;
+					new_h.question=h.question;
+					new_h.text=h.text;
+					new_h.user=user;
+					new_h.save();
+				}
+			}
 
-								}
-							}
-						}
-						System.out.println(searching);
-						if (searching==true) {
-							new_hypothesis.selected = false;
-							q_aux.hypothesislist.add(new_hypothesis);
-							searching=false;
-						}
-					}
-			for(Hypothesis h: q_aux.hypothesislist){
-				System.out.println("LIST:" + h.id + "SELECTED: " + h.selected);
+			q_aux.hypothesislist=hypothesis_aux;
+			q=q_aux;
 			}
+			else{
+				q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
+				q=q_aux;
 			}
+			
 			
 			
 			}
@@ -366,130 +349,125 @@ public class Profile extends Controller {
 				categories, form(Comment.class)));
 	}
 
-	public static Result postquestionanswer(String module_acronym,
-			String lesson_acronym, Long test_id, Long question_id) {
-		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class)
-				.bindFromRequest();
-		System.out.println("Answer: " + form.get().qanswer + "Question: "
-				+ question_id);
-		
-		User user = User.findByEmail(request().username());
+//	public static Result postquestionanswer(String module_acronym,
+//			String lesson_acronym, Long test_id, Long question_id) {
+//		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class)
+//				.bindFromRequest();
+//		System.out.println("Answer: " + form.get().qanswer + "Question: "
+//				+ question_id);
+//		
+//		User user = User.findByEmail(request().username());
+//
+//		Question question = Question.find.byId(question_id);
+//		Test test = Test.find.byId(test_id);
+//
+//		Answer userAnswer = Answer.findByUserAndQuestion(request()
+//				.username(),question_id);
+//		if (userAnswer == null) {
+//
+//			Answer answer = new Answer();
+//			answer.answer = form.get().qanswer;
+//			answer.openQuestion = question;
+//			answer.test = test;
+//			answer.user = User.find.byId(request().username());
+//			answer.save();
+//
+//		} else {
+//			userAnswer.answer = form.get().qanswer;
+//			userAnswer.save();
+//		}
+//		
+//		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
+//				test_id);
+//		List<ChoiceAnswer> test_choiceanswers = ChoiceAnswer
+//				.findByUserEmailAndTestId(user.email, test_id);
+//		
+//		List<Category> categories = Category.getAllCategories();
+//		Test test_aux = test;
+//		test_aux.answers = openanswers;
+//		test_aux.choiceanswers = test_choiceanswers;
+//		Module module = Module.findByAcronym(module_acronym);
+//		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+//
+//		return ok(views.html.secured.test.render(user, module, lesson,
+//				categories, test_aux, form(QuestionAnswer.class),
+//				form(OneChoiceQuestionAnswer.class)));
+//
+//	}
 
-		Question question = Question.find.byId(question_id);
-		Test test = Test.find.byId(test_id);
-
-		Answer userAnswer = Answer.findByUserAndQuestion(question_id, request()
-				.username());
-		if (userAnswer == null) {
-
-			Answer answer = new Answer();
-			answer.answer = form.get().qanswer;
-			answer.openQuestion = question;
-			answer.test = test;
-			answer.user = User.find.byId(request().username());
-			answer.save();
-
-		} else {
-			userAnswer.answer = form.get().qanswer;
-			userAnswer.save();
-		}
-		
-		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
-				test_id);
-		List<ChoiceAnswer> test_choiceanswers = ChoiceAnswer
-				.findByUserEmailAndTestId(user.email, test_id);
-		
-		List<Category> categories = Category.getAllCategories();
-		Test test_aux = test;
-		test_aux.answers = openanswers;
-		test_aux.choiceanswers = test_choiceanswers;
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-
-		return ok(views.html.secured.test.render(user, module, lesson,
-				categories, test_aux, form(QuestionAnswer.class),
-				form(OneChoiceQuestionAnswer.class)));
-
-	}
-
-	public static Result postonechoicequestionanswer(String module_acronym,
-			String lesson_acronym, Long test_id, Long question_id) {
-		
-
-		Test test = Test.find.byId(test_id);
-		User user = User.find.byId(request().username());
-		Question question = Question.find.byId(question_id);
-
-		ChoiceAnswer last_answer = ChoiceAnswer.findByUserAndQuestion(
-				question_id, user.email);
-
-		if (last_answer == null) {
-			last_answer = new ChoiceAnswer();
-			last_answer.question = question;
-			last_answer.test = test;
-			last_answer.user = user;
-			last_answer.save();
-		}
-		last_answer.delete();
-
-		ChoiceAnswer new_answer = new ChoiceAnswer();
-		new_answer.question = question;
-		new_answer.test = test;
-		new_answer.user = user;
-		
-		if(question.typeOfQuestion == 2){
-			Form<Profile.MultipleChoiceQuestionAnswer> form = form(
-					Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
-		for (int h : form.get().mcqanswers) {
-			if (h != 0) {
-				new_answer.question = question;
-				new_answer.test = test;
-				new_answer.user = user;
-				System.out.println("MULTIPLECHOICE: " + h);
-				Hypothesis hypothesis_selected = Hypothesis.find.byId((long) h);
-				System.out.println("Encontrei? " + hypothesis_selected.text);
-				new_answer.hypothesislist.add(hypothesis_selected);
-				hypothesis_selected.save();
-
-				new_answer.save();
-				System.out
-						.println("Salvei " + new_answer.hypothesislist.size());
-
-			}
-		}
-		}else if(question.typeOfQuestion==1){
-			Form<Profile.OneChoiceQuestionAnswer> form = form(
-					Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
-			long h = form.get().ocqanswer;
-			System.out.println("ONECHOICE: " + h);
-			Hypothesis hypothesis_selected = Hypothesis.find.byId(h);
-			System.out.println("Encontrei? " + hypothesis_selected.text);
-			new_answer.hypothesislist.add(hypothesis_selected);
-			hypothesis_selected.save();
-
-			new_answer.save();
-			System.out
-					.println("Salvei " + new_answer.hypothesislist.size());
-			
-		}
-
-		List<Category> categories = Category.getAllCategories();
-		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
-				test_id);
-		List<ChoiceAnswer> test_choiceanswers = ChoiceAnswer
-				.findByUserEmailAndTestId(user.email, test_id);
-		
-		Test test_aux = test;
-		test_aux.choiceanswers = test_choiceanswers;
-		test_aux.answers = openanswers;
-
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-
-		return ok(views.html.secured.test.render(user, module, lesson,
-				categories, test_aux, form(QuestionAnswer.class),
-				form(OneChoiceQuestionAnswer.class)));
-	}
+//	public static Result postonechoicequestionanswer(String module_acronym,
+//			String lesson_acronym, Long test_id, Long question_id) {
+//		
+//
+//		Test test = Test.find.byId(test_id);
+//		User user = User.find.byId(request().username());
+//		Question question = Question.find.byId(question_id);
+//
+//		ChoiceAnswer last_answer = ChoiceAnswer.findByUserAndQuestion(
+//				question_id, user.email);
+//
+//		if (last_answer == null) {
+//			last_answer = new ChoiceAnswer();
+//			last_answer.question = question;
+//			last_answer.test = test;
+//			last_answer.user = user;
+//			last_answer.save();
+//		}
+//		last_answer.delete();
+//		new_answer.question = question;
+//		new_answer.test = test;
+//		new_answer.user = user;
+//		
+//		if(question.typeOfQuestion == 2){
+//			Form<Profile.MultipleChoiceQuestionAnswer> form = form(
+//					Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
+//		for (int h : form.get().mcqanswers) {
+//			if (h != 0) {
+//				new_answer.question = question;
+//				new_answer.test = test;
+//				new_answer.user = user;
+//				System.out.println("MULTIPLECHOICE: " + h);
+//				Hypothesis hypothesis_selected = Hypothesis.find.byId((long) h);
+//				System.out.println("Encontrei? " + hypothesis_selected.text);
+//				new_answer.hypothesislist.add(hypothesis_selected);
+//				hypothesis_selected.save();
+//
+//				new_answer.save();
+//				System.out
+//						.println("Salvei " + new_answer.hypothesislist.size());
+//
+//			}
+//		}
+//		}else if(question.typeOfQuestion==1){
+//			Form<Profile.OneChoiceQuestionAnswer> form = form(
+//					Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
+//			long h = form.get().ocqanswer;
+//			System.out.println("ONECHOICE: " + h);
+//			Hypothesis hypothesis_selected = Hypothesis.find.byId(h);
+//			System.out.println("Encontrei? " + hypothesis_selected.text);
+//			new_answer.hypothesislist.add(hypothesis_selected);
+//			hypothesis_selected.save();
+//
+//			new_answer.save();
+//			System.out
+//					.println("Salvei " + new_answer.hypothesislist.size());
+//			
+//		}
+//
+//		List<Category> categories = Category.getAllCategories();
+//		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
+//				test_id);
+//		
+//		Test test_aux = test;
+//		test_aux.answers = openanswers;
+//
+//		Module module = Module.findByAcronym(module_acronym);
+//		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+//
+//		return ok(views.html.secured.test.render(user, module, lesson,
+//				categories, test_aux, form(QuestionAnswer.class),
+//				form(OneChoiceQuestionAnswer.class)));
+//	}
 
 	public static Result postmultiplechoicequestionanswer(
 			String module_acronym, String lesson_acronym, Long test_id,

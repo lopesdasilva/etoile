@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.User;
 import models.test.question.Question;
 
 import com.avaje.ebean.Ebean;
@@ -32,13 +33,14 @@ public class Hypothesis extends Model{
 	@Constraints.Required
 	public String questionImageURL;
 	
-	@ManyToMany(mappedBy="hypothesislist")
-	public ChoiceAnswer answer;
 
 	@ManyToOne
 	public Question question;
 
 	public boolean selected;
+	
+	@ManyToOne
+	public User user;
 	
 	public static Model.Finder<Long, Hypothesis> find = new Model.Finder<Long, Hypothesis>(
 			Long.class, Hypothesis.class);
@@ -47,6 +49,12 @@ public class Hypothesis extends Model{
 		List<Hypothesis> questions = new ArrayList<Hypothesis>();
 		questions = Ebean.find(Hypothesis.class).findList(); 
 		return questions; 
+	}
+	
+	public static List<Hypothesis> findByUserEmailAndQuestion(String email,
+			Long question_id) {
+		return find.where().eq("user_email", email).eq("question_id", question_id)
+				.findList();
 	}
 	
 }

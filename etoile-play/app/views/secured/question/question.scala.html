@@ -233,13 +233,13 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 				<div class="span11">
 					<div class="span6">
 
-						<textarea class="span50" rows="10" name="qanswer">` int_0^1 f(x) dx`</textarea>
+						<textarea class="span50" rows="10" name="qanswer">@question.openanswer.answer</textarea>
 					</div>
 					<div class="span6">
 						<div class="alert alert-block alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>
 							<h4>Your answer</h4>
-							` int_0^1 f(x) dx`
+							@question.openanswer.answer
 						</div>
 
 					</div>
@@ -254,10 +254,20 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					</p>
 
 					<div class="alert alert-info">
-						@for(hypothesis <- question.hypothesislist){ <label class="radio">
+						@for(hypothesis <- question.hypothesislist){ 
+						@if(hypothesis.selected){
+						<label class="radio">
+							<input type="radio" name="optionsRadios" id="optionRadios"
+							value="option1" checked="checked"> @hypothesis.text
+						</label> 
+						}
+						@if(!hypothesis.selected){
+						<label class="radio">
 							<input type="radio" name="optionsRadios" id="optionRadios"
 							value="option1"> @hypothesis.text
-						</label> }
+						</label> 
+						}
+						}
 
 					</div>
 				</div>
@@ -271,11 +281,21 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					</p>
 
 					<div class="alert alert-info">
-						@for(hypothesis <- question.hypothesislist){ <label
+						@for(hypothesis <- question.hypothesislist){ 
+						@if(hypothesis.selected){
+						<label
+							class="checkbox"> <input type="checkbox"
+							name="optionsRadios" id="optionsRadios1" value="option1" checked="checked">
+							@hypothesis.text
+						</label> }
+						@if(!hypothesis.selected){
+						<label
 							class="checkbox"> <input type="checkbox"
 							name="optionsRadios" id="optionsRadios1" value="option1">
 							@hypothesis.text
-						</label> }
+						</label>
+						}
+						}
 					</div>
 				</div>
 			</div>

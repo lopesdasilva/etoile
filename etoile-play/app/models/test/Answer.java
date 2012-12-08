@@ -28,7 +28,7 @@ public class Answer extends Model{
 	@ManyToOne
 	public Question openQuestion;
 
-	@ManyToOne
+	@OneToOne
 	public Test test;
 	
 	@ManyToOne
@@ -47,7 +47,7 @@ public class Answer extends Model{
         return find.where().eq("user_email", email).eq("test_id", test_id).findList();
     }
 
-	public static Answer findByUserAndQuestion(Long openquestion_id, String user_id) {
+	public static Answer findByUserAndQuestion(String user_id,Long openquestion_id) {
 		return find.where().eq("open_question_id",openquestion_id).eq("user_email", user_id).findUnique();
 	}
 	

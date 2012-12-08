@@ -53,9 +53,6 @@ POST 	/modules/:module/:lesson/addquestion 				controllers.Profile.addquestion(t
 
 #Tests
 GET 	/modules/:module/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,module: String)
-POST 	/modules/:module/:lesson/test:test/postquestionanswer		 controllers.Profile.postquestionanswer(module: String, lesson: String, test: Long, question: Long)
-POST 	/modules/:module/:lesson/test:test/postonechoicequestionanswer		 controllers.Profile.postonechoicequestionanswer(module: String, lesson: String, test: Long, question: Long)
-POST 	/modules/:module/:lesson/test:test/postmultiplechoicequestionanswer		 controllers.Profile.postmultiplechoicequestionanswer(module: String, lesson: String, test: Long, question: Long)
 GET		/modules/:module/:lesson/test:test/:question		controllers.Profile.question(question: Int,test: Long, lesson: String,module: String)
 
 

@@ -5,7 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
-import models.test.ChoiceAnswer;
+import models.test.Hypothesis;
 import models.test.question.Question;
 import models.test.question.URL;
 import models.manytomany.UserTest;
@@ -69,8 +69,9 @@ public class User extends Model {
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Answer> answers;
 	
+	
 	@OneToMany(cascade = {CascadeType.ALL})
-	List<ChoiceAnswer> choiceanswers;
+	List<Hypothesis> hypothesis;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<UserTest> tests;

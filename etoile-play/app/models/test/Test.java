@@ -42,9 +42,7 @@ public class Test extends Model{
 	
 	@OneToMany
 	public List<Answer> answers;
-	
-	@OneToMany
-	public List<ChoiceAnswer> choiceanswers;
+
 	
 	@OneToMany
 	public List<UserTest> users;

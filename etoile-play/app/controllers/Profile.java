@@ -256,7 +256,7 @@ public class Profile extends Controller {
 				
 			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 			if (hypothesis_aux.size()<1){
-				for (Hypothesis h: q.hypothesislist){
+				for (Hypothesis h: Hypothesis.findByQuestion(q.id)){
 					Hypothesis new_h=new Hypothesis();
 					new_h.number=h.number;
 					new_h.question=h.question;

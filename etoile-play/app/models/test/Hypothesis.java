@@ -57,4 +57,9 @@ public class Hypothesis extends Model{
 				.findList();
 	}
 	
+	public static List<Hypothesis> findByQuestion(Long question_id) {
+		return find.where().eq("user_email", null).eq("question_id", question_id)
+				.findList();
+	}
+	
 }

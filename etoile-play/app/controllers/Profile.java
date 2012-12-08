@@ -526,81 +526,9 @@ public class Profile extends Controller {
 			answer.save();
 		}
 		
-		//COPIA DO METODO question() - Temos que arranjar maneira de isto não ficar tudo repetido
-		
-		Test test = models.test.Test.find.byId(test_id);
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		UserTest usertest = UserTest.findByUserAndTest(user.email,
-				test.id);
-		
-		if (question_number<=test.groups.size() && question_number>0){
-		System.out.println("A imprimir as questoes");
-		
-		QuestionGroup group = test.groups.get(question_number-1);
-		
-		QuestionGroup group_aux = new QuestionGroup();
-		group_aux=new QuestionGroup();
-		group_aux.id = group.id;
-		group_aux.imageURL = group.imageURL;
-		group_aux.number = group.number;
-		group_aux.question = group.question;
-		group_aux.test = group.test;
-		group_aux.videoURL = group.videoURL;
-		
-		System.out.println("Group_aux created");
-		
-		for(Question q: group.questions){
-			Question q_aux = new Question();
-			q_aux.id = q.id;
-			q_aux.imageURL = q.imageURL;
-			q_aux.lesson = q.lesson;
-			q_aux.number = q.number;
-			q_aux.question = q.question;
-			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.user = q.user;
-			q_aux.videoURL = q.videoURL;
-			q_aux.urls=q.urls;
 			
-			
-			//q_aux.hypothesislist?????
-			group_aux.questions.add(q_aux);
-			
-			System.out.println("QUESTION: "+q.id);
-			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
-				
-			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
-			if (hypothesis_aux.size()<1){
-				for (Hypothesis h: q.hypothesislist){
-					Hypothesis new_h=new Hypothesis();
-					new_h.number=h.number;
-					new_h.question=h.question;
-					new_h.text=h.text;
-					new_h.user=user;
-					new_h.save();
-				}
-				hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
-			}
-			
-			q_aux.hypothesislist=hypothesis_aux;
-			q=q_aux;
-			}
-			else{
-				q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
-				q=q_aux;
-			}
-			
-			
-			
-			}
-		
-		
-		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
-		}
-		else
-			return ok(views.html.statics.error.render());
-		
-		//FIM COPIA DO METODO question()
+			return question(question_number,test_id,lesson_acronym,module_acronym );
+
 	}
 
 	// -- Queries

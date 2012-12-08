@@ -219,6 +219,26 @@ public class Profile extends Controller {
 		UserTest usertest = UserTest.findByUserAndTest(user.email,
 				test.id);
 		
+		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
+				test_id);
+		if (test_answers.isEmpty()) {
+			for(QuestionGroup g: test.groups){
+			for (Question q : g.questions) {
+				if (q.typeOfQuestion == 0) {
+					Answer empty_answer = new Answer();
+					empty_answer.answer = "No answer.";
+					empty_answer.openQuestion = q;
+					empty_answer.test = test;
+					empty_answer.user = user;
+					empty_answer.save();
+					test.answers.add(empty_answer);
+					test.save();
+				}
+			}
+			}
+		}
+		
+		
 		if (question_number<=test.groups.size() && question_number>0){
 		System.out.println("A imprimir as questoes");
 		
@@ -526,6 +546,13 @@ public class Profile extends Controller {
 			answer.save();
 		}
 		
+			int numeroTotaldeQuestoes=0;
+			Test t= Test.find.byId(test_id);
+			for (QuestionGroup g: t.groups){
+				numeroTotaldeQuestoes+=g.questions.size();
+			}
+			
+			
 			
 			return question(question_number,test_id,lesson_acronym,module_acronym );
 

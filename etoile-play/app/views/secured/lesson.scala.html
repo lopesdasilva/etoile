@@ -142,7 +142,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 										@if(usertest.test.id==test.id && usertest.inmodule){
 										<td><a class="btn btn-success btn-small disabled" >Suggest Question&raquo;</a></td>
 										<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.test(test.id,lesson.acronym,module.acronym)">Resolve
+											href="@routes.Profile.question(1,test.id,lesson.acronym,module.acronym)">Resolve
 												Test&raquo;</a></td> 
 										}
 										 @if(usertest.test.id==test.id && !usertest.inmodule){

@@ -79,6 +79,7 @@
           </div>
          
            <div class="row-fluid">
+           <h3>My Modules</h3>
 				<ul class="thumbnails">
 					@for(module <- user.modules) {
 					<li class="span4">
@@ -105,17 +106,27 @@
       
         
           
-          <div class="row-fluid">
-            @for(blog <- blogs) {
-	<div class="span4">
-		<h4>@blog.header</h4>
-		<p>@blog.text</p>
-		<p><a class="btn" href="@routes.Application.blog(blog.id)">View details &raquo;</a></p>
-	</div>
-	}
-       
-       
-        </div>
+         <div class="row-fluid">
+				<h3>Latest news</h3>
+				<ul class="thumbnails">
+					@for(blog <- blogs) {
+					<li class="span4">
+						<div class="thumbnail">
+							<img src="@blog.articleImageURL" class="img-rounded"
+								style="height: 100px">
+							<div class="caption">
+								<h5>@blog.alternateHeader</h5>
+								<p>@blog.alternateText</p>
+								<p>
+									<a class="btn btn-primary"
+										href="@routes.Application.blog(blog.id)">View details
+										&raquo;</a>
+								</p>
+							</div>
+						</div>
+					</li> }
+				</ul>
+			</div>
         </div>
 </div>
 </div>

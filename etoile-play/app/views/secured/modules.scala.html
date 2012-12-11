@@ -75,11 +75,12 @@
                     <img src="http://resources2.news.com.au/images/2011/12/17/1226224/763178-student-survey.jpg" alt="" width="700px" height="300px">
                     <div class="carousel-caption">
                       <h4>New Modules</h4>
-                      <p>Aply for a new module today!</p>
+                      <p>Apply</p>
                     </div>
                   </div>
+                  
                 @for(module <- modules) {
-              
+              	@if(!user.modules.contains(module)){
                   <div class="item"  style="max-height: 300px;min-height: 300px">
                     <img src="@module.imageURL" alt="@module.name" width="700px" height="300px">
                     <div class="carousel-caption">
@@ -95,6 +96,7 @@
                     </div>
                   </div>
                   }
+                  }
             
                 </div>
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -104,6 +106,7 @@
 			<div class="row-fluid">
 				 <ul class="thumbnails">
         @for(module <- modules) {
+        @if(!user.modules.contains(module)){
             <li class="span4">
 		<div class="carousel-inner">
 		     <div class="item"  style="min-height: 150px; max-height: 150px">
@@ -117,6 +120,7 @@
                   </div>
 		</div>
 		</li>
+		}
 		}
 		</ul>
 

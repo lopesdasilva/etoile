@@ -71,8 +71,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 				<div class="accordion-group">
 					<div class="accordion-heading">
 						<a class="accordion-toggle" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseOne"> @lesson.name
-							Description </a>
+							data-parent="#accordion2" href="#collapseOne">Description </a>
 					</div>
 					<div id="collapseOne" class="accordion-body collapse">
 						<div class="accordion-inner">@lesson.description</div>
@@ -140,16 +139,16 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 <!-- 										<td>@test.text</td>  -->
 										@for(usertest<-user.tests){
 										@if(usertest.test.id==test.id && usertest.inmodule){
-										<td><a class="btn btn-success btn-small disabled" >Suggest Question&raquo;</a></td>
+										<td><a class="btn btn-success btn-small disabled" >Question suggested</a></td>
 										<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.question(1,test.id,lesson.acronym,module.acronym)">Resolve
-												Test&raquo;</a></td> 
+											href="@routes.Profile.question(1,test.id,lesson.acronym,module.acronym)">Solve
+												test&raquo;</a></td> 
 										}
 										 @if(usertest.test.id==test.id && !usertest.inmodule){
 										
 										<td><a href="#modal@test.id" class="btn btn-danger btn-small"
 											data-toggle="modal">Suggest Question&raquo;</a></td> 
-										<td><a class="btn btn-primary btn-small disabled">Resolve Test&raquo;</a></td>	
+										<td><a class="btn btn-primary btn-small disabled">Solve test&raquo;</a></td>	
 														<!-- MODAL -->
 										<div id="modal@test.id" class="modal hide shown">
 											<div class="modal-header">

@@ -78,7 +78,8 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 						&raquo;</a>
 				</p>
 			</div>
-
+	
+	@if(user.modules.size()!=0){
 			<div class="row-fluid">
 				<h3>My Modules</h3>
 				<ul class="thumbnails">
@@ -96,7 +97,7 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 					</li> }
 				</ul>
 			</div>
-
+}
 
 
 

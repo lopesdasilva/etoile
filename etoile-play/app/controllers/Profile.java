@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -364,6 +365,7 @@ public class Profile extends Controller {
 		c.text = form.get().comment;
 		c.blog = Blog.find.byId(blog);
 		c.user = user;
+		c.date = new Date();
 		c.save();
 
 		return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),

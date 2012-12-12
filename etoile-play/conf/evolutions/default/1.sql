@@ -47,6 +47,7 @@ create table comment (
   text                      varchar(255),
   blog_id                   bigint,
   user_email                varchar(255),
+  date                      datetime,
   constraint pk_comment primary key (id))
 ;
 

@@ -23,6 +23,8 @@ public class Comment extends Model {
 	@ManyToOne
 	public User user;
 
+	@Constraints.Required
+	public Date date;
 	//public Date created;
 
 	public static Model.Finder<Long, Comment> find = new Model.Finder<Long, Comment>(

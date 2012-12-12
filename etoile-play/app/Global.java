@@ -325,6 +325,7 @@ public class Global extends GlobalSettings {
 			c.text = "Great! I can't wait to try it!";
 			c.blog = blog;
 			c.user = user;
+			c.date = new Date();
 			c.save();
 
 			
@@ -390,6 +391,7 @@ public class Global extends GlobalSettings {
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 			c1.blog = blog;
 			c1.user = user;
+			c1.date = new Date();
 			c1.save();
 			
 			

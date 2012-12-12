@@ -39,11 +39,12 @@ public class Application extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.getAllModules();
+		
 		//This is to load Universities(weird)
-    	for (Module c: modules){
-//    		System.out.println(c.university.name);
-    		String s=c.university.name;
-    	}
+//    	for (Module c: modules){
+////    		System.out.println(c.university.name);
+//    		String s=c.university.name;
+//    	}
 		
 		return ok(index.render(blogs,categories,continents,modules));
 	}

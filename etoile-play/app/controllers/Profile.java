@@ -72,9 +72,9 @@ public class Profile extends Controller {
 		List<Category> categories = Category.getAllCategories();
 
 		// This is to load Universities(weird)
-		for (Module c : user.modules) {
-			System.out.println(c.university.name);
-		}
+//		for (Module c : user.modules) {
+//			System.out.println(c.university.name);
+//		}
 
 		return ok(home.render(user, blogs, categories));
 	}

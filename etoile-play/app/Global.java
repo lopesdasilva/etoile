@@ -224,14 +224,14 @@ public class Global extends GlobalSettings {
 			module.lessons.add(lesson_one);
 			module.lessons.add(lesson_two);
 			module.save();
-			/* 
+			 
 			Module module_two = new Module();
 			module_two.name = "Statistics 101";
 			module_two.acronym="stats101";
 			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			module_two.save();
-			*/
+			
 			
 			Module module_three = new Module();
 			module_three.name = "Social Science";

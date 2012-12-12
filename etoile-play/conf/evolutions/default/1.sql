@@ -29,6 +29,7 @@ create table blog (
   text                      TEXT,
   alternate_text            TEXT,
   article_image_url         varchar(255),
+  date                      datetime,
   constraint pk_blog primary key (id))
 ;
 

@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.LinkedList;
 
 import play.*;
@@ -103,7 +104,7 @@ public class Global extends GlobalSettings {
 			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
 			blog.alternateText = "The Complex Systems Digital Campus network is getting stronger... ";
 			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			
+			blog.date = new Date();
 			blog.save();
 			
 			blog = new Blog();
@@ -112,7 +113,7 @@ public class Global extends GlobalSettings {
 			blog.text = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
 			blog.alternateText = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory”...";
 			blog.articleImageURL="https://dl.dropbox.com/u/124850/emergence.jpg";
-			
+			blog.date = new Date();
 			blog.save();
 			
 			blog = new Blog();
@@ -121,6 +122,7 @@ public class Global extends GlobalSettings {
 			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android...";
 			blog.articleImageURL="http://velositor.com/wp-content/uploads/2012/03/Tablets-in-Education-eTextbooks-on-Tablets-Preferred-Over-Print-Books-Among-College-and-High-School-Students-e1332128400234-290x290.jpg";
+			blog.date = new Date();
 			blog.save();
 			
 			

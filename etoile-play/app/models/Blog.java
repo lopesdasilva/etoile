@@ -35,6 +35,10 @@ public class Blog extends Model {
 	@Constraints.Required
 	public String articleImageURL;
 	
+
+	@Constraints.Required
+	public Date date;
+	
 	//public Date created;
 
 	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)

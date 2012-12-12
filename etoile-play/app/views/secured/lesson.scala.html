@@ -66,24 +66,26 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 			</div>
 			<!--/.well -->
 		</div>
+		
 		<div class="span9">
-			<div class="accordion" id="accordion2">
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseOne">Description </a>
-					</div>
-					<div id="collapseOne" class="accordion-body collapse">
-						<div class="accordion-inner">@lesson.description</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="page-header">
+			<h2>
+				@lesson.name
+			</h2>
 
+		</div>
 		<!--/span-->
-		<div class="span9">
-			<div class="page-header">
-				<h1>@lesson.name</h1>
+		<div class="row-fluid">
+				<div class="">
+				<button type="button" class="close" data-toggle="collapse"
+							data-target="#@lesson.id">-</button>
+						<strong data-toggle="collapse" data-target="#@lesson.id">@lesson.shortDescription</strong>
+							<div id="@lesson.id" class="collapse row-fluid">
+							<p>@lesson.description</p>
+							</div>
+						
+				</div>
+				</br>
 				<div class="tabbable">
 					<!-- Only required for left/right tabs -->
 					<ul class="nav nav-tabs">
@@ -98,7 +100,23 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 									<img src="@lesson.imageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
-									<p>New Allert</p>
+									<p>The First Test is now available</p>
+								</div>
+							</div></br>
+							<div class="row-fluid">
+								<div class="span2">
+									<img src="@lesson.imageURL" height="100" width="100" />
+								</div>
+								<div class="span9">
+									<p>The Second Test is now Available</p>
+								</div>
+							</div></br>
+							<div class="row-fluid">
+								<div class="span2">
+									<img src="@lesson.imageURL" height="100" width="100" />
+								</div>
+								<div class="span9">
+									<p>Please read the documentation</p>
 								</div>
 							</div>
 						</div>

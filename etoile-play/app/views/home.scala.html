@@ -48,7 +48,7 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 		<div class="span3">
 			<div class="well sidebar-nav" style="background: #0088CC;">
 				<ul class="nav nav-list">
-					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
+					<li class="nav-header"  style="color: white; text-shadow: #0088CC;">My
 						Modules</li> @for(module <- user.modules) {
 					<li><a href="@routes.Application.module(module.acronym)"
 						style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
@@ -69,14 +69,34 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 
 
 		<div class="span9">
-			<div class="hero-unit">
-				<h1>étoile platform</h1>
-				<p>Enhanced Technology for Open Intelligent Learning
-					Environments</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="about">Learn more
-						&raquo;</a>
-				</p>
+			<div class="well">
+			<img src="http://forum.must.ac.ug/sites/default/files/default-avatar.png">
+			@user.name
+			<h2>My reputation:</h2>
+			<h4>Level: Guru</h4>
+				
+			<div class="">
+				<button type="button" class="close" data-toggle="collapse"
+							data-target="#reputationdetails">+</button>
+						<div class="span10">
+						<div class="progress progress-success progress-striped">
+					<div class="bar" style="width: 55%"></div>
+					
+				</div>
+				</div>
+				
+							<div id="reputationdetails" class="collapse row-fluid">
+							<div class="offset1">
+							<blockquote>
+							<p>Marked questions: 10</p>
+							<p>Answered tests: 20</p>
+							<p>Forum participations: 55</p>
+							<p>Suggested questions: 20</p>
+							</div>
+							</blockquote>
+							</div>
+						
+				</div>
 			</div>
 	
 	@if(user.modules.size()!=0){

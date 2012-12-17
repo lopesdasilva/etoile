@@ -450,21 +450,25 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					</p>
 
 					<div class="alert alert-info">
+					<div class="btn-group" data-toggle="buttons-radio">
+					<ul class="inputs-list">
 						@for(hypothesis <- question.hypothesislist){ 
 						@if(hypothesis.selected){
 						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
-							checked="checked"> @hypothesis.text
+							<a disabled="disabled" type="radio" class="btn" >  <input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+							checked="checked"></a><span>@hypothesis.text</span>
 						</label> 
 						}
 						@if(!hypothesis.selected){
 						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
-							> @hypothesis.text
+							<a disabled="disabled" type="radio" class="btn"  ><input class="pagination-centered" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+							></a><span>@hypothesis.text</span>
 						</label> 
+						
 						}
 						}
-
+					</ul>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -530,4 +534,5 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 		</div>
 	</div>
 </div>
+		<button class="btn btn-primary pull-right">Submit Test</button>
 }

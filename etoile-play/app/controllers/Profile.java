@@ -117,7 +117,7 @@ public class Profile extends Controller {
 						user_test.test = test;
 						user_test.expired = false;
 						user_test.inmodule = false;
-						user_test.submited = false;
+						user_test.submitted = false;
 						user_test.save();
 						user.tests.add(user_test);
 						test.users.add(user_test);
@@ -316,6 +316,18 @@ public class Profile extends Controller {
 
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module, form(OpenQuestionSuggestion.class)));
+
+	}
+	
+	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
+		User user = User.find.byId(request().username());
+		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+		userTest.submitted=true;
+		userTest.save();
+		
+		System.out.println("DEBUG: "+test_id+" submitted");
+		
+		return lesson(lesson_acronym,module_acronym);
 
 	}
 
@@ -548,15 +560,22 @@ public class Profile extends Controller {
 			answer.save();
 		}
 		
-			int numeroTotaldeQuestoes=0;
+			int totalNumQuestions=0;
 			Test t= Test.find.byId(test_id);
 			for (QuestionGroup g: t.groups){
-				numeroTotaldeQuestoes+=g.questions.size();
+				totalNumQuestions+=g.questions.size();
 			}
+			System.out.println(totalNumQuestions);
 			
 			
 			
-			return question(question_number,test_id,lesson_acronym,module_acronym );
+			UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+			float progress = userTest.progress+ 100/totalNumQuestions;
+			System.out.println("progress"+progress);
+			userTest.progress=progress;
+			userTest.save();
+			
+			return question(question_number,test_id,lesson_acronym,module_acronym);
 
 	}
 

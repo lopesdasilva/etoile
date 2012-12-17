@@ -246,11 +246,12 @@ create table account (
 create table user_test (
   id                        bigint auto_increment not null,
   inmodule                  tinyint(1) default 0,
-  submited                  tinyint(1) default 0,
+  submitted                 tinyint(1) default 0,
   expired                   tinyint(1) default 0,
   user_email                varchar(255),
   test_id                   bigint,
-  progress                  varchar(255),
+  progress                  float,
+  progress_string           varchar(255),
   constraint pk_user_test primary key (id))
 ;
 

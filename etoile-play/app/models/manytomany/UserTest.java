@@ -27,7 +27,7 @@ public class UserTest extends Model{
 	
 	@Constraints.Required
     @Formats.NonEmpty
-	public boolean submited;
+	public boolean submitted;
 	
 	@Constraints.Required
     @Formats.NonEmpty
@@ -41,8 +41,8 @@ public class UserTest extends Model{
 	@ManyToOne
 	public Test test;
 	
-	public String progress="0%";
-	
+	public float progress=0;
+	public String progressString="0%";
 	
 	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(
 			Long.class, UserTest.class);

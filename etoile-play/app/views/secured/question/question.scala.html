@@ -48,7 +48,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 		<div class="row-fluid">
 			<div class="span4">
 				<div class="progress">
-					<div class="bar" style="width: @usertest.progress;"></div>
+					<div class="bar" style="width: @usertest.progress%;"></div>
 				</div>
 			</div>
 		</div>
@@ -204,7 +204,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
               </ul>
               <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
                 <div class="tab-pane active" id="tab1">
-                  <p>For mathematics written in this form, you mark your mathematical expressions by surrounding them in “back-ticks”, i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
+                  <p>For mathematics written in this form, you mark your mathematical expressions by surrounding them in ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
                   
                    <table class="table table-hover">
               <thead>
@@ -244,7 +244,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
                 </div>
                 <div class="tab-pane" id="tab2">
                   <p class="text-warning">
-						<span class="label label-warning">Info</span>Do not forget to surround your formula with “back-ticks”, i.e., <span class="asciimath2jax_ignore">`...`</span>.
+						<span class="label label-warning">Info</span>Do not forget to surround your formula with ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.
 					</p>
                    <table class="table table-condensed table-hover">
 										<thead>
@@ -432,7 +432,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					</div>
 					<div class="span6">
 						<div class="alert alert-block alert-success">
-							<button type="button" class="close" data-dismiss="alert">×</button>
+							<button type="button" class="close" data-dismiss="alert">x</button>
 							<h4>Your answer</h4>
 							@question.openanswer.answer
 						</div>
@@ -444,7 +444,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			
 							
 			<div class="row-fluid ">
-				<div class="span10 offset1 ">
+				<div class="span11">
 					<p class="text-warning">
 						<span class="label label-warning">Warning</span>Identify the correct answer (<strong>only one is the correct one</strong>).
 					</p>
@@ -455,14 +455,15 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 						@for(hypothesis <- question.hypothesislist){ 
 						@if(hypothesis.selected){
 						<label class="radio">
-							<a disabled="disabled" type="radio" class="btn" >  <input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
-							checked="checked"></a><span>@hypothesis.text</span>
+							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+-							checked="checked"> @hypothesis.text
+
 						</label> 
 						}
 						@if(!hypothesis.selected){
 						<label class="radio">
-							<a disabled="disabled" type="radio" class="btn"  ><input class="pagination-centered" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
-							></a><span>@hypothesis.text</span>
+							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+-							> @hypothesis.text
 						</label> 
 						
 						}
@@ -477,7 +478,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			
 			} @if(question.typeOfQuestion==2){
 			<div class="row-fluid ">
-				<div class="span10 offset1 ">
+				<div class="span11">
 					<p class="text-warning">
 						<span class="label label-warning">Warning</span>Identify the correct answers (<strong>can
 						be more than one</strong>).
@@ -507,19 +508,18 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			<div class="row-fluid">
 				<div class="span11">
 					<p>
-						<button class="btn btn-success pull-right" type="submit#1">Save answer @question.number</button>
+						<button class="btn btn-success pull-right" type="submit">Save answer @question.number</button>
 					</p>
 				</div>
 			</div>
 			
-								}
-			
-
-			
+		}
 			<hr>
-			}
+			
 		</div>
-
+		}
+</div>
+</div>
 		<div class="row-fluid">
 			<div class="pagination pagination-centered pagination-small">
 				<ul>
@@ -531,8 +531,31 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					} }
 				</ul>
 			</div>
-		</div>
-	</div>
+			</div>
+			<div class="row-fluid">
+		<div class="span11 pull-right">
+			<!-- Button to trigger modal -->
+<a href="#submittest" role="button" class="btn btn-primary pull-right" data-toggle="modal">Submit test</a>
+ 
+<!-- Modal -->
+<div id="submittest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Confirmation</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to submit your test?</p>
+    <p><span class="label label-important">Important</span> This Action is irreversible!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <a class="btn btn-primary" href="@routes.Profile.submitTest(test.id,lesson.acronym,module.acronym)">Confirm</a>
+  </div>
 </div>
-		<button class="btn btn-primary pull-right">Submit Test</button>
+		</div>
+		</div>
+	
+</div>
+</div>
+		
 }

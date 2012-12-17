@@ -158,11 +158,17 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 										@for(usertest<-user.tests){
 										@if(usertest.test.id==test.id && usertest.inmodule){
 										<td><a class="btn btn-success btn-small disabled" >Question suggested</a></td>
+										@if(!usertest.submitted){
 										<td><a class="btn btn-primary btn-small"
 											href="@routes.Profile.question(1,test.id,lesson.acronym,module.acronym)">Solve
 												test&raquo;</a></td> 
+												}
+										@if(usertest.submitted){
+										<td><a class="btn btn-primary btn-small disabled"
+											href="#">Test submitted</a></td> 
 										}
-										 @if(usertest.test.id==test.id && !usertest.inmodule){
+										}
+										 @if(usertest.test.id==test.id && !usertest.inmodule ){
 										
 										<td><a href="#modal@test.id" class="btn btn-danger btn-small"
 											data-toggle="modal">Suggest Question&raquo;</a></td> 

@@ -50,7 +50,14 @@ public class User extends Model {
     public String country;
 
     @Constraints.Required
-    public String account_type;
+    public int account_type;
+    
+    //Only if account_type=1
+    //Professor profile
+    @OneToOne
+    public Professor professor;
+    
+    
     
 	@ManyToMany(cascade = {CascadeType.ALL})
 //	@JoinTable(name="account_module", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="module_id")})

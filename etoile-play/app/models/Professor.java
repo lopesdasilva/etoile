@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import models.module.Module;
 
@@ -49,6 +50,9 @@ public class Professor extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String shortdescription;
+	
+	@OneToOne
+	public User user;
 	
 	
 	@OneToMany

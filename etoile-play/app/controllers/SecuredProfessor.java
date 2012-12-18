@@ -6,7 +6,7 @@ import play.mvc.Http.*;
 
 import models.*;
 
-public class Secured extends Security.Authenticator {
+public class SecuredProfessor extends Security.Authenticator {
     
     @Override
     public String getUsername(Context ctx) {
@@ -20,7 +20,7 @@ public class Secured extends Security.Authenticator {
     
     // Access rights
     
-    public static boolean isStudent(String user_email) {
-    	 return (User.find.byId(user_email).account_type==0) ;
+    public static boolean isProfessor(String user_email) {
+        return (User.find.byId(user_email).account_type==1) ;
     }    
 }

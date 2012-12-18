@@ -74,6 +74,7 @@ public class Profile extends Controller {
 	 * Display the dashboard.
 	 */
 	public static Result index() {
+		if(Secured.isStudent(request().username())){
 		List<Blog> blogs = Blog.getAllBlogs();
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
@@ -84,9 +85,12 @@ public class Profile extends Controller {
 //		}
 
 		return ok(home.render(user, blogs, categories));
+		}
+		return redirect(routes.Application.index());
 	}
 
 	public static Result module(String module_acronym) {
+		
 		Module module = Module.findByAcronym(module_acronym);
 		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
@@ -639,14 +643,13 @@ public class Profile extends Controller {
 	}
 	// -- Queries
 
-	public static Model.Finder<Long, Profile> find = new Model.Finder(
-			Long.class, Profile.class);
 
-	/**
-	 * Check if a user is a member of this project
-	 */
-	public static boolean isMember(Long project, String user) {
-		return find.where().eq("members.email", user).eq("id", project)
-				.findRowCount() > 0;
+	
+	public static boolean isStudent(Long user_id, String user_email) {
+		System.out.println("Checking if user is student");
+		User user= User.findByEmail(user_email);
+			if (user.account_type==0)
+				return true;
+			return false;
 	}
 }

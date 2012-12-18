@@ -78,8 +78,8 @@ public static Result professorprofile(String professor_acronym) {
 				Category.getAllCategories()
 				));
 	}
-public static Result news() {
-		
+	public static Result news() {
+
 		return ok(views.html.blog.blogs.render(
 				Blog.getAllBlogs(),Category.getAllCategories()
 				));
@@ -175,10 +175,15 @@ public static Result news() {
             return badRequest(login.render(loginForm));
         } else {
             session("email", loginForm.get().email);
-            return redirect(
-                routes.Profile.index()
-            );
+            
+            switch (User.find.byId(session("email")).account_type){
+            case 0:
+            	return redirect(routes.Profile.index());
+            case 1:
+            	return redirect(routes.ProfessorController.index());
+            }
         }
+		return null;
     }
 
     /**

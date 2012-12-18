@@ -325,7 +325,7 @@ public class Global extends GlobalSettings {
 			user.username="rub";
 			user.password = sha1.parseSHA1Password("123");
 			user.name = "Ruben";
-			user.account_type = "student";
+			user.account_type = 0;
 //			user.modules.add(module);
 			//user.modules.add(module_two);
 //			user.modules.add(module_three);
@@ -350,7 +350,7 @@ public class Global extends GlobalSettings {
 			user.username="rui";
 			user.password = sha1.parseSHA1Password("123");
 			user.name = "Rui Lopes da Silva";
-			user.account_type = "student";
+			user.account_type = 0;
 //			user.modules.add(module);
 			//user.modules.add(module_two);
 //			module.save();
@@ -416,7 +416,7 @@ public class Global extends GlobalSettings {
 			user.username="prof";
 			user.password=sha1.parseSHA1Password("123");
 			user.name = "Professor";
-			user.account_type = "professor";
+			user.account_type = 1;
 			user.save();
 	
 			// Continents ++++++++++++++++++++++++++++++++++++++++++++++++++++

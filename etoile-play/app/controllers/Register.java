@@ -54,7 +54,7 @@ public class Register extends Controller {
 	        	user.password= sha1.parseSHA1Password( form.get().inputPassword);
 	        	user.email=form.get().inputEmail;
 	        	user.country=form.get().inputCountry;
-	        	user.account_type = "student";
+	        	user.account_type = 0;
 	        	user.save();
 	       	 System.out.println("DEBUG**************START**************");
 			 System.out.println("New user registration");

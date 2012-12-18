@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
+GET		/professor						controllers.ProfessorController.index()
 
 # Authentication
 GET     /login                              controllers.Application.login()

@@ -46,25 +46,7 @@
  
  <div class="container-fluid">
  	<div class="row-fluid">
-		<div class="span3">
-			<div class="well sidebar-nav" style="background: #0088CC;">
-            	<ul class="nav nav-list">
-              		<li class="nav-header" style="color: white; text-shadow: #0088CC;" >My Modules</li>
-				              @for(module <- user.modules) {
-					<li><a href="@routes.Application.module(module.acronym)" style="text-shadow: #0088CC; color: #999999 ">@module.name</a></li>
-					}
-					 </ul>
-					 </div>
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-header">Categories (@categories.size)</li>
-					@for(category <- categories) {
-										<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
-
-				</ul>
-			</div>
-			<!--/.well -->
-		</div>		<!--/span-->
+	@usermenu(user,categories)
 	
  
  <div class="span9">

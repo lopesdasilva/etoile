@@ -48,7 +48,7 @@ public class Module extends Model {
 	@ManyToMany(mappedBy="modules")
 	public List<Professor> professors;
 
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Lesson> lessons;
 
 	@ManyToMany (cascade = {CascadeType.ALL})

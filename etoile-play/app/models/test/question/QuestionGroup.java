@@ -39,6 +39,9 @@ public class QuestionGroup extends Model {
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Question> questions;
 	
+	@ManyToOne
+	public List<Answer> answers;
+	
 	@Id
 	@GeneratedValue
 	public Long id;

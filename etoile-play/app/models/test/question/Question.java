@@ -42,7 +42,7 @@ public class Question extends Model {
 	public User user;
 	//ARGUMENTOS COMUNS
 	@ManyToMany(mappedBy="questions")
-	List<QuestionGroup> group;
+	public List<QuestionGroup> group;
 	@Id
 	@GeneratedValue
 	public Long id;

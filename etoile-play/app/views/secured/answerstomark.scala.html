@@ -1,0 +1,94 @@
+@(user: User, categories: List[models.curriculum.Category],answers: List[models.test.Answer] )
+ @import helper._
+@main("etoileplatform"){
+
+
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+	@usermenu(user,categories)
+	
+		
+		<div class="span9">
+		<div class="page-header">
+			<h2>
+				Answers to Mark
+			</h2>
+
+		</div>
+		<!--/span-->
+		<div class="row-fluid">
+								<table class="table table-striped" style="background: #DDDDDD;">
+								<thead>
+									<tr>
+										<th>Question</th>
+										<th>Group</th>
+										<th>Test</th>
+										<th>Lesson</th>
+										<th>Module</th>
+										<th>    </th>
+									</tr>
+								</thead>
+								<tbody>
+									@for(answer <- user.answersToMark) {
+									<tr>
+										<td>@(answer.openQuestion.number+1)</td>
+										<td>@answer.group.id</td>
+										<td>@answer.group.test.name</td>
+										<td>@answer.group.test.lesson.name</td>
+										<td>@answer.group.test.lesson.module.name</td>
+										<td><td><a class="btn btn-primary btn-small">Mark Question</a></td></td>
+									</tr>
+									}
+								</tbody>
+			</table>
+			</div>
+		</div>
+
+
+
+		<div class="row-fluid"></div>
+	</div>
+</div>
+<div class="row-fluid">}

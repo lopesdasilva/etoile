@@ -22,6 +22,7 @@ import models.module.Module;
 import models.module.Lesson;
 import models.module.Lessoncontent;
 import models.module.University;
+import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -185,6 +186,7 @@ public class Global extends GlobalSettings {
 			test_two.save();
 			
 			
+			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Lessoncontent mcontent = new Lessoncontent();
@@ -200,11 +202,14 @@ public class Global extends GlobalSettings {
 			lesson_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
 			lesson_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
 			lesson_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
-			lesson_one.tests.add(test_one);
-			lesson_one.tests.add(test_two);
 			lesson_one.lessoncontents.add(mcontent);
 			mcontent.save();
 			lesson_one.save();
+			
+			test_one.lesson = lesson_one;
+			test_two.lesson = lesson_one;
+			test_two.save();
+			test_one.save();
 			
 			Lesson lesson_two = new Lesson();
 			lesson_two.name = "Division";
@@ -228,6 +233,9 @@ public class Global extends GlobalSettings {
 			module.lessons.add(lesson_one);
 			module.lessons.add(lesson_two);
 			module.save();
+			
+			lesson_one.module = module;
+			lesson_one.save();
 			 
 			Module module_two = new Module();
 			module_two.name = "Statistics 101";
@@ -236,6 +244,8 @@ public class Global extends GlobalSettings {
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
 			module_two.save();
 			
+			lesson_two.module = module;
+			lesson_two.save();
 			
 			Module module_three = new Module();
 			module_three.name = "Social Science";
@@ -308,6 +318,7 @@ public class Global extends GlobalSettings {
 			
 			
 			// USERS ++++++++++++++++++++++++++++++++++++++++++++
+
 			
 			User user = new User();
 			user.email = "rub@rub.pt";
@@ -321,7 +332,10 @@ public class Global extends GlobalSettings {
 //			module.save();
 			//module_two.save();
 //			module_three.save();
-			user.save();	
+//			user.answersToMark.add();
+//			user.answersToMark.add();
+			user.save();
+			
 			
 			Comment c = new Comment();
 			c.text = "Great! I can't wait to try it!";

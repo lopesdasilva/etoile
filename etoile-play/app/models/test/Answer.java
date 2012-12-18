@@ -7,6 +7,7 @@ import javax.persistence.*;
 import models.Blog;
 import models.User;
 import models.test.question.Question;
+import models.test.question.QuestionGroup;
 
 import com.avaje.ebean.Ebean;
 
@@ -33,6 +34,12 @@ public class Answer extends Model{
 	
 	@ManyToOne
 	public User user;
+	
+	@ManyToOne
+	public QuestionGroup group;
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	public List<User> markers;
 	
 	public static Model.Finder<Long, Answer> find = new Model.Finder<Long, Answer>(
 			Long.class, Answer.class);

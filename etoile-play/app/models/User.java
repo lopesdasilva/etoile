@@ -66,9 +66,11 @@ public class User extends Model {
 	
     // -- Queries
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy="user")
 	public List<Answer> answers;
 	
+	@ManyToMany(mappedBy="markers")
+	public List<Answer> answersToMark;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	List<Hypothesis> hypothesis;

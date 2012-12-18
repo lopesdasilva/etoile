@@ -36,6 +36,9 @@ POST	/admin/addblog					controllers.Administration.addblog()
 GET		/admin/removeblog				controllers.Administration.removeblog(blog: Long)
 GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 
+#Mark Answers
+GET		/answerstomark						controllers.Profile.answersToMark()
+
 #Modules
 ##CHECK THIS ROUTE
 GET		/modules						controllers.Application.modules()

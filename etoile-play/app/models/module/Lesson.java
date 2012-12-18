@@ -41,10 +41,10 @@ public class Lesson extends Model{
 	@Constraints.Required
 	public String videoURL;
 
-	@ManyToMany(mappedBy="lessons")
+	@ManyToOne
 	public Module module;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})

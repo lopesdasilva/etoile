@@ -34,7 +34,7 @@ public class Test extends Model{
 	@Constraints.Required
 	public String testImageURL;
 
-	@ManyToMany(mappedBy="lessons")
+	@ManyToOne
 	public Lesson lesson;
 	
 	@OneToMany

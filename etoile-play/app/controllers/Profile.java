@@ -184,6 +184,7 @@ public class Profile extends Controller {
 					empty_answer.openQuestion = q;
 					empty_answer.test = test;
 					empty_answer.user = user;
+					empty_answer.group = g;
 					empty_answer.save();
 					test.answers.add(empty_answer);
 					test.save();
@@ -231,6 +232,7 @@ public class Profile extends Controller {
 					empty_answer.openQuestion = q;
 					empty_answer.test = test;
 					empty_answer.user = user;
+					empty_answer.group = g;
 					empty_answer.save();
 					test.answers.add(empty_answer);
 					test.save();
@@ -313,7 +315,8 @@ public class Profile extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(request().username());
-
+		
+		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module, form(OpenQuestionSuggestion.class)));
 
@@ -578,6 +581,22 @@ public class Profile extends Controller {
 			return question(question_number,test_id,lesson_acronym,module_acronym);
 
 	}
+	
+	public static Result answersToMark(){
+		User user = User.find.byId(request().username());
+		List<Category> categories = Category.getAllCategories();
+		List<Answer> answers = user.answersToMark;
+			
+		for(Answer a: answers){
+			a.group.refresh();
+			a.group.test.refresh();
+			a.group.test.lesson.refresh();
+			a.group.test.lesson.module.refresh();
+		}
+
+		return ok(views.html.secured.answerstomark.render(user, categories, answers));
+	}
+	
 
 	// -- Queries
 

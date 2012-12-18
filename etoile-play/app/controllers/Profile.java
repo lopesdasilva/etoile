@@ -29,6 +29,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import scala.collection.mutable.ArrayLike;
 import views.html.*;
+import controllers.secured.*;
 
 /**
  * Manage Profile related operations.
@@ -74,7 +75,7 @@ public class Profile extends Controller {
 	 * Display the dashboard.
 	 */
 	public static Result index() {
-		if(Secured.isStudent(request().username())){
+		if(Secured.isStudent(session("email"))){
 		List<Blog> blogs = Blog.getAllBlogs();
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
@@ -86,23 +87,32 @@ public class Profile extends Controller {
 
 		return ok(home.render(user, blogs, categories));
 		}
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.index();
+		}
 		return redirect(routes.Application.index());
 	}
 
 	public static Result module(String module_acronym) {
-		
-		Module module = Module.findByAcronym(module_acronym);
-		User user = User.find.byId(session("email"));
-		List<Category> categories = Category.getAllCategories();
+		if(Secured.isStudent(session("email"))){
+			Module module = Module.findByAcronym(module_acronym);
+			User user = User.find.byId(session("email"));
+			List<Category> categories = Category.getAllCategories();
 
-		if (!user.modules.contains(module))
-			return ok(views.html.secured.moduleGeneral.render(user, categories,
-					module));
-		else
-			// Has this module
-			return ok(views.html.secured.module
-					.render(user, categories, module));
-
+			if (!user.modules.contains(module))
+				return ok(views.html.secured.moduleGeneral.render(user, categories,
+						module));
+			else
+				// Has this module
+				return ok(views.html.secured.module
+						.render(user, categories, module));
+		}
+		System.out.println(session("email"));
+		if (SecuredProfessor.isProfessor(session("email"))){
+			//Subsituir por module
+			return ProfessorController.index();
+		}
+		return redirect(routes.Application.index());
 	}
 
 	public static Result signupmodule(String module_acronym) {
@@ -173,6 +183,7 @@ public class Profile extends Controller {
 				module, form(OpenQuestionSuggestion.class)));
 	}
 
+	//TODO REMOVE
 	public static Result test(Long test_id, String lesson_acronym,String module_acronym) {
 		List<Category> categories = Category.getAllCategories();
 		Test test = models.test.Test.find.byId(test_id);
@@ -224,6 +235,7 @@ public class Profile extends Controller {
 
 	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
+		if(Secured.isStudent(session("email"))){
 		Test test = models.test.Test.find.byId(test_id);
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
@@ -317,10 +329,16 @@ public class Profile extends Controller {
 		}
 		else
 			return ok(views.html.statics.error.render());
+		}
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.index();
+		}
+		return redirect(routes.Application.index());
+		
 	}
 	
 	public static Result lesson(String lesson_acronym, String module_acronym) {
-
+		if(Secured.isStudent(session("email"))){
 		List<Category> categories = Category.getAllCategories();
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -329,7 +347,12 @@ public class Profile extends Controller {
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module, form(OpenQuestionSuggestion.class)));
-
+		}
+		if (SecuredProfessor.isProfessor(session("email"))){
+			//Subsituir por module
+			return ProfessorController.index();
+		}
+		return redirect(routes.Application.index());
 	}
 	
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
@@ -397,200 +420,9 @@ public class Profile extends Controller {
 				categories, form(Comment.class)));
 	}
 
-//	public static Result postquestionanswer(String module_acronym,
-//			String lesson_acronym, Long test_id, Long question_id) {
-//		Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class)
-//				.bindFromRequest();
-//		System.out.println("Answer: " + form.get().qanswer + "Question: "
-//				+ question_id);
-//		
-//		User user = User.findByEmail(request().username());
-//
-//		Question question = Question.find.byId(question_id);
-//		Test test = Test.find.byId(test_id);
-//
-//		Answer userAnswer = Answer.findByUserAndQuestion(request()
-//				.username(),question_id);
-//		if (userAnswer == null) {
-//
-//			Answer answer = new Answer();
-//			answer.answer = form.get().qanswer;
-//			answer.openQuestion = question;
-//			answer.test = test;
-//			answer.user = User.find.byId(request().username());
-//			answer.save();
-//
-//		} else {
-//			userAnswer.answer = form.get().qanswer;
-//			userAnswer.save();
-//		}
-//		
-//		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
-//				test_id);
-//		List<ChoiceAnswer> test_choiceanswers = ChoiceAnswer
-//				.findByUserEmailAndTestId(user.email, test_id);
-//		
-//		List<Category> categories = Category.getAllCategories();
-//		Test test_aux = test;
-//		test_aux.answers = openanswers;
-//		test_aux.choiceanswers = test_choiceanswers;
-//		Module module = Module.findByAcronym(module_acronym);
-//		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-//
-//		return ok(views.html.secured.test.render(user, module, lesson,
-//				categories, test_aux, form(QuestionAnswer.class),
-//				form(OneChoiceQuestionAnswer.class)));
-//
-//	}
 
-//	public static Result postonechoicequestionanswer(String module_acronym,
-//			String lesson_acronym, Long test_id, Long question_id) {
-//		
-//
-//		Test test = Test.find.byId(test_id);
-//		User user = User.find.byId(request().username());
-//		Question question = Question.find.byId(question_id);
-//
-//		ChoiceAnswer last_answer = ChoiceAnswer.findByUserAndQuestion(
-//				question_id, user.email);
-//
-//		if (last_answer == null) {
-//			last_answer = new ChoiceAnswer();
-//			last_answer.question = question;
-//			last_answer.test = test;
-//			last_answer.user = user;
-//			last_answer.save();
-//		}
-//		last_answer.delete();
-//		new_answer.question = question;
-//		new_answer.test = test;
-//		new_answer.user = user;
-//		
-//		if(question.typeOfQuestion == 2){
-//			Form<Profile.MultipleChoiceQuestionAnswer> form = form(
-//					Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
-//		for (int h : form.get().mcqanswers) {
-//			if (h != 0) {
-//				new_answer.question = question;
-//				new_answer.test = test;
-//				new_answer.user = user;
-//				System.out.println("MULTIPLECHOICE: " + h);
-//				Hypothesis hypothesis_selected = Hypothesis.find.byId((long) h);
-//				System.out.println("Encontrei? " + hypothesis_selected.text);
-//				new_answer.hypothesislist.add(hypothesis_selected);
-//				hypothesis_selected.save();
-//
-//				new_answer.save();
-//				System.out
-//						.println("Salvei " + new_answer.hypothesislist.size());
-//
-//			}
-//		}
-//		}else if(question.typeOfQuestion==1){
-//			Form<Profile.OneChoiceQuestionAnswer> form = form(
-//					Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
-//			long h = form.get().ocqanswer;
-//			System.out.println("ONECHOICE: " + h);
-//			Hypothesis hypothesis_selected = Hypothesis.find.byId(h);
-//			System.out.println("Encontrei? " + hypothesis_selected.text);
-//			new_answer.hypothesislist.add(hypothesis_selected);
-//			hypothesis_selected.save();
-//
-//			new_answer.save();
-//			System.out
-//					.println("Salvei " + new_answer.hypothesislist.size());
-//			
-//		}
-//
-//		List<Category> categories = Category.getAllCategories();
-//		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
-//				test_id);
-//		
-//		Test test_aux = test;
-//		test_aux.answers = openanswers;
-//
-//		Module module = Module.findByAcronym(module_acronym);
-//		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-//
-//		return ok(views.html.secured.test.render(user, module, lesson,
-//				categories, test_aux, form(QuestionAnswer.class),
-//				form(OneChoiceQuestionAnswer.class)));
-//	}
 
-	public static Result postquestion(
-			int question_number, String module_acronym, String lesson_acronym, Long test_id,
-			Long question_id) {
-		
-		User user = User.find.byId(request().username());
-		Question question = Question.find.byId(question_id);
-		
-			if(question.typeOfQuestion == 1){
-				Form<Profile.OneChoiceQuestionAnswer> form = form(Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
-				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
-				for(Hypothesis h : last_answers){
-					h.selected = false;
-					h.save();
-				}
-				
-				Hypothesis hypothesis = Hypothesis.find.byId(form.get().ocqanswer);
-				hypothesis.selected = true;
-				hypothesis.save();
-				
-			}else if(question.typeOfQuestion == 2) {
-			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE
-
-			Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
-			for (int h : form.get().mcqanswers) {
-				System.out.println("VALOR: " + h);
-			}
-			
-			List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
-			
-			for(Hypothesis h : last_answers){
-				h.selected = false;
-				h.save();
-				
-			}
-			
-			for(int h : form.get().mcqanswers){
-				if(h!=0){
-					for(Hypothesis hypothesis: last_answers){
-						if(hypothesis.id == h){
-							hypothesis.selected = true;
-							hypothesis.save();
-						}
-					}
-				}
-			}
-		} else {
-			//GUARDAR OPEN QUESTION - WORKING
-			
-			Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
-			System.out.println("Open Answer: " + form.get().qanswer);
-			
-			Answer answer = Answer.findByUserAndQuestion(user.email, question_id); // Resposta Guardada
-			answer.answer = form.get().qanswer;
-			answer.save();
-		}
-		
-			int totalNumQuestions=0;
-			Test t= Test.find.byId(test_id);
-			for (QuestionGroup g: t.groups){
-				totalNumQuestions+=g.questions.size();
-			}
-			System.out.println(totalNumQuestions);
-			
-			
-			
-			UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
-			float progress = userTest.progress+ 100/totalNumQuestions;
-			System.out.println("progress"+progress);
-			userTest.progress=progress;
-			userTest.save();
-			
-			return question(question_number,test_id,lesson_acronym,module_acronym);
-
-	}
+	
 	
 	public static Result answersToMark(){
 		User user = User.find.byId(request().username());

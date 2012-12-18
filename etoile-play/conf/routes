@@ -5,7 +5,7 @@
 # Home page
 GET     /                           controllers.Profile.index()
 GET		/index						controllers.Application.index()
-GET		/professor						controllers.ProfessorController.index()
+GET		/						controllers.ProfessorController.index()
 
 # Authentication
 GET     /login                              controllers.Application.login()
@@ -59,10 +59,10 @@ POST 	/modules/:module/:lesson/addquestion 				controllers.Profile.addquestion(t
 
 #Tests
 GET 	/modules/:module/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,module: String)
-GET		/modules/:module/:lesson/test:test/:question		controllers.Profile.question(question: Int,test: Long, lesson: String,module: String)
+GET		/modules/:module/:lesson/test:test/:question		controllers.StudentTestController.question(question: Int,test: Long, lesson: String,module: String)
 
 #Questions
-POST    /modules/:module/:lesson/test:test/postquestion     controllers.Profile.postquestion(question_number: Int, module: String, lesson: String, test: Long, question: Long)
+POST    /modules/:module/:lesson/test:test/postquestion     controllers.StudentTestController.postquestion(question_number: Int, module: String, lesson: String, test: Long, question: Long)
 GET		/modules/:module/:lesson/submitTest					controllers.Profile.submitTest(test: Long,lesson: String,module: String)
 
 # Map static resources from the /public folder to the /assets URL path

@@ -141,7 +141,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 										<td><a class="btn btn-success btn-small disabled" >Question suggested</a></td>
 										@if(!usertest.submitted){
 										<td><a class="btn btn-primary btn-small"
-											href="@routes.Profile.question(1,test.id,lesson.acronym,module.acronym)">Solve
+											href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
 												test&raquo;</a></td> 
 												}
 										@if(usertest.submitted){

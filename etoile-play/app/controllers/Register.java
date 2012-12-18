@@ -7,6 +7,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
 import views.html.register;
+import controllers.extra.sha1;
 
 public class Register extends Controller {
 

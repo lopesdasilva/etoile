@@ -10,7 +10,7 @@ import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.*;
+import controllers.secured.*;
 
 /**
  * Manage Profile related operations.
@@ -26,14 +26,14 @@ public class ProfessorController extends Controller {
 	public static Result index() {
 		
 		
-		if(SecuredProfessor.isProfessor(request().username())){
+		if(SecuredProfessor.isProfessor(session("email"))){
 		List<Blog> blogs = Blog.getAllBlogs();
-		User user = User.find.byId(request().username());
+		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
 
 		return ok(views.html.professor.homeprofessor.render(user, blogs, categories));
 		}
-		return redirect(routes.Application.index());
+		return Profile.index(); 
 	}
 	
 

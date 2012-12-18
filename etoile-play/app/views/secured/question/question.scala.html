@@ -390,7 +390,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 				
 			</div>
 			<div class="control-group">
-							@helper.form(routes.Profile.postquestion(group.number, module.acronym,
+							@helper.form(routes.StudentTestController.postquestion(group.number, module.acronym,
 							lesson.acronym,test.id,question.id)) {
 							<div class="controls">
 
@@ -535,7 +535,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					<li class="active"><a>@group_aux.number</a></li> }
 					@if(group.number!=group_aux.number){
 					<li><a
-						href="@routes.Profile.question(group_aux.number,test.id, lesson.acronym,module.acronym)">@group_aux.number</a></li>
+						href="@routes.StudentTestController.question(group_aux.number,test.id, lesson.acronym,module.acronym)">@group_aux.number</a></li>
 					} }
 				</ul>
 			</div>

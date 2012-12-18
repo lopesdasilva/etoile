@@ -18,7 +18,7 @@ import play.data.validation.*;
 
 import com.avaje.ebean.*;
 
-import controllers.sha1;
+import controllers.extra.sha1;
 
 /**
  * User entity managed by Ebean

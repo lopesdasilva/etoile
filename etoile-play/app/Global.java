@@ -7,7 +7,7 @@ import play.*;
 
 import com.avaje.ebean.*;
 
-import controllers.sha1;
+import controllers.extra.sha1;
 
 import models.*;
 import models.continent.Continent;

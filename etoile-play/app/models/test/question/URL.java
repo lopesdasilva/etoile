@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.joda.time.DateTime;
+
 import models.User;
 
 
@@ -38,6 +40,9 @@ public class URL extends Model implements Comparable<URL> {
 	@Constraints.Required
 	public String imageURL;
 	
+	@Constraints.Required
+	public DateTime added;
+	
 	//Associations
 	
 	@ManyToOne
@@ -59,6 +64,17 @@ public class URL extends Model implements Comparable<URL> {
         return find.where().eq("question_id", question_id).findList();
     }
 	
+    public boolean isFeatured(long urlID){
+    	DateTime dt= new DateTime();
+    	URL url= URL.find.byId(urlID);
+    	
+    	if (dt.isAfter(url.added.plusDays(15))){
+    		return false;
+    	}
+    	
+		return true;
+    	
+    }
 
 
 	@Override

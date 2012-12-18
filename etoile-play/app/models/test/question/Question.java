@@ -84,13 +84,23 @@ public class Question extends Model {
 	
 	public List<URL> getTopUrls(long question_id) {
 		List<URL> aux=	URL.findByQuestion(question_id);
+		URL url_aux = null;
 		if(aux.size()>0){
 			Collections.sort(aux);
 			if(aux.size()>5){
+				for(URL url: aux){
+					if(url.isFeatured(url.id)){
+						url_aux= url;
+						break;
+					}
+
+				}
 				aux=aux.subList(0, 4);
+				if (url_aux!=null && !aux.contains(url_aux))
+					aux.add(url_aux);
 			}
 		}
-		
+		Collections.shuffle(aux);
 		return aux;
 	}
 }

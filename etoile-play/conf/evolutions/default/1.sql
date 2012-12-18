@@ -218,6 +218,7 @@ create table url (
   name                      varchar(255),
   description               varchar(255),
   image_url                 varchar(255),
+  added                     datetime,
   question_id               bigint,
   user_email                varchar(255),
   constraint pk_url primary key (id))

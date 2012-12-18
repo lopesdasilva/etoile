@@ -100,12 +100,20 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					<div class="modal-body">
 					@for(url<- question.getTopUrls(question.id)){
 						<div class="well">
+						@if(url.isFeatured(url.id)){
+									<img class="pull-right"
+									src=" @routes.Assets.at("images/featured_url.png") "
+									 height="35" width="35">
+									}
 							<div class="media">
 								<a class="pull-left" href="@url.adress"> <img class="media-object"
 									src="@url.imageURL" height="70" width="70">
 								</a>
+								
 								<div class="media-body">
+								
 									<div>
+									
 										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description

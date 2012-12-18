@@ -38,6 +38,8 @@ GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 
 #Mark Answers
 GET		/answerstomark						controllers.Profile.answersToMark()
+GET		/answerstomark/answer:answer		controllers.Profile.answerToMark(answer: Long)
+POST    /answerstomark/answer:answer/postevaluation controllers.Profile.markanswer(answer: Long)
 
 #Modules
 ##CHECK THIS ROUTE

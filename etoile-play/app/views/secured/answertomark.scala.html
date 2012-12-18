@@ -1,5 +1,6 @@
-@(user: User, categories: List[models.curriculum.Category],answer: models.test.Answer )
- @import helper._
+@(user: User, categories: List[models.curriculum.Category],answer:
+models.test.Answer, question: models.test.question.Question, formMarkerEvaluation
+:Form[Profile.MarkerEvaluation] ) @import helper._ 
 @main("etoileplatform"){
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -42,21 +43,456 @@
 
 <div class="container-fluid">
 	<div class="row-fluid">
-	@usermenu(user,categories)
-	
-		
-		<div class="span9">
-		<div class="page-header">
-			<h2>
-				Answers to Mark
-			</h2>
+		@usermenu(user,categories)
 
-		</div>
-		
-		<div class="row-fluid">
-			
+
+		<div class="span9">
+			<div class="page-header">
+				<h2>Answer to Mark</h2>
+
 			</div>
-		</div>
-	</div>
-</div>
-}
+
+			<div class="row-fluid">
+
+				<div class="well  ">
+
+					<div class="row-fluid">
+						<div class="span9">
+							<h3>Group @answer.group.number</h3>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span11">
+							<p>@answer.group.question</p>
+						</div>
+					</div>
+
+					<hr>
+					<div class="control-group">
+							@helper.form(routes.Profile.markanswer(answer.id)) {
+							<div class="controls">
+					<div class="offset1">
+						<div class="row-fluid">
+							<div class="span6">
+								<h4>Question @answer.openQuestion.number</h4>
+							</div>
+							<div class="span5">
+								<div class="btn-group pull-right">
+									<button class="btn btn-small btn-info  dropdown-toggle"
+										data-toggle="dropdown">
+										help<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu">
+										<li><a href="#URLTop@question.number" data-toggle="modal">View
+												top5 URLs</a></li>
+										<li><a href="#URLALL@question.number" data-toggle="modal">View
+												All URLs</a></li>
+
+										<li><a href="#ADDURL@question.number" data-toggle="modal">Add
+												new URLs</a></li>
+										<li class="divider"></li>
+										<li><a href="#generalhelp" data-toggle="modal">General
+												help</a></li>
+									</ul>
+								</div>
+								<!-- /btn-group -->
+							</div>
+
+							<!-- URL TOP 5 Modal -->
+							<div id="URLTop@question.number" class="modal hide fade">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">X</button>
+									<h3 id="myModalLabel">Top 5</h3>
+								</div>
+								<div class="modal-body">
+									@for(url<- answer.openQuestion.getTopUrls(question.id)){
+									<div class="well">
+										@if(url.isFeatured(url.id)){ <img class="pull-right"
+											src=" @routes.Assets.at("images/featured_url.png") " height="35" width="35">
+										}
+										<div class="media">
+											<a class="pull-left" href="@url.adress"> <img
+												class="media-object" src="@url.imageURL" height="70"
+												width="70">
+											</a>
+
+											<div class="media-body">
+
+												<div>
+
+													<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+													<div class="media pull-right">@url.likes likes</div>
+													<small>@url.adress</small></br> </br>@url.description
+													<button class="btn btn-mini btn-primary pull-right">Like</button>
+													<!-- Nested media object -->
+													<!-- <div class="media pull-right"></div> -->
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+									}
+								</div>
+							</div>
+							<!-- END TOP 5Modal -->
+
+							<!-- ALL URL Modal -->
+							<div id="URLALL@question.number" class="modal hide fade">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">X</button>
+									<h3 id="myModalLabel">All</h3>
+								</div>
+								<div class="modal-body">
+									@for(url<- answer.openQuestion.urls){
+									<div class="well">
+										<div class="media">
+											<a class="pull-left" href="@url.adress"> <img
+												class="media-object" src="@url.imageURL" height="70"
+												width="70">
+											</a>
+											<div class="media-body">
+												<div>
+													<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+													<div class="media pull-right">@url.likes likes</div>
+													<small>@url.adress</small></br> </br>@url.description
+													<button class="btn btn-mini btn-primary pull-right">Like</button>
+													<!-- Nested media object -->
+													<!-- <div class="media pull-right"></div> -->
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+									}
+								</div>
+							</div>
+							<!-- END All URL Modal -->
+
+							<!-- ALL URL Modal -->
+							<div id="ADDURL@question.number" class="modal hide fade">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">X</button>
+									<h3 id="myModalLabel">Add new URL</h3>
+								</div>
+								<div class="modal-body">
+									<form class="form-horizontal">
+										<fieldset>
+											<div class="control-group">
+
+												<!-- Text input-->
+												<label class="control-label" for="input01">New URL</label>
+												<div class="controls">
+													<input type="text" placeholder="Insert the new URL"
+														class="input-xlarge">
+													<p class="help-block">A valid URL that you used to
+														answer this question</p>
+												</div>
+											</div>
+
+											<div class="control-group">
+												<label class="control-label"></label>
+
+												<!-- Button -->
+												<div class="controls">
+													<button class="btn btn-success">Add</button>
+												</div>
+											</div>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+							<!-- END All URL Modal -->
+
+							<!-- GENERAL HELP Modal -->
+							<div id="generalhelp" class="modal hide fade">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">X</button>
+									<h3 id="myModalLabel">Help</h3>
+								</div>
+								<div class="modal-body">
+									<div class="tabbable" style="margin-bottom: 18px;">
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#tab1" data-toggle="tab">ASCIIMathML</a></li>
+											<li><a href="#tab2" data-toggle="tab">Greek Letters</a></li>
+										</ul>
+										<div class="tab-content"
+											style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+											<div class="tab-pane active" id="tab1">
+												<p>
+													For mathematics written in this form, you mark your
+													mathematical expressions by surrounding them in
+													‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.
+												</p>
+
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>Type this</th>
+															<th>See this</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>x^2+y_1+z_12^34</td>
+															<td>`x^2+y_1+z_12^34`</td>
+														</tr>
+														<tr>
+															<td>sin^-1(x)</td>
+															<td>`sin^-1(x)`</td>
+														</tr>
+														<tr>
+															<td>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</td>
+															<td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
+														</tr>
+														<tr>
+															<td>f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n</td>
+															<td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
+														</tr>
+														<tr>
+															<td>int_0^1f(x)dx</td>
+															<td>`int_0^1f(x)dx`</td>
+														</tr>
+														<tr>
+															<td>bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)</td>
+															<td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+											<div class="tab-pane" id="tab2">
+												<p class="text-warning">
+													<span class="label label-warning">Info</span>Do not forget
+													to surround your formula with ‚"back-ticks", i.e., <span
+														class="asciimath2jax_ignore">`...`</span>.
+												</p>
+												<table class="table table-condensed table-hover">
+													<thead>
+														<tr>
+															<th>Command</th>
+															<th>Effect</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>eta</td>
+															<td>`eta`</td>
+														</tr>
+														<tr>
+															<td>gamma</td>
+															<td>`gamma`</td>
+														</tr>
+														<tr>
+															<td>Gamma</td>
+															<td>`Gamma`</td>
+														</tr>
+														<tr>
+															<td>iota</td>
+															<td>`iota`</td>
+														</tr>
+														<tr>
+															<td>kappa</td>
+															<td>`kappa`</td>
+														</tr>
+														<tr>
+															<td>lambda</td>
+															<td>`lambda`</td>
+														</tr>
+														<tr>
+															<td>Lambda</td>
+															<td>`Lambda`</td>
+														</tr>
+														<tr>
+															<td>mu</td>
+															<td>`mu`</td>
+														</tr>
+														<tr>
+															<td>nu</td>
+															<td>`nu`</td>
+														</tr>
+														<tr>
+															<td>omega</td>
+															<td>`omega`</td>
+														</tr>
+														<tr>
+															<td>Omega</td>
+															<td>`Omega`</td>
+														</tr>
+														<tr>
+															<td>phi</td>
+															<td>`phi`</td>
+														</tr>
+														<tr>
+															<td>varphi</td>
+															<td>`varphi`</td>
+														</tr>
+														<tr>
+															<td>Phi</td>
+															<td>`phi`</td>
+														</tr>
+														<tr>
+															<td>pi</td>
+															<td>`pi`</td>
+														</tr>
+														<tr>
+															<td>Pi</td>
+															<td>`Pi`</td>
+														</tr>
+														<tr>
+															<td>psi</td>
+															<td>`psi`</td>
+														</tr>
+														<tr>
+															<td>Psi</td>
+															<td>`Psi`</td>
+														</tr>
+														<tr>
+															<td>rho</td>
+															<td>`rho`</td>
+														</tr>
+														<tr>
+															<td>sigma</td>
+															<td>`sigma`</td>
+														</tr>
+														<tr>
+															<td>Sigma</td>
+															<td>`Sigma`</td>
+														</tr>
+														<tr>
+															<td>tau</td>
+															<td>`tau`</td>
+														</tr>
+														<tr>
+															<td>theta</td>
+															<td>`theta`</td>
+														</tr>
+														<tr>
+															<td>vartheta</td>
+															<td>`vartheta`</td>
+														</tr>
+														<tr>
+															<td>Theta</td>
+															<td>`Theta`</td>
+														</tr>
+														<tr>
+															<td>upsilon</td>
+															<td>`upsilon`</td>
+														</tr>
+														<tr>
+															<td>xi</td>
+															<td>`xi`</td>
+														</tr>
+														<tr>
+															<td>Xi</td>
+															<td>`Xi`</td>
+														</tr>
+														<tr>
+															<td>zeta`</td>
+															<td>`zeta`</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+										</div>
+									</div>
+									<!-- /tabbable -->
+								</div>
+							</div>
+							<!-- GENERAL HELP Modal -->
+						</div>
+
+						<div class="control-group">
+
+							<div class="controls">
+
+								<div class="row-fluid">
+									<div class="span11">
+										<p>@answer.openQuestion.question</p>
+										@if(answer.openQuestion.imageURL!=null ||
+										answer.openQuestion.videoURL!=null){
+										<div class="alert">
+											<strong data-toggle="collapse" data-target="#@question.id">Click
+												to expand and view media</strong>
+											<button type="button" class="close" data-toggle="collapse"
+												data-target="#@question.id">-</button>
+
+											<div id="@question.id" class="collapse row-fluid">
+												@if(answer.openQuestion.imageURL!=null){
+												<div class="span6">
+													<p>
+														<img src="@question.imageURL" height="300" />
+													</p>
+												</div>
+												} @if(answer.openQuestion.videoURL!=null){
+												<div class="span6">
+													<p>
+														<object style="float: none;">
+															<param name="movie" value="@answer.openQuestion.videoURL" />
+															<embed src="@answer.openQuestion.videoURL"
+																type="application/x-shockwave-flash" wmode="transparent"
+																height="300">
+														</object>
+
+													</p>
+												</div>
+												}
+											</div>
+
+										</div>
+										}
+
+									</div>
+								</div>
+
+								@if(answer.openQuestion.typeOfQuestion==0){
+								<div class="row-fluid">
+									<div class="span11">
+										<div class="span12">
+											<div class="alert alert-block alert-success">
+												<h4>Student answer:</h4>
+												@answer.answer
+											</div>
+										</div>
+										<div class=span11>
+											<p>Your evaluation</p>
+											<textarea rows="1" cols="1" name="evaluation"></textarea>
+											
+											<!-- Vertical Slider -->
+            <h2 class="demoHeaders">Vertical Slider</h2>
+            <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
+            <span class="ui-icon ui-icon-volume-on" style="float:left; margin:-2px 5px 0 0;"></span>
+            Master volume
+            </p>
+            <p>
+              <label for="amount">Volume:</label>
+              <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;" />
+            </p>
+
+            <div id="slider-horizontal" style="height:200px;"></div>
+
+
+          </div>
+          <!--end col-->
+											
+											<button class="btn btn-success pull-right" type="submit">Mark!
+												@question.number</button>
+										</div>
+									</div>
+
+								</div>
+								}
+							</div>
+
+						</div>
+					</div>
+					}
+					</div>
+				</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			}

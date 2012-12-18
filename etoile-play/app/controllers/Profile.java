@@ -57,6 +57,11 @@ public class Profile extends Controller {
 
 		public int[] mcqanswers = new int[4];
 	}
+	
+	public static class MarkerEvaluation {
+
+		public Long evaluation;
+	}
 
 	public static class OpenQuestionSuggestion {
 
@@ -597,7 +602,24 @@ public class Profile extends Controller {
 		return ok(views.html.secured.answerstomark.render(user, categories, answers));
 	}
 	
-
+	public static Result answerToMark(Long answer_id){
+		User user = User.find.byId(request().username());
+		List<Category> categories = Category.getAllCategories();
+		Answer answer = Answer.find.byId(answer_id);
+		answer.group.refresh();
+		answer.openQuestion.refresh();
+		
+		
+		return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,form(MarkerEvaluation.class)));
+		
+	}
+	
+	public static Result markanswer(Long answer_id){
+		Form<Profile.MarkerEvaluation> form = form(
+				Profile.MarkerEvaluation.class).bindFromRequest();
+		System.out.println("Evaluation" + form.get().evaluation);
+	return answersToMark();
+	}
 	// -- Queries
 
 	public static Model.Finder<Long, Profile> find = new Model.Finder(

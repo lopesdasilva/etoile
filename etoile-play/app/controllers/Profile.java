@@ -16,6 +16,7 @@ import models.module.Module;
 import models.module.Lesson;
 import models.module.University;
 import models.test.Answer;
+import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -615,9 +616,25 @@ public class Profile extends Controller {
 	}
 	
 	public static Result markanswer(Long answer_id){
+		User user = User.find.byId(request().username());
 		Form<Profile.MarkerEvaluation> form = form(
 				Profile.MarkerEvaluation.class).bindFromRequest();
 		System.out.println("Evaluation" + form.get().evaluation);
+		
+		Answer answer = Answer.find.byId(answer_id);
+		
+		Evaluation evaluation = new Evaluation();
+		evaluation.answer =answer;
+		evaluation.user = user;
+		evaluation.evaluation = form.get().evaluation;
+		evaluation.save();
+		System.out.println("Evaluation criada.");
+		
+		answer.markers.remove(user);
+		answer.save();
+		
+		System.out.println("Answer removida da lista do marker.");
+		
 	return answersToMark();
 	}
 	// -- Queries

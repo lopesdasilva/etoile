@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
+import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.question.Question;
 import models.test.question.URL;
@@ -63,6 +64,9 @@ public class User extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Question> questions;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Evaluation> evaluations;
 	
     // -- Queries
 	

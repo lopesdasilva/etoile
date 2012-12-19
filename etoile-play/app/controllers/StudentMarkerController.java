@@ -68,7 +68,7 @@ public class StudentMarkerController extends Controller {
 		Answer answer = Answer.find.byId(answer_id);
 		
 		Evaluation evaluation = new Evaluation();
-		evaluation.answer =answer;
+		evaluation.answer = answer;
 		evaluation.user = user;
 		evaluation.evaluation = form.get().evaluation;
 		evaluation.save();

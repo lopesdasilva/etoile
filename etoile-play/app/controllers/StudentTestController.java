@@ -250,7 +250,7 @@ public class StudentTestController extends Controller {
 						System.out.println(user.email);
 						System.out.println(user.email.equals(a.user.email));
 						if (!user.email.equals(a.user.email)) {
-							if (!a.markers.contains(user)) {
+							if (!a.markers.contains(user) && a.markers.size() < 3 && user.answersToMark.size() < 3) {
 								a.markers.add(user);
 								a.save();
 							}

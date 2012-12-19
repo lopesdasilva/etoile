@@ -1,6 +1,6 @@
 @(user: User, categories: List[models.curriculum.Category],answer:
 models.test.Answer, question: models.test.question.Question, formMarkerEvaluation
-:Form[Profile.MarkerEvaluation] ) @import helper._ 
+:Form[StudentMarkerController.MarkerEvaluation] ) @import helper._ 
 @main("etoileplatform"){
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -69,7 +69,7 @@ models.test.Answer, question: models.test.question.Question, formMarkerEvaluatio
 
 					<hr>
 					<div class="control-group">
-							@helper.form(routes.Profile.markanswer(answer.id)) {
+							@helper.form(routes.StudentMarkerController.markanswer(answer.id)) {
 							<div class="controls">
 					<div class="offset1">
 						<div class="row-fluid">

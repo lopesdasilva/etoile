@@ -1,6 +1,6 @@
 @(user: User, categories: List[models.curriculum.Category], lesson:
 models.module.Lesson, module: models.module.Module,formSuggestQuestion
-:Form[Profile.OpenQuestionSuggestion]) @import helper._
+:Form[StudentTestController.OpenQuestionSuggestion]) @import helper._
 @main("etoileplatform"){
 
 
@@ -163,7 +163,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 											<div class="modal-body">
 												<p>
 												<div class="control-group">
-													@helper.form(routes.Profile.addquestion(test.id,lesson.acronym,module.acronym)){
+													@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
 
 													<div class="controls">
 														<p>In order to resolve the test you need to make a question suggestion.</p>

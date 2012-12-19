@@ -16,7 +16,6 @@ import models.module.Module;
 import models.module.Lesson;
 import models.module.University;
 import models.test.Answer;
-import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -45,45 +44,18 @@ public class Profile extends Controller {
 		public String comment;
 	}
 
-	public static class QuestionAnswer {
-
-		public String qanswer;
-	}
-
-	public static class OneChoiceQuestionAnswer {
-
-		public Long ocqanswer;
-	}
-
-	public static class MultipleChoiceQuestionAnswer {
-
-		public int[] mcqanswers = new int[4];
-	}
 	
-	public static class MarkerEvaluation {
 
-		public Long evaluation;
-	}
 
-	public static class OpenQuestionSuggestion {
-
-		public String openquestionsuggestion;
-
-	}
 
 	/**
-	 * Display the dashboard.
+	 * Display the homescreen.
 	 */
 	public static Result index() {
 		if(Secured.isStudent(session("email"))){
 		List<Blog> blogs = Blog.getAllBlogs();
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
-
-		// This is to load Universities(weird)
-//		for (Module c : user.modules) {
-//			System.out.println(c.university.name);
-//		}
 
 		return ok(home.render(user, blogs, categories));
 		}
@@ -154,84 +126,8 @@ public class Profile extends Controller {
 
 	}
 
-	public static Result addquestion(Long test_id, String lesson_acronym,
-			String module_acronym) {
-		User user = User.find.byId(request().username());
-		// Test test = models.test.Test.find.byId(test_id);
-		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
-		usertest.inmodule = true;
-		usertest.save();
+	
 
-		List<Category> categories = Category.getAllCategories();
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-
-		Form<Profile.OpenQuestionSuggestion> form = form(
-				Profile.OpenQuestionSuggestion.class).bindFromRequest();
-
-		System.out.println("MODULESIZE: " + lesson.questions.size());
-		Question new_question = new Question();
-		new_question.question = form.get().openquestionsuggestion;
-		new_question.lesson = lesson;
-		new_question.user = user;
-		new_question.imageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
-		new_question.save();
-		lesson.save();
-		System.out.println("MODULESIZE2: " + lesson.questions.size());
-
-		return ok(views.html.secured.lesson.render(user, categories, lesson,
-				module, form(OpenQuestionSuggestion.class)));
-	}
-
-	//TODO REMOVE
-	public static Result test(Long test_id, String lesson_acronym,String module_acronym) {
-		List<Category> categories = Category.getAllCategories();
-		Test test = models.test.Test.find.byId(test_id);
-		//DEBUG
-		for(QuestionGroup g : test.groups){
-			System.out.println("GROUP: " + g.question);
-		}
-		
-		User user = User.find.byId(request().username());
-
-		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
-				test_id);
-		if (test_answers.isEmpty()) {
-			for(QuestionGroup g: test.groups){
-			for (Question q : g.questions) {
-				if (q.typeOfQuestion == 0) {
-					Answer empty_answer = new Answer();
-					empty_answer.answer = "No answer.";
-					empty_answer.openQuestion = q;
-					empty_answer.test = test;
-					empty_answer.user = user;
-					empty_answer.group = g;
-					empty_answer.save();
-					test.answers.add(empty_answer);
-					test.save();
-				}
-			}
-			}
-		}
-
-		List<Answer> openanswers = Answer.findByUserEmailAndTestId(user.email,
-				test_id);
-
-		Test test_aux = test;
-		test_aux.answers = openanswers;
-
-		System.out.println(test.answers);
-
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-
-
-
-		return ok(views.html.secured.test.render(user, module, lesson,
-				categories, test_aux, form(QuestionAnswer.class),
-				form(OneChoiceQuestionAnswer.class)));
-
-	}
 
 	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
@@ -346,7 +242,7 @@ public class Profile extends Controller {
 		
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
-				module, form(OpenQuestionSuggestion.class)));
+				module, form(StudentTestController.OpenQuestionSuggestion.class)));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
 			//Subsituir por module
@@ -355,18 +251,6 @@ public class Profile extends Controller {
 		return redirect(routes.Application.index());
 	}
 	
-	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
-		User user = User.find.byId(request().username());
-		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
-		userTest.submitted=true;
-		userTest.save();
-		
-		System.out.println("DEBUG: "+test_id+" submitted");
-		
-		return lesson(lesson_acronym,module_acronym);
-
-	}
-
 	public static Result modules() {
 		List<Module> allModules = Module.getAllModules();
 		List<Category> categories = Category.getAllCategories();
@@ -424,55 +308,7 @@ public class Profile extends Controller {
 
 	
 	
-	public static Result answersToMark(){
-		User user = User.find.byId(request().username());
-		List<Category> categories = Category.getAllCategories();
-		List<Answer> answers = user.answersToMark;
-			
-		for(Answer a: answers){
-			a.group.refresh();
-			a.group.test.refresh();
-			a.group.test.lesson.refresh();
-			a.group.test.lesson.module.refresh();
-		}
-
-		return ok(views.html.secured.answerstomark.render(user, categories, answers));
-	}
 	
-	public static Result answerToMark(Long answer_id){
-		User user = User.find.byId(request().username());
-		List<Category> categories = Category.getAllCategories();
-		Answer answer = Answer.find.byId(answer_id);
-		answer.group.refresh();
-		answer.openQuestion.refresh();
-		
-		
-		return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,form(MarkerEvaluation.class)));
-		
-	}
-	
-	public static Result markanswer(Long answer_id){
-		User user = User.find.byId(request().username());
-		Form<Profile.MarkerEvaluation> form = form(
-				Profile.MarkerEvaluation.class).bindFromRequest();
-		System.out.println("Evaluation" + form.get().evaluation);
-		
-		Answer answer = Answer.find.byId(answer_id);
-		
-		Evaluation evaluation = new Evaluation();
-		evaluation.answer =answer;
-		evaluation.user = user;
-		evaluation.evaluation = form.get().evaluation;
-		evaluation.save();
-		System.out.println("Evaluation criada.");
-		
-		answer.markers.remove(user);
-		answer.save();
-		
-		System.out.println("Answer removida da lista do marker.");
-		
-	return answersToMark();
-	}
 	// -- Queries
 
 

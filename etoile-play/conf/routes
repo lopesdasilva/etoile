@@ -38,9 +38,9 @@ GET		/admin/removeblog				controllers.Administration.removeblog(blog: Long)
 GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 
 #Mark Answers
-GET		/answerstomark						controllers.Profile.answersToMark()
-GET		/answerstomark/answer:answer		controllers.Profile.answerToMark(answer: Long)
-POST    /answerstomark/answer:answer/postevaluation controllers.Profile.markanswer(answer: Long)
+GET		/answerstomark						controllers.StudentMarkerController.answersToMark()
+GET		/answerstomark/answer:answer		controllers.StudentMarkerController.answerToMark(answer: Long)
+POST    /answerstomark/answer:answer/postevaluation controllers.StudentMarkerController.markanswer(answer: Long)
 
 #Modules
 ##CHECK THIS ROUTE
@@ -55,15 +55,14 @@ GET /curriculum/category:category					controllers.Application.categoryModules(ca
 
 #Lessons
 GET		/modules/:module/:lesson			controllers.Profile.lesson(lesson: String, module: String)
-POST 	/modules/:module/:lesson/addquestion 				controllers.Profile.addquestion(test: Long, lesson: String, module: String)
+POST 	/modules/:module/:lesson/addquestion 				controllers.StudentTestController.addquestion(test: Long, lesson: String, module: String)
 
 #Tests
-GET 	/modules/:module/:lesson/test:test  controllers.Profile.test(test: Long, lesson: String,module: String)
 GET		/modules/:module/:lesson/test:test/:question		controllers.StudentTestController.question(question: Int,test: Long, lesson: String,module: String)
 
 #Questions
 POST    /modules/:module/:lesson/test:test/postquestion     controllers.StudentTestController.postquestion(question_number: Int, module: String, lesson: String, test: Long, question: Long)
-GET		/modules/:module/:lesson/submitTest					controllers.Profile.submitTest(test: Long,lesson: String,module: String)
+GET		/modules/:module/:lesson/submitTest					controllers.StudentTestController.submitTest(test: Long,lesson: String,module: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -4,6 +4,7 @@ package controllers;
 import java.util.List;
 
 import models.User;
+import models.curriculum.Category;
 import models.manytomany.UserTest;
 import models.module.Lesson;
 import models.module.Module;
@@ -12,6 +13,7 @@ import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionGroup;
+import play.api.Routes;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,7 +21,7 @@ import play.mvc.Security;
 import controllers.secured.*;
 
 /**
- * Manage Profile related operations.
+ * Manage Test related operations.
  */
 @Security.Authenticated(Secured.class)
 public class StudentTestController extends Controller {
@@ -40,7 +42,14 @@ public class StudentTestController extends Controller {
 		public int[] mcqanswers = new int[4];
 	}
 
+	public static class OpenQuestionSuggestion {
 
+		public String openquestionsuggestion;
+
+	}
+
+	
+	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
 		if(Secured.isStudent(session("email"))){
 		Test test = models.test.Test.find.byId(test_id);
@@ -152,7 +161,7 @@ public class StudentTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		
 			if(question.typeOfQuestion == 1){
-				Form<Profile.OneChoiceQuestionAnswer> form = form(Profile.OneChoiceQuestionAnswer.class).bindFromRequest();
+				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
 				for(Hypothesis h : last_answers){
 					h.selected = false;
@@ -166,7 +175,7 @@ public class StudentTestController extends Controller {
 			}else if(question.typeOfQuestion == 2) {
 			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE
 
-			Form<Profile.MultipleChoiceQuestionAnswer> form = form(Profile.MultipleChoiceQuestionAnswer.class).bindFromRequest();
+			Form<MultipleChoiceQuestionAnswer> form = form(MultipleChoiceQuestionAnswer.class).bindFromRequest();
 			for (int h : form.get().mcqanswers) {
 				System.out.println("VALOR: " + h);
 			}
@@ -192,7 +201,7 @@ public class StudentTestController extends Controller {
 		} else {
 			//GUARDAR OPEN QUESTION - WORKING
 			
-			Form<Profile.QuestionAnswer> form = form(Profile.QuestionAnswer.class).bindFromRequest();
+			Form<QuestionAnswer> form = form(QuestionAnswer.class).bindFromRequest();
 			System.out.println("Open Answer: " + form.get().qanswer);
 			
 			Answer answer = Answer.findByUserAndQuestion(user.email, question_id); // Resposta Guardada
@@ -217,5 +226,51 @@ public class StudentTestController extends Controller {
 			
 			return question(question_number,test_id,lesson_acronym,module_acronym);
 
+	}
+
+	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
+		User user = User.find.byId(request().username());
+		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+		userTest.submitted=true;
+		userTest.save();
+		
+		return redirect(routes.Profile.lesson(lesson_acronym,module_acronym));
+
+	}
+
+	/**
+	 * Adiciona uma sugestão de questão por parte do aluno
+	 *
+	 * @param  test_id  int id do teste
+	 * @param  lesson_acronym String acronimo da lição
+	 * @return      a mesma pagina
+	 */
+	public static Result addquestion(Long test_id, String lesson_acronym,
+			String module_acronym) {
+		User user = User.find.byId(request().username());
+		// Test test = models.test.Test.find.byId(test_id);
+		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+		usertest.inmodule = true;
+		usertest.save();
+
+		List<Category> categories = Category.getAllCategories();
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+
+		Form<OpenQuestionSuggestion> form = form(
+				OpenQuestionSuggestion.class).bindFromRequest();
+
+		System.out.println("MODULESIZE: " + lesson.questions.size());
+		Question new_question = new Question();
+		new_question.question = form.get().openquestionsuggestion;
+		new_question.lesson = lesson;
+		new_question.user = user;
+		new_question.imageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
+		new_question.save();
+		lesson.save();
+		System.out.println("MODULESIZE2: " + lesson.questions.size());
+
+		return ok(views.html.secured.lesson.render(user, categories, lesson,
+				module, form(OpenQuestionSuggestion.class)));
 	}
 }

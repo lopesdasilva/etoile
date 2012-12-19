@@ -42,8 +42,7 @@ public class BlogController extends Controller {
 		if(session("email")!=null){
 			User user = User.find.byId(session("email"));
 			
-			return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),
-					categories, form(Comment_Form.class)));
+			return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),categories, form(Comment_Form.class)));
 		}
 		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories));
 		

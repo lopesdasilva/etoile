@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -36,7 +37,10 @@ public class Application extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.getAllModules();
-		
+		if (modules.size()>3){
+		Collections.shuffle(modules);
+		modules=modules.subList(0, 3);
+		}
 		//This is to load Universities(weird)
 //    	for (Module c: modules){
 ////    		System.out.println(c.university.name);
@@ -90,7 +94,7 @@ public static Result professorprofile(String professor_acronym) {
 	    	List <Continent> continents = Continent.getAllContinents();
 	    	
 //	    	if(session("email")!=null){
-//				return Profile.module(module_acronym);
+//				return StudentController.module(module_acronym);
 //			}
 	    	
 	    	return ok(views.html.statics.continent.render(categories,continents,continent,continent.universities));
@@ -105,7 +109,7 @@ public static Result professorprofile(String professor_acronym) {
 	    	
 	    	
 	    	if(session("email")!=null){
-				return Profile.module(module_acronym);
+				return StudentController.module(module_acronym);
 			}
 	    	
 	    	return ok(views.html.statics.module.render(categories,module));
@@ -113,7 +117,7 @@ public static Result professorprofile(String professor_acronym) {
 	
 	public static Result about() {
 		if(session("email")!=null){
-			return Profile.about();
+			return StudentController.about();
 		}
 		return ok(views.html.statics.about.render(
 				Category.getAllCategories()
@@ -122,7 +126,7 @@ public static Result professorprofile(String professor_acronym) {
 	
 	public static Result contact() {
 		if(session("email")!=null){
-			return Profile.contact();
+			return StudentController.contact();
 		}
 		return ok(views.html.statics.contact.render(
 				Category.getAllCategories()
@@ -134,7 +138,7 @@ public static Result professorprofile(String professor_acronym) {
 	public static Result modules(){
 		
 		if(session("email")!=null){
-			return Profile.modules();
+			return StudentController.modules();
 		}
 		return ok(modules.render(Module.getAllModules(),Category.getAllCategories()));
 	}
@@ -159,7 +163,7 @@ public static Result professorprofile(String professor_acronym) {
             
             switch (User.find.byId(session("email")).account_type){
             case 0:
-            	return redirect(routes.Profile.index());
+            	return redirect(routes.StudentController.index());
             case 1:
             	return redirect(routes.ProfessorController.index());
             }

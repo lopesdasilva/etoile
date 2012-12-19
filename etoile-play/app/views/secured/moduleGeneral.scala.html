@@ -60,7 +60,7 @@
 					</div>
 					<div class="span2 offset3 pull-right">
 						<h2>
-							<a href="@routes.Profile.signupmodule(module.acronym)" class="btn btn-info">Sign Up</a>
+							<a href="@routes.StudentController.signupmodule(module.acronym)" class="btn btn-info">Sign Up</a>
 						</h2>
 					</div>
 				</div>
@@ -69,7 +69,33 @@
 			<h3>Description</h3>
 			<div class="row-fluid">
 				<div class="span3">
+					<a href="#myModal" class="thumbnail" data-toggle="modal">
 					<img src="@module.imageURL" height="200" width="200" />
+					<div class="caption">Watch the video</div>
+					</a>
+					<!-- Button to trigger modal -->
+
+
+					<!-- Modal -->
+					<div id="myModal" class="modal hide fade" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">@module.name Video</h3>
+						</div>
+						<div class="modal-body">
+							<p>
+								<object>
+									<param name="movie"
+										value="@module.videoURL" />
+									<param name="wmode" value="transparent" />
+									<embed src="@module.videoURL"
+										type="application/x-shockwave-flash" wmode="transparent"
+										width="530" height="385" />
+								</object>
+
+							</p>
+						</div>
+					</div>
 				</div>
 				<div class="span9">
 

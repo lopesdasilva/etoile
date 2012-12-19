@@ -234,7 +234,7 @@ public class StudentTestController extends Controller {
 		userTest.submitted=true;
 		userTest.save();
 		
-		return redirect(routes.Profile.lesson(lesson_acronym,module_acronym));
+		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 
 	}
 

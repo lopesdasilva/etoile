@@ -33,10 +33,10 @@ import views.html.*;
 import controllers.secured.*;
 
 /**
- * Manage Profile related operations.
+ * Manage StudentController related operations.
  */
 @Security.Authenticated(Secured.class)
-public class Profile extends Controller {
+public class StudentController extends Controller {
 
 	/**
 	 * Display the homescreen.

@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Profile.index()
+GET     /                           controllers.StudentController.index()
 GET		/index						controllers.Application.index()
 GET		/						controllers.ProfessorController.index()
 
@@ -46,7 +46,7 @@ POST    /answerstomark/answer:answer/postevaluation controllers.StudentMarkerCon
 ##CHECK THIS ROUTE
 GET		/modules						controllers.Application.modules()
 GET  	/modules/:module					controllers.Application.module(module: String)
-GET	/modules/:module/signup				controllers.Profile.signupmodule(module: String)
+GET	/modules/:module/signup				controllers.StudentController.signupmodule(module: String)
 GET    /:continent          controllers.Application.continent(continent: String)
 
 
@@ -54,7 +54,7 @@ GET    /:continent          controllers.Application.continent(continent: String)
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)
 
 #Lessons
-GET		/modules/:module/:lesson			controllers.Profile.lesson(lesson: String, module: String)
+GET		/modules/:module/:lesson			controllers.StudentController.lesson(lesson: String, module: String)
 POST 	/modules/:module/:lesson/addquestion 				controllers.StudentTestController.addquestion(test: Long, lesson: String, module: String)
 
 #Tests

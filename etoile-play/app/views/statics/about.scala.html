@@ -1,31 +1,25 @@
-@(categories: List[models.curriculum.Category])
-@main("etoile"){
+@(categories: List[models.curriculum.Category]) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
 			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li><a href="/">Home</a>
-					</li>
-					<li><a href="/digitalcampus">Digital Campus</a>
-					</li>
-					<li><a href="/modules">Modules</a>
-					</li>
-<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
-					</li>
-					<li class="active"><a href="/about">About</a>
-					</li>
-					<li><a href="/contact">Contact</a>
-					</li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li class="active"><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<!--  
 				<div class="navbar-form pull-right">
@@ -33,8 +27,10 @@
 				</div>
 				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
-					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -42,31 +38,65 @@
 		</div>
 	</div>
 </div>
-    
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          
-					 <div class="well sidebar-nav">
-					  <ul class="nav nav-list">
-              <li class="nav-header">Categories (@categories.size)</li>
-              @for(category <- categories) {
-									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
 
-					 </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-  <div class="page-header">
-              <h2>About étoile <br><small>Enhanced Technology for Open Intelligent Learning Environments</small></h2>
-             
-            </div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
 
-<p>Complex systems science is highly interdisciplinary.  The silo-based education provided by most universities creates scientists expert in one discipline but ignorant of most others. Most PhD programmes require students to learn key ideas from other disciplines relevant to their topic, but knowledge across the community is patchy. This includes basic social science and even the core disciplines of mathematics, statistics, physics and ICT. The Complex Systems Society (CSS, 2000+ members) has identified this as a major hindrance to the development of the science.</p>
-<p>We will develop and use a remarkable new way of automatically creating educational resources. It is scalable so that the cost of educating large numbers of students is very low. It is adaptive to changes in the curriculum in fast-moving research fields creating new learning resources as new topics emerge, and it is adaptive to students by creating learning resource that reflects their personal styles of learning, background knowledge, and language. √âtoile is a big step towards personalised learning.</p>
-<p>The basic √©toile concept is simple but a demonstrator is needed to show that the idea works in practice for real students working towards masters and doctoral degrees. We will provide an open source implementation for use by the CSS, and other organisation needing to disseminate new ideas quickly at low cost to a heterogeneous community.</p>
-<p>Following proof of concept, the CSS will take √©toile forward in its long term programme of professional training and recognition. Students with certificated mastery of the core curriculum will be highly attractive as post-docs. As mastery of the core curriculum becomes common communication in the research community will be much easier, there will be less duplication of effort and more cross-fertilization of ideas. √âtoile can have big and long-lasting impact on the science of complex systems, and the method can be adopted by other fast-moving research communities.</p>
-</div>
-</div>
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Categories (@categories.size)</li>
+					@for(category <- categories) {
+					<li><a href="/curriculum#@category.keyword">@category.name</a></li>
+					}
+
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9">
+			<div class="page-header">
+				<h2>
+					About étoile <br>
+					<small>Enhanced Technology for Open Intelligent Learning
+						Environments</small>
+				</h2>
+
+			</div>
+			<p>Complex systems science is highly interdisciplinary. The
+				silo-based education provided by most universities creates
+				scientists expert in one discipline but ignorant of most others.
+				Most PhD programmes require students to learn key ideas from other
+				disciplines relevant to their topic, but knowledge across the
+				community is patchy. This includes basic social science and even the
+				core disciplines of mathematics, statistics, physics and ICT. The
+				Complex Systems Society (CSS, 2000+ members) has identified this as
+				a major hindrance to the development of the science.</p>
+			<p>We will develop and use a remarkable new way of automatically
+				creating educational resources. It is scalable so that the cost of
+				educating large numbers of students is very low. It is adaptive to
+				changes in the curriculum in fast-moving research fields creating
+				new learning resources as new topics emerge, and it is adaptive to
+				students by creating learning resource that reflects their personal
+				styles of learning, background knowledge, and language. Étoile is a
+				big step towards personalised learning.</p>
+			<p>The basic étoile concept is simple but a demonstrator is
+				needed to show that the idea works in practice for real students
+				working towards masters and doctoral degrees. We will provide an
+				open source implementation for use by the CSS, and other
+				organisation needing to disseminate new ideas quickly at low cost to
+				a heterogeneous community.</p>
+			<p>Following proof of concept, the CSS will take étoile forward
+				in its long term programme of professional training and recognition.
+				Students with certificated mastery of the core curriculum will be
+				highly attractive as post-docs. As mastery of the core curriculum
+				becomes common communication in the research community will be much
+				easier, there will be less duplication of effort and more
+				cross-fertilization of ideas. Étoile can have big and long-lasting
+				impact on the science of complex systems, and the method can be
+				adopted by other fast-moving research communities.</p>
+		</div>
+	</div>
 </div>
 }

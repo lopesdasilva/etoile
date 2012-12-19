@@ -13,7 +13,7 @@ import play.mvc.Security;
 import controllers.secured.*;
 
 /**
- * Manage Profile related operations.
+ * Manage StudentController related operations.
  */
 @Security.Authenticated(SecuredProfessor.class)
 public class ProfessorController extends Controller {
@@ -33,7 +33,7 @@ public class ProfessorController extends Controller {
 
 		return ok(views.html.professor.homeprofessor.render(user, blogs, categories));
 		}
-		return Profile.index(); 
+		return StudentController.index(); 
 	}
 	
 

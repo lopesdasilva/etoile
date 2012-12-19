@@ -9,6 +9,7 @@ import models.manytomany.UserTest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
+import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -233,6 +234,31 @@ public class StudentTestController extends Controller {
 		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
 		userTest.submitted=true;
 		userTest.save();
+		System.out.println("USERMAIL:" + user.email);
+		
+		System.out.println("Vou criar marker list..");
+		//Quando aluno submete o teste, é associado à sua lista answersToMark, todas as answers dos outros alunos ao mesmo teste.
+		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
+		//Isto é só um teste para ter qlq coisa a funcionar
+		
+		Test test = userTest.test;
+		for (UserTest ut : UserTest.getAllTests()) {
+			if (userTest.id != ut.id) {
+				if (ut.test.id == test.id) {
+					for (Answer a : test.answers) {
+						System.out.println(a.user.email);
+						System.out.println(user.email);
+						System.out.println(user.email.equals(a.user.email));
+						if (!user.email.equals(a.user.email)) {
+							if (!a.markers.contains(user)) {
+								a.markers.add(user);
+								a.save();
+							}
+						}
+					}
+				}
+			}
+		}
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 

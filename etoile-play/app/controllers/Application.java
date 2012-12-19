@@ -2,14 +2,11 @@ package controllers;
 
 import java.util.List;
 
-import controllers.Profile.Comment;
 
 import models.*;
 import models.continent.Continent;
 import models.curriculum.Category;
 import models.module.Module;
-import models.module.University;
-import play.*;
 import play.data.Form;
 import play.mvc.*;
 
@@ -49,14 +46,7 @@ public class Application extends Controller {
 		return ok(index.render(blogs,categories,continents,modules));
 	}
 	
-	public static Result postcomment(){
-		 Form<Comment> form = form(Comment.class).bindFromRequest();
-		 List<Category> categories = Category.getAllCategories();
-	
-		
-//		User user=User.find.byId(session("email"));
-		return ok(views.html.statics.about.render(categories));
-	}
+
 	
 	public static Result curriculum() {
 		
@@ -148,16 +138,7 @@ public static Result professorprofile(String professor_acronym) {
 		}
 		return ok(modules.render(Module.getAllModules(),Category.getAllCategories()));
 	}
-	
-	public static Result blog(Long blog){
-		List<Category> categories = Category.getAllCategories();
-		if(session("email")!=null){
-			return Profile.blog(blog);
-		}
-		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories));
-	}
-
-	
+		
 	/**
      * Login page.
      */

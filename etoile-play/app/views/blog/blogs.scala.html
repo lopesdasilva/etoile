@@ -61,7 +61,7 @@
      <div class="span9" >
 			@for(blog <- blogs) {
 			<div class="row-fluid">
-				<a href="@routes.Application.blog(blog.id)"><h4>@blog.header</h4></a>
+				<a href="@routes.BlogController.blog(blog.id)"><h4>@blog.header</h4></a>
 				<div class="span2">
 					<img src="@blog.articleImageURL" height="100" width="100" />
 				</div>
@@ -77,7 +77,7 @@
 			
 			</div>
 			<br>
-			<a class="btn btn-info" href="@routes.Application.blog(blog.id)">View
+			<a class="btn btn-info" href="@routes.BlogController.blog(blog.id)">View
 							details &raquo;</a>
 				<hr>
 			}

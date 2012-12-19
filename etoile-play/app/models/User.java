@@ -16,7 +16,6 @@ import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 
-import com.avaje.ebean.*;
 
 import controllers.extra.sha1;
 
@@ -125,7 +124,7 @@ public class User extends Model {
     // --
     
     public String toString() {
-        return "User(" + email + ")";
+        return username;
     }
 
 }

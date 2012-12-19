@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.List;
 
-import controllers.Profile.Comment;
 
 import models.*;
 import models.curriculum.Category;

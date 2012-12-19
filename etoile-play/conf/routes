@@ -24,8 +24,8 @@ GET		/digitalcampus					controllers.Application.digitalcampus()
 
 #Blog
 GET		/news							controllers.Application.news()
-GET		/news:blog						controllers.Application.blog(blog: Long)
-POST	/news:blog/postcomment					controllers.Profile.postcomment(blog: Long)
+GET		/news:blog						controllers.BlogController.blog(blog: Long)
+POST	/news:blog/postcomment			controllers.BlogController.postcomment(blog: Long)
 
 #Professors
 GET		/professors/:professor			controllers.Application.professorprofile(professor: String)

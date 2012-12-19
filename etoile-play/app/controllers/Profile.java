@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import controllers.Application.Login;
+import controllers.BlogController.Comment_Form;
+import controllers.StudentTestController.OpenQuestionSuggestion;
 
 import models.Blog;
 import models.curriculum.Category;
@@ -35,18 +37,6 @@ import controllers.secured.*;
  */
 @Security.Authenticated(Secured.class)
 public class Profile extends Controller {
-
-	/**
-	 * Describes the comment form.
-	 */
-	public static class Comment {
-
-		public String comment;
-	}
-
-	
-
-
 
 	/**
 	 * Display the homescreen.
@@ -126,10 +116,6 @@ public class Profile extends Controller {
 
 	}
 
-	
-
-
-	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
 		if(Secured.isStudent(session("email"))){
 		Test test = models.test.Test.find.byId(test_id);
@@ -242,7 +228,7 @@ public class Profile extends Controller {
 		
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
-				module, form(StudentTestController.OpenQuestionSuggestion.class)));
+				module, form(OpenQuestionSuggestion.class)));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
 			//Subsituir por module
@@ -277,47 +263,4 @@ public class Profile extends Controller {
 		return ok(views.html.secured.about.render(user, categories));
 	}
 
-	public static Result blog(Long blog) {
-		List<Category> categories = Category.getAllCategories();
-
-		// check this line
-		User user = User.find.byId(session("email"));
-		return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),
-				categories, form(Comment.class)));
-	}
-
-	public static Result postcomment(Long blog) {
-		Form<Profile.Comment> form = form(Profile.Comment.class)
-				.bindFromRequest();
-		List<Category> categories = Category.getAllCategories();
-		User user = User.find.byId(session("email"));
-
-		// New Comment
-		models.Comment c = new models.Comment();
-		c.text = form.get().comment;
-		c.blog = Blog.find.byId(blog);
-		c.user = user;
-		c.date = new Date();
-		c.save();
-
-		return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),
-				categories, form(Comment.class)));
-	}
-
-
-
-	
-	
-	
-	// -- Queries
-
-
-	
-	public static boolean isStudent(Long user_id, String user_email) {
-		System.out.println("Checking if user is student");
-		User user= User.findByEmail(user_email);
-			if (user.account_type==0)
-				return true;
-			return false;
-	}
 }

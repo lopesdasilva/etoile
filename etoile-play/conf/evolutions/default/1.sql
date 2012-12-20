@@ -182,6 +182,7 @@ create table question (
   lesson_id                 bigint,
   user_email                varchar(255),
   weight                    integer,
+  weight_to_lose            integer,
   number                    integer,
   type_of_question          integer,
   question                  varchar(255),

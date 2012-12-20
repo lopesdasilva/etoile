@@ -44,6 +44,7 @@ GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
 GET		/answerstomark						controllers.StudentMarkerController.answersToMark()
 GET		/answerstomark/answer:answer		controllers.StudentMarkerController.answerToMark(answer: Long)
 POST    /answerstomark/answer:answer/postevaluation controllers.StudentMarkerController.markanswer(answer: Long)
+GET		/modules/:module/:lesson/testanalysis:test/:question		controllers.StudentTestController.questionanalysis(question: Long,test: Long, lesson: String,module: String)
 
 #Modules
 ##CHECK THIS ROUTE

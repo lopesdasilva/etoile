@@ -52,6 +52,9 @@ public class Question extends Model {
 	public int weight;
 	
 	@Constraints.Required
+	public int weightToLose;
+	
+	@Constraints.Required
     @Formats.NonEmpty
 	public int number;
 	

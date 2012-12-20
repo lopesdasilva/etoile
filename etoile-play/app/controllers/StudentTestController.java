@@ -50,6 +50,85 @@ public class StudentTestController extends Controller {
 	}
 
 	
+	public static Result questionanalysis(Long question_number, Long test_id,String lesson_acronym,String module_acronym){
+			Test test = models.test.Test.find.byId(test_id);
+			User user = User.find.byId(request().username());
+			Module module = Module.findByAcronym(module_acronym);
+			Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+			UserTest usertest = UserTest.findByUserAndTest(user.email,test.id);
+			
+			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
+					test_id);
+			
+			if (question_number<=test.groups.size() && question_number>0){
+				System.out.println("A imprimir as questoes");
+				
+				QuestionGroup group = test.groups.get((int) (question_number-1));
+				
+				QuestionGroup group_aux = new QuestionGroup();
+				group_aux=new QuestionGroup();
+				group_aux.id = group.id;
+				group_aux.imageURL = group.imageURL;
+				group_aux.number = group.number;
+				group_aux.question = group.question;
+				group_aux.test = group.test;
+				group_aux.videoURL = group.videoURL;
+				
+				System.out.println("Group_aux created");
+				
+				for(Question q: group.questions){
+					Question q_aux = new Question();
+					q_aux.id = q.id;
+					q_aux.imageURL = q.imageURL;
+					q_aux.lesson = q.lesson;
+					q_aux.number = q.number;
+					q_aux.question = q.question;
+					q_aux.typeOfQuestion = q.typeOfQuestion;
+					q_aux.user = q.user;
+					q_aux.videoURL = q.videoURL;
+					q_aux.urls=q.urls;
+					
+					
+					//q_aux.hypothesislist?????
+					group_aux.questions.add(q_aux);
+					
+					System.out.println("QUESTION: "+q.id);
+					if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
+						
+					List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+					if (hypothesis_aux.size()<1){
+						for (Hypothesis h: Hypothesis.findByQuestion(q.id)){
+							Hypothesis new_h=new Hypothesis();
+							new_h.number=h.number;
+							new_h.question=h.question;
+							new_h.text=h.text;
+							new_h.user=user;
+							new_h.save();
+						}
+						hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+					}
+					
+					q_aux.hypothesislist=hypothesis_aux;
+					q=q_aux;
+					}
+					else{
+						q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
+						q=q_aux;
+					}
+					
+					
+					
+					}
+				
+				
+				return ok(views.html.secured.question.questionanalysis.render(user,module,lesson,test,group_aux,usertest));
+				}else{
+					return ok(views.html.statics.error.render());
+				}
+			
+				
+	}
+	
 	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
 		if(Secured.isStudent(session("email"))){
@@ -266,11 +345,16 @@ public class StudentTestController extends Controller {
 		for(QuestionGroup g : test.groups){
 			for(Question q : g.questions){
 				if(q.typeOfQuestion==1){
+					boolean bool = true;
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 						for(Hypothesis h : hypothesis){
-							if(h.isCorrect && h.selected){
+							if(h.isCorrect && h.selected && bool){
 								reputation = reputation + q.weight;
 								System.out.println("OC - A somar weight..");
+								bool = true;
+							}else if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
+								reputation = reputation - q.weightToLose;
+								bool = false;
 							}
 						}
 						System.out.println("Reputação após OC acertada: " + reputation);
@@ -281,8 +365,14 @@ public class StudentTestController extends Controller {
 						System.out.println(h.text);
 						if(h.isCorrect && h.selected && bool){
 							 bool = true;
-						}else if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected)){
+						}else if((h.isCorrect && !h.selected) && bool){
+							System.out.println("entrei");
 							 bool = false;
+							 reputation = reputation - q.weightToLose;
+						}else if( (!h.isCorrect && h.selected) && bool){
+							System.out.println("entrei2");
+							 bool = false;
+							 reputation = reputation - q.weightToLose;
 						}
 					}
 					if(bool){
@@ -297,6 +387,7 @@ public class StudentTestController extends Controller {
 		
 		userTest.reviewd = true;
 		userTest.reputationAsAstudent = reputation;
+		userTest.inmodule = false;
 		userTest.save();
 		
 		System.out.println("Reputação no Teste: " + userTest.reputationAsAstudent);

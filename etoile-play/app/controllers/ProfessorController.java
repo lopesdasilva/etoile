@@ -52,9 +52,9 @@ public class ProfessorController extends Controller {
 			}
 			return ok(views.html.professor.moduleGeneral.render(user, categories,
 					module));
-			
-	
 		
 	}
 
+	
+	
 }

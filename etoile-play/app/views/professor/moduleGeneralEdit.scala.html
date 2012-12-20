@@ -178,15 +178,13 @@ models.module.Module) @main("etoileplatform"){
 
 			<div class="row-fluid">
 				<div class="span3">
-					<a href="#myModal" class="thumbnail" data-toggle="modal"> <img
+					<a href="#editMediaModal" class="thumbnail" data-toggle="modal"> <img
 						src="@module.imageURL" height="200" width="200" />
 						<div class="caption">Watch the video</div>
 					</a>
-					<!-- Button to trigger modal -->
+				
 
-
-					<!-- Modal -->
-					<div id="myModal" class="modal hide fade">
+					<div id="editMediaModal" class="modal hide fade">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">X</button>
 							<h3 id="myModalLabel">@module.name Video</h3>
@@ -212,6 +210,32 @@ models.module.Module) @main("etoileplatform"){
 			</div>
 			<hr>
 
+			<div class="row-fluid">
+				<h3>Lessons <small> <a href="#" data-toggle="modal"
+						role="button" class="btn btn-success btn-mini">Add</a></small></h3>
+				<ul class="thumbnails">
+					@for(lesson <- module.lessons) {
+					<li class="span4">
+						<div class="carousel-inner">
+							<div class="item" style="min-height: 150px; max-height: 150px">
+								<a
+									href="@routes.StudentController.lesson(lesson.acronym,module.acronym)">
+									<img src="@lesson.imageURL" alt="">
+									<div class="carousel-caption"
+										style="max-height: 30px; min-height: 30px">
+										<h4>@lesson.name</h4>
+
+									</div>
+								</a>
+							</div>
+						</div>
+					</li> }
+
+				</ul>
+			</div>
+
+
+
 			<h3>About the Professor(s)</h3>
 			@for(professor <- module.professors) {
 			<p>
@@ -222,12 +246,91 @@ models.module.Module) @main("etoileplatform"){
 			}
 
 			<div class="row-fluid">
-				<h3>Bibliography</h3>
+				<h3>
+					Bibliography<small> <a href="#addBibliography" data-toggle="modal"
+						role="button" class="btn btn-success btn-mini">Add</a></small>
+				</h3>
+				
+				<div id="addBibliography"
+								class="modal hide fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h3>Edit</h3>
+								</div>
+
+								@helper.form(routes.ProfessorModuleController.addbibliographyitem(module.acronym),'class->"form-horizontal"){
+								
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Title</label>
+											<div class="controls">
+												<input name="title" type="text" placeholder="" class="input-xlarge">
+												<p class="help-block">Bibliography item's title</p>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Textarea -->
+											<label class="control-label">Description</label>
+											<div class="controls">
+												<div class="textarea">
+													<textarea name="description" type="" class=""
+														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Image url</label>
+											<div class="controls">
+												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">Bibliography item's image</p>
+											</div>
+										</div>
+
+
+
+									<div class="control-group">
+
+										<!-- Text input-->
+										<label class="control-label" for="input01">Link</label>
+										<div class="controls">
+											<input name="url" type="text" placeholder=""
+												class="input-xlarge">
+											<p class="help-block">Url to download bibliography item</p>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+
+								}
+
+
+							</div>
+				
+				
+				
 				@for(bibliography <- module.bibliography) {
 
 				<div class="media-list">
 					<div class="media">
-						<a class="pull-right" href="@bibliography.link"> <img
+						<a class="pull-right" href="@bibliography.link" target="blank"> <img
 							class="media-object" src="@bibliography.imageURL" height="50px"
 							width="50px">
 						</a>
@@ -235,15 +338,18 @@ models.module.Module) @main("etoileplatform"){
 							<a href="@bibliography.link" target="blank"><h4
 									class="media-heading">
 									@bibliography.title <small> <span class="btn-group">
-											<a class="btn btn-mini btn-warning" href="#editBibliography@bibliography.id" data-toggle="modal"  role="button">edit</a> <a
-											class="btn btn-mini btn-danger" href="#deleteBibliography@bibliography.id"  data-toggle="modal"  role="button">delete</a>
+											<a class="btn btn-mini btn-warning"
+											href="#editBibliography@bibliography.id" data-toggle="modal"
+											role="button">edit</a> <a class="btn btn-mini btn-danger"
+											href="#deleteBibliography@bibliography.id"
+											data-toggle="modal" role="button">delete</a>
 
 									</span>
 									</small>
 								</h4></a>
-							<div id="deleteBibliography@bibliography.id" class="modal hide fade"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
+							<div id="deleteBibliography@bibliography.id"
+								class="modal hide fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
@@ -259,28 +365,29 @@ models.module.Module) @main("etoileplatform"){
 								</div>
 								<div class="modal-footer">
 									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									<a class="btn btn-danger" href="#">Delete</a>
+									<a class="btn btn-danger" href="@routes.ProfessorModuleController.deletebibliographyitem(module.acronym,bibliography.id)">Delete</a>
 								</div>
 
 
 							</div>
-							<div id="editBibliography@bibliography.id" class="modal hide fade"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
+							<div id="editBibliography@bibliography.id"
+								class="modal hide fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
 									<h3>Edit</h3>
 								</div>
-								<form class="form-horizontal">
-									<fieldset>
+
+								@helper.form(routes.ProfessorModuleController.editbibliographyitem(module.acronym,bibliography.id),'class->"form-horizontal"){
+								
 
 										<div class="control-group">
 
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input type="text" placeholder="" class="input-xlarge"
+												<input name="title" type="text" placeholder="" class="input-xlarge"
 													value="@bibliography.title">
 												<p class="help-block">Edit bibliography item's title</p>
 											</div>
@@ -292,7 +399,7 @@ models.module.Module) @main("etoileplatform"){
 											<label class="control-label">Description</label>
 											<div class="controls">
 												<div class="textarea">
-													<textarea type="" class=""
+													<textarea name="description" type="" class=""
 														style="margin: 0px; height: 145px; width: 269px;">@bibliography.description</textarea>
 												</div>
 											</div>
@@ -303,7 +410,7 @@ models.module.Module) @main("etoileplatform"){
 											<!-- Text input-->
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
-												<input type="text" placeholder="" class="input-xlarge"
+												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
 													value="@bibliography.imageURL">
 												<p class="help-block">Bibliography item's image</p>
 											</div>
@@ -311,23 +418,32 @@ models.module.Module) @main("etoileplatform"){
 
 
 
-										<div class="control-group">
+									<div class="control-group">
 
-											<!-- Text input-->
-											<label class="control-label" for="input01">Link</label>
-											<div class="controls">
-												<input type="text" placeholder="" class="input-xlarge"
-													value="@bibliography.link">
-												<p class="help-block">Url to download bibliography item</p>
-											</div>
+										<!-- Text input-->
+										<label class="control-label" for="input01">Link</label>
+										<div class="controls">
+											<input name="url" type="text" placeholder=""
+												class="input-xlarge" value="@bibliography.link">
+											<p class="help-block">Url to download bibliography item</p>
 										</div>
+									</div>
 
-									</fieldset>
-								</form>
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+
+								}
 
 
 							</div>
-
+	
 							@bibliography.description
 						</div>
 					</div>
@@ -339,7 +455,7 @@ models.module.Module) @main("etoileplatform"){
 
 			@for(content <- module.contents) {
 			<h3>
-				@content.title <small><a href="#editContent@content.id"
+				@content.title <small> <a href="#editContent@content.id"
 					data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
 			</h3>
 
@@ -377,6 +493,15 @@ models.module.Module) @main("etoileplatform"){
 									<textarea type="" class=""
 										style="margin: 0px; height: 109px; width: 269px;">@content.text</textarea>
 								</div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success">Save</button>
 							</div>
 						</div>
 

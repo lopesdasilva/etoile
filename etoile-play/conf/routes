@@ -30,6 +30,9 @@ POST	/news:blog/postcomment			controllers.BlogController.postcomment(blog: Long)
 #Professors
 GET		/professors/:professor			controllers.Application.professorprofile(professor: String)
 
+
+
+
 #Admin
 GET		/admin							controllers.Administration.index()
 GET		/admin/createblog				controllers.Administration.createblog()
@@ -49,6 +52,10 @@ GET  	/modules/:module					controllers.Application.module(module: String)
 GET	/modules/:module/signup				controllers.StudentController.signupmodule(module: String)
 GET    /:continent          controllers.Application.continent(continent: String)
 
+#Professor Module
+GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)
+POST /modules/:module/editbibliographyitem	controllers.ProfessorModuleController.editbibliographyitem(module: String, bibliography: Long)
+POST /modules/:module/addbibliographyitem	controllers.ProfessorModuleController.addbibliographyitem(module: String)
 
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

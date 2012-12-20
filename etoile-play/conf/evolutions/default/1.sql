@@ -181,6 +181,7 @@ create table question (
   id                        bigint auto_increment not null,
   lesson_id                 bigint,
   user_email                varchar(255),
+  weight                    integer,
   number                    integer,
   type_of_question          integer,
   question                  varchar(255),
@@ -260,9 +261,12 @@ create table account (
 
 create table user_test (
   id                        bigint auto_increment not null,
+  reputation_as_astudent    integer,
+  reputation_as_amarker     integer,
   inmodule                  tinyint(1) default 0,
   submitted                 tinyint(1) default 0,
   expired                   tinyint(1) default 0,
+  reviewd                   tinyint(1) default 0,
   user_email                varchar(255),
   test_id                   bigint,
   progress                  float,

@@ -260,6 +260,47 @@ public class StudentTestController extends Controller {
 			}
 		}
 		
+		
+		//CORRIGIR TESTE
+		int reputation = 0;
+		for(QuestionGroup g : test.groups){
+			for(Question q : g.questions){
+				if(q.typeOfQuestion==1){
+					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+						for(Hypothesis h : hypothesis){
+							if(h.isCorrect && h.selected){
+								reputation = reputation + q.weight;
+								System.out.println("OC - A somar weight..");
+							}
+						}
+						System.out.println("Reputação após OC acertada: " + reputation);
+				}else if(q.typeOfQuestion==2){
+					boolean bool = true;
+					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+					for(Hypothesis h : hypothesis){
+						System.out.println(h.text);
+						if(h.isCorrect && h.selected && bool){
+							 bool = true;
+						}else if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected)){
+							 bool = false;
+						}
+					}
+					if(bool){
+						System.out.println("MC - A somar weight..");
+						reputation = reputation + q.weight;
+					}
+					System.out.println("Reputação após MC acertada: " + reputation);
+
+				}
+			}
+		}
+		
+		userTest.reviewd = true;
+		userTest.reputationAsAstudent = reputation;
+		userTest.save();
+		
+		System.out.println("Reputação no Teste: " + userTest.reputationAsAstudent);
+		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 
 	}

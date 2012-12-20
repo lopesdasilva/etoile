@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Constraint;
 
 
 
@@ -46,6 +47,9 @@ public class Question extends Model {
 	@Id
 	@GeneratedValue
 	public Long id;
+	
+	@Constraints.Required
+	public int weight;
 	
 	@Constraints.Required
     @Formats.NonEmpty

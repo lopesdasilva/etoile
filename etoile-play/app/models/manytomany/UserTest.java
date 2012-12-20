@@ -22,6 +22,12 @@ public class UserTest extends Model{
 	public Long id;
 
 	@Constraints.Required
+	public int reputationAsAstudent;
+	
+	@Constraints.Required
+	public int reputationAsAMarker;
+	
+	@Constraints.Required
     @Formats.NonEmpty
 	public boolean inmodule;
 	
@@ -32,6 +38,10 @@ public class UserTest extends Model{
 	@Constraints.Required
     @Formats.NonEmpty
 	public boolean expired;
+	
+	@Constraints.Required
+    @Formats.NonEmpty
+	public boolean reviewd;
 	
 	//Ligação com User
 	@ManyToOne

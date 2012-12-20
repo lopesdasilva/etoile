@@ -31,30 +31,30 @@ public class ProfessorController extends Controller {
 		List<Blog> blogs = Blog.getAllBlogs();
 		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
-
+	
 		user.professorProfile.refresh();
 		
 		return ok(views.html.professor.homeprofessor.render(user, blogs, categories));
 		}
 		return StudentController.index(); 
 	}
-	
-	public static Result module(String module_acronym) {
-		
-		Module module = Module.findByAcronym(module_acronym);
-		User user = User.find.byId(session("email"));
-		user.professorProfile.refresh();
-		List<Category> categories = Category.getAllCategories();
-		
-		if(SecuredProfessor.isOwner(user,module)){
-			return ok(views.html.professor.moduleGeneralEdit.render(user, categories,
-					module));
-		}
-		return ok(views.html.professor.moduleGeneral.render(user, categories,
-				module));
-		
 
+	public static Result module(String module_acronym) {
+			
+			Module module = Module.findByAcronym(module_acronym);
+			User user = User.find.byId(session("email"));
+			user.professorProfile.refresh();
+			List<Category> categories = Category.getAllCategories();
+			
+			if(SecuredProfessor.isOwner(user,module)){
+				return ok(views.html.professor.moduleGeneralEdit.render(user, categories,
+						module));
+			}
+			return ok(views.html.professor.moduleGeneral.render(user, categories,
+					module));
+			
 	
-}
+		
+	}
 
 }

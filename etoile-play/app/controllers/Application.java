@@ -3,6 +3,9 @@ package controllers;
 import java.util.Collections;
 import java.util.List;
 
+import controllers.secured.Secured;
+import controllers.secured.SecuredProfessor;
+
 
 import models.*;
 import models.continent.Continent;
@@ -33,6 +36,10 @@ public class Application extends Controller {
 	    }
 
 	public static Result index() {
+		
+		if(session("email")!=null){
+			return StudentController.index();
+		}
 		List<Blog> blogs = Blog.getAllBlogs();
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
@@ -41,11 +48,6 @@ public class Application extends Controller {
 		Collections.shuffle(modules);
 		modules=modules.subList(0, 3);
 		}
-		//This is to load Universities(weird)
-//    	for (Module c: modules){
-////    		System.out.println(c.university.name);
-//    		String s=c.university.name;
-//    	}
 		
 		return ok(index.render(blogs,categories,continents,modules));
 	}
@@ -67,15 +69,21 @@ public static Result professorprofile(String professor_acronym) {
 	}
 
 	public static Result digitalcampus() {
-		
+		if(session("email")!=null){
+			return StudentController.digitalcampus();
+		}
 		return ok(views.html.statics.digitalcampus.render(
-				Category.getAllCategories()
+				Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
 	public static Result news() {
+		
+		if(session("email")!=null){
+			return StudentController.news();
+		}
 
 		return ok(views.html.blog.blogs.render(
-				Blog.getAllBlogs(),Category.getAllCategories()
+				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
 	
@@ -93,34 +101,22 @@ public static Result professorprofile(String professor_acronym) {
 	    	List<Category> categories = Category.getAllCategories();
 	    	List <Continent> continents = Continent.getAllContinents();
 	    	
-//	    	if(session("email")!=null){
-//				return StudentController.module(module_acronym);
-//			}
+	    	if(session("email")!=null){
+				return StudentController.continent(categories,continents,continent,continent.universities);
+			}
 	    	
 	    	return ok(views.html.statics.continent.render(categories,continents,continent,continent.universities));
 	    }
 	
 	
-	 public static Result module(String module_acronym){
-	    	
-	    	Module module = Module.findByAcronym(module_acronym);
-	    	
-	    	List<Category> categories = Category.getAllCategories();
-	    	
-	    	
-	    	if(session("email")!=null){
-				return StudentController.module(module_acronym);
-			}
-	    	
-	    	return ok(views.html.statics.module.render(categories,module));
-	    }
-	
-	public static Result about() {
+	 public static Result about() {
 		if(session("email")!=null){
 			return StudentController.about();
 		}
+		
+		
 		return ok(views.html.statics.about.render(
-				Category.getAllCategories()
+				Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
 	
@@ -129,18 +125,48 @@ public static Result professorprofile(String professor_acronym) {
 			return StudentController.contact();
 		}
 		return ok(views.html.statics.contact.render(
-				Category.getAllCategories()
+				Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
+
+
+	public static Result module(String module_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);
+		
+		List<Category> categories = Category.getAllCategories();
+		
+		
+		if(session("email")!=null){
+			if(Secured.isStudent(session("email"))){
+			return StudentController.module(module_acronym);
+			}
+			if (SecuredProfessor.isProfessor(session("email"))){
+
+				//TODO Subsituir por modules
+				return ProfessorController.module(module_acronym);
+			}
+		}
+		
+		return ok(views.html.statics.module.render(categories,Continent.getAllContinents(),module));
+	}
+
 
 
 	//CHECK THIS METHOD
 	public static Result modules(){
 		
 		if(session("email")!=null){
-			return StudentController.modules();
+			if(Secured.isStudent(session("email"))){
+				return StudentController.modules();
+			}
+			if (SecuredProfessor.isProfessor(session("email"))){
+
+				//TODO Subsituir por modules
+				return ProfessorController.index();
+			}
 		}
-		return ok(modules.render(Module.getAllModules(),Category.getAllCategories()));
+		return ok(modules.render(Module.getAllModules(),Category.getAllCategories(),Continent.getAllContinents()));
 	}
 		
 	/**

@@ -6,6 +6,7 @@ import play.mvc.*;
 import play.mvc.Http.*;
 
 import models.*;
+import models.module.Module;
 
 public class SecuredProfessor extends Security.Authenticator {
     
@@ -22,7 +23,12 @@ public class SecuredProfessor extends Security.Authenticator {
     // Access rights
     
     public static boolean isProfessor(String user_email) {
-    	System.out.println(user_email);
         return (User.find.byId(user_email).account_type==1) ;
-    }    
+    }
+
+	public static boolean isOwner(User user, Module module) {
+		if (user.professorProfile.modules.contains(module))
+			return true;
+		return false;
+	}    
 }

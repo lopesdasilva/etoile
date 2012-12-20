@@ -254,7 +254,7 @@ create table account (
   username                  varchar(255),
   country                   varchar(255),
   account_type              integer,
-  professor_id              bigint,
+  professor_profile_id      bigint,
   constraint pk_account primary key (email))
 ;
 
@@ -380,8 +380,8 @@ alter table url add constraint fk_url_user_27 foreign key (user_email) reference
 create index ix_url_user_27 on url (user_email);
 alter table university add constraint fk_university_continent_28 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
 create index ix_university_continent_28 on university (continent_id);
-alter table account add constraint fk_account_professor_29 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
-create index ix_account_professor_29 on account (professor_id);
+alter table account add constraint fk_account_professorProfile_29 foreign key (professor_profile_id) references professor (id) on delete restrict on update restrict;
+create index ix_account_professorProfile_29 on account (professor_profile_id);
 alter table user_test add constraint fk_user_test_user_30 foreign key (user_email) references account (email) on delete restrict on update restrict;
 create index ix_user_test_user_30 on user_test (user_email);
 alter table user_test add constraint fk_user_test_test_31 foreign key (test_id) references test (id) on delete restrict on update restrict;

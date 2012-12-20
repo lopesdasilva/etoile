@@ -54,7 +54,7 @@ public class User extends Model {
     //Only if account_type=1
     //Professor profile
     @OneToOne
-    public Professor professor;
+    public Professor professorProfile;
     
     
     

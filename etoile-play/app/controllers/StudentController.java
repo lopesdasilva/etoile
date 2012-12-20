@@ -9,6 +9,7 @@ import controllers.BlogController.Comment_Form;
 import controllers.StudentTestController.OpenQuestionSuggestion;
 
 import models.Blog;
+import models.continent.Continent;
 import models.curriculum.Category;
 import models.Comment;
 
@@ -38,16 +39,18 @@ import controllers.secured.*;
 @Security.Authenticated(Secured.class)
 public class StudentController extends Controller {
 
+	private final static boolean DEBUG=true;
+	
 	/**
 	 * Display the homescreen.
 	 */
 	public static Result index() {
 		if(Secured.isStudent(session("email"))){
-		List<Blog> blogs = Blog.getAllBlogs();
-		User user = User.find.byId(request().username());
-		List<Category> categories = Category.getAllCategories();
+			List<Blog> blogs = Blog.getAllBlogs();
+			User user = User.find.byId(session("email"));
+			List<Category> categories = Category.getAllCategories();
 
-		return ok(home.render(user, blogs, categories));
+			return ok(home.render(user, blogs, categories));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
 			return ProfessorController.index();
@@ -56,11 +59,15 @@ public class StudentController extends Controller {
 	}
 
 	public static Result module(String module_acronym) {
-		if(Secured.isStudent(session("email"))){
+		
 			Module module = Module.findByAcronym(module_acronym);
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
 
+			if(DEBUG){
+				System.out.println("---USER: "+user+" is Student");
+			}
+			
 			if (!user.modules.contains(module))
 				return ok(views.html.secured.moduleGeneral.render(user, categories,
 						module));
@@ -68,13 +75,7 @@ public class StudentController extends Controller {
 				// Has this module
 				return ok(views.html.secured.module
 						.render(user, categories, module));
-		}
-		System.out.println(session("email"));
-		if (SecuredProfessor.isProfessor(session("email"))){
-			//Subsituir por module
-			return ProfessorController.index();
-		}
-		return redirect(routes.Application.index());
+		
 	}
 
 	public static Result signupmodule(String module_acronym) {
@@ -262,5 +263,27 @@ public class StudentController extends Controller {
 		User user = User.find.byId(session("email"));
 		return ok(views.html.secured.about.render(user, categories));
 	}
+	
+	public static Result news() {
 
+		return ok(views.html.secured.blogs.render(User.find.byId(session("email")),
+				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
+				));
+	}
+	
+	public static Result digitalcampus() {
+
+		return ok(views.html.secured.digitalcampus.render(User.find.byId(session("email")),
+				Category.getAllCategories(),Continent.getAllContinents()
+				));
+	}
+
+	public static Result continent(List<Category> categories,
+			List<Continent> continents, Continent continent,
+			List<University> universities) {
+
+		return ok(views.html.secured.continent.render(User.find.byId(session("email")),
+				categories,continents,continent,continent.universities));
+		   
+	}
 }

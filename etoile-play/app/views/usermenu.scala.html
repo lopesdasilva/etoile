@@ -1,32 +1,38 @@
 @(user: User,categories: List[models.curriculum.Category])
 
-	<div class="span3">
-			<div class="well sidebar-nav" style="background: #0088CC;">
-				<ul class="nav nav-list">
-					<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
-						Modules</li> @for(module <- user.modules) {
-					<li><a href="@routes.Application.module(module.acronym)"
-						style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
-				</ul>
-			</div>
-			@if(user.answersToMark.size() != 0) {
-			<div class="well sidebar-nav" style="background: #DEDE04;">
-				<ul class="nav nav-list">
-					<li class="nav-header"  style="color: white; text-shadow: #0088CC;">My
-						Answers to Mark</li> 
-					<li><a href="@routes.StudentMarkerController.answersToMark()"
-						style="text-shadow: #0088CC; color: #999999">You have answers to mark</a></li>
-				</ul>
-			</div>
-			 }
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-header">Categories (@categories.size)</li>
-					@for(category <- categories) {
-					<li><a href="/curriculum#@category.keyword">@category.name</a></li>
-					}
+<div class="span3">
+	<div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header">@user.name</li>
+			<li><a href="#">My Profile</a></li>
+		</ul>
+	</div>
+	<div class="well sidebar-nav" style="background: #0088CC;">
+		<ul class="nav nav-list">
+			<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
+				Modules</li> @for(module <- user.modules) {
+			<li><a href="@routes.Application.module(module.acronym)"
+				style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
+		</ul>
+	</div>
+	@if(user.answersToMark.size() != 0) {
+	<div class="well sidebar-nav" style="background: #DEDE04;">
+		<ul class="nav nav-list">
+			<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
+				Answers to Mark</li>
+			<li><a href="@routes.StudentMarkerController.answersToMark()"
+				style="text-shadow: #0088CC; color: #999999">You have answers to
+					mark</a></li>
+		</ul>
+	</div>
+	}
+	<div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header">Categories (@categories.size)</li>
+			@for(category <- categories) {
+			<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
 
-				</ul>
-			</div>
-			<!--/.well -->
-		</div>
+		</ul>
+	</div>
+	<!--/.well -->
+</div>

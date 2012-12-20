@@ -1,5 +1,6 @@
-@(categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
+@(user: User,categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 @main("etoile"){
+
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -14,7 +15,7 @@
 				<ul class="nav">
 					<li><a href="/">Home</a>
 					</li>
-					<li><a href="/digitalcampus">Digital Campus</a>
+					<li  class="active"><a href="/digitalcampus">Digital Campus</a>
 					</li>
 					<li><a href="/modules">Modules</a>
 					</li>
@@ -23,7 +24,7 @@
 					</li>
 					<li><a href="/about">About</a>
 					</li>
-					<li class="active"><a href="/contact">Contact</a>
+					<li><a href="/contact">Contact</a>
 					</li>
 				</ul>
 				<!--  
@@ -41,31 +42,17 @@
 		</div>
 	</div>
 </div>
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+		@usermenu(user,categories)        
 
-<div class="container-fluid">
-<div class="row-fluid">
-	@staticmenu(categories,continents)
-
-			<div class="span9">
-		<div class="page-header">
-			<h2>
-				Contact étoile <br>
-				<small>Enhanced Technology for Open Intelligent Learning
-					Environments</small>
-			</h2>
-
-		</div>
-		
-			<address>
-				<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-				San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr> (123)
-				456-7890
-			</address>
-
-			<address>
-				<strong>Full Name</strong><br> <a href="mailto:#">first.last[at]gmail.com</a>
-			</address>
-		</div>
-	</div>
+        <div class="span9">
+  <div class="page-header">
+              <h2>Digital Campus<br><small>Enhanced Technology for Open Intelligent Learning Environments</small></h2>
+             
+            </div>
+</div>
+</div>
 </div>
 }

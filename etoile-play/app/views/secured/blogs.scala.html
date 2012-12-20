@@ -1,5 +1,5 @@
-@(categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
-@main("etoile"){
+@(user: User,blogs: List[Blog],categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
+@main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -19,11 +19,11 @@
 					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
+					<li class="active"><a href="/news">News</a>
 					</li>
 					<li><a href="/about">About</a>
 					</li>
-					<li class="active"><a href="/contact">Contact</a>
+					<li><a href="/contact">Contact</a>
 					</li>
 				</ul>
 				<!--  
@@ -44,28 +44,36 @@
 
 <div class="container-fluid">
 <div class="row-fluid">
-	@staticmenu(categories,continents)
+		@usermenu(user,categories)
 
-			<div class="span9">
-		<div class="page-header">
-			<h2>
-				Contact étoile <br>
-				<small>Enhanced Technology for Open Intelligent Learning
-					Environments</small>
-			</h2>
 
+
+		<div class="span9" >
+			@for(blog <- blogs) {
+			<div class="row-fluid">
+				<a href="@routes.BlogController.blog(blog.id)"><h4>@blog.header</h4></a>
+				<div class="span2">
+					<img src="@blog.articleImageURL" height="100" width="100" />
+				</div>
+				<div class="span9">
+					<p>@blog.text</p>
+					<p>
+						
+					</p>
+
+				</div>
+				
+
+			
+			</div>
+			<br>
+			<a class="btn btn-info" href="@routes.BlogController.blog(blog.id)">View
+							details &raquo;</a>
+				<hr>
+			}
 		</div>
-		
-			<address>
-				<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-				San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr> (123)
-				456-7890
-			</address>
 
-			<address>
-				<strong>Full Name</strong><br> <a href="mailto:#">first.last[at]gmail.com</a>
-			</address>
-		</div>
-	</div>
-</div>
+ </div>
+ </div>
+
 }

@@ -45,26 +45,8 @@
     
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          
-					 <div class="well sidebar-nav">
-					  <ul class="nav nav-list">
-              <li class="nav-header">Categories (@categories.size)</li>
-              @for(category <- categories) {
-									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
-
-					 </ul>
-          </div><!--/.well -->
-        		<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-header">Universities within the digital campus</li>
-					@for(continent <- continents) {
-					<li><a href="/@continent.acronym">@continent.name (@continent.universities.size)</a>
-					</li> }
-
-				</ul>
-			</div>
-        </div><!--/span-->
+       @staticmenu(categories,continents)
+       
         <div class="span9">
         
            <div class="page-header">

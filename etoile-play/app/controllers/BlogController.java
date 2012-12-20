@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Blog;
 import models.User;
+import models.continent.Continent;
 import models.curriculum.Category;
 
 import java.util.Date;
@@ -44,7 +45,7 @@ public class BlogController extends Controller {
 			
 			return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),categories, form(Comment_Form.class)));
 		}
-		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories));
+		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories,Continent.getAllContinents()));
 		
 	}
 

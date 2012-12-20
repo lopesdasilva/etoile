@@ -1,4 +1,4 @@
-@(categories: List[models.curriculum.Category])
+@(categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -45,17 +45,8 @@
     
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          
-					 <div class="well sidebar-nav">
-					  <ul class="nav nav-list">
-              <li class="nav-header">Categories (@categories.size)</li>
-              @for(category <- categories) {
-									<li><a href="/curriculum#@category.keyword">@category.name</a></li> }
+		@staticmenu(categories,continents)        
 
-					 </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
         <div class="span9">
   <div class="page-header">
               <h2>Digital Campus<br><small>Enhanced Technology for Open Intelligent Learning Environments</small></h2>

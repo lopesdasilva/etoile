@@ -54,7 +54,6 @@ public class Professor extends Model {
 	@OneToOne
 	public User user;
 	
-	
 	@OneToMany
 	public List<ProfessorContent> contents;
 

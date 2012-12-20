@@ -380,7 +380,7 @@ public class Global extends GlobalSettings {
 			p.email="email[at]gmail.com";
 			p.degree="Professor";
 			p.shortdescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
-			p.contact="SCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
+			p.contact="ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
 					" Av. das Forças Armadas" +
 					"1649-026" +
 					"Lisboa Portugal";
@@ -401,6 +401,16 @@ public class Global extends GlobalSettings {
 			p.save();
 			pc2.save();
 			
+			User prof = new User();
+			prof.email = "prof@prof.pt";
+			prof.username="prof";
+			prof.password=sha1.parseSHA1Password("123");
+			prof.name = "Professor";
+			prof.account_type = 1;
+			prof.professorProfile=p;
+			prof.save();
+			p.user=prof;
+			p.save();
 			
 
 			Comment c1 = new Comment();
@@ -411,13 +421,7 @@ public class Global extends GlobalSettings {
 			c1.save();
 			
 			
-			user = new User();
-			user.email = "prof@prof.pt";
-			user.username="prof";
-			user.password=sha1.parseSHA1Password("123");
-			user.name = "Professor";
-			user.account_type = 1;
-			user.save();
+			
 	
 			// Continents ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			

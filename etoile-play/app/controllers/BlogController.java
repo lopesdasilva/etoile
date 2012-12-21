@@ -63,7 +63,6 @@ public class BlogController extends Controller {
 		c.user = user;
 		c.date = new Date();
 		c.save();
-		System.out.println("Comentario: "+form.get().comment);
 		return redirect(routes.BlogController.blog(blog));
 	}
 }

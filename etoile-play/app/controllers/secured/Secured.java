@@ -22,7 +22,6 @@ public class Secured extends Security.Authenticator {
     // Access rights
     
     public static boolean isStudent(String user_email) {
-    	System.out.println(user_email);
     	 return (User.find.byId(user_email).account_type==0) ;
     }    
 }

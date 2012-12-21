@@ -203,6 +203,7 @@ public class StudentTestController extends Controller {
 					new_h.question=h.question;
 					new_h.text=h.text;
 					new_h.user=user;
+					new_h.isCorrect = h.isCorrect;
 					new_h.save();
 				}
 				hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);

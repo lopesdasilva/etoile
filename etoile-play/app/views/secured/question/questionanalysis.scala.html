@@ -450,23 +450,28 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 						<span class="label label-warning">Warning</span>Identify the correct answer (<strong>only one is the correct one</strong>).
 					</p>
 
-					<div class="alert alert-success">
+					<div class="alert alert-info">
 					<div class="btn-group" data-toggle="buttons-radio">
 					<ul class="inputs-list">
 						@for(hypothesis <- question.hypothesislist){ 
+						@if(hypothesis.isCorrect){
+						<div class="alert alert-success">
+						}
+						@if(!hypothesis.isCorrect){
+						<div class="alert alert-error">
+						}
 						@if(hypothesis.selected){
-						Ã<label class="radio">
-							<input disabled="disabled" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
--							checked="checked"> @hypothesis.text
-
+						<label class="radio">
+							<input disabled="disabled" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios" checked="checked"> @hypothesis.text
 						</label> 
+						</div>
 						}
 						@if(!hypothesis.selected){
-						X<label class="radio">
-							<input disabled="disabled" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
--							> @hypothesis.text
+						<label class="radio">
+							<input disabled="disabled" type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios" > @hypothesis.text
+							
 						</label> 
-						
+						</div>
 						}
 						}
 					</ul>
@@ -484,21 +489,28 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 						<span class="label label-warning">Warning</span>Identify the correct answers (<strong>can
 						be more than one</strong>).
 					</p>
-
-					<div class="alert alert-info">
+						<div class="alert alert-info">
 						@for(hypothesis <- question.hypothesislist){ 
+						@if(hypothesis.isCorrect){
+						<div class="alert alert-success">
+							}
+							@if(!hypothesis.isCorrect){
+							<div class="alert alert-error">
+							}
 						@if(hypothesis.selected){
 						<label
-							class="checkbox"> <input type="checkbox"
+							class="checkbox"> <input disabled="disabled" type="checkbox"
 							id="optionsRadios1" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" checked="checked">
 							@hypothesis.text
-						</label> }
+						</label>
+						</div> }
 						@if(!hypothesis.selected){
 						<label
-							class="checkbox"> <input type="checkbox"
+							class="checkbox"> <input disabled="disabled" type="checkbox"
 							id="optionsRadios1"name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"">
 							@hypothesis.text
 						</label>
+						</div>
 						}
 						}
 					</div>

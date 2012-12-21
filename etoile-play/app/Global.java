@@ -51,6 +51,8 @@ public class Global extends GlobalSettings {
 			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
 			q.typeOfQuestion = 0;
 			q.number = 1;
+			q.weight = 0;
+			q.weightToLose = 0;
 			q.save();
 			
 			Hypothesis hyp_one = new Hypothesis();
@@ -61,6 +63,7 @@ public class Global extends GlobalSettings {
 			Hypothesis hyp_two = new Hypothesis();
 			hyp_two.text = "b) `f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`";
 			hyp_two.number = 1;
+			hyp_two.isCorrect = true;
 			hyp_two.save();
 			
 			Hypothesis hyp_three = new Hypothesis();
@@ -80,6 +83,8 @@ public class Global extends GlobalSettings {
 			q_two.hypothesislist.add(hyp_two);
 			q_two.hypothesislist.add(hyp_three);
 			q_two.hypothesislist.add(hyp_four);
+			q_two.weight = 50;
+			q_two.weightToLose = 25;
 			q_two.number = 2;
 			q_two.save();
 			
@@ -96,6 +101,8 @@ public class Global extends GlobalSettings {
 			q_three.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
 			q_three.typeOfQuestion = 2;
 			q_three.number = 1;
+			q_three.weight = 50;
+			q_three.weightToLose = 25;
 			q_three.save();
 			
 			
@@ -138,12 +145,14 @@ public class Global extends GlobalSettings {
 			hypothesis_one.text = "a) `int_0^1f(x)dx`";
 			hypothesis_one.number = 0;
 			hypothesis_one.question = q_three;
+			hypothesis_one.isCorrect = true;
 			hypothesis_one.save();
 			
 			Hypothesis hypothesis_two = new Hypothesis();
 			hypothesis_two.text = "b) `[[a,b],[c,d]]((n),(k))`	";
 			hypothesis_two.number = 1;
 			hypothesis_two.question = q_three;
+			hypothesis_two.isCorrect = true;
 			hypothesis_two.save();
 			
 			Hypothesis hypothesis_three = new Hypothesis();

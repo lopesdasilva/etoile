@@ -65,7 +65,7 @@ models.module.Module) @main("etoileplatform"){
 									aria-hidden="true">×</button>
 								<h3>Edit module name</h3>
 							</div>
-							<form class="form-horizontal">
+							@helper.form(routes.ProfessorModuleController.editmoduletitle(module.acronym),'class->"form-horizontal"){
 								<p>
 								<fieldset>
 
@@ -75,7 +75,7 @@ models.module.Module) @main("etoileplatform"){
 										<!-- Text input-->
 										<label class="control-label" for="input01">Name</label>
 										<div class="controls">
-											<input type="text" placeholder="@module.name"
+											<input name="title" type="text" value="@module.name"
 												class="input-xlarge">
 											<p class="help-block">Edit module name</p>
 										</div>
@@ -86,7 +86,7 @@ models.module.Module) @main("etoileplatform"){
 										<!-- Text input-->
 										<label class="control-label" for="input01">Acronym</label>
 										<div class="controls">
-											<input type="text" placeholder="@module.acronym"
+											<input name="acronym" type="text" value="@module.acronym"
 												class="input-xlarge">
 											<p class="help-block">This must be unique</p>
 										</div>
@@ -103,7 +103,7 @@ models.module.Module) @main("etoileplatform"){
 
 								</fieldset>
 								</p>
-							</form>
+							}
 						</div>
 					</div>
 				</div>
@@ -122,7 +122,7 @@ models.module.Module) @main("etoileplatform"){
 					<h3>Edit Description</h3>
 				</div>
 
-				<form class="form-horizontal">
+				@helper.form(routes.ProfessorModuleController.editmoduledescription(module.acronym),'class->"form-horizontal"){
 					<p>
 					<fieldset>
 
@@ -133,7 +133,7 @@ models.module.Module) @main("etoileplatform"){
 							<label class="control-label">Description</label>
 							<div class="controls">
 								<div class="textarea">
-									<textarea type="" class=""
+									<textarea type="" class="" name="description"
 										style="margin: 0px; height: 145px; width: 269px;">@module.description</textarea>
 								</div>
 							</div>
@@ -144,7 +144,7 @@ models.module.Module) @main("etoileplatform"){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Image url</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" value="@module.imageURL">
+								<input name="imageURL" type="text" class="input-xlarge" value="@module.imageURL">
 								<p class="help-block">Image to describe the module</p>
 							</div>
 						</div>
@@ -154,7 +154,7 @@ models.module.Module) @main("etoileplatform"){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Video url</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" value="@module.videoURL">
+								<input name="videoURL" type="text" class="input-xlarge" value="@module.videoURL">
 								<p class="help-block">Video to describe the module</p>
 							</div>
 						</div>
@@ -172,7 +172,7 @@ models.module.Module) @main("etoileplatform"){
 
 					</fieldset>
 					</p>
-				</form>
+				}
 
 			</div>
 
@@ -469,7 +469,7 @@ models.module.Module) @main("etoileplatform"){
 				</div>
 
 
-				<form class="form-horizontal">
+				@helper.form(routes.ProfessorModuleController.editmoduledcontent(module.acronym,content.id),'class->"form-horizontal"){
 					<p>
 					<fieldset>
 
@@ -478,7 +478,7 @@ models.module.Module) @main("etoileplatform"){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Title</label>
 							<div class="controls">
-								<input type="text" placeholder="placeholder"
+								<input name="title" type="text" placeholder="placeholder"
 									class="input-xlarge" value="@content.title">
 								<p class="help-block">Edit title</p>
 							</div>
@@ -490,7 +490,7 @@ models.module.Module) @main("etoileplatform"){
 							<label class="control-label">Description</label>
 							<div class="controls">
 								<div class="textarea">
-									<textarea type="" class=""
+									<textarea name="description" type="" class=""
 										style="margin: 0px; height: 109px; width: 269px;">@content.text</textarea>
 								</div>
 							</div>
@@ -507,7 +507,7 @@ models.module.Module) @main("etoileplatform"){
 
 					</fieldset>
 					</p>
-				</form>
+				}
 
 
 			</div>

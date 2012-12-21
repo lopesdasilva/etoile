@@ -57,6 +57,9 @@ GET    /:continent          controllers.Application.continent(continent: String)
 GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)
 POST /modules/:module/editbibliographyitem	controllers.ProfessorModuleController.editbibliographyitem(module: String, bibliography: Long)
 POST /modules/:module/addbibliographyitem	controllers.ProfessorModuleController.addbibliographyitem(module: String)
+POST /module/:module/editmoduletitle		controllers.ProfessorModuleController.editmoduletitle(module: String)
+POST /module/:module/editmoduledescription		controllers.ProfessorModuleController.editmoduledescription(module: String)
+POST /module/:module/editmoduledcontent		controllers.ProfessorModuleController.editmoduledcontent(module: String, content: Long)
 
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

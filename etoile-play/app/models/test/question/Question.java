@@ -83,6 +83,9 @@ public class Question extends Model {
 	@OneToMany(cascade=CascadeType.ALL)
 	public List<URL> urls;
 	
+	@OneToMany
+	public List<QuestionEvaluation> questionevaluation;
+	
 	
 	public static Model.Finder<Long, Question> find = new Model.Finder<Long, Question>(
 			Long.class, Question.class);

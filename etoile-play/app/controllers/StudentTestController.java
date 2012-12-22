@@ -13,6 +13,7 @@ import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
+import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
 import play.api.Routes;
 import play.data.Form;
@@ -345,8 +346,8 @@ public class StudentTestController extends Controller {
 		int reputation = 0;
 		for(QuestionGroup g : test.groups){
 			for(Question q : g.questions){
+				boolean bool = true;
 				if(q.typeOfQuestion==1){
-					boolean bool = true;
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 						for(Hypothesis h : hypothesis){
 							if(h.isCorrect && h.selected && bool){
@@ -360,7 +361,6 @@ public class StudentTestController extends Controller {
 						}
 						System.out.println("Reputação após OC acertada: " + reputation);
 				}else if(q.typeOfQuestion==2){
-					boolean bool = true;
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 					for(Hypothesis h : hypothesis){
 						System.out.println(h.text);
@@ -383,6 +383,20 @@ public class StudentTestController extends Controller {
 					System.out.println("Reputação após MC acertada: " + reputation);
 
 				}
+				
+				userTest.reviewd = true;
+				userTest.reputationAsAstudent = reputation;
+				userTest.inmodule = false;
+				userTest.save();
+				
+				QuestionEvaluation qe = new QuestionEvaluation();
+				if(bool){
+				qe.isCorrect=true;
+				}
+				qe.score = reputation;
+				qe.userTest = userTest;
+				qe.question = q;
+				qe.save();
 			}
 		}
 		

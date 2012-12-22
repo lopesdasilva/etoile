@@ -8,6 +8,7 @@ import models.User;
 import models.module.Module;
 import models.module.Lesson;
 import models.test.Test;
+import models.test.question.QuestionEvaluation;
 
 import com.avaje.ebean.Ebean;
 
@@ -53,6 +54,9 @@ public class UserTest extends Model{
 	
 	public float progress=0;
 	public String progressString="0%";
+	
+	@OneToMany
+	public List<QuestionEvaluation> questionevaluation;
 	
 	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(
 			Long.class, UserTest.class);

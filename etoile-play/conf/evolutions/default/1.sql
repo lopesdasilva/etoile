@@ -192,6 +192,15 @@ create table question (
   constraint pk_question primary key (id))
 ;
 
+create table question_evaluation (
+  id                        bigint auto_increment not null,
+  score                     integer,
+  is_correct                tinyint(1) default 0,
+  user_test_id              bigint,
+  question_id               bigint,
+  constraint pk_question_evaluation primary key (id))
+;
+
 create table question_group (
   id                        bigint auto_increment not null,
   test_id                   bigint,
@@ -369,28 +378,32 @@ alter table question add constraint fk_question_user_19 foreign key (user_email)
 create index ix_question_user_19 on question (user_email);
 alter table question add constraint fk_question_openanswer_20 foreign key (openanswer_id) references answer (id) on delete restrict on update restrict;
 create index ix_question_openanswer_20 on question (openanswer_id);
-alter table question_group add constraint fk_question_group_test_21 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_question_group_test_21 on question_group (test_id);
-alter table reply add constraint fk_reply_topic_22 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
-create index ix_reply_topic_22 on reply (topic_id);
-alter table reply add constraint fk_reply_user_23 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_reply_user_23 on reply (user_email);
-alter table test add constraint fk_test_lesson_24 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
-create index ix_test_lesson_24 on test (lesson_id);
-alter table topic add constraint fk_topic_forum_25 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
-create index ix_topic_forum_25 on topic (forum_id);
-alter table url add constraint fk_url_question_26 foreign key (question_id) references question (id) on delete restrict on update restrict;
-create index ix_url_question_26 on url (question_id);
-alter table url add constraint fk_url_user_27 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_url_user_27 on url (user_email);
-alter table university add constraint fk_university_continent_28 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
-create index ix_university_continent_28 on university (continent_id);
-alter table account add constraint fk_account_professorProfile_29 foreign key (professor_profile_id) references professor (id) on delete restrict on update restrict;
-create index ix_account_professorProfile_29 on account (professor_profile_id);
-alter table user_test add constraint fk_user_test_user_30 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_user_test_user_30 on user_test (user_email);
-alter table user_test add constraint fk_user_test_test_31 foreign key (test_id) references test (id) on delete restrict on update restrict;
-create index ix_user_test_test_31 on user_test (test_id);
+alter table question_evaluation add constraint fk_question_evaluation_userTe_21 foreign key (user_test_id) references user_test (id) on delete restrict on update restrict;
+create index ix_question_evaluation_userTe_21 on question_evaluation (user_test_id);
+alter table question_evaluation add constraint fk_question_evaluation_questi_22 foreign key (question_id) references question (id) on delete restrict on update restrict;
+create index ix_question_evaluation_questi_22 on question_evaluation (question_id);
+alter table question_group add constraint fk_question_group_test_23 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_question_group_test_23 on question_group (test_id);
+alter table reply add constraint fk_reply_topic_24 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
+create index ix_reply_topic_24 on reply (topic_id);
+alter table reply add constraint fk_reply_user_25 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_reply_user_25 on reply (user_email);
+alter table test add constraint fk_test_lesson_26 foreign key (lesson_id) references lesson (id) on delete restrict on update restrict;
+create index ix_test_lesson_26 on test (lesson_id);
+alter table topic add constraint fk_topic_forum_27 foreign key (forum_id) references forum (id) on delete restrict on update restrict;
+create index ix_topic_forum_27 on topic (forum_id);
+alter table url add constraint fk_url_question_28 foreign key (question_id) references question (id) on delete restrict on update restrict;
+create index ix_url_question_28 on url (question_id);
+alter table url add constraint fk_url_user_29 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_url_user_29 on url (user_email);
+alter table university add constraint fk_university_continent_30 foreign key (continent_id) references continent (id) on delete restrict on update restrict;
+create index ix_university_continent_30 on university (continent_id);
+alter table account add constraint fk_account_professorProfile_31 foreign key (professor_profile_id) references professor (id) on delete restrict on update restrict;
+create index ix_account_professorProfile_31 on account (professor_profile_id);
+alter table user_test add constraint fk_user_test_user_32 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_user_test_user_32 on user_test (user_email);
+alter table user_test add constraint fk_user_test_test_33 foreign key (test_id) references test (id) on delete restrict on update restrict;
+create index ix_user_test_test_33 on user_test (test_id);
 
 
 
@@ -489,6 +502,8 @@ drop table professor_content;
 drop table question;
 
 drop table question_group_question;
+
+drop table question_evaluation;
 
 drop table question_group;
 

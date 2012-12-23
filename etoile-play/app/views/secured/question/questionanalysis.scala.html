@@ -1,6 +1,6 @@
 @(user: User,module: models.module.Module, lesson: models.module.Lesson,
 test: models.test.Test, group: models.test.question.QuestionGroup,
-usertest: models.manytomany.UserTest) @main("etoile"){
+usertest: models.manytomany.UserTest, evaluations: List[models.test.question.QuestionEvaluation]) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -68,7 +68,18 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			
 			<div class="row-fluid">
 			<div class="span6">
-					<h4>Question @question.number</h4>
+					<h4>Question @question.number 
+					@if(question.typeOfQuestion != 0){
+					@for(evaluation <- evaluations){
+						@if(evaluation.question == question && evaluation.isCorrect){
+						<button disabled="disabled" class="btn btn-success">Right Answer (+@evaluation.score)</button></h4>
+						}
+						@if(evaluation.question == question && !evaluation.isCorrect){
+						<button disabled="disabled" class="btn btn-danger">Wrong Answer (-@evaluation.score)</button></h4>
+						}
+					}
+					}
+					
 				</div>
 				<div class="span5">
 					<div class="btn-group pull-right">
@@ -446,9 +457,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 							
 			<div class="row-fluid ">
 				<div class="span11">
-					<p class="text-warning">
-						<span class="label label-warning">Warning</span>Identify the correct answer (<strong>only one is the correct one</strong>).
-					</p>
+					
 
 					<div class="alert alert-info">
 					<div class="btn-group" data-toggle="buttons-radio">
@@ -485,10 +494,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			} @if(question.typeOfQuestion==2){
 			<div class="row-fluid ">
 				<div class="span11">
-					<p class="text-warning">
-						<span class="label label-warning">Warning</span>Identify the correct answers (<strong>can
-						be more than one</strong>).
-					</p>
+					
 						<div class="alert alert-info">
 						@for(hypothesis <- question.hypothesislist){ 
 						@if(hypothesis.isCorrect){

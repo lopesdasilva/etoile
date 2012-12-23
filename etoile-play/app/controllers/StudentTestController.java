@@ -1,6 +1,7 @@
 package controllers;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import models.User;
@@ -121,8 +122,12 @@ public class StudentTestController extends Controller {
 					
 					}
 				
+				LinkedList<QuestionEvaluation> evaluations = new LinkedList<QuestionEvaluation>();
+				for(Question que : group_aux.questions){
+					evaluations.add(QuestionEvaluation.findByUserAndQuestion(usertest.id, que.id));
+				}
 				
-				return ok(views.html.secured.question.questionanalysis.render(user,module,lesson,test,group_aux,usertest));
+				return ok(views.html.secured.question.questionanalysis.render(user,module,lesson,test,group_aux,usertest, evaluations));
 				}else{
 					return ok(views.html.statics.error.render());
 				}

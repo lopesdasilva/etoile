@@ -53,10 +53,14 @@ public class QuestionEvaluation extends Model {
 	public Question question;
 	
 	
+	
 	public static Model.Finder<Long, QuestionEvaluation> find = new Model.Finder<Long, QuestionEvaluation>(
 			Long.class, QuestionEvaluation.class);
 	
-
+	public static QuestionEvaluation findByUserAndQuestion(Long user_test_id,
+			Long question_id) {
+		return find.where().eq("user_test_id", user_test_id).eq("question_id", question_id).findUnique();
+	}
 	
 	
 }

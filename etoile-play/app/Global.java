@@ -196,6 +196,7 @@ public class Global extends GlobalSettings {
 			
 			
 			
+			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Lessoncontent mcontent = new Lessoncontent();
@@ -214,6 +215,8 @@ public class Global extends GlobalSettings {
 			lesson_one.lessoncontents.add(mcontent);
 			mcontent.save();
 			lesson_one.save();
+			
+			createSecondTest(test_two, lesson_one);
 			
 			test_one.lesson = lesson_one;
 			test_two.lesson = lesson_one;
@@ -624,6 +627,49 @@ public class Global extends GlobalSettings {
 	}
 
 	
+	private void createSecondTest(Test test, Lesson lesson) {
+		QuestionGroup g1 = new QuestionGroup();
+
+		
+		Question q1 = new Question();
+		q1.typeOfQuestion = 0;
+		q1.question = "What is Summation in Math?";
+		q1.lesson = lesson;
+		q1.weight = 50;
+		q1.weightToLose = 25;
+		q1.save();
+		
+		Question q2 = new Question();
+		q2.typeOfQuestion = 1;
+		q2.question = "What is Summation in Math?";
+		q2.lesson = lesson;
+		q2.weight = 50;
+		q2.weightToLose = 25;
+		q2.save();
+		
+		Hypothesis h1 = new Hypothesis();
+		h1.question = q2;
+		h1.number = 0;
+		h1.text = "-";
+		h1.save();
+		
+		Hypothesis h2 = new Hypothesis();
+		h2.question = q2;
+		h2.number = 1;
+		h2.text = "+";
+		h2.isCorrect = true;
+		h2.save();
+		
+		g1.number = 1;
+		g1.question = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet.";
+		g1.test = test;
+		g1.questions.add(q1);
+		g1.questions.add(q2);
+		g1.save();
+		
+	}
+
+
 	// 5. CURRICULUM COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
 	private void createCurriculumComputerScience() {

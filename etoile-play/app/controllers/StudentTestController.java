@@ -356,13 +356,16 @@ public class StudentTestController extends Controller {
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 						for(Hypothesis h : hypothesis){
 							if(h.isCorrect && h.selected && bool){
-								reputation = reputation + q.weight;
-								System.out.println("OC - A somar weight..");
 								bool = true;
 							}else if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
-								reputation = reputation - q.weightToLose;
 								bool = false;
 							}
+						}
+						
+						if(bool){
+							reputation = reputation + q.weight;
+						}else{
+							reputation = reputation - q.weightToLose;
 						}
 						System.out.println("Reputação após OC acertada: " + reputation);
 				}else if(q.typeOfQuestion==2){
@@ -372,19 +375,18 @@ public class StudentTestController extends Controller {
 						if(h.isCorrect && h.selected && bool){
 							 bool = true;
 						}else if((h.isCorrect && !h.selected) && bool){
-							System.out.println("entrei");
 							 bool = false;
-							 reputation = reputation - q.weightToLose;
 						}else if( (!h.isCorrect && h.selected) && bool){
-							System.out.println("entrei2");
 							 bool = false;
-							 reputation = reputation - q.weightToLose;
 						}
 					}
 					if(bool){
 						System.out.println("MC - A somar weight..");
 						reputation = reputation + q.weight;
+					}else{
+						reputation = reputation - q.weightToLose;
 					}
+					
 					System.out.println("Reputação após MC acertada: " + reputation);
 
 				}
@@ -397,8 +399,11 @@ public class StudentTestController extends Controller {
 				QuestionEvaluation qe = new QuestionEvaluation();
 				if(bool){
 				qe.isCorrect=true;
+				qe.score = q.weight;
+				}else{
+					qe.score = q.weightToLose;
 				}
-				qe.score = reputation;
+				
 				qe.userTest = userTest;
 				qe.question = q;
 				qe.save();

@@ -50,6 +50,12 @@ public class StudentTestController extends Controller {
 		public String openquestionsuggestion;
 
 	}
+	
+	public static class OpenAnswerSuggestion {
+
+		public String openanswersuggestion;
+
+	}
 
 	
 	public static Result questionanalysis(Long question_number, Long test_id,String lesson_acronym,String module_acronym){
@@ -440,12 +446,19 @@ public class StudentTestController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 
-		Form<OpenQuestionSuggestion> form = form(
+		Form<OpenQuestionSuggestion> form_question = form(
 				OpenQuestionSuggestion.class).bindFromRequest();
+		
+		Form<OpenAnswerSuggestion> form_answer = form(
+				OpenAnswerSuggestion.class).bindFromRequest();
+		
+		System.out.println("SUGGESTION - question: " + form_question.get().openquestionsuggestion);
+		System.out.println("SUGGESTION - answer: " + form_answer.get().openanswersuggestion);
 
 		System.out.println("MODULESIZE: " + lesson.questions.size());
 		Question new_question = new Question();
-		new_question.question = form.get().openquestionsuggestion;
+		new_question.question = form_question.get().openquestionsuggestion;
+		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
 		new_question.lesson = lesson;
 		new_question.user = user;
 		new_question.imageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";

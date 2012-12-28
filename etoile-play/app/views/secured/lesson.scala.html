@@ -190,9 +190,15 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 													@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
 
 													<div class="controls">
-														<p>In order to resolve the test you need to make a question suggestion.</p>
+														<p>In order to resolve the test you need to make a QUESTION suggestion.</p>
 														<textarea class="span20" rows="10"
 															name="openquestionsuggestion"  placeholder="Please insert your suggestion." style="resize: none"></textarea>
+														<p>In order to resolve the test you need to suggest an
+															ANSWER for your own question.</p>
+														<textarea class="span20" rows="10"
+															name="openanswersuggestion"
+															placeholder="Please insert your answer suggestion."
+															style="resize: none"></textarea>
 
 														<div class="controls">
 															<button type="submit" class="btn btn-info">Save</button>

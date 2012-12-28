@@ -186,6 +186,7 @@ create table question (
   number                    integer,
   type_of_question          integer,
   question                  varchar(255),
+  answer_suggested_by_student varchar(255),
   image_url                 varchar(255),
   video_url                 varchar(255),
   openanswer_id             bigint,

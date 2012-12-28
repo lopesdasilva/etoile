@@ -65,6 +65,10 @@ public class Question extends Model {
 	public String question;
 	
 	@Constraints.Required
+	public String answerSuggestedByStudent;
+	
+	
+	@Constraints.Required
 	public String imageURL;
 	
 	@Constraints.Required

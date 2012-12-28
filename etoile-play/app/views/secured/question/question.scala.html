@@ -543,7 +543,11 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 			<div class="row-fluid">
 		<div class="span11 pull-right">
 			<!-- Button to trigger modal -->
-<a href="#submittest" role="button" class="btn btn-primary pull-right" data-toggle="modal">Submit test</a>
+<div class="btn-group pull-right">
+<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
+<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
+</div>
+
  
 <!-- Modal -->
 <div id="submittest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

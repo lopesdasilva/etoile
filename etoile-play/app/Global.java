@@ -197,7 +197,7 @@ public class Global extends GlobalSettings {
 			
 			
 			
-			// MODULES +++++++++++++++++++++++++++++++++++++++++
+			// LESSONS  +++++++++++++++++++++++++++++++++++++++++
 			
 			Lessoncontent mcontent = new Lessoncontent();
 			mcontent.name = "Content";
@@ -205,6 +205,16 @@ public class Global extends GlobalSettings {
 			mcontent.url = "http://www.benkler.org/Benkler_Wealth_Of_Networks.pdf";
 			mcontent.lessonContentImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			mcontent.save();
+			
+			Lesson lesson_demo_one = new Lesson();
+			lesson_demo_one.name = "Multiplication";
+			lesson_demo_one.acronym = "multiplication";
+			lesson_demo_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			lesson_demo_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
+			lesson_demo_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";
+			lesson_demo_one.lessoncontents.add(mcontent);
+			lesson_demo_one.save();
+			lesson_demo_one.save();
 			
 			Lesson lesson_one = new Lesson();
 			lesson_one.name = "Multiplication";
@@ -234,7 +244,20 @@ public class Global extends GlobalSettings {
 		
 			
 			
-			// COURSES +++++++++++++++++++++++++++++++++++++++++
+			// MODULES +++++++++++++++++++++++++++++++++++++++++
+			
+			Module module_demo = new Module();
+			module_demo.name = "Demo";
+			module_demo.acronym="demo1";
+			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
+			module_demo.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
+			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module is only for demonstration, with no pedagogical coherence.";
+			module_demo.lessons.add(lesson_demo_one);
+			//module_demo.lessons.add(lesson_demo_two);
+			module_demo.save();
+			
+			lesson_demo_one.module = module_demo;
+			lesson_demo_one.save();
 			
 			Module module = new Module();
 			module.name = "Mathematics 101";

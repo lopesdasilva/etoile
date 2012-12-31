@@ -82,7 +82,6 @@ public class ProfessorModuleController extends Controller {
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<ModuleDescription_Form> form = form(ModuleDescription_Form.class).bindFromRequest();
-			System.out.println(form.get().description);
 			module.description=form.get().description;
 			module.imageURL=form.get().imageURL;
 			module.videoURL=form.get().videoURL;
@@ -145,6 +144,27 @@ public class ProfessorModuleController extends Controller {
 		return redirect(routes.Application.module(module_acronym));
 	}
 	
+	
+	public static Result addmoduledcontent(String module_acronym){
+
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
+			Content content= new Content();
+			content.title=form.get().title;
+			content.text=form.get().description;
+			content.module=module;
+			content.save();
+		}
+
+
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	
+	
 	public static Result editmoduledcontent(String module_acronym, Long content_id){
 
 		Module module = Module.findByAcronym(module_acronym);
@@ -155,6 +175,20 @@ public class ProfessorModuleController extends Controller {
 			content.title=form.get().title;
 			content.text=form.get().description;
 			content.save();
+		}
+
+
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	public static Result deletemodulecontent(String module_acronym, Long content_id){
+
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			
+			Content content= Content.find.byId(content_id);
+			content.delete();
 		}
 
 

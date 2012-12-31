@@ -4,13 +4,16 @@ package controllers;
 import java.util.List;
 
 import models.Blog;
+import models.Professor;
 import models.curriculum.Category;
+import models.module.Lesson;
 import models.module.Module;
 
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import controllers.StudentTestController.OpenQuestionSuggestion;
 import controllers.secured.*;
 
 /**
@@ -45,14 +48,27 @@ public class ProfessorController extends Controller {
 			User user = User.find.byId(session("email"));
 			user.professorProfile.refresh();
 			List<Category> categories = Category.getAllCategories();
-			
+			String[] profs_emails = Professor.getAllEmails();
+			System.out.println("numero de profs "+profs_emails.length);
+			System.out.println("email 0"+profs_emails[0]);
 			if(SecuredProfessor.isOwner(user,module)){
 				return ok(views.html.professor.moduleGeneralEdit.render(user, categories,
-						module));
+						module,Professor.getAllEmails()));
 			}
 			return ok(views.html.professor.moduleGeneral.render(user, categories,
 					module));
 		
+	}
+
+	public static Result lesson(String lesson_acronym, String module_acronym) {
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		user.professorProfile.refresh();
+		List<Category> categories = Category.getAllCategories();
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		
+		return ok(views.html.professor.lesson.render(user, categories, lesson,
+				module));
 	}
 
 	

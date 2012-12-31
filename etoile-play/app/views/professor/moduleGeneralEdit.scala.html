@@ -1,5 +1,5 @@
 @(user: User, categories: List[models.curriculum.Category],module:
-models.module.Module) @main("etoileplatform"){
+models.module.Module,professors: Array[String]) @main("etoileplatform"){
 
 
 
@@ -107,6 +107,7 @@ models.module.Module) @main("etoileplatform"){
 						</div>
 					</div>
 				</div>
+
 			</div>
 
 			<h3>
@@ -211,8 +212,7 @@ models.module.Module) @main("etoileplatform"){
 			<hr>
 
 			<div class="row-fluid">
-				<h3>Lessons <small> <a href="#" data-toggle="modal"
-						role="button" class="btn btn-success btn-mini">Add</a></small></h3>
+				<h3>Lessons </h3>
 				<ul class="thumbnails">
 					@for(lesson <- module.lessons) {
 					<li class="span4">
@@ -236,7 +236,51 @@ models.module.Module) @main("etoileplatform"){
 
 
 
-			<h3>About the Professor(s)</h3>
+			<h3>About the Professor(s) <small><a href="#addProfessorModal"
+								data-toggle="modal" role="button"
+								class="btn btn-success btn-mini">Add</a></small></h3>
+
+			<div id="addProfessorModal" class="modal hide fade"
+				tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+				aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h3>Add Professor(s)</h3>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<fieldset>
+							<div id="legend" class="">
+								<legend class="">Form Name</legend>
+							</div>
+							<div class="control-group">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">Professor(s)
+									email</label>
+								<div class="controls">
+								<input type="text" placeholder="e-mail" class="input-xlarge" data-provide="professor" >
+									
+									<p class="help-block">Insert Professor(s) email</p>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					<a class="btn btn-success"
+						href="#">Add</a>
+				</div>
+
+
+			</div>
+
 			@for(professor <- module.professors) {
 			<p>
 				<a href="@routes.Application.professorprofile(professor.acronym)">@professor</a>
@@ -250,6 +294,8 @@ models.module.Module) @main("etoileplatform"){
 					Bibliography<small> <a href="#addBibliography" data-toggle="modal"
 						role="button" class="btn btn-success btn-mini">Add</a></small>
 				</h3>
+				
+				
 				
 				<div id="addBibliography"
 								class="modal hide fade" tabindex="-1" role="dialog"
@@ -335,18 +381,22 @@ models.module.Module) @main("etoileplatform"){
 							width="50px">
 						</a>
 						<div class="media-body">
-							<a href="@bibliography.link" target="blank"><h4
-									class="media-heading">
-									@bibliography.title <small> <span class="btn-group">
+							<h4 class="media-heading"><a href="@bibliography.link" target="blank">
+									
+									@bibliography.title 
+									
+									</a>
+									<small> 
+									<span class="btn-group">
 											<a class="btn btn-mini btn-warning"
 											href="#editBibliography@bibliography.id" data-toggle="modal"
-											role="button">edit</a> <a class="btn btn-mini btn-danger"
+											role="button">edit</a>
+											<a class="btn btn-mini btn-danger"
 											href="#deleteBibliography@bibliography.id"
 											data-toggle="modal" role="button">delete</a>
-
 									</span>
 									</small>
-								</h4></a>
+								</h4>
 							<div id="deleteBibliography@bibliography.id"
 								class="modal hide fade" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel" aria-hidden="true">
@@ -452,11 +502,17 @@ models.module.Module) @main("etoileplatform"){
 
 				}
 			</div>
-
+			<hr>
 			@for(content <- module.contents) {
 			<h3>
-				@content.title <small> <a href="#editContent@content.id"
-					data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
+				@content.title <small> 
+<span class="btn-group"> <a class="btn btn-mini btn-warning"
+						href="#editContent@content.id" data-toggle="modal" role="button">edit</a> <a
+						class="btn btn-mini btn-danger" href="#deleteContent@content.id" data-toggle="modal"
+						role="button">delete</a>
+
+				</span>
+				</small>
 			</h3>
 
 			<div id="editContent@content.id" class="modal hide fade"
@@ -511,10 +567,91 @@ models.module.Module) @main("etoileplatform"){
 
 
 			</div>
+			<div id="deleteContent@content.id"
+								class="modal hide fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h3>Confirm Delete</h3>
+								</div>
+								<div class="modal-body">
+									<p>Are you sure you want to delete this item?</p>
+									<blockquote>@content.title</blockquote>
+									<p>
+										<span class="label label-important">Important</span> This
+										Action is irreversible!
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+									<a class="btn btn-danger" href="@routes.ProfessorModuleController.deletemodulecontent(module.acronym,content.id)">Delete</a>
+								</div>
 
+
+							</div>
 			<p>@content.text</p>
-			<hr>
-			} @if(module.categories.size!=0) { @if(module.categories.size==1) {
+			
+			
+			}
+			<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#addContent" type="button">Add content</a>
+			<div id="addContent" class="modal hide fade"
+				tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+				aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h3>Add new content</h3>
+				</div>
+
+
+				@helper.form(routes.ProfessorModuleController.addmoduledcontent(module.acronym),'class->"form-horizontal"){
+					<p>
+					<fieldset>
+
+						<div class="control-group">
+
+							<!-- Text input-->
+							<label class="control-label" for="input01">Title</label>
+							<div class="controls">
+								<input name="title" required="required" type="text" placeholder="placeholder"
+									class="input-xlarge" >
+								<p class="help-block">Edit title</p>
+							</div>
+						</div>
+
+						<div class="control-group">
+
+							<!-- Textarea -->
+							<label class="control-label">Description</label>
+							<div class="controls">
+								<div class="textarea">
+									<textarea name="description" type="" class="" 
+										style="margin: 0px; height: 109px; width: 269px;"></textarea>
+								</div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success">Add content</button>
+							</div>
+						</div>
+
+					</fieldset>
+					</p>
+				}
+
+
+			</div>
+			
+			
+			
+			
+			 @if(module.categories.size!=0) { @if(module.categories.size==1) {
 			<h3>Category</h3>
 			} else{
 			<h3>Categories</h3>
@@ -522,8 +659,7 @@ models.module.Module) @main("etoileplatform"){
 				href="/curriculum#@category.keyword" class="">@category.name</a> <br>
 			} }
 
-
-
+			
 
 
 			<p></p>

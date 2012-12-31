@@ -218,6 +218,7 @@ public class Global extends GlobalSettings {
 			
 			Lesson lesson_one = new Lesson();
 			lesson_one.name = "Multiplication";
+			lesson_one.number=1;
 			lesson_one.acronym = "multiplication";
 			lesson_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
 			lesson_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
@@ -235,6 +236,7 @@ public class Global extends GlobalSettings {
 			
 			Lesson lesson_two = new Lesson();
 			lesson_two.name = "Division";
+			lesson_two.number=2;
 			lesson_two.acronym = "divison";
 			lesson_two.description = "In the expression a ÷ b = c, a is called the dividend or numerator, b the divisor or denominator and the result c is called the quotient. Conceptually, division describes two distinct but related settings. Partitioning involves taking a set of size a and forming b groups that are equal in size. The size of each group formed, c, is the quotient of a and b. Quotative division involves taking a set of size a and forming groups of size b. The number of groups of this size that can be formed, c, is the quotient of a and b.[1]";
 			lesson_two.shortDescription = "In mathematics, especially in elementary arithmetic, division (÷) is an arithmetic operation";

@@ -60,7 +60,9 @@ POST /modules/:module/addbibliographyitem	controllers.ProfessorModuleController.
 POST /module/:module/editmoduletitle		controllers.ProfessorModuleController.editmoduletitle(module: String)
 POST /module/:module/editmoduledescription		controllers.ProfessorModuleController.editmoduledescription(module: String)
 POST /module/:module/editmoduledcontent		controllers.ProfessorModuleController.editmoduledcontent(module: String, content: Long)
-
+POST /module/:module/addmoduledcontent		controllers.ProfessorModuleController.addmoduledcontent(module: String)
+GET /module/:module/deletemodulecontent		controllers.ProfessorModuleController.deletemodulecontent(module: String, content: Long)
+		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)
 

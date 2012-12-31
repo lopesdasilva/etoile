@@ -24,6 +24,9 @@ public class Lesson extends Model{
 	public String name;
 	
 	@Constraints.Required
+	public int number;
+	
+	@Constraints.Required
 	public String acronym;
 	
 	@Constraints.Required

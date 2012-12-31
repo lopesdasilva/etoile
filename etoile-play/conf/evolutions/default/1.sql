@@ -124,6 +124,7 @@ create table hypothesis (
 create table lesson (
   id                        bigint auto_increment not null,
   name                      varchar(255),
+  number                    integer,
   acronym                   varchar(255),
   description               TEXT,
   short_description         TEXT,

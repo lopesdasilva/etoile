@@ -1,0 +1,223 @@
+@(user: User, categories: List[models.curriculum.Category], lesson:
+models.module.Lesson, module: models.module.Module) @import helper._
+@main("etoileplatform"){
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		@professormenu(user)
+		
+		<div class="span9">
+		<div class="page-header">
+			<h2>@lesson.name <small> 
+<span class="btn-group">
+											<a class="btn btn-mini btn-warning"
+											href="#" data-toggle="modal"
+											role="button">edit</a> <a class="btn btn-mini btn-danger"
+											href="#"
+											data-toggle="modal" role="button">delete</a>
+
+									</span>
+</small></h2>
+
+		</div>
+		<!--/span-->
+		<div class="row-fluid">
+				<div class="">
+				<button type="button" class="close" data-toggle="collapse"
+							data-target="#@lesson.id">-</button>
+						<strong data-toggle="collapse" data-target="#@lesson.id">@lesson.shortDescription</strong>
+							<div id="@lesson.id" class="collapse row-fluid">
+							<p>@lesson.description</p>
+							</div>
+						
+				</div>
+				</br>
+				<div class="tabbable">
+					<!-- Only required for left/right tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#informations" data-toggle="tab">Information</a></li>
+						<li><a href="#content" data-toggle="tab">Extra</a></li>
+						<li><a href="#tests" data-toggle="tab">Tests</a></li>
+						<li><a href="#suggested" data-toggle="tab">Suggested questions</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="informations">
+							<div class="row-fluid">
+								<div class="span2">
+									<img src="@lesson.imageURL" height="100" width="100" />
+								</div>
+								<div class="span9">
+									<p>The First Test is now available</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="content">
+							@for(mc <- lesson.lessoncontents) {
+							<div class="row-fluid">
+								<div class="span2">
+									<img
+										src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA"
+										height="50" width="50" />
+								</div>
+								<div class="span9">
+									<p>@mc.text</p>
+									<p>
+										<a href="@mc.url" target="_blank">@mc.name</a>
+									</p>
+								</div>
+							</div>
+							}
+						</div>
+						<div class="tab-pane" id="tests">
+							<table class="table table-striped" style="background: #DDDDDD;">
+								<thead>
+									<tr>
+										<th>Test-ID</th>
+										<th>Test Name</th>
+										<th>Expected Duration</th>
+										<th>Grade</th>
+										<th>Question</th>
+										<th>      </th>
+									</tr>
+								</thead>
+								<tbody>
+									@for(test <- lesson.tests) {
+									<tr>
+										<td>@test.id</td>
+										<td>@test.name</td>
+										<td>3 hours</td>
+										
+										@for(usertest<-user.tests){
+										<!-- IF1 -->
+										@if(usertest.test.id==test.id && usertest.inmodule){
+										<td> - </td> 
+										
+										<td><a class="btn btn-success btn-small disabled" >Question suggested</a></td>
+										@if(!usertest.submitted){
+										<td><a class="btn btn-primary btn-small"
+											href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
+												test&raquo;</a></td> 
+												}
+										@if(usertest.submitted){
+										<td><a class="btn btn-primary btn-small disabled"
+											href="#">Test submitted</a></td> 
+										}
+										}
+										<!-- IF2 -->
+										@if(usertest.test.id==test.id && !usertest.inmodule && usertest.submitted){
+										@if(!usertest.reviewd){
+										<td> - </td> 
+										}
+										@if(usertest.reviewd){
+										<td><a href="@routes.StudentTestController.questionanalysis(1,test.id,lesson.acronym,module.acronym)">@usertest.reputationAsAstudent / 100</a></td> 
+										}
+										<td><a class="btn btn-success btn-small disabled" >Question suggested</a></td>
+										@if(!usertest.submitted){
+										<td><a class="btn btn-primary btn-small"
+											href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
+												test&raquo;</a></td> 
+												}
+										@if(usertest.submitted){
+										<td><a class="btn btn-primary btn-small disabled"
+											href="#">Test submitted</a></td> 
+										}
+										}
+										<!-- IF3 -->
+										 @if(usertest.test.id==test.id && !usertest.inmodule && !usertest.submitted ){
+										<td> - </td> 
+										<td><a href="#modal@test.id" class="btn btn-danger btn-small"
+											data-toggle="modal">Suggest Question&raquo;</a></td> 
+										<td><a class="btn btn-primary btn-small disabled">Solve test&raquo;</a></td>	
+														<!-- MODAL -->
+										<div id="modal@test.id" class="modal hide shown">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">X</button>
+												<h3 id="myModalLabel">New Question</h3>
+											</div>
+											<div class="modal-body">
+												<p>
+												<div class="control-group">
+													@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
+
+													<div class="controls">
+														<p>In order to resolve the test you need to make a question suggestion.</p>
+														<textarea class="span20" rows="10"
+															name="openquestionsuggestion"  placeholder="Please insert your suggestion." style="resize: none"></textarea>
+
+														<div class="controls">
+															<button type="submit" class="btn btn-info">Save</button>
+
+														</div>
+														}
+													</div>
+												</div>
+
+											</div>
+										</div>
+											}
+
+							
+										}
+									</tr>
+
+
+
+									}
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane active" id="suggested">
+							<div class="row-fluid">
+								
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+}

@@ -233,7 +233,7 @@ public class StudentController extends Controller {
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
 			//Subsituir por module
-			return ProfessorController.index();
+			return ProfessorController.lesson(lesson_acronym,module_acronym);
 		}
 		return redirect(routes.Application.index());
 	}

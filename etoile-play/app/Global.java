@@ -107,8 +107,19 @@ public class Global extends GlobalSettings {
 			
 			
 			// NEWS ++++++++++++++++++++++++++++++++++++++++++
-			
+						
 			Blog blog = new Blog();
+			
+			blog = new Blog();
+			blog.alternateHeader = "Étoile will run on tablets !";
+			blog.header= "Étoile will run on tablets !";
+			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
+			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android...";
+			blog.articleImageURL="http://velositor.com/wp-content/uploads/2012/03/Tablets-in-Education-eTextbooks-on-Tablets-Preferred-Over-Print-Books-Among-College-and-High-School-Students-e1332128400234-290x290.jpg";
+			blog.date = new Date();
+			blog.save();
+			
+			blog = new Blog();
 			blog.alternateHeader = "The Digital Campus goes to Latin-America";
 			blog.header= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
 			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
@@ -117,23 +128,72 @@ public class Global extends GlobalSettings {
 			blog.date = new Date();
 			blog.save();
 			
+			/*
 			blog = new Blog();
-			blog.alternateHeader = "New module on Emergence";
-			blog.header= "Étoile module on “Emergence, Multi-Agent Simulation, and Network Theory”";
-			blog.text = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory” will be presented by Jorge Louçã at the Université Paris Dauphine, École doctorale EDDIMO (Décision, Informatique, Mathématiques et Organisation), in January/February 2013.";
-			blog.alternateText = "A new Étoile module entitled “Emergence, Multi-Agent Simulation, and Network Theory”...";
-			blog.articleImageURL="https://dl.dropbox.com/u/124850/emergence.jpg";
+			blog.alternateHeader = "";
+			blog.header= "";
+			blog.text = "";
+			blog.alternateText = "";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
 			blog.date = new Date();
 			blog.save();
 			
 			blog = new Blog();
-			blog.alternateHeader = "Étoile will run on tablet!";
-			blog.header= "Étoile will run on tablet !";
-			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
-			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android...";
-			blog.articleImageURL="http://velositor.com/wp-content/uploads/2012/03/Tablets-in-Education-eTextbooks-on-Tablets-Preferred-Over-Print-Books-Among-College-and-High-School-Students-e1332128400234-290x290.jpg";
+			blog.alternateHeader = "";
+			blog.header= "";
+			blog.text = "";
+			blog.alternateText = "";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
 			blog.date = new Date();
 			blog.save();
+			
+			blog = new Blog();
+			blog.alternateHeader = "";
+			blog.header= "";
+			blog.text = "";
+			blog.alternateText = "";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
+			blog.date = new Date();
+			blog.save();
+			*/
+			
+			blog = new Blog();
+			blog.alternateHeader = "Étoile used in Master and PhD Programmes";
+			blog.header= "Étoile used in PhDs";
+			blog.text = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to evaluate the experimental version of étoile. Classes will start on Friday, 7th of October 2011.";
+			blog.alternateText = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/phd_lisbon.jpg";
+			blog.date = new Date();
+			blog.save();
+			
+			blog = new Blog();
+			blog.alternateHeader = "Kickoff meeting";
+			blog.header= "Kickoff meeting held at the OU";
+			blog.text = "The étoile project held its kickoff meeting at the Open University in Milton Keynes in the beginning of march. The event lasted 3 days where the members of the team had the opportunity to see presentations on several projects run by the Open University that are highly related to distance learning, e-learning systems, and automatic marking system, among others.";
+			blog.alternateText = "The étoile project held its kickoff meeting at...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/kick-off_jeff.jpg";
+			blog.date = new Date();
+			blog.save();
+			
+			blog = new Blog();
+			blog.alternateHeader = "Étoile is about to start !";
+			blog.header= "Étoile is about to start !";
+			blog.text = "The étoile project will test a remarkable information architecture using social intelligence to provide ultra-low-cost education and support the rapid dissemination of scientific ideas. It will be tested in with postgraduate students in Europe and around the world. It is intended to support programmes of education in domains related to complex systems science to large numbers of students around the world at almost no cost per student.";
+			blog.alternateText = "The étoile project will test a remarkable information architecture using ...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/education.jpg";
+			blog.date = new Date();
+			blog.save();
+			
+			blog = new Blog();
+			blog.alternateHeader = "Kickoff Meeting 9-12 March 2011";
+			blog.header= "Kickoff Meeting 9-12 March 2011";
+			blog.text = "The étoile kickoff meeting will take place at the Hub Lecture Theatre, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK, between the 9th and the 12nd March 2011.";
+			blog.alternateText = "The étoile kickoff meeting will take place at the Hub Lecture Theatre...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/OU_milton_keynes_campus.jpg";
+			blog.date = new Date();
+			blog.save();
+			
+			
 			
 			
 			// QUESTIONS ++++++++++++++++++++++++++++++++++++++++

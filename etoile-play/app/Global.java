@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import org.joda.time.DateTime;
@@ -163,16 +164,24 @@ public class Global extends GlobalSettings {
 			blog.text = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to evaluate the experimental version of étoile. Classes will start on Friday, 7th of October 2011.";
 			blog.alternateText = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/phd_lisbon.jpg";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("04/10/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
 			blog.alternateHeader = "Kickoff meeting";
 			blog.header= "Kickoff meeting held at the OU";
 			blog.text = "The étoile project held its kickoff meeting at the Open University in Milton Keynes in the beginning of march. The event lasted 3 days where the members of the team had the opportunity to see presentations on several projects run by the Open University that are highly related to distance learning, e-learning systems, and automatic marking system, among others.";
-			blog.alternateText = "The étoile project held its kickoff meeting at...";
+			blog.alternateText = "The étoile project held its kickoff meeting at the Open University...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/kick-off_jeff.jpg";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("23/03/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
@@ -181,7 +190,11 @@ public class Global extends GlobalSettings {
 			blog.text = "The étoile project will test a remarkable information architecture using social intelligence to provide ultra-low-cost education and support the rapid dissemination of scientific ideas. It will be tested in with postgraduate students in Europe and around the world. It is intended to support programmes of education in domains related to complex systems science to large numbers of students around the world at almost no cost per student.";
 			blog.alternateText = "The étoile project will test a remarkable information architecture using ...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/education.jpg";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("11/02/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
@@ -190,7 +203,11 @@ public class Global extends GlobalSettings {
 			blog.text = "The étoile kickoff meeting will take place at the Hub Lecture Theatre, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK, between the 9th and the 12nd March 2011.";
 			blog.alternateText = "The étoile kickoff meeting will take place at the Hub Lecture Theatre...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/OU_milton_keynes_campus.jpg";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("11/02/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			

@@ -117,7 +117,11 @@ public class Global extends GlobalSettings {
 			blog.text = "The migration of the Étoile platform for tablet has started, both for iPad and Android. Be attentive to the next developments !";
 			blog.alternateText = "The migration of the Étoile platform for tablet has started, both for iPad and Android...";
 			blog.articleImageURL="http://velositor.com/wp-content/uploads/2012/03/Tablets-in-Education-eTextbooks-on-Tablets-Preferred-Over-Print-Books-Among-College-and-High-School-Students-e1332128400234-290x290.jpg";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("12/10/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
@@ -126,43 +130,135 @@ public class Global extends GlobalSettings {
 			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
 			blog.alternateText = "The Complex Systems Digital Campus network is getting stronger... ";
 			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
-			blog.date = new Date();
-			blog.save();
-			
-			/*
-			blog = new Blog();
-			blog.alternateHeader = "";
-			blog.header= "";
-			blog.text = "";
-			blog.alternateText = "";
-			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
-			blog.date = new Date();
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("28/08/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
-			blog.alternateHeader = "";
-			blog.header= "";
-			blog.text = "";
-			blog.alternateText = "";
-			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
-			blog.date = new Date();
+			blog.header= "Étoile course on Complex Networks and Graph Theory";
+			blog.text = "Jeff Johnson presented the Complex Networks and Graph Theory component of the 2nd Ph.D. School on  ”Mathematical Modeling of Complex Systems”, Pescara, Italy, 16-28 July, 2012. The aim of the Étoile method to explore new methods of crowd sourcing resources for education and reseach. Unusually, students are set the test before the begin studying. The idea is that if the student can answer a question already, that”s fine! If they cannot answer the question they have to search the internet to find a website that gives sufficient information to answer the question. An important aspect of the Etoile method is that it tests students” metaknowledge. To answer the question the student needs knowledge. Metaknowledge is here defined as “knowledge about the knowledge”, and generally it is deeper and shows greater understanding. Students demonstrate their metaknowledge by returning a web reference (URL) with their answer.  For example, if the question were “What is a clique in a social network” a student might answer “A clique is a (maximal) subset of vertices in the network that are all linked to each other” and provide the URL http://en.wikipedia.org/wiki/Social_network . Is http://en.wikipedia.org/wiki/Social_network a good URL for this question? In Etoile the URLs that student return enter an ecology of learning resources. Those best adapted to answer the question will thrive, while those least adapted will not. The ecology is driven by other students” experience of trying to use the URL to answer the question. For example, a student might give the URLs a star rating, with 5 stars meaning that the URL provided material that was excellently adapated to answering the question, with zero stars meaning the material was very badly adapted to the question – as far as that particular student was concerned. Of course, we are all different, and one student may find a website particularly good for answering a question, while another student my find it useful. This could reflect the style of the material on the site, the level of prior knowledge that it expects, or something as similar as the language used. For example, a site in Portugese could be excellent for a person speeking that language, and useful for someone who did not. But the reasons for finding sites useful or not may be more subtle than that. In general clusters of students (e.g. Portugese speakers, those knowing a lot of mathematics, those liking pictures) will find clusters of site useful (e.g. good pedagogical Portugese sites, terse mathematical sites, well illustrated sites). These emergent clusters can be considered to be relation simplices in hypenetworks. Hypergraphs, simplicial complexes and hypernetworks will be the focus of my lectures on Complex Networks and Graph Theory the example of this Etoile will (hopefully) provide hands-on data for us to explore the ideas. Jeffrey Johnson, The Open University, UK. 15th July 2012. http://www.cs-dc.net/Complex_Networks_Pescara_School_16-28_July_2012H.html";
+			blog.alternateHeader = "Étoile course on Complex Networks";
+			blog.alternateText = "Jeff Johnson presented the Complex Networks and Graph Theory...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/pescara.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("15/07/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
 			
 			blog = new Blog();
-			blog.alternateHeader = "";
-			blog.header= "";
-			blog.text = "";
-			blog.alternateText = "";
-			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/";
-			blog.date = new Date();
+			blog.header= "Étoile course on Statistics";
+			blog.text = "The Étoile course on Statistics has been presented by Diogo Pinheiro for the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. The programme included: 1. Probability theory - 1.1 Probability measure; 1.2 Random variables; 1.3 Discrete distributions; 1.4 Continuous distributions; 1.5 The Law of Large Numbers; 1.6 The Central Limit Theorem; 2. Statistics - 2.1 Sampling; 2.2 Estimation; 2.3 Confidence intervals; 2.4 Hypothesis Testing; Stochastic Processes - 3.1 Basic properties; 3.2 Poisson Process; 3.3 Markov Chain; 3.4 Markov Process; 3.5 Brownian motion; 3.6 Lévy process";
+			blog.alternateHeader = "Étoile course on “Statistics";
+			blog.alternateText = "The Étoile course on Statistics has been presented ...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/stats.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("16/06/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
 			blog.save();
-			*/
 			
 			blog = new Blog();
-			blog.alternateHeader = "Étoile used in Master and PhD Programmes";
-			blog.header= "Étoile used in PhDs";
+			blog.header= "Étoile course on Complex Networks";
+			blog.text = "The Étoile course on Complex Networks has been presented by Pedro Lind for the PhD students at the Faculty of Sciences / Lisbon University Institute. The programme included stochastic methods in complex systems, auto-organised criticality, and complex networks.";
+			blog.alternateHeader = "Étoile course on Complex Networks";
+			blog.alternateText = "The Étoile course on Complex Networks has been presented...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/nets.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("02/06/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "Étoile course on Mathematics";
+			blog.text = "The Étoile course on Mathematics has been presented by Diogo Pinheiro for the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. The programme included (1) Differential equations and Dynamical Systems; (2) Chaotic behaviour, and (3) Bifurcations.";
+			blog.alternateHeader = "Étoile course on Mathematics";
+			blog.alternateText = "The Étoile course on Mathematics has been presented...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/maths.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("20/05/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "The Digital Campus reaches Africa";
+			blog.text = "Inspired by the contacts that Paul Bourgine, from the Étoile team, developed with some of the best African universities, the African Conference on Complex Systems took place in Dakar, Senegal. The main subject of the conference was the African Roadmap and its Digital Campus - towards a UNESCO Unitwin Network. Participants from 34 different countries where present and discussed the African Roadmap. Since then the participants have been contributing to an African roadmap.";
+			blog.alternateHeader = "Digital Campus in Africa";
+			blog.alternateText = "The African Conference on Complex Systems took place in Dakar...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/africa.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("03/05/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "The Étoile Platform is on-line";
+			blog.text = "The étoile Platform is available for professors, researchers and students in Complex Systems Science. The courses available include Hypernetworks, Mathematics for Complex Systems Studies, and Computational Complexity. Please feel free to contact the étoile team for more information.";
+			blog.alternateHeader = "Étoile Platform";
+			blog.alternateText = "The étoile Platform is available for professors, researchers, and...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/etoile_2.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("23/04/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "The Complex Systems Digital Campus has been launched";
+			blog.text = "The European Coordination Action ASSYST with help of the Complex Systems Society (CSS) is forming an international Complex Systems Digital Campus as a UniTwin network between universities from all continents. The aim of the network is to spread knowledge and know-how of the new science through education and research collaborations. The Complex Systems Digital Campus will federate the Research and Educational Institutions worldwide addressing the challenges of complex systems science. It will coordinate an evolving international network of scientists to identify the scientific challenges though ‘living complex systems roadmaps’, facilitating the sharing of research and educative resources to address these challenges. The Digital Campus will have virtual departments federating the e-community addressing each challenge. The Digital Campus will be open to all citizens of the world and enable them to participate in the creation and application of the new Complex Systems Science to help solve the local and global challenges that lie ahead. The Étoile community is deeply committed to the success of the Complex Systems Digital Campus.";
+			blog.alternateHeader = "Complex Systems Digital Campus";
+			blog.alternateText = "The Complex Systems Digital Campus will federate the research ...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/unesco.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("16/03/2012");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "Jeff Johnson presented étoile at the ECCS’11 Conference";
+			blog.text = "Jeff Johnson presented the étoile Cascades Ideas at ECCS’11 – European Conference on Complex Systems. You are invited to watch the presentation on video.";
+			blog.alternateHeader = "Étoile at  ECCS’11";
+			blog.alternateText = "Jeff Johnson presented the Étoile Cascades Ideas project at ECCS’11...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/Jeff_at_eccs11.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("04/10/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.header= "The Étoile experimental version is on-line";
+			blog.text = "You are welcome to try it… and return later to test the new functionalities that are being prepared!";
+			blog.alternateHeader = "Étoile experimental version";
+			blog.alternateText = "You are welcome to try it, and return later to test the new functionalities...";
+			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/monge.jpg";
+			try{
+				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("04/10/2011");
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			blog.save();
+			
+			blog = new Blog();
+			blog.alternateHeader = "Étoile used in PhDs";
+			blog.header= "Étoile used in Master and PhD Programmes";
 			blog.text = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to evaluate the experimental version of étoile. Classes will start on Friday, 7th of October 2011.";
-			blog.alternateText = "The Master and Doctoral Programmes in Complexity Sciences (Lisbon) agreed to...";
+			blog.alternateText = "The Doctoral Programmes in Complexity Sciences (Lisbon) agreed to...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/phd_lisbon.jpg";
 			try{
 				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("04/10/2011");
@@ -198,8 +294,8 @@ public class Global extends GlobalSettings {
 			blog.save();
 			
 			blog = new Blog();
-			blog.alternateHeader = "Kickoff Meeting 9-12 March 2011";
-			blog.header= "Kickoff Meeting 9-12 March 2011";
+			blog.alternateHeader = "Kickoff scheduled for 9-12 March 2011";
+			blog.header= "Kickoff scheduled for 9-12 March 2011";
 			blog.text = "The étoile kickoff meeting will take place at the Hub Lecture Theatre, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK, between the 9th and the 12nd March 2011.";
 			blog.alternateText = "The étoile kickoff meeting will take place at the Hub Lecture Theatre...";
 			blog.articleImageURL="http://www.iscte.pt/~jmal/etoile/images/OU_milton_keynes_campus.jpg";

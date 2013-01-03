@@ -50,6 +50,9 @@ public class StudentController extends Controller {
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
 
+			
+			if(blogs.size()>3)
+				blogs=blogs.subList(0, 3);
 			return ok(home.render(user, blogs, categories));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){

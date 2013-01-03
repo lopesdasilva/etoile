@@ -48,7 +48,8 @@ public class Application extends Controller {
 		Collections.shuffle(modules);
 		modules=modules.subList(0, 3);
 		}
-		
+		if(blogs.size()>3)
+		blogs=blogs.subList(0, 3);
 		return ok(index.render(blogs,categories,continents,modules));
 	}
 	

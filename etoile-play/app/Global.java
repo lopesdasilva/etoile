@@ -381,7 +381,7 @@ public class Global extends GlobalSettings {
 			
 			Lesson lesson_demo_one = new Lesson();
 			lesson_demo_one.name = "Multiplication";
-			lesson_demo_one.acronym = "multiplication";
+			lesson_demo_one.acronym = "multiplicationDemo";
 			lesson_demo_one.description = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
 			lesson_demo_one.shortDescription = "Multiplication (often denoted by the cross symbol ×) is the mathematical operation of scaling one number by another. It is one of the four basic operations in ...";
 			lesson_demo_one.imageURL = "http://imguol.com/2012/07/09/saiba-como-usar-tabela-do-word-para-somar-itens-1341868753923_956x500.jpg";

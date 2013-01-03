@@ -70,12 +70,12 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 				<div class="tabbable">
 					<!-- Only required for left/right tabs -->
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1" data-toggle="tab">Information</a></li>
-						<li><a href="#tab2" data-toggle="tab">Extra</a></li>
-						<li><a href="#tab3" data-toggle="tab">Tests</a></li>
+						<li class="active"><a href="#news" data-toggle="tab">News</a></li>
+						<li><a href="#resources" data-toggle="tab">Resources</a></li>
+						<li><a href="#tests" data-toggle="tab">Tests</a></li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane active" id="tab1">
+						<div class="tab-pane active" id="news">
 							<div class="row-fluid">
 								<div class="span2">
 									<img src="@lesson.imageURL" height="100" width="100" />
@@ -101,7 +101,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane" id="tab2">
+						<div class="tab-pane" id="resources">
 							@for(mc <- lesson.lessoncontents) {
 							<div class="row-fluid">
 								<div class="span2">
@@ -118,7 +118,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 							</div>
 							}
 						</div>
-						<div class="tab-pane" id="tab3">
+						<div class="tab-pane" id="tests">
 							<table class="table table-striped" style="background: #DDDDDD;">
 								<thead>
 									<tr>

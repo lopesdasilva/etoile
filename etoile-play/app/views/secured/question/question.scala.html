@@ -117,7 +117,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
+										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -149,7 +149,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<button class="btn btn-mini btn-primary pull-right">Like</button>
+										<button href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</button>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -183,7 +183,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 											this question</p>
 									</div>
 								</div>
-
+								
 								<div class="control-group">
 									<label class="control-label"></label>
 

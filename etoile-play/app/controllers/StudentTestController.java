@@ -16,6 +16,7 @@ import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
+import models.test.question.URL;
 import play.api.Routes;
 import play.data.Form;
 import play.mvc.Controller;
@@ -469,4 +470,18 @@ public class StudentTestController extends Controller {
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module, form(OpenQuestionSuggestion.class)));
 	}
+	
+	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){
+		URL url = URL.find.byId(url_id);
+		System.out.println("Number Likes Before: " + url.likes);
+		url.likes ++ ;
+
+		System.out.println("Number Likes Before: " + url.likes);
+		url.save();
+		
+		return question(question_number, test_id, lesson_acronym, module_acronym);
+		
+	}
+	
+	
 }

@@ -48,20 +48,19 @@ models.module.Lesson, module: models.module.Module) @import helper._
 		@professormenu(user)
 		
 		<div class="span9">
-		<div class="page-header">
-			<h2>@lesson.name <small> 
-<span class="btn-group">
-											<a class="btn btn-mini btn-warning"
-											href="#" data-toggle="modal"
-											role="button">edit</a> <a class="btn btn-mini btn-danger"
-											href="#"
-											data-toggle="modal" role="button">delete</a>
+			<div class="page-header">
+				<h2>
+					@lesson.name <small> <span class="btn-group"> <a
+							class="btn btn-mini btn-warning" href="#" data-toggle="modal"
+							role="button">edit</a> <a class="btn btn-mini btn-danger"
+							href="#" data-toggle="modal" role="button">delete</a>
 
-									</span>
-</small></h2>
+					</span>
+					</small>
+				</h2>
 
-		</div>
-		<!--/span-->
+			</div>
+			<!--/span-->
 		<div class="row-fluid">
 				<div class="">
 				<button type="button" class="close" data-toggle="collapse"
@@ -132,7 +131,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										<td>3 hours</td>
 										<td>
 										<span class="btn-group">
-										<a class="btn btn-small btn-success" href="#" data-toggle="modal" role="button">open</a>
+										<a class="btn btn-small btn-success" href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,test.id)" data-toggle="modal" role="button">open</a>
 										<a class="btn btn-small btn-warning" href="#" data-toggle="modal" role="button">edit</a>
 										<a class="btn btn-small btn-danger" href="#" data-toggle="modal" role="button">delete</a>
 

@@ -1,0 +1,92 @@
+@(user: User,module:
+models.module.Module,lesson: models.module.Lesson, test:models.test.Test) @main("etoileplatform"){
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+		@professormenu(user)
+		<!--/span-->
+
+
+		<div class="span9">
+		
+			<table class="table table-condensed table-striped">
+								<thead>
+									<tr>
+										<th>Username</th>
+										<th>Progress</th>
+										<th>Submitted</th>
+										<th>Grade</th>
+										<th>State</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for(usertest <- test.users) {
+									@if(!usertest.reviewd && usertest.submitted){
+									<tr class="warning">
+									}
+									@if(!usertest.submitted){
+									<tr>
+									}
+										<td>@usertest.user.name</td>
+										<td>@usertest.progress %</td>
+										<td>@usertest.submitted</td>
+										<td>@usertest.reputationAsAstudent</td>
+										<td>
+										@if(!usertest.reviewd && usertest.submitted){
+										<a href="@routes.ProfessorTestController.gradetest(module.acronym,lesson.acronym,test.id,usertest.id,1)" class="btn btn-small btn-success ">Review</a>
+										}
+										@if(usertest.reviewd){
+										<a href="#" class="btn btn-small btn-inverse disabled">Reviewed</a>
+										}	
+										</td>
+									</tr>
+									}
+								</tbody>
+							</table>
+		
+		</div>
+	</div>
+</div>
+}

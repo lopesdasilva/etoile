@@ -46,10 +46,10 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 
 
 		<div class="row-fluid">
-			<div class="span4">
-				<div class="progress">
-					<div class="bar" style="width: @usertest.progress%;"></div>
-				</div>
+			<div class="span11">
+				
+					<h4>Student name:</h4><blockquote >@usertest.user.name</blockquote>
+				
 			</div>
 		</div>
 		<div class="row-fluid">
@@ -81,9 +81,6 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 									top5 URLs</a></li>
 							<li><a href="#URLALL@question.number" data-toggle="modal">View
 									All URLs</a></li>
-							
-							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
-									new URLs</a></li>
 									<li class="divider"></li>
 									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
 						</ul>
@@ -117,7 +114,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,usertest.test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
+									
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -149,7 +146,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<button href ="@routes.StudentTestController.voteurl(url.id, group.number,usertest.test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</button>
+										
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -159,41 +156,6 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 							</div>
 						</div>
 						}
-					</div>
-				</div>
-				<!-- END All URL Modal -->
-
-				<!-- ALL URL Modal -->
-				<div id="ADDURL@question.number" class="modal hide fade">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">X</button>
-						<h3 id="myModalLabel">Add new URL</h3>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal">
-							<fieldset>
-								<div class="control-group">
-
-									<!-- Text input-->
-									<label class="control-label" for="input01">New URL</label>
-									<div class="controls">
-										<input type="text" placeholder="Insert the new URL"
-											class="input-xlarge">
-										<p class="help-block">A valid URL that you used to answer
-											this question</p>
-									</div>
-								</div>
-								
-								<div class="control-group">
-									<label class="control-label"></label>
-
-									<!-- Button -->
-									<div class="controls">
-										<button class="btn btn-success">Add</button>
-									</div>
-								</div>
-							</fieldset>
-						</form>
 					</div>
 				</div>
 				<!-- END All URL Modal -->
@@ -390,8 +352,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 				
 			</div>
 			<div class="control-group">
-							@helper.form(routes.StudentTestController.postquestion(group.number, module.acronym,
-							lesson.acronym,usertest.test.id,question.id)) {
+							<form>
 							<div class="controls">
 
 			<div class="row-fluid">
@@ -434,18 +395,14 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 			@if(question.typeOfQuestion==0){
 			<div class="row-fluid">
 				<div class="span11">
-					<div class="span6">
-
-						<textarea class="span50" rows="10" name="qanswer"></textarea>
-					</div>
-					<div class="span6">
-						<div class="alert alert-block alert-success">
-							<button type="button" class="close" data-dismiss="alert">x</button>
-							<h4>Your answer</h4>
+					
+						<div class="alert alert-block alert-info">
+							
+							<h4>Student's answer</h4>
 							@question.openanswer.answer
 						</div>
 
-					</div>
+					
 				</div>
 			</div>
 			} @if(question.typeOfQuestion==1){
@@ -463,14 +420,14 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 						@for(hypothesis <- question.hypothesislist){ 
 						@if(hypothesis.selected){
 						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+							<input disabled type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
 -							checked="checked"> @hypothesis.text
 
 						</label> 
 						}
 						@if(!hypothesis.selected){
 						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+							<input disabled type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
 -							> @hypothesis.text
 						</label> 
 						
@@ -496,13 +453,13 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 						@for(hypothesis <- question.hypothesislist){ 
 						@if(hypothesis.selected){
 						<label
-							class="checkbox"> <input type="checkbox"
+							class="checkbox"> <input disabled type="checkbox"
 							id="optionsRadios1" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" checked="checked">
 							@hypothesis.text
 						</label> }
 						@if(!hypothesis.selected){
 						<label
-							class="checkbox"> <input type="checkbox"
+							class="checkbox"> <input disabled type="checkbox"
 							id="optionsRadios1"name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"">
 							@hypothesis.text
 						</label>
@@ -513,19 +470,14 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 			</div>
 			}
 			
-			<div class="row-fluid">
-				<div class="span11">
-					<p>
-						<button class="btn btn-success pull-right" type="submit">Save answer @question.number</button>
-					</p>
-				</div>
-			</div>
+			
+
 			
 		}
 			<hr>
 			
 		</div>
-		}
+		</form>
 </div>
 </div>
 		<div class="row-fluid">
@@ -535,7 +487,8 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 					<li class="active"><a>@group_aux.number</a></li> }
 					@if(group.number!=group_aux.number){
 					<li><a
-						href="@routes.StudentTestController.question(group_aux.number,usertest.test.id, lesson.acronym,module.acronym)">@group_aux.number</a></li>
+					
+						href="@routes.ProfessorTestController.gradetest(module.acronym,lesson.acronym,usertest.id,group_aux.number)">@group_aux.number</a></li>
 					} }
 				</ul>
 			</div>
@@ -544,8 +497,8 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 		<div class="span11 pull-right">
 			<!-- Button to trigger modal -->
 <div class="btn-group pull-right">
-<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
-<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
+<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit reviewed test</a>
+<a href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn">Return to tests</a>
 </div>
 
  
@@ -556,12 +509,12 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
     <h3 id="myModalLabel">Confirmation</h3>
   </div>
   <div class="modal-body">
-    <p>Are you sure you want to submit your test?</p>
+    <p>Are you sure you want to submit your reviewed test?</p>
     <p><span class="label label-important">Important</span> This Action is irreversible!</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a class="btn btn-primary" href="@routes.StudentTestController.submitTest(usertest.test.id,lesson.acronym,module.acronym)">Confirm</a>
+    <a class="btn btn-primary" href="#">Confirm</a>
   </div>
 </div>
 		</div>

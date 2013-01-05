@@ -118,6 +118,8 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 //				question.openanswer.refresh();
 //			
 //		}
+		//REFRESH
+		usertest.user.refresh();
 		
 		return ok(views.html.professor.questionanalysis.render(module,lesson,usertest,group_aux));
 	}

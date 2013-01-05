@@ -75,7 +75,7 @@ models.module.Module,lesson: models.module.Lesson, test:models.test.Test) @main(
 										<td>@usertest.reputationAsAstudent</td>
 										<td>
 										@if(!usertest.reviewd && usertest.submitted){
-										<a href="@routes.ProfessorTestController.gradetest(module.acronym,lesson.acronym,test.id,usertest.id,1)" class="btn btn-small btn-success ">Review</a>
+										<a href="@routes.ProfessorTestController.gradetest(module.acronym,lesson.acronym,usertest.id,1)" class="btn btn-small btn-success ">Review</a>
 										}
 										@if(usertest.reviewd){
 										<a href="#" class="btn btn-small btn-inverse disabled">Reviewed</a>

@@ -63,7 +63,7 @@ POST /module/:module/editmoduledcontent		controllers.ProfessorModuleController.e
 POST /module/:module/addmoduledcontent		controllers.ProfessorModuleController.addmoduledcontent(module: String)
 GET /module/:module/deletemodulecontent		controllers.ProfessorModuleController.deletemodulecontent(module: String, content: Long)
 GET /modules/:module/:lesson/test:test				controllers.ProfessorTestController.test(module: String, lesson:String, test: Long)
-GET	/modules/:module/:lesson/test:test/:question	controllers.ProfessorTestController.gradetest(module: String, lesson: String, test:Long, usertest:Long, question:Long)
+GET	/modules/:module/:lesson/test:usertest/grade:question	controllers.ProfessorTestController.gradetest(module: String, lesson: String, usertest:Long, question:Long)
 		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

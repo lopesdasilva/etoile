@@ -35,18 +35,18 @@ public static Result test(String module_acronym, String lesson_acronym, Long tes
 	}
 
 
-public static Result gradetest(String module_acronym, String lesson_acronym, Long test_id,Long usertest_id, Long question_number){
+public static Result gradetest(String module_acronym, String lesson_acronym,Long usertest_id, Long question_number){
 	
 	Module module = Module.findByAcronym(module_acronym);
 	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 	User user = User.find.byId(session("email"));
 	if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-		Test test=Test.find.byId(test_id);
+		
 		UserTest usertest=UserTest.find.byId(usertest_id);
 		QuestionGroup questionGroup=QuestionGroup.find.byId(question_number);
 		
 		
-		return ok(views.html.professor.questionanalysis.render(module,lesson,test,usertest,questionGroup));
+		return ok(views.html.professor.questionanalysis.render(module,lesson,usertest,questionGroup));
 	}
 	
 	

@@ -59,6 +59,7 @@ GET		/modules						controllers.Application.modules()
 GET  	/modules/:module					controllers.Application.module(module: String)
 GET	/modules/:module/signup				controllers.StudentController.signupmodule(module: String)
 GET    /:continent          controllers.Application.continent(continent: String)
+GET  	/modules/:module/lessons/:lesson					controllers.Application.lesson(module: String, lesson: String)
 
 #Professor Module
 GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)
@@ -71,7 +72,11 @@ POST /module/:module/addmoduledcontent		controllers.ProfessorModuleController.ad
 GET /module/:module/deletemodulecontent		controllers.ProfessorModuleController.deletemodulecontent(module: String, content: Long)
 GET /modules/:module/:lesson/test:test				controllers.ProfessorTestController.test(module: String, lesson:String, test: Long)
 GET	/modules/:module/:lesson/test:usertest/grade:question	controllers.ProfessorTestController.gradetest(module: String, lesson: String, usertest:Long, question:Long)
-		
+
+#Professor Lesson
+POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)
+POST /modules/:module/lesson/:lesson/addlessoncontent		controllers.ProfessorLessonController.addlessoncontent(module: String, lesson: String)		
+POST /modules/:module/lesson/:lesson/editlesson			controllers.ProfessorLessonController.editlesson(module: String, lesson: String)		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)
 

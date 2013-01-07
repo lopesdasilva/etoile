@@ -51,8 +51,9 @@ models.module.Lesson, module: models.module.Module) @import helper._
 			<div class="page-header">
 				<h2>
 					@lesson.name <small> <span class="btn-group"> <a
-							class="btn btn-mini btn-warning" href="#" data-toggle="modal"
-							role="button">edit</a> <a class="btn btn-mini btn-danger"
+							class="btn btn-mini btn-warning" href="#MyModalEditLesson" data-toggle="modal"
+							role="button">edit</a>
+							 <a class="btn btn-mini btn-danger"
 							href="#" data-toggle="modal" role="button">delete</a>
 
 					</span>
@@ -94,26 +95,158 @@ models.module.Lesson, module: models.module.Module) @import helper._
 							</div>
 							</br>
 							}
-							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#addContent" type="button">Add news</a>
+							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewAlert" type="button">Add news</a>
 						</div>
+							
+							<!-- Modal -->
+					<div id="myModalNewAlert" class="modal hide fade" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">@lesson.name new alert</h3>
+							
+						</div>
+						<div class="modal-body">
+							
+							@helper.form(routes.ProfessorLessonController.addlessonalert(module.acronym, lesson.acronym),'class->"form-horizontal"){
+								
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Title</label>
+											<div class="controls">
+												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<p class="help-block">Title</p>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Textarea -->
+											<label class="control-label">Text</label>
+											<div class="controls">
+												<div class="textarea">
+													<textarea name="text" type="" class=""
+														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Image url</label>
+											<div class="controls">
+												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">New Alert's image</p>
+											</div>
+										</div>
+
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+
+								}
+							
+						</div>
+					</div>
+						
 						<div class="tab-pane" id="resources">
 							@for(mc <- lesson.lessoncontents) {
 							<div class="row-fluid">
 								<div class="span2">
-									<img
-										src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA"
-										height="50" width="50" />
+									<img src="@mc.lessonContentImageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
+									<h4>@mc.name</h4>
 									<p>@mc.text</p>
 									<p>
 										<a href="@mc.url" target="_blank">@mc.name</a>
 									</p>
 								</div>
 							</div>
+							</br>
 							}
-							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#" type="button">Add resource</a>
-		
+							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewResource" type="button">Add resource</a>
+							
+							<!-- Modal -->
+					<div id="myModalNewResource" class="modal hide fade" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">@lesson.name new resource</h3>
+						</div>
+						<div class="modal-body">
+							
+							@helper.form(routes.ProfessorLessonController.addlessoncontent(module.acronym, lesson.acronym),'class->"form-horizontal"){
+								
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Title</label>
+											<div class="controls">
+												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<p class="help-block">Title</p>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Textarea -->
+											<label class="control-label">Text</label>
+											<div class="controls">
+												<div class="textarea">
+													<textarea name="text" type="" class=""
+														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Image url</label>
+											<div class="controls">
+												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">New Alert item's image</p>
+											</div>
+										</div>
+										
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">URL</label>
+											<div class="controls">
+												<input name="url" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">New Alert item's url</p>
+											</div>
+										</div>
+
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+
+								}
+							
+						</div>
+					</div>
+							
+							
 						</div>
 						<div class="tab-pane" id="tests">
 							<table class="table table-striped" style="background: #DDDDDD;">
@@ -144,6 +277,76 @@ models.module.Lesson, module: models.module.Module) @import helper._
 								</tbody>
 							</table>
 						</div>
+						
+						<div id="MyModalEditLesson" class="modal hide fade" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">@lesson.name new resource</h3>
+						</div>
+						<div class="modal-body">
+							
+							@helper.form(routes.ProfessorLessonController.editlesson(module.acronym, lesson.acronym),'class->"form-horizontal"){
+								
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Title</label>
+											<div class="controls">
+												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<p class="help-block">Title</p>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Textarea -->
+											<label class="control-label">Text</label>
+											<div class="controls">
+												<div class="textarea">
+													<textarea name="text" type="" class=""
+														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Image url</label>
+											<div class="controls">
+												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">New Alert item's image</p>
+											</div>
+										</div>
+										
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">URL</label>
+											<div class="controls">
+												<input name="url" type="text" placeholder="" class="input-xlarge"
+													>
+												<p class="help-block">New Alert item's url</p>
+											</div>
+										</div>
+
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+
+								}
+							
+						</div>
+					</div>
+						
 						<div class="tab-pane active" id="suggested">
 							<div class="row-fluid">
 								

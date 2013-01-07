@@ -60,6 +60,7 @@ public class ProfessorModuleController extends Controller {
 		
 		public String description;
 	}
+
 	
 	public static Result editmoduletitle(String module_acronym){
 		
@@ -194,5 +195,9 @@ public class ProfessorModuleController extends Controller {
 
 		return redirect(routes.Application.module(module.acronym));
 	}
+	
+	//LESSON
+	
+	
 	
 }

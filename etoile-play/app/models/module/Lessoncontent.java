@@ -26,7 +26,7 @@ public class Lessoncontent extends Model{
     @Formats.NonEmpty
 	public String text;
 
-	@ManyToMany(mappedBy="lessonscontents")
+	@ManyToOne
 	public Lesson lesson;
 	
 	@Constraints.Required

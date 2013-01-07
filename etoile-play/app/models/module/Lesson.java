@@ -50,7 +50,7 @@ public class Lesson extends Model{
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Test> tests;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany(cascade = {CascadeType.ALL})

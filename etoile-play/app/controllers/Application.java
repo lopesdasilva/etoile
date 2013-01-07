@@ -10,6 +10,7 @@ import controllers.secured.SecuredProfessor;
 import models.*;
 import models.continent.Continent;
 import models.curriculum.Category;
+import models.module.Lesson;
 import models.module.Module;
 import play.data.Form;
 import play.mvc.*;
@@ -154,6 +155,25 @@ public static Result professorprofile(String professor_acronym) {
 		
 		return ok(views.html.statics.module.render(categories,Continent.getAllContinents(),module));
 	}
+	
+	public static Result lesson(String module_acronym, String lesson_acronym){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		List<Category> categories = Category.getAllCategories();
+		
+		if(session("email")!=null){
+			if(Secured.isStudent(session("email"))){
+				return StudentController.module(module_acronym);
+				}
+			if (SecuredProfessor.isProfessor(session("email"))){
+				return ProfessorController.lesson(lesson_acronym, module_acronym);
+			}
+		}
+	
+		System.out.println("Vou para o module.");
+		return ok(views.html.statics.module.render(categories,Continent.getAllContinents(),module));
+	}
+
 
 
 

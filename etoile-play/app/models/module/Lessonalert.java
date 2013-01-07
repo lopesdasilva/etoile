@@ -28,11 +28,7 @@ public class Lessonalert extends Model{
 
 	@ManyToOne
 	public Lesson lesson;
-	
-	@Constraints.Required
-    @Formats.NonEmpty
-	public String url;
-	
+
 	@Constraints.Required
     @Formats.NonEmpty
 	public String imageURL;

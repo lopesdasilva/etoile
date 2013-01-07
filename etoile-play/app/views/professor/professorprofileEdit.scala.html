@@ -1,0 +1,366 @@
+@(professor: models.Professor) @main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container">
+
+
+
+	<div class="page-header">
+		<h2>
+			@professor <small><a href="#editProfileModal"
+				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
+			<br> <small>Enhanced Technology for Open Intelligent
+				Learning Environments</small>
+		</h2>
+
+		<div id="editProfileModal" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+			@helper.form(routes.ProfessorProfileController.editprofile(),'class->"form-horizontal"){
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h3>Edit profile</h3>
+			</div>
+			<div class="modal-body">
+				<fieldset>
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">First Name</label>
+						<div class="controls">
+							<input type="text" name="firstname" placeholder="First Name"
+								class="input-xlarge" value="@professor.firstname">
+							<p class="help-block">Please insert your first name</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Last Name</label>
+						<div class="controls">
+							<input type="text" name="lastname" placeholder="Last Name"
+								class="input-xlarge" value="@professor.lastname">
+							<p class="help-block">Please insert your last name</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Degree</label>
+						<div class="controls">
+							<input type="text" name="degree" placeholder="Degree"
+								class="input-xlarge" value="@professor.degree">
+							<p class="help-block">Please insert your degree</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Profile Image
+							url</label>
+						<div class="controls">
+							<input type="text" name="imageURL" placeholder="Image url"
+								class="input-xlarge" value="@professor.imageURL">
+							<p class="help-block">Please insert the url to your picture</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Textarea -->
+						<label class="control-label">Short Description</label>
+						<div class="controls">
+							<div class="textarea">
+								<textarea type="" name="shortdescription" class=""
+									style="margin: 0px; width: 269px; height: 200px;">@professor.shortdescription</textarea>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<a class="btn" data-dismiss="modal">Close</a>
+				<button class="btn btn-success">Save changes</button>
+			</div>
+			}
+
+
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="span3">
+			<img src="@professor.imageURL" />
+		</div>
+		<div class="span8">
+			<a href="#editContactModal" data-toggle="modal" role="button"
+				class="btn btn-warning btn-mini">Edit</a>
+			<p>@professor.contact</p>
+			<h4>Modules on étoile</h4>
+			@for(module <- professor.modules) { <a
+				href="@routes.Application.module(module.acronym)"><p>@module.name</p></a>
+			}
+
+			<div id="editContactModal" class="modal hide fade" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+				@helper.form(routes.ProfessorProfileController.editprofilecontact(),'class->"form-horizontal"){
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h3>Edit profile</h3>
+				</div>
+				<div class="modal-body">
+					<fieldset>
+
+						<div class="control-group">
+
+							<!-- Textarea -->
+							<label class="control-label">Contact Address</label>
+							<div class="controls">
+								<div class="textarea">
+									<textarea name="address" type="" class=""
+										style="margin: 0px; width: 269px; height: 200px;">@professor.contact</textarea>
+								</div>
+							</div>
+						</div>
+
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<a class="btn" data-dismiss="modal">Close</a>
+					<button class="btn btn-success">Save changes</button>
+				</div>
+				}
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	@for(content <- professor.contents) { <br> @if(content.id%2!=0){
+	<div class="row">
+		<div class="span8 justify-text">
+			<p>@content.description</p>
+			<span class="btn-group"> <a class="btn btn-mini btn-warning"
+				href="#editContent@content.id" data-toggle="modal" role="button">edit</a>
+				<a class="btn btn-mini btn-danger" href="#deleteContent@content.id"
+				data-toggle="modal" role="button">delete</a>
+
+			</span>
+		</div>
+		<div class="span3">
+			<img src="@content.imageURL" />
+		</div>
+	</div>
+	} @if(content.id%2==0){
+	<div class="row">
+
+		<div class="span3">
+			<img src="@content.imageURL" />
+		</div>
+		<div class="span8 justified-text">
+			<p>@content.description</p>
+			<span class="btn-group pull-right"> <a
+				class="btn btn-mini btn-warning" href="#editContent@content.id"
+				data-toggle="modal" role="button">edit</a> <a
+				class="btn btn-mini btn-danger" href="#deleteContent@content.id"
+				data-toggle="modal" role="button">delete</a>
+
+			</span>
+
+
+
+
+		</div>
+	</div>
+	}
+	<hr>
+	<div id="editContent@content.id" class="modal hide fade" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3>Edit @content.title</h3>
+		</div>
+
+
+		@helper.form(routes.ProfessorProfileController.editprofilecontent(content.id),'class->"form-horizontal"){
+		<p>
+		<fieldset>
+
+			<div class="control-group">
+
+				<!-- Text input-->
+				<label class="control-label" for="input01">Image url</label>
+				<div class="controls">
+					<input name="imageURL" type="text" placeholder="Image url"
+						class="input-xlarge" value="@content.imageURL">
+					<p class="help-block">Edit image url</p>
+				</div>
+			</div>
+
+			<div class="control-group">
+
+				<!-- Textarea -->
+				<label class="control-label">Description</label>
+				<div class="controls">
+					<div class="textarea">
+						<textarea name="description" type="" class=""
+							style="margin: 0px; height: 109px; width: 269px;">@content.description</textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label"></label>
+
+				<!-- Button -->
+				<div class="controls">
+					<button class="btn btn-success">Save</button>
+				</div>
+			</div>
+
+		</fieldset>
+		</p>
+		}
+
+
+	</div>
+	<div id="deleteContent@content.id" class="modal hide fade"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3>Confirm Delete</h3>
+		</div>
+		<div class="modal-body">
+			<p>Are you sure you want to delete this item?</p>
+			<p>
+				<span class="label label-important">Important</span> This Action is
+				irreversible!
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<a class="btn btn-danger"
+				href="@routes.ProfessorProfileController.deleteprofilecontent(content.id)">Delete</a>
+		</div>
+
+
+	</div>
+	}
+
+	<div class="row">
+		<br>
+		<p>
+			<a class="btn btn-large btn-block btn-success btn-mini"
+				data-toggle="modal" href="#addContent" type="button">Add content</a>
+		</p>
+
+		<div id="addContent" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h3>Add new content</h3>
+			</div>
+
+
+			@helper.form(routes.ProfessorProfileController.addprofilecontent(),'class->"form-horizontal"){
+			<p>
+			<fieldset>
+
+				<div class="control-group">
+
+					<!-- Text input-->
+					<label class="control-label" for="input01">Title</label>
+					<div class="controls">
+						<input name="imageURL" required="required" type="text"
+							placeholder="Content image url" class="input-xlarge">
+						<p class="help-block">Insert image url</p>
+					</div>
+				</div>
+
+				<div class="control-group">
+
+					<!-- Textarea -->
+					<label class="control-label">Description</label>
+					<div class="controls">
+						<div class="textarea">
+							<textarea name="description" type="" class=""
+								style="margin: 0px; height: 109px; width: 269px;"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label"></label>
+
+					<!-- Button -->
+					<div class="controls">
+						<button class="btn btn-success">Add content</button>
+					</div>
+				</div>
+
+			</fieldset>
+			</p>
+			}
+
+
+		</div>
+	</div>
+
+</div>
+
+}

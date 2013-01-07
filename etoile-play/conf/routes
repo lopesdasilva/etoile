@@ -14,6 +14,13 @@ GET     /logout                             controllers.Application.logout()
 GET		/register							controllers.Register.register2()
 POST	/register							controllers.Register.register()
 
+#User
+GET		/myprofile							controllers.ProfessorController.myprofile()
+POST	/myprofile/addprofilecontent		controllers.ProfessorProfileController.addprofilecontent()
+GET		/myprofile/deleteprofilecontent		controllers.ProfessorProfileController.deleteprofilecontent(content: Long)
+POST	/myprofile/editprofilecontent		controllers.ProfessorProfileController.editprofilecontent(content: Long)
+POST	/myprofile/editprofilecontact		controllers.ProfessorProfileController.editprofilecontact()
+POST	/myprofile/editprofil				controllers.ProfessorProfileController.editprofile()
 
 
 #Static pages

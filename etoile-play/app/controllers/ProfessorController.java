@@ -71,6 +71,14 @@ public class ProfessorController extends Controller {
 				module));
 	}
 
+	public static Result myprofile() {
+		if(session("email")!=null && SecuredProfessor.isProfessor(session("email"))) {
+			User user = User.find.byId(session("email"));
+			return ok(views.html.professor.professorprofileEdit.render(user.professorProfile));		
+			}
+	
+		return Application.index();
+	}
 	
 	
 }

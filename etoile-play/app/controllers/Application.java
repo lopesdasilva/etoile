@@ -57,17 +57,20 @@ public class Application extends Controller {
 	
 	public static Result curriculum() {
 		
+		
 		return ok(views.html.statics.curriculum.render(
 				Category.getAllCategories()
 				));
 	}
 	
 public static Result professorprofile(String professor_acronym) {
+	
 		Professor professor = Professor.findByAcronym(professor_acronym);
 	
 		
 		return ok(views.html.statics.professorprofile.render(professor));
 	}
+
 
 	public static Result digitalcampus() {
 		if(session("email")!=null){

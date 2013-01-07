@@ -45,6 +45,22 @@ public class ProfessorLessonController extends Controller {
 		
 	}
 	
+	public static class LessonDescription_Form {
+		
+		public String name;
+		
+		public String acronym;
+		
+		public String shortdescription;
+		
+		public String description;
+		
+		public String imageURL;
+		
+		public String videoURL;
+		
+	}
+	
 	public static Result addlessonalert(String module_acronym, String lesson_acronym){
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -102,14 +118,19 @@ public class ProfessorLessonController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(session("email"));
-		
+		Form<LessonDescription_Form> form = form(LessonDescription_Form.class).bindFromRequest();
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			
+			lesson.acronym = form.get().acronym;
+			lesson.description = form.get().description;
+			lesson.imageURL = form.get().imageURL;
+			lesson.name = form.get().name;
+			lesson.shortDescription = form.get().shortdescription;
+			lesson.save();
 		}
 		
 		
-		return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
+		return redirect(routes.Application.lesson(module_acronym,lesson.acronym));
 	}
 	
 	

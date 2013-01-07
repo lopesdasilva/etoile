@@ -93,17 +93,17 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 							@for(mc <- lesson.lessoncontents) {
 							<div class="row-fluid">
 								<div class="span2">
-									<img
-										src="http://t1.gstatic.com/images?q=tbn:ANd9GcT4WGTzj_cToz8WU04RHnC8XnDRR4bxJgLFHkQuXxGkYm8FeWmHKNi2PA"
-										height="50" width="50" />
+									<img src="@mc.lessonContentImageURL" height="100" width="100" />
 								</div>
 								<div class="span9">
+									<h4>@mc.name</h4>
 									<p>@mc.text</p>
 									<p>
 										<a href="@mc.url" target="_blank">@mc.name</a>
 									</p>
 								</div>
 							</div>
+							</br>
 							}
 						</div>
 						<div class="tab-pane" id="tests">

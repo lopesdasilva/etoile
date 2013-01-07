@@ -83,6 +83,8 @@ models.module.Lesson, module: models.module.Module) @import helper._
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="news">
+						<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewAlert" type="button">Add news</a></br>
+						
 							@for(alert <- lesson.lessonalerts){
 							<div class="row-fluid">
 								<div class="span2">
@@ -159,6 +161,8 @@ models.module.Lesson, module: models.module.Module) @import helper._
 					</div>
 						
 						<div class="tab-pane" id="resources">
+						<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewResource" type="button">Add resource</a></br>
+						
 							@for(mc <- lesson.lessoncontents) {
 							<div class="row-fluid">
 								<div class="span2">
@@ -291,21 +295,43 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										<div class="control-group">
 
 											<!-- Text input-->
-											<label class="control-label" for="input01">Title</label>
+											<label class="control-label" for="input01">Name</label>
 											<div class="controls">
-												<input name="name" type="text" placeholder="" class="input-xlarge">
-												<p class="help-block">Title</p>
+												<textarea name="name" type="text" placeholder="" class="input-xlarge">@lesson.name</textarea>
+												<p class="help-block">Lesson Name</p>
+											</div>
+										</div>
+										
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Acronym</label>
+											<div class="controls">
+												<textarea name="acronym" type="text" placeholder="" class="input-xlarge">@lesson.acronym</textarea>
+												<p class="help-block">Lesson Acronym</p>
 											</div>
 										</div>
 
 										<div class="control-group">
 
 											<!-- Textarea -->
-											<label class="control-label">Text</label>
+											<label class="control-label">Short Description</label>
 											<div class="controls">
 												<div class="textarea">
-													<textarea name="text" type="" class=""
-														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+													<textarea name="shortdescription" type="" class=""
+														style="margin: 0px; height: 145px; width: 269px;">@lesson.shortDescription</textarea>
+												</div>
+											</div>
+										</div>
+										
+										<div class="control-group">
+
+											<!-- Textarea -->
+											<label class="control-label">Description</label>
+											<div class="controls">
+												<div class="textarea">
+													<textarea name="description" type="" class=""
+														style="margin: 0px; height: 250px; width: 269px;">@lesson.description</textarea>
 												</div>
 											</div>
 										</div>
@@ -315,22 +341,11 @@ models.module.Lesson, module: models.module.Module) @import helper._
 											<!-- Text input-->
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
-												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
-													>
-												<p class="help-block">New Alert item's image</p>
+												<textarea name="imageURL" type="text" style="margin: 0px; height: 145px; width: 269px; placeholder="" class="input-xlarge">@lesson.imageURL</textarea>
+												<p class="help-block">Lesson image</p>
 											</div>
 										</div>
 										
-										<div class="control-group">
-
-											<!-- Text input-->
-											<label class="control-label" for="input01">URL</label>
-											<div class="controls">
-												<input name="url" type="text" placeholder="" class="input-xlarge"
-													>
-												<p class="help-block">New Alert item's url</p>
-											</div>
-										</div>
 
 									<div class="control-group">
 										<label class="control-label"></label>

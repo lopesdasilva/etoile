@@ -53,6 +53,9 @@ public class Lesson extends Model{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Lessoncontent> lessoncontents;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Lessonalert> lessonalerts;
+	
 	@OneToMany
 	public List<Question> questions;
 	

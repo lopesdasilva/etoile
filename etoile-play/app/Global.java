@@ -19,6 +19,7 @@ import models.curriculum.Curriculumtopic;
 import models.forum.Topic;
 import models.module.Bibliography;
 import models.module.Content;
+import models.module.Lessonalert;
 import models.module.Module;
 import models.module.Lesson;
 import models.module.Lessoncontent;
@@ -389,6 +390,7 @@ public class Global extends GlobalSettings {
 			lesson_demo_one.save();
 			lesson_demo_one.save();
 			
+			
 			Lesson lesson_one = new Lesson();
 			lesson_one.name = "Multiplication";
 			lesson_one.number=1;
@@ -399,6 +401,20 @@ public class Global extends GlobalSettings {
 			lesson_one.lessoncontents.add(mcontent);
 			mcontent.save();
 			lesson_one.save();
+			
+			Lessonalert alert_one = new Lessonalert();
+			alert_one.name = "New Test!";
+			alert_one.text = "The Multiplication test is now available!";
+			alert_one.imageURL = "https://www.clevernotes.ie/wp-content/uploads/2012/11/106395737.jpg";
+			alert_one.lesson = lesson_one;
+			alert_one.save();
+			
+			Lessonalert alert_two = new Lessonalert();
+			alert_two.name = "New Resources available!";
+			alert_two.text = "Please read the new resources! ";
+			alert_two.imageURL = "http://us.123rf.com/400wm/400/400/zybr/zybr1204/zybr120400005/13195450-vector-illustration-pile-of-books-isolated-on-white.jpg";
+			alert_two.lesson = lesson_one;
+			alert_two.save();
 			
 			createSecondTest(test_two, lesson_one);
 			

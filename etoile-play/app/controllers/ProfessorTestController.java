@@ -145,7 +145,6 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
 		User user = User.find.byId(session("email"));
 		
-		Answer answer = Answer.findByUserAndQuestion(user.email, question_id);
 		UserTest usertest = UserTest.find.byId(usertest_id);
 		Question question = Question.find.byId(question_id);
 		
@@ -164,7 +163,6 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			evaluation.question = question;
 			evaluation.score = cotacao;
 			evaluation.userTest = usertest;
-			evaluation.answer = answer;
 			evaluation.save();
 		}else{
 			System.out.println(usertest.reputationAsAstudent +"-"+ evaluation.score + "+" + "(" +form.get().evaluation+ "/100)*" + question.weight + "=" );
@@ -187,9 +185,9 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 //		return null;
 	}
 	
-	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id){
-		User user = User.find.byId(session("email"));
-		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id, Long usertest_id){
+		System.out.println(test_id);
+		UserTest usertest = UserTest.find.byId(usertest_id);
 		usertest.reviewd = true;
 		usertest.save();
 		System.out.println("Review Test submitted with: " + usertest.reputationAsAstudent);

@@ -522,7 +522,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 		<div class="span11 pull-right">
 			<!-- Button to trigger modal -->
 <div class="btn-group pull-right">
-<a href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn btn-primary" >Submit reviewed test</a>
+<a href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id,usertest.id)" role="button" class="btn btn-primary" >Submit reviewed test</a>
 <a href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn">Return to tests</a>
 </div>
 

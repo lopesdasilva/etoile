@@ -8,19 +8,31 @@ import models.manytomany.UserTest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
+import models.test.Evaluation;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
+import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import controllers.ProfessorLessonController.LessonDescription_Form;
 import controllers.secured.SecuredProfessor;
 
 
 
 @Security.Authenticated(SecuredProfessor.class)
 public class ProfessorTestController extends Controller {
+	
+	
+	public static class evaluation_Form {
+		
+		public int evaluation;
+		
+		
+	}
 	
 public static Result test(String module_acronym, String lesson_acronym, Long test_id){
 		
@@ -128,5 +140,60 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 	return redirect(routes.Application.module(module.acronym));
 }
 
+
+	public static Result markanswer(String module_acronym, String lesson_acronym,Long usertest_id, Long question_number, Long question_id){
+		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
+		User user = User.find.byId(session("email"));
+		
+		Answer answer = Answer.findByUserAndQuestion(user.email, question_id);
+		UserTest usertest = UserTest.find.byId(usertest_id);
+		Question question = Question.find.byId(question_id);
+		
+		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
+		if(evaluation==null){
+			
+			double percentagem = 100.0;
+			percentagem = (form.get().evaluation/percentagem);
+			double peso = question.weight;
+			double cotacao = peso*percentagem;
+			
+			usertest.reputationAsAstudent = usertest.reputationAsAstudent + cotacao;
+			usertest.save();
+			
+			evaluation = new QuestionEvaluation();
+			evaluation.question = question;
+			evaluation.score = cotacao;
+			evaluation.userTest = usertest;
+			evaluation.answer = answer;
+			evaluation.save();
+		}else{
+			System.out.println(usertest.reputationAsAstudent +"-"+ evaluation.score + "+" + "(" +form.get().evaluation+ "/100)*" + question.weight + "=" );
+			
+			double percentagem = 100.0;
+			percentagem = (form.get().evaluation/percentagem);
+			double peso = question.weight;
+			double cotacao = peso*percentagem;
+			System.out.println("COTACAO: " + cotacao);
+
+			usertest.reputationAsAstudent = usertest.reputationAsAstudent - evaluation.score + cotacao;
+			
+			usertest.save();
+			
+			evaluation.score = cotacao ;
+			evaluation.save();
+		}
+		
+		return gradetest(module_acronym, lesson_acronym, usertest_id, question_number);
+//		return null;
+	}
+	
+	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id){
+		User user = User.find.byId(session("email"));
+		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+		usertest.reviewd = true;
+		usertest.save();
+		System.out.println("Review Test submitted with: " + usertest.reputationAsAstudent);
+		return test(module_acronym, lesson_acronym, test_id);
+	}
 
 }

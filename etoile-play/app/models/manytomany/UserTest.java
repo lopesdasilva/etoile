@@ -23,7 +23,7 @@ public class UserTest extends Model{
 	public Long id;
 
 	@Constraints.Required
-	public int reputationAsAstudent;
+	public double reputationAsAstudent;
 	
 	@Constraints.Required
 	public int reputationAsAMarker;

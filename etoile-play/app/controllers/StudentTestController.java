@@ -164,6 +164,7 @@ public class StudentTestController extends Controller {
 					empty_answer.test = test;
 					empty_answer.user = user;
 					empty_answer.group = g;
+					empty_answer.openQuestion = q;
 					empty_answer.save();
 					test.answers.add(empty_answer);
 					test.save();
@@ -398,26 +399,27 @@ public class StudentTestController extends Controller {
 
 				}
 				
-				userTest.reviewd = true;
 				userTest.reputationAsAstudent = reputation;
 				userTest.inmodule = false;
 				userTest.save();
 				
+				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
 				QuestionEvaluation qe = new QuestionEvaluation();
 				if(bool){
 				qe.isCorrect=true;
 				qe.score = q.weight;
 				}else{
-					qe.score = q.weightToLose;
+					qe.score = -q.weightToLose;
 				}
 				
 				qe.userTest = userTest;
 				qe.question = q;
 				qe.save();
+				}
 			}
 		}
 		
-		userTest.reviewd = true;
+		userTest.reviewd = false;
 		userTest.reputationAsAstudent = reputation;
 		userTest.inmodule = false;
 		userTest.save();

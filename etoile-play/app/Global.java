@@ -53,7 +53,7 @@ public class Global extends GlobalSettings {
 			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
 			q.typeOfQuestion = 0;
 			q.number = 1;
-			q.weight = 0;
+			q.weight = 50;
 			q.weightToLose = 0;
 			q.save();
 			
@@ -85,8 +85,8 @@ public class Global extends GlobalSettings {
 			q_two.hypothesislist.add(hyp_two);
 			q_two.hypothesislist.add(hyp_three);
 			q_two.hypothesislist.add(hyp_four);
-			q_two.weight = 50;
-			q_two.weightToLose = 25;
+			q_two.weight = 25;
+			q_two.weightToLose = 10;
 			q_two.number = 2;
 			q_two.save();
 			
@@ -103,8 +103,8 @@ public class Global extends GlobalSettings {
 			q_three.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
 			q_three.typeOfQuestion = 2;
 			q_three.number = 1;
-			q_three.weight = 50;
-			q_three.weightToLose = 25;
+			q_three.weight = 25;
+			q_three.weightToLose = 10;
 			q_three.save();
 			
 			

@@ -72,6 +72,8 @@ POST /module/:module/addmoduledcontent		controllers.ProfessorModuleController.ad
 GET /module/:module/deletemodulecontent		controllers.ProfessorModuleController.deletemodulecontent(module: String, content: Long)
 GET /modules/:module/:lesson/test:test				controllers.ProfessorTestController.test(module: String, lesson:String, test: Long)
 GET	/modules/:module/:lesson/test:usertest/grade:question	controllers.ProfessorTestController.gradetest(module: String, lesson: String, usertest:Long, question:Long)
+POST /modules/:module/:lesson/test:usertest/grade:question/markanswer	controllers.ProfessorTestController.markanswer(module: String, lesson: String, usertest:Long, question:Long, question_id: Long)
+GET /modules/:module/:lesson/test:test/submitreviewedtest  controllers.ProfessorTestController.submitreviewedtest(module: String, lesson:String, test: Long)
 
 #Professor Lesson
 POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)

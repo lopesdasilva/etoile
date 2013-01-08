@@ -41,7 +41,7 @@ public class QuestionEvaluation extends Model {
 	public Long id;
 	
 	@Constraints.Required
-	public int score;
+	public double score;
 	
 	@Constraints.Required
 	public boolean isCorrect;
@@ -52,6 +52,8 @@ public class QuestionEvaluation extends Model {
 	@ManyToOne
 	public Question question;
 	
+	@OneToOne
+	public Answer answer;
 	
 	
 	public static Model.Finder<Long, QuestionEvaluation> find = new Model.Finder<Long, QuestionEvaluation>(

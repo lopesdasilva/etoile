@@ -1,5 +1,7 @@
 @(module: models.module.Module, lesson: models.module.Lesson,
-usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup) @main("etoile"){
+usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup) 
+@import helper._ 
+@main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -66,9 +68,12 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 		<div class="offset1">
 			@for(question <- group.questions) {
 			
+			
+			
 			<div class="row-fluid">
 			<div class="span6">
 					<h4>Question @question.number</h4>
+
 				</div>
 				<div class="span5">
 					<div class="btn-group pull-right">
@@ -95,7 +100,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 						<h3 id="myModalLabel">Top 5</h3>
 					</div>
 					<div class="modal-body">
-					@for(url<- question.getTopUrls(question.id)){
+					@for(url <- question.getTopUrls(question.id)){
 						<div class="well">
 						@if(url.isFeatured(url.id)){
 									<img class="pull-right"
@@ -351,13 +356,14 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 				<!-- GENERAL HELP Modal -->
 				
 			</div>
-			<div class="control-group">
-							<form>
-							<div class="controls">
+			<div>
+							
+							<div>
 
 			<div class="row-fluid">
 				<div class="span11">
 					<p>@question.question</p>
+
 					@if(question.imageURL!=null || question.videoURL!=null){
 					<div class="alert">
 						<strong data-toggle="collapse" data-target="#@question.id">Click
@@ -392,7 +398,11 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 
 				</div>
 			</div>
+
 			@if(question.typeOfQuestion==0){
+			
+			
+			
 			<div class="row-fluid">
 				<div class="span11">
 					
@@ -401,11 +411,26 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 							<h4>Student's answer</h4>
 							@question.openanswer.answer
 						</div>
-
 					
 				</div>
 			</div>
-			} @if(question.typeOfQuestion==1){
+
+
+												<div class="control-group">
+													@helper.form(routes.ProfessorTestController.markanswer(module.acronym, lesson.acronym, usertest.id, question.number, question.id)){
+
+													<div class="controls">
+														<h4>Your evaluation</h4> 
+														<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="evaluation" ></input><span class="add-on">%</span>
+														</div>
+														<div class="controls">
+														<button  type="submit" class="btn btn-info">Save Question Score</button>
+														</div>
+														}
+													
+												</div>					
+												
+						} @if(question.typeOfQuestion==1){
 			
 							
 			<div class="row-fluid ">
@@ -477,7 +502,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 			<hr>
 			
 		</div>
-		</form>
+	
 </div>
 </div>
 		<div class="row-fluid">
@@ -497,7 +522,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 		<div class="span11 pull-right">
 			<!-- Button to trigger modal -->
 <div class="btn-group pull-right">
-<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit reviewed test</a>
+<a href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn btn-primary" >Submit reviewed test</a>
 <a href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn">Return to tests</a>
 </div>
 

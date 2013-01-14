@@ -509,6 +509,31 @@ public class Global extends GlobalSettings {
 			bibliography.module=module_demo;
 			bibliography.save();
 			
+			bibliography = new Bibliography();
+			bibliography.title="Linked: The New Science of Networks, Albert-László Barabási. Perseus Publishing";
+			bibliography.link="http://en.wikipedia.org/wiki/Linked:_The_New_Science_of_Networks";
+			bibliography.description="Linked: The New Science of Networks is a popular science book written by the Hungarian physicist Albert-László Barabási and first published by the Perseus Books Group in 2002.Barabási has changed the way of thinking about real-world networks and largely contributed to making networks the revolutionary science of the 21st century. Linked is his first book that introduces the highly developing field of Network Science to the broad audience.";
+			bibliography.imageURL="http://www3.nd.edu/~networks/Linked/real-cover.jpg";
+			bibliography.module=module_four;
+			bibliography.save();
+			
+			bibliography = new Bibliography();
+			bibliography.title="Linked: The New Science of Networks, Albert-László Barabási. Perseus Publishing";
+			bibliography.link="http://en.wikipedia.org/wiki/Linked:_The_New_Science_of_Networks";
+			bibliography.description="Linked: The New Science of Networks is a popular science book written by the Hungarian physicist Albert-László Barabási and first published by the Perseus Books Group in 2002.Barabási has changed the way of thinking about real-world networks and largely contributed to making networks the revolutionary science of the 21st century. Linked is his first book that introduces the highly developing field of Network Science to the broad audience.";
+			bibliography.imageURL="http://www3.nd.edu/~networks/Linked/real-cover.jpg";
+			bibliography.module=module_demo;
+			bibliography.save();
+			
+			bibliography = new Bibliography();
+			bibliography.title="Networks – an Introduction, Mark Newman, Oxford University Press";
+			bibliography.link="http://...";
+			bibliography.description="...";
+			bibliography.imageURL="http://";
+			bibliography.module=module_four;
+			bibliography.save();
+			
+			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			
 			Content content;
@@ -516,7 +541,7 @@ public class Global extends GlobalSettings {
 			content = new Content();
 			content.module=module_four;
 			content.title="Textbook (Recommended)";
-			content.text="Linked – The New Science of Networks, Albert-László Barabási. Perseus Publishing /n Networks – an Introduction, Mark Newman, Oxford University Press";
+			content.text="Name of the recommended textbook";
 			content.save();
 			
 			content = new Content();
@@ -527,8 +552,14 @@ public class Global extends GlobalSettings {
 			
 			content = new Content();
 			content.module=module_demo;
+			content.title="Module description and objectives";
+			content.text="This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. ";
+			content.save();
+			
+			content = new Content();
+			content.module=module_demo;
 			content.title="About the Professor";
-			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
+			content.text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
 			content.save();
 			
 			content= new Content();

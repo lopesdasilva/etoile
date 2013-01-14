@@ -79,6 +79,13 @@ usertest: models.manytomany.UserTest, evaluations: List[models.test.question.Que
 						}
 					}
 					}
+					@if(question.typeOfQuestion == 0){
+					@for(evaluation <- evaluations){
+					@if(evaluation.question == question){
+						<button disabled="disabled" class="btn btn-info">(+@evaluation.score)</button></h4>
+					}
+					}
+					}
 					
 				</div>
 				<div class="span5">

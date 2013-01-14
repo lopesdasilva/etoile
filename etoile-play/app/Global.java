@@ -442,14 +442,18 @@ public class Global extends GlobalSettings {
 			module_demo.name = "Demo";
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
-			module_demo.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
+			module_demo.videoURL = "http://youtu.be/tvN1dp0qVcY";
 			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical coherence.";
 			module_demo.lessons.add(lesson_demo_one);
-			//module_demo.lessons.add(lesson_demo_two);
+			module_demo.lessons.add(lesson_one);
+			module_demo.lessons.add(lesson_two);
 			module_demo.save();
 			
-			lesson_demo_one.module = module_demo;
-			lesson_demo_one.save();
+			lesson_one.module = module_demo;
+			lesson_one.save();
+			
+			lesson_two.module = module_demo;
+			lesson_two.save();
 			
 			Module module = new Module();
 			module.name = "Mathematics";
@@ -457,12 +461,9 @@ public class Global extends GlobalSettings {
 			module.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
 			module.description = "This will be the Étoile Mathematics module. This module is empty for now. Would you like to propose a module on Mathematics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
-			module.lessons.add(lesson_one);
-			module.lessons.add(lesson_two);
+			//module.lessons.add(lesson_one);
+			//module.lessons.add(lesson_two);
 			module.save();
-			
-			lesson_one.module = module;
-			lesson_one.save();
 			 
 			Module module_two = new Module();
 			module_two.name = "Statistics";
@@ -470,9 +471,6 @@ public class Global extends GlobalSettings {
 			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of... This module is empty for now. Would you like to propose a module on Statistics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_two.save();
-			
-			lesson_two.module = module;
-			lesson_two.save();
 			
 			Module module_three = new Module();
 			module_three.name = "Social Science";
@@ -487,10 +485,11 @@ public class Global extends GlobalSettings {
 			module_four.acronym="netsci_01";
 			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
-			module_four.description = "Module presented during Spring 2012 at the Center for Complex Network Research, Northeastern University Physics Department, by Prof. Albert-László Barabási, assisted by Dr. Baruch Barzel, and for network visualizations by Prof. Mauro Martino";
+			module_four.description = "This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. ";
 			//module_four.lessons.add(lesson_one);
 			//module_four.lessons.add(lesson_two);
 			module_four.save();
+			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
 			Bibliography bibliography = new Bibliography();
@@ -514,23 +513,15 @@ public class Global extends GlobalSettings {
 			bibliography.link="http://en.wikipedia.org/wiki/Linked:_The_New_Science_of_Networks";
 			bibliography.description="Linked: The New Science of Networks is a popular science book written by the Hungarian physicist Albert-László Barabási and first published by the Perseus Books Group in 2002.Barabási has changed the way of thinking about real-world networks and largely contributed to making networks the revolutionary science of the 21st century. Linked is his first book that introduces the highly developing field of Network Science to the broad audience.";
 			bibliography.imageURL="http://www3.nd.edu/~networks/Linked/real-cover.jpg";
-			bibliography.module=module_four;
-			bibliography.save();
-			
-			bibliography = new Bibliography();
-			bibliography.title="Linked: The New Science of Networks, Albert-László Barabási. Perseus Publishing";
-			bibliography.link="http://en.wikipedia.org/wiki/Linked:_The_New_Science_of_Networks";
-			bibliography.description="Linked: The New Science of Networks is a popular science book written by the Hungarian physicist Albert-László Barabási and first published by the Perseus Books Group in 2002.Barabási has changed the way of thinking about real-world networks and largely contributed to making networks the revolutionary science of the 21st century. Linked is his first book that introduces the highly developing field of Network Science to the broad audience.";
-			bibliography.imageURL="http://www3.nd.edu/~networks/Linked/real-cover.jpg";
 			bibliography.module=module_demo;
 			bibliography.save();
 			
 			bibliography = new Bibliography();
-			bibliography.title="Networks – an Introduction, Mark Newman, Oxford University Press";
-			bibliography.link="http://...";
-			bibliography.description="...";
-			bibliography.imageURL="http://";
-			bibliography.module=module_four;
+			bibliography.title="Networks – an Introduction, Mark Newman, Oxford University Press, 2010.";
+			bibliography.link="http://www.oup.com/us/catalog/general/subject/Physics/?view=usa&ci=9780199206650#";
+			bibliography.description="Subjects covered include the measurement and structure of networks in many branches of science, methods for analyzing network data, including methods developed in physics, statistics, and sociology, the fundamentals of graph theory, computer algorithms, and spectral methods, mathematical models of networks, including random graph models and generative models, and theories of dynamical processes taking place on networks.";
+			bibliography.imageURL="http://www-personal.umich.edu/~mejn/networks-an-introduction/cover-s.jpg";
+			bibliography.module=module_demo;
 			bibliography.save();
 			
 			
@@ -539,15 +530,9 @@ public class Global extends GlobalSettings {
 			Content content;
 			
 			content = new Content();
-			content.module=module_four;
+			content.module=module_demo;
 			content.title="Textbook (Recommended)";
 			content.text="Name of the recommended textbook";
-			content.save();
-			
-			content = new Content();
-			content.module=module_four;
-			content.title="Module description and objectives";
-			content.text="The module is an interdisciplinary module, focused on the emerging science of complex networks and their applications. The material includes the mathematics of networks, their applications to biology, sociology, technology and other fields, and their use in the research of real complex systems in nature and in man made systems. The students will learn about the ongoing research in the field, and apply their knowledge in the analysis of real network systems, as the main objective of their final project.";
 			content.save();
 			
 			content = new Content();
@@ -556,11 +541,13 @@ public class Global extends GlobalSettings {
 			content.text="This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. ";
 			content.save();
 			
+			/* 
 			content = new Content();
 			content.module=module_demo;
 			content.title="About the Professor";
 			content.text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
 			content.save();
+			*/
 			
 			content= new Content();
 			content.module=module_demo;

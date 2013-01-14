@@ -671,6 +671,34 @@ public class Global extends GlobalSettings {
 			p.save();
 			
 			
+			Professor p2 = new Professor();
+			p2.acronym = "Rprof";
+			p2.contact = "ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
+					" Av. das Forças Armadas" +
+					"1649-026" +
+					"Lisboa Portugal";
+			p2.degree = "Professor";
+			p2.email = "rprof@prof.pt";
+			p2.firstname = "Demo";
+			p2.lastname = "Professor";
+			p2.imageURL = "http://www.vocesabia.net/wp-content/uploads/2012/10/professor2.jpg";
+			p2.shortdescription = "Professor Rprof Prof.";
+			p2.save();
+			
+			User rprof = new User();
+			rprof.account_type = 1;
+			rprof.country = "Portugal";
+			rprof.email = "rprof@prof.pt";
+			rprof.name = "Rprof";
+			rprof.password=sha1.parseSHA1Password("123");
+			rprof.professorProfile = p2;
+			rprof.save();
+			
+			p2.user = rprof;
+			p2.save();
+			p2.modules.add(module);
+			p2.save();
+					
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++
 
 

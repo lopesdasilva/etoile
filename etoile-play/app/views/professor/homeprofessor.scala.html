@@ -46,7 +46,32 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 <div class="container-fluid">
 	<div class="row-fluid">
 		@professormenu(user)
+		<div class="span9">
+		@for(module <- user.professorProfile.modules) {
+		<h3>@module.name</h3>
+		<ul class="thumbnails">
+					@for(lesson <- module.lessons) {
+					<li class="span4">
+						<div class="carousel-inner">
+							<div class="item" style="min-height: 150px; max-height: 150px">
+								<a
+									href="@routes.StudentController.lesson(lesson.acronym,module.acronym)">
+									<img src="@lesson.imageURL" alt="">
+									<div class="carousel-caption"
+										style="max-height: 30px; min-height: 30px">
+										<h4>@lesson.name</h4>
+
+									</div>
+								</a>
+							</div>
+						</div>
+					</li> }
+
+				</ul>
+		}
+		</div>
 		
 	</div>
+	
 </div>
 }

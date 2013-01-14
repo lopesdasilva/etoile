@@ -53,7 +53,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 					@lesson.name <small> <span class="btn-group"> <a
 							class="btn btn-mini btn-warning" href="#MyModalEditLesson" data-toggle="modal"
 							role="button">edit</a>
-							 <a class="btn btn-mini btn-danger"
+							 <a class="btn btn-mini btn-danger disabled"
 							href="#" data-toggle="modal" role="button">delete</a>
 
 					</span>
@@ -118,7 +118,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
 												<input name="name" type="text" placeholder="" class="input-xlarge">
-												<p class="help-block">Title</p>
+												<p class="help-block">Insert the news header</p>
 											</div>
 										</div>
 
@@ -271,16 +271,45 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										<td>
 										<span class="btn-group">
 										<a class="btn btn-small btn-success" href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,test.id)" data-toggle="modal" role="button">open</a>
-										<a class="btn btn-small btn-warning" href="#" data-toggle="modal" role="button">edit</a>
-										<a class="btn btn-small btn-danger" href="#" data-toggle="modal" role="button">delete</a>
+										<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal" >edit</a>
+										<a class="btn btn-small btn-danger disabled" href="#deleteTest@test.id" data-toggle="modal" role="button">delete</a>
+
+										
 
 										</span>
+										<div id="deleteTest@test.id" class="modal hide fade" tabindex="-1"
+													role="dialog" aria-labelledby="myModalLabel"
+													aria-hidden="true">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">×</button>
+														<h3>Confirm Delete</h3>
+													</div>
+													<div class="modal-body">
+														<p>Are you sure you want to delete this item?</p>
+														<blockquote>@test.name</blockquote>
+														<p>
+															<span class="label label-important">Important</span> This
+															Action is irreversible!
+														</p>
+													</div>
+													<div class="modal-footer">
+														<button class="btn" data-dismiss="modal"
+															aria-hidden="true">Close</button>
+														<a class="btn btn-danger"
+															href="@routes.ProfessorTestController.deletetest(test.id,module.acronym,lesson.acronym)">Delete</a>
+													</div>
+
+
+												</div>
 										</td>
 									</tr>
 									}
 								</tbody>
 							</table>
 						</div>
+						
+						
 						
 						<div id="MyModalEditLesson" class="modal hide fade" >
 						<div class="modal-header">

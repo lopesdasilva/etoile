@@ -194,4 +194,16 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		return test(module_acronym, lesson_acronym, test_id);
 	}
 
+	public static Result deletetest(Long test_id,String module_acronym, String lesson_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Test test= Test.find.byId(test_id);
+			test.delete();
+		}
+		//TODO: Criar ligacao pelo controlador do professor
+		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
+	}
 }

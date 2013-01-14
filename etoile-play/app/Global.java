@@ -50,7 +50,7 @@ public class Global extends GlobalSettings {
 			Question q = new Question();
 			q.question = " What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ?";
 			q.imageURL= "http://www.polymath-software.com/PolymathHelp/MatlabGraph.jpg";
-			q.videoURL= "http://www.youtube.com/v/AyPzM5WK8ys";
+			q.videoURL= "http://www.youtube.com/v/mvOkMYCygps";
 			q.typeOfQuestion = 0;
 			q.number = 1;
 			q.weight = 50;
@@ -374,10 +374,10 @@ public class Global extends GlobalSettings {
 			// LESSONS  +++++++++++++++++++++++++++++++++++++++++
 			
 			Lessoncontent mcontent = new Lessoncontent();
-			mcontent.name = "Content";
-			mcontent.text = "This is a new Content.";
-			mcontent.url = "http://www.benkler.org/Benkler_Wealth_Of_Networks.pdf";
-			mcontent.lessonContentImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			mcontent.name = "Multiplication table";
+			mcontent.text = "Multiplication values can be represented in a table.";
+			mcontent.url = "http://www.vaughns-1-pagers.com/computer/multiplication-tables.htm";
+			mcontent.lessonContentImageURL = "http://www.vaughns-1-pagers.com/computer/multiplication-tables/times-table-10x10.gif";
 			mcontent.save();
 			
 			Lesson lesson_demo_one = new Lesson();
@@ -442,7 +442,7 @@ public class Global extends GlobalSettings {
 			module_demo.name = "Demo";
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
-			module_demo.videoURL = "http://youtu.be/tvN1dp0qVcY";
+			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";
 			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical coherence.";
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
@@ -658,34 +658,6 @@ public class Global extends GlobalSettings {
 			p.save();
 			
 			
-			Professor p2 = new Professor();
-			p2.acronym = "Rprof";
-			p2.contact = "ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
-					" Av. das Forças Armadas" +
-					"1649-026" +
-					"Lisboa Portugal";
-			p2.degree = "Professor";
-			p2.email = "rprof@prof.pt";
-			p2.firstname = "Demo";
-			p2.lastname = "Professor";
-			p2.imageURL = "http://www.vocesabia.net/wp-content/uploads/2012/10/professor2.jpg";
-			p2.shortdescription = "Professor Rprof Prof.";
-			p2.save();
-			
-			User rprof = new User();
-			rprof.account_type = 1;
-			rprof.country = "Portugal";
-			rprof.email = "rprof@prof.pt";
-			rprof.name = "Rprof";
-			rprof.password=sha1.parseSHA1Password("123");
-			rprof.professorProfile = p2;
-			rprof.save();
-			
-			p2.user = rprof;
-			p2.save();
-			p2.modules.add(module);
-			p2.save();
-					
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++
 
 

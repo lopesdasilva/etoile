@@ -443,7 +443,7 @@ public class Global extends GlobalSettings {
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
-			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module is only for demonstration, with no pedagogical coherence.";
+			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical coherence.";
 			module_demo.lessons.add(lesson_demo_one);
 			//module_demo.lessons.add(lesson_demo_two);
 			module_demo.save();
@@ -452,11 +452,11 @@ public class Global extends GlobalSettings {
 			lesson_demo_one.save();
 			
 			Module module = new Module();
-			module.name = "Mathematics 101";
+			module.name = "Mathematics";
 			module.acronym="math101";
 			module.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module.videoURL = "http://www.youtube.com/v/AyPzM5WK8ys";
-			module.description = "Mathematics lesson presented at the Master and Doctoral Programme in Complexity Sciences - Lisbon University Institute and Faculty of Sciences at the University of Lisbon. Professor Diogo Pinheiro";
+			module.description = "This will be the Étoile Mathematics module. This module is empty for now. Would you like to propose a module on Mathematics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module.lessons.add(lesson_one);
 			module.lessons.add(lesson_two);
 			module.save();
@@ -465,10 +465,10 @@ public class Global extends GlobalSettings {
 			lesson_one.save();
 			 
 			Module module_two = new Module();
-			module_two.name = "Statistics 101";
+			module_two.name = "Statistics";
 			module_two.acronym="stats101";
 			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
-			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of ..";
+			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of... This module is empty for now. Would you like to propose a module on Statistics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_two.save();
 			
 			lesson_two.module = module;
@@ -478,7 +478,7 @@ public class Global extends GlobalSettings {
 			module_three.name = "Social Science";
 			module_three.acronym="socscience";
 			module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
-			module_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to ...";
+			module_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to... This module is empty for now. Would you like to propose a module on Social Science? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_three.save();
 			
 			
@@ -498,7 +498,7 @@ public class Global extends GlobalSettings {
 			bibliography.link="http://books.google.co.uk/books/about/Computer_Ethics_and_Professional_Respons.html?id=FOxqAjC8iHkC";
 			bibliography.description="This clear and accessible textbookand its associated website offer a state of the art introduction to the burgeoning field of computer ethics and professional responsibility. ";
 			bibliography.imageURL="http://bks5.books.google.co.uk/books?id=FOxqAjC8iHkC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71rwGQTfyj97JTxptwM-URC0Iy5eY0fJwpy3wsNs0pYpeltEtL334XnHw2ZigcJ8ylnypoG91BHhVYFSQoh5ID13NZ_eGEk4FfyLvZC3tb15cbuOIWj5PAFEte6MsjiB8-QaxZL";
-			bibliography.module=module;
+			bibliography.module=module_demo;
 			bibliography.save();
 			
 			bibliography = new Bibliography();
@@ -506,7 +506,7 @@ public class Global extends GlobalSettings {
 			bibliography.link="http://books.google.co.uk/books?id=wb3X3xNSntkC&dq=mathematics&hl=pt-PT&source=gbs_navlinks_s";
 			bibliography.description="This accessible and thought-provoking book considers what beginning teachers need to know about learning, teaching, assessment, curriculum and professional development, in the context of teaching mathematics to eleven to nineteen year olds. It is part of a new series of books that has as its starting point the fact that PGCE students are already subject specialists.";
 			bibliography.imageURL="http://bks9.books.google.co.uk/books?id=wb3X3xNSntkC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE70zfpHHuBmkjMmKgszdfIZYNSN2UKVkhMjtAbAGEqDsePekXhaSmjxwqM2g8PBtzvomBeclI1ovd3ofdXAm_iasy6k2YY8MGyQJEP9HLd-EfOL8XPQiDxSSukg_oN3yDg4ElZ7q";
-			bibliography.module=module;
+			bibliography.module=module_demo;
 			bibliography.save();
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
@@ -526,21 +526,21 @@ public class Global extends GlobalSettings {
 			content.save();
 			
 			content = new Content();
-			content.module=module_three;
+			content.module=module_demo;
 			content.title="About the Professor";
 			content.text="J. Alex Haldermanis an assistant professor of computer science and engineering at the University of Michigan. His research spans computer security and tech-centric public policy, including topics such as software security, data privacy, electronic voting, censorship resistance, and cybercrime, as well as technological aspects of intellectual property law and government regulation. He holds a Ph.D. from Princeton University. A noted expert on electronic voting security, Prof. Halderman helped demonstrate the first voting machine virus, participated in California's top-to-bottom electronic voting review, and exposed election security flaws in India, the world's largest democracy. He recently led a team from the University of Michigan that hacked into Washington D.C.'s Internet voting system. In his spare time, he reprogrammed a touch-screen voting machine to play Pac-Man ";
 			content.save();
 			
 			content= new Content();
-			content.module=module_three;
+			content.module=module_demo;
 			content.title="Module format";
-			content.text="The class will consist of lecture videos totaling about 2 hours a week. These will several enrichment and evaluation questions. There will also be optional reading and a final essay.";
+			content.text="The module will include 10 lessons. Each lesson will be associated to a different test. ";
 			content.save();
 			
 			content= new Content();
-			content.module=module;
+			content.module=module_demo;
 			content.title="Recommended Background";
-			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some college-level computer science background.";
+			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
 			
 			
@@ -614,7 +614,7 @@ public class Global extends GlobalSettings {
 			p.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
 			p.save();
 			
-			p.modules.add(module);
+			p.modules.add(module_demo);
 			p.save();
 			module.save();
 			
@@ -639,6 +639,9 @@ public class Global extends GlobalSettings {
 			p.user=prof;
 			p.save();
 			
+			
+			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 			Comment c1 = new Comment();
 			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";

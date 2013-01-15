@@ -8,6 +8,7 @@ import models.Professor;
 import models.curriculum.Category;
 import models.module.Lesson;
 import models.module.Module;
+import models.test.question.Question;
 
 import models.User;
 import play.mvc.Controller;
@@ -66,6 +67,13 @@ public class ProfessorController extends Controller {
 		user.professorProfile.refresh();
 		List<Category> categories = Category.getAllCategories();
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		
+		for(Question q: lesson.questions){
+			if(q.user!=null){
+				
+				q.user.refresh();
+			}
+		}
 		
 		return ok(views.html.professor.lesson.render(user, categories, lesson,
 				module));

@@ -50,10 +50,11 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 		
 		<div class="span9">
 		<div class="page-header">
+		
 			<h2>
 				@lesson.name
 			</h2>
-
+<a href="@routes.Application.module(module.acronym)" class="btn btn-primary btn-small">Return to the beginning of the module</a>
 		</div>
 		<!--/span-->
 		<div class="row-fluid">
@@ -113,7 +114,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 										<th>Test-ID</th>
 										<th>Test Name</th>
 										<th>Expected Duration</th>
-										<th>Grade</th>
+										<th>Evaluation</th>
 										<th>Question</th>
 										<th>      </th>
 									</tr>
@@ -164,13 +165,13 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 										 @if(usertest.test.id==test.id && !usertest.inmodule && !usertest.submitted ){
 										<td> - </td> 
 										<td><a href="#modal@test.id" class="btn btn-danger btn-small"
-											data-toggle="modal">Suggest Question&raquo;</a></td> 
+											data-toggle="modal">Suggest question&raquo;</a></td> 
 										<td><a class="btn btn-primary btn-small disabled">Solve test&raquo;</a></td>	
 														<!-- MODAL -->
 										<div id="modal@test.id" class="modal hide shown">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">X</button>
-												<h3 id="myModalLabel">New Question</h3>
+												<h3 id="myModalLabel">New question</h3>
 											</div>
 											<div class="modal-body">
 												<p>
@@ -178,11 +179,10 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 													@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
 
 													<div class="controls">
-														<p>In order to resolve the test you need to make a QUESTION suggestion.</p>
+														<p>In order to solve the test you firstly need to suggest a QUESTION:</p>
 														<textarea class="span20" rows="10"
 															name="openquestionsuggestion"  placeholder="Please insert your suggestion." style="resize: none"></textarea>
-														<p>In order to resolve the test you need to suggest an
-															ANSWER for your own question.</p>
+														<p>In order to solve the test you firstly need to suggest an ANSWER for your question:</p>
 														<textarea class="span20" rows="10"
 															name="openanswersuggestion"
 															placeholder="Please insert your answer suggestion."

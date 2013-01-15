@@ -50,6 +50,13 @@ models.module.Module,lesson: models.module.Lesson, test:models.test.Test) @main(
 
 
 		<div class="span9">
+			<div class="page-header">
+		
+			<h2>
+				@test.name
+			</h2>
+<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" class="btn btn-primary btn-small">Return to the beginning of the lesson</a>
+		</div>
 		
 			<table class="table table-condensed table-striped">
 								<thead>
@@ -57,7 +64,7 @@ models.module.Module,lesson: models.module.Lesson, test:models.test.Test) @main(
 										<th>Username</th>
 										<th>Progress</th>
 										<th>Submitted</th>
-										<th>Grade</th>
+										<th>Evaluation</th>
 										<th>State</th>
 									</tr>
 								</thead>

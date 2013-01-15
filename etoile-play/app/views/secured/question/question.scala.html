@@ -47,7 +47,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 
 		<div class="row-fluid">
 			<div class="span4">
-				<div class="progress">
+			Answered:	<div class="progress">
 					<div class="bar" style="width: @usertest.progress%;"></div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 									All URLs</a></li>
 							
 							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
-									new URLs</a></li>
+									new URL</a></li>
 									<li class="divider"></li>
 									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
 						</ul>
@@ -106,7 +106,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 									 height="35" width="35">
 									}
 							<div class="media">
-								<a class="pull-left" href="@url.adress"> <img class="media-object"
+								<a class="pull-left" href="@url.adress" target="_blank"> <img class="media-object"
 									src="@url.imageURL" height="70" width="70">
 								</a>
 								
@@ -114,7 +114,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 								
 									<div>
 									
-										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
 										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
@@ -141,12 +141,12 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 					@for(url<- question.urls){
 						<div class="well">
 							<div class="media">
-								<a class="pull-left" href="@url.adress"> <img class="media-object"
+								<a class="pull-left" href="@url.adress" target="_blank"> <img class="media-object"
 									src="@url.imageURL" height="70" width="70">
 								</a>
 								<div class="media-body">
 									<div>
-										<a href="@url.adress"><h4 class="media-heading">@url.name</h4></a>
+										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
 										<button href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</button>
@@ -163,7 +163,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 				</div>
 				<!-- END All URL Modal -->
 
-				<!-- ALL URL Modal -->
+				<!-- ADD URL Modal -->
 				<div id="ADDURL@question.number" class="modal hide fade">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">X</button>
@@ -189,14 +189,14 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 
 									<!-- Button -->
 									<div class="controls">
-										<button class="btn btn-success">Add</button>
+										<a class="btn btn-success" href="#">Add</a>
 									</div>
 								</div>
 							</fieldset>
 						</form>
 					</div>
 				</div>
-				<!-- END All URL Modal -->
+				<!-- END ADD URL Modal -->
 				
 				<!-- GENERAL HELP Modal -->
 				<div id="generalhelp" class="modal hide fade">
@@ -212,8 +212,9 @@ usertest: models.manytomany.UserTest) @main("etoile"){
               </ul>
               <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
                 <div class="tab-pane active" id="tab1">
-                  <p>For mathematics written in this form, you mark your mathematical expressions by surrounding them in ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
-                  
+                  <p> Please use the <a href="http://www1.chapman.edu/~jipsen/mathml/asciimath.html" target="_blank">ASCIIMathML</a> language for writing formal expressions. Formal expressions should be surrounded by "back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
+                 
+                  <p>Examples:</p>
                    <table class="table table-hover">
               <thead>
                 <tr>

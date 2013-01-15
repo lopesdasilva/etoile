@@ -870,6 +870,7 @@ public class Global extends GlobalSettings {
 		Question q1 = new Question();
 		q1.typeOfQuestion = 0;
 		q1.question = "What is Summation in Math?";
+		q1.number=1;
 		q1.lesson = lesson;
 		q1.weight = 50;
 		q1.weightToLose = 25;
@@ -878,6 +879,7 @@ public class Global extends GlobalSettings {
 		Question q2 = new Question();
 		q2.typeOfQuestion = 1;
 		q2.question = "What is Summation in Math?";
+		q2.number= 2;
 		q2.lesson = lesson;
 		q2.weight = 50;
 		q2.weightToLose = 25;

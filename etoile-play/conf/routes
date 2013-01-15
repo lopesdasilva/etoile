@@ -91,10 +91,12 @@ POST 	/modules/:module/:lesson/addquestion 				controllers.StudentTestController
 #Tests
 GET		/modules/:module/:lesson/test:test/:question		controllers.StudentTestController.question(question: Int,test: Long, lesson: String,module: String)
 
+
 #Questions
 POST    /modules/:module/:lesson/test:test/postquestion     controllers.StudentTestController.postquestion(question_number: Int, module: String, lesson: String, test: Long, question: Long)
 GET		/modules/:module/:lesson/submitTest					controllers.StudentTestController.submitTest(test: Long,lesson: String,module: String)
 GET 	/modules/:module/:lesson/test:test/:question/voteurl	controllers.StudentTestController.voteurl(url: Long, question: Int, test: Long, lesson: String, module: String)
+POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTestController.addurl(question: Int, test: Long, lesson: String, module: String, question_id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

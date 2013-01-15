@@ -1,8 +1,11 @@
 package controllers;
 
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import models.User;
 import models.curriculum.Category;
@@ -57,6 +60,14 @@ public class StudentTestController extends Controller {
 		public String openanswersuggestion;
 
 	}
+	
+	public static class URL_form {
+		public String name;
+		public String url;
+		public String description;
+		public String image;
+	}
+
 
 	
 	public static Result questionanalysis(Long question_number, Long test_id,String lesson_acronym,String module_acronym){
@@ -475,6 +486,28 @@ public class StudentTestController extends Controller {
 		url.likes ++ ;
 
 		System.out.println("Number Likes Before: " + url.likes);
+		url.save();
+		
+		return question(question_number, test_id, lesson_acronym, module_acronym);
+		
+	}
+	
+	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ){
+		Form<URL_form> form = form(
+				URL_form.class).bindFromRequest();
+		
+		User user = User.find.byId(request().username());
+		Question question = Question.find.byId(question_id);
+		
+		URL url = new URL();
+		url.added = new DateTime();
+		url.description = form.get().description;
+		url.adress= form.get().url;
+		url.imageURL=form.get().image;
+		url.name=form.get().name;
+		url.likes=0;
+		url.question=question;
+		url.user=user;
 		url.save();
 		
 		return question(question_number, test_id, lesson_acronym, module_acronym);

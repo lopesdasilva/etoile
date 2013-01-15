@@ -363,9 +363,7 @@ public class StudentTestController extends Controller {
 				if(q.typeOfQuestion==1){
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 						for(Hypothesis h : hypothesis){
-							if(h.isCorrect && h.selected && bool){
-								bool = true;
-							}else if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
+							if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
 								bool = false;
 							}
 						}
@@ -377,14 +375,12 @@ public class StudentTestController extends Controller {
 						}
 						System.out.println("Reputação após OC acertada: " + reputation);
 				}else if(q.typeOfQuestion==2){
+					System.out.println("CORRIGIR ESCOLHA MULTIPLA.");
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 					for(Hypothesis h : hypothesis){
 						System.out.println(h.text);
-						if(h.isCorrect && h.selected && bool){
-							 bool = true;
-						}else if((h.isCorrect && !h.selected) && bool){
-							 bool = false;
-						}else if( (!h.isCorrect && h.selected) && bool){
+						System.out.println("SELECTED: "+ h.selected + "isCORRECT?: " + h.isCorrect);
+						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
 							 bool = false;
 						}
 					}

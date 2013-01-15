@@ -75,7 +75,7 @@ usertest: models.manytomany.UserTest, evaluations: List[models.test.question.Que
 						<button disabled="disabled" class="btn btn-success">Right Answer (+@evaluation.score)</button></h4>
 						}
 						@if(evaluation.question == question && !evaluation.isCorrect){
-						<button disabled="disabled" class="btn btn-danger">Wrong Answer (-@evaluation.score)</button></h4>
+						<button disabled="disabled" class="btn btn-danger">Wrong Answer (@evaluation.score)</button></h4>
 						}
 					}
 					}

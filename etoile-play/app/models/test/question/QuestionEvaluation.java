@@ -44,6 +44,9 @@ public class QuestionEvaluation extends Model {
 	public double score;
 	
 	@Constraints.Required
+	public int percent;
+	
+	@Constraints.Required
 	public boolean isCorrect;
 	
 	@ManyToOne

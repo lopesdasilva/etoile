@@ -113,7 +113,9 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			}
 			else{
 				q_aux.openanswer=Answer.findByUserAndQuestion( usertest.user.email,q.id);
-				
+				if(q_aux.openanswer.questionevaluation != null){
+				q_aux.openanswer.questionevaluation.refresh();
+				}
 				q=q_aux;
 				System.out.println("q answer: "+q.openanswer.answer);
 			}
@@ -147,7 +149,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		
 		UserTest usertest = UserTest.find.byId(usertest_id);
 		Question question = Question.find.byId(question_id);
-		
+		Answer answer = Answer.findByUserAndQuestion(usertest.user.email, question_id);
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
 		if(evaluation==null){
 			
@@ -163,7 +165,12 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			evaluation.question = question;
 			evaluation.score = cotacao;
 			evaluation.userTest = usertest;
+			evaluation.percent = form.get().evaluation;
+			evaluation.answer = answer;
 			evaluation.save();
+			
+			answer.questionevaluation = evaluation;
+			answer.save();
 		}else{
 			System.out.println(usertest.reputationAsAstudent +"-"+ evaluation.score + "+" + "(" +form.get().evaluation+ "/100)*" + question.weight + "=" );
 			
@@ -174,9 +181,8 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			System.out.println("COTACAO: " + cotacao);
 
 			usertest.reputationAsAstudent = usertest.reputationAsAstudent - evaluation.score + cotacao;
-			
+			evaluation.percent = form.get().evaluation;
 			usertest.save();
-			
 			evaluation.score = cotacao ;
 			evaluation.save();
 		}

@@ -208,6 +208,7 @@ create table question (
 create table question_evaluation (
   id                        bigint auto_increment not null,
   score                     double,
+  percent                   integer,
   is_correct                tinyint(1) default 0,
   user_test_id              bigint,
   question_id               bigint,

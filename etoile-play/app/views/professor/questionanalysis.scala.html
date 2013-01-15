@@ -421,7 +421,12 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 
 													<div class="controls">
 														<h4>Your evaluation</h4> 
+														@if(question.openanswer.questionevaluation!=null){
+														<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="evaluation" value="@question.openanswer.questionevaluation.percent"></input><span class="add-on">%</span>
+														}
+														@if(question.openanswer.questionevaluation==null){
 														<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="evaluation" ></input><span class="add-on">%</span>
+														}
 														</div>
 														<div class="controls">
 														<button  type="submit" class="btn btn-info">Save Question Score</button>

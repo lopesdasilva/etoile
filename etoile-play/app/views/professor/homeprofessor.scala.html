@@ -48,18 +48,27 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 		@professormenu(user)
 		<div class="span9">
 		@for(module <- user.professorProfile.modules) {
-		<h3>@module.name</h3>
+							<div class="well">
+							<h3>@module.name</h3>
+							
+							<blockquote>
+							<p>Number of students: @module.users.size</p>
+							<p>Number of suggested questions: 543</p>
+							<p>Number of tests to mark: 1</p>
+							</blockquote>
+							
+							
 		<ul class="thumbnails">
 					@for(lesson <- module.lessons) {
-					<li class="span4">
+					<li class="span3">
 						<div class="carousel-inner">
-							<div class="item" style="min-height: 150px; max-height: 150px">
+							<div class="item" style="min-height: 100px; max-height: 100px">
 								<a
 									href="@routes.StudentController.lesson(lesson.acronym,module.acronym)">
 									<img src="@lesson.imageURL" alt="">
 									<div class="carousel-caption"
-										style="max-height: 30px; min-height: 30px">
-										<h4>@lesson.name</h4>
+										style="max-height: 10px; min-height: 10px">
+										<p>@lesson.name</p>
 
 									</div>
 								</a>
@@ -68,6 +77,10 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 					</li> }
 
 				</ul>
+						</div>
+						<hr>
+					
+						
 		}
 		</div>
 		

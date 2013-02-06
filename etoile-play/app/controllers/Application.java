@@ -170,7 +170,6 @@ public static Result professorprofile(String professor_acronym) {
 			}
 		}
 	
-		System.out.println("Vou para o module.");
 		return ok(views.html.statics.module.render(categories,Continent.getAllContinents(),module));
 	}
 

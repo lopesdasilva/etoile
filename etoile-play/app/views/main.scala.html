@@ -14,6 +14,8 @@
 <!--  <link rel="stylesheet" href="@routes.Assets.at("stylesheets/themeetoile.css")">  -->
 
 <!-- <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")"> -->
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/docs.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/prettify.css")">
 
@@ -28,6 +30,20 @@
         padding: 9px 0;
       }
     </style>
+    <script>
+  $(function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    $( "#draggable" ).draggable({
+      axis: "x",
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+  });
+  </script>
 
 </head>
 <body data-spy="scroll" data-target=".sidebar-nav">
@@ -44,7 +60,8 @@
 <!-- 	</footer> -->
 
 <script type="text/javascript" src="@routes.Assets.at("javascripts/widgets.js")"></script>
-<script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script>
+<!-- <script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script> -->
+
 <!-- <script src="@routes.Assets.at("javascripts/prettify.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-alert.js")"></script> -->
@@ -60,7 +77,7 @@
 <script src="@routes.Assets.at("javascripts/bootstrap-typeahead.js")"></script>
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-affix.js")"></script> -->
 <script src="@routes.Assets.at("javascripts/js/application.js")"></script>
-<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ui.min.js")"></script>
+<!-- <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ui.min.js")"></script> -->
 <!-- MathJax	 -->
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full">

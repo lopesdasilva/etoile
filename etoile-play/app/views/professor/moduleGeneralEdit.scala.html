@@ -213,7 +213,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 
 			<div class="row-fluid">
 				<h3>Lessons </h3>
-				<ul class="thumbnails">
+				<ul id="sortable" class="thumbnails">
 					@for(lesson <- module.lessons) {
 					<li class="span4">
 						<div class="carousel-inner">

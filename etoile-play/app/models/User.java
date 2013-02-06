@@ -113,8 +113,7 @@ public class User extends Model {
      * Authenticate a User.
      */
     public static User authenticate(String email, String password) {
-    	System.out.println("Email: "+email);
-    	System.out.println("Password: "+password);
+    	System.out.println("User loggedin: "+email);
         return find.where()
             .eq("email", email)
             .eq("password",sha1.parseSHA1Password(  password))

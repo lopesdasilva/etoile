@@ -82,6 +82,8 @@ POST /modules/:module/addlesson						controllers.ProfessorModuleController.addle
 POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)
 POST /modules/:module/lesson/:lesson/addlessoncontent		controllers.ProfessorLessonController.addlessoncontent(module: String, lesson: String)		
 POST /modules/:module/lesson/:lesson/editlesson			controllers.ProfessorLessonController.editlesson(module: String, lesson: String)
+POST /modules/:module/lesson/:lesson/addtest		controllers.ProfessorLessonController.addtest(module: String, lesson: String)
+		
 		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

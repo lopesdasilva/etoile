@@ -308,6 +308,50 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									}
 								</tbody>
 							</table>
+							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewTest" type="button">Add test</a></br>
+							
+							<div id="myModalNewTest" class="modal hide fade" >
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">New Test</h3>
+							</div>
+							<div class="modal-body">
+								
+								@helper.form(routes.ProfessorLessonController.addtest(module.acronym, lesson.acronym),'class->"form-horizontal"){
+								
+
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Name</label>
+											<div class="controls">
+												<textarea name="name" type="text" placeholder="" class="input-xlarge"></textarea>
+												<p class="help-block">Test name</p>
+											</div>
+										</div>
+										
+										<div class="control-group">
+
+											<!-- Text input-->
+											<label class="control-label" for="input01">Description</label>
+											<div class="controls">
+												<textarea name="text" type="text" placeholder="" class="input-xlarge"></textarea>
+												<p class="help-block">Short description about the test</p>
+											</div>
+										</div>
+										
+										<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button href="routes.controllers.ProfessorLessonController.addtest(module.acronym, lesson.acronym)" type="submit" class="btn btn-success">Save</button>
+										</div>
+										</div>
+								}
+							
+							</div>
+							</div>
 						</div>
 						
 						

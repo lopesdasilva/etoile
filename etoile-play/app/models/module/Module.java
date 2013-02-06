@@ -5,6 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.curriculum.Category;
+import models.manytomany.UserTest;
+import models.test.Test;
 import models.Professor;
 import models.User;
 
@@ -77,4 +79,27 @@ public class Module extends Model {
 		modules = Ebean.find(Module.class).findList(); 
 		return modules; 
 	}
+	
+	
+	public int getNumberOfQuestions(){
+		int n = 0;
+		for(Lesson lesson: this.lessons){
+			n = n + lesson.questions.size();
+		}
+		return n;
+	}
+	
+	public int getNumberOfTestsToMark(){
+		int n = 0;
+		for(Lesson lesson: this.lessons){
+			for(Test test : lesson.tests){
+				for(UserTest ut: test.users){
+					if(ut.submitted && !ut.reviewd){
+						n = n + 1;
+					}
+				}
+			}
+		}
+		return n;
+		}
 }

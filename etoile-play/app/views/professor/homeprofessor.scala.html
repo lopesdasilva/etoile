@@ -53,8 +53,8 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 							
 							<blockquote>
 							<p>Number of students: @module.users.size</p>
-							<p>Number of suggested questions: 543</p>
-							<p>Number of tests to mark: 1</p>
+							<p>Number of suggested questions: @module.getNumberOfQuestions</p>
+							<p>Number of tests to mark: @module.getNumberOfTestsToMark</p>
 							</blockquote>
 							
 							

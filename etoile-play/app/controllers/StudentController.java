@@ -254,15 +254,24 @@ public class StudentController extends Controller {
 	public static Result contact() {
 		List<Category> categories = Category.getAllCategories();
 
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.contact();
+		}
+		
+		
 		// check this line
 		User user = User.find.byId(session("email"));
 		return ok(views.html.secured.contact.render(user, categories));
 	}
 
 	public static Result about() {
+	
 		List<Category> categories = Category.getAllCategories();
-
-		// check this line
+		
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.about();
+		}
+		
 		User user = User.find.byId(session("email"));
 		return ok(views.html.secured.about.render(user, categories));
 	}

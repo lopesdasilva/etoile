@@ -102,6 +102,18 @@ public class ProfessorController extends Controller {
 		user.professorProfile.refresh();
 		return ok(views.html.professor.blogs.render(user,Blog.getAllBlogs()));
 	}
+
+	public static Result about() {
+		User user = User.find.byId(session("email"));
+		user.professorProfile.refresh();
+		return ok(views.html.professor.about.render(user));
+	}
+
+	public static Result contact() {
+		User user = User.find.byId(session("email"));
+		user.professorProfile.refresh();
+		return ok(views.html.professor.contact.render(user));
+	}
 	
 	
 }

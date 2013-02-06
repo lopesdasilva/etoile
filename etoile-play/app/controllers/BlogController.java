@@ -41,9 +41,16 @@ public class BlogController extends Controller {
 		
 		List<Category> categories = Category.getAllCategories();
 		if(session("email")!=null){
+
 			User user = User.find.byId(session("email"));
 			
-			return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),categories, form(Comment_Form.class)));
+			if (SecuredProfessor.isProfessor(session("email"))){
+				user.professorProfile.refresh();
+				return ok(views.html.professor.blog.render(user, Blog.find.byId(blog), form(Comment_Form.class)));
+			}
+						return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),categories, form(Comment_Form.class)));
+			
+			
 		}
 		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories,Continent.getAllContinents()));
 		

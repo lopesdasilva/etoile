@@ -1,6 +1,4 @@
-
-@(user: User,blog: Blog,categories: List[models.curriculum.Category],formComment : Form[BlogController.Comment_Form])
-@import helper._
+@(user: User,blogs: List[Blog]) 
 @main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -21,7 +19,7 @@
 					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
+					<li class="active"><a href="/news">News</a>
 					</li>
 					<li><a href="/about">About</a>
 					</li>
@@ -43,45 +41,39 @@
 		</div>
 	</div>
 </div>
- 
- <div class="container-fluid">
- 	<div class="row-fluid">
-	@usermenu(user,categories)
-	
- 
- <div class="span9">
-		<h3>@blog.header</h3>
-		@blog.date
-		<br> <img src="@blog.articleImageURL" height="200" width="200" />
 
-		<p>@blog.text</p>
-		@for(comment <- blog.comments) {
-		<blockquote>
-			<p>@comment.text</p>
-			<small>By @comment.user on @comment.date</small>
-		</blockquote>
-		}
- <hr>
-  <h3>Insert your comment below</h3>
-  
-   <div class="control-group">
-   @helper.form(routes.BlogController.postcomment(blog.id)) {
- <div class="controls">
-	 @textarea(
-            field = formComment("comment"),
-            args = '_label -> "",    'placeholder -> "Insert your comment", 'class->"span8"
-        )
-        
-    </div>   
-    <div class="controls">
-      <button type="submit" class="btn btn-primary">Submit</button>
-   
-    </div>
-     }
-  </div>
-  </div>
-  
+<div class="container-fluid">
+<div class="row-fluid">
+		@professormenu(user)
+
+
+
+		<div class="span9" >
+			@for(blog <- blogs) {
+			<div class="row-fluid">
+				<a href="@routes.BlogController.blog(blog.id)"><h4>@blog.header</h4></a>
+				<div class="span2">
+					<img src="@blog.articleImageURL" height="100" width="100" />
+				</div>
+				<div class="span9">
+					<p>@blog.alternateText</p>
+					<p>
+						
+					</p>
+
+				</div>
+				
+
+			
+			</div>
+			<br>
+			<a class="btn btn-info" href="@routes.BlogController.blog(blog.id)">View
+							details &raquo;</a>
+				<hr>
+			}
+		</div>
+
  </div>
  </div>
-  </div>
+
 }

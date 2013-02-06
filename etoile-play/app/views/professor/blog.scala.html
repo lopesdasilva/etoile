@@ -1,5 +1,5 @@
 
-@(user: User,blog: Blog,categories: List[models.curriculum.Category],formComment : Form[BlogController.Comment_Form])
+@(user: User,blog: Blog,formComment : Form[BlogController.Comment_Form])
 @import helper._
 @main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -46,7 +46,7 @@
  
  <div class="container-fluid">
  	<div class="row-fluid">
-	@usermenu(user,categories)
+@professormenu(user)
 	
  
  <div class="span9">
@@ -61,6 +61,7 @@
 			<small>By @comment.user on @comment.date</small>
 		</blockquote>
 		}
+	
  <hr>
   <h3>Insert your comment below</h3>
   

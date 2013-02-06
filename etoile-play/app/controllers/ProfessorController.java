@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.Blog;
 import models.Professor;
+import models.continent.Continent;
 import models.curriculum.Category;
 import models.module.Lesson;
 import models.module.Module;
@@ -86,6 +87,20 @@ public class ProfessorController extends Controller {
 			}
 	
 		return Application.index();
+	}
+
+	public static Result digitalcampus() {
+		User user = User.find.byId(session("email"));
+		user.professorProfile.refresh();
+		return ok(views.html.professor.digitalcampus.render(user));
+		
+	}
+
+	public static Result news() {
+		
+		User user = User.find.byId(session("email"));
+		user.professorProfile.refresh();
+		return ok(views.html.professor.blogs.render(user,Blog.getAllBlogs()));
 	}
 	
 	

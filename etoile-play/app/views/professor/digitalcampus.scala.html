@@ -1,7 +1,6 @@
+@(user: User)
+@main("etoile"){
 
-@(user: User,blog: Blog,categories: List[models.curriculum.Category],formComment : Form[BlogController.Comment_Form])
-@import helper._
-@main("etoile project") {
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -16,7 +15,7 @@
 				<ul class="nav">
 					<li><a href="/">Home</a>
 					</li>
-					<li><a href="/digitalcampus">Digital Campus</a>
+					<li  class="active"><a href="/digitalcampus">Digital Campus</a>
 					</li>
 					<li><a href="/modules">Modules</a>
 					</li>
@@ -43,45 +42,17 @@
 		</div>
 	</div>
 </div>
- 
- <div class="container-fluid">
- 	<div class="row-fluid">
-	@usermenu(user,categories)
-	
- 
- <div class="span9">
-		<h3>@blog.header</h3>
-		@blog.date
-		<br> <img src="@blog.articleImageURL" height="200" width="200" />
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+		@professormenu(user)
 
-		<p>@blog.text</p>
-		@for(comment <- blog.comments) {
-		<blockquote>
-			<p>@comment.text</p>
-			<small>By @comment.user on @comment.date</small>
-		</blockquote>
-		}
- <hr>
-  <h3>Insert your comment below</h3>
-  
-   <div class="control-group">
-   @helper.form(routes.BlogController.postcomment(blog.id)) {
- <div class="controls">
-	 @textarea(
-            field = formComment("comment"),
-            args = '_label -> "",    'placeholder -> "Insert your comment", 'class->"span8"
-        )
-        
-    </div>   
-    <div class="controls">
-      <button type="submit" class="btn btn-primary">Submit</button>
-   
-    </div>
-     }
-  </div>
-  </div>
-  
- </div>
- </div>
-  </div>
+        <div class="span9">
+  <div class="page-header">
+              <h2>Digital Campus<br><small>Enhanced Technology for Open Intelligent Learning Environments</small></h2>
+             
+            </div>
+</div>
+</div>
+</div>
 }

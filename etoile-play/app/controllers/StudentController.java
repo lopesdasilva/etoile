@@ -268,6 +268,10 @@ public class StudentController extends Controller {
 	}
 	
 	public static Result news() {
+		
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.news();
+		}
 
 		return ok(views.html.secured.blogs.render(User.find.byId(session("email")),
 				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
@@ -276,9 +280,15 @@ public class StudentController extends Controller {
 	
 	public static Result digitalcampus() {
 
+		if (SecuredProfessor.isProfessor(session("email"))){
+			return ProfessorController.digitalcampus();
+		}
+		
 		return ok(views.html.secured.digitalcampus.render(User.find.byId(session("email")),
 				Category.getAllCategories(),Continent.getAllContinents()
 				));
+		
+		
 	}
 
 	public static Result continent(List<Category> categories,
@@ -289,4 +299,5 @@ public class StudentController extends Controller {
 				categories,continents,continent,continent.universities));
 		   
 	}
+
 }

@@ -5,6 +5,7 @@ import models.User;
 
 import models.module.Bibliography;
 import models.module.Content;
+import models.module.Lesson;
 import models.module.Module;
 
 import controllers.routes;
@@ -37,6 +38,20 @@ public class ProfessorModuleController extends Controller {
 		public String imageURL;
 		
 		public String url;
+		
+	}
+	
+	public static class LessonItem_Form {
+		
+		public String name;
+		
+		public String description;
+		
+		public String shortDescription;
+		
+		public String acronym;
+		
+		public String imageURL;
 		
 	}
 	
@@ -108,6 +123,28 @@ public class ProfessorModuleController extends Controller {
 			bibliographyItem.link=form.get().url;
 			bibliographyItem.module=module;
 			bibliographyItem.save();
+		}
+		
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result addlesson(String module_acronym){
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<LessonItem_Form> form = form(LessonItem_Form.class).bindFromRequest();
+			Lesson lesson = new Lesson();
+			lesson.acronym = form.get().acronym;
+			lesson.name = form.get().name;
+			lesson.description = form.get().description;
+			lesson.shortDescription = form.get().description;
+			lesson.imageURL = form.get().imageURL;
+			lesson.number = module.lessons.size() + 1;
+			lesson.module = module;
+			lesson.save();
+			
 		}
 		
 		return redirect(routes.Application.module(module_acronym));

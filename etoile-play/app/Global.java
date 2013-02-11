@@ -55,6 +55,7 @@ public class Global extends GlobalSettings {
 			q.number = 1;
 			q.weight = 50;
 			q.weightToLose = 0;
+			q.keywords = "quadratic formula";
 			q.save();
 			
 			Hypothesis hyp_one = new Hypothesis();
@@ -88,6 +89,7 @@ public class Global extends GlobalSettings {
 			q_two.weight = 25;
 			q_two.weightToLose = 10;
 			q_two.number = 2;
+			q_two.keywords = "complex science";
 			q_two.save();
 			
 			hyp_one.question = q_two;
@@ -105,6 +107,7 @@ public class Global extends GlobalSettings {
 			q_three.number = 1;
 			q_three.weight = 25;
 			q_three.weightToLose = 10;
+			q_three.keywords = "complex networks";
 			q_three.save();
 			
 			
@@ -874,6 +877,7 @@ public class Global extends GlobalSettings {
 		q1.lesson = lesson;
 		q1.weight = 50;
 		q1.weightToLose = 25;
+		q1.keywords = "math summation";
 		q1.save();
 		
 		Question q2 = new Question();
@@ -883,6 +887,7 @@ public class Global extends GlobalSettings {
 		q2.lesson = lesson;
 		q2.weight = 50;
 		q2.weightToLose = 25;
+		q2.keywords = "math summation";
 		q2.save();
 		
 		Hypothesis h1 = new Hypothesis();

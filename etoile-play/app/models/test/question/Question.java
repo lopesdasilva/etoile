@@ -74,6 +74,8 @@ public class Question extends Model {
 	@Constraints.Required
 	public String videoURL;
 
+	@Constraints.Required
+	public String keywords;
 	
 	//ARGUMENTOS OPEN QUESTION
 	@OneToOne

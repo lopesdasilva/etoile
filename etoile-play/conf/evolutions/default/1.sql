@@ -201,6 +201,7 @@ create table question (
   answer_suggested_by_student varchar(255),
   image_url                 varchar(255),
   video_url                 varchar(255),
+  keywords                  varchar(255),
   openanswer_id             bigint,
   constraint pk_question primary key (id))
 ;

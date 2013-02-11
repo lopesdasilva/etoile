@@ -272,7 +272,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										<td>
 										<span class="btn-group">
 										<a class="btn btn-small btn-success" href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,test.id)" data-toggle="modal" role="button">open</a>
-										<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal" >edit</a>
+										<a class="btn btn-small btn-warning" href="@routes.ProfessorTestController.edittest(module.acronym,lesson.acronym,test.id)" data-toggle="modal" >edit</a>
 										<a class="btn btn-small btn-danger disabled"  href="" data-toggle="modal" role="button">delete</a>
 
 										

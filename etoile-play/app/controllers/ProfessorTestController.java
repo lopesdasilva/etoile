@@ -34,6 +34,41 @@ public class ProfessorTestController extends Controller {
 		
 	}
 	
+	public static class NewTest_Form {
+		
+		public String name;
+		
+		public String text;
+		
+		
+	}
+	
+	public static Result addtest(String module_acronym, String lesson_acronym){
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Module module = Module.findByAcronym(module_acronym);
+		Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
+		models.test.Test test = new models.test.Test();
+		test.name = form.get().name;
+		test.text = form.get().text;
+		test.lesson = lesson;
+		test.save();
+		
+		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
+	}
+	
+	public static Result edittest(String module_acronym, String lesson_acronym, Long test_id){
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Test test=Test.find.byId(test_id);
+			
+			return ok(views.html.professor.testEdit.render(module,lesson,test));
+		}
+		
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
 public static Result test(String module_acronym, String lesson_acronym, Long test_id){
 		
 		Module module = Module.findByAcronym(module_acronym);

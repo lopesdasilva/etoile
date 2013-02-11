@@ -82,7 +82,11 @@ POST /modules/:module/addlesson						controllers.ProfessorModuleController.addle
 POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)
 POST /modules/:module/lesson/:lesson/addlessoncontent		controllers.ProfessorLessonController.addlessoncontent(module: String, lesson: String)		
 POST /modules/:module/lesson/:lesson/editlesson			controllers.ProfessorLessonController.editlesson(module: String, lesson: String)
-POST /modules/:module/lesson/:lesson/addtest		controllers.ProfessorLessonController.addtest(module: String, lesson: String)
+
+
+#Professor Test
+POST /modules/:module/:lesson/addtest		controllers.ProfessorTestController.addtest(module: String, lesson: String)
+GET /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController.edittest(module: String, lesson: String, test: Long)
 		
 		
 #Curriculum Modules

@@ -61,14 +61,7 @@ public class ProfessorLessonController extends Controller {
 		
 	}
 	
-	public static class NewTest_Form {
-		
-		public String name;
-		
-		public String text;
-		
-		
-	}
+
 	
 	public static Result addlessonalert(String module_acronym, String lesson_acronym){
 		Module module = Module.findByAcronym(module_acronym);
@@ -142,17 +135,6 @@ public class ProfessorLessonController extends Controller {
 		return redirect(routes.Application.lesson(module_acronym,lesson.acronym));
 	}
 	
-	public static Result addtest(String module_acronym, String lesson_acronym){
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		Module module = Module.findByAcronym(module_acronym);
-		Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
-		models.test.Test test = new models.test.Test();
-		test.name = form.get().name;
-		test.text = form.get().text;
-		test.lesson = lesson;
-		test.save();
-		
-		return ok(views.html.professor.testAdd.render(module,lesson,test));
-	}
+	
 	
 }

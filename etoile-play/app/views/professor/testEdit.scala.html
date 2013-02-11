@@ -163,11 +163,27 @@
 					@if(question.typeOfQuestion==2){
 					<td> Multiple choice question</td>
 					}
-<td><span class="btn-group pull-right"> <a
+<td>
+					@if(question.typeOfQuestion==0){
+					<span class="btn-group pull-right"> <a
+							class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editopenquestion(module.acronym, lesson.acronym, test.id,group.id)" data-toggle="modal">edit</a>
+							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
+							role="button">delete</a>
+					</span>
+					}@if(question.typeOfQuestion==1){
+					<span class="btn-group pull-right"> <a
 							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
 							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
 							role="button">delete</a>
-					</span></td>
+					</span>
+					}@if(question.typeOfQuestion==2){
+					<span class="btn-group pull-right"> <a
+							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
+							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
+							role="button">delete</a>
+					</span>
+					}
+					</td>
 				</tr>
 				}
 			}

@@ -388,12 +388,16 @@ public class StudentTestController extends Controller {
 				}else if(q.typeOfQuestion==2){
 					System.out.println("CORRIGIR ESCOLHA MULTIPLA.");
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+					if(hypothesis.size() != 0){
 					for(Hypothesis h : hypothesis){
 						System.out.println(h.text);
 						System.out.println("SELECTED: "+ h.selected + "isCORRECT?: " + h.isCorrect);
 						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
 							 bool = false;
 						}
+					}
+					}else{
+						bool = false;
 					}
 					if(bool){
 						System.out.println("MC - A somar weight..");

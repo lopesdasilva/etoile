@@ -33,6 +33,12 @@ public class Test extends Model{
 	
 	@Constraints.Required
 	public String testImageURL;
+	
+	@Constraints.Required
+	public String expectedDuration;
+	
+	@Constraints.Required
+	public boolean published=false;
 
 	@ManyToOne
 	public Lesson lesson;

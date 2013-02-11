@@ -14,6 +14,7 @@ import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
+import java.util.LinkedList;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -53,6 +54,13 @@ public class ProfessorTestController extends Controller {
 		}
 		return ok(views.html.professor.openquestionAdd.render(module,lesson,test));
 	}
+	
+	public static class NewGroup_Form{
+		public String question;
+		
+	}
+	
+	
 	
 	public static Result addtest(String module_acronym, String lesson_acronym){
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -258,4 +266,41 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		//TODO: Criar ligacao pelo controlador do professor
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 	}
+
+	public static Result addgroup(String module_acronym, String lesson_acronym, Long test_id){
+		User user = User.find.byId(session("email"));
+		Module module = Module.findByAcronym(module_acronym);
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Test test=Test.find.byId(test_id);
+			Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
+
+			QuestionGroup questiongroup=new QuestionGroup();
+			questiongroup.question=form.get().question;
+			questiongroup.test=test;
+			questiongroup.number=test.groups.size()+1;
+			questiongroup.save();
+
+		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+	}
+		
+		return redirect(routes.Application.module(module.acronym));
+	}
+		
+		public static Result deletegroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
+			System.out.println("Estou aqui");
+			User user = User.find.byId(session("email"));
+			Module module = Module.findByAcronym(module_acronym);
+			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+				Test test=Test.find.byId(test_id);
+				
+
+				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
+				questiongroup.delete();
+
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+		}
+		
+		return redirect(routes.Application.module(module.acronym));
+	}
+		
 }

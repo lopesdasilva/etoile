@@ -87,7 +87,11 @@ POST /modules/:module/lesson/:lesson/editlesson			controllers.ProfessorLessonCon
 #Professor Test
 POST /modules/:module/:lesson/addtest		controllers.ProfessorTestController.addtest(module: String, lesson: String)
 GET /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController.edittest(module: String, lesson: String, test: Long)
+
 GET /modules/:module/:lesson/editopenquestion/:test	controllers.ProfessorTestController.editopenquestion(module: String, lesson: String, test: Long)		
+GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestController.addgroup(module: String, lesson: String, test: Long)	
+GET /modules/:module/:lesson/edittest/:test/deletegroup/:group	controllers.ProfessorTestController.deletegroup(module: String, lesson: String, test: Long,group: Long)		
+		
 		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

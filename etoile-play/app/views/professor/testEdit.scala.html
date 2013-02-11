@@ -51,10 +51,73 @@
 			<br> <small>@test.text
 			<p>  
 			 <label class="checkbox">
-      <input type="checkbox"> Published
+			 @if(!test.published){
+      				<input type="checkbox"> Published
+     			 }
+      		@if(test.published){
+      			<input type="checkbox" checked> Published
+     			 }
     </label>
 <p></small>
 		</h2>
+		<div id="editTestModal" class="modal hide fade" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">X</button>
+								<h3>Edit test name</h3>
+							</div>
+							@helper.form(routes.ProfessorModuleController.editmoduletitle(module.acronym),'class->"form-horizontal"){
+								<p>
+								<fieldset>
+
+
+									<div class="control-group">
+
+										<!-- Text input-->
+										<label class="control-label" for="input01">Name</label>
+										<div class="controls">
+											<input name="title" type="text" value="@test.name"
+												class="input-xlarge">
+											<p class="help-block">Edit test name</p>
+										</div>
+									</div>
+
+									<div class="control-group">
+
+										<!-- Text input-->
+										<label class="control-label" for="input01">Description</label>
+										<div class="controls">
+											<input name="acronym" type="text" value="@test.text"
+												class="input-xlarge">
+											<p class="help-block">Small description</p>
+										</div>
+									</div>
+									
+									<div class="control-group">
+
+										<!-- Text input-->
+										<label class="control-label" for="input01">Expected duration</label>
+										<div class="controls">
+											<input name="acronym" type="text" value="@test.expectedDuration"
+												class="input-xlarge disabled">
+											<p class="help-block">Estimated time for students complete the test</p>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button class="btn btn-success">Save</button>
+										</div>
+									</div>
+
+								</fieldset>
+								</p>
+							}
+						</div>
 
 	</div>
 	<div class="row">
@@ -73,15 +136,17 @@
 					<td></td>
 					<td>
 						<div class="btn-group pull-right">
-							<button class="btn btn-primary btn-small dropdown-toggle"
+							<a class="btn btn-small btn-danger" href="@routes.ProfessorTestController.deletegroup(module.acronym,lesson.acronym,test.id,group.id)" role="button">delete</a>
+							<a class="btn btn-primary btn-small dropdown-toggle"
 								data-toggle="dropdown">
 								Add Question <span class="caret"></span>
-							</button>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Open question</a></li>
 								<li><a href="#">One choice question</a></li>
 								<li><a href="#">Multiple choice question</a></li>
 							</ul>
+							
 						</div>
 					</td>
 
@@ -112,15 +177,61 @@
 		</table>
 	</div>
 	<div class="row">
-	<a class="btn btn-large btn-block btn-success btn-mini" href="#" type="button">Add Group</a></br>
+	<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#addGroup" type="button">Add group</a>
+			<div id="addGroup" class="modal hide fade"
+				tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+				aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">X</button>
+					<h3>Add new group</h3>
+				</div>
+
+
+				@helper.form(routes.ProfessorTestController.addgroup(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
+					<p>
+					<fieldset>
+
+						<div class="control-group">
+
+							<!-- Textarea -->
+							<label class="control-label">Group question</label>
+							<div class="controls">
+								<div class="textarea">
+									<textarea name="question" type="" class="" 
+										style="margin: 0px; height: 109px; width: 269px;"></textarea>
+								</div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success">Add group</button>
+							</div>
+						</div>
+
+					</fieldset>
+					</p>
+				}
+
+
+			</div>
+			
+			
+			
+			
 							
 	</div>
 
-
+<p>
 <div class="btn-group pull-right">
 <a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
 <a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
 </div>	
+</p>
 </div>
 
 

@@ -240,6 +240,8 @@ create table test (
   name                      varchar(255),
   text                      TEXT,
   test_image_url            varchar(255),
+  expected_duration         varchar(255),
+  published                 tinyint(1) default 0,
   lesson_id                 bigint,
   constraint pk_test primary key (id))
 ;

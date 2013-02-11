@@ -116,10 +116,13 @@ function startNewQuery(){
 						<h3 id="myModalLabel">Twitter Search !</h3>
 					</div>
 					<div class="modal-body">
-			    <fieldset style="padding: 0.5em;border-radius: 1em;">
-				    
-				    <input onclick="this.select();" style="padding: 0.2em;margin: 0.1em 0.2em;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box;" id="searchingT" type="text" value=""></input>
-				    <button onclick="startNewQuery();" style="padding: 0.2em;margin: 0.1em 0.2em;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box;" >A button</button>
+					<fieldset class="form-search">
+					
+  <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
+  <button onclick="startNewQuery();" type="submit" class="btn">Search</button>
+
+					
+		
 			    </fieldset>
     <div id="pagingT">
       <div id="tweets" class="widgetT query"></div>

@@ -65,6 +65,9 @@ public class ProfessorTestController extends Controller {
 	public static Result addtest(String module_acronym, String lesson_acronym){
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Module module = Module.findByAcronym(module_acronym);
+		
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
 		models.test.Test test = new models.test.Test();
 		test.name = form.get().name;
@@ -73,6 +76,9 @@ public class ProfessorTestController extends Controller {
 		test.save();
 		
 		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
+	}
+	
+	return redirect(routes.Application.module(module.acronym));
 	}
 	
 	public static Result edittest(String module_acronym, String lesson_acronym, Long test_id){

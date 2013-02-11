@@ -1,4 +1,4 @@
-@main("etoile"){
+@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -45,45 +45,41 @@
 
 	<div class="page-header">
 		<h2>
-			Teste <small><a href="#editTestModal"
+			Test name <small><a href="#editTestModal"
 				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
-			<br> <small>Description</small>
+			<br> <small>Test description</small>
 		</h2>
-
+		<h3>
+			Group 1
+		</h3>
 	</div>
-	<div class="row">
-		<form class="well span8">
-  <div class="row">
-		<div class="span3">
-			<label>First Name</label>
-			<input type="text" class="span3" placeholder="Your First Name">
-			<label>Last Name</label>
-			<input type="text" class="span3" placeholder="Your Last Name">
-			<label>Email Address</label>
-			<input type="text" class="span3" placeholder="Your email address">
-			<label>Subject
-			<select id="subject" name="subject" class="span3">
-				<option value="na" selected="">Choose One:</option>
-				<option value="service">General Customer Service</option>
-				<option value="suggestions">Suggestions</option>
-				<option value="product">Product Support</option>
-			</select>
-			</label>
+	<div class="tabbable">
+					<!-- Only required for left/right tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#news" data-toggle="tab">News</a></li>
+						<li><a href="#resources" data-toggle="tab">Resources</a></li>
+						<li><a href="#tests" data-toggle="tab">Tests</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="news">
+	<div class="row-fluid">
+				<div class="well span11">
+					<label >Question</label>
+						<textarea  class="span12" rows="10" name="qanswer">Test</textarea>
+						<label>Model Answer</label>
+						<textarea  class="span12" rows="10" name="qanswer">Test</textarea>
+				</div>
+			</div>
 		</div>
-		<div class="span5">
-			<label>Message</label>
-			<textarea name="message" id="message" class="input-xlarge span5" rows="10"></textarea>
-		</div>
-	
-		<button type="submit" class="btn btn-primary pull-right">Send</button>
+						<div class="tab-pane" id="resources">
+						aiueh
+						</div>
 	</div>
-</form>
 	</div>
-
 
 <div class="btn-group pull-right">
 <a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
-<a href="" role="button" class="btn">Return to Lesson</a>
+<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
 </div>	
 </div>
 

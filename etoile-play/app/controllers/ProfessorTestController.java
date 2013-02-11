@@ -42,6 +42,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 	}
+	public static Result editopenquestion(String module_acronym, String lesson_acronym, Long test_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		return ok(views.html.professor.openquestionAdd.render(module,lesson,test));
+	}
 	
 	public static Result addtest(String module_acronym, String lesson_acronym){
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);

@@ -2,6 +2,51 @@
 test: models.test.Test, group: models.test.question.QuestionGroup,
 usertest: models.manytomany.UserTest) @main("etoile"){
 
+<script>
+
+function startNewQuery(){
+        var options = {
+	  //query: ' What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ? ',
+	  query: document.getElementById("searchingT").value,
+	  //query: "naruto",
+          page: 1,
+          avatar_size: 55,
+          count: 6,
+          loading_text: "loading ..."
+        };
+
+        var widgetT = $("#pagingT .widgetT"),
+          nextT = $("#pagingT .nextT"),
+          prevT = $("#pagingT .prevT");
+
+        var enable = function(el, yes) {
+          yes ? $(el).removeAttr('disabled') :
+                $(el).attr('disabled', true);
+        };
+
+        var stepClick = function(incr) {
+          return function() {
+            options.page = options.page + incr;
+            enable(this, false);
+            widgetT.tweet(options);
+          };
+        };
+
+        nextT.bind("checkstate", function() {
+          enable(this, widgetT.find("li").length == options.count)
+        }).click(stepClick(1));
+
+        prevT.bind("checkstate", function() {
+          enable(this, options.page > 1)
+        }).click(stepClick(-1));
+
+        widgetT.tweet(options).bind("loaded", function() {
+		console.log($("#tweets").text);
+	    nextT.add(prevT).trigger("checkstate"); });
+
+}
+					</script>
+
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -64,6 +109,28 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 		</div>
 		<hr>
 		<div class="offset1">
+				<!-- Twitter Query -->
+<div style="padding: 20px;" id="TwitterQuery" class="modal hide fade">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">X</button>
+						<h3 id="myModalLabel">Twitter Search !</h3>
+					</div>
+					<div class="modal-body">
+			    <fieldset style="padding: 0.5em;border-radius: 1em;">
+				    
+				    <input onclick="this.select();" style="padding: 0.2em;margin: 0.1em 0.2em;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box;" id="searchingT" type="text" value=""></input>
+				    <button onclick="startNewQuery();" style="padding: 0.2em;margin: 0.1em 0.2em;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box;" >A button</button>
+			    </fieldset>
+    <div id="pagingT">
+      <div id="tweets" class="widgetT query"></div>
+      <div class="controlsT">
+        <button class="prevT" type="button" disabled>&larr;</button>
+        <span class="pagenum"></span>
+        <button class="nextT" type="button" disabled>&rarr;</button>
+      </div>
+    </div>
+</div>
+</div>
 			@for(question <- group.questions) {
 			
 			<div class="row-fluid">
@@ -84,6 +151,7 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 							
 							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
 									new URL</a></li>
+							<li><a href="#TwitterQuery" onclick='document.getElementById("searchingT").value="@question.question";' data-toggle="modal">Ask Twitter</a></li>
 									<li class="divider"></li>
 									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
 						</ul>

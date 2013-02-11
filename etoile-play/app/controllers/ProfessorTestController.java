@@ -46,6 +46,11 @@ public class ProfessorTestController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
+		for(Question q: lesson.questions){
+			if(q.user!= null){
+				q.user.refresh();
+			}
+		}
 		return ok(views.html.professor.openquestionAdd.render(module,lesson,test));
 	}
 	

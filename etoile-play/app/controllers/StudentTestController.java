@@ -212,7 +212,7 @@ public class StudentTestController extends Controller {
 			q_aux.user = q.user;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
-			
+			q_aux.keywords=q.keywords;
 			
 			//q_aux.hypothesislist?????
 			group_aux.questions.add(q_aux);
@@ -245,7 +245,10 @@ public class StudentTestController extends Controller {
 			
 			
 			}
-		
+		for(Question q: group_aux.questions){
+System.out.println(			q.keywords+"...");/**/
+
+		}
 		
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}

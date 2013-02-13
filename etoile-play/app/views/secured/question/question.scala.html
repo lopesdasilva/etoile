@@ -4,20 +4,21 @@ usertest: models.manytomany.UserTest) @main("etoile"){
 
 <script>
 
-function startNewQuery(){
+function startNewQuery(q){
         var options = {
 	  //query: ' What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ? ',
-	  query: document.getElementById("searchingT").value,
+	  query: q,//document.getElementById("searchingT").value,
 	  //query: "naruto",
           page: 1,
           avatar_size: 55,
-          count: 6,
+          count: 5,
           loading_text: "loading ..."
         };
 
         var widgetT = $("#pagingT .widgetT"),
           nextT = $("#pagingT .nextT"),
           prevT = $("#pagingT .prevT");
+	var keywords = document.getElementById("keywordsT").value;
 
         var enable = function(el, yes) {
           yes ? $(el).removeAttr('disabled') :
@@ -40,10 +41,14 @@ function startNewQuery(){
           enable(this, options.page > 1)
         }).click(stepClick(-1));
 
-        widgetT.tweet(options).bind("loaded", function() {
-		console.log($("#tweets").text);
-	    nextT.add(prevT).trigger("checkstate"); });
 
+        widgetT.tweet(options).bind("loaded", function() { 
+            if($("#tweets").text()=="") {
+                $("#tweets").empty().append("No matching tweets found");
+            }
+            nextT.add(prevT).trigger("checkstate");
+        //next.add(prev).trigger("checkstate");
+        });
 }
 					</script>
 
@@ -117,15 +122,17 @@ function startNewQuery(){
 					</div>
 					<div class="modal-body">
 					<fieldset class="form-search">
-					
   <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
-  <button onclick="startNewQuery();" type="submit" class="btn">Search</button>
+  <button onclick='document.getElementById("labelsT").style.display="none";startNewQuery(document.getElementById("searchingT").value);' type="submit" class="btn">Search</button><br>
+  <div id="labelsT"><label id="legRel" >Related: </label> <a href="#" onclick='startNewQuery(document.getElementById("keywordsT").innerText);'><label for="legRel" id="keywordsT"></label></a></div><br>
 
 					
 		
 			    </fieldset>
     <div id="pagingT">
+<br>
       <div id="tweets" class="widgetT query"></div>
+<br>
       <div class="controlsT">
         <button class="prevT" type="button" disabled>&larr;</button>
         <span class="pagenum"></span>
@@ -154,7 +161,7 @@ function startNewQuery(){
 							
 							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
 									new URL</a></li>
-							<li><a href="#TwitterQuery" onclick='document.getElementById("searchingT").value="@question.question";' data-toggle="modal">Ask Twitter</a></li>
+							<li><a href="#TwitterQuery" onclick='startNewQuery("@question.question");document.getElementById("searchingT").value="@question.question";document.getElementById("keywordsT").innerHTML="@question.keywords";document.getElementById("labelsT").style.display="block";$("#tweets").text("loading ...");' data-toggle="modal">Ask Twitter</a></li>
 									<li class="divider"></li>
 									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
 						</ul>

@@ -2,6 +2,7 @@ package models.test;
 
 import java.util.*;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 
 import models.Comment;
@@ -60,6 +61,23 @@ public class Test extends Model{
 		List<Test> tests = new ArrayList<Test>();
 		tests = Ebean.find(Test.class).findList(); 
 		return tests; 
+	}
+	
+	
+	public boolean studentsEnrolled(Test t){
+		for(UserTest userTest : t.users){
+			if(userTest.inmodule)
+				return true;
+		}
+		return false;
+	}
+	public int numberStudentsEnrolled(Test t){
+		int number=0;
+		for(UserTest userTest : t.users){
+			if(userTest.inmodule)
+				number++;
+		}
+		return number;
 	}
 	
 }

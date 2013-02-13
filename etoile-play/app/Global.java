@@ -354,6 +354,7 @@ public class Global extends GlobalSettings {
 			g_two.save();
 			
 			Test test_one = new Test();
+			test_one.published=true;
 			test_one.name = "First Sum Test";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
@@ -366,6 +367,7 @@ public class Global extends GlobalSettings {
 			g_two.save();
 			
 			Test test_two = new Test();
+			test_two.published=true;
 			test_two.name="Final Sum Test";
 			test_two.text = "Final Evaluation of Sum Lesson";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";

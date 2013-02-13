@@ -11,7 +11,7 @@ function startNewQuery(q){
 	  //query: "naruto",
           page: 1,
           avatar_size: 55,
-          count: 5,
+          count: 4,
           loading_text: "loading ..."
         };
 
@@ -124,7 +124,7 @@ function startNewQuery(q){
 					<fieldset class="form-search">
   <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
   <button onclick='document.getElementById("labelsT").style.display="none";startNewQuery(document.getElementById("searchingT").value);' type="submit" class="btn">Search</button><br>
-  <div id="labelsT"><label id="legRel" >Related: </label> <a href="#" onclick='startNewQuery(document.getElementById("keywordsT").innerText);'><label for="legRel" id="keywordsT"></label></a></div><br>
+  <div id="labelsT"><label id="legRel" >Related: </label> <a href="#" onclick='document.getElementById("searchingT").value=document.getElementById("keywordsT").innerText;startNewQuery(document.getElementById("keywordsT").innerText);'><label for="legRel" id="keywordsT"></label></a></div>
 
 					
 		

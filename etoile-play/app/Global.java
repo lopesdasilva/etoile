@@ -102,7 +102,7 @@ public class Global extends GlobalSettings {
 			hyp_four.save();
 			
 			Question q_three = new Question();
-			q_three.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
+			q_three.question= "What is ComplexNetworks?";
 			q_three.typeOfQuestion = 2;
 			q_three.number = 1;
 			q_three.weight = 25;
@@ -882,7 +882,7 @@ public class Global extends GlobalSettings {
 		
 		Question q2 = new Question();
 		q2.typeOfQuestion = 1;
-		q2.question = "What is Summation in Math?";
+		q2.question = "What is the symbol '+' in Math?";
 		q2.number= 2;
 		q2.lesson = lesson;
 		q2.weight = 50;

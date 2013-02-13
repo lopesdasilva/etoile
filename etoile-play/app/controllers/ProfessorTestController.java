@@ -57,15 +57,13 @@ public class ProfessorTestController extends Controller {
 		public String video;
 		
 		public int weight;
-		
-		public int weighttolose;
+
 		
 		
 	}
 	
 	
 	public static Result addopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		System.out.println("ADD OPEN QUESTION FORM");
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
@@ -85,7 +83,6 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		System.out.println("ADD OPEN QUESTION");
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
@@ -103,7 +100,7 @@ public class ProfessorTestController extends Controller {
 			question.imageURL = form.get().image;
 			question.videoURL = form.get().video;
 			question.weight = form.get().weight;
-			question.weightToLose = form.get().weighttolose;
+			question.weightToLose = 0;
 			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 0;
@@ -118,6 +115,37 @@ public class ProfessorTestController extends Controller {
 		return redirect(routes.Application.module(module_acronym));
 	}
 	
+	public static Result reusequestionadd(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question old_question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Question copy_question = new Question();
+			copy_question.question = old_question.question;
+			copy_question.lesson = lesson;
+			copy_question.answerSuggestedByStudent = old_question.answerSuggestedByStudent;
+			copy_question.keywords = old_question.keywords;
+			copy_question.imageURL = old_question.imageURL;
+			copy_question.videoURL = old_question.videoURL;
+			copy_question.weight = old_question.weight;
+			copy_question.weightToLose = old_question.weightToLose;
+			copy_question.user = old_question.user;
+			copy_question.number = group.questions.size()+1;
+			copy_question.typeOfQuestion = copy_question.typeOfQuestion;
+			copy_question.iscopy = true;
+			copy_question.save();
+			
+			group.questions.add(copy_question);
+			group.save();
+			
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
+		}
+		return redirect(routes.Application.module(module_acronym));
+	}
 	public static class NewGroup_Form{
 		public String question;
 		

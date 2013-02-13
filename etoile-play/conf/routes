@@ -94,6 +94,7 @@ GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestCo
 GET /modules/:module/:lesson/edittest/:test/deletegroup/:group	controllers.ProfessorTestController.deletegroup(module: String, lesson: String, test: Long,group: Long)		
 GET /modules/:module/:lesson/edittest/:test/publish	controllers.ProfessorTestController.publish(module: String, lesson: String, test: Long)
 GET /modules/:module/:lesson/edittest/:test/unpublish	controllers.ProfessorTestController.unpublish(module: String, lesson: String, test: Long)
+GET /modules/:module/:lesson/edittest/:test/reusequestionadd	controllers.ProfessorTestController.reusequestionadd(module: String, lesson: String, test: Long, group: Long, question: Long)
 
 
 

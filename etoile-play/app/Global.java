@@ -102,7 +102,7 @@ public class Global extends GlobalSettings {
 			hyp_four.save();
 			
 			Question q_three = new Question();
-			q_three.question= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis semper felis a laoreet. Aliquam at massa nec mi mattis porttitor, `bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`.";
+			q_three.question= "What is ComplexNetworks?";
 			q_three.typeOfQuestion = 2;
 			q_three.number = 1;
 			q_three.weight = 25;
@@ -354,7 +354,9 @@ public class Global extends GlobalSettings {
 			g_two.save();
 			
 			Test test_one = new Test();
+			test_one.published=true;
 			test_one.name = "First Sum Test";
+			test_one.expectedDuration="1,5 hours";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_one.save();
@@ -366,7 +368,9 @@ public class Global extends GlobalSettings {
 			g_two.save();
 			
 			Test test_two = new Test();
+			test_two.published=true;
 			test_two.name="Final Sum Test";
+			test_two.expectedDuration="45 min";
 			test_two.text = "Final Evaluation of Sum Lesson";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
@@ -882,7 +886,7 @@ public class Global extends GlobalSettings {
 		
 		Question q2 = new Question();
 		q2.typeOfQuestion = 1;
-		q2.question = "What is Summation in Math?";
+		q2.question = "What is the symbol '+' in Math?";
 		q2.number= 2;
 		q2.lesson = lesson;
 		q2.weight = 50;

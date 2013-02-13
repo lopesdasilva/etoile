@@ -77,6 +77,9 @@ public class Question extends Model {
 	@Constraints.Required
 	public String keywords;
 	
+	@Constraints.Required
+	public boolean iscopy;
+	
 	//ARGUMENTOS OPEN QUESTION
 	@OneToOne
 	public Answer openanswer;

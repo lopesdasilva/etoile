@@ -269,7 +269,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
-										<td>3 hours</td>
+										<td>@test.expectedDuration</td>
 										<td>
 										@if(test.published){
 										published
@@ -348,6 +348,15 @@ models.module.Lesson, module: models.module.Module) @import helper._
 												<p class="help-block">Short description about the test</p>
 											</div>
 										</div>
+										
+											<!-- Text input-->
+										<label class="control-label" for="input01">Expected duration</label>
+										<div class="controls">
+											<input name="expectedDuration" type="text" 
+												class="input-xlarge disabled">
+											<p class="help-block">Estimated time for students complete the test</p>
+										</div>
+									
 										
 										<div class="control-group">
 										<label class="control-label"></label>

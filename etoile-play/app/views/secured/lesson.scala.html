@@ -125,7 +125,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
-										<td>3 hours</td>
+										<td>@test.expectedDuration</td>
 										
 										@for(usertest<-user.tests){
 										<!-- IF1 -->
@@ -181,10 +181,10 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 
 													<div class="controls">
 														<p>In order to solve the test you firstly need to suggest a QUESTION:</p>
-														<textarea class="span20" rows="10"
+														<textarea class="span20" rows="5"
 															name="openquestionsuggestion"  placeholder="Please insert your suggestion." style="resize: none"></textarea>
 														<p>In order to solve the test you firstly need to suggest an ANSWER for your question:</p>
-														<textarea class="span20" rows="10"
+														<textarea class="span20" rows="5"
 															name="openanswersuggestion"
 															placeholder="Please insert your answer suggestion."
 															style="resize: none"></textarea>

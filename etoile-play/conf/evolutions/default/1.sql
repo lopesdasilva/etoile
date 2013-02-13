@@ -202,6 +202,7 @@ create table question (
   image_url                 varchar(255),
   video_url                 varchar(255),
   keywords                  varchar(255),
+  iscopy                    tinyint(1) default 0,
   openanswer_id             bigint,
   constraint pk_question primary key (id))
 ;

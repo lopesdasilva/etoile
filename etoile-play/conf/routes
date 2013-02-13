@@ -93,6 +93,8 @@ GET /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController
 
 GET /modules/:module/:lesson/edittest/:test/:group/addopenquestion	controllers.ProfessorTestController.addopenquestion(module: String, lesson: String, test: Long, group: Long)		
 GET /modules/:module/:lesson/edittest/:test/addopenquestionform/:group	controllers.ProfessorTestController.addopenquestionform(module: String, lesson: String, test: Long, group: Long)		
+GET /modules/:module/:lesson/edittest/:test/editopenquestionform/group/:group/:question	controllers.ProfessorTestController.editopenquestionform(module: String, lesson: String, test: Long, group: Long, question: Long)		
+
 GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestController.addgroup(module: String, lesson: String, test: Long)	
 GET /modules/:module/:lesson/edittest/:test/deletegroup/:group	controllers.ProfessorTestController.deletegroup(module: String, lesson: String, test: Long,group: Long)		
 GET /modules/:module/:lesson/edittest/:test/publish	controllers.ProfessorTestController.publish(module: String, lesson: String, test: Long)

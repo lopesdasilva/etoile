@@ -46,7 +46,7 @@ public class ProfessorTestController extends Controller {
 		
 	}
 	
-	public static class NewQuestion_Form {
+	public static class OpenQuestion_Form {
 		
 		public String question;
 		
@@ -92,7 +92,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<NewQuestion_Form> form = form(NewQuestion_Form.class).bindFromRequest();
+			Form<OpenQuestion_Form> form = form(OpenQuestion_Form.class).bindFromRequest();
 			Question question = new Question();
 //			q.group.add(group);
 			question.lesson = lesson;
@@ -114,6 +114,42 @@ public class ProfessorTestController extends Controller {
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
 		}
 		
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result editopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			
+			return ok(views.html.professor.openquestionEdit.render(module,lesson,test, group,question));
+
+		}
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result editopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Test test = Test.find.byId(test_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<OpenQuestion_Form> form = form(OpenQuestion_Form.class).bindFromRequest();
+			question.question = form.get().question;
+			question.answerSuggestedByStudent = form.get().suggestedanswer;
+			question.keywords = form.get().keywords;
+			question.imageURL = form.get().image;
+			question.videoURL = form.get().video;
+			question.weight = form.get().weight;
+			question.save();
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
+		}
 		return redirect(routes.Application.module(module_acronym));
 	}
 	

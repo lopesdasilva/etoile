@@ -121,6 +121,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 								</thead>
 								<tbody>
 									@for(test <- lesson.tests) {
+									@if(test.published){
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
@@ -205,7 +206,7 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 									</tr>
 
 
-
+									}
 									}
 								</tbody>
 							</table>

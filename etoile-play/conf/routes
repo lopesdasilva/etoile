@@ -82,6 +82,7 @@ POST /modules/:module/addlesson						controllers.ProfessorModuleController.addle
 POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)
 POST /modules/:module/lesson/:lesson/addlessoncontent		controllers.ProfessorLessonController.addlessoncontent(module: String, lesson: String)		
 POST /modules/:module/lesson/:lesson/editlesson			controllers.ProfessorLessonController.editlesson(module: String, lesson: String)
+GET /modules/:module/lesson/:lesson/:question/deletequestion			controllers.ProfessorLessonController.deletequestion(module: String, lesson: String, question: Long )
 
 
 #Professor Test
@@ -91,7 +92,8 @@ GET /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController
 GET /modules/:module/:lesson/edittest/:test/editopenquestion/:group	controllers.ProfessorTestController.editopenquestion(module: String, lesson: String, test: Long, group: Long)		
 GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestController.addgroup(module: String, lesson: String, test: Long)	
 GET /modules/:module/:lesson/edittest/:test/deletegroup/:group	controllers.ProfessorTestController.deletegroup(module: String, lesson: String, test: Long,group: Long)		
-		
+GET /modules/:module/:lesson/edittest/:test/publish	controllers.ProfessorTestController.publish(module: String, lesson: String, test: Long)
+GET /modules/:module/:lesson/edittest/:test/unpublish	controllers.ProfessorTestController.unpublish(module: String, lesson: String, test: Long)
 		
 #Curriculum Modules
 GET /curriculum/category:category					controllers.Application.categoryModules(category: Long)

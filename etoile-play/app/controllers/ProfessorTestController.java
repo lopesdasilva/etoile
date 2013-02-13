@@ -118,6 +118,7 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		System.out.println("Edit Open QuestionForm");
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
@@ -134,6 +135,7 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		System.out.println("EditOpenQuestion");
 		Module module = Module.findByAcronym(module_acronym);
 		Test test = Test.find.byId(test_id);
 		Question question = Question.find.byId(question_id);

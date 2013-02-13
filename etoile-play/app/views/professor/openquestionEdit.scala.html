@@ -57,7 +57,7 @@
       <div id="legend" class="">
         <legend class="">Question Form</legend>
       </div>			
-      					@helper.form(routes.ProfessorTestController.addopenquestion(module.acronym, lesson.acronym, test.id, group.id),'class->"form-horizontal"){
+      					@helper.form(routes.ProfessorTestController.editopenquestion(module.acronym, lesson.acronym, test.id, group.id, question.id),'class->"form-horizontal"){
 						<label >Question</label>
 						<textarea  class="span12" rows="10" name="question">@question.question</textarea>
 						

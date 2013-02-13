@@ -50,6 +50,26 @@ function startNewQuery(q){
         //next.add(prev).trigger("checkstate");
         });
 }
+
+function TwitterQuery(keywords){
+	var aux=keywords.split(","); 
+	startNewQuery(aux[0]);
+	document.getElementById("searchingT").value=aux[0];
+	if(aux.length>1){ 
+		var temporal="";
+		for(i=0;i<aux.length;i++) {
+			temporal+='<a href=\"#\" onclick=\'document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+', ';
+		}
+		$("#keywordsT").html(temporal);
+		document.getElementById("labelsT").style.display="block";
+	}
+	else document.getElementById("labelsT").style.display="none";
+}
+
+function searchButton(){
+	document.getElementById("labelsT").style.display="none";
+	startNewQuery(document.getElementById("searchingT").value);
+}
 					</script>
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -123,8 +143,8 @@ function startNewQuery(q){
 					<div class="modal-body">
 					<fieldset class="form-search">
   <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
-  <button onclick='document.getElementById("labelsT").style.display="none";startNewQuery(document.getElementById("searchingT").value);' type="submit" class="btn">Search</button><br>
-  <div id="labelsT"><label id="legRel" >Related: </label> <a href="#" onclick='document.getElementById("searchingT").value=document.getElementById("keywordsT").innerText;startNewQuery(document.getElementById("keywordsT").innerText);'><label for="legRel" id="keywordsT"></label></a></div>
+  <button onclick='searchButton();' type="submit" class="btn">Search</button><br>
+  <div id="labelsT"><label id="legRel" >Related: </label> <label for="legRel" id="keywordsT"></label></div>
 
 					
 		
@@ -161,7 +181,7 @@ function startNewQuery(q){
 							
 							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
 									new URL</a></li>
-							<li><a href="#TwitterQuery" onclick='startNewQuery("@question.question");document.getElementById("searchingT").value="@question.question";document.getElementById("keywordsT").innerHTML="@question.keywords";document.getElementById("labelsT").style.display="block";$("#tweets").text("loading ...");' data-toggle="modal">Ask Twitter</a></li>
+							<li><a href="#TwitterQuery" onclick='TwitterQuery("@question.keywords");' data-toggle="modal">Ask Twitter</a></li>
 									<li class="divider"></li>
 									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
 						</ul>
@@ -248,61 +268,7 @@ function startNewQuery(q){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-
-							@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal"){
-
-						
-						<div class="control-group">
-							<label class="control-label" for="input01">New URL</label>
-							<div class="controls">
-								<input type="text" placeholder="Insert the new URL"
-									class="input-xlarge" name="url">
-								<p class="help-block">A valid URL that you used to answer
-									this question</p>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Title</label>
-							<div class="controls">
-								<input type="text" placeholder="Insert the Title"
-									class="input-xlarge" name="name">
-								<p class="help-block">URL title</p>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Description</label>
-							<div class="controls">
-								<input type="text" placeholder="Insert the Description"
-									class="input-xlarge" name="description">
-								<p class="help-block">A URL small description</p>
-							</div>
-						</div>
-						<div class="control-group">
-
-							<!-- Text input-->
-							<label class="control-label" for="input01">Image url</label>
-							<div class="controls">
-								<input name="image" type="text" placeholder=""
-									class="input-xlarge">
-								<p class="help-block">URL image</p>
-							</div>
-						</div>
-
-
-
-
-
-						<div class="control-group">
-										<label class="control-label"></label>
-
-										<!-- Button -->
-										<div class="controls">
-											<button type="submit" class="btn btn-success">Save</button>
-										</div>
-									</div>
-
-
-								}
+						<input id="enterUrl">lalallallala</input>
 					</div>
 				</div>
 				<!-- END ADD URL Modal -->

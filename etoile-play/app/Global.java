@@ -55,7 +55,7 @@ public class Global extends GlobalSettings {
 			q.number = 1;
 			q.weight = 50;
 			q.weightToLose = 0;
-			q.keywords = "quadratic formula";
+			q.keywords = "quadratic formula,mathematics,hard excercise, this is too much for me";
 			q.save();
 			
 			Hypothesis hyp_one = new Hypothesis();

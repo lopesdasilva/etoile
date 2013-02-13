@@ -49,15 +49,17 @@
 			@test.name <small><a href="#editTestModal"
 				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
 			<br> <small>@test.text
+			<p>Number of users enroled to this test: @test.users.size</p>
 			<p>  
-			 <label class="checkbox">
+			
 			 @if(!test.published){
-      				<input type="checkbox"> Published
+			  <a class="btn btn-info" href="@routes.ProfessorTestController.publish(module.acronym,lesson.acronym,test.id)">Publish</a>
+			 
      			 }
       		@if(test.published){
-      			<input type="checkbox" checked> Published
-     			 }
-    </label>
+      			  <a class="btn btn-warning" href="@routes.ProfessorTestController.unpublish(module.acronym,lesson.acronym,test.id)">Unpublish</a>
+			
+     			 } 
 <p></small>
 		</h2>
 		<div id="editTestModal" class="modal hide fade" tabindex="-1"
@@ -121,6 +123,7 @@
 
 	</div>
 	<div class="row">
+	<h3>Groups</h3>
 		<table class="table table-striped table-condensed">
 	  <thead>
       <tr>
@@ -243,8 +246,7 @@
 	</div>
 
 <p>
-<div class="btn-group pull-right">
-<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
+<div class=" pull-right">
 <a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
 </div>	
 </p>

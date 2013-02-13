@@ -8,6 +8,7 @@ import models.module.Lesson;
 import models.module.Lessonalert;
 import models.module.Lessoncontent;
 import models.module.Module;
+import models.test.question.Question;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -135,6 +136,18 @@ public class ProfessorLessonController extends Controller {
 		return redirect(routes.Application.lesson(module_acronym,lesson.acronym));
 	}
 	
-	
+	public static Result deletequestion(String module_acronym, String lesson_acronym,Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+
+		User user = User.find.byId(session("email"));
+			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+				Question question= Question.find.byId(question_id);
+				question.delete();
+				question.save();
+			}
+		
+		
+		return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
+	}
 	
 }

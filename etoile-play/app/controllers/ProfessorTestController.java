@@ -61,6 +61,36 @@ public class ProfessorTestController extends Controller {
 		
 	}
 	
+	public static Result publish(String module_acronym, String lesson_acronym, Long test_id){
+		Module module = Module.findByAcronym(module_acronym);
+
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Test test=Test.find.byId(test_id);
+			test.published=true;
+			test.save();
+			
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+		}
+
+		return redirect(routes.Application.module(module.acronym));
+	}
+
+	public static Result unpublish(String module_acronym, String lesson_acronym, Long test_id){		
+		Module module = Module.findByAcronym(module_acronym);
+
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Test test=Test.find.byId(test_id);
+			test.published=false;
+			test.save();
+			
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+		}
+
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
 	
 	
 	public static Result addtest(String module_acronym, String lesson_acronym){

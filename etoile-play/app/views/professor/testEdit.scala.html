@@ -145,7 +145,7 @@
 								Add Question <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="@routes.ProfessorTestController.editopenquestion(module.acronym, lesson.acronym, test.id,group.id)">Open question</a></li>
+								<li><a href="@routes.ProfessorTestController.addopenquestionform(module.acronym, lesson.acronym, test.id,group.id)">Open question</a></li>
 								<li><a href="#">One choice question</a></li>
 								<li><a href="#">Multiple choice question</a></li>
 							</ul>
@@ -169,7 +169,7 @@
 <td>
 					@if(question.typeOfQuestion==0){
 					<span class="btn-group pull-right"> <a
-							class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editopenquestion(module.acronym, lesson.acronym, test.id,group.id)" data-toggle="modal">edit</a>
+							class="btn btn-mini btn-warning" href="" data-toggle="modal">edit</a>
 							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
 							role="button">delete</a>
 					</span>

@@ -133,13 +133,13 @@
       <div id="legend" class="">
         <legend class="">Question Form</legend>
       </div>			
-      					@helper.form(routes.ProfessorModuleController.editmoduletitle(module.acronym),'class->"form-horizontal"){
+      					@helper.form(routes.ProfessorTestController.addopenquestion(module.acronym, lesson.acronym, test.id, group.id),'class->"form-horizontal"){
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="qanswer">Test</textarea>
+						<textarea  class="span12" rows="10" name="question">Test</textarea>
 						
 						
 						<label>Model Answer</label>
-						<textarea  class="span12" rows="10" name="qanswer">Test</textarea>
+						<textarea  class="span12" rows="10" name="suggestedanswer">Test</textarea>
 						
 						<p><p>
 						
@@ -148,7 +148,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Keywords</label>
 										<div class="controls">
-											<input name="title" type="text" value=""
+											<input name="keywords" type="text" value=""
 												class="input-xlarge">
 											<p class="help-block">Question keyword</p>
 										</div>
@@ -166,7 +166,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Image</label>
 										<div class="controls">
-											<input name="title" type="text" value=""
+											<input name="image" type="text" value=""
 												class="input-xlarge">
 											<p class="help-block">Question image URL</p>
 										</div>
@@ -177,7 +177,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Video</label>
 										<div class="controls">
-											<input name="title" type="text" value=""
+											<input name="video" type="text" value=""
 												class="input-xlarge">
 											<p class="help-block">Question video URL</p>
 										</div>
@@ -186,7 +186,7 @@
 									
 									
 									
-							
+						<hr>
 						<h3>Weight</h3>
 						
 						<div class="control-group">
@@ -194,7 +194,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight</label>
 										<div class="controls">
-											<input name="title" type="text" value=""
+											<input name="weight" type="text" value=""
 												class="input-xlarge">
 											<p class="help-block">Question Weight</p>
 										</div>
@@ -205,11 +205,21 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight to lose</label>
 										<div class="controls">
-											<input name="title" type="text" value=""
+											<input name="weighttolose" type="text" value=""
 												class="input-xlarge">
 											<p class="help-block">Question Weight to lose</p>
 										</div>
 									</div>
+									
+									<div class="control-group">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success">Add Question</button>
+							</div>
+						</div>
+						
 						}
 						</div>
 					</div>

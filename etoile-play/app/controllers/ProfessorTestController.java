@@ -43,17 +43,79 @@ public class ProfessorTestController extends Controller {
 		
 		
 	}
-	public static Result editopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+	
+	public static class NewQuestion_Form {
+		
+		public String question;
+		
+		public String suggestedanswer;
+		
+		public String keywords;
+		
+		public String image;
+		
+		public String video;
+		
+		public int weight;
+		
+		public int weighttolose;
+		
+		
+	}
+	
+	
+	public static Result addopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+		System.out.println("ADD OPEN QUESTION FORM");
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		for(Question q: lesson.questions){
-			if(q.user!= null){
-				q.user.refresh();
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			for(Question q: lesson.questions){
+				if(q.user!= null){
+					q.user.refresh();
+				}
 			}
+			return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group));
 		}
-		return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group));
+		
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	public static Result addopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+		System.out.println("ADD OPEN QUESTION");
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<NewQuestion_Form> form = form(NewQuestion_Form.class).bindFromRequest();
+			Question question = new Question();
+//			q.group.add(group);
+			question.lesson = lesson;
+			question.question = form.get().question;
+			question.answerSuggestedByStudent = form.get().suggestedanswer;
+			question.keywords = form.get().keywords;
+			question.imageURL = form.get().image;
+			question.videoURL = form.get().video;
+			question.weight = form.get().weight;
+			question.weightToLose = form.get().weighttolose;
+			question.user = user;
+			question.number = group.questions.size()+1;
+			question.typeOfQuestion = 0;
+			
+			question.save();
+			
+			group.questions.add(question);
+			group.save();
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
+		}
+		
+		return redirect(routes.Application.module(module_acronym));
 	}
 	
 	public static class NewGroup_Form{

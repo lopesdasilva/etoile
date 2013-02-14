@@ -475,7 +475,7 @@ public class Global extends GlobalSettings {
 			lesson_net4.acronym = "netConnect";
 			lesson_net4.description = "This lesson presents... (to complete)";
 			lesson_net4.shortDescription = "This lesson presents... (to complete)";
-			lesson_net4.imageURL = "http://www.";
+			lesson_net4.imageURL = "http://bio.informatik.uni-jena.de/wp/wp-content/uploads/2010/11/leukemia3_vor_pidr.png";
 			lesson_net4.save();
 			
 			Lesson lesson_net5 = new Lesson();
@@ -484,7 +484,7 @@ public class Global extends GlobalSettings {
 			lesson_net5.acronym = "netPercol";
 			lesson_net5.description = "This lesson presents... (to complete)";
 			lesson_net5.shortDescription = "This lesson presents... (to complete)";
-			lesson_net5.imageURL = "http://bio.informatik.uni-jena.de/wp/wp-content/uploads/2010/11/leukemia3_vor_pidr.png";
+			lesson_net5.imageURL = "http://pilarlopezsophrologue.files.wordpress.com/2011/01/k-listo-sophrologie-pilar-lopez-sexo-domino-atelier-saint-valentin.jpg";
 			lesson_net5.save();
 			
 			Lesson lesson_net6 = new Lesson();

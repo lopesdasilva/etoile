@@ -614,9 +614,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			User user = User.find.byId(session("email"));
 			Module module = Module.findByAcronym(module_acronym);
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-				Test test=Test.find.byId(test_id);
 				
-
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
 				questiongroup.delete();
 
@@ -653,4 +651,21 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		return redirect(routes.Application.module(module.acronym));
 		}
 		
+		public static Result editgroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
+			User user = User.find.byId(session("email"));
+			Module module = Module.findByAcronym(module_acronym);
+			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+				Test test=Test.find.byId(test_id);
+				Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
+
+				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
+				questiongroup.question=form.get().question;
+				questiongroup.save();
+
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+		}
+		
+		return redirect(routes.Application.module(module.acronym));
+
+		}
 }

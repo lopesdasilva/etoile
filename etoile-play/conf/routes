@@ -90,7 +90,7 @@ POST /modules/:module/:lesson/addtest		controllers.ProfessorTestController.addte
 POST /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController.edittesttitle(module: String, lesson: String, test: Long)
 GET /modules/:module/:lesson/edittest/:test/:group/removequestion/:question controllers.ProfessorTestController.removequestion(module: String,lesson: String,test: Long,group: Long,question: Long)
 GET /modules/:module/:lesson/edittest/:test		controllers.ProfessorTestController.edittest(module: String, lesson: String, test: Long)
-GET /modules/:module/:lesson/edittest/:test/editgroup/ controllers.ProfessorTestController.editgroup(module: String, lesson: String, test: Long, group: Long)   
+GET /modules/:module/:lesson/edittest/:test/:group/editgroup controllers.ProfessorTestController.editgroup(module: String, lesson: String, test: Long, group: Long)   
 GET /modules/:module/:lesson/edittest/:test/:group/addopenquestion	controllers.ProfessorTestController.addopenquestion(module: String, lesson: String, test: Long, group: Long)		
 GET /modules/:module/:lesson/edittest/:test/addopenquestionform/:group	controllers.ProfessorTestController.addopenquestionform(module: String, lesson: String, test: Long, group: Long)		
 GET /modules/:module/:lesson/edittest/:test/editopenquestionform/group/:group/:question	controllers.ProfessorTestController.editopenquestionform(module: String, lesson: String, test: Long, group: Long, question: Long)		

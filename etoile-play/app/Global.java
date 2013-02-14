@@ -446,11 +446,11 @@ public class Global extends GlobalSettings {
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Module module_demo = new Module();
-			module_demo.name = "Demo";
+			module_demo.name = "Demo for using the platform";
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";
-			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical coherence.";
+			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical goal or coherence.";
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
@@ -462,6 +462,7 @@ public class Global extends GlobalSettings {
 			lesson_two.module = module_demo;
 			lesson_two.save();
 			
+			/*
 			Module module = new Module();
 			module.name = "Mathematics";
 			module.acronym="math101";
@@ -471,19 +472,23 @@ public class Global extends GlobalSettings {
 			//module.lessons.add(lesson_one);
 			//module.lessons.add(lesson_two);
 			module.save();
+			*/
 			 
+			/*
 			Module module_two = new Module();
 			module_two.name = "Statistics";
 			module_two.acronym="stats101";
 			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of... This module is empty for now. Would you like to propose a module on Statistics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_two.save();
+			*/
 			
 			Module module_three = new Module();
-			module_three.name = "Social Science";
-			module_three.acronym="socscience";
-			module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
-			module_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to... This module is empty for now. Would you like to propose a module on Social Science? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
+			module_three.name = "Non-Equilibrium Social Science";
+			module_three.acronym="ness";
+			//module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			module_three.imageURL = "assets/images/modules/ness_logo_unequilibrium_version_light_for_etoile.jpg";
+			module_three.description = "This module will introduce the main concepts in Non-Equilibrium Social Science.";
 			module_three.save();
 			
 			
@@ -492,7 +497,7 @@ public class Global extends GlobalSettings {
 			module_four.acronym="netsci_01";
 			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
-			module_four.description = "This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. ";
+			module_four.description = "This module will present the State-of-the-Art in Network Science, including both theory and examples. ";
 			//module_four.lessons.add(lesson_one);
 			//module_four.lessons.add(lesson_two);
 			module_four.save();
@@ -641,7 +646,7 @@ public class Global extends GlobalSettings {
 			
 			p.modules.add(module_demo);
 			p.save();
-			module.save();
+			//module.save();
 			
 			p.contents.add(pc);
 			pc.professor=p;
@@ -736,11 +741,11 @@ public class Global extends GlobalSettings {
 			university.continent=europe;
 			university.save();
 			
-			module.university=university;
+			//module.university=university;
 			module_three.university=university;
 			//module_two.university=university;
 			module_four.university=university;
-			module.save();
+			//module.save();
 			//module_two.save();
 			module_three.save();
 			module_four.save();

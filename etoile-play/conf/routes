@@ -97,8 +97,10 @@ GET /modules/:module/:lesson/edittest/:test/editopenquestionform/group/:group/:q
 GET /modules/:module/:lesson/edittest/:test/editopenquestion/group/:group/:question	controllers.ProfessorTestController.editopenquestion(module: String, lesson: String, test: Long, group: Long, question: Long)		
 
 GET /modules/:module/:lesson/edittest/:test/onechoicequestionform/:group	controllers.ProfessorTestController.addonechoicequestionform(module: String, lesson: String, test: Long, group: Long)		
-GET /modules/:module/:lesson/edittest/:test/:group/addonechoicequestion	controllers.ProfessorTestController.addonechoicequestion(module: String, lesson: String, test: Long, group: Long)		
+GET /modules/:module/:lesson/edittest/:test/addonechoicequestion/:group	controllers.ProfessorTestController.addonechoicequestion(module: String, lesson: String, test: Long, group: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/addhypothesisform/:question	controllers.ProfessorTestController.addhypothesisform(module: String, lesson: String, test: Long, group: Long, question:Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/addhypothesis/:question	controllers.ProfessorTestController.addhypothesis(module: String, lesson: String, test: Long, group: Long, question:Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/changerightonechoiceanswer/:hypothesis	controllers.ProfessorTestController.changerightonechoiceanswer(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis:Long)		
 
 
 GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestController.addgroup(module: String, lesson: String, test: Long)	

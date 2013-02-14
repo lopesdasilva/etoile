@@ -188,13 +188,29 @@ public class ProfessorTestController extends Controller {
 			
 			group.questions.add(question);
 			group.save();
-			return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
-			//return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+			//return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+			return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 		}
 		
 		return redirect(routes.Application.module(module_acronym));
 	}
 	
+	public static Result addhypothesisform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			
+			return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+		}
+		
+		return redirect(routes.Application.module(module_acronym));
+
+	}
 	public static Result addonechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -225,7 +241,10 @@ public class ProfessorTestController extends Controller {
 			
 			Form<newHypothesis_form> form = form(newHypothesis_form.class).bindFromRequest();
 			Hypothesis hypothesis = new Hypothesis();
-			hypothesis.number = question.hypothesislist.size();
+			if(question.hypothesislist.size()==0){
+				hypothesis.isCorrect = true;
+			}
+			hypothesis.number = question.hypothesislist.size()+1;
 			hypothesis.question = question;
 			hypothesis.text = form.get().hypothesis;
 			hypothesis.save();
@@ -233,9 +252,32 @@ public class ProfessorTestController extends Controller {
 			question.hypothesislist.add(hypothesis);
 			question.save();
 			
-			return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+			return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 		}
 		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	public static Result changerightonechoiceanswer(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		Hypothesis hypothesis_selected = Hypothesis.find.byId(hypothesis_id);
+		
+		System.out.println("####" + question.hypothesislist.size());
+		for(Hypothesis h: question.hypothesislist){
+			if(h.id != hypothesis_selected.id){
+				h.isCorrect = false;
+				h.save();
+			}else{
+				h.isCorrect = true;
+				h.save();
+			}
+		}
+		return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+
 	}
 	
 	public static Result reusequestionadd(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){

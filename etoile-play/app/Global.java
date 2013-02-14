@@ -440,6 +440,97 @@ public class Global extends GlobalSettings {
 			lesson_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
 			lesson_two.save();
 			
+			// Lessons for the Network Theory module
+			
+			Lesson lesson_net1 = new Lesson();
+			lesson_two.name = "Introduction";
+			lesson_two.number=3;
+			lesson_two.acronym = "netIntro";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net2 = new Lesson();
+			lesson_two.name = "Graphs, Networks, Trees and Lattices";
+			lesson_two.number=4;
+			lesson_two.acronym = "netGraphs";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net3 = new Lesson();
+			lesson_two.name = "Random Networks, Scale-free Networks & Power Laws";
+			lesson_two.number=5;
+			lesson_two.acronym = "netRandom";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net4 = new Lesson();
+			lesson_two.name = "Connectivity: Small Worlds, Clustering and Community Detection";
+			lesson_two.number=6;
+			lesson_two.acronym = "netConnect";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net5 = new Lesson();
+			lesson_two.name = "Percolation, Cascades and Epidemics";
+			lesson_two.number=7;
+			lesson_two.acronym = "netPercol";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net6 = new Lesson();
+			lesson_two.name = "Assessment-1";
+			lesson_two.number=8;
+			lesson_two.acronym = "netAssess-1";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net7 = new Lesson();
+			lesson_two.name = "Hypergraphs, Hypernetworks";
+			lesson_two.number=9;
+			lesson_two.acronym = "netHyper";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net8 = new Lesson();
+			lesson_two.name = "Networks of Networks & Multilevel Systems";
+			lesson_two.number=10;
+			lesson_two.acronym = "netNet";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net9 = new Lesson();
+			lesson_two.name = "Examples, Big Data & Visualization";
+			lesson_two.number=11;
+			lesson_two.acronym = "netExamples";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
+			
+			Lesson lesson_net10 = new Lesson();
+			lesson_two.name = "Assessment-2";
+			lesson_two.number=12;
+			lesson_two.acronym = "netAssess-2";
+			lesson_two.description = "";
+			lesson_two.shortDescription = "";
+			lesson_two.imageURL = "http://www.";
+			lesson_two.save();
 		
 			
 			

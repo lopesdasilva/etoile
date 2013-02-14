@@ -215,6 +215,15 @@ public class ProfessorTestController extends Controller {
 			test.published=false;
 			test.save();
 			
+			for(UserTest usertest :test.users){
+				if(!usertest.submitted){
+					
+					usertest.delete();
+				}
+				
+				
+			}
+			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}
 

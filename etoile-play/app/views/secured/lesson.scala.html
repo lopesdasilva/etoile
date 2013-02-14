@@ -125,9 +125,16 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
-										<td>@test.expectedDuration</td>
-										
+										<td>@test.expectedDuration
+										@if(user.tests.contains(test)){
+										true
+										}
+										@if(!user.tests.contains(test)){
+										false
+										}
+										</td>
 										@for(usertest<-user.tests){
+										
 										<!-- IF1 -->
 										@if(usertest.test.id==test.id && usertest.inmodule){
 										<td> - </td> 

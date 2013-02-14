@@ -440,17 +440,108 @@ public class Global extends GlobalSettings {
 			lesson_two.imageURL = "http://www.coolmath4kids.com/long-division/images/long-division-30.gif";
 			lesson_two.save();
 			
+			// Lessons for the Network Theory module
+			
+			Lesson lesson_net1 = new Lesson();
+			lesson_net1.name = "Introduction";
+			lesson_net1.number=3;
+			lesson_net1.acronym = "netIntro";
+			lesson_net1.description = "This lesson introduces the Network Theory module.";
+			lesson_net1.shortDescription = "This lesson introduces the Network Theory module.";
+			lesson_net1.imageURL = "http://www.mba.master.unipi.it/images/Linkedin_web.jpg";
+			lesson_net1.save();
+			
+			Lesson lesson_net2 = new Lesson();
+			lesson_net2.name = "Graphs, Networks, Trees and Lattices";
+			lesson_net2.number=4;
+			lesson_net2.acronym = "netGraphs";
+			lesson_net2.description = "This lesson presents... (to complete)";
+			lesson_net2.shortDescription = "This lesson presents... (to complete)";
+			lesson_net2.imageURL = "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Directed_acyclic_graph_3.svg/356px-Directed_acyclic_graph_3.svg.png";
+			lesson_net2.save();
+			
+			Lesson lesson_net3 = new Lesson();
+			lesson_net3.name = "Random Networks, Scale-free Networks & Power Laws";
+			lesson_net3.number=5;
+			lesson_net3.acronym = "netRandom";
+			lesson_net3.description = "This lesson presents... (to complete)";
+			lesson_net3.shortDescription = "This lesson presents... (to complete)";
+			lesson_net3.imageURL = "http://readwrite.com/files/files/opengraph.png";
+			lesson_net3.save();
+			
+			Lesson lesson_net4 = new Lesson();
+			lesson_net4.name = "Connectivity: Small Worlds, Clustering and Community Detection";
+			lesson_net4.number=6;
+			lesson_net4.acronym = "netConnect";
+			lesson_net4.description = "This lesson presents... (to complete)";
+			lesson_net4.shortDescription = "This lesson presents... (to complete)";
+			lesson_net4.imageURL = "http://www.";
+			lesson_net4.save();
+			
+			Lesson lesson_net5 = new Lesson();
+			lesson_net5.name = "Percolation, Cascades and Epidemics";
+			lesson_net5.number=7;
+			lesson_net5.acronym = "netPercol";
+			lesson_net5.description = "This lesson presents... (to complete)";
+			lesson_net5.shortDescription = "This lesson presents... (to complete)";
+			lesson_net5.imageURL = "http://bio.informatik.uni-jena.de/wp/wp-content/uploads/2010/11/leukemia3_vor_pidr.png";
+			lesson_net5.save();
+			
+			Lesson lesson_net6 = new Lesson();
+			lesson_net6.name = "Assessment-1";
+			lesson_net6.number=8;
+			lesson_net6.acronym = "netAssess-1";
+			lesson_net6.description = "This lesson presents... (to complete)";
+			lesson_net6.shortDescription = "This lesson presents... (to complete)";
+			lesson_net6.imageURL = "http://myenglishpages.com/blog/wp-content/uploads/2009/09/assessment.gif";
+			lesson_net6.save();
+			
+			Lesson lesson_net7 = new Lesson();
+			lesson_net7.name = "Hypergraphs, Hypernetworks";
+			lesson_net7.number=9;
+			lesson_net7.acronym = "netHyper";
+			lesson_net7.description = "This lesson presents... (to complete)";
+			lesson_net7.shortDescription = "This lesson presents... (to complete)";
+			lesson_net7.imageURL = "http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Hypergraph-wikipedia.svg/262px-Hypergraph-wikipedia.svg.png";
+			lesson_net7.save();
+			
+			Lesson lesson_net8 = new Lesson();
+			lesson_net8.name = "Networks of Networks & Multilevel Systems";
+			lesson_net8.number=10;
+			lesson_net8.acronym = "netNet";
+			lesson_net8.description = "This lesson presents... (to complete)";
+			lesson_net8.shortDescription = "This lesson presents... (to complete)";
+			lesson_net8.imageURL = "http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Diagram_of_a_social_network.jpg/220px-Diagram_of_a_social_network.jpg";
+			lesson_net8.save();
+			
+			Lesson lesson_net9 = new Lesson();
+			lesson_net9.name = "Examples, Big Data & Visualization";
+			lesson_net9.number=11;
+			lesson_net9.acronym = "netExamples";
+			lesson_net9.description = "This lesson presents... (to complete)";
+			lesson_net9.shortDescription = "This lesson presents... (to complete)";
+			lesson_net9.imageURL = "http://t1.gstatic.com/images?q=tbn:ANd9GcTT3GWRYa957yqKCeZhlRkZu0UKQROTZi-4BNs0qvKEM1kP4yL2SA";
+			lesson_net9.save();
+			
+			Lesson lesson_net10 = new Lesson();
+			lesson_net10.name = "Assessment-2";
+			lesson_net10.number=12;
+			lesson_net10.acronym = "netAssess-2";
+			lesson_net10.description = "This lesson presents... (to complete)";
+			lesson_net10.shortDescription = "This lesson presents... (to complete)";
+			lesson_net10.imageURL = "http://myenglishpages.com/blog/wp-content/uploads/2009/09/assessment.gif";
+			lesson_net10.save();
 		
 			
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Module module_demo = new Module();
-			module_demo.name = "Demo";
+			module_demo.name = "Demo for using the platform";
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";
-			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical coherence.";
+			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical goal or coherence.";
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
@@ -462,6 +553,7 @@ public class Global extends GlobalSettings {
 			lesson_two.module = module_demo;
 			lesson_two.save();
 			
+			/*
 			Module module = new Module();
 			module.name = "Mathematics";
 			module.acronym="math101";
@@ -471,19 +563,23 @@ public class Global extends GlobalSettings {
 			//module.lessons.add(lesson_one);
 			//module.lessons.add(lesson_two);
 			module.save();
+			*/
 			 
+			/*
 			Module module_two = new Module();
 			module_two.name = "Statistics";
 			module_two.acronym="stats101";
 			module_two.imageURL = "http://www.vintank.com/wp-content/uploads/2012/04/stat.jpg";
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of... This module is empty for now. Would you like to propose a module on Statistics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_two.save();
+			*/
 			
 			Module module_three = new Module();
-			module_three.name = "Social Science";
-			module_three.acronym="socscience";
-			module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
-			module_three.description = "Social science refers to the academic disciplines concerned with society and human behavior. Social science is commonly used as an umbrella term to refer to... This module is empty for now. Would you like to propose a module on Social Science? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
+			module_three.name = "Non-Equilibrium Social Science";
+			module_three.acronym="ness";
+			//module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
+			module_three.imageURL = "assets/images/modules/ness_logo_unequilibrium_version_light_for_etoile.jpg";
+			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
 			module_three.save();
 			
 			
@@ -492,10 +588,39 @@ public class Global extends GlobalSettings {
 			module_four.acronym="netsci_01";
 			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
-			module_four.description = "This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. This is the introduction to the module Network Science. ";
-			//module_four.lessons.add(lesson_one);
-			//module_four.lessons.add(lesson_two);
+			module_four.description = "This module presents the State-of-the-Art in Network Science, including both theory and examples. ";
+			module_four.lessons.add(lesson_net1);
+			module_four.lessons.add(lesson_net2);
+			module_four.lessons.add(lesson_net3);
+			module_four.lessons.add(lesson_net4);
+			module_four.lessons.add(lesson_net5);
+			module_four.lessons.add(lesson_net6);
+			module_four.lessons.add(lesson_net7);
+			module_four.lessons.add(lesson_net8);
+			module_four.lessons.add(lesson_net9);
+			module_four.lessons.add(lesson_net10);
 			module_four.save();
+			
+			lesson_net1.module = module_four;
+			lesson_net1.save();
+			lesson_net2.module = module_four;
+			lesson_net2.save();	
+			lesson_net3.module = module_four;
+			lesson_net3.save();
+			lesson_net4.module = module_four;
+			lesson_net4.save();
+			lesson_net5.module = module_four;
+			lesson_net5.save();
+			lesson_net6.module = module_four;
+			lesson_net6.save();
+			lesson_net7.module = module_four;
+			lesson_net7.save();
+			lesson_net8.module = module_four;
+			lesson_net8.save();
+			lesson_net9.module = module_four;
+			lesson_net9.save();
+			lesson_net10.module = module_four;
+			lesson_net10.save();
 			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
@@ -641,7 +766,7 @@ public class Global extends GlobalSettings {
 			
 			p.modules.add(module_demo);
 			p.save();
-			module.save();
+			//module.save();
 			
 			p.contents.add(pc);
 			pc.professor=p;
@@ -736,11 +861,11 @@ public class Global extends GlobalSettings {
 			university.continent=europe;
 			university.save();
 			
-			module.university=university;
+			//module.university=university;
 			module_three.university=university;
 			//module_two.university=university;
 			module_four.university=university;
-			module.save();
+			//module.save();
 			//module_two.save();
 			module_three.save();
 			module_four.save();

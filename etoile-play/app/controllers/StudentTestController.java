@@ -454,7 +454,25 @@ System.out.println(			q.keywords+"...");/**/
 	public static Result addquestion(Long test_id, String lesson_acronym,
 			String module_acronym) {
 		User user = User.find.byId(request().username());
-		// Test test = models.test.Test.find.byId(test_id);
+		
+		Test test=Test.find.byId(test_id);
+		if(!user.isUserSignupTest(test)){
+			//signup in test
+			UserTest user_test = new UserTest();
+			user_test.user = user;
+			user_test.test = test;
+			user_test.expired = false;
+			user_test.inmodule = false;
+			user_test.submitted = false;
+			user_test.save();
+			user.tests.add(user_test);
+			test.users.add(user_test);
+			user.save();
+			test.save();
+			user_test.save();
+			
+		}
+		
 		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
 		usertest.inmodule = true;
 		usertest.save();
@@ -468,6 +486,9 @@ System.out.println(			q.keywords+"...");/**/
 		
 		Form<OpenAnswerSuggestion> form_answer = form(
 				OpenAnswerSuggestion.class).bindFromRequest();
+		
+		
+		
 		
 		System.out.println("SUGGESTION - question: " + form_question.get().openquestionsuggestion);
 		System.out.println("SUGGESTION - answer: " + form_answer.get().openanswersuggestion);
@@ -483,8 +504,8 @@ System.out.println(			q.keywords+"...");/**/
 		lesson.save();
 		System.out.println("MODULESIZE2: " + lesson.questions.size());
 
-		return ok(views.html.secured.lesson.render(user, categories, lesson,
-				module, form(OpenQuestionSuggestion.class)));
+		
+		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym));
 	}
 	
 	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){

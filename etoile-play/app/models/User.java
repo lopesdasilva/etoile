@@ -7,6 +7,7 @@ import javax.persistence.*;
 import models.test.Answer;
 import models.test.Evaluation;
 import models.test.Hypothesis;
+import models.test.Test;
 import models.test.question.Question;
 import models.test.question.URL;
 import models.manytomany.UserTest;
@@ -124,6 +125,17 @@ public class User extends Model {
     
     public String toString() {
         return username;
+    }
+    
+    public boolean isUserSignupTest(Test t){
+    	System.out.println("ifEstou no signuptest");
+    	boolean signup=false;
+    	for(UserTest usertest: tests){
+    		if(usertest.test.id==t.id)
+    			signup=true;
+    	}
+    	
+    	return signup;
     }
 
 }

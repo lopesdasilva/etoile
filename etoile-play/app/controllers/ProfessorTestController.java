@@ -215,6 +215,15 @@ public class ProfessorTestController extends Controller {
 			test.published=false;
 			test.save();
 			
+			for(UserTest usertest :test.users){
+				if(!usertest.submitted){
+					
+					usertest.delete();
+				}
+				
+				
+			}
+			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}
 
@@ -476,7 +485,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 	}
 		
 		public static Result deletegroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
-			System.out.println("Estou aqui");
+			
 			User user = User.find.byId(session("email"));
 			Module module = Module.findByAcronym(module_acronym);
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -491,5 +500,32 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		
 		return redirect(routes.Application.module(module.acronym));
 	}
+		
+		public static Result removequestion(String module_acronym, String lesson_acronym, Long test_id,Long group_id, Long question_id){
+			User user = User.find.byId(session("email"));
+			Module module = Module.findByAcronym(module_acronym);
+			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+				Test test=Test.find.byId(test_id);
+				for(QuestionGroup group: test.groups){
+					if(group.id==group_id){
+						Question question=Question.find.byId(question_id);
+						group.questions.remove(question);	
+						group.save();
+						int i =1;
+						for(Question q: group.questions){
+							q.number=i;
+							q.save();
+							i++;
+							
+						}
+						}
+					}
+				
+				
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+		}
+		
+		return redirect(routes.Application.module(module.acronym));
+		}
 		
 }

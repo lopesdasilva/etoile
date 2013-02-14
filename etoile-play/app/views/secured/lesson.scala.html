@@ -125,14 +125,11 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 									<tr>
 										<td>@test.id</td>
 										<td>@test.name</td>
-										<td>@test.expectedDuration
-										@if(user.tests.contains(test)){
-										true
-										}
-										@if(!user.tests.contains(test)){
-										false
-										}
-										</td>
+										<td>@test.expectedDuration</td>
+										@if(user.isUserSignupTest(test)){
+										
+										
+										
 										@for(usertest<-user.tests){
 										
 										<!-- IF1 -->
@@ -209,7 +206,49 @@ models.module.Lesson, module: models.module.Module,formSuggestQuestion
 											}
 
 							
+										
 										}
+										}
+										
+										@if(!user.isUserSignupTest(test)){
+															<td> - </td> 
+										<td><a href="#modal@test.id" class="btn btn-danger btn-small"
+											data-toggle="modal">Suggest question&raquo;</a></td> 
+										<td><a class="btn btn-primary btn-small disabled">Solve test&raquo;</a></td>	
+														<!-- MODAL -->
+										<div id="modal@test.id" class="modal hide shown">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">X</button>
+												<h3 id="myModalLabel">New question</h3>
+											</div>
+											<div class="modal-body">
+												<p>
+												<div class="control-group">
+													@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
+
+													<div class="controls">
+														<p>In order to solve the test you firstly need to suggest a QUESTION:</p>
+														<textarea class="span20" rows="5"
+															name="openquestionsuggestion"  placeholder="Please insert your suggestion." style="resize: none"></textarea>
+														<p>In order to solve the test you firstly need to suggest an ANSWER for your question:</p>
+														<textarea class="span20" rows="5"
+															name="openanswersuggestion"
+															placeholder="Please insert your answer suggestion."
+															style="resize: none"></textarea>
+
+														<div class="controls">
+															<button type="submit" class="btn btn-info">Save</button>
+
+														</div>
+														}
+													</div>
+												</div>
+
+											</div>
+										</div>
+										
+										}
+										
 									</tr>
 
 

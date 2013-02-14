@@ -215,8 +215,9 @@
 					<span class="btn-group pull-right"> 
 					<a class="btn btn-mini btn-warning disabled" href="#" data-toggle="modal">edit</a>
 							<a class="btn btn-mini btn-danger disabled" href="#" data-toggle="modal"
-							role="button">delete</a>
+							role="button">remove</a>
 					</span>
+					
 					
 					</td>
 				</tr>
@@ -317,22 +318,40 @@
 					@if(question.typeOfQuestion==0){
 					<span class="btn-group pull-right"> <a
 							class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editopenquestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)" data-toggle="modal">edit</a>
-							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
-							role="button">delete</a>
-					</span>
+							
 					}@if(question.typeOfQuestion==1){
 					<span class="btn-group pull-right"> <a
 							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
-							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
-							role="button">delete</a>
-					</span>
+							
 					}@if(question.typeOfQuestion==2){
 					<span class="btn-group pull-right"> <a
 							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
-							<a class="btn btn-mini btn-danger" href="#" data-toggle="modal"
-							role="button">delete</a>
-					</span>
+							
 					}
+					<a class="btn btn-mini btn-danger" href="#removequestion@question.id" data-toggle="modal"
+							role="button">remove</a>
+					</span>
+					<div id="removequestion@question.id"
+								class="modal hide fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">X</button>
+									<h3>Confirm removal</h3>
+								</div>
+								<div class="modal-body">
+									<p>Are you sure you want to remove this question?</p>
+									<blockquote>Group @group.number</blockquote>
+									<blockquote>Question @question.number</blockquote>
+									<blockquote>@question.question</blockquote>
+								</div>
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+									<a class="btn btn-danger" href="@routes.ProfessorTestController.removequestion(module.acronym,lesson.acronym,test.id,group.id,question.id)">Remove</a>
+								</div>
+
+
+							</div>
 					</td>
 				</tr>
 				}

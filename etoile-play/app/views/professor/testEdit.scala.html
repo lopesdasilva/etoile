@@ -185,6 +185,8 @@
 					<td>
 						<div class="btn-group pull-right">
 							<a class="btn btn-small btn-danger disabled" href="#" role="button">delete</a>
+							<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal">view</a>
+							<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal">edit</a>
 							<a class="btn btn-primary btn-small dropdown-toggle disabled"
 								data-toggle="dropdown">
 								Add Question <span class="caret"></span>
@@ -213,9 +215,10 @@
 					}
 <td>				
 					<span class="btn-group pull-right"> 
+					<a class="btn btn-mini btn-danger disabled"  href="#" data-toggle="modal">remove</a>
+					<a class="btn btn-mini btn-success disabled" href="#" data-toggle="modal">view</a>
 					<a class="btn btn-mini btn-warning disabled" href="#" data-toggle="modal">edit</a>
-							<a class="btn btn-mini btn-danger disabled" href="#" data-toggle="modal"
-							role="button">remove</a>
+							
 					</span>
 					
 					
@@ -261,6 +264,8 @@
 					<td>
 						<div class="btn-group pull-right">
 							<a class="btn btn-small btn-danger" href="#deletegroup@group.id" data-toggle="modal" role="button">delete</a>
+							<a class="btn btn-small btn-success" href="#" data-toggle="modal">view</a>
+							<a class="btn btn-small btn-warning" href="#" data-toggle="modal">edit</a>
 							<a class="btn btn-primary btn-small dropdown-toggle"
 								data-toggle="dropdown">
 								Add Question <span class="caret"></span>
@@ -315,21 +320,22 @@
 					<td> Multiple choice question</td>
 					}
 <td>
+<span class="btn-group pull-right">
+<a class="btn btn-mini btn-danger" href="#removequestion@question.id" data-toggle="modal">remove</a>
 					@if(question.typeOfQuestion==0){
-					<span class="btn-group pull-right"> <a
-							class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editopenquestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)" data-toggle="modal">edit</a>
+					<a class="btn btn-mini btn-success" href="#" data-toggle="modal">view</a>
+					 <a class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editopenquestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)" data-toggle="modal">edit</a>
 							
 					}@if(question.typeOfQuestion==1){
-					<span class="btn-group pull-right"> <a
-							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
+					<a class="btn btn-mini btn-success" href="#" data-toggle="modal">view</a>
+					<a class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
 							
 					}@if(question.typeOfQuestion==2){
-					<span class="btn-group pull-right"> <a
-							class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
+					<a class="btn btn-mini btn-success" href="#" data-toggle="modal">view</a>
+				    <a class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
 							
 					}
-					<a class="btn btn-mini btn-danger" href="#removequestion@question.id" data-toggle="modal"
-							role="button">remove</a>
+					
 					</span>
 					<div id="removequestion@question.id"
 								class="modal hide fade" tabindex="-1" role="dialog"

@@ -3,29 +3,47 @@ test: models.test.Test, group: models.test.question.QuestionGroup,
 usertest: models.manytomany.UserTest) @main("etoile"){
 
 <script>
+var widgetT;
+var options;
+var enable;
+var stepClick;
+var nextT;
+var prevT;
 
-function startNewQuery(q){
-        var options = {
+function TwitterQuery(keywords){
+	var aux=keywords.split(","); 
+	//console.log(aux);
+	document.getElementById("searchingT").value=aux[0];
+	if(aux.length>1){ 
+		var temporal="";
+		for(i=0;i<aux.length;i++) {
+			temporal+='<a href=\"#\" onclick=\'$(\"#tweets\").empty().text("loading ...");document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+', ';
+		}
+		$("#keywordsT").html(temporal);
+		document.getElementById("labelsT").style.display="block";
+	}
+	else document.getElementById("labelsT").style.display="none";
+	
+
+        options = {
 	  //query: ' What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ? ',
-	  query: q,//document.getElementById("searchingT").value,
-	  //query: "naruto",
+	  query: aux[0],//document.getElementById("searchingT").value,
           page: 1,
           avatar_size: 55,
           count: 4,
           loading_text: "loading ..."
         };
 
-        var widgetT = $("#pagingT .widgetT"),
+        widgetT = $("#pagingT .widgetT"),
           nextT = $("#pagingT .nextT"),
           prevT = $("#pagingT .prevT");
-	var keywords = document.getElementById("keywordsT").value;
 //
-        var enable = function(el, yes) {
+        enable = function(el, yes) {
           yes ? $(el).removeAttr('disabled') :
                 $(el).attr('disabled', true);
         };
 
-        var stepClick = function(incr) {
+        stepClick = function(incr) {
           return function() {
             options.page = options.page + incr;
             enable(this, false);
@@ -47,24 +65,35 @@ function startNewQuery(q){
                 $("#tweets").empty().append("No matching tweets found");
             }
             nextT.add(prevT).trigger("checkstate");
-        //next.add(prev).trigger("checkstate");
         });
 }
 
-function TwitterQuery(keywords){
-	var aux=keywords.split(","); 
-	startNewQuery(aux[0]);
-	document.getElementById("searchingT").value=aux[0];
-	if(aux.length>1){ 
-		var temporal="";
-		for(i=0;i<aux.length;i++) {
-			temporal+='<a href=\"#\" onclick=\'document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+', ';
-		}
-		$("#keywordsT").html(temporal);
-		document.getElementById("labelsT").style.display="block";
-	}
-	else document.getElementById("labelsT").style.display="none";
+function startNewQuery(q){
+        options = {
+	  //query: ' What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ? ',
+	  query: q,//document.getElementById("searchingT").value,
+          page: 1,
+          avatar_size: 55,
+          count: 4,
+          loading_text: "loading ..."
+        };
+        widgetT.tweet(options);
+	
+        enable = function(el, yes) {
+          yes ? $(el).removeAttr('disabled') :
+                $(el).attr('disabled', true);
+        };
+
+        stepClick = function(incr) {
+          return function() {
+            options.page = options.page + incr;
+            enable(this, false);
+            widgetT.tweet(options);
+          };
+        };
+	nextT.add(prevT).trigger("checkstate");
 }
+
 
 function searchButton(){
 	document.getElementById("labelsT").style.display="none";

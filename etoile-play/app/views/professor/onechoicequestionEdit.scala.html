@@ -1,4 +1,4 @@
-@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup) @main("etoile"){
+@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup, question: models.test.question.Question) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -55,11 +55,11 @@
 				<div class="well span11">
 				 <fieldset>
       <div id="legend" class="">
-        <legend class="">Question Form</legend>
+        <legend class="">Question Edit Form</legend>
       </div>			
-      					@helper.form(routes.ProfessorTestController.addonechoicequestion(module.acronym, lesson.acronym, test.id, group.id),'class->"form-horizontal"){
+      					@helper.form(routes.ProfessorTestController.editonechoicequestion(module.acronym, lesson.acronym, test.id, group.id, question.id),'class->"form-horizontal"){
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="question">Test</textarea>
+						<textarea  class="span12" rows="10" name="question">@question.question</textarea>
 						
 						
 						
@@ -71,7 +71,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Keywords</label>
 										<div class="controls">
-											<input name="keywords" type="text" value=""
+											<input name="keywords" type="text" value="@question.keywords"
 												class="input-xlarge">
 											<p class="help-block">Keywords related to this question</p>
 										</div>
@@ -89,7 +89,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Image</label>
 										<div class="controls">
-											<input name="image" type="text" value=""
+											<input name="image" type="text" value="@question.imageURL"
 												class="input-xlarge">
 											<p class="help-block">Question image URL</p>
 										</div>
@@ -100,7 +100,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Video</label>
 										<div class="controls">
-											<input name="video" type="text" value=""
+											<input name="video" type="text" value="@question.videoURL"
 												class="input-xlarge">
 											<p class="help-block">Question video URL</p>
 										</div>
@@ -117,7 +117,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight</label>
 										<div class="controls">
-											<input name="weight" type="text" value=""
+											<input name="weight" type="text" value="@question.weight"
 												class="input-xlarge">
 											<p class="help-block">Weight of this question</p>
 										</div>
@@ -128,7 +128,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight to Lose</label>
 										<div class="controls">
-											<input name="weighttolose" type="text" value=""
+											<input name="weighttolose" type="text" value="@question.weightToLose"
 												class="input-xlarge">
 											<p class="help-block">Weight to lose if  student fail this question</p>
 										</div>
@@ -140,7 +140,7 @@
 
 							<!-- Button -->
 							<div class="controls">
-								<button class="btn btn-success">Add Question</button>
+								<button class="btn btn-success">Next</button>
 							</div>
 						</div>
 						

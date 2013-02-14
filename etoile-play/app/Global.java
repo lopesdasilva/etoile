@@ -765,6 +765,8 @@ public class Global extends GlobalSettings {
 			p.save();
 			
 			p.modules.add(module_demo);
+			p.modules.add(module_four);
+			p.modules.add(module_three);
 			p.save();
 			//module.save();
 			

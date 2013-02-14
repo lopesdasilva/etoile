@@ -19,6 +19,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.secured.question.question;
 import controllers.ProfessorLessonController.LessonDescription_Form;
 import controllers.secured.SecuredProfessor;
 
@@ -46,7 +47,7 @@ public class ProfessorTestController extends Controller {
 		
 	}
 	
-	public static class OpenQuestion_Form {
+	public static class Question_Form {
 		
 		public String question;
 		
@@ -60,7 +61,13 @@ public class ProfessorTestController extends Controller {
 		
 		public int weight;
 
+		public int weighttolose;
 		
+	}
+	
+	public static class newHypothesis_form {
+		
+		public String hypothesis;
 		
 	}
 	
@@ -92,7 +99,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<OpenQuestion_Form> form = form(OpenQuestion_Form.class).bindFromRequest();
+			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
 			Question question = new Question();
 //			q.group.add(group);
 			question.lesson = lesson;
@@ -142,7 +149,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<OpenQuestion_Form> form = form(OpenQuestion_Form.class).bindFromRequest();
+			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
@@ -153,6 +160,82 @@ public class ProfessorTestController extends Controller {
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
 		}
 		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result addonechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Question question = new Question();
+//			q.group.add(group);
+			question.lesson = lesson;
+			question.question = form.get().question;
+			question.keywords = form.get().keywords;
+			question.imageURL = form.get().image;
+			question.videoURL = form.get().video;
+			question.weight = form.get().weight;
+			question.weightToLose = form.get().weighttolose;
+			question.user = user;
+			question.number = group.questions.size()+1;
+			question.typeOfQuestion = 1;
+			
+			question.save();
+			
+			group.questions.add(question);
+			group.save();
+			return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+			//return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result addonechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			for(Question q: lesson.questions){
+				if(q.user!= null){
+					q.user.refresh();
+				}
+			}
+			return ok(views.html.professor.onechoicequestionAdd.render(module,lesson,test, group));
+		}
+		
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	public static Result addhypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			
+			Form<newHypothesis_form> form = form(newHypothesis_form.class).bindFromRequest();
+			Hypothesis hypothesis = new Hypothesis();
+			hypothesis.number = question.hypothesislist.size();
+			hypothesis.question = question;
+			hypothesis.text = form.get().hypothesis;
+			hypothesis.save();
+			
+			question.hypothesislist.add(hypothesis);
+			question.save();
+			
+			return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+		}
+		return redirect(routes.Application.module(module.acronym));
 	}
 	
 	public static Result reusequestionadd(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){

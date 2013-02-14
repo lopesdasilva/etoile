@@ -1,0 +1,130 @@
+@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup, question: models.test.question.Question) @main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) { <a href="/logout" role="button"
+						class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container">
+
+
+
+	<div class="page-header">
+		<h2>
+			@test.name <small><a href="#editTestModal"
+				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
+			<br> <small>@test.text</small>
+			@question.question
+		</h2>
+	</div>
+
+						<div class="row-fluid">
+								<p>
+						<hr>
+						<h3>Hypothesis</h3>
+						<div class="tab-pane" id="tests">
+							<table class="table table-striped" >
+								<thead>
+									<tr>
+										<th>Number</th>
+										<th>Hypothesis Text</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								@if(question.hypothesislist!=null){
+									@for(hypothesis <- question.hypothesislist){
+									<tr>
+										<td>@hypothesis.number</td>
+										<td>@hypothesis.text</td>
+										<td>
+										<span class="btn-group pull-right">
+										<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">open</a>
+										<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal" >edit</a>
+										<a class="btn btn-small btn-danger disabled"  href="#" data-toggle="modal" role="button">delete</a>
+
+										</td>
+									</tr>
+									}
+									}
+									
+								</tbody>
+							</table>
+							<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#addHypothesisModal" type="button">Add hypothesis</a></br>
+							
+							
+						</div>
+						</div>
+						
+						<div id="addHypothesisModal" class="modal hide fade" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">X</button>
+							<h3 id="myModalLabel">New Hypothesis</h3>
+						</div>
+						<div class="modal-body">
+							@helper.form(routes.ProfessorTestController.addhypothesis(module.acronym, lesson.acronym, test.id, group.id, question.id),'class->"form-horizontal"){
+							
+							<div class="control-group">
+
+										<!-- Text input-->
+										<label class="control-label" for="input01">Hypothesis</label>
+										<div class="controls">
+											<input name="hypothesis" type="text" value=""
+												class="input-xlarge">
+										</div>
+									</div>
+									
+									<div class="controls">
+								<button class="btn btn-success">Add Hypothesis</button>
+							</div>
+							}
+						</div>
+						<div class="modal-footer">
+														<button class="btn" data-dismiss="modal"
+															aria-hidden="true">Close</button>
+													</div>
+					</div>
+						</div>
+						
+
+<div class="pull-right">
+<a href="@routes.ProfessorTestController.edittest(module.acronym, lesson.acronym, test.id)" role="button" class="btn">Return to Test Edit</a>
+</div>	
+</div>
+
+
+}

@@ -46,7 +46,7 @@ public class StudentTestController extends Controller {
 
 	public static class MultipleChoiceQuestionAnswer {
 
-		public int[] mcqanswers = new int[4];
+		public int[] mcqanswers = new int[10];
 	}
 
 	public static class OpenQuestionSuggestion {

@@ -537,7 +537,7 @@ public class Global extends GlobalSettings {
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
 			Module module_demo = new Module();
-			module_demo.name = "Demo for using the platform";
+			module_demo.name = "Demo for testing the platform";
 			module_demo.acronym="demo1";
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";

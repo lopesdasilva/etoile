@@ -10,6 +10,24 @@ var stepClick;
 var nextT;
 var prevT;
 
+
+function validateUrl() {
+	var regexp = /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
+	var result = regexp.test(document.getElementsByName("url")[0].value.toString());
+	if(result) {
+		$("#ErrorMessage").empty();
+		//$("#formBlock").show();
+		console.log("Correctou");
+		return true;
+	}
+	else {
+		$("#ErrorMessage").empty().text("You're drunk");
+		//$("#formBlock").hide();
+		return false;
+	}
+}
+
+
 function TwitterQuery(keywords){
 	var aux=keywords.split(","); 
 	//console.log(aux);
@@ -290,6 +308,12 @@ function searchButton(){
 				</div>
 				<!-- END All URL Modal -->
 
+
+
+
+
+
+
 				<!-- ADD URL Modal -->
 				<div id="ADDURL@question.number" class="modal hide fade">
 					<div class="modal-header">
@@ -297,11 +321,38 @@ function searchButton(){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-						<input id="enterUrl">lalallallala</input>
+				@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'onSubmit->"return validateUrl();"){
+						<div class="control-group">
+							<label class="control-label" for="input01">New URL</label>
+							<div class="controls">
+								<input type="text" placeholder="Insert the new URL"
+									class="input-xlarge" name="url">
+								<label id="ErrorMessage" class="control-label"></label>
+							</div>
+						</div>
+						<div class="control-group">
+										<label class="control-label"></label>
+
+										<!-- Button -->
+										<div class="controls">
+											<button type="submit" class="btn btn-success">Save</button>
+										</div>
+						</div>
+				}				
+						
 					</div>
 				</div>
 				<!-- END ADD URL Modal -->
 				
+
+
+
+
+
+
+
+
+
 				<!-- GENERAL HELP Modal -->
 				<div id="generalhelp" class="modal hide fade">
 					<div class="modal-header">

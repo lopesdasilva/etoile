@@ -27,6 +27,17 @@ import play.mvc.Result;
 import play.mvc.Security;
 import controllers.secured.*;
 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Manage Test related operations.
  */
@@ -81,7 +92,7 @@ public class StudentTestController extends Controller {
 					test_id);
 			
 			if (question_number<=test.groups.size() && question_number>0){
-				System.out.println("A imprimir as questoes");
+				//System.out.println("A imprimir as questoes");
 				
 				QuestionGroup group = test.groups.get((int) (question_number-1));
 				
@@ -94,7 +105,7 @@ public class StudentTestController extends Controller {
 				group_aux.test = group.test;
 				group_aux.videoURL = group.videoURL;
 				
-				System.out.println("Group_aux created");
+				//System.out.println("Group_aux created");
 				
 				for(Question q: group.questions){
 					Question q_aux = new Question();
@@ -112,7 +123,7 @@ public class StudentTestController extends Controller {
 					//q_aux.hypothesislist?????
 					group_aux.questions.add(q_aux);
 					
-					System.out.println("QUESTION: "+q.id);
+					//System.out.println("QUESTION: "+q.id);
 					if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
 						
 					List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
@@ -186,7 +197,7 @@ public class StudentTestController extends Controller {
 		
 		
 		if (question_number<=test.groups.size() && question_number>0){
-		System.out.println("A imprimir as questoes");
+		//System.out.println("A imprimir as questoes");
 		
 		QuestionGroup group = test.groups.get(question_number-1);
 		
@@ -199,7 +210,7 @@ public class StudentTestController extends Controller {
 		group_aux.test = group.test;
 		group_aux.videoURL = group.videoURL;
 		
-		System.out.println("Group_aux created");
+		//System.out.println("Group_aux created");
 		
 		for(Question q: group.questions){
 			Question q_aux = new Question();
@@ -217,7 +228,7 @@ public class StudentTestController extends Controller {
 			//q_aux.hypothesislist?????
 			group_aux.questions.add(q_aux);
 			
-			System.out.println("QUESTION: "+q.id);
+			//System.out.println("QUESTION: "+q.id);
 			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
 				
 			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
@@ -245,10 +256,6 @@ public class StudentTestController extends Controller {
 			
 			
 			}
-		for(Question q: group_aux.questions){
-System.out.println(			q.keywords+"...");/**/
-
-		}
 		
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
@@ -519,14 +526,121 @@ System.out.println(			q.keywords+"...");/**/
 		return question(question_number, test_id, lesson_acronym, module_acronym);
 		
 	}
+
+    public static String IMG;
+    public static String DESCR;
+        
+    public static void getImage(String url) throws IOException {
+        java.net.URL u = new java.net.URL(url);
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        conn.connect();
+        
+        // ContentType is an inner class defined below
+        ContentType contentType = getContentTypeHeader(conn);
+        if (!contentType.contentType.equals("text/html") || conn.getResponseCode()!=200){
+            IMG=null;
+            DESCR=null;
+        }
+        else {
+            // determine the charset, or use the default
+            Charset charset = getCharset(contentType);
+            if (charset == null)
+                charset = Charset.defaultCharset();
+ 
+            // read the response body, using BufferedReader for performance
+            InputStream in = conn.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
+            int n = 0, totalRead = 0;
+            char[] buf = new char[1024];
+            StringBuilder content = new StringBuilder();
+ 
+            // read until EOF or first 8192 characters
+            while (totalRead < 8192 && (n = reader.read(buf, 0, buf.length)) != -1) {
+                content.append(buf, 0, n);
+                totalRead += n;
+            }
+            reader.close();
+ 
+            // extract the title
+            Pattern pattern = Pattern.compile("<meta property=\"og:image\" content=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(content);
+            if (matcher.find()) {
+                
+                IMG = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
+            }
+            else {
+                pattern = Pattern.compile("<link rel=\"apple-touch-icon\" href=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+                matcher = pattern.matcher(content);
+                if (matcher.find()) {
+                    IMG = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
+                }
+                else IMG = null;
+            }
+            
+            pattern = Pattern.compile("<meta property=\"og:description\" content=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+            matcher = pattern.matcher(content);
+            if (matcher.find()) {
+                DESCR = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
+            }
+            else DESCR=null;
+        }
+    }
+ 
+    private static ContentType getContentTypeHeader(URLConnection conn) {
+        int i = 0;
+        boolean moreHeaders = true;
+        do {
+            String headerName = conn.getHeaderFieldKey(i);
+            String headerValue = conn.getHeaderField(i);
+            if (headerName != null && headerName.equals("Content-Type"))
+                return new ContentType(headerValue);
+ 
+            i++;
+            moreHeaders = headerName != null || headerValue != null;
+        }
+        while (moreHeaders);
+ 
+        return null;
+    }
+ 
+    private static Charset getCharset(ContentType contentType) {
+        if (contentType != null && contentType.charsetName != null && Charset.isSupported(contentType.charsetName))
+            return Charset.forName(contentType.charsetName);
+        else
+            return null;
+    }
+ 
+    private static final class ContentType {
+        private static final Pattern CHARSET_HEADER = Pattern.compile("charset=([-_a-zA-Z0-9]+)", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+ 
+        private String contentType;
+        private String charsetName;
+        private ContentType(String headerValue) {
+            if (headerValue == null)
+                throw new IllegalArgumentException("ContentType must be constructed with a not-null headerValue");
+            int n = headerValue.indexOf(";");
+            if (n != -1) {
+                contentType = headerValue.substring(0, n);
+                Matcher matcher = CHARSET_HEADER.matcher(headerValue);
+                if (matcher.find())
+                    charsetName = matcher.group(1);
+            }
+            else
+                contentType = headerValue;
+        }
+    }
 	
-	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ){
+	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ) throws IOException {
 		Form<URL_form> form = form(
 				URL_form.class).bindFromRequest();
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		
+		System.out.println(form.get().url);
+		getImage(form.get().url);
+		System.out.println("IMG: "+IMG);
+		System.out.println("DESCR: "+DESCR);
+/*
 		URL url = new URL();
 		url.added = new DateTime();
 		url.description = form.get().description;
@@ -537,7 +651,7 @@ System.out.println(			q.keywords+"...");/**/
 		url.question=question;
 		url.user=user;
 		url.save();
-		
+*/
 		return question(question_number, test_id, lesson_acronym, module_acronym);
 		
 	}

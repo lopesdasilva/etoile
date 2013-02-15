@@ -660,6 +660,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		
 		UserTest usertest=UserTest.find.byId(usertest_id);
 		QuestionGroup questionGroup=QuestionGroup.find.byId(question_number);
+		System.out.println("question_number: "+question_number);
 		QuestionGroup group = usertest.test.groups.get((int) (question_number-1));
 	
 		
@@ -840,6 +841,13 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
 				
 				questiongroup.delete();
+				Test test=Test.find.byId(test_id);
+				int i=1;
+				for(QuestionGroup questiongroup_aux: test.groups){
+					questiongroup_aux.number=i;
+					questiongroup_aux.save();
+					i++;
+				}
 
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}

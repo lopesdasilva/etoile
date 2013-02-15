@@ -39,7 +39,7 @@ public class QuestionGroup extends Model {
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<Question> questions;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	public List<Answer> answers;
 	
 	@Id

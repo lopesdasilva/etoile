@@ -81,18 +81,18 @@ public class Question extends Model {
 	public boolean iscopy;
 	
 	//ARGUMENTOS OPEN QUESTION
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	public Answer openanswer;
 		
 	//ARGUMENTOS ONE CHOICE QUESTION
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Hypothesis> hypothesislist;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	public List<URL> urls;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<QuestionEvaluation> questionevaluation;
 	
 	

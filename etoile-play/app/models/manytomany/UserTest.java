@@ -55,7 +55,7 @@ public class UserTest extends Model{
 	public float progress=0;
 	public String progressString="0%";
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<QuestionEvaluation> questionevaluation;
 	
 	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(

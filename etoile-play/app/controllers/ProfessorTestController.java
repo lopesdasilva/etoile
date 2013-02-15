@@ -408,10 +408,26 @@ public class ProfessorTestController extends Controller {
 			test.published=false;
 			test.save();
 			
+			
+			
 			for(UserTest usertest :test.users){
-				if(!usertest.submitted){
+				if(!usertest.submitted){				
 					
+					List<Answer> useranswers = Answer.findByUserEmailAndTestId(usertest.user.email, test.id);
+					for (Answer useranswer:useranswers){
+						useranswer.delete();
+					}
 					usertest.delete();
+					for(QuestionGroup group:usertest.test.groups ){
+						for (Question question :group.questions){
+							List<Hypothesis> userhypothesis=Hypothesis.findByUserEmailAndQuestion(usertest.user.email, question.id);
+							for(Hypothesis hypothesis: userhypothesis ){
+								hypothesis.delete();
+							}
+						}
+				}
+				
+				
 				}
 				
 				
@@ -684,6 +700,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 				
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
+				
 				questiongroup.delete();
 
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));

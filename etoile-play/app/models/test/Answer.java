@@ -45,7 +45,7 @@ public class Answer extends Model{
 	@OneToOne
 	public Evaluation evaluation;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	public QuestionEvaluation questionevaluation;
 	
 	public static Model.Finder<Long, Answer> find = new Model.Finder<Long, Answer>(
@@ -59,6 +59,10 @@ public class Answer extends Model{
 	
     public static List<Answer> findByUserEmailAndTestId(String email,Long test_id) {
         return find.where().eq("user_email", email).eq("test_id", test_id).findList();
+    }
+    
+    public static List<Answer> findByUserEmailAndTestIdAndGroupId(String email,Long test_id,Long group_id) {
+        return find.where().eq("user_email", email).eq("test_id", test_id).eq("group_id", group_id).findList();
     }
 
 	public static Answer findByUserAndQuestion(String user_id,Long openquestion_id) {

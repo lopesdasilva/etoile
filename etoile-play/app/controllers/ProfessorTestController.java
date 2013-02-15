@@ -483,6 +483,58 @@ public class ProfessorTestController extends Controller {
 		return redirect(routes.Application.module(module.acronym));
 	}
 	
+	public static Result editmultiplechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		Question question = Question.find.byId(question_id);
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			for(Question q: lesson.questions){
+				if(q.user!= null){
+					q.user.refresh();
+				}
+			}
+			return ok(views.html.professor.multiplechoicequestionEdit.render(module,lesson,test, group, question));
+		}
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
+	public static Result editmultiplechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		Question question = Question.find.byId(question_id);
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+//			q.group.add(group);
+			question.lesson = lesson;
+			question.question = form.get().question;
+			question.keywords = form.get().keywords;
+			if(form.get().image.length() > 0){
+				question.imageURL = form.get().image;
+			}
+			
+			if(form.get().video.length() > 0){
+				question.videoURL = form.get().video;
+			}
+			question.weight = form.get().weight;
+			question.weightToLose = form.get().weighttolose;
+			question.user = user;
+			question.number = group.questions.size()+1;
+			question.typeOfQuestion = 2;
+			
+			question.save();
+			
+			//return ok(views.html.professor.hypothesisAdd.render(module,lesson,test, group, question));
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		return redirect(routes.Application.module(module_acronym));
+	}
 	
 	
 	

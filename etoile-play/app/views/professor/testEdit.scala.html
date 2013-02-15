@@ -327,7 +327,7 @@ models.test.Test) @main("etoile"){
 								data-toggle="modal">edit</a> }@if(question.typeOfQuestion==2){ <a
 								class="btn btn-mini btn-success"
 								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
-								class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
+								class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editmultiplechoicequestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)" data-toggle="modal">edit</a>
 
 								}
 

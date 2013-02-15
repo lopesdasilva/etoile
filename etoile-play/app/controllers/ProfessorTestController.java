@@ -106,8 +106,13 @@ public class ProfessorTestController extends Controller {
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
-			question.imageURL = form.get().image;
-			question.videoURL = form.get().video;
+			if(form.get().image.length() > 0){
+				question.imageURL = form.get().image;
+			}
+			
+			if(form.get().video.length() > 0){
+				question.videoURL = form.get().video;
+			}
 			question.weight = form.get().weight;
 			question.weightToLose = 0;
 			question.user = user;
@@ -153,8 +158,13 @@ public class ProfessorTestController extends Controller {
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
-			question.imageURL = form.get().image;
-			question.videoURL = form.get().video;
+			if(form.get().image.length() > 0){
+				question.imageURL = form.get().image;
+			}
+			
+			if(form.get().video.length() > 0){
+				question.videoURL = form.get().video;
+			}
 			question.weight = form.get().weight;
 			question.save();
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
@@ -176,8 +186,13 @@ public class ProfessorTestController extends Controller {
 			question.lesson = lesson;
 			question.question = form.get().question;
 			question.keywords = form.get().keywords;
-			question.imageURL = form.get().image;
-			question.videoURL = form.get().video;
+			if(form.get().image.length() > 0){
+				question.imageURL = form.get().image;
+			}
+			
+			if(form.get().video.length() > 0){
+				question.videoURL = form.get().video;
+			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
 			question.user = user;
@@ -227,8 +242,13 @@ public class ProfessorTestController extends Controller {
 			question.lesson = lesson;
 			question.question = form.get().question;
 			question.keywords = form.get().keywords;
-			question.imageURL = form.get().image;
-			question.videoURL = form.get().video;
+			if(form.get().image.length() > 0){
+				question.imageURL = form.get().image;
+			}
+			
+			if(form.get().video.length() > 0){
+				question.videoURL = form.get().video;
+			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
 			question.user = user;
@@ -316,7 +336,7 @@ public class ProfessorTestController extends Controller {
 		
 		System.out.println("####" + question.hypothesislist.size());
 		for(Hypothesis h: question.hypothesislist){
-			if(h.id != hypothesis_selected.id){
+			if(h.id != hypothesis_selected.id && h.user == null){
 				h.isCorrect = false;
 				h.save();
 			}else{

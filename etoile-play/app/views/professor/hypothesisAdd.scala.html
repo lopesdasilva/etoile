@@ -45,16 +45,19 @@
 
 	<div class="page-header">
 		<h2>
-			@test.name <small><a href="#editTestModal"
-				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
-			<br> <small>@test.text</small>
+			Edit question hypothesis 
+			<br> <small>Test: @test.name</small>
+			<br> <small>Question @question.number</small>
 		</h2>
+		<a href="@routes.ProfessorTestController.edittest(module.acronym, lesson.acronym, test.id)" class="btn btn-primary btn-small">Return to test edit</a>
+		<a href="@routes.ProfessorTestController.editonechoicequestionform(module.acronym, lesson.acronym, test.id, group.id, question.id)" class="btn btn-primary btn-small">Return to question edit</a>
+		
 	</div>
 
 						<div class="row-fluid">
 								<p>
 						
-						<h3>Hypothesis</h3>
+						
 						<div class="tab-pane" id="tests">
 							<table class="table table-striped" >
 								<thead>
@@ -66,18 +69,23 @@
 									</tr>
 								</thead>
 								<tbody>
-								@if(question.hypothesislist!=null){
+								@if(question.hypothesislist!=null || question.hypothesislist.size()!=0){
 									@for(hypothesis <- question.hypothesislist){
 									<tr>
+										@if(hypothesis.user==null){
 										<td>@hypothesis.number</td>
-										<td>@hypothesis.text</td>
+										
+										
 										@if(hypothesis.isCorrect){
+										<td><p class="text-success">@hypothesis.text</p></td>
 										<td><a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">right answer</a></td>
 										}
 										@if(!hypothesis.isCorrect){
+										<td><p class="text-error">@hypothesis.text</p></td>
 										<td><a class="btn btn-small btn-info" href="@routes.ProfessorTestController.changerightonechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" role="button">right answer</a></td>
 										
 										}
+										
 										<td>
 										<span class="btn-group pull-right">
 										<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">open</a>
@@ -85,8 +93,20 @@
 										<a class="btn btn-small btn-danger disabled"  href="#" data-toggle="modal" role="button">delete</a>
 
 										</td>
+										}
 									</tr>
 									}
+									}
+									@if(question.hypothesislist==null || question.hypothesislist.size()==0){
+									<tr>
+									<td>
+									No hypothesis
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									</tr>
 									}
 									
 								</tbody>
@@ -95,6 +115,7 @@
 							
 							
 						</div>
+						
 						</div>
 						
 						<div id="addHypothesisModal" class="modal hide fade" >
@@ -122,14 +143,11 @@
 									</div>
 									
 									<div class="controls">
-								<button class="btn btn-success">Add Hypothesis</button>
+								<button class="btn btn-success pull-right">Add Hypothesis</button>
 							</div>
 							}
 						</div>
-						<div class="modal-footer">
-														<button class="btn" data-dismiss="modal"
-															aria-hidden="true">Close</button>
-													</div>
+						
 					</div>
 						</div>
 						

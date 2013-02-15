@@ -45,10 +45,11 @@
 
 	<div class="page-header">
 		<h2>
-			@test.name <small><a href="#editTestModal"
-				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
-			<br> <small>@test.text</small>
+			Add open question
+			<br> <small>Test: @test.name</small>
 		</h2>
+		<a href="@routes.ProfessorTestController.edittest(module.acronym, lesson.acronym, test.id)" class="btn btn-primary btn-small">Return to test edit</a>
+		
 	</div>
 	<div class="tabbable">
 					<!-- Only required for left/right tabs -->
@@ -124,18 +125,19 @@
 			
 						</div>
 						<div class="tab-pane" id="new_question">
+						      					@helper.form(routes.ProfessorTestController.addopenquestion(module.acronym, lesson.acronym, test.id, group.id),'class->"form-horizontal"){
+						
 						<div class="row-fluid">
-				<div class="well span11">
+				<div class="well span12">
 				 <fieldset>
       <div id="legend" class="">
-        <legend class="">Question Form</legend>
+        <legend class=""><h3>New Question</h3></legend>
       </div>			
-      					@helper.form(routes.ProfessorTestController.addopenquestion(module.acronym, lesson.acronym, test.id, group.id),'class->"form-horizontal"){
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="question">Test</textarea>
-						
+						<textarea  class="span12" rows="10" name="question"></textarea>
+						<p></p>
 						<label>Model Answer</label>
-						<textarea  class="span12" rows="10" name="suggestedanswer">Test</textarea>
+						<textarea  class="span12" rows="10" name="suggestedanswer"></textarea>
 						
 						<p><p>
 						
@@ -200,21 +202,22 @@
 									<div class="control-group">
 							<label class="control-label"></label>
 
-							<!-- Button -->
-							<div class="controls">
-								<button class="btn btn-success">Add Question</button>
-							</div>
+							
 						</div>
 						
-						}
+						
 						</div>
 					</div>
+					<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success pull-right">Add Question</button>
+							</div>
+					}
 						</div>
 	</div>
 	</div>
 
 <div class="pull-right">
-<a href="@routes.ProfessorTestController.edittest(module.acronym, lesson.acronym, test.id)" role="button" class="btn">Return to Test Edit</a>
 </div>	
 </div>
 

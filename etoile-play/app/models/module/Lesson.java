@@ -72,4 +72,15 @@ public class Lesson extends Model{
 		return lessons; 
 	}
 	
+	public int publishedTests(Lesson lesson){
+		int number=0;
+		for (Test test: lesson.tests){
+			if(test.published){
+				number++;
+			}
+		}
+		
+		return number;
+	}
+	
 }

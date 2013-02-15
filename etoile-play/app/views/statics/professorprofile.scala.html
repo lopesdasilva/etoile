@@ -58,7 +58,9 @@
             <p>@professor.contact</p>
             <h4>Modules on étoile</h4>
              @for(module <- professor.modules) {
-             <a href="@routes.Application.module(module.acronym)"><p>@module.name</p></a>
+             <p>
+             <a href="@routes.Application.module(module.acronym)"><span class="label label-info">@module.name</span></a>
+             </p>
              }
             </div>
             

@@ -45,7 +45,7 @@
 
 	<div class="page-header">
 		<h2>
-			Edit question hypothesis - One Choice Question
+			Edit question hypothesis - Multiple Choice Question
 			<br> <small>Test: @test.name</small>
 			<br> <small>Question @question.number</small>
 		</h2>
@@ -78,12 +78,19 @@
 										
 										@if(hypothesis.isCorrect){
 										<td><p class="text-success">@hypothesis.text</p></td>
-										<td><a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">right answer</a></td>
+										<td>
+										<span class="btn-group pull-right">
+										<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">right</a>
+										<a class="btn btn-small btn-danger" href="@routes.ProfessorTestController.changerightmultiplechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" >wrong</a>
+										</td>
 										}
 										@if(!hypothesis.isCorrect){
 										<td><p class="text-error">@hypothesis.text</p></td>
-										<td><a class="btn btn-small btn-info" href="@routes.ProfessorTestController.changerightonechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" role="button">right answer</a></td>
-										
+										<td>
+										<span class="btn-group pull-right">
+										<a class="btn btn-small btn-success " href="@routes.ProfessorTestController.changerightmultiplechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" role="button">right</a>
+										<a class="btn btn-small btn-danger disabled" href="#" data-toggle="modal" >wrong</a>
+										</td>										
 										}
 										
 										<td>
@@ -124,27 +131,42 @@
 							<h3 id="myModalLabel">New Hypothesis</h3>
 						</div>
 						<div class="modal-body">
-							@helper.form(routes.ProfessorTestController.addhypothesis(module.acronym, lesson.acronym, test.id, group.id, question.id),'class->"form-horizontal"){
-							
-								@if(question.hypothesislist.size()==0){
-								<p>
-								<span class="label label-warning">Warning</span>Please insert the <strong>right answer</strong>.
-								</p>
-								}
-							
-							<div class="control-group">
+							@helper.form(routes.ProfessorTestController.addmultiplehypothesis(module.acronym, lesson.acronym, test.id, group.id, question.id),'class->"form-horizontal"){
 
-										<!-- Text input-->
-										<label class="control-label" for="input01">Hypothesis</label>
-										<div class="controls">
-											<input name="hypothesis" type="text" value=""
-												class="input-xlarge">
-										</div>
+
+
+			<div class="control-group">
+
+				<!-- Text input-->
+				<label class="control-label" for="input01">Hypothesis</label>
+				<div class="controls">
+					<input name="hypothesis" type="text" value="" class="input-xlarge">
+
+				</div>
+
+			</div>
+
+			<!-- <div class="control-group">
+				<div class="controls">
+
+					<div class="btn-group" data-toggle="buttons-radio">
+						<button type="button" value="" name ="isIncorrect" class="btn btn-danger">Incorrect</button>
+						<button type="button" value="1" name ="isCorrect" class="btn btn-success">Correct</button>
+					</div>
+
+				</div>
+			</div>
+ -->
+
+
+
+									<div class="controls">
+									<button class="btn btn-primary pull-right">Add Hypothesis</button>
 									</div>
 									
-									<div class="controls">
-								<button class="btn btn-success pull-right">Add Hypothesis</button>
-							</div>
+									
+									
+									
 							}
 						</div>
 						
@@ -155,7 +177,7 @@
 <div class="pull-right">
 <a href="@routes.ProfessorTestController.edittest(module.acronym, lesson.acronym, test.id)" role="button" class="btn">Return to Test Edit</a>
 </div>	
-</div>
+
 
 
 }

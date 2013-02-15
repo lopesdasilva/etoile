@@ -100,11 +100,17 @@ GET /modules/:module/:lesson/edittest/:test/onechoicequestionform/:group	control
 GET /modules/:module/:lesson/edittest/:test/addonechoicequestion/:group	controllers.ProfessorTestController.addonechoicequestion(module: String, lesson: String, test: Long, group: Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/editonechoicequestionform/:question	controllers.ProfessorTestController.editonechoicequestionform(module: String, lesson: String, test: Long, group: Long, question: Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/editonechoicequestion/:question	controllers.ProfessorTestController.editonechoicequestion(module: String, lesson: String, test: Long, group: Long, question: Long)		
-
-
 GET /modules/:module/:lesson/edittest/:test/:group/addhypothesisform/:question	controllers.ProfessorTestController.addhypothesisform(module: String, lesson: String, test: Long, group: Long, question:Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/addhypothesis/:question	controllers.ProfessorTestController.addhypothesis(module: String, lesson: String, test: Long, group: Long, question:Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/:question/changerightonechoiceanswer/:hypothesis	controllers.ProfessorTestController.changerightonechoiceanswer(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis:Long)		
+
+GET /modules/:module/:lesson/edittest/:test/multiplechoicequestionform/:group	controllers.ProfessorTestController.addmultiplechoicequestionform(module: String, lesson: String, test: Long, group: Long)		
+GET /modules/:module/:lesson/edittest/:test/addmultiplechoicequestion/:group	controllers.ProfessorTestController.addmultiplechoicequestion(module: String, lesson: String, test: Long, group: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/addmultiplehypothesisform/:question	controllers.ProfessorTestController.addmultiplehypothesisform(module: String, lesson: String, test: Long, group: Long, question:Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/addmultiplehypothesis/:question	controllers.ProfessorTestController.addmultiplehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/changerightmultiplechoiceanswer/:hypothesis	controllers.ProfessorTestController.changerightmultiplechoiceanswer(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis:Long)		
+
+
 
 
 GET /modules/:module/:lesson/edittest/:test/addgroup	controllers.ProfessorTestController.addgroup(module: String, lesson: String, test: Long)	

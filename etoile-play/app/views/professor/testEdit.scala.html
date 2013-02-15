@@ -55,7 +55,7 @@ models.test.Test) @main("etoile"){
 			<br> <small>@test.text </small>
 
 		</h2>
-		
+
 		<a
 			href="@routes.StudentController.lesson(lesson.acronym,module.acronym)#tests"
 			class="btn btn-primary btn-small">Return to the beginning of the
@@ -66,7 +66,7 @@ models.test.Test) @main("etoile"){
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">X</button>
-				<h3>Edit test name</h3>
+				<h3>Edit test</h3>
 			</div>
 			@helper.form(routes.ProfessorTestController.edittesttitle(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
 			<p>
@@ -121,12 +121,8 @@ models.test.Test) @main("etoile"){
 			</p>
 			}
 		</div>
-		
-		} 
-		
-		
-		
-		@if(test.published){ <a class="btn btn-warning pull-right"
+
+		} @if(test.published){ <a class="btn btn-warning pull-right"
 			href="#unpublishModal" data-toggle="modal">Unpublish</a>
 		<div id="unpublishModal" class="modal hide fade" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -156,27 +152,25 @@ models.test.Test) @main("etoile"){
 
 		<h2>
 
-			@test.name <small><a href="#"
-				data-toggle="modal" role="button" class="btn btn-warning btn-mini disabled">Edit</a></small>
-			<br> <small>@test.text </small>
+			@test.name <small><a href="#" data-toggle="modal"
+				role="button" class="btn btn-warning btn-mini disabled">Edit</a></small> <br>
+			<small>@test.text </small>
 
 		</h2>
 
 		<a
 			href="@routes.StudentController.lesson(lesson.acronym,module.acronym)#tests"
 			class="btn btn-primary btn-small">Return to the beginning of the
-			lesson</a>
-	<span class="pull-right"> <span
+			lesson</a> <span class="pull-right"> <span
 			class="label label-important">Info</span> You can not edit this test
 			while students are enrolled to it.
-		</span> 
-		}
+		</span> }
 
-		
-	
+
+
 	</div>
-	
-	
+
+
 	<span class="span12">
 		<div class="row">
 			<h3>Statistics</h3>
@@ -184,15 +178,12 @@ models.test.Test) @main("etoile"){
 
 				<p>Number of users enrolled to this test:
 					@test.numberStudentsEnrolled(test)</p>
+				<p>Number of questions: @test.numberOfQuestions(test)</p>
 			</blockquote>
 
 
 
-		</div>
-		
-	
-		
-		@if(!test.published){
+		</div> @if(!test.published){
 
 
 		<div class="row">
@@ -214,9 +205,11 @@ models.test.Test) @main("etoile"){
 							<div class="btn-group pull-right">
 								<a class="btn btn-small btn-danger" href="#deletegroup@group.id"
 									data-toggle="modal" role="button">delete</a> <a
-									class="btn btn-small btn-success" href="#viewgroup@group.id" data-toggle="modal">view</a>
-								<a class="btn btn-small btn-warning" href="#editgroup@group.id" data-toggle="modal">edit</a> 
-								<a class="btn btn-primary btn-small dropdown-toggle"
+									class="btn btn-small btn-success" href="#viewgroup@group.id"
+									data-toggle="modal">view</a> <a
+									class="btn btn-small btn-warning" href="#editgroup@group.id"
+									data-toggle="modal">edit</a> <a
+									class="btn btn-primary btn-small dropdown-toggle"
 									data-toggle="dropdown"> add question <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
@@ -251,7 +244,7 @@ models.test.Test) @main("etoile"){
 									</p>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
 									<a class="btn btn-danger"
 										href="@routes.ProfessorTestController.deletegroup(module.acronym,lesson.acronym,test.id,group.id)">Delete</a>
 								</div>
@@ -274,18 +267,18 @@ models.test.Test) @main("etoile"){
 										<label class="control-label">Group question</label>
 										<div class="controls">
 											<div class="textarea">
-												<textarea name="question" type="" class="" style="margin: 0px; height: 150px; width: 269px;">@group.question</textarea>
+												<textarea name="question" type="" class=""
+													style="margin: 0px; height: 150px; width: 269px;">@group.question</textarea>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<div class="controls">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-							<button class="btn btn-success">Edit group</button>
-						</div>
+									<button class="btn btn-success">Edit group</button>
+								</div>
 
-}
+								}
 							</div>
 							<div id="viewgroup@group.id" class="modal hide fade"
 								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -295,16 +288,16 @@ models.test.Test) @main("etoile"){
 										aria-hidden="true">X</button>
 									<h3>Group @group.number</h3>
 								</div>
-								
+
 								<div class="modal-body">
-									
+
 									<blockquote>@group.question</blockquote>
-									
+
 								</div>
 
-					<div class="modal-footer">
+								<div class="modal-footer">
 									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									
+
 								</div>
 
 							</div>
@@ -322,16 +315,19 @@ models.test.Test) @main("etoile"){
 								class="btn btn-mini btn-danger"
 								href="#removequestion@question.id" data-toggle="modal">remove</a>
 								@if(question.typeOfQuestion==0){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning"
+								class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning"
 								href="@routes.ProfessorTestController.editopenquestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)"
 								data-toggle="modal">edit</a> }@if(question.typeOfQuestion==1){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning" href="@routes.ProfessorTestController.editonechoicequestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)" data-toggle="modal">edit</a>
-
-								}@if(question.typeOfQuestion==2){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
+								class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning"
+								href="@routes.ProfessorTestController.editonechoicequestionform(module.acronym, lesson.acronym, test.id,group.id, question.id)"
+								data-toggle="modal">edit</a> }@if(question.typeOfQuestion==2){ <a
+								class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning" href="#" data-toggle="modal">edit</a>
 
 								}
 
@@ -358,38 +354,40 @@ models.test.Test) @main("etoile"){
 
 
 							</div></td>
-							<div id="viewquestion@question.id" class="modal hide fade"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">X</button>
-									<h3>Question @question.number</h3>
-								</div>
-								
-								<div class="modal-body">
-									
-									<blockquote>@question.question</blockquote>
-									
-								</div>
+						<div id="viewquestion@question.id" class="modal hide fade"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+							aria-hidden="true">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">X</button>
+								<h3>Question @question.number</h3>
+							</div>
 
-					<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									
-								</div>
+							<div class="modal-body">
+
+								<blockquote>@question.question</blockquote>
+								@if(question.typeOfQuestion!=0){ @for(hypothesis <-
+								question.hypothesislist){ @if(hypothesis.user==null){
+								@if(hypothesis.isCorrect){
+								<p class="text-success">@hypothesis.text</p>
+								} @if(!hypothesis.isCorrect){
+								<p class="text-error">@hypothesis.text</p>
+								} } } }
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 
 							</div>
+
+						</div>
 					</tr>
 					} }
 
 
 				</tbody>
 			</table>
-		</div>
-
-	}
-	
-	@if(test.published){
+		</div> } @if(test.published){
 
 
 		<div class="row">
@@ -409,19 +407,18 @@ models.test.Test) @main("etoile"){
 						<td></td>
 						<td>
 							<div class="btn-group pull-right">
-								<a class="btn btn-small btn-danger disabled" href="#" data-toggle="modal" role="button">delete</a> <a
-									class="btn btn-small btn-success " href="#viewgroup@group.id" data-toggle="modal">view</a>
-								<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal">edit</a> 
-								<a class="btn btn-primary btn-small dropdown-toggle disabled"
+								<a class="btn btn-small btn-danger disabled" href="#"
+									data-toggle="modal" role="button">delete</a> <a
+									class="btn btn-small btn-success " href="#viewgroup@group.id"
+									data-toggle="modal">view</a> <a
+									class="btn btn-small btn-warning disabled" href="#"
+									data-toggle="modal">edit</a> <a
+									class="btn btn-primary btn-small dropdown-toggle disabled"
 									data-toggle="dropdown"> add question <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a
-										href="#">Open
-											question</a></li>
-									<li><a
-										href="#">One
-											choice question</a></li>
+									<li><a href="#">Open question</a></li>
+									<li><a href="#">One choice question</a></li>
 									<li><a href="#">Multiple choice question</a></li>
 								</ul>
 
@@ -434,16 +431,16 @@ models.test.Test) @main("etoile"){
 										aria-hidden="true">X</button>
 									<h3>Group @group.number</h3>
 								</div>
-								
+
 								<div class="modal-body">
-									
+
 									<blockquote>@group.question</blockquote>
-									
+
 								</div>
 
-					<div class="modal-footer">
+								<div class="modal-footer">
 									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									
+
 								</div>
 
 							</div>
@@ -458,69 +455,61 @@ models.test.Test) @main("etoile"){
 						<td>One choice question</td> } @if(question.typeOfQuestion==2){
 						<td>Multiple choice question</td> }
 						<td><span class="btn-group pull-right"> <a
-								class="btn btn-mini btn-danger disabled"
-								href="#" data-toggle="modal">remove</a>
-								@if(question.typeOfQuestion==0){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning disabled"
-								href="#"
+								class="btn btn-mini btn-danger disabled" href="#"
+								data-toggle="modal">remove</a> @if(question.typeOfQuestion==0){
+								<a class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning disabled" href="#"
 								data-toggle="modal">edit</a> }@if(question.typeOfQuestion==1){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning disabled" href="#" data-toggle="modal">edit</a>
+								class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning disabled" href="#"
+								data-toggle="modal">edit</a> }@if(question.typeOfQuestion==2){ <a
+								class="btn btn-mini btn-success"
+								href="#viewquestion@question.id" data-toggle="modal">view</a> <a
+								class="btn btn-mini btn-warning disabled" href="#"
+								data-toggle="modal">edit</a> }
 
-								}@if(question.typeOfQuestion==2){ <a
-								class="btn btn-mini btn-success" href="#viewquestion@question.id" data-toggle="modal">view</a>
-								<a class="btn btn-mini btn-warning disabled" href="#" data-toggle="modal">edit</a>
+						</span></td>
+						<div id="viewquestion@question.id" class="modal hide fade"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+							aria-hidden="true">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">X</button>
+								<h3>Question @question.number</h3>
+							</div>
 
-								}
+							<div class="modal-body">
 
-						</span>
-							</td>
-							<div id="viewquestion@question.id" class="modal hide fade"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">X</button>
-									<h3>Question @question.number</h3>
-								</div>
-								
-								<div class="modal-body">
-									
-									<blockquote>@question.question</blockquote>
-									@if(question.typeOfQuestion!=0){
-									@for(hypothesis <- question.hypothesislist){
-									@if(hypothesis.user==null){
-									@if(hypothesis.isCorrect){
-									<p class="text-success" >@hypothesis.text</p>
-									}
-									@if(!hypothesis.isCorrect){
-									<p class="text-error" >@hypothesis.text</p>}
-									}
-									}
-									}
-								</div>
+								<blockquote>@question.question</blockquote>
+								@if(question.typeOfQuestion!=0){ @for(hypothesis <-
+								question.hypothesislist){ @if(hypothesis.user==null){
+								@if(hypothesis.isCorrect){
+								<p class="text-success">@hypothesis.text</p>
+								} @if(!hypothesis.isCorrect){
+								<p class="text-error">@hypothesis.text</p>
+								} } } }
+							</div>
 
-					<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									
-								</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 
 							</div>
+
+						</div>
 					</tr>
 					} }
 
 
 				</tbody>
 			</table>
-		</div>
+		</div> }
 
-	}
-	
 
 		<div class="row">
-		@if(!test.published){
-			<a class="btn btn-large btn-block btn-success btn-mini"
+			@if(!test.published){ <a
+				class="btn btn-large btn-block btn-success btn-mini"
 				data-toggle="modal" href="#addGroup" type="button">Add group</a>
 			<div id="addGroup" class="modal hide fade" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -562,16 +551,14 @@ models.test.Test) @main("etoile"){
 
 
 			</div>
-}
-@if(test.published){
-<a class="btn btn-large btn-block btn-success btn-mini disabled"
-				data-toggle="modal" href="#" type="button">Add group</a>
-}
-		</div> 
-		
-	
-	
-	
+			} @if(test.published){ <a
+				class="btn btn-large btn-block btn-success btn-mini disabled"
+				data-toggle="modal" href="#" type="button">Add group</a> }
+		</div>
+
+
+
+
 	</span>
 
 </div>

@@ -80,4 +80,14 @@ public class Test extends Model{
 		return number;
 	}
 	
+	public int numberOfQuestions(Test t){
+		int number=0;
+		for(QuestionGroup group: t.groups){
+			number+=group.questions.size();
+		}
+		
+		
+		return number;
+	}
+	
 }

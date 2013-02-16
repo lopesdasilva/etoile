@@ -75,7 +75,7 @@ public class StudentTestController extends Controller {
 	public static class URL_form {
 		public String name;
 		public String url;
-		public String description;
+		public String descriptionUrl;
 		public String image;
 	}
 
@@ -636,25 +636,29 @@ public class StudentTestController extends Controller {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		System.out.println(form.get().url);
-		getImage(form.get().url);
-		System.out.println("IMG: "+IMG);
-		System.out.println("DESCR: "+DESCR);
-/*
+		System.out.println();
+		System.out.println("Url: "+form.get().url);
+		System.out.println("Title: "+form.get().name);
+		System.out.println("Descr: "+form.get().descriptionUrl);
+		System.out.println("ImageUrl: "+form.get().image);
+		System.out.println();
+
 		URL url = new URL();
 		url.added = new DateTime();
-		url.description = form.get().description;
+		url.description = form.get().descriptionUrl;
 		url.adress= form.get().url;
 		url.imageURL=form.get().image;
 		url.name=form.get().name;
 		url.likes=0;
 		url.question=question;
 		url.user=user;
+		
 		url.save();
-*/
+
 		return question(question_number, test_id, lesson_acronym, module_acronym);
 		
 	}
+	
 	
 	
 }

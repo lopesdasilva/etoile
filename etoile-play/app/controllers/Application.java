@@ -15,6 +15,7 @@ import models.module.Module;
 import play.data.Form;
 import play.mvc.*;
 
+
 import views.html.*;
 
 public class Application extends Controller {
@@ -230,6 +231,4 @@ public static Result professorprofile(String professor_acronym) {
             routes.Application.index()
         );
     }
-	
-
 }

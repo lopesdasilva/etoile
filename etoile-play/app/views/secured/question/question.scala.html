@@ -2,7 +2,9 @@
 test: models.test.Test, group: models.test.question.QuestionGroup,
 usertest: models.manytomany.UserTest) @main("etoile"){
 
-<script>
+<script type="application/x-javascript">
+
+
 var widgetT;
 var options;
 var enable;
@@ -13,20 +15,56 @@ var prevT;
 
 function validateUrl() {
 	var regexp = /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
-	var result = regexp.test(document.getElementsByName("url")[0].value.toString());
+	var result = regexp.test(document.getElementsByName("urlInput")[0].value.toString());
 	if(result) {
 		$("#ErrorMessage").empty();
-		//$("#formBlock").show();
-		console.log("Correctou");
-		return true;
-	}
-	else {
-		$("#ErrorMessage").empty().text("You're drunk");
-		//$("#formBlock").hide();
+		$.ajax({
+			type: 'GET',
+			url: 'http://tina.iscpif.fr/getJsonFromUrl/textCrawler.php',
+			data: "url="+encodeURIComponent(document.getElementsByName("urlInput")[0].value.toString()),
+			contentType: "application/json",
+			dataType: 'jsonp',
+			success : function(data){ 
+				if(data.url == null) data.url = "";
+				if(data.title == null) data.title = data.titleEsc;
+				if(data.description == null) data.description = data.descriptionEsc;
+				if(data.title == null) data.title = "";
+				if(data.description == null) data.description = "";
+				if(data.images == null) data.images = "";
+				document.getElementsByName("url")[0].value=data.url;
+				document.getElementsByName("name")[0].value=data.title;
+				document.getElementsByName("descriptionUrl")[0].value=data.description;
+				document.getElementsByName("image")[0].value=data.images;
+				$("#formBlock").show(); 
+			},
+			error: function(){ 
+				$("#formBlock").hide(); 
+				document.getElementsByName("urlInput")[0].value="";
+				document.getElementsByName("name")[0].value="";
+				document.getElementsByName("url")[0].value="";
+				document.getElementsByName("descriptionurl")[0].value="";
+				document.getElementsByName("image")[0].value="";
+				$("#ErrorMessage").empty().text("Page Not found.");
+			}
+	    	});
 		return false;
 	}
+	else {
+		$("#ErrorMessage").empty().text("Not a valid url");
+		$("#formBlock").hide();
+		return false;
+	}
+	return false;
 }
 
+function initAddUrl(){
+	document.getElementsByName("urlInput")[0].value="";
+	document.getElementsByName("name")[0].value="";
+	document.getElementsByName("url")[0].value="";
+	document.getElementsByName("descriptionUrl")[0].value="";
+	document.getElementsByName("image")[0].value="";
+		$("#formBlock").hide();
+}
 
 function TwitterQuery(keywords){
 	var aux=keywords.split(","); 
@@ -226,7 +264,7 @@ function searchButton(){
 							<li><a href="#URLALL@question.number" data-toggle="modal">View
 									All URLs</a></li>
 							
-							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
+							<li><a href="#ADDURL@question.number" onclick="initAddUrl();" data-toggle="modal">Add
 									new URL</a></li>
 							<li><a href="#TwitterQuery" onclick='TwitterQuery("@question.keywords");' data-toggle="modal">Ask Twitter</a></li>
 									<li class="divider"></li>
@@ -321,15 +359,45 @@ function searchButton(){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-				@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'onSubmit->"return validateUrl();"){
+
 						<div class="control-group">
 							<label class="control-label" for="input01">New URL</label>
 							<div class="controls">
 								<input type="text" placeholder="Insert the new URL"
-									class="input-xlarge" name="url">
+									class="input-xlarge" name="urlInput">
+								<button onclick="return validateUrl();" class="btn">Load Data</button>
 								<label id="ErrorMessage" class="control-label"></label>
 							</div>
 						</div>
+
+					@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display: none;"){
+						<input type="hidden" name="url" value="">
+						<div class="control-group">
+							<label class="control-label" for="input01">Title</label>
+							<div class="controls">
+								<input type="text"
+									class="input-xlarge" name="name" value="">
+								<p class="help-block">URL title</p>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="input01">Description</label>
+							<div class="controls">
+								<input type="text"
+									class="input-xlarge" name="descriptionUrl" value="">
+								<p class="help-block">A URL small description</p>
+							</div>
+						</div>
+						<div class="control-group">
+
+							<!-- Text input-->
+							<label class="control-label" for="input01">Image url</label>
+							<div class="controls">
+								<input name="image" type="text" value="" class="input-xlarge">
+								<p class="help-block">URL image</p>
+							</div>
+						</div>
+
 						<div class="control-group">
 										<label class="control-label"></label>
 
@@ -338,7 +406,7 @@ function searchButton(){
 											<button type="submit" class="btn btn-success">Save</button>
 										</div>
 						</div>
-				}				
+					}
 						
 					</div>
 				</div>

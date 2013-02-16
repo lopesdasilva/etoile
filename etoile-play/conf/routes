@@ -141,5 +141,6 @@ GET		/modules/:module/:lesson/submitTest					controllers.StudentTestController.s
 GET 	/modules/:module/:lesson/test:test/:question/voteurl	controllers.StudentTestController.voteurl(url: Long, question: Int, test: Long, lesson: String, module: String)
 POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTestController.addurl(question: Int, test: Long, lesson: String, module: String, question_id: Long)
 
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

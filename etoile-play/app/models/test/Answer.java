@@ -57,6 +57,7 @@ public class Answer extends Model{
 		return questions; 
 	}
 	
+	
     public static List<Answer> findByUserEmailAndTestId(String email,Long test_id) {
         return find.where().eq("user_email", email).eq("test_id", test_id).findList();
     }

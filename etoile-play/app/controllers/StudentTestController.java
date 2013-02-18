@@ -174,8 +174,17 @@ public class StudentTestController extends Controller {
 		UserTest usertest = UserTest.findByUserAndTest(user.email,
 				test.id);
 		
+		
+		
+		
+		
 		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
 				test_id);
+		
+		
+		
+			
+		
 		if (test_answers.isEmpty()) {
 			for(QuestionGroup g: test.groups){
 			for (Question q : g.questions) {
@@ -192,6 +201,29 @@ public class StudentTestController extends Controller {
 					test.save();
 				}
 			}
+			}
+			
+		}else{
+			if(test_answers.size()!=usertest.test.numberOfQuestions(usertest.test)){
+				for(QuestionGroup group:usertest.test.groups){
+					for(Question question:group.questions){
+						if(Answer.findByUserAndQuestion(user.email, question.id)==null){
+							Answer empty_answer = new Answer();
+							empty_answer.answer = "No answer.";
+							empty_answer.openQuestion = question;
+							empty_answer.test = test;
+							empty_answer.user = user;
+							empty_answer.group = group;
+							empty_answer.openQuestion = question;
+							empty_answer.save();
+							test.answers.add(empty_answer);
+							test.save();
+						}
+						System.out.println("Resultado da query: "+Answer.findByUserAndQuestion(user.email, question.id));
+						
+					}
+				}
+				
 			}
 		}
 		
@@ -376,6 +408,8 @@ public class StudentTestController extends Controller {
 		}
 		
 		
+		
+		
 		//CORRIGIR TESTE
 		int reputation = 0;
 		for(QuestionGroup g : test.groups){
@@ -425,7 +459,12 @@ public class StudentTestController extends Controller {
 				userTest.save();
 				
 				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
-				QuestionEvaluation qe = new QuestionEvaluation();
+					QuestionEvaluation qe;
+					if(QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id)==null){
+						 qe = new QuestionEvaluation();
+					}else{
+						qe = QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id);
+					}
 				if(bool){
 				qe.isCorrect=true;
 				qe.score = q.weight;

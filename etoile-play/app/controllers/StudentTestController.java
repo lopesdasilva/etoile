@@ -573,12 +573,12 @@ public class StudentTestController extends Controller {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		//System.out.println();
-		//System.out.println("Url: "+form.get().url);
-		//System.out.println("Title: "+form.get().name);
-		//System.out.println("Descr: "+form.get().descriptionUrl);
-		//System.out.println("ImageUrl: "+form.get().image);
-		//System.out.println();
+		System.out.println();
+		System.out.println("Url: "+form.get().url);
+		System.out.println("Title: "+form.get().name);
+		System.out.println("Descr: "+form.get().descriptionUrl);
+		System.out.println("ImageUrl: "+form.get().image);
+		System.out.println();
 
 		URL url = new URL();
 		url.added = new DateTime();

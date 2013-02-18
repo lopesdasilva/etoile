@@ -32,20 +32,35 @@ function validateUrl() {
 				if(data.description == null) data.description = data.descriptionEsc;
 				if(data.title == null) data.title = "";
 				if(data.description == null) data.description = "";
-				if(data.images == null) data.images = "";
+				if(data.images == null || data.images==false) data.images = "";
 				else {
+					console.log(data.images);
+					images = data.images.split("|");
+					console.log(images.length);
+					if(images.length>1){
+						document.getElementsByName("image")[0].value=images[0];
+						$('#theImage').html("<img src=\""+images[0]+"\""+"</img>");
+					}
+					else {
+						document.getElementsByName("image")[0].value=data.images;
+						$('#theImage').html("<img width=150 src=\""+data.images+"\""+"</img>");
+					}
+/*
 					if(data.images!=false){
 						images = data.images.split("|");
 						if(images.length>1){
 							document.getElementsByName("image")[0].value=images[0];				
 							$('#theImage').html("<img src=\""+images[0]+"\""+"</img>");
+							multipleImages=true;
 						}
 						else {
 							document.getElementsByName("image")[0].value=data.images;			
 							$('#theImage').html("<img width=150 src=\""+data.images+"\""+"</img>");
 						}
 					}
+*/
 				}
+
 				document.getElementsByName("url")[0].value=data.url;
 				document.getElementsByName("name")[0].value=data.title;
 				document.getElementsByName("descriptionUrl")[0].value=data.description;
@@ -79,6 +94,12 @@ function initAddUrl(){
 }
 
 function TwitterQuery(keywords){
+
+function onKeyUpInput(event) {
+    if(event.keyCode == 13){
+        $("#triggerButton").click();
+    }
+}
 	var aux=keywords.split(","); 
 	//console.log(aux);
 	document.getElementById("searchingT").value=aux[0];
@@ -377,7 +398,7 @@ function searchButton(){
 							<div class="controls">
 								<input type="text" placeholder="Insert the new URL"
 									class="input-xlarge" name="urlInput">
-								<button onclick="return validateUrl();" class="btn">Load Data</button><div id="Loading"></div>
+								<button id="triggerButton" onclick="return validateUrl();" class="btn">Load Data</button><div id="Loading"></div>
 								<label id="ErrorMessage" class="control-label"></label>
 							</div>
 						</div>
@@ -405,7 +426,7 @@ function searchButton(){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Image url</label>
 							<div class="controls">
-								<input name="image" type="text" value="" class="input-xlarge" disabled>
+								<input name="image" type="text" value="" class="input-xlarge" readOnly="true">
 								<p class="help-block"><div id="theImage" width=10px ></div></p>
 							</div>
 						</div>

@@ -417,7 +417,7 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 
 
 												<div class="control-group">
-													@helper.form(routes.ProfessorTestController.markanswer(module.acronym, lesson.acronym, usertest.id, question.number, question.id)){
+													@helper.form(routes.ProfessorTestController.markanswer(module.acronym, lesson.acronym, usertest.id, group.number, question.id)){
 
 													<div class="controls">
 														<h4>Your evaluation</h4> 

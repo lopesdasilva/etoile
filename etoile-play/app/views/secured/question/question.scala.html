@@ -16,6 +16,7 @@ var prevT;
 function validateUrl() {
 	var regexp = /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
 	var result = regexp.test(document.getElementsByName("urlInput")[0].value.toString());
+	if(document.getElementsByName("urlInput")[0].value.toString().match("wikipedia")!=null) result=true;
 	if(result) {
 		$('#Loading').html("<img src=\"/assets/images/Loader.gif\"></img>");
 		$("#ErrorMessage").empty();
@@ -36,9 +37,13 @@ function validateUrl() {
 					if(data.images!=false){
 						images = data.images.split("|");
 						if(images.length>1){
-							document.getElementsByName("image")[0].value=images[0];
+							document.getElementsByName("image")[0].value=images[0];				
+							$('#theImage').html("<img src=\""+images[0]+"\""+"</img>");
 						}
-						else document.getElementsByName("image")[0].value=data.images;
+						else {
+							document.getElementsByName("image")[0].value=data.images;			
+							$('#theImage').html("<img width=150 src=\""+data.images+"\""+"</img>");
+						}
 					}
 				}
 				document.getElementsByName("url")[0].value=data.url;
@@ -69,6 +74,7 @@ function initAddUrl(){
 	document.getElementsByName("url")[0].value="";
 	document.getElementsByName("descriptionUrl")[0].value="";
 	document.getElementsByName("image")[0].value="";
+	$('#theImage').html("");
 	$("#formBlock").hide();
 }
 
@@ -396,12 +402,11 @@ function searchButton(){
 							</div>
 						</div>
 						<div class="control-group">
-
 							<!-- Text input-->
 							<label class="control-label" for="input01">Image url</label>
 							<div class="controls">
-								<input name="image" type="text" value="" class="input-xlarge">
-								<p class="help-block">URL image</p>
+								<input name="image" type="text" value="" class="input-xlarge" disabled>
+								<p class="help-block"><div id="theImage" width=10px ></div></p>
 							</div>
 						</div>
 

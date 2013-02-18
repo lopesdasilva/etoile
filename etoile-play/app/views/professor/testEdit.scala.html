@@ -199,7 +199,13 @@ models.test.Test) @main("etoile"){
 				<tbody>
 					@for(group<- test.groups){
 					<tr>
-						<td>Group @group.number</td>
+						@if(group.question.length()<30){
+						<td><b>Group @group.number</b> - <small>@group.question</small></td>
+						}
+						@if(group.question.length()>=30){
+						<td><b>Group @group.number</b> - <small>@group.question.substring(0,30) ...</small></td>
+						
+						}
 						<td></td>
 						<td>
 							<div class="btn-group pull-right">

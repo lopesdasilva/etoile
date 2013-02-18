@@ -94,7 +94,7 @@
 										<span class="btn-group pull-right">
 										<a class="btn btn-small btn-success" href="#viewhypothesis@hypothesis.id" data-toggle="modal" role="button">view</a>
 										<a class="btn btn-small btn-warning" href="#edithypothesis@hypothesis.id" data-toggle="modal" >edit</a>
-										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
+										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removemultiplechoicehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
 
 						
 			
@@ -104,7 +104,7 @@
 			<h3 id="myModalLabel">Edit Hypothesis</h3>
 		</div>
 		<div class="modal-body">
-			@helper.form(routes.ProfessorTestController.edithypothesis(module.acronym,
+			@helper.form(routes.ProfessorTestController.editmultiplechoicehypothesis(module.acronym,
 			lesson.acronym, test.id, group.id,
 			question.id, hypothesis.id),'class->"form-horizontal"){
 			<div class="control-group">

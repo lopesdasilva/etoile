@@ -527,12 +527,14 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
 		<div class="span11 pull-right">
 			<!-- Button to trigger modal -->
 <div class="btn-group pull-right">
-<a href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id,usertest.id)" role="button" class="btn btn-primary" >Submit reviewed test</a>
+<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit reviewed test</a>
 <a href="@routes.ProfessorTestController.test(module.acronym,lesson.acronym,usertest.test.id)" role="button" class="btn">Return to tests</a>
+
+
+
 </div>
 
- 
-<!-- Modal -->
+ <!-- Modal -->
 <div id="submittest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -544,9 +546,10 @@ usertest: models.manytomany.UserTest, group: models.test.question.QuestionGroup)
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a class="btn btn-primary" href="#">Confirm</a>
+    <a class="btn btn-primary" href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id,usertest.id)">Confirm</a>
   </div>
 </div>
+
 		</div>
 		</div>
 	

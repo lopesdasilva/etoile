@@ -39,9 +39,11 @@ public class Lesson extends Model{
 	public String shortDescription;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String videoURL;
 
 	@ManyToOne

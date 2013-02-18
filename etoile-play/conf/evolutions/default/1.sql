@@ -129,8 +129,8 @@ create table lesson (
   acronym                   varchar(255),
   description               TEXT,
   short_description         TEXT,
-  image_url                 varchar(255),
-  video_url                 varchar(255),
+  image_url                 TEXT,
+  video_url                 TEXT,
   module_id                 bigint,
   constraint pk_lesson primary key (id))
 ;

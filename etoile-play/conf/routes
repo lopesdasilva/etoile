@@ -112,7 +112,10 @@ GET /modules/:module/:lesson/edittest/:test/:group/:question/changerightmultiple
 GET /modules/:module/:lesson/edittest/:test/:group/editmultiplechoicequestionform/:question	controllers.ProfessorTestController.editmultiplechoicequestionform(module: String, lesson: String, test: Long, group: Long, question: Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/editmultiplechoicequestion/:question	controllers.ProfessorTestController.editmultiplechoicequestion(module: String, lesson: String, test: Long, group: Long, question: Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/:question/edithypothesis/:hypothesis	controllers.ProfessorTestController.edithypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
-GET /modules/:module/:lesson/edittest/:test/:group/:question/removehypothesis/:hypothesis	controllers.ProfessorTestController.removehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/editmultiplechoicehypothesis/:hypothesis	controllers.ProfessorTestController.editmultiplechoicehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
+
+GET /modules/:module/:lesson/edittest/:test/:group/:question/removemultiplechoicehypothesis/:hypothesis	controllers.ProfessorTestController.removemultiplechoicehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/removeonechoicehypothesis/:hypothesis	controllers.ProfessorTestController.removeonechoicehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
 
 
 

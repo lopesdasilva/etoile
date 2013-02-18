@@ -90,9 +90,12 @@
 										<span class="btn-group pull-right">
 										<a class="btn btn-small btn-success " href="#viewhypothesis@hypothesis.id" data-toggle="modal" role="button">view</a>
 										<a class="btn btn-small btn-warning" href="#edithypothesis@hypothesis.id" data-toggle="modal" >edit</a>
-										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
-
-							
+										@if(hypothesis.isCorrect){
+										<a class="btn btn-small btn-danger disabled"  href="#">delete</a>
+										}
+										@if(!hypothesis.isCorrect){
+										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removeonechoicehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
+										}
 
 										<div id="edithypothesis@hypothesis.id" class="modal hide fade">
 		<div class="modal-header">

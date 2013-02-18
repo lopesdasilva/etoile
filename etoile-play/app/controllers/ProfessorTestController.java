@@ -613,6 +613,11 @@ public class ProfessorTestController extends Controller {
 				
 				
 				}
+				else{
+					
+					usertest.submitted=false;
+					usertest.save();
+				}
 				
 				
 			}

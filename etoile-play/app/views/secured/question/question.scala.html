@@ -17,6 +17,7 @@ function validateUrl() {
 	var regexp = /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
 	var result = regexp.test(document.getElementsByName("urlInput")[0].value.toString());
 	if(result) {
+		$('#Loading').html("<img src=\"/assets/images/Loader.gif\"></img>");
 		$("#ErrorMessage").empty();
 		$.ajax({
 			type: 'GET',
@@ -32,16 +33,19 @@ function validateUrl() {
 				if(data.description == null) data.description = "";
 				if(data.images == null) data.images = "";
 				else {
-					images = data.images.split("|");
-					if(images.length>1){
-						document.getElementsByName("image")[0].value=images[0];
+					if(data.images!=false){
+						images = data.images.split("|");
+						if(images.length>1){
+							document.getElementsByName("image")[0].value=images[0];
+						}
+						else document.getElementsByName("image")[0].value=data.images;
 					}
-					else document.getElementsByName("image")[0].value=data.images;
 				}
 				document.getElementsByName("url")[0].value=data.url;
 				document.getElementsByName("name")[0].value=data.title;
 				document.getElementsByName("descriptionUrl")[0].value=data.description;
 				//document.getElementsByName("image")[0].value=data.images;
+				$('#Loading').html("");
 				$("#formBlock").show(); 
 			},
 			error: function(){ 
@@ -65,7 +69,7 @@ function initAddUrl(){
 	document.getElementsByName("url")[0].value="";
 	document.getElementsByName("descriptionUrl")[0].value="";
 	document.getElementsByName("image")[0].value="";
-		$("#formBlock").hide();
+	$("#formBlock").hide();
 }
 
 function TwitterQuery(keywords){
@@ -367,7 +371,7 @@ function searchButton(){
 							<div class="controls">
 								<input type="text" placeholder="Insert the new URL"
 									class="input-xlarge" name="urlInput">
-								<button onclick="return validateUrl();" class="btn">Load Data</button>
+								<button onclick="return validateUrl();" class="btn">Load Data</button><div id="Loading"></div>
 								<label id="ErrorMessage" class="control-label"></label>
 							</div>
 						</div>

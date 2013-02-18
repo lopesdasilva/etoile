@@ -88,11 +88,61 @@
 										
 										<td>
 										<span class="btn-group pull-right">
-										<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">open</a>
-										<a class="btn btn-small btn-warning disabled" href="#" data-toggle="modal" >edit</a>
-										<a class="btn btn-small btn-danger disabled"  href="#" data-toggle="modal" role="button">delete</a>
+										<a class="btn btn-small btn-success " href="#viewhypothesis@hypothesis.id" data-toggle="modal" role="button">view</a>
+										<a class="btn btn-small btn-warning" href="#edithypothesis@hypothesis.id" data-toggle="modal" >edit</a>
+										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
 
+							
+
+										<div id="edithypothesis@hypothesis.id" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">X</button>
+			<h3 id="myModalLabel">Edit Hypothesis</h3>
+		</div>
+		<div class="modal-body">
+			@helper.form(routes.ProfessorTestController.edithypothesis(module.acronym,
+			lesson.acronym, test.id, group.id,
+			question.id, hypothesis.id),'class->"form-horizontal"){
+			<div class="control-group">
+				<!-- Text input-->
+				<label class="control-label" for="input01">Hypothesis</label>
+				<div class="controls">
+					<input name="hypothesis" type="text" value="@hypothesis.text" class="input-xlarge">
+				</div>
+			</div>
+			<div class="controls">
+				<button class="btn btn-primary pull-right">Edit Hypothesis</button>
+			</div>
+			}
+		</div>
+	</div>
+	
+							
+							
+										
 										</td>
+										<div id="viewhypothesis@hypothesis.id" class="modal hide fade"
+								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+								aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">X</button>
+									<h3>Hypothesis @hypothesis.number</h3>
+								</div>
+
+								<div class="modal-body">
+												
+									<blockquote>@hypothesis.text</blockquote>
+
+								</div>
+
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
+								</div>
+
+							</div>	
+										
 										}
 									</tr>
 									}

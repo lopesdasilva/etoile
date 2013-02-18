@@ -483,6 +483,49 @@ public class ProfessorTestController extends Controller {
 		return redirect(routes.Application.module(module.acronym));
 	}
 	
+	public static Result edithypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		Question question = Question.find.byId(question_id);
+		User user = User.find.byId(session("email"));
+		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			
+			Form<newMultipleHypothesis_form> form = form(newMultipleHypothesis_form.class).bindFromRequest();
+			System.out.println("CORRECT: " + form.get().isCorrect);
+
+			hypothesis.number = question.hypothesislist.size()+1;
+			hypothesis.question = question;
+			hypothesis.text = form.get().hypothesis;
+			hypothesis.save();
+			
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		return redirect(routes.Application.module(module.acronym));
+	}
+	
+	public static Result removehypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
+		System.out.println("REMOVEHYP");
+		
+		Module module = Module.findByAcronym(module_acronym);
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Test test = Test.find.byId(test_id);
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		User user = User.find.byId(session("email"));
+		Question question = Question.find.byId(question_id);
+		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+
+			hypothesis.delete();
+			
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+
+		}
+		return redirect(routes.Application.module(module_acronym));
+	}
+	
 	public static Result editmultiplechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -500,6 +543,8 @@ public class ProfessorTestController extends Controller {
 		}
 		return redirect(routes.Application.module(module_acronym));
 	}
+	
+	
 	
 	public static Result editmultiplechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
 		Module module = Module.findByAcronym(module_acronym);

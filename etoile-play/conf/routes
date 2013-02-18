@@ -111,6 +111,8 @@ GET /modules/:module/:lesson/edittest/:test/:group/addmultiplehypothesis/:questi
 GET /modules/:module/:lesson/edittest/:test/:group/:question/changerightmultiplechoiceanswer/:hypothesis	controllers.ProfessorTestController.changerightmultiplechoiceanswer(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis:Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/editmultiplechoicequestionform/:question	controllers.ProfessorTestController.editmultiplechoicequestionform(module: String, lesson: String, test: Long, group: Long, question: Long)		
 GET /modules/:module/:lesson/edittest/:test/:group/editmultiplechoicequestion/:question	controllers.ProfessorTestController.editmultiplechoicequestion(module: String, lesson: String, test: Long, group: Long, question: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/edithypothesis/:hypothesis	controllers.ProfessorTestController.edithypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
+GET /modules/:module/:lesson/edittest/:test/:group/:question/removehypothesis/:hypothesis	controllers.ProfessorTestController.removehypothesis(module: String, lesson: String, test: Long, group: Long, question:Long, hypothesis: Long)		
 
 
 

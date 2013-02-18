@@ -535,11 +535,7 @@ public class ProfessorTestController extends Controller {
 		}
 		return redirect(routes.Application.module(module_acronym));
 	}
-	
-	
-	
-	
-	
+
 	public static Result reusequestionadd(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -571,9 +567,7 @@ public class ProfessorTestController extends Controller {
 		}
 		return redirect(routes.Application.module(module_acronym));
 	}
-	
-
-	
+		
 	public static Result publish(String module_acronym, String lesson_acronym, Long test_id){
 		Module module = Module.findByAcronym(module_acronym);
 
@@ -628,9 +622,7 @@ public class ProfessorTestController extends Controller {
 
 		return redirect(routes.Application.module(module.acronym));
 	}
-	
-	
-	
+		
 	public static Result addtest(String module_acronym, String lesson_acronym){
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Module module = Module.findByAcronym(module_acronym);
@@ -682,10 +674,8 @@ public class ProfessorTestController extends Controller {
 		
 		return redirect(routes.Application.module(module.acronym));
 	}
-	
-	
-	
-public static Result test(String module_acronym, String lesson_acronym, Long test_id){
+		
+	public static Result test(String module_acronym, String lesson_acronym, Long test_id){
 		
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -702,8 +692,7 @@ public static Result test(String module_acronym, String lesson_acronym, Long tes
 		return redirect(routes.Application.module(module.acronym));
 	}
 
-
-public static Result gradetest(String module_acronym, String lesson_acronym,Long usertest_id, Long question_number){
+	public static Result gradetest(String module_acronym, String lesson_acronym,Long usertest_id, Long group_number){
 	
 	Module module = Module.findByAcronym(module_acronym);
 	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
@@ -711,9 +700,8 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 	if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		
 		UserTest usertest=UserTest.find.byId(usertest_id);
-		QuestionGroup questionGroup=QuestionGroup.find.byId(question_number);
-		System.out.println("question_number: "+question_number);
-		QuestionGroup group = usertest.test.groups.get((int) (question_number-1));
+		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
+		QuestionGroup group = usertest.test.groups.get((int) (group_number-1));
 	
 		
 		QuestionGroup group_aux = new QuestionGroup();
@@ -725,7 +713,6 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		group_aux.test = group.test;
 		group_aux.videoURL = group.videoURL;
 		
-		System.out.println("Group_aux created");
 		
 		for(Question q: group.questions){
 			Question q_aux = new Question();
@@ -743,7 +730,6 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			//q_aux.hypothesislist?????
 			group_aux.questions.add(q_aux);
 			
-			System.out.println("QUESTION: "+q.id);
 			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
 				
 			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(usertest.user.email, q.id);
@@ -769,7 +755,6 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 				q_aux.openanswer.questionevaluation.refresh();
 				}
 				q=q_aux;
-				System.out.println("q answer: "+q.openanswer.answer);
 			}
 			
 			
@@ -794,8 +779,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 	return redirect(routes.Application.module(module.acronym));
 }
 
-
-	public static Result markanswer(String module_acronym, String lesson_acronym,Long usertest_id, Long question_number, Long question_id){
+	public static Result markanswer(String module_acronym, String lesson_acronym,Long usertest_id, Long group_number, Long question_id){
 		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
 		User user = User.find.byId(session("email"));
 		
@@ -805,17 +789,17 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
 		if(evaluation==null){
 			
-			double percentagem = 100.0;
-			percentagem = (form.get().evaluation/percentagem);
-			double peso = question.weight;
-			double cotacao = peso*percentagem;
+			double percentage = 100.0;
+			percentage = (form.get().evaluation/percentage);
+			double weight = question.weight;
+			double mark = weight*percentage;
 			
-			usertest.reputationAsAstudent = usertest.reputationAsAstudent + cotacao;
+			usertest.reputationAsAstudent = usertest.reputationAsAstudent + mark;
 			usertest.save();
 			
 			evaluation = new QuestionEvaluation();
 			evaluation.question = question;
-			evaluation.score = cotacao;
+			evaluation.score = mark;
 			evaluation.userTest = usertest;
 			evaluation.percent = form.get().evaluation;
 			evaluation.answer = answer;
@@ -824,23 +808,21 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 			answer.questionevaluation = evaluation;
 			answer.save();
 		}else{
-			System.out.println(usertest.reputationAsAstudent +"-"+ evaluation.score + "+" + "(" +form.get().evaluation+ "/100)*" + question.weight + "=" );
 			
-			double percentagem = 100.0;
-			percentagem = (form.get().evaluation/percentagem);
-			double peso = question.weight;
-			double cotacao = peso*percentagem;
-			System.out.println("COTACAO: " + cotacao);
+			double percentage = 100.0;
+			percentage = (form.get().evaluation/percentage);
+			double weight = question.weight;
+			double mark = weight*percentage;
 
-			usertest.reputationAsAstudent = usertest.reputationAsAstudent - evaluation.score + cotacao;
+			usertest.reputationAsAstudent = usertest.reputationAsAstudent - evaluation.score + mark;
 			evaluation.percent = form.get().evaluation;
 			usertest.save();
-			evaluation.score = cotacao ;
+			evaluation.score = mark ;
 			evaluation.save();
 		}
 		
-		return gradetest(module_acronym, lesson_acronym, usertest_id, question_number);
-//		return null;
+		return redirect(routes.ProfessorTestController.gradetest(module_acronym, lesson_acronym, usertest_id, group_number));
+
 	}
 	
 	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id, Long usertest_id){
@@ -884,7 +866,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		return redirect(routes.Application.module(module.acronym));
 	}
 		
-		public static Result deletegroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
+	public static Result deletegroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
 			
 			User user = User.find.byId(session("email"));
 			Module module = Module.findByAcronym(module_acronym);
@@ -907,7 +889,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		return redirect(routes.Application.module(module.acronym));
 	}
 		
-		public static Result removequestion(String module_acronym, String lesson_acronym, Long test_id,Long group_id, Long question_id){
+	public static Result removequestion(String module_acronym, String lesson_acronym, Long test_id,Long group_id, Long question_id){
 			User user = User.find.byId(session("email"));
 			Module module = Module.findByAcronym(module_acronym);
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -934,7 +916,7 @@ public static Result gradetest(String module_acronym, String lesson_acronym,Long
 		return redirect(routes.Application.module(module.acronym));
 		}
 		
-		public static Result editgroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
+	public static Result editgroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
 			User user = User.find.byId(session("email"));
 			Module module = Module.findByAcronym(module_acronym);
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){

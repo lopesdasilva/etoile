@@ -527,108 +527,6 @@ public class StudentTestController extends Controller {
 		
 	}
 
-    public static String IMG;
-    public static String DESCR;
-        
-    public static void getImage(String url) throws IOException {
-        java.net.URL u = new java.net.URL(url);
-        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-        conn.connect();
-        
-        // ContentType is an inner class defined below
-        ContentType contentType = getContentTypeHeader(conn);
-        if (!contentType.contentType.equals("text/html") || conn.getResponseCode()!=200){
-            IMG=null;
-            DESCR=null;
-        }
-        else {
-            // determine the charset, or use the default
-            Charset charset = getCharset(contentType);
-            if (charset == null)
-                charset = Charset.defaultCharset();
- 
-            // read the response body, using BufferedReader for performance
-            InputStream in = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
-            int n = 0, totalRead = 0;
-            char[] buf = new char[1024];
-            StringBuilder content = new StringBuilder();
- 
-            // read until EOF or first 8192 characters
-            while (totalRead < 8192 && (n = reader.read(buf, 0, buf.length)) != -1) {
-                content.append(buf, 0, n);
-                totalRead += n;
-            }
-            reader.close();
- 
-            // extract the title
-            Pattern pattern = Pattern.compile("<meta property=\"og:image\" content=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
-            Matcher matcher = pattern.matcher(content);
-            if (matcher.find()) {
-                
-                IMG = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
-            }
-            else {
-                pattern = Pattern.compile("<link rel=\"apple-touch-icon\" href=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
-                matcher = pattern.matcher(content);
-                if (matcher.find()) {
-                    IMG = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
-                }
-                else IMG = null;
-            }
-            
-            pattern = Pattern.compile("<meta property=\"og:description\" content=\"(.+?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
-            matcher = pattern.matcher(content);
-            if (matcher.find()) {
-                DESCR = matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
-            }
-            else DESCR=null;
-        }
-    }
- 
-    private static ContentType getContentTypeHeader(URLConnection conn) {
-        int i = 0;
-        boolean moreHeaders = true;
-        do {
-            String headerName = conn.getHeaderFieldKey(i);
-            String headerValue = conn.getHeaderField(i);
-            if (headerName != null && headerName.equals("Content-Type"))
-                return new ContentType(headerValue);
- 
-            i++;
-            moreHeaders = headerName != null || headerValue != null;
-        }
-        while (moreHeaders);
- 
-        return null;
-    }
- 
-    private static Charset getCharset(ContentType contentType) {
-        if (contentType != null && contentType.charsetName != null && Charset.isSupported(contentType.charsetName))
-            return Charset.forName(contentType.charsetName);
-        else
-            return null;
-    }
- 
-    private static final class ContentType {
-        private static final Pattern CHARSET_HEADER = Pattern.compile("charset=([-_a-zA-Z0-9]+)", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
- 
-        private String contentType;
-        private String charsetName;
-        private ContentType(String headerValue) {
-            if (headerValue == null)
-                throw new IllegalArgumentException("ContentType must be constructed with a not-null headerValue");
-            int n = headerValue.indexOf(";");
-            if (n != -1) {
-                contentType = headerValue.substring(0, n);
-                Matcher matcher = CHARSET_HEADER.matcher(headerValue);
-                if (matcher.find())
-                    charsetName = matcher.group(1);
-            }
-            else
-                contentType = headerValue;
-        }
-    }
 	
 	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ) throws IOException {
 		Form<URL_form> form = form(
@@ -636,16 +534,17 @@ public class StudentTestController extends Controller {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		System.out.println();
-		System.out.println("Url: "+form.get().url);
-		System.out.println("Title: "+form.get().name);
-		System.out.println("Descr: "+form.get().descriptionUrl);
-		System.out.println("ImageUrl: "+form.get().image);
-		System.out.println();
+		//System.out.println();
+		//System.out.println("Url: "+form.get().url);
+		//System.out.println("Title: "+form.get().name);
+		//System.out.println("Descr: "+form.get().descriptionUrl);
+		//System.out.println("ImageUrl: "+form.get().image);
+		//System.out.println();
 
 		URL url = new URL();
 		url.added = new DateTime();
-		url.description = form.get().descriptionUrl;
+		if(form.get().descriptionUrl.length()>255) url.description = form.get().descriptionUrl.substring(0, 255);
+		else url.description = form.get().descriptionUrl;
 		url.adress= form.get().url;
 		url.imageURL=form.get().image;
 		url.name=form.get().name;

@@ -31,19 +31,21 @@ function validateUrl() {
 				if(data.title == null) data.title = "";
 				if(data.description == null) data.description = "";
 				if(data.images == null) data.images = "";
+				else {
+					images = data.images.split("|");
+					if(images.length>1){
+						document.getElementsByName("image")[0].value=images[0];
+					}
+					else document.getElementsByName("image")[0].value=data.images;
+				}
 				document.getElementsByName("url")[0].value=data.url;
 				document.getElementsByName("name")[0].value=data.title;
 				document.getElementsByName("descriptionUrl")[0].value=data.description;
-				document.getElementsByName("image")[0].value=data.images;
+				//document.getElementsByName("image")[0].value=data.images;
 				$("#formBlock").show(); 
 			},
 			error: function(){ 
-				$("#formBlock").hide(); 
-				document.getElementsByName("urlInput")[0].value="";
-				document.getElementsByName("name")[0].value="";
-				document.getElementsByName("url")[0].value="";
-				document.getElementsByName("descriptionurl")[0].value="";
-				document.getElementsByName("image")[0].value="";
+				initAddUrl();
 				$("#ErrorMessage").empty().text("Page Not found.");
 			}
 	    	});
@@ -359,7 +361,7 @@ function searchButton(){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-
+<div class="form-horizontal">
 						<div class="control-group">
 							<label class="control-label" for="input01">New URL</label>
 							<div class="controls">
@@ -369,6 +371,7 @@ function searchButton(){
 								<label id="ErrorMessage" class="control-label"></label>
 							</div>
 						</div>
+</div>
 
 					@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display: none;"){
 						<input type="hidden" name="url" value="">

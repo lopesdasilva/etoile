@@ -16,6 +16,9 @@ import play.mvc.Security;
 import controllers.ProfessorModuleController.BibliographyItem_Form;
 import controllers.StudentTestController.OpenQuestionSuggestion;
 import controllers.secured.*;
+import controllers.extra.SendMail;
+import java.util.List;
+
 
 /**
  * Manage StudentController related operations.
@@ -64,11 +67,12 @@ public class ProfessorLessonController extends Controller {
 	
 
 	
-	public static Result addlessonalert(String module_acronym, String lesson_acronym){
+	public static Result addlessonalert(String module_acronym, String lesson_acronym) {
+
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(session("email"));
-		
+
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			System.out.println("Entrei");
@@ -78,12 +82,19 @@ public class ProfessorLessonController extends Controller {
 			lessonalert.text = form.get().text;
 			if(form.get().imageURL.equals("")){
 				lessonalert.imageURL = "http://www.msxrio.com.br/wp-content/uploads/2011/02/alert.jpg";
-			}else{
-			lessonalert.imageURL = form.get().imageURL;
+			}
+			else{
+				lessonalert.imageURL = form.get().imageURL;
 			}
 			
 			lessonalert.lesson = lesson;
 			lessonalert.save();
+
+			List<User> users_list = module.users;
+			for(User u : users_list) {
+				SendMail.sendMail(u.email, "[Etoile] News in module "+module_acronym, "blablablablablabl some New from the professor "+user.email); 
+			}
+		
 		}
 		
 		
@@ -91,6 +102,7 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result addlessoncontent(String module_acronym, String lesson_acronym){
+
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(session("email"));

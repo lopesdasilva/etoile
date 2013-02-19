@@ -8,6 +8,7 @@ import play.mvc.Result;
 import views.html.login;
 import views.html.register;
 import controllers.extra.sha1;
+import controllers.extra.SendMail;
 
 public class Register extends Controller {
 
@@ -56,7 +57,8 @@ public class Register extends Controller {
 	        	user.email=form.get().inputEmail;
 	        	user.country=form.get().inputCountry;
 	        	user.account_type = 0;
-	        	user.save();
+			SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
+	        	user.save();  
 	       	 System.out.println("DEBUG**************START**************");
 			 System.out.println("New user registration");
 			 System.out.println("User: "+form.get().inputUsername);

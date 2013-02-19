@@ -38,6 +38,8 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controllers.extra.SendMail;
+
 /**
  * Manage Test related operations.
  */
@@ -384,7 +386,6 @@ public class StudentTestController extends Controller {
 		userTest.submitted=true;
 		userTest.save();
 		System.out.println("USERMAIL:" + user.email);
-		
 		System.out.println("Vou criar marker list..");
 		//Quando aluno submete o teste, é associado à sua lista answersToMark, todas as answers dos outros alunos ao mesmo teste.
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
@@ -402,6 +403,7 @@ public class StudentTestController extends Controller {
 							if (!a.markers.contains(user) && a.markers.size() < 3 && user.answersToMark.size() < 3) {
 								a.markers.add(user);
 								a.save();
+								SendMail.sendMail(user.email, "Hey "+user.username+"!", "You've answer to mark"); 
 							}
 						}
 					}
@@ -487,6 +489,7 @@ public class StudentTestController extends Controller {
 		userTest.save();
 		
 		System.out.println("Reputação no Teste: " + userTest.reputationAsAstudent);
+		SendMail.sendMail(user.email, "Congrats "+user.username+"!", "You've answer something");    
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 

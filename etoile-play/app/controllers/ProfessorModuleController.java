@@ -16,6 +16,10 @@ import play.mvc.Result;
 import play.mvc.Security;
 import controllers.secured.*;
 
+import controllers.extra.SendMail;
+import java.util.List;
+
+
 
 @Security.Authenticated(SecuredProfessor.class)
 public class ProfessorModuleController extends Controller {
@@ -128,13 +132,14 @@ public class ProfessorModuleController extends Controller {
 		return redirect(routes.Application.module(module_acronym));
 	}
 	
-	public static Result addlesson(String module_acronym){
+	public static Result addlesson(String module_acronym) throws java.sql.SQLException{
 		Module module = Module.findByAcronym(module_acronym);
 		User user = User.find.byId(session("email"));
 		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<LessonItem_Form> form = form(LessonItem_Form.class).bindFromRequest();
+			
 			Lesson lesson = new Lesson();
 			lesson.acronym = form.get().acronym;
 			lesson.name = form.get().name;
@@ -144,7 +149,11 @@ public class ProfessorModuleController extends Controller {
 			lesson.number = module.lessons.size() + 1;
 			lesson.module = module;
 			lesson.save();
-			
+
+			List<User> users_list = module.users;
+			for(User u : users_list) {
+				SendMail.sendMail(u.email, "[Etoile] New lesson in "+module_acronym+" module !", "blablablablablabl some new lesson called "+form.get().name); 
+			}
 		}
 		
 		return redirect(routes.Application.module(module_acronym));

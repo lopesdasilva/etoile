@@ -37,13 +37,13 @@ public class Answer extends Model{
 	@ManyToOne
 	public Usertest usertest;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public QuestionGroup group;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<User> markers;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.DETACH})
 	public Evaluation evaluation;
 	
 	@OneToOne(cascade = {CascadeType.ALL})

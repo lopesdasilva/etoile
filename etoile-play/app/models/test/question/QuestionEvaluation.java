@@ -50,7 +50,7 @@ public class QuestionEvaluation extends Model {
 	public boolean isCorrect;
 	
 	@ManyToOne
-	public Usertest userTest;
+	public Usertest usertest;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Question question;
@@ -64,12 +64,12 @@ public class QuestionEvaluation extends Model {
 	
 	public static QuestionEvaluation findByUserAndQuestion(Long user_test_id,
 			Long question_id) {
-		return find.where().eq("user_test_id", user_test_id).eq("question_id", question_id).findUnique();
+		return find.where().eq("usertest_id", user_test_id).eq("question_id", question_id).findUnique();
 	}
 	
 	public static List<QuestionEvaluation> findByUserAndTest(Long user_test_id,
 			Long test_id) {
-		return find.where().eq("user_test_id", user_test_id).eq("test_id", test_id).findList();
+		return find.where().eq("usertest_id", user_test_id).eq("test_id", test_id).findList();
 	}
 	
 	

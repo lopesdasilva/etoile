@@ -212,7 +212,7 @@ create table question_evaluation (
   score                     double,
   percent                   integer,
   is_correct                tinyint(1) default 0,
-  user_test_id              bigint,
+  usertest_id               bigint,
   question_id               bigint,
   answer_id                 bigint,
   constraint pk_question_evaluation primary key (id))
@@ -397,8 +397,8 @@ alter table question add constraint fk_question_user_22 foreign key (user_email)
 create index ix_question_user_22 on question (user_email);
 alter table question add constraint fk_question_openanswer_23 foreign key (openanswer_id) references answer (id) on delete restrict on update restrict;
 create index ix_question_openanswer_23 on question (openanswer_id);
-alter table question_evaluation add constraint fk_question_evaluation_userTe_24 foreign key (user_test_id) references usertest (id) on delete restrict on update restrict;
-create index ix_question_evaluation_userTe_24 on question_evaluation (user_test_id);
+alter table question_evaluation add constraint fk_question_evaluation_userte_24 foreign key (usertest_id) references usertest (id) on delete restrict on update restrict;
+create index ix_question_evaluation_userte_24 on question_evaluation (usertest_id);
 alter table question_evaluation add constraint fk_question_evaluation_questi_25 foreign key (question_id) references question (id) on delete restrict on update restrict;
 create index ix_question_evaluation_questi_25 on question_evaluation (question_id);
 alter table question_evaluation add constraint fk_question_evaluation_answer_26 foreign key (answer_id) references answer (id) on delete restrict on update restrict;

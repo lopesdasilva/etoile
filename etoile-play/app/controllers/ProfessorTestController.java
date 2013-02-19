@@ -868,7 +868,7 @@ public class ProfessorTestController extends Controller {
 			evaluation = new QuestionEvaluation();
 			evaluation.question = question;
 			evaluation.score = mark;
-			evaluation.userTest = usertest;
+			evaluation.usertest = usertest;
 			evaluation.percent = form.get().evaluation;
 			evaluation.answer = answer;
 			evaluation.save();

@@ -380,9 +380,9 @@ public class StudentTestController extends Controller {
 
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
 		User user = User.find.byId(request().username());
-		Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
-		userTest.submitted=true;
-		userTest.save();
+		Usertest usertest= Usertest.findByUserAndTest(user.email, test_id);
+		usertest.submitted=true;
+		usertest.save();
 		System.out.println("USERMAIL:" + user.email);
 		
 		System.out.println("Vou criar marker list..");
@@ -390,9 +390,9 @@ public class StudentTestController extends Controller {
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
 		//Isto é só um teste para ter qlq coisa a funcionar
 		
-		Test test = userTest.test;
+		Test test = usertest.test;
 		for (Usertest ut : Usertest.getAllTests()) {
-			if (userTest.id != ut.id) {
+			if (usertest.id != ut.id) {
 				if (ut.test.id == test.id) {
 					for (Answer a : test.answers) {
 						System.out.println(a.usertest.user.email);
@@ -456,16 +456,16 @@ public class StudentTestController extends Controller {
 
 				}
 				
-				userTest.reputationAsAstudent = reputation;
-				userTest.inmodule = false;
-				userTest.save();
+				usertest.reputationAsAstudent = reputation;
+				usertest.inmodule = false;
+				usertest.save();
 				
 				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
 					QuestionEvaluation qe;
-					if(QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id)==null){
+					if(QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id)==null){
 						 qe = new QuestionEvaluation();
 					}else{
-						qe = QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id);
+						qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
 					}
 				if(bool){
 				qe.isCorrect=true;
@@ -474,19 +474,19 @@ public class StudentTestController extends Controller {
 					qe.score = -q.weightToLose;
 				}
 				
-				qe.userTest = userTest;
+				qe.usertest = usertest;
 				qe.question = q;
 				qe.save();
 				}
 			}
 		}
 		
-		userTest.reviewd = false;
-		userTest.reputationAsAstudent = reputation;
-		userTest.inmodule = false;
-		userTest.save();
+		usertest.reviewd = false;
+		usertest.reputationAsAstudent = reputation;
+		usertest.inmodule = false;
+		usertest.save();
 		
-		System.out.println("Reputação no Teste: " + userTest.reputationAsAstudent);
+		System.out.println("Reputação no Teste: " + usertest.reputationAsAstudent);
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 

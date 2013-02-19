@@ -31,10 +31,12 @@ public class Lessoncontent extends Model{
 	
 	@Constraints.Required
     @Formats.NonEmpty
+    @Column(columnDefinition="TEXT")
 	public String url;
 	
 	@Constraints.Required
     @Formats.NonEmpty
+    @Column(columnDefinition="TEXT")
 	public String lessonContentImageURL;
 	
 	

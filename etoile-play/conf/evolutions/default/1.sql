@@ -19,7 +19,7 @@ create table bibliography (
   id                        bigint auto_increment not null,
   title                     varchar(255),
   description               TEXT,
-  image_url                 varchar(255),
+  image_url                 TEXT,
   link                      varchar(255),
   module_id                 bigint,
   constraint pk_bibliography primary key (id))
@@ -31,7 +31,7 @@ create table blog (
   alternate_header          varchar(255),
   text                      TEXT,
   alternate_text            TEXT,
-  article_image_url         varchar(255),
+  article_image_url         TEXT,
   date                      datetime,
   constraint pk_blog primary key (id))
 ;
@@ -66,7 +66,7 @@ create table continent (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
-  image_url                 varchar(255),
+  image_url                 TEXT,
   constraint pk_continent primary key (id))
 ;
 
@@ -140,7 +140,7 @@ create table lessonalert (
   name                      varchar(255),
   text                      varchar(255),
   lesson_id                 bigint,
-  image_url                 varchar(255),
+  image_url                 TEXT,
   constraint pk_lessonalert primary key (id))
 ;
 
@@ -149,8 +149,8 @@ create table lessoncontent (
   name                      varchar(255),
   text                      varchar(255),
   lesson_id                 bigint,
-  url                       varchar(255),
-  lesson_content_image_url  varchar(255),
+  url                       TEXT,
+  lesson_content_image_url  TEXT,
   constraint pk_lessoncontent primary key (id))
 ;
 
@@ -161,7 +161,7 @@ create table module (
   duration                  varchar(255),
   description               TEXT,
   video_url                 TEXT,
-  image_url                 varchar(255),
+  image_url                 TEXT,
   university_id             bigint,
   constraint pk_module primary key (id))
 ;
@@ -173,7 +173,7 @@ create table professor (
   firstname                 varchar(255),
   lastname                  varchar(255),
   degree                    varchar(255),
-  image_url                 varchar(255),
+  image_url                 TEXT,
   contact                   TEXT,
   shortdescription          TEXT,
   user_email                varchar(255),
@@ -183,7 +183,7 @@ create table professor (
 create table professor_content (
   id                        bigint auto_increment not null,
   title                     varchar(255),
-  image_url                 varchar(255),
+  image_url                 TEXT,
   description               TEXT,
   professor_id              bigint,
   constraint pk_professor_content primary key (id))
@@ -199,8 +199,8 @@ create table question (
   type_of_question          integer,
   question                  varchar(255),
   answer_suggested_by_student varchar(255),
-  image_url                 varchar(255),
-  video_url                 varchar(255),
+  image_url                 TEXT,
+  video_url                 TEXT,
   keywords                  varchar(255),
   iscopy                    tinyint(1) default 0,
   openanswer_id             bigint,
@@ -240,7 +240,7 @@ create table test (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      TEXT,
-  test_image_url            varchar(255),
+  test_image_url            TEXT,
   expected_duration         varchar(255),
   published                 tinyint(1) default 0,
   lesson_id                 bigint,
@@ -256,11 +256,11 @@ create table topic (
 
 create table url (
   id                        bigint auto_increment not null,
-  adress                    varchar(255),
+  adress                    TEXT,
   likes                     integer,
   name                      varchar(255),
   description               varchar(255),
-  image_url                 varchar(255),
+  image_url                 TEXT,
   added                     datetime,
   question_id               bigint,
   user_email                varchar(255),
@@ -271,7 +271,7 @@ create table university (
   id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
-  image_url                 varchar(255),
+  image_url                 TEXT,
   continent_id              bigint,
   constraint pk_university primary key (id))
 ;

@@ -294,14 +294,16 @@ public class StudentTestController extends Controller {
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
+				System.out.println(last_answers.size());
 				for(Hypothesis h : last_answers){
 					h.selected = false;
 					h.save();
 				}
-				
+				if(form.get().ocqanswer!=null){
 				Hypothesis hypothesis = Hypothesis.find.byId(form.get().ocqanswer);
 				hypothesis.selected = true;
 				hypothesis.save();
+				}
 				
 			}else if(question.typeOfQuestion == 2) {
 			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE

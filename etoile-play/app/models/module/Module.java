@@ -41,6 +41,7 @@ public class Module extends Model {
 	public String videoURL;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 

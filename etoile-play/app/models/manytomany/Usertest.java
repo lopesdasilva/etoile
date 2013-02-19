@@ -93,4 +93,15 @@ public class Usertest extends Model{
 		return true;
 	}
 	
+	public boolean allQuestionsAnswered(Long usertest_id){
+		Usertest ut = Usertest.find.byId(usertest_id);
+		for(Answer ans: ut.answers){
+			if(ans.answer.equals("No answer.") || ans.answer.equals("")){
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
 }

@@ -33,6 +33,7 @@ public class Test extends Model{
 	public String text;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String testImageURL;
 	
 	@Constraints.Required

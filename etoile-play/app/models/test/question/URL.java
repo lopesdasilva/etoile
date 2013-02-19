@@ -2,6 +2,7 @@ package models.test.question;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class URL extends Model implements Comparable<URL> {
 	public Long id;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String adress;
 	
 	@Constraints.Required
@@ -38,6 +40,7 @@ public class URL extends Model implements Comparable<URL> {
 	public String description;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	@Constraints.Required

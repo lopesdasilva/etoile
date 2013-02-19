@@ -364,7 +364,7 @@ function searchButton(){
 										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<button href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</button>
+										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -670,13 +670,7 @@ function searchButton(){
 							} @if(question.videoURL!=null){
 							<div class="span6">
 								<p>
-									<object style="float: none;">
-										<param name="movie" value="@module.videoURL" />
-										<embed src="@question.videoURL"
-											type="application/x-shockwave-flash" wmode="transparent"
-											height="300">
-									</object>
-
+									<iframe height="300" src="@question.videoURL" frameborder="0" allowfullscreen></iframe>
 								</p>
 							</div>
 							}
@@ -812,6 +806,9 @@ function searchButton(){
     <h3 id="myModalLabel">Confirmation</h3>
   </div>
   <div class="modal-body">
+   @if(!usertest.allQuestionsAnswered(usertest.id)){
+   	<b>You haven't completed the test.</b>
+   }
     <p>Are you sure you want to submit your test?</p>
     <p><span class="label label-important">Important</span> This Action is irreversible!</p>
   </div>

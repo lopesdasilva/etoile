@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -73,9 +74,11 @@ public class Question extends Model {
 	
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String videoURL;
 
 	@Constraints.Required

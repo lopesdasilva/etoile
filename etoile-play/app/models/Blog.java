@@ -33,6 +33,7 @@ public class Blog extends Model {
 	public String alternateText;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String articleImageURL;
 	
 

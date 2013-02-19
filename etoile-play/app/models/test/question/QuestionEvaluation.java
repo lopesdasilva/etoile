@@ -20,7 +20,7 @@ import javax.validation.Constraint;
 
 
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.test.Answer;
 import models.test.Hypothesis;
@@ -50,12 +50,12 @@ public class QuestionEvaluation extends Model {
 	public boolean isCorrect;
 	
 	@ManyToOne
-	public UserTest userTest;
+	public Usertest userTest;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Question question;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	public Answer answer;
 	
 	

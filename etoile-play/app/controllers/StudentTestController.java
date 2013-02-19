@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 
 import models.User;
 import models.curriculum.Category;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
@@ -87,7 +87,7 @@ public class StudentTestController extends Controller {
 			User user = User.find.byId(request().username());
 			Module module = Module.findByAcronym(module_acronym);
 			Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-			UserTest usertest = UserTest.findByUserAndTest(user.email,test.id);
+			Usertest usertest = Usertest.findByUserAndTest(user.email,test.id);
 			
 //			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
 //					test_id);
@@ -116,7 +116,7 @@ public class StudentTestController extends Controller {
 					q_aux.number = q.number;
 					q_aux.question = q.question;
 					q_aux.typeOfQuestion = q.typeOfQuestion;
-					q_aux.usertest = q.usertest;
+					q_aux.user = q.user;
 					q_aux.videoURL = q.videoURL;
 					q_aux.urls=q.urls;
 					
@@ -172,7 +172,7 @@ public class StudentTestController extends Controller {
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		UserTest usertest = UserTest.findByUserAndTest(user.email,
+		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
 		
@@ -253,7 +253,7 @@ public class StudentTestController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.usertest = q.usertest;
+			q_aux.user = q.user;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			q_aux.keywords=q.keywords;
@@ -308,7 +308,7 @@ public class StudentTestController extends Controller {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		UserTest usertest=UserTest.find.byId(usertest_id);
+		Usertest usertest=Usertest.find.byId(usertest_id);
 		
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
@@ -368,7 +368,7 @@ public class StudentTestController extends Controller {
 			
 			
 			
-			UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+			Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
 			float progress = userTest.progress+ 100/totalNumQuestions;
 			System.out.println("progress"+progress);
 			userTest.progress=progress;
@@ -380,7 +380,7 @@ public class StudentTestController extends Controller {
 
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
 		User user = User.find.byId(request().username());
-		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+		Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
 		userTest.submitted=true;
 		userTest.save();
 		System.out.println("USERMAIL:" + user.email);
@@ -391,7 +391,7 @@ public class StudentTestController extends Controller {
 		//Isto é só um teste para ter qlq coisa a funcionar
 		
 		Test test = userTest.test;
-		for (UserTest ut : UserTest.getAllTests()) {
+		for (Usertest ut : Usertest.getAllTests()) {
 			if (userTest.id != ut.id) {
 				if (ut.test.id == test.id) {
 					for (Answer a : test.answers) {
@@ -506,7 +506,7 @@ public class StudentTestController extends Controller {
 		Test test=Test.find.byId(test_id);
 		if(!user.isUserSignupTest(test)){
 			//signup in test
-			UserTest user_test = new UserTest();
+			Usertest user_test = new Usertest();
 			user_test.user = user;
 			user_test.test = test;
 			user_test.expired = false;
@@ -521,7 +521,7 @@ public class StudentTestController extends Controller {
 			
 		}
 		
-		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+		Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
 		usertest.inmodule = true;
 		usertest.save();
 
@@ -542,7 +542,7 @@ public class StudentTestController extends Controller {
 		new_question.question = form_question.get().openquestionsuggestion;
 		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
 		new_question.lesson = lesson;
-		new_question.usertest = usertest;
+		new_question.user = user;
 		new_question.imageURL = "http://placehold.it/350x150";
 		new_question.save();
 		lesson.save();

@@ -5,7 +5,7 @@ import java.util.List;
 
 import models.User;
 import models.curriculum.Category;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;

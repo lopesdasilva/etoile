@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import models.Blog;
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
@@ -35,7 +35,7 @@ public class Answer extends Model{
 	public Test test;
 	
 	@ManyToOne
-	public UserTest usertest;
+	public Usertest usertest;
 	
 	@ManyToOne
 	public QuestionGroup group;

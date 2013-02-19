@@ -70,9 +70,9 @@ public class ProfessorController extends Controller {
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		
 		for(Question q: lesson.questions){
-			if(q.usertest!=null){
+			if(q.user!=null){
 				
-				q.usertest.refresh();
+				q.user.refresh();
 			}
 		}
 		

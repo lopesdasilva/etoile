@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 
 import models.Comment;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.test.question.Question;
 import models.test.question.QuestionGroup;
@@ -52,7 +52,7 @@ public class Test extends Model{
 
 	
 	@OneToMany
-	public List<UserTest> users;
+	public List<Usertest> users;
 	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
@@ -65,7 +65,7 @@ public class Test extends Model{
 	
 	
 	public boolean studentsEnrolled(Test t){
-		for(UserTest userTest : t.users){
+		for(Usertest userTest : t.users){
 			if(userTest.inmodule)
 				return true;
 		}
@@ -73,7 +73,7 @@ public class Test extends Model{
 	}
 	public int numberStudentsEnrolled(Test t){
 		int number=0;
-		for(UserTest userTest : t.users){
+		for(Usertest userTest : t.users){
 			if(userTest.inmodule)
 				number++;
 		}

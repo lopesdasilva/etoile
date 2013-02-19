@@ -577,8 +577,7 @@ public class Global extends GlobalSettings {
 			Module module_three = new Module();
 			module_three.name = "Non-Equilibrium Social Science";
 			module_three.acronym="ness";
-			//module_three.imageURL = "http://www.vaniercollege.qc.ca/social-science/images/social-science.jpg";
-			module_three.imageURL = "assets/images/modules/ness_logo_unequilibrium_version_light_for_etoile.jpg";
+			module_three.imageURL = "http://img138.imageshack.us/img138/9061/nesslogounequilibriumve.jpg";
 			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
 			module_three.save();
 			

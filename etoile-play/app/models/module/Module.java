@@ -44,7 +44,6 @@ public class Module extends Model {
 	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
-
 	@ManyToMany(mappedBy="modules")
 	public List<User> users;
 	

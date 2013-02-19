@@ -106,7 +106,7 @@ function onKeyUpInput(event) {
 	if(aux.length>1){ 
 		var temporal="";
 		for(i=0;i<aux.length;i++) {
-			temporal+='<a href=\"#\" onclick=\'$(\"#tweets\").empty().text("loading ...");document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+', ';
+			temporal+='<a class="badge badge-info" href=\"#\" onclick=\'$(\"#tweets\").empty().text("loading ...");document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+' ';
 		}
 		$("#keywordsT").html(temporal);
 		document.getElementById("labelsT").style.display="block";
@@ -262,20 +262,19 @@ function searchButton(){
 					<fieldset class="form-search">
   <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
   <button onclick='searchButton();' type="submit" class="btn">Search</button><br>
-  <div id="labelsT"><label id="legRel" >Related: </label> <label for="legRel" id="keywordsT"></label></div>
-
-					
-		
+  <div id="labelsT"><label id="legRel" >Related: </label> <label  for="legRel" id="keywordsT"></label></div>
 			    </fieldset>
     <div id="pagingT">
-<br>
       <div id="tweets" class="widgetT query"></div>
-<br>
-      <div class="controlsT">
-        <button class="prevT" type="button" disabled>&larr;</button>
-        <span class="pagenum"></span>
-        <button class="nextT" type="button" disabled>&rarr;</button>
+      <div class="controlsT pagination">
+      <ul>
+        <li><a class="prevT" type="button" disabled>&larr;</a></li>
+        <li><a class="nextT" type="button" disabled>&rarr;</a></li>
+       <ul>
       </div>
+      
+      
+      
     </div>
 </div>
 </div>

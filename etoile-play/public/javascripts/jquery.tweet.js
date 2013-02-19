@@ -164,6 +164,7 @@
         return proto+'//'+s.twitter_api_url+'/1/statuses/user_timeline.json?screen_name='+s.username[0]+'&count='+count+(s.retweets ? '&include_rts=1' : '')+'&page='+s.page+common_params;
       } else {
         var query = (s.query || 'from:'+s.username.join(' OR from:'));
+	console.log(proto+'//'+s.twitter_search_url+'/search.json?&q='+encodeURIComponent(query)+'&rpp='+count+'&page='+s.page+common_params);
         return proto+'//'+s.twitter_search_url+'/search.json?&q='+encodeURIComponent(query)+'&rpp='+count+'&page='+s.page+common_params;
       }
     }
@@ -249,6 +250,7 @@
       if (s.loading_text) $(widget).not(":has(.tweet_list)").empty().append(loading);
       $.getJSON(build_api_url(), function(data){
         var tweets = $.map(data.results || data, extract_template_data);
+	console.log(tweets);
         tweets = $.grep(tweets, s.filter).sort(s.comparator).slice(0, s.count);
         $(widget).trigger("tweet:retrieved", [tweets]);
       });

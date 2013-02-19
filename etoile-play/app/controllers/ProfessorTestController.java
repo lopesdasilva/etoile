@@ -861,6 +861,13 @@ public class ProfessorTestController extends Controller {
 		//REFRESH
 		usertest.user.refresh();
 		
+		for(Answer asd : usertest.answers){
+			if(asd.questionevaluation == null){
+				System.out.println("You've answers to mark");
+
+			}
+		}
+		
 		return ok(views.html.professor.questionanalysis.render(module,lesson,usertest,group_aux));
 	}
 	

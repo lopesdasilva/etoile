@@ -81,4 +81,16 @@ public class Usertest extends Model{
         return find.where().eq("user_email", user_email).findList();
     }
 	
+	public boolean allAnswersMarked(Long usertest_id){
+		Usertest ut = Usertest.find.byId(usertest_id);
+		List<Answer> answers_aux = ut.answers;
+		boolean allmarked = true;
+		for(Answer ans: answers_aux){
+			if(ans.questionevaluation==null){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

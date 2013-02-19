@@ -541,12 +541,26 @@ usertest: models.manytomany.Usertest, group: models.test.question.QuestionGroup)
     <h3 id="myModalLabel">Confirmation</h3>
   </div>
   <div class="modal-body">
+		@for(answer_aux <- usertest.answers){
+			@if(answer_aux.questionevaluation == null){
+				<blockquote>Question @answer_aux.openQuestion.number isn't marked</blockquote>
+				Please mark all answers!
+			}
+		}
+  	@if(usertest.allAnswersMarked(usertest.id)){
     <p>Are you sure you want to submit your reviewed test?</p>
     <p><span class="label label-important">Important</span> This Action is irreversible!</p>
+    }
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    @if(usertest.allAnswersMarked(usertest.id)){
     <a class="btn btn-primary" href="@routes.ProfessorTestController.submitreviewedtest(module.acronym,lesson.acronym,usertest.test.id,usertest.id)">Confirm</a>
+  	}
+  	@if(!usertest.allAnswersMarked(usertest.id)){
+  	    <a class="btn btn-primary disabled" href="#">Confirm</a>
+  	
+  	}
   </div>
 </div>
 

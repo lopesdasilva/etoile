@@ -129,7 +129,7 @@ public class StudentController extends Controller {
 		UserTest usertest = UserTest.findByUserAndTest(user.email,
 				test.id);
 		
-		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
+		List<Answer> test_answers = Answer.findByUserTestAndTestId(usertest.id,
 				test_id);
 		if (test_answers.isEmpty()) {
 			for(QuestionGroup g: test.groups){
@@ -139,7 +139,7 @@ public class StudentController extends Controller {
 					empty_answer.answer = "No answer.";
 					empty_answer.openQuestion = q;
 					empty_answer.test = test;
-					empty_answer.user = user;
+					empty_answer.usertest.user = user;
 					empty_answer.group = g;
 					empty_answer.save();
 					test.answers.add(empty_answer);
@@ -174,7 +174,7 @@ public class StudentController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.user = q.user;
+			q_aux.usertest.user = q.usertest.user;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			
@@ -202,7 +202,7 @@ public class StudentController extends Controller {
 			q=q_aux;
 			}
 			else{
-				q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
+				q_aux.openanswer=Answer.findByUserTestAndQuestion( usertest.id,q.id);
 				q=q_aux;
 			}
 			

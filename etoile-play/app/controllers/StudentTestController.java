@@ -89,8 +89,8 @@ public class StudentTestController extends Controller {
 			Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 			UserTest usertest = UserTest.findByUserAndTest(user.email,test.id);
 			
-			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
-					test_id);
+//			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
+//					test_id);
 			
 			if (question_number<=test.groups.size() && question_number>0){
 				//System.out.println("A imprimir as questoes");
@@ -116,7 +116,7 @@ public class StudentTestController extends Controller {
 					q_aux.number = q.number;
 					q_aux.question = q.question;
 					q_aux.typeOfQuestion = q.typeOfQuestion;
-					q_aux.user = q.user;
+					q_aux.usertest = q.usertest;
 					q_aux.videoURL = q.videoURL;
 					q_aux.urls=q.urls;
 					
@@ -144,7 +144,7 @@ public class StudentTestController extends Controller {
 					q=q_aux;
 					}
 					else{
-						q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
+						q_aux.openanswer=Answer.findByUserTestAndQuestion( usertest.id,q.id);
 						q=q_aux;
 					}
 					
@@ -179,7 +179,7 @@ public class StudentTestController extends Controller {
 		
 		
 		
-		List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
+		List<Answer> test_answers = Answer.findByUserTestAndTestId(usertest.id,
 				test_id);
 		
 		
@@ -194,7 +194,7 @@ public class StudentTestController extends Controller {
 					empty_answer.answer = "No answer.";
 					empty_answer.openQuestion = q;
 					empty_answer.test = test;
-					empty_answer.user = user;
+					empty_answer.usertest=usertest;
 					empty_answer.group = g;
 					empty_answer.openQuestion = q;
 					empty_answer.save();
@@ -208,19 +208,19 @@ public class StudentTestController extends Controller {
 			if(test_answers.size()!=usertest.test.numberOfQuestions(usertest.test)){
 				for(QuestionGroup group:usertest.test.groups){
 					for(Question question:group.questions){
-						if(Answer.findByUserAndQuestion(user.email, question.id)==null){
+						if(Answer.findByUserTestAndQuestion(usertest.id, question.id)==null){
 							Answer empty_answer = new Answer();
 							empty_answer.answer = "No answer.";
 							empty_answer.openQuestion = question;
 							empty_answer.test = test;
-							empty_answer.user = user;
+							empty_answer.usertest = usertest;
 							empty_answer.group = group;
 							empty_answer.openQuestion = question;
 							empty_answer.save();
 							test.answers.add(empty_answer);
 							test.save();
 						}
-						System.out.println("Resultado da query: "+Answer.findByUserAndQuestion(user.email, question.id));
+						System.out.println("Resultado da query: "+Answer.findByUserTestAndQuestion(usertest.id, question.id));
 						
 					}
 				}
@@ -253,7 +253,7 @@ public class StudentTestController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.user = q.user;
+			q_aux.usertest = q.usertest;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			q_aux.keywords=q.keywords;
@@ -282,7 +282,7 @@ public class StudentTestController extends Controller {
 			q=q_aux;
 			}
 			else{
-				q_aux.openanswer=Answer.findByUserAndQuestion( user.email,q.id);
+				q_aux.openanswer=Answer.findByUserTestAndQuestion( usertest.id,q.id);
 				q=q_aux;
 			}
 			
@@ -303,11 +303,12 @@ public class StudentTestController extends Controller {
 	}
 	
 	public static Result postquestion(
-			int question_number, String module_acronym, String lesson_acronym, Long test_id,
+			int question_number, String module_acronym, String lesson_acronym, Long test_id,Long usertest_id,
 			Long question_id) {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
+		UserTest usertest=UserTest.find.byId(usertest_id);
 		
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
@@ -353,7 +354,7 @@ public class StudentTestController extends Controller {
 			Form<QuestionAnswer> form = form(QuestionAnswer.class).bindFromRequest();
 			System.out.println("Open Answer: " + form.get().qanswer);
 			
-			Answer answer = Answer.findByUserAndQuestion(user.email, question_id); // Resposta Guardada
+			Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id); // Resposta Guardada
 			answer.answer = form.get().qanswer;
 			answer.save();
 		}
@@ -394,10 +395,10 @@ public class StudentTestController extends Controller {
 			if (userTest.id != ut.id) {
 				if (ut.test.id == test.id) {
 					for (Answer a : test.answers) {
-						System.out.println(a.user.email);
+						System.out.println(a.usertest.user.email);
 						System.out.println(user.email);
-						System.out.println(user.email.equals(a.user.email));
-						if (!user.email.equals(a.user.email)) {
+						System.out.println(user.email.equals(a.usertest.user.email));
+						if (!user.email.equals(a.usertest.user.email)) {
 							if (!a.markers.contains(user) && a.markers.size() < 3 && user.answersToMark.size() < 3) {
 								a.markers.add(user);
 								a.save();
@@ -535,21 +536,16 @@ public class StudentTestController extends Controller {
 				OpenAnswerSuggestion.class).bindFromRequest();
 		
 		
-		
-		
-		System.out.println("SUGGESTION - question: " + form_question.get().openquestionsuggestion);
-		System.out.println("SUGGESTION - answer: " + form_answer.get().openanswersuggestion);
 
 		System.out.println("MODULESIZE: " + lesson.questions.size());
 		Question new_question = new Question();
 		new_question.question = form_question.get().openquestionsuggestion;
 		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
 		new_question.lesson = lesson;
-		new_question.user = user;
-		new_question.imageURL = "http://2.bp.blogspot.com/_n9nhDiNysbI/TTgaGiOpZGI/AAAAAAAAANo/eWv-c-7041I/s1600/ponto-interrogacao-21.jpg";
+		new_question.usertest = usertest;
+		new_question.imageURL = "http://placehold.it/350x150";
 		new_question.save();
 		lesson.save();
-		System.out.println("MODULESIZE2: " + lesson.questions.size());
 
 		
 		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym));
@@ -557,10 +553,8 @@ public class StudentTestController extends Controller {
 	
 	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){
 		URL url = URL.find.byId(url_id);
-		System.out.println("Number Likes Before: " + url.likes);
 		url.likes ++ ;
 
-		System.out.println("Number Likes Before: " + url.likes);
 		url.save();
 		
 		return question(question_number, test_id, lesson_acronym, module_acronym);

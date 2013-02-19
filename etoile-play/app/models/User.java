@@ -70,15 +70,10 @@ public class User extends Model {
 	public List<Question> openquestions;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	public List<Question> questions;
-	
-	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Evaluation> evaluations;
 	
     // -- Queries
 	
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy="user")
-	public List<Answer> answers;
 	
 	@ManyToMany(mappedBy="markers")
 	public List<Answer> answersToMark;

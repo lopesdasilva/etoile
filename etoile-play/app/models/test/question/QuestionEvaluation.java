@@ -52,7 +52,7 @@ public class QuestionEvaluation extends Model {
 	@ManyToOne
 	public UserTest userTest;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Question question;
 	
 	@OneToOne

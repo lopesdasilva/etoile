@@ -7,7 +7,9 @@ import javax.persistence.*;
 import models.User;
 import models.module.Module;
 import models.module.Lesson;
+import models.test.Answer;
 import models.test.Test;
+import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 
 import com.avaje.ebean.Ebean;
@@ -52,10 +54,16 @@ public class UserTest extends Model{
 	@ManyToOne
 	public Test test;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Answer> answers;
+	
 	public float progress=0;
 	public String progressString="0%";
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.DETACH})
+	public List<Question> questions;
+	
+	@OneToMany(cascade = {CascadeType.DETACH})
 	public List<QuestionEvaluation> questionevaluation;
 	
 	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(

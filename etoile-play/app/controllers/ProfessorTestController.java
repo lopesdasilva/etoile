@@ -94,8 +94,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.user!= null){
-					q.user.refresh();
+				if(q.usertest.user!= null){
+					q.usertest.user.refresh();
 				}
 			}
 			return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group));
@@ -128,7 +128,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = 0;
-			question.user = user;
+			question.usertest.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 0;
 			
@@ -194,8 +194,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.user!= null){
-					q.user.refresh();
+				if(q.usertest.user!= null){
+					q.usertest.user.refresh();
 				}
 			}
 			return ok(views.html.professor.onechoicequestionAdd.render(module,lesson,test, group));
@@ -227,7 +227,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.user = user;
+			question.usertest.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 1;
 			
@@ -251,8 +251,8 @@ public class ProfessorTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.user!= null){
-					q.user.refresh();
+				if(q.usertest.user!= null){
+					q.usertest.user.refresh();
 				}
 			}
 			return ok(views.html.professor.onechoicequestionEdit.render(module,lesson,test, group, question));
@@ -283,7 +283,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.user = user;
+			question.usertest.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 1;
 			
@@ -391,8 +391,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.user!= null){
-					q.user.refresh();
+				if(q.usertest.user!= null){
+					q.usertest.user.refresh();
 				}
 			}
 			return ok(views.html.professor.multiplechoicequestionAdd.render(module,lesson,test, group));
@@ -424,7 +424,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.user = user;
+			question.usertest.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 2;
 			
@@ -576,8 +576,8 @@ public class ProfessorTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.user!= null){
-					q.user.refresh();
+				if(q.usertest.user!= null){
+					q.usertest.user.refresh();
 				}
 			}
 			return ok(views.html.professor.multiplechoicequestionEdit.render(module,lesson,test, group, question));
@@ -610,7 +610,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.user = user;
+			question.usertest.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 2;
 			
@@ -640,7 +640,7 @@ public class ProfessorTestController extends Controller {
 			copy_question.videoURL = old_question.videoURL;
 			copy_question.weight = old_question.weight;
 			copy_question.weightToLose = old_question.weightToLose;
-			copy_question.user = old_question.user;
+			copy_question.usertest.user = old_question.usertest.user;
 			copy_question.number = group.questions.size()+1;
 			copy_question.typeOfQuestion = copy_question.typeOfQuestion;
 			copy_question.iscopy = true;
@@ -683,7 +683,7 @@ public class ProfessorTestController extends Controller {
 			for(UserTest usertest :test.users){
 				if(!usertest.submitted){				
 					
-					List<Answer> useranswers = Answer.findByUserEmailAndTestId(usertest.user.email, test.id);
+					List<Answer> useranswers = Answer.findByUserTestAndTestId(usertest.id, test.id);
 					for (Answer useranswer:useranswers){
 						useranswer.delete();
 					}
@@ -813,8 +813,6 @@ public class ProfessorTestController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.user = usertest.user;
-			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			
 			
@@ -841,7 +839,7 @@ public class ProfessorTestController extends Controller {
 			q=q_aux;
 			}
 			else{
-				q_aux.openanswer=Answer.findByUserAndQuestion( usertest.user.email,q.id);
+				q_aux.openanswer=Answer.findByUserTestAndQuestion( usertest.id,q.id);
 				if(q_aux.openanswer.questionevaluation != null){
 				q_aux.openanswer.questionevaluation.refresh();
 				}
@@ -876,7 +874,7 @@ public class ProfessorTestController extends Controller {
 		
 		UserTest usertest = UserTest.find.byId(usertest_id);
 		Question question = Question.find.byId(question_id);
-		Answer answer = Answer.findByUserAndQuestion(usertest.user.email, question_id);
+		Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id);
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
 		if(evaluation==null){
 			

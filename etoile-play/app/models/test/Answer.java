@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import models.Blog;
 import models.User;
+import models.manytomany.UserTest;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
@@ -34,7 +35,7 @@ public class Answer extends Model{
 	public Test test;
 	
 	@ManyToOne
-	public User user;
+	public UserTest usertest;
 	
 	@ManyToOne
 	public QuestionGroup group;
@@ -58,16 +59,16 @@ public class Answer extends Model{
 	}
 	
 	
-    public static List<Answer> findByUserEmailAndTestId(String email,Long test_id) {
-        return find.where().eq("user_email", email).eq("test_id", test_id).findList();
+    public static List<Answer> findByUserTestAndTestId(Long usertest_id,Long test_id) {
+        return find.where().eq("usertest_id", usertest_id).eq("test_id", test_id).findList();
     }
     
     public static List<Answer> findByUserEmailAndTestIdAndGroupId(String email,Long test_id,Long group_id) {
         return find.where().eq("user_email", email).eq("test_id", test_id).eq("group_id", group_id).findList();
     }
 
-	public static Answer findByUserAndQuestion(String user_id,Long openquestion_id) {
-		return find.where().eq("open_question_id",openquestion_id).eq("user_email", user_id).findUnique();
+	public static Answer findByUserTestAndQuestion(Long usertest_id,Long openquestion_id) {
+		return find.where().eq("open_question_id",openquestion_id).eq("usertest_id", usertest_id).findUnique();
 	}
 	
 }

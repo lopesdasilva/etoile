@@ -20,6 +20,7 @@ import javax.validation.Constraint;
 
 
 import models.User;
+import models.manytomany.UserTest;
 import models.module.Lesson;
 import models.test.Answer;
 import models.test.Hypothesis;
@@ -41,6 +42,10 @@ public class Question extends Model {
 	
 	@ManyToOne
 	public User user;
+	
+	@ManyToOne
+	public UserTest usertest;
+	
 	//ARGUMENTOS COMUNS
 	@ManyToMany(mappedBy="questions")
 	public List<QuestionGroup> group;

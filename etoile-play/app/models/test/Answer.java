@@ -43,7 +43,7 @@ public class Answer extends Model{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<User> markers;
 	
-	@OneToOne(cascade = {CascadeType.DETACH})
+	@OneToOne(cascade = {CascadeType.ALL})
 	public Evaluation evaluation;
 	
 	@OneToOne(cascade = {CascadeType.ALL})

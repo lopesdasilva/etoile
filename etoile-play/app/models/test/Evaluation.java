@@ -34,10 +34,10 @@ public class Evaluation extends Model {
 	@Constraints.Required
 	public Long evaluation;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Answer answer;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public User user;
 	
 	public static Model.Finder<Long, Evaluation> find = new Model.Finder<Long, Evaluation>(

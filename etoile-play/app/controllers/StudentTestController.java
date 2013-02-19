@@ -525,7 +525,6 @@ public class StudentTestController extends Controller {
 		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
 		new_question.lesson = lesson;
 		new_question.user = user;
-		new_question.imageURL = "http://placehold.it/350x150";
 		new_question.save();
 		lesson.save();
 

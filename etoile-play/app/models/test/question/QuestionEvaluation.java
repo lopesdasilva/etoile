@@ -55,7 +55,7 @@ public class QuestionEvaluation extends Model {
 	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Question question;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = {CascadeType.DETACH})
 	public Answer answer;
 	
 	

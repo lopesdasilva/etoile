@@ -678,10 +678,31 @@ public class ProfessorTestController extends Controller {
 			test.published=false;
 			test.save();
 			
-			
-			
+		
 			for(Usertest usertest :test.users){
+				
+				for(QuestionGroup group:usertest.test.groups){
+				for(Question question:group.questions){
+					if(question.typeOfQuestion!=0){
+					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(usertest.user.email,question.id );
+					for(Hypothesis hyp: hypothesis){
+						hyp.delete();
+					}
+					}
+				}
+				}
+						
+				
+				if(usertest.questionevaluation!=null){
+				for(QuestionEvaluation userevaluation: usertest.questionevaluation){
+					userevaluation.answer=null;
+					userevaluation.save();
+				}
+				}
+				
 				usertest.delete();
+				
+				
 			}
 				
 				

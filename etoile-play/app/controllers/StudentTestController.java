@@ -187,6 +187,7 @@ public class StudentTestController extends Controller {
 			
 		
 		if (test_answers.isEmpty()) {
+			System.out.println("There is no answers creating.");
 			for(QuestionGroup g: test.groups){
 			for (Question q : g.questions) {
 				if (q.typeOfQuestion == 0) {
@@ -204,28 +205,6 @@ public class StudentTestController extends Controller {
 			}
 			}
 			
-		}else{
-			if(test_answers.size()!=usertest.test.numberOfQuestions(usertest.test)){
-				for(QuestionGroup group:usertest.test.groups){
-					for(Question question:group.questions){
-						if(Answer.findByUserTestAndQuestion(usertest.id, question.id)==null){
-							Answer empty_answer = new Answer();
-							empty_answer.answer = "No answer.";
-							empty_answer.openQuestion = question;
-							empty_answer.test = test;
-							empty_answer.usertest = usertest;
-							empty_answer.group = group;
-							empty_answer.openQuestion = question;
-							empty_answer.save();
-							test.answers.add(empty_answer);
-							test.save();
-						}
-						System.out.println("Resultado da query: "+Answer.findByUserTestAndQuestion(usertest.id, question.id));
-						
-					}
-				}
-				
-			}
 		}
 		
 		
@@ -310,6 +289,8 @@ public class StudentTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		Usertest usertest=Usertest.find.byId(usertest_id);
 		
+		
+		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
@@ -364,17 +345,18 @@ public class StudentTestController extends Controller {
 			for (QuestionGroup g: t.groups){
 				totalNumQuestions+=g.questions.size();
 			}
-			System.out.println(totalNumQuestions);
+			
+
 			
 			
 			
 			Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
 			float progress = userTest.progress+ 100/totalNumQuestions;
-			System.out.println("progress"+progress);
+			System.out.println("progress: "+progress);
 			userTest.progress=progress;
 			userTest.save();
-			
-			return question(question_number,test_id,lesson_acronym,module_acronym);
+			System.out.println("Vou fazer redirect");
+			return redirect(routes.StudentTestController.question(question_number,test_id,lesson_acronym,module_acronym));
 
 	}
 

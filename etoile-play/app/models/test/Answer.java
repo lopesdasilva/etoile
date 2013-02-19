@@ -31,10 +31,10 @@ public class Answer extends Model{
 	@ManyToOne
 	public Question openQuestion;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.DETACH})
 	public Test test;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public Usertest usertest;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH})

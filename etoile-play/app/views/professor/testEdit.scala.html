@@ -134,12 +134,15 @@ models.test.Test) @main("etoile"){
 			<div class="modal-body">
 				<p>Are you sure you want to unpublish this test?</p>
 				<blockquote>@test.name</blockquote>
-				@if(test.studentsEnrolled(test)){
+				
 				<p>
-					<span class="label label-important">Important</span> All students
-					enrolled to this test, will have their test deleted!
+					<span class="label label-important">Important</span> All students enrolled to this test, will have their test deleted!
 				</p>
-				}
+				<p>
+					
+					<span class="label label-important">Important</span> Even the students that already have their test marked!
+				</p>
+				
 			</div>
 			<div class="modal-footer">
 				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -270,7 +273,7 @@ models.test.Test) @main("etoile"){
 									<div class="control-group">
 
 										<!-- Textarea -->
-										<label class="control-label">Group question</label>
+										<label class="control-label">Group subject</label>
 										<div class="controls">
 											<div class="textarea">
 												<textarea name="question" type="" class=""
@@ -533,7 +536,7 @@ models.test.Test) @main("etoile"){
 					<div class="control-group">
 
 						<!-- Textarea -->
-						<label class="control-label">Group question</label>
+						<label class="control-label">Group subject</label>
 						<div class="controls">
 							<div class="textarea">
 								<textarea name="question" type="" class=""

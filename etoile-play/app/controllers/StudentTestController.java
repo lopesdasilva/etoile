@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 
 import models.User;
 import models.curriculum.Category;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
@@ -89,7 +89,7 @@ public class StudentTestController extends Controller {
 			User user = User.find.byId(request().username());
 			Module module = Module.findByAcronym(module_acronym);
 			Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-			UserTest usertest = UserTest.findByUserAndTest(user.email,test.id);
+			Usertest usertest = Usertest.findByUserAndTest(user.email,test.id);
 			
 //			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
 //					test_id);
@@ -118,7 +118,7 @@ public class StudentTestController extends Controller {
 					q_aux.number = q.number;
 					q_aux.question = q.question;
 					q_aux.typeOfQuestion = q.typeOfQuestion;
-					q_aux.usertest = q.usertest;
+					q_aux.user = q.user;
 					q_aux.videoURL = q.videoURL;
 					q_aux.urls=q.urls;
 					
@@ -174,7 +174,7 @@ public class StudentTestController extends Controller {
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		UserTest usertest = UserTest.findByUserAndTest(user.email,
+		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
 		
@@ -189,6 +189,7 @@ public class StudentTestController extends Controller {
 			
 		
 		if (test_answers.isEmpty()) {
+			System.out.println("There is no answers creating.");
 			for(QuestionGroup g: test.groups){
 			for (Question q : g.questions) {
 				if (q.typeOfQuestion == 0) {
@@ -206,28 +207,6 @@ public class StudentTestController extends Controller {
 			}
 			}
 			
-		}else{
-			if(test_answers.size()!=usertest.test.numberOfQuestions(usertest.test)){
-				for(QuestionGroup group:usertest.test.groups){
-					for(Question question:group.questions){
-						if(Answer.findByUserTestAndQuestion(usertest.id, question.id)==null){
-							Answer empty_answer = new Answer();
-							empty_answer.answer = "No answer.";
-							empty_answer.openQuestion = question;
-							empty_answer.test = test;
-							empty_answer.usertest = usertest;
-							empty_answer.group = group;
-							empty_answer.openQuestion = question;
-							empty_answer.save();
-							test.answers.add(empty_answer);
-							test.save();
-						}
-						System.out.println("Resultado da query: "+Answer.findByUserTestAndQuestion(usertest.id, question.id));
-						
-					}
-				}
-				
-			}
 		}
 		
 		
@@ -255,7 +234,7 @@ public class StudentTestController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.usertest = q.usertest;
+			q_aux.user = q.user;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			q_aux.keywords=q.keywords;
@@ -310,19 +289,23 @@ public class StudentTestController extends Controller {
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
-		UserTest usertest=UserTest.find.byId(usertest_id);
+		Usertest usertest=Usertest.find.byId(usertest_id);
 		
+		
+		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
+				System.out.println(last_answers.size());
 				for(Hypothesis h : last_answers){
 					h.selected = false;
 					h.save();
 				}
-				
+				if(form.get().ocqanswer!=null){
 				Hypothesis hypothesis = Hypothesis.find.byId(form.get().ocqanswer);
 				hypothesis.selected = true;
 				hypothesis.save();
+				}
 				
 			}else if(question.typeOfQuestion == 2) {
 			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE
@@ -366,34 +349,35 @@ public class StudentTestController extends Controller {
 			for (QuestionGroup g: t.groups){
 				totalNumQuestions+=g.questions.size();
 			}
-			System.out.println(totalNumQuestions);
+			
+
 			
 			
 			
-			UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
+			Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
 			float progress = userTest.progress+ 100/totalNumQuestions;
-			System.out.println("progress"+progress);
+			System.out.println("progress: "+progress);
 			userTest.progress=progress;
 			userTest.save();
-			
-			return question(question_number,test_id,lesson_acronym,module_acronym);
+			System.out.println("Vou fazer redirect");
+			return redirect(routes.StudentTestController.question(question_number,test_id,lesson_acronym,module_acronym));
 
 	}
 
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
 		User user = User.find.byId(request().username());
-		UserTest userTest= UserTest.findByUserAndTest(user.email, test_id);
-		userTest.submitted=true;
-		userTest.save();
+		Usertest usertest= Usertest.findByUserAndTest(user.email, test_id);
+		usertest.submitted=true;
+		usertest.save();
 		System.out.println("USERMAIL:" + user.email);
 		System.out.println("Vou criar marker list..");
 		//Quando aluno submete o teste, é associado à sua lista answersToMark, todas as answers dos outros alunos ao mesmo teste.
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
 		//Isto é só um teste para ter qlq coisa a funcionar
 		
-		Test test = userTest.test;
-		for (UserTest ut : UserTest.getAllTests()) {
-			if (userTest.id != ut.id) {
+		Test test = usertest.test;
+		for (Usertest ut : Usertest.getAllTests()) {
+			if (usertest.id != ut.id) {
 				if (ut.test.id == test.id) {
 					for (Answer a : test.answers) {
 						System.out.println(a.usertest.user.email);
@@ -458,16 +442,16 @@ public class StudentTestController extends Controller {
 
 				}
 				
-				userTest.reputationAsAstudent = reputation;
-				userTest.inmodule = false;
-				userTest.save();
+				usertest.reputationAsAstudent = reputation;
+				usertest.inmodule = false;
+				usertest.save();
 				
 				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
 					QuestionEvaluation qe;
-					if(QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id)==null){
+					if(QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id)==null){
 						 qe = new QuestionEvaluation();
 					}else{
-						qe = QuestionEvaluation.findByUserAndQuestion(userTest.id, q.id);
+						qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
 					}
 				if(bool){
 				qe.isCorrect=true;
@@ -476,20 +460,21 @@ public class StudentTestController extends Controller {
 					qe.score = -q.weightToLose;
 				}
 				
-				qe.userTest = userTest;
+				qe.usertest = usertest;
 				qe.question = q;
 				qe.save();
 				}
 			}
 		}
 		
-		userTest.reviewd = false;
-		userTest.reputationAsAstudent = reputation;
-		userTest.inmodule = false;
-		userTest.save();
+		usertest.reviewd = false;
+		usertest.reputationAsAstudent = reputation;
+		usertest.inmodule = false;
+		usertest.save();
 		
-		System.out.println("Reputação no Teste: " + userTest.reputationAsAstudent);
-		SendMail.sendMail(user.email, "Congrats "+user.username+"!", "You've answer something");    
+
+		SendMail.sendMail(user.email, "Congrats "+user.username+"!", "You've answer something"); 
+		System.out.println("Reputação no Teste: " + usertest.reputationAsAstudent);
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 
@@ -509,7 +494,7 @@ public class StudentTestController extends Controller {
 		Test test=Test.find.byId(test_id);
 		if(!user.isUserSignupTest(test)){
 			//signup in test
-			UserTest user_test = new UserTest();
+			Usertest user_test = new Usertest();
 			user_test.user = user;
 			user_test.test = test;
 			user_test.expired = false;
@@ -524,7 +509,7 @@ public class StudentTestController extends Controller {
 			
 		}
 		
-		UserTest usertest = UserTest.findByUserAndTest(user.email, test_id);
+		Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
 		usertest.inmodule = true;
 		usertest.save();
 
@@ -545,8 +530,7 @@ public class StudentTestController extends Controller {
 		new_question.question = form_question.get().openquestionsuggestion;
 		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
 		new_question.lesson = lesson;
-		new_question.usertest = usertest;
-		new_question.imageURL = "http://placehold.it/350x150";
+		new_question.user = user;
 		new_question.save();
 		lesson.save();
 

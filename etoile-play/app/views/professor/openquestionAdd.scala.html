@@ -76,10 +76,10 @@
 								
 							<tr>
 								<td>@question.question</td>
-								 @if(question.usertest.user!=null){
-									<td>@question.usertest.user.name</td>
+								 @if(question.user!=null){
+									<td>@question.user.name</td>
 								 }
-								 @if(question.usertest.user==null){
+								 @if(question.user==null){
 								  	<td>Official Question</td>
 								 }
 								 
@@ -98,8 +98,8 @@
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">X</button>
 										<h3 id="myModalLabel">Suggested question from
-										@if(question.usertest.user!=null){
-											@question.usertest.user.name</h3>
+										@if(question.user!=null){
+											@question.user.name</h3>
 											}
 									</div>
 									<div class="modal-body">
@@ -192,8 +192,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight</label>
 										<div class="controls">
-											<input name="weight" type="text" value=""
-												class="input-xlarge">
+											<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="weight" value="0"></input><span class="add-on">%</span>
 											<p class="help-block">Weight of this question</p>
 										</div>
 									</div>

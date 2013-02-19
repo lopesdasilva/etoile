@@ -1,6 +1,6 @@
 @(user: User,module: models.module.Module, lesson: models.module.Lesson,
 test: models.test.Test, group: models.test.question.QuestionGroup,
-usertest: models.manytomany.UserTest) @main("etoile"){
+usertest: models.manytomany.Usertest) @main("etoile"){
 
 <script type="application/x-javascript">
 
@@ -106,7 +106,7 @@ function onKeyUpInput(event) {
 	if(aux.length>1){ 
 		var temporal="";
 		for(i=0;i<aux.length;i++) {
-			temporal+='<a href=\"#\" onclick=\'$(\"#tweets\").empty().text("loading ...");document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+', ';
+			temporal+='<a class="badge badge-info" href=\"#\" onclick=\'$(\"#tweets\").empty().text("loading ...");document.getElementById(\"searchingT\").value=\"'+aux[i]+'\";startNewQuery(\"'+aux[i]+'\");\'>'+aux[i]+'</a>'+' ';
 		}
 		$("#keywordsT").html(temporal);
 		document.getElementById("labelsT").style.display="block";
@@ -262,20 +262,19 @@ function searchButton(){
 					<fieldset class="form-search">
   <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
   <button onclick='searchButton();' type="submit" class="btn">Search</button><br>
-  <div id="labelsT"><label id="legRel" >Related: </label> <label for="legRel" id="keywordsT"></label></div>
-
-					
-		
+  <div id="labelsT"><label id="legRel" >Related: </label> <label  for="legRel" id="keywordsT"></label></div>
 			    </fieldset>
     <div id="pagingT">
-<br>
       <div id="tweets" class="widgetT query"></div>
-<br>
-      <div class="controlsT">
-        <button class="prevT" type="button" disabled>&larr;</button>
-        <span class="pagenum"></span>
-        <button class="nextT" type="button" disabled>&rarr;</button>
+      <div class="controlsT pagination">
+      <ul>
+        <li><a class="prevT" type="button" disabled>&larr;</a></li>
+        <li><a class="nextT" type="button" disabled>&rarr;</a></li>
+       <ul>
       </div>
+      
+      
+      
     </div>
 </div>
 </div>
@@ -365,7 +364,7 @@ function searchButton(){
 										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
 										<small>@url.adress</small></br> </br>@url.description
-										<button href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</button>
+										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -671,13 +670,7 @@ function searchButton(){
 							} @if(question.videoURL!=null){
 							<div class="span6">
 								<p>
-									<object style="float: none;">
-										<param name="movie" value="@module.videoURL" />
-										<embed src="@question.videoURL"
-											type="application/x-shockwave-flash" wmode="transparent"
-											height="300">
-									</object>
-
+									<iframe height="300" src="@question.videoURL" frameborder="0" allowfullscreen></iframe>
 								</p>
 							</div>
 							}
@@ -813,6 +806,9 @@ function searchButton(){
     <h3 id="myModalLabel">Confirmation</h3>
   </div>
   <div class="modal-body">
+   @if(!usertest.allQuestionsAnswered(usertest.id)){
+   	<b>You haven't completed the test.</b>
+   }
     <p>Are you sure you want to submit your test?</p>
     <p><span class="label label-important">Important</span> This Action is irreversible!</p>
   </div>

@@ -5,7 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.curriculum.Category;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.test.Test;
 import models.Professor;
 import models.User;
@@ -41,9 +41,9 @@ public class Module extends Model {
 	public String videoURL;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
-
 	@ManyToMany(mappedBy="modules")
 	public List<User> users;
 	
@@ -93,7 +93,7 @@ public class Module extends Model {
 		int n = 0;
 		for(Lesson lesson: this.lessons){
 			for(Test test : lesson.tests){
-				for(UserTest ut: test.users){
+				for(Usertest ut: test.users){
 					if(ut.submitted && !ut.reviewd){
 						n = n + 1;
 					}

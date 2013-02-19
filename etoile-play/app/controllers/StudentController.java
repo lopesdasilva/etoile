@@ -14,7 +14,7 @@ import models.curriculum.Category;
 import models.Comment;
 
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Module;
 import models.module.Lesson;
 import models.module.University;
@@ -93,26 +93,26 @@ public class StudentController extends Controller {
 			user.save();
 			module.save();
 
-			for (Lesson lesson : module.lessons) {
-				for (Test test : lesson.tests) {
-					UserTest usertest = UserTest.findByUserAndTest(user.email,
-							test.id);
-					if (usertest == null) {
-						UserTest user_test = new UserTest();
-						user_test.user = user;
-						user_test.test = test;
-						user_test.expired = false;
-						user_test.inmodule = false;
-						user_test.submitted = false;
-						user_test.save();
-						user.tests.add(user_test);
-						test.users.add(user_test);
-						user.save();
-						test.save();
-						user_test.save();
-					}
-				}
-			}
+//			for (Lesson lesson : module.lessons) {
+//				for (Test test : lesson.tests) {
+//					Usertest usertest = Usertest.findByUserAndTest(user.email,
+//							test.id);
+//					if (usertest == null) {
+//						Usertest user_test = new Usertest();
+//						user_test.user = user;
+//						user_test.test = test;
+//						user_test.expired = false;
+//						user_test.inmodule = false;
+//						user_test.submitted = false;
+//						user_test.save();
+//						user.tests.add(user_test);
+//						test.users.add(user_test);
+//						user.save();
+//						test.save();
+//						user_test.save();
+//					}
+//				}
+//			}
 		}
 
 		// Has this module
@@ -126,7 +126,7 @@ public class StudentController extends Controller {
 		User user = User.find.byId(request().username());
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		UserTest usertest = UserTest.findByUserAndTest(user.email,
+		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
 		List<Answer> test_answers = Answer.findByUserTestAndTestId(usertest.id,
@@ -174,7 +174,7 @@ public class StudentController extends Controller {
 			q_aux.number = q.number;
 			q_aux.question = q.question;
 			q_aux.typeOfQuestion = q.typeOfQuestion;
-			q_aux.usertest.user = q.usertest.user;
+			q_aux.user = q.user;
 			q_aux.videoURL = q.videoURL;
 			q_aux.urls=q.urls;
 			

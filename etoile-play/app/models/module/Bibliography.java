@@ -32,6 +32,7 @@ public class Bibliography extends Model{
 	public String description;
 
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	@Constraints.Required

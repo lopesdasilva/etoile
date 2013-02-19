@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ import javax.validation.Constraint;
 
 
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.test.Answer;
 import models.test.Hypothesis;
@@ -43,12 +44,11 @@ public class Question extends Model {
 	@ManyToOne
 	public User user;
 	
-	@ManyToOne
-	public UserTest usertest;
 	
 	//ARGUMENTOS COMUNS
 	@ManyToMany(mappedBy="questions")
 	public List<QuestionGroup> group;
+	
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -74,9 +74,11 @@ public class Question extends Model {
 	
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String videoURL;
 
 	@Constraints.Required

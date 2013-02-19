@@ -3,6 +3,7 @@ package models.continent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,6 +33,7 @@ public class Continent extends Model {
 	public String acronym;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 	
 	

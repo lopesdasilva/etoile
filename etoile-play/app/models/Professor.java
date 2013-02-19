@@ -45,6 +45,7 @@ public class Professor extends Model {
 	public String degree;
 
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String imageURL;
 
 	@Constraints.Required

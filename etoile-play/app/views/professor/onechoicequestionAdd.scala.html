@@ -58,7 +58,7 @@
         <legend class=""><h3>New one choice question</h3></legend>
       </div>			
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="question">Test</textarea>
+						<textarea  class="span12" rows="10" name="question"></textarea>
 						
 						
 						
@@ -116,8 +116,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight</label>
 										<div class="controls">
-											<input name="weight" type="text" value=""
-												class="input-xlarge">
+<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="weight" value="0"></input><span class="add-on">%</span>
 											<p class="help-block">Weight of this question</p>
 										</div>
 									</div>
@@ -127,8 +126,8 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight to Lose</label>
 										<div class="controls">
-											<input name="weighttolose" type="text" value=""
-												class="input-xlarge">
+											<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="weighttolose" value="0"></input><span class="add-on">%</span>
+
 											<p class="help-block">Weight to lose if  student fail this question</p>
 										</div>
 									</div>

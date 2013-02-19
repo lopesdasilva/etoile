@@ -31,6 +31,7 @@ public class Lessonalert extends Model{
 
 	@Constraints.Required
     @Formats.NonEmpty
+    @Column(columnDefinition="TEXT")
 	public String imageURL;
 
 	

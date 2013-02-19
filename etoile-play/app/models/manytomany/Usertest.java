@@ -19,7 +19,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class UserTest extends Model{
+public class Usertest extends Model{
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -60,27 +60,48 @@ public class UserTest extends Model{
 	public float progress=0;
 	public String progressString="0%";
 	
-	@OneToMany(cascade = {CascadeType.DETACH})
-	public List<Question> questions;
 	
-	@OneToMany(cascade = {CascadeType.DETACH})
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<QuestionEvaluation> questionevaluation;
 	
-	public static Model.Finder<Long, UserTest> find = new Model.Finder<Long, UserTest>(
-			Long.class, UserTest.class);
+	public static Model.Finder<Long, Usertest> find = new Model.Finder<Long, Usertest>(
+			Long.class, Usertest.class);
 
-	public static List<UserTest> getAllTests() {
-		List<UserTest> tests = new ArrayList<UserTest>();
-		tests = Ebean.find(UserTest.class).findList(); 
+	public static List<Usertest> getAllTests() {
+		List<Usertest> tests = new ArrayList<Usertest>();
+		tests = Ebean.find(Usertest.class).findList(); 
 		return tests; 
 	}
 	
-	public static UserTest findByUserAndTest(String user_email, Long test_id) {
+	public static Usertest findByUserAndTest(String user_email, Long test_id) {
         return find.where().eq("user_email", user_email).eq("test_id", test_id).findUnique();
     }
 	
-	public static List<UserTest> findByUser(String user_email) {
+	public static List<Usertest> findByUser(String user_email) {
         return find.where().eq("user_email", user_email).findList();
     }
+	
+	public boolean allAnswersMarked(Long usertest_id){
+		Usertest ut = Usertest.find.byId(usertest_id);
+		List<Answer> answers_aux = ut.answers;
+		boolean allmarked = true;
+		for(Answer ans: answers_aux){
+			if(ans.questionevaluation==null){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean allQuestionsAnswered(Long usertest_id){
+		Usertest ut = Usertest.find.byId(usertest_id);
+		for(Answer ans: ut.answers){
+			if(ans.answer.equals("No answer.") || ans.answer.equals("")){
+				return false;
+			}
+		}
+		return true;
+		
+	}
 	
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import models.Blog;
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
@@ -31,19 +31,19 @@ public class Answer extends Model{
 	@ManyToOne
 	public Question openQuestion;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.DETACH})
 	public Test test;
 	
-	@ManyToOne
-	public UserTest usertest;
+	@ManyToOne(cascade = {CascadeType.DETACH})
+	public Usertest usertest;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH})
 	public QuestionGroup group;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	public List<User> markers;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	public Evaluation evaluation;
 	
 	@OneToOne(cascade = {CascadeType.ALL})

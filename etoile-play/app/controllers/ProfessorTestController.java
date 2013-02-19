@@ -4,7 +4,7 @@ package controllers;
 import java.util.List;
 
 import models.User;
-import models.manytomany.UserTest;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
@@ -94,8 +94,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.usertest.user!= null){
-					q.usertest.user.refresh();
+				if(q.user!= null){
+					q.user.refresh();
 				}
 			}
 			return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group));
@@ -128,7 +128,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = 0;
-			question.usertest.user = user;
+			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 0;
 			
@@ -194,8 +194,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.usertest.user!= null){
-					q.usertest.user.refresh();
+				if(q.user!= null){
+					q.user.refresh();
 				}
 			}
 			return ok(views.html.professor.onechoicequestionAdd.render(module,lesson,test, group));
@@ -227,7 +227,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.usertest.user = user;
+			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 1;
 			
@@ -251,8 +251,8 @@ public class ProfessorTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.usertest.user!= null){
-					q.usertest.user.refresh();
+				if(q.user!= null){
+					q.user.refresh();
 				}
 			}
 			return ok(views.html.professor.onechoicequestionEdit.render(module,lesson,test, group, question));
@@ -283,7 +283,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.usertest.user = user;
+			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 1;
 			
@@ -391,8 +391,8 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.usertest.user!= null){
-					q.usertest.user.refresh();
+				if(q.user!= null){
+					q.user.refresh();
 				}
 			}
 			return ok(views.html.professor.multiplechoicequestionAdd.render(module,lesson,test, group));
@@ -424,7 +424,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.usertest.user = user;
+			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 2;
 			
@@ -576,8 +576,8 @@ public class ProfessorTestController extends Controller {
 		Question question = Question.find.byId(question_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
-				if(q.usertest.user!= null){
-					q.usertest.user.refresh();
+				if(q.user!= null){
+					q.user.refresh();
 				}
 			}
 			return ok(views.html.professor.multiplechoicequestionEdit.render(module,lesson,test, group, question));
@@ -610,7 +610,7 @@ public class ProfessorTestController extends Controller {
 			}
 			question.weight = form.get().weight;
 			question.weightToLose = form.get().weighttolose;
-			question.usertest.user = user;
+			question.user = user;
 			question.number = group.questions.size()+1;
 			question.typeOfQuestion = 2;
 			
@@ -640,7 +640,7 @@ public class ProfessorTestController extends Controller {
 			copy_question.videoURL = old_question.videoURL;
 			copy_question.weight = old_question.weight;
 			copy_question.weightToLose = old_question.weightToLose;
-			copy_question.usertest.user = old_question.usertest.user;
+			copy_question.user = old_question.user;
 			copy_question.number = group.questions.size()+1;
 			copy_question.typeOfQuestion = copy_question.typeOfQuestion;
 			copy_question.iscopy = true;
@@ -678,35 +678,36 @@ public class ProfessorTestController extends Controller {
 			test.published=false;
 			test.save();
 			
-			
-			
-			for(UserTest usertest :test.users){
-				if(!usertest.submitted){				
-					
-					List<Answer> useranswers = Answer.findByUserTestAndTestId(usertest.id, test.id);
-					for (Answer useranswer:useranswers){
-						useranswer.delete();
+		
+			for(Usertest usertest :test.users){
+				
+				for(QuestionGroup group:usertest.test.groups){
+				for(Question question:group.questions){
+					if(question.typeOfQuestion!=0){
+					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(usertest.user.email,question.id );
+					for(Hypothesis hyp: hypothesis){
+						hyp.delete();
 					}
-					usertest.delete();
-					for(QuestionGroup group:usertest.test.groups ){
-						for (Question question :group.questions){
-							List<Hypothesis> userhypothesis=Hypothesis.findByUserEmailAndQuestion(usertest.user.email, question.id);
-							for(Hypothesis hypothesis: userhypothesis ){
-								hypothesis.delete();
-							}
-						}
-				}
-				
-				
-				}
-				else{
 					
-					usertest.submitted=false;
-					usertest.save();
+					}
 				}
+				}
+						
+				
+				if(usertest.questionevaluation!=null){
+				for(QuestionEvaluation userevaluation: usertest.questionevaluation){
+					userevaluation.answer=null;
+					userevaluation.save();
+				}
+				}
+				
+				usertest.delete();
 				
 				
 			}
+				
+				
+			
 			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}
@@ -773,7 +774,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Test test=Test.find.byId(test_id);
-			for (UserTest usertest: test.users)
+			for (Usertest usertest: test.users)
 			usertest.user.refresh();
 			return ok(views.html.professor.testGeneral.render(user,
 					module,lesson,test));
@@ -790,7 +791,7 @@ public class ProfessorTestController extends Controller {
 	User user = User.find.byId(session("email"));
 	if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		
-		UserTest usertest=UserTest.find.byId(usertest_id);
+		Usertest usertest=Usertest.find.byId(usertest_id);
 		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
 		QuestionGroup group = usertest.test.groups.get((int) (group_number-1));
 	
@@ -872,7 +873,7 @@ public class ProfessorTestController extends Controller {
 		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
 		User user = User.find.byId(session("email"));
 		
-		UserTest usertest = UserTest.find.byId(usertest_id);
+		Usertest usertest = Usertest.find.byId(usertest_id);
 		Question question = Question.find.byId(question_id);
 		Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id);
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
@@ -889,7 +890,7 @@ public class ProfessorTestController extends Controller {
 			evaluation = new QuestionEvaluation();
 			evaluation.question = question;
 			evaluation.score = mark;
-			evaluation.userTest = usertest;
+			evaluation.usertest = usertest;
 			evaluation.percent = form.get().evaluation;
 			evaluation.answer = answer;
 			evaluation.save();
@@ -916,7 +917,7 @@ public class ProfessorTestController extends Controller {
 	
 	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id, Long usertest_id){
 		System.out.println(test_id);
-		UserTest usertest = UserTest.find.byId(usertest_id);
+		Usertest usertest = Usertest.find.byId(usertest_id);
 		usertest.reviewd = true;
 		usertest.save();
 		System.out.println("Review Test submitted with: " + usertest.reputationAsAstudent);

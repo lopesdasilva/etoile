@@ -39,9 +39,7 @@ public class Answer extends Model{
 	
 	@ManyToOne(cascade = {CascadeType.DETACH})
 	public QuestionGroup group;
-	
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<User> markers;
+
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	public AnswerMarkers answerMarkers;

@@ -75,8 +75,6 @@ public class User extends Model {
     // -- Queries
 	
 	
-	@ManyToMany(mappedBy="markers")
-	public List<Answer> answersToMark;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	List<Hypothesis> hypothesis;
@@ -134,6 +132,15 @@ public class User extends Model {
     	}
     	
     	return signup;
+    }
+    
+    public boolean haveAnswersToMark(){
+    	for(AnswerMarkers answer_markers: answerMarkers){
+    		if(!answer_markers.isMarked){
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
 }

@@ -375,25 +375,24 @@ public class StudentTestController extends Controller {
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
 		//Isto é só um teste para ter qlq coisa a funcionar
 		
-		Test test = usertest.test;
-		for (Usertest ut : Usertest.getAllTests()) {
-			if (usertest.id != ut.id) {
-				if (ut.test.id == test.id) {
-					for (Answer a : test.answers) {
-						System.out.println(a.usertest.user.email);
-						System.out.println(user.email);
-						System.out.println(user.email.equals(a.usertest.user.email));
-						if (!user.email.equals(a.usertest.user.email)) {
-							if (!a.markers.contains(user) && a.markers.size() < 3 && user.answersToMark.size() < 3) {
-								a.markers.add(user);
-								a.save();
-								SendMail.sendMail(user.email, "Hey "+user.username+"!", "You've answer to mark"); 
-							}
-						}
-					}
-				}
-			}
-		}
+//		Test test = usertest.test;
+//		for (Usertest ut : Usertest.getAllTests()) {
+//			if (usertest.id != ut.id) {
+//				if (ut.test.id == test.id) {
+//					for (Answer a : test.answers) {
+//						System.out.println(a.usertest.user.email);
+//						System.out.println(user.email);
+//						System.out.println(user.email.equals(a.usertest.user.email));
+//						if (!user.email.equals(a.usertest.user.email)) {
+//							AnswerMarkers am = new AnswerMarkers();
+//							am.answer = a;
+//							am.user = user;
+//							am.save();
+//						}
+//					}
+//				}
+//			}
+//		}
 		
 		
 		

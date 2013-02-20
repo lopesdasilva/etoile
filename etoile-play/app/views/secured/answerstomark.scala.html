@@ -1,4 +1,4 @@
-@(user: User, categories: List[models.curriculum.Category],answers: List[models.test.Answer] )
+@(user: User, categories: List[models.curriculum.Category],answersToMark: List[models.test.AnswerMarkers] )
  @import helper._
 @main("etoileplatform"){
 
@@ -71,14 +71,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									@for(answer <- user.answersToMark) {
+									@for(answerToMark <- answersToMark) {
 									<tr>
-										<td>@(answer.openQuestion.number+1)</td>
-										<td>@answer.group.id</td>
-										<td>@answer.group.test.name</td>
-										<td>@answer.group.test.lesson.name</td>
-										<td>@answer.group.test.lesson.module.name</td>
-										<td><td><a href="@routes.StudentMarkerController.answerToMark(answer.id)" class="btn btn-primary btn-small">Mark Question</a></td></td>
+										<td>@(answerToMark.answer.openQuestion.number+1)</td>
+										<td>@answerToMark.answer.group.id</td>
+										<td>@answerToMark.answer.group.test.name</td>
+										<td>@answerToMark.answer.group.test.lesson.name</td>
+										<td>@answerToMark.answer.group.test.lesson.module.name</td>
+										<td><td><a href="@routes.StudentMarkerController.answerToMark(answerToMark.answer.id)" class="btn btn-primary btn-small">Mark Question</a></td></td>
 									</tr>
 									}
 								</tbody>

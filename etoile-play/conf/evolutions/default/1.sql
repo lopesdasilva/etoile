@@ -21,7 +21,8 @@ create table answer_markers (
   markerscore               bigint,
   answer_id                 bigint,
   markercomment             TEXT,
-  marker_email              varchar(255),
+  user_email                varchar(255),
+  is_marked                 tinyint(1) default 0,
   constraint pk_answer_markers primary key (id))
 ;
 
@@ -318,12 +319,6 @@ create table usertest (
 ;
 
 
-create table answer_account (
-  answer_id                      bigint not null,
-  account_email                  varchar(255) not null,
-  constraint pk_answer_account primary key (answer_id, account_email))
-;
-
 create table category_curriculummodule (
   category_id                    bigint not null,
   curriculummodule_id            bigint not null,
@@ -379,8 +374,8 @@ alter table answer add constraint fk_answer_questionevaluation_6 foreign key (qu
 create index ix_answer_questionevaluation_6 on answer (questionevaluation_id);
 alter table answer_markers add constraint fk_answer_markers_answer_7 foreign key (answer_id) references answer (id) on delete restrict on update restrict;
 create index ix_answer_markers_answer_7 on answer_markers (answer_id);
-alter table answer_markers add constraint fk_answer_markers_marker_8 foreign key (marker_email) references account (email) on delete restrict on update restrict;
-create index ix_answer_markers_marker_8 on answer_markers (marker_email);
+alter table answer_markers add constraint fk_answer_markers_user_8 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_answer_markers_user_8 on answer_markers (user_email);
 alter table bibliography add constraint fk_bibliography_module_9 foreign key (module_id) references module (id) on delete restrict on update restrict;
 create index ix_bibliography_module_9 on bibliography (module_id);
 alter table comment add constraint fk_comment_blog_10 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
@@ -450,10 +445,6 @@ create index ix_usertest_test_41 on usertest (test_id);
 
 
 
-alter table answer_account add constraint fk_answer_account_answer_01 foreign key (answer_id) references answer (id) on delete restrict on update restrict;
-
-alter table answer_account add constraint fk_answer_account_account_02 foreign key (account_email) references account (email) on delete restrict on update restrict;
-
 alter table category_curriculummodule add constraint fk_category_curriculummodule__01 foreign key (category_id) references category (id) on delete restrict on update restrict;
 
 alter table category_curriculummodule add constraint fk_category_curriculummodule__02 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
@@ -487,8 +478,6 @@ alter table account_module add constraint fk_account_module_module_02 foreign ke
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table answer;
-
-drop table answer_account;
 
 drop table answer_markers;
 

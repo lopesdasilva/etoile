@@ -47,7 +47,10 @@ public class AnswerMarkers extends Model {
 	public String markercomment;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH})
-	public User marker;
+	public User user;
+	
+	@Constraints.Required
+	public boolean isMarked;
 	
 	
 	
@@ -59,5 +62,13 @@ public class AnswerMarkers extends Model {
 		answerMarkers = Ebean.find(AnswerMarkers.class)
 				.findList(); 
 		return answerMarkers; 
+	}
+	
+	public static AnswerMarkers getByAnswerAndUser(String user_email, Long answer_id){
+		return find.where().eq("user_email", user_email).eq("answer_id", answer_id).findUnique();
+	}
+	
+	public static List<AnswerMarkers> getByMarker(String user_email){
+		return find.where().eq("user_email", user_email).eq("is_marked", false).findList();
 	}
 }

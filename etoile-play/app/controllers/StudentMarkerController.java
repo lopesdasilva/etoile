@@ -37,16 +37,16 @@ public class StudentMarkerController extends Controller {
 	public static Result answersToMark(){
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
-		List<Answer> answers = user.answersToMark;
-			
-		for(Answer a: answers){
-			a.group.refresh();
-			a.group.test.refresh();
-			a.group.test.lesson.refresh();
-			a.group.test.lesson.module.refresh();
+		List<AnswerMarkers> answersToMark = AnswerMarkers.getByMarker(user.email);
+		
+		for(AnswerMarkers a: answersToMark){
+			a.answer.group.refresh();
+			a.answer.group.test.refresh();
+			a.answer.group.test.lesson.refresh();
+			a.answer.group.test.lesson.module.refresh();
 		}
 
-		return ok(views.html.secured.answerstomark.render(user, categories, answers));
+		return ok(views.html.secured.answerstomark.render(user, categories, answersToMark));
 	}
 	
 	public static Result answerToMark(Long answer_id){
@@ -69,21 +69,15 @@ public class StudentMarkerController extends Controller {
 		
 		Answer answer = Answer.find.byId(answer_id);
 		
-		AnswerMarkers answerMarkers = new AnswerMarkers();
+		AnswerMarkers answerMarkers = AnswerMarkers.getByAnswerAndUser(user.email,answer.id);
 		answerMarkers.answer = answer;
 		answerMarkers.answerscore = form.get().answerscore;
 		answerMarkers.markercomment=form.get().markercomment;
-		answerMarkers.marker= user;
+		answerMarkers.user= user;
+		answerMarkers.isMarked=true;
 		answerMarkers.save();
-		
-		answer.answerMarkers=answerMarkers;
 		answer.save();
-		System.out.println("AnswerMarkers criada.");
-		
-		answer.markers.remove(user);
-		answer.save();
-		
-		System.out.println("Answer removida da lista do marker.");
+	
 		
 	return answersToMark();
 	}

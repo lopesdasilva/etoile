@@ -21,6 +21,7 @@ import javax.validation.Constraint;
 
 
 import models.User;
+import models.curriculum.Curriculummodule;
 import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.test.Answer;
@@ -101,6 +102,9 @@ public class Question extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<QuestionEvaluation> questionevaluation;
+	
+	@ManyToOne
+	public Curriculummodule subtopic;
 	
 	
 	public static Model.Finder<Long, Question> find = new Model.Finder<Long, Question>(

@@ -87,6 +87,9 @@ public class User extends Model {
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<URL> urls;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<SubtopicReputation> subtopicreputation;
+	
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

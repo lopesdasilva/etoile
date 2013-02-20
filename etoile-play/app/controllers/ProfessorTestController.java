@@ -4,6 +4,8 @@ package controllers;
 import java.util.List;
 
 import models.User;
+import models.curriculum.Category;
+import models.curriculum.Curriculummodule;
 import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
@@ -57,6 +59,8 @@ public class ProfessorTestController extends Controller {
 		
 		public String keywords;
 		
+		public String subtopic;
+		
 		public String image;
 		
 		public String video;
@@ -100,13 +104,15 @@ public class ProfessorTestController extends Controller {
 					q.user.refresh();
 				}
 			}
-			return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group));
+			List<Curriculummodule> subtopics=Curriculummodule.getAllModules(); 
+			return ok(views.html.professor.openquestionAdd.render(module,lesson,test, group,subtopics));
 		}
 		
 		return redirect(routes.Application.module(module.acronym));
 	}
 	
 	public static Result addopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
+				
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		Test test = Test.find.byId(test_id);
@@ -121,6 +127,8 @@ public class ProfessorTestController extends Controller {
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
+			question.subtopic=Curriculummodule.findByName(form.get().subtopic);
+			
 			if(form.get().image.length() > 0){
 				question.imageURL = form.get().image;
 			}
@@ -154,8 +162,8 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			
-			return ok(views.html.professor.openquestionEdit.render(module,lesson,test, group,question));
+			List<Curriculummodule> subtopics=Curriculummodule.getAllModules(); 
+			return ok(views.html.professor.openquestionEdit.render(module,lesson,test, group,question,subtopics));
 
 		}
 		return redirect(routes.Application.module(module_acronym));
@@ -173,6 +181,8 @@ public class ProfessorTestController extends Controller {
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
+			
+			question.subtopic=Curriculummodule.findByName(form.get().subtopic);
 			if(form.get().image.length() > 0){
 				question.imageURL = form.get().image;
 			}

@@ -3,9 +3,12 @@ package models.curriculum;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 
 import models.curriculum.Category;
 import models.module.Content;
+import models.test.question.Question;
+import models.SubtopicReputation;
 import models.User;
 
 import com.avaje.ebean.Ebean;
@@ -16,6 +19,7 @@ import play.data.validation.*;
 
 @Entity
 public class Curriculummodule extends Model {
+	
 	@Id
 	@GeneratedValue
     @Formats.NonEmpty
@@ -27,6 +31,7 @@ public class Curriculummodule extends Model {
 	public String keyword;
 
 	@Constraints.Required
+	@Column(unique=true)
 	public String name;
 	
 	@Constraints.Required
@@ -39,10 +44,18 @@ public class Curriculummodule extends Model {
 	@ManyToMany (mappedBy="curriculummodules")
 	public List<Category> curriculumcategories;
 
-
+	@OneToMany
+	public List<Question> questions;
+	
+	@OneToMany
+	public List<SubtopicReputation> subtopicsreputation;
 
 	public static Model.Finder<Long, Curriculummodule> find = new Model.Finder<Long, Curriculummodule>(
 			Long.class, Curriculummodule.class);
+	
+	public static Curriculummodule findByName(String name) {
+        return find.where().eq("name", name).findUnique();
+    }
 
 	public static List<Curriculummodule> getAllModules() {
 		List<Curriculummodule> modules = new ArrayList<Curriculummodule>();

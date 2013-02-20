@@ -1,4 +1,4 @@
-@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup) @main("etoile"){
+@(module: models.module.Module, lesson: models.module.Lesson, test: models.test.Test, group: models.test.question.QuestionGroup, subtopics: List[models.curriculum.Curriculummodule] ) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -141,18 +141,29 @@
 						
 						<p><p>
 						
-						<div class="control-group">
-
-										<!-- Text input-->
-										<label class="control-label" for="input01">Keywords</label>
-										<div class="controls">
-											<input name="keywords" type="text" value=""
-												class="input-xlarge">
-											<p class="help-block">Keywords related to this question</p>
-										</div>
-									</div>
 						
-						<hr>
+							<div class="control-group">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">Keywords</label>
+								<div class="controls">
+									<input name="keywords" type="text" value=""
+										class="input-xlarge">
+									<p class="help-block">Keywords related to this question</p>
+								</div>
+								</div>
+
+							<div class="control-group">
+								<label class="control-label">Subtopic</label>
+								<div class="controls">
+									<select name="subtopic"> @for(subtopic <- subtopics){
+										<option>@subtopic.name</option> }
+									</select>
+									<p class="help-block">Subtopic related to this question</p>
+								</div>
+							</div>
+
+							<hr>
 						<h3>Media</h3>
 						
 								<p>

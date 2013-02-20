@@ -65,7 +65,7 @@
 		<div class="control-group">
     <label class="control-label" for="inputName">Name</label>
     <div class="controls">
-      <input type="text" class="required" name="inputName" id="Name" placeholder="Name"  required="required">
+      <input type="text"  name="inputName" id="Name" placeholder="Name"  required>
       <span class="help-inline"></span>
         <span class="help-block">Please write your name.</span>
     </div>
@@ -74,8 +74,7 @@
 			<div class="control-group">
     <label class="control-label" for="inputUsername">Username</label>
     <div class="controls">
-      <input type="text" class="required" name="inputUsername" id="inputUsername" placeholder="Username"  required="required"    required 
-  data-validation-required-message="You must agree to the terms and conditions">
+      <input type="text" class="required" name="inputUsername" id="inputUsername" placeholder="Username"  required>
       <span class="help-inline"></span>
         <span class="help-block">Please choose a valid username.</span>
     </div>
@@ -83,7 +82,8 @@
   <div class="control-group">
     <label class="control-label" for="inputEmail">Email</label>
     <div class="controls">
-      <input type="email" name="inputEmail" placeholder="Email" required="required">
+      <input type="email" name="inputEmail" placeholder="Email" type="email" required
+  data-validation-email-messagee= "You must enter your email address">
       <span class="help-inline"></span>
         <span class="help-block">Enter a valid email address.</span> 
     </div>
@@ -91,7 +91,7 @@
   <div class="control-group">
     <label class="control-label" for="inputPassword">Password</label>
     <div class="controls">
-      <input type="password" id="inputPassword" name="inputPassword" placeholder="Password" required="required">
+      <input type="password" id="inputPassword" name="inputPassword" placeholder="Password" required  minlength="6" data-validation-minlength-message="A password must be at least 6 characters.">
        <span class="help-inline"></span>
         <span class="help-block">A password must be at least 6 characters. </span> 
     </div>
@@ -100,7 +100,9 @@
   <div class="control-group">
     <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
     <div class="controls">
-      <input type="password" id="inputRepeatPassword" name="inputRepeatPassword" placeholder="Repeat Password" required="required">
+      <input type="password" id="inputRepeatPassword" name="inputRepeatPassword" placeholder="Repeat Password"  data-validation-matches-match="inputPassword" 
+  data-validation-matches-message=
+    "Must match password entered above">
        <span class="help-inline"></span>
         <span class="help-block">Please repeat your password again. </span> 
         
@@ -193,7 +195,7 @@
     <div class="controls">
       
       <button type="submit" class="btn btn-primary" >Sign up</button>
-      <p class="text-error"id="validate-status"></p>​
+      
     </div>
   </div>
 }
@@ -224,30 +226,4 @@
 
 
 }
-<script type='text/javascript'>
-$(document).ready(function() {
-	  $("#inputRepeatPassword").keyup(validate);
-	});
-$(document).ready(function() {
-	  $("#inputPassword").keyup(validate);
-	});
-
-
-	function validate() {
-	  var password1 = $("#inputPassword").val();
-	  var password2 = $("#inputRepeatPassword").val();
-
-	    
-	    if(password1 == password2) {
-	       $("#validate-status").text("");
-	       
-	    }
-	    else {
-	        $("#validate-status").text("Passwords should Match"); 
-	        $('#signup').text("true");
-	    }
-	    
-	}
-
-</script>
 

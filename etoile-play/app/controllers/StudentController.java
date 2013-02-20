@@ -232,7 +232,7 @@ public class StudentController extends Controller {
 		
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
-				module, form(OpenQuestionSuggestion.class)));
+				module));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
 			//Subsituir por module

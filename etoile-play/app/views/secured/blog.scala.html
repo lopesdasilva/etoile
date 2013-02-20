@@ -64,18 +64,18 @@
  <hr>
   <h3>Insert your comment below</h3>
   
-   <div class="control-group">
+   
    @helper.form(routes.BlogController.postcomment(blog.id)) {
+   <div class="control-group">
  <div class="controls">
-	 @textarea(
-            field = formComment("comment"),
-            args = '_label -> "",    'placeholder -> "Insert your comment", 'class->"span8"
-        )
-        
+  <textarea id="comment" name="comment" placeholder="Insert your comment" class="span8" required style="resize: none" rows="3"></textarea>
+        </div>
     </div>   
+    <div class="control-group">
     <div class="controls">
       <button type="submit" class="btn btn-primary">Submit</button>
    
+    </div>
     </div>
      }
   </div>

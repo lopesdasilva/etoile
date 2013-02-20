@@ -534,7 +534,7 @@ public class StudentTestController extends Controller {
 		lesson.save();
 
 		
-		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym));
+		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym)+"#tests");
 	}
 	
 	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){

@@ -30,20 +30,7 @@
         padding: 9px 0;
       }
     </style>
-    <script>
-  $(function() {
-    $( "#sortable" ).sortable({
-      revert: true
-    });
-    $( "#draggable" ).draggable({
-      axis: "x",
-      connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "invalid"
-    });
-    $( "ul, li" ).disableSelection();
-  });
-  </script>
+
 
 </head>
 <body data-spy="scroll" data-target=".sidebar-nav">
@@ -85,6 +72,14 @@
 <script>
   $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 </script>
+	<script>
+function tabchanger()	{
+	$('#tabs a[href="#tests"]').tab('show');
+	$('#tabs a[href="#resources"]').tab('show');
+	$('#tabs a[href="#news"]').tab('show');
+	
+}
+	</script>
 	
   <link href="@routes.Assets.at("stylesheets/jquery.tweet.css")" rel="stylesheet"/>
   <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.tweet.js")"></script>

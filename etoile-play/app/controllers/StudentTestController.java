@@ -13,7 +13,7 @@ import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
-import models.test.AnswerMarkers;
+import models.test.AnswerMarker;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -375,7 +375,7 @@ public class StudentTestController extends Controller {
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
 		//Isto é só um teste para ter qlq coisa a funcionar
 		
-//		Test test = usertest.test;
+		Test test = usertest.test;
 //		for (Usertest ut : Usertest.getAllTests()) {
 //			if (usertest.id != ut.id) {
 //				if (ut.test.id == test.id) {
@@ -384,7 +384,7 @@ public class StudentTestController extends Controller {
 //						System.out.println(user.email);
 //						System.out.println(user.email.equals(a.usertest.user.email));
 //						if (!user.email.equals(a.usertest.user.email)) {
-//							AnswerMarkers am = new AnswerMarkers();
+//							AnswerMarker am = new AnswerMarker();
 //							am.answer = a;
 //							am.user = user;
 //							am.save();

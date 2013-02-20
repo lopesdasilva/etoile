@@ -24,7 +24,7 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 @Entity
-public class AnswerMarkers extends Model {
+public class AnswerMarker extends Model {
 
 	
 	@Id
@@ -54,21 +54,21 @@ public class AnswerMarkers extends Model {
 	
 	
 	
-	public static Model.Finder<Long, AnswerMarkers> find = new Model.Finder<Long, AnswerMarkers>(
-			Long.class, AnswerMarkers.class);
+	public static Model.Finder<Long, AnswerMarker> find = new Model.Finder<Long, AnswerMarker>(
+			Long.class, AnswerMarker.class);
 
-	public static List<AnswerMarkers> getAllEvaluations() {
-		List<AnswerMarkers> answerMarkers = new ArrayList<AnswerMarkers>();
-		answerMarkers = Ebean.find(AnswerMarkers.class)
+	public static List<AnswerMarker> getAllEvaluations() {
+		List<AnswerMarker> answerMarker = new ArrayList<AnswerMarker>();
+		answerMarker = Ebean.find(AnswerMarker.class)
 				.findList(); 
-		return answerMarkers; 
+		return answerMarker; 
 	}
 	
-	public static AnswerMarkers getByAnswerAndUser(String user_email, Long answer_id){
+	public static AnswerMarker getByAnswerAndUser(String user_email, Long answer_id){
 		return find.where().eq("user_email", user_email).eq("answer_id", answer_id).findUnique();
 	}
 	
-	public static List<AnswerMarkers> getByMarker(String user_email){
+	public static List<AnswerMarker> getByMarker(String user_email){
 		return find.where().eq("user_email", user_email).eq("is_marked", false).findList();
 	}
 }

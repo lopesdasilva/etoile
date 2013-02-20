@@ -5,7 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
-import models.test.AnswerMarkers;
+import models.test.AnswerMarker;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -70,7 +70,7 @@ public class User extends Model {
 	public List<Question> openquestions;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	public List<AnswerMarkers> answerMarkers;
+	public List<AnswerMarker> answerMarker;
 	
     // -- Queries
 	
@@ -135,7 +135,7 @@ public class User extends Model {
     }
     
     public boolean haveAnswersToMark(){
-    	for(AnswerMarkers answer_markers: answerMarkers){
+    	for(AnswerMarker answer_markers: answerMarker){
     		if(!answer_markers.isMarked){
     			return true;
     		}

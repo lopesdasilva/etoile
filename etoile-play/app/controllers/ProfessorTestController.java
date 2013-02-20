@@ -10,7 +10,7 @@ import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
-import models.test.AnswerMarkers;
+import models.test.AnswerMarker;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -715,9 +715,9 @@ public class ProfessorTestController extends Controller {
 				
 				if(usertest.answers!=null){
 					for(Answer useranswers: usertest.answers){
-						if(useranswers.answerMarkers!=null){
-							useranswers.answerMarkers.answer=null;
-							useranswers.answerMarkers.save();
+						if(useranswers.answerMarker!=null){
+							useranswers.answerMarker.answer=null;
+							useranswers.answerMarker.save();
 						}
 					}
 					}

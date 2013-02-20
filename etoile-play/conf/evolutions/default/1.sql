@@ -10,12 +10,12 @@ create table answer (
   test_id                   bigint,
   usertest_id               bigint,
   group_id                  bigint,
-  answer_markers_id         bigint,
+  answer_marker_id          bigint,
   questionevaluation_id     bigint,
   constraint pk_answer primary key (id))
 ;
 
-create table answer_markers (
+create table answer_marker (
   id                        bigint auto_increment not null,
   answerscore               bigint,
   markerscore               bigint,
@@ -23,7 +23,7 @@ create table answer_markers (
   markercomment             TEXT,
   user_email                varchar(255),
   is_marked                 tinyint(1) default 0,
-  constraint pk_answer_markers primary key (id))
+  constraint pk_answer_marker primary key (id))
 ;
 
 create table bibliography (
@@ -368,14 +368,14 @@ alter table answer add constraint fk_answer_usertest_3 foreign key (usertest_id)
 create index ix_answer_usertest_3 on answer (usertest_id);
 alter table answer add constraint fk_answer_group_4 foreign key (group_id) references question_group (id) on delete restrict on update restrict;
 create index ix_answer_group_4 on answer (group_id);
-alter table answer add constraint fk_answer_answerMarkers_5 foreign key (answer_markers_id) references answer_markers (id) on delete restrict on update restrict;
-create index ix_answer_answerMarkers_5 on answer (answer_markers_id);
+alter table answer add constraint fk_answer_answerMarker_5 foreign key (answer_marker_id) references answer_marker (id) on delete restrict on update restrict;
+create index ix_answer_answerMarker_5 on answer (answer_marker_id);
 alter table answer add constraint fk_answer_questionevaluation_6 foreign key (questionevaluation_id) references question_evaluation (id) on delete restrict on update restrict;
 create index ix_answer_questionevaluation_6 on answer (questionevaluation_id);
-alter table answer_markers add constraint fk_answer_markers_answer_7 foreign key (answer_id) references answer (id) on delete restrict on update restrict;
-create index ix_answer_markers_answer_7 on answer_markers (answer_id);
-alter table answer_markers add constraint fk_answer_markers_user_8 foreign key (user_email) references account (email) on delete restrict on update restrict;
-create index ix_answer_markers_user_8 on answer_markers (user_email);
+alter table answer_marker add constraint fk_answer_marker_answer_7 foreign key (answer_id) references answer (id) on delete restrict on update restrict;
+create index ix_answer_marker_answer_7 on answer_marker (answer_id);
+alter table answer_marker add constraint fk_answer_marker_user_8 foreign key (user_email) references account (email) on delete restrict on update restrict;
+create index ix_answer_marker_user_8 on answer_marker (user_email);
 alter table bibliography add constraint fk_bibliography_module_9 foreign key (module_id) references module (id) on delete restrict on update restrict;
 create index ix_bibliography_module_9 on bibliography (module_id);
 alter table comment add constraint fk_comment_blog_10 foreign key (blog_id) references blog (id) on delete restrict on update restrict;
@@ -479,7 +479,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table answer;
 
-drop table answer_markers;
+drop table answer_marker;
 
 drop table bibliography;
 

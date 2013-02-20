@@ -42,7 +42,7 @@ public class Answer extends Model{
 
 	
 	@OneToOne(cascade = {CascadeType.ALL})
-	public AnswerMarkers answerMarkers;
+	public AnswerMarker answerMarker;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	public QuestionEvaluation questionevaluation;

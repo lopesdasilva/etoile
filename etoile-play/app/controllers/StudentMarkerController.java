@@ -19,7 +19,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
-import models.test.AnswerMarkers;
+import models.test.AnswerMarker;
 import controllers.secured.*;
 
 @Security.Authenticated(Secured.class)
@@ -37,9 +37,9 @@ public class StudentMarkerController extends Controller {
 	public static Result answersToMark(){
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
-		List<AnswerMarkers> answersToMark = AnswerMarkers.getByMarker(user.email);
+		List<AnswerMarker> answersToMark = AnswerMarker.getByMarker(user.email);
 		
-		for(AnswerMarkers a: answersToMark){
+		for(AnswerMarker a: answersToMark){
 			a.answer.group.refresh();
 			a.answer.group.test.refresh();
 			a.answer.group.test.lesson.refresh();
@@ -65,17 +65,17 @@ public class StudentMarkerController extends Controller {
 		User user = User.find.byId(request().username());
 		Form<MarkerEvaluation> form = form(
 				MarkerEvaluation.class).bindFromRequest();
-		System.out.println("AnswerMarkers" + form.get().answerscore);
+		System.out.println("AnswerMarker" + form.get().answerscore);
 		
 		Answer answer = Answer.find.byId(answer_id);
 		
-		AnswerMarkers answerMarkers = AnswerMarkers.getByAnswerAndUser(user.email,answer.id);
-		answerMarkers.answer = answer;
-		answerMarkers.answerscore = form.get().answerscore;
-		answerMarkers.markercomment=form.get().markercomment;
-		answerMarkers.user= user;
-		answerMarkers.isMarked=true;
-		answerMarkers.save();
+		AnswerMarker answerMarker = AnswerMarker.getByAnswerAndUser(user.email,answer.id);
+		answerMarker.answer = answer;
+		answerMarker.answerscore = form.get().answerscore;
+		answerMarker.markercomment=form.get().markercomment;
+		answerMarker.user= user;
+		answerMarker.isMarked=true;
+		answerMarker.save();
 		answer.save();
 	
 		

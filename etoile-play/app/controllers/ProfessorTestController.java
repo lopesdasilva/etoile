@@ -8,7 +8,7 @@ import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
-import models.test.Evaluation;
+import models.test.AnswerMarkers;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -32,6 +32,8 @@ public class ProfessorTestController extends Controller {
 	public static class evaluation_Form {
 		
 		public int evaluation;
+		
+		public String evalutationcomment;
 		
 		
 	}
@@ -701,6 +703,15 @@ public class ProfessorTestController extends Controller {
 				}
 				}
 				
+				if(usertest.answers!=null){
+					for(Answer useranswers: usertest.answers){
+						if(useranswers.answerMarkers!=null){
+							useranswers.answerMarkers.answer=null;
+							useranswers.answerMarkers.save();
+						}
+					}
+					}
+				
 				usertest.delete();
 				
 				
@@ -892,7 +903,9 @@ public class ProfessorTestController extends Controller {
 			evaluation.score = mark;
 			evaluation.usertest = usertest;
 			evaluation.percent = form.get().evaluation;
+			evaluation.evalutationcomment=form.get().evalutationcomment;
 			evaluation.answer = answer;
+			evaluation.professormarker=user.professorProfile;
 			evaluation.save();
 			
 			answer.questionevaluation = evaluation;

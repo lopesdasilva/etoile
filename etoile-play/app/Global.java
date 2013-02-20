@@ -371,7 +371,7 @@ public class Global extends GlobalSettings {
 			test_two.published=true;
 			test_two.name="Final Sum Test";
 			test_two.expectedDuration="45 min";
-			test_two.text = "Final Evaluation of Sum Lesson";
+			test_two.text = "Final AnswerMarkers of Sum Lesson";
 			test_two.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_two.save();
 			

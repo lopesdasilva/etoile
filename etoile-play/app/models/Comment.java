@@ -15,6 +15,8 @@ public class Comment extends Model {
 	public Long id;
 
 	@Constraints.Required
+	@Constraints.MaxLength(value = 255)
+	@Column(columnDefinition="TEXT")
 	public String text;
 
 	@ManyToOne

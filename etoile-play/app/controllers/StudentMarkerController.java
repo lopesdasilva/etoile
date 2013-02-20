@@ -19,7 +19,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
-import models.test.Evaluation;
+import models.test.AnswerMarkers;
 import controllers.secured.*;
 
 @Security.Authenticated(Secured.class)
@@ -27,7 +27,9 @@ public class StudentMarkerController extends Controller {
 	
 	public static class MarkerEvaluation {
 
-		public Long evaluation;
+		public Long answerscore;
+		
+		public String markercomment;
 	}
 
 	
@@ -63,16 +65,20 @@ public class StudentMarkerController extends Controller {
 		User user = User.find.byId(request().username());
 		Form<MarkerEvaluation> form = form(
 				MarkerEvaluation.class).bindFromRequest();
-		System.out.println("Evaluation" + form.get().evaluation);
+		System.out.println("AnswerMarkers" + form.get().answerscore);
 		
 		Answer answer = Answer.find.byId(answer_id);
 		
-		Evaluation evaluation = new Evaluation();
-		evaluation.answer = answer;
-		evaluation.user = user;
-		evaluation.evaluation = form.get().evaluation;
-		evaluation.save();
-		System.out.println("Evaluation criada.");
+		AnswerMarkers answerMarkers = new AnswerMarkers();
+		answerMarkers.answer = answer;
+		answerMarkers.answerscore = form.get().answerscore;
+		answerMarkers.markercomment=form.get().markercomment;
+		answerMarkers.marker= user;
+		answerMarkers.save();
+		
+		answer.answerMarkers=answerMarkers;
+		answer.save();
+		System.out.println("AnswerMarkers criada.");
 		
 		answer.markers.remove(user);
 		answer.save();

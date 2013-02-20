@@ -5,7 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.test.Answer;
-import models.test.Evaluation;
+import models.test.AnswerMarkers;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
@@ -70,7 +70,7 @@ public class User extends Model {
 	public List<Question> openquestions;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	public List<Evaluation> evaluations;
+	public List<AnswerMarkers> answerMarkers;
 	
     // -- Queries
 	

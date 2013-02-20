@@ -416,17 +416,34 @@ usertest: models.manytomany.Usertest, group: models.test.question.QuestionGroup)
 			</div>
 
 
-												<div class="control-group">
+												
+			<div class="row-fluid">
+				<div class="span11">
 													@helper.form(routes.ProfessorTestController.markanswer(module.acronym, lesson.acronym, usertest.id, group.number, question.id)){
 
 													<div class="controls">
 														<h4>Your evaluation</h4> 
 														@if(question.openanswer.questionevaluation!=null){
 														<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="evaluation" value="@question.openanswer.questionevaluation.percent"></input><span class="add-on">%</span>
+														<p>
+														<h5>Comment</h5>
+														</p>
+														<p>
+														<textarea  class="span12" rows="5" name="evalutationcomment" >@question.openanswer.questionevaluation.evalutationcomment</textarea>
+														</p>
+														
 														}
 														@if(question.openanswer.questionevaluation==null){
 														<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="evaluation" ></input><span class="add-on">%</span>
+														<p>
+														<h5>Comment</h5>
+														</p>
+														<p>
+														<textarea  class="span12" rows="5" name="evalutationcomment" ></textarea>
+														</p>
+														
 														}
+														
 														</div>
 														<div class="controls">
 														<button  type="submit" class="btn btn-info">Save Question Score</button>

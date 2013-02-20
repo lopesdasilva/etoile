@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ import javax.validation.Constraint;
 
 
 
+import models.Professor;
 import models.User;
 import models.manytomany.Usertest;
 import models.module.Lesson;
@@ -57,6 +59,14 @@ public class QuestionEvaluation extends Model {
 	
 	@OneToOne(cascade = {CascadeType.DETACH})
 	public Answer answer;
+	
+	@Constraints.Required
+	@Constraints.MaxLength(value = 255)
+	@Column(columnDefinition="TEXT")
+	public String evalutationcomment;
+	
+	@OneToOne
+	public Professor professormarker;
 	
 	
 	public static Model.Finder<Long, QuestionEvaluation> find = new Model.Finder<Long, QuestionEvaluation>(

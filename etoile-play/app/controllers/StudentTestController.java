@@ -13,7 +13,7 @@ import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
-import models.test.Evaluation;
+import models.test.AnswerMarkers;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;

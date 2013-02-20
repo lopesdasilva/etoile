@@ -44,7 +44,7 @@ public class Answer extends Model{
 	public List<User> markers;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
-	public Evaluation evaluation;
+	public AnswerMarkers answerMarkers;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	public QuestionEvaluation questionevaluation;

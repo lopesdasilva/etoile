@@ -3,6 +3,7 @@ package controllers;
 import controllers.routes;
 
 import models.User;
+import models.curriculum.Category;
 import models.module.Bibliography;
 import models.module.Lesson;
 import models.module.Lessonalert;
@@ -13,6 +14,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.register;
 import controllers.ProfessorModuleController.BibliographyItem_Form;
 import controllers.StudentTestController.OpenQuestionSuggestion;
 import controllers.secured.*;
@@ -34,6 +36,13 @@ public class ProfessorLessonController extends Controller {
 		public String text;
 		
 		public String imageURL;
+		
+		public String validate() {
+			if(name.length()<6){
+				return "A lesson name must be at least 6 characters";
+            	}
+            return null;
+        }
 		
 	}
 	
@@ -72,16 +81,19 @@ public class ProfessorLessonController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(session("email"));
-
-		
+		List<Category> categories = Category.getAllCategories();
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			System.out.println("Entrei");
 			Form<NewAlert_Form> form = form(NewAlert_Form.class).bindFromRequest();
+			if(form.hasErrors()) {
+	            return badRequest(views.html.professor.lesson.render(user, categories, lesson,
+	    				module,form));
+			}else{
 			Lessonalert lessonalert = new Lessonalert();
 			lessonalert.name = form.get().name;
 			lessonalert.text = form.get().text;
 			if(form.get().imageURL.equals("")){
-				lessonalert.imageURL = "http://www.msxrio.com.br/wp-content/uploads/2011/02/alert.jpg";
+				lessonalert.imageURL = "http://placehold.it/75x75";
 			}
 			else{
 				lessonalert.imageURL = form.get().imageURL;
@@ -94,6 +106,7 @@ public class ProfessorLessonController extends Controller {
 			for(User u : users_list) {
 				SendMail.sendMail(u.email, "[Etoile] News in module "+module_acronym, "blablablablablabl some New from the professor "+user.email); 
 			}
+			}
 		
 		}
 		
@@ -102,7 +115,9 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result addlessoncontent(String module_acronym, String lesson_acronym){
-
+		Form<NewContent_Form> form = form(NewContent_Form.class).bindFromRequest();
+	if(!(form.get().name==null || form.get().name.equals("") || form.get().name.length()<6)){
+		
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(session("email"));
@@ -110,7 +125,7 @@ public class ProfessorLessonController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			System.out.println("Entrei");
-			Form<NewContent_Form> form = form(NewContent_Form.class).bindFromRequest();
+			
 			
 			Lessoncontent content = new Lessoncontent();
 			content.name = form.get().name;
@@ -124,8 +139,9 @@ public class ProfessorLessonController extends Controller {
 			content.lesson = lesson;
 			content.save();
 		}
-		
-		
+		return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
+	}
+		flash("error", "Error in the form.");
 		return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
 	}
 	

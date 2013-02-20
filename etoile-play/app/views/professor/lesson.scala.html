@@ -1,5 +1,5 @@
 @(user: User, categories: List[models.curriculum.Category], lesson:
-models.module.Lesson, module: models.module.Module) @import helper._
+models.module.Lesson, module: models.module.Module, newAlertForm: Form[ProfessorLessonController.NewAlert_Form]) @import helper._
 @main("etoileplatform"){
 
 
@@ -84,6 +84,19 @@ models.module.Lesson, module: models.module.Module) @import helper._
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="news">
+						
+						@if(newAlertForm.hasGlobalErrors) {
+						<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">X</button>
+						<strong>Error!</strong> @newAlertForm.globalError.message
+						</div>
+						} @if(flash.contains("error")) {
+						<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">X</button>
+						<strong>Error!</strong> @flash.get("error")
+						</div>
+						}
+						
 						<a class="btn btn-large btn-block btn-success btn-mini" data-toggle="modal" href="#myModalNewAlert" type="button">Add news</a></br>
 						
 							@for(alert <- lesson.lessonalerts){
@@ -118,7 +131,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<input required="required" name="name" type="text" placeholder="" class="input-xlarge">
 												<p class="help-block">Insert the news header</p>
 											</div>
 										</div>

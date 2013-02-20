@@ -77,7 +77,7 @@ public class ProfessorController extends Controller {
 		}
 		
 		return ok(views.html.professor.lesson.render(user, categories, lesson,
-				module));
+				module, form(ProfessorLessonController.NewAlert_Form.class)));
 	}
 
 	public static Result myprofile() {

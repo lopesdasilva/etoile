@@ -77,9 +77,9 @@ models.test.Test) @main("etoile"){
 
 					<!-- Text input-->
 					<label class="control-label" for="input01">Name</label>
-					<div class="controls">
+					<div class="controls" >
 						<input name="name" type="text" value="@test.name"
-							class="input-xlarge">
+							class="input-xlarge" required>
 						<p class="help-block">Edit test name</p>
 					</div>
 				</div>
@@ -90,7 +90,7 @@ models.test.Test) @main("etoile"){
 					<label class="control-label" for="input01">Description</label>
 					<div class="controls">
 						<input name="text" type="text" value="@test.text"
-							class="input-xlarge">
+							class="input-xlarge" required>
 						<p class="help-block">Small description</p>
 					</div>
 				</div>
@@ -102,7 +102,7 @@ models.test.Test) @main("etoile"){
 						duration</label>
 					<div class="controls">
 						<input name="expectedDuration" type="text"
-							value="@test.expectedDuration" class="input-xlarge disabled">
+							value="@test.expectedDuration" class="input-xlarge disabled" required>
 						<p class="help-block">Estimated time for students complete the
 							test</p>
 					</div>
@@ -277,7 +277,7 @@ models.test.Test) @main("etoile"){
 										<div class="controls">
 											<div class="textarea">
 												<textarea name="question" type="" class=""
-													style="margin: 0px; height: 150px; width: 269px;">@group.question</textarea>
+													style="margin: 0px; height: 150px; width: 269px;" required>@group.question</textarea>
 											</div>
 										</div>
 									</div>
@@ -540,7 +540,7 @@ models.test.Test) @main("etoile"){
 						<div class="controls">
 							<div class="textarea">
 								<textarea name="question" type="" class=""
-									style="margin: 0px; height: 109px; width: 269px;"></textarea>
+									style="margin: 0px; height: 109px; width: 269px;" required></textarea>
 							</div>
 						</div>
 					</div>

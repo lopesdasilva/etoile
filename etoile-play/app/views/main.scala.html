@@ -60,8 +60,8 @@
 <!-- 	</footer> -->
 
 <script type="text/javascript" src="@routes.Assets.at("javascripts/widgets.js")"></script>
-<!-- <script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script> -->
-
+<script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script>
+<script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.6/jqBootstrapValidation.js"></script>
 <!-- <script src="@routes.Assets.at("javascripts/prettify.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-alert.js")"></script> -->
@@ -82,6 +82,9 @@
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full">
 </script>	
+<script>
+  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 	
   <link href="@routes.Assets.at("stylesheets/jquery.tweet.css")" rel="stylesheet"/>
   <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.tweet.js")"></script>

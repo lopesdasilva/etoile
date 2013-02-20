@@ -76,7 +76,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 										<label class="control-label" for="input01">Name</label>
 										<div class="controls">
 											<input name="title" type="text" value="@module.name"
-												class="input-xlarge">
+												class="input-xlarge" required minlength="4">
 											<p class="help-block">Edit module name</p>
 										</div>
 									</div>
@@ -87,7 +87,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 										<label class="control-label" for="input01">Acronym</label>
 										<div class="controls">
 											<input name="acronym" type="text" value="@module.acronym"
-												class="input-xlarge">
+												class="input-xlarge" required>
 											<p class="help-block">This must be unique</p>
 										</div>
 									</div>
@@ -135,7 +135,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 							<div class="controls">
 								<div class="textarea">
 									<textarea type="" class="" name="description"
-										style="margin: 0px; height: 145px; width: 269px;">@module.description</textarea>
+										style="margin: 0px; height: 145px; width: 269px;" required>@module.description</textarea>
 								</div>
 							</div>
 						</div>
@@ -248,7 +248,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<!-- Text input-->
 											<label class="control-label" for="input01">Name</label>
 											<div class="controls">
-												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<input name="name" type="text" placeholder="" class="input-xlarge" required minlength="6" >
 												<p class="help-block">Lesson item's title</p>
 											</div>
 										</div>
@@ -260,7 +260,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="shortDescription" type="" class=""
-														style="margin: 0px; height: 50px; width: 269px;"></textarea>
+														style="margin: 0px; height: 50px; width: 269px;" required maxlength="200"></textarea>
 												</div>
 											</div>
 										</div>
@@ -272,7 +272,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="description" type="" class=""
-														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+														style="margin: 0px; height: 145px; width: 269px;" required></textarea>
 												</div>
 											</div>
 										</div>
@@ -282,7 +282,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<!-- Text input-->
 											<label class="control-label" for="input01">Acronym</label>
 											<div class="controls">
-												<input name="acronym" type="text" placeholder="" class="input-xlarge">
+												<input name="acronym" type="text" placeholder="" class="input-xlarge" required minlength="4">
 												<p class="help-block">Lesson item's acronym</p>
 											</div>
 										</div>
@@ -293,7 +293,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
 												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
-													>
+													required >
 												<p class="help-block">Lesson item's image</p>
 											</div>
 										</div>
@@ -391,7 +391,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input name="title" type="text" placeholder="" class="input-xlarge">
+												<input name="title" type="text" placeholder="" class="input-xlarge" required>
 												<p class="help-block">Bibliography item's title</p>
 											</div>
 										</div>
@@ -403,7 +403,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="description" type="" class=""
-														style="margin: 0px; height: 145px; width: 269px;"></textarea>
+														style="margin: 0px; height: 145px; width: 269px; " required minlength="50"></textarea>
 												</div>
 											</div>
 										</div>
@@ -427,7 +427,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 										<label class="control-label" for="input01">Link</label>
 										<div class="controls">
 											<input name="url" type="text" placeholder=""
-												class="input-xlarge">
+												class="input-xlarge" required>
 											<p class="help-block">Url to download bibliography item</p>
 										</div>
 									</div>
@@ -515,7 +515,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
 												<input name="title" type="text" placeholder="" class="input-xlarge"
-													value="@bibliography.title">
+													value="@bibliography.title" required>
 												<p class="help-block">Edit bibliography item's title</p>
 											</div>
 										</div>
@@ -527,7 +527,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="description" type="" class=""
-														style="margin: 0px; height: 145px; width: 269px;">@bibliography.description</textarea>
+														style="margin: 0px; height: 145px; width: 269px; " required>@bibliography.description</textarea>
 												</div>
 											</div>
 										</div>
@@ -551,7 +551,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 										<label class="control-label" for="input01">Link</label>
 										<div class="controls">
 											<input name="url" type="text" placeholder=""
-												class="input-xlarge" value="@bibliography.link">
+												class="input-xlarge" value="@bibliography.link" required>
 											<p class="help-block">Url to download bibliography item</p>
 										</div>
 									</div>
@@ -612,7 +612,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 							<label class="control-label" for="input01">Title</label>
 							<div class="controls">
 								<input name="title" type="text" placeholder="placeholder"
-									class="input-xlarge" value="@content.title">
+									class="input-xlarge" value="@content.title" required>
 								<p class="help-block">Edit title</p>
 							</div>
 						</div>
@@ -624,7 +624,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 							<div class="controls">
 								<div class="textarea">
 									<textarea name="description" type="" class=""
-										style="margin: 0px; height: 109px; width: 269px;">@content.text</textarea>
+										style="margin: 0px; height: 109px; width: 269px;" required >@content.text</textarea>
 								</div>
 							</div>
 						</div>
@@ -692,7 +692,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 							<label class="control-label" for="input01">Title</label>
 							<div class="controls">
 								<input name="title" required="required" type="text" placeholder="Title"
-									class="input-xlarge" >
+									class="input-xlarge">
 								<p class="help-block">Insert title</p>
 							</div>
 						</div>
@@ -704,7 +704,7 @@ models.module.Module,professors: Array[String]) @main("etoileplatform"){
 							<div class="controls">
 								<div class="textarea">
 									<textarea name="description" type="" class="" 
-										style="margin: 0px; height: 109px; width: 269px;"></textarea>
+										style="margin: 0px; height: 109px; width: 269px;" required ></textarea>
 								</div>
 							</div>
 						</div>

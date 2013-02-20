@@ -131,7 +131,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input required="required" name="name" type="text" placeholder="" class="input-xlarge">
+												<input required="required" name="name" type="text" placeholder="" class="input-xlarge" required>
 												<p class="help-block">Insert the news header</p>
 											</div>
 										</div>
@@ -210,7 +210,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input name="name" type="text" placeholder="" class="input-xlarge">
+												<input name="name" type="text" placeholder="" class="input-xlarge" required minlength="6">
 												<p class="help-block">Title</p>
 											</div>
 										</div>
@@ -233,7 +233,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
 												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
-													>
+													required>
 												<p class="help-block">New Alert item's image</p>
 											</div>
 										</div>
@@ -390,7 +390,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 						<div id="MyModalEditLesson" class="modal hide fade" >
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">X</button>
-							<h3 id="myModalLabel">@lesson.name new resource</h3>
+							<h3 id="myModalLabel">@lesson.name Edit</h3>
 						</div>
 						<div class="modal-body">
 							
@@ -402,7 +402,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Name</label>
 											<div class="controls">
-												<textarea name="name" type="text" placeholder="" class="input-xlarge">@lesson.name</textarea>
+												<textarea name="name" type="text" placeholder="" class="input-xlarge" required>@lesson.name</textarea>
 												<p class="help-block">Lesson Name</p>
 											</div>
 										</div>
@@ -412,7 +412,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Acronym</label>
 											<div class="controls">
-												<textarea name="acronym" type="text" placeholder="" class="input-xlarge">@lesson.acronym</textarea>
+												<textarea name="acronym" type="text" placeholder="" class="input-xlarge" required minlength="4">@lesson.acronym</textarea>
 												<p class="help-block">Lesson Acronym</p>
 											</div>
 										</div>
@@ -424,7 +424,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="shortdescription" type="" class=""
-														style="margin: 0px; height: 145px; width: 269px;">@lesson.shortDescription</textarea>
+														style="margin: 0px; height: 145px; width: 269px;" required maxlength="200">@lesson.shortDescription</textarea>
 												</div>
 											</div>
 										</div>
@@ -436,7 +436,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<div class="controls">
 												<div class="textarea">
 													<textarea name="description" type="" class=""
-														style="margin: 0px; height: 250px; width: 269px;">@lesson.description</textarea>
+														style="margin: 0px; height: 250px; width: 269px;" required minlength="50">@lesson.description</textarea>
 												</div>
 											</div>
 										</div>
@@ -446,7 +446,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
-												<textarea name="imageURL" type="text" style="margin: 0px; height: 145px; width: 269px; placeholder="" class="input-xlarge">@lesson.imageURL</textarea>
+												<textarea name="imageURL" type="text" style="margin: 0px; height: 145px; width: 269px; placeholder="" class="input-xlarge" required>@lesson.imageURL</textarea>
 												<p class="help-block">Lesson image</p>
 											</div>
 										</div>

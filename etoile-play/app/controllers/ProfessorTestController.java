@@ -40,6 +40,10 @@ public class ProfessorTestController extends Controller {
 		
 	}
 	
+	public static class Date_Form{
+		public String date;
+	}
+	
 	public static class NewTest_Form {
 		
 		public String name;
@@ -774,6 +778,23 @@ public class ProfessorTestController extends Controller {
 		
 		return redirect(routes.Application.module(module.acronym));
 	}
+	
+	public static Result changetestdates(String module_acronym, String lesson_acronym, Long test_id){
+		Module module = Module.findByAcronym(module_acronym);
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<Date_Form> form = form(Date_Form.class).bindFromRequest();
+			System.out.println("DATAS: " + form.get().date);
+			String [] datas = new String[2];
+			
+			
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+
+		}
+		return redirect(routes.Application.module(module.acronym));
+
+	}
+	
 	
 	public static Result edittest(String module_acronym, String lesson_acronym, Long test_id){
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);

@@ -69,9 +69,14 @@
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full">
 </script>	
-<script>
-  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
-</script>
+
+<script type="text/javascript" src="http://www.dangrossman.info/wp-content/themes/2012/date.js"></script>
+<script type="text/javascript" src="http://www.dangrossman.info/wp-content/themes/2012/daterangepicker.js"></script>
+<link rel="stylesheet" href="http://www.dangrossman.info/wp-content/themes/2012/daterangepicker.css">
+
+	
+
+
 	<script> function changetab (url){
 		console.log(url);
 	var queryStart   = url.indexOf("#")+1;
@@ -90,7 +95,16 @@
 	}
 	}
 	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#reservation').daterangepicker();
+	});
+	</script>
 	
+<script>
+ $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
+
   <link href="@routes.Assets.at("stylesheets/jquery.tweet.css")" rel="stylesheet"/>
   <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.tweet.js")"></script>
 	

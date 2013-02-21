@@ -14,7 +14,9 @@ var prevT;
 
 
 function validateUrl() {
-
+	
+	
+	
 	var url=document.getElementsByName("urlInput")[0].value.toString();
 	if(url.search("http://")!=-1){
 	var url=url.slice(7,url.length);
@@ -76,13 +78,13 @@ function validateUrl() {
 			},
 			error: function(){ 
 				initAddUrl();
-				$("#ErrorMessage").empty().text("The page was not found");
+				$("#ErrorMessage").empty().text("Page Not found.");
 			}
 	    	});
 		return false;
 	}
 	else {
-		$("#ErrorMessage").empty().text("This is not a valid URL");
+		$("#ErrorMessage").empty().text("Not a valid url");
 		$("#formBlock").hide();
 		return false;
 	}
@@ -196,6 +198,19 @@ function searchButton(){
 }
 					</script>
 
+
+<script>
+
+function UpdateMath (TeX) {	 
+	 $("#answer").empty().text(TeX);
+	 MathJax.Hub.Typeset()
+ 
+
+}
+   
+</script>
+
+
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -241,7 +256,8 @@ function searchButton(){
 
 		<div class="row-fluid">
 			<div class="span4">
-			Answered:	<div class="progress">
+				Answered:
+				<div class="progress">
 					<div class="bar" style="width: @usertest.progress%;"></div>
 				</div>
 			</div>
@@ -258,36 +274,41 @@ function searchButton(){
 		</div>
 		<hr>
 		<div class="offset1">
-				<!-- Twitter Query -->
-<div style="padding: 20px;" id="TwitterQuery" class="modal hide fade">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">X</button>
-						<h3 id="myModalLabel">Twitter Search !</h3>
-					</div>
-					<div class="modal-body">
+			<!-- Twitter Query -->
+			<div style="padding: 20px;" id="TwitterQuery" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">X</button>
+					<h3 id="myModalLabel">Twitter Search !</h3>
+				</div>
+				<div class="modal-body">
 					<fieldset class="form-search">
-  <input onclick="this.select();" id="searchingT" type="text" class="input-medium search-query">
-  <button onclick='searchButton();' type="submit" class="btn">Search</button><br>
-  <div id="labelsT"><label id="legRel" >Related: </label> <label  for="legRel" id="keywordsT"></label></div>
-			    </fieldset>
-    <div id="pagingT">
-      <div id="tweets" class="widgetT query"></div>
-      <div class="controlsT pagination">
-      <ul>
-        <li><a class="prevT" type="button" disabled>&larr;</a></li>
-        <li><a class="nextT" type="button" disabled>&rarr;</a></li>
-       <ul>
-      </div>
-      
-      
-      
-    </div>
-</div>
-</div>
+						<input onclick="this.select();" id="searchingT" type="text"
+							class="input-medium search-query">
+						<button onclick='searchButton();' type="submit" class="btn">Search</button>
+						<br>
+						<div id="labelsT">
+							<label id="legRel">Related: </label> <label for="legRel"
+								id="keywordsT"></label>
+						</div>
+					</fieldset>
+					<div id="pagingT">
+						<div id="tweets" class="widgetT query"></div>
+						<div class="controlsT pagination">
+							<ul>
+								<li><a class="prevT" type="button" disabled>&larr;</a></li>
+								<li><a class="nextT" type="button" disabled>&rarr;</a></li>
+								<ul>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
 			@for(question <- group.questions) {
-			
+
 			<div class="row-fluid">
-			<div class="span6">
+				<div class="span6">
 					<h4>Question @question.number</h4>
 				</div>
 				<div class="span5">
@@ -301,12 +322,15 @@ function searchButton(){
 									top5 URLs</a></li>
 							<li><a href="#URLALL@question.number" data-toggle="modal">View
 									All URLs</a></li>
-							
-							<li><a href="#ADDURL@question.number" onclick="initAddUrl();" data-toggle="modal">Add
-									new URL</a></li>
-							<li><a href="#TwitterQuery" onclick='TwitterQuery("@question.keywords");' data-toggle="modal">Ask Twitter</a></li>
-									<li class="divider"></li>
-									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
+
+							<li><a href="#ADDURL@question.number"
+								onclick="initAddUrl();" data-toggle="modal">Add new URL</a></li>
+							<li><a href="#TwitterQuery"
+								onclick='TwitterQuery("@question.keywords");'
+								data-toggle="modal">Ask Twitter</a></li>
+							<li class="divider"></li>
+							<li><a href="#generalhelp" data-toggle="modal">General
+									help</a></li>
 						</ul>
 					</div>
 					<!-- /btn-group -->
@@ -319,26 +343,26 @@ function searchButton(){
 						<h3 id="myModalLabel">Top 5</h3>
 					</div>
 					<div class="modal-body">
-					@for(url<- question.getTopUrls(question.id)){
+						@for(url<- question.getTopUrls(question.id)){
 						<div class="well">
-						@if(url.isFeatured(url.id)){
-									<img class="pull-right"
-									src=" @routes.Assets.at("images/featured_url.png") "
-									 height="35" width="35">
-									}
+							@if(url.isFeatured(url.id)){ <img class="pull-right"
+								src="@routes.Assets.at("images/featured_url.png")" height="35" width="35">
+							}
 							<div class="media">
-								<a class="pull-left" href="@url.adress" target="_blank"> <img class="media-object"
-									src="@url.imageURL" height="70" width="70">
+								<a class="pull-left" href="@url.adress" target="_blank"> <img
+									class="media-object" src="@url.imageURL" height="70" width="70">
 								</a>
-								
+
 								<div class="media-body">
-								
+
 									<div>
-									
-										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
+
+										<a href="@url.adress" target="_blank"><h4
+												class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
-										<small>@url.adress</small></br> </br>@url.description
-										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
+										<small>@url.adress</small></br> </br>@url.description <a
+											href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
+											class="btn btn-mini btn-primary pull-right">Like</a>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -359,18 +383,20 @@ function searchButton(){
 						<h3 id="myModalLabel">All</h3>
 					</div>
 					<div class="modal-body">
-					@for(url<- question.urls){
+						@for(url<- question.urls){
 						<div class="well">
 							<div class="media">
-								<a class="pull-left" href="@url.adress" target="_blank"> <img class="media-object"
-									src="@url.imageURL" height="70" width="70">
+								<a class="pull-left" href="@url.adress" target="_blank"> <img
+									class="media-object" src="@url.imageURL" height="70" width="70">
 								</a>
 								<div class="media-body">
 									<div>
-										<a href="@url.adress" target="_blank"><h4 class="media-heading">@url.name</h4></a>
+										<a href="@url.adress" target="_blank"><h4
+												class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
-										<small>@url.adress</small></br> </br>@url.description
-										<a href ="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)" class="btn btn-mini btn-primary pull-right">Like</a>
+										<small>@url.adress</small></br> </br>@url.description <a
+											href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
+											class="btn btn-mini btn-primary pull-right">Like</a>
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -397,33 +423,35 @@ function searchButton(){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-<form class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="input01">New URL</label>
-							<div class="controls">
-								<input type="text" placeholder="Insert the new URL"
-									class="input-xlarge" name="urlInput" required>
-								<button id="triggerButton" onclick="return validateUrl();" class="btn btn-primary">Submit Url</button><div id="Loading"></div>
-								<label id="ErrorMessage" class="control-label"></label>
+						<div class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label" for="input01">New URL</label>
+								<div class="controls">
+									<input type="text" placeholder="Insert the new URL"
+										class="input-xlarge" name="urlInput">
+									<button id="triggerButton" onclick="return validateUrl();" class="btn btn-primary">Submit Url</button><div id="Loading"></div>
+
+										
+									<div id="Loading"></div>
+									<label id="ErrorMessage" class="control-label"></label>
+								</div>
 							</div>
 						</div>
-</form>
 
-					@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display: none;"){
+						@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display:none;"){ 
 						<input type="hidden" name="url" value="">
 						<div class="control-group">
 							<label class="control-label" for="input01">Title</label>
 							<div class="controls">
-								<input type="text"
-									class="input-xlarge" name="name" value="">
+								<input type="text" class="input-xlarge" name="name" value="">
 								<p class="help-block">URL title</p>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">Description</label>
 							<div class="controls">
-								<input type="text"
-									class="input-xlarge" name="descriptionUrl" value="">
+								<input type="text" class="input-xlarge" name="descriptionUrl"
+									value="">
 								<p class="help-block">A URL small description</p>
 							</div>
 						</div>
@@ -431,25 +459,28 @@ function searchButton(){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Image url</label>
 							<div class="controls">
-								<input name="image" type="text" value="" class="input-xlarge" readOnly="true">
-								<p class="help-block"><div id="theImage" width=10px ></div></p>
+								<input name="image" type="text" value="" class="input-xlarge"
+									readOnly="true">
+								<p class="help-block">
+								<div id="theImage" width=10px></div>
+								</p>
 							</div>
 						</div>
 
 						<div class="control-group">
-										<label class="control-label"></label>
+							<label class="control-label"></label>
 
-										<!-- Button -->
-										<div class="controls">
-											<button type="submit" class="btn btn-success">Save</button>
-										</div>
+							<!-- Button -->
+							<div class="controls">
+								<button type="submit" class="btn btn-success">Save</button>
+							</div>
 						</div>
-					}
-						
+						}
+
 					</div>
 				</div>
 				<!-- END ADD URL Modal -->
-				
+
 
 
 
@@ -466,57 +497,66 @@ function searchButton(){
 						<h3 id="myModalLabel">Help</h3>
 					</div>
 					<div class="modal-body">
-					<div class="tabbable" style="margin-bottom: 18px;">
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab">ASCIIMathML</a></li>
-                <li><a href="#tab2" data-toggle="tab">Greek Letters</a></li>
-              </ul>
-              <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
-                <div class="tab-pane active" id="tab1">
-                  <p> Please use the <a href="http://www1.chapman.edu/~jipsen/mathml/asciimath.html" target="_blank">ASCIIMathML</a> language for writing formal expressions. Formal expressions should be surrounded by "back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
-                 
-                  <p>Examples:</p>
-                   <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Type this</th>
-                  <th>See this</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> x^2+y_1+z_12^34</td>
-                  <td>`x^2+y_1+z_12^34`</td>
-                </tr>
-                <tr>
-                  <td>sin^-1(x)</td>
-                  <td>`sin^-1(x)`</td>
-                </tr>
-                <tr>
-                  <td>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</td>
-                  <td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
-                </tr>
-                 <tr>
-                  <td>f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n</td>
-                  <td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
-                </tr>
-                 <tr>
-                  <td>int_0^1f(x)dx</td>
-                  <td>`int_0^1f(x)dx`</td>
-                </tr>
-                 <tr>
-                  <td>bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)</td>
-                  <td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
-                </tr>
-              </tbody>
-            </table>
-                  
-                </div>
-                <div class="tab-pane" id="tab2">
-                  <p class="text-warning">
-						<span class="label label-warning">Info</span>Do not forget to surround your formula with ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.
-					</p>
-                   <table class="table table-condensed table-hover">
+						<div class="tabbable" style="margin-bottom: 18px;">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tab1" data-toggle="tab">ASCIIMathML</a></li>
+								<li><a href="#tab2" data-toggle="tab">Greek Letters</a></li>
+							</ul>
+							<div class="tab-content"
+								style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+								<div class="tab-pane active" id="tab1">
+									<p>
+										Please use the <a
+											href="http://www1.chapman.edu/~jipsen/mathml/asciimath.html"
+											target="_blank">ASCIIMathML</a> language for writing formal
+										expressions. Formal expressions should be surrounded by
+										"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.
+									</p>
+
+									<p>Examples:</p>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Type this</th>
+												<th>See this</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>x^2+y_1+z_12^34</td>
+												<td>`x^2+y_1+z_12^34`</td>
+											</tr>
+											<tr>
+												<td>sin^-1(x)</td>
+												<td>`sin^-1(x)`</td>
+											</tr>
+											<tr>
+												<td>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</td>
+												<td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
+											</tr>
+											<tr>
+												<td>f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n</td>
+												<td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
+											</tr>
+											<tr>
+												<td>int_0^1f(x)dx</td>
+												<td>`int_0^1f(x)dx`</td>
+											</tr>
+											<tr>
+												<td>bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)</td>
+												<td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<div class="tab-pane" id="tab2">
+									<p class="text-warning">
+										<span class="label label-warning">Info</span>Do not forget to
+										surround your formula with ‚"back-ticks", i.e., <span
+											class="asciimath2jax_ignore">`...`</span>.
+									</p>
+									<table class="table table-condensed table-hover">
 										<thead>
 											<tr>
 												<th>Command</th>
@@ -641,149 +681,143 @@ function searchButton(){
 												<td>`zeta`</td>
 											</tr>
 										</tbody>
-            </table>
-                </div>
-                
-              </div>
-            </div> <!-- /tabbable -->
+									</table>
+								</div>
+
+							</div>
+						</div>
+						<!-- /tabbable -->
 					</div>
 				</div>
 				<!-- GENERAL HELP Modal -->
-				
+
 			</div>
 			<div class="control-group">
-							@helper.form(routes.StudentTestController.postquestion(group.number, module.acronym,
-							lesson.acronym,test.id,usertest.id,question.id)) {
-							<div class="controls">
+				@helper.form(routes.StudentTestController.postquestion(group.number,
+				module.acronym, lesson.acronym,test.id,usertest.id,question.id)) {
+				<div class="controls">
 
-			<div class="row-fluid">
-				<div class="span11">
-					<p>@question.question</p>
-					@if(question.imageURL!=null || question.videoURL!=null){
-					<div class="alert">
-						<strong data-toggle="collapse" data-target="#@question.id">Click
-							to expand and view media</strong>
-						<button type="button" class="close" data-toggle="collapse"
-							data-target="#@question.id">-</button>
+					<div class="row-fluid">
+						<div class="span11">
+							<p>@question.question</p>
+							@if(question.imageURL!=null || question.videoURL!=null){
+							<div class="alert">
+								<strong data-toggle="collapse" data-target="#@question.id">Click
+									to expand and view media</strong>
+								<button type="button" class="close" data-toggle="collapse"
+									data-target="#@question.id">-</button>
 
-						<div id="@question.id" class="collapse row-fluid">
-							@if(question.imageURL!=null){
-							<div class="span6">
-								<p>
-									<img src="@question.imageURL" height="300" />
-								</p>
-							</div>
-							} @if(question.videoURL!=null){
-							<div class="span6">
-								<p>
-									<iframe height="300" src="@question.videoURL" frameborder="0" allowfullscreen></iframe>
-								</p>
+								<div id="@question.id" class="collapse row-fluid">
+									@if(question.imageURL!=null){
+									<div class="span6">
+										<p>
+											<img src="@question.imageURL" height="300" />
+										</p>
+									</div>
+									} @if(question.videoURL!=null){
+									<div class="span6">
+										<p>
+											<iframe height="300" src="@question.videoURL" frameborder="0"
+												allowfullscreen></iframe>
+										</p>
+									</div>
+									}
+								</div>
+
 							</div>
 							}
-						</div>
 
+						</div>
+					</div>
+					@if(question.typeOfQuestion==0){
+					<div class="row-fluid">
+						<div class="span11">
+							<div class="span6">
+
+								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onchange="UpdateMath(this.value)">@question.openanswer.answer</textarea>
+							</div>
+							<div class="span6">
+								<div class="alert alert-block alert-success">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<h4>Your answer</h4>
+									<label id="answer" >@question.openanswer.answer</label>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					} @if(question.typeOfQuestion==1){
+
+
+					<div class="row-fluid ">
+						<div class="span11">
+							<p class="text-warning">
+								<span class="label label-warning">Warning</span>Identify the
+								correct answer (<strong>only one is the correct one</strong>).
+							</p>
+
+							<div class="alert alert-info">
+								<div class="btn-group" data-toggle="buttons-radio">
+									<ul class="inputs-list">
+										@for(hypothesis <- question.hypothesislist){
+										@if(hypothesis.selected){
+										<label class="radio"> <input type="radio"
+											name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+											-							checked="checked"> @hypothesis.text
+
+										</label> } @if(!hypothesis.selected){
+										<label class="radio"> <input type="radio"
+											name="ocqanswer" value="@hypothesis.id" id="optionRadios"-							>
+											@hypothesis.text
+										</label> } }
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					} @if(question.typeOfQuestion==2){
+					<div class="row-fluid ">
+						<div class="span11">
+							<p class="text-warning">
+								<span class="label label-warning">Warning</span>Identify the
+								correct answers (<strong>can be more than one</strong>).
+							</p>
+
+							<div class="alert alert-info">
+								@for(hypothesis <- question.hypothesislist){
+								@if(hypothesis.selected){ <label class="checkbox"> <input
+									type="checkbox" id="optionsRadios1"
+									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"
+									checked="checked"> @hypothesis.text
+								</label> } @if(!hypothesis.selected){ <label class="checkbox"> <input
+									type="checkbox" id="optionsRadios1"
+									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"">
+									@hypothesis.text
+								</label> } }
+							</div>
+						</div>
 					</div>
 					}
 
-				</div>
-			</div>
-			@if(question.typeOfQuestion==0){
-			<div class="row-fluid">
-				<div class="span11">
-					<div class="span6">
-
-						<textarea class="span50" rows="10" name="qanswer">@question.openanswer.answer</textarea>
-					</div>
-					<div class="span6">
-						<div class="alert alert-block alert-success">
-							<button type="button" class="close" data-dismiss="alert">x</button>
-							<h4>Your answer</h4>
-							@question.openanswer.answer
+					<div class="row-fluid">
+						<div class="span11">
+							<p>
+								<button class="btn btn-success pull-right" type="submit">Save
+									answer @question.number</button>
+							</p>
 						</div>
-
 					</div>
-				</div>
-			</div>
-			} @if(question.typeOfQuestion==1){
-			
-							
-			<div class="row-fluid ">
-				<div class="span11">
-					<p class="text-warning">
-						<span class="label label-warning">Warning</span>Identify the correct answer (<strong>only one is the correct one</strong>).
-					</p>
 
-					<div class="alert alert-info">
-					<div class="btn-group" data-toggle="buttons-radio">
-					<ul class="inputs-list">
-						@for(hypothesis <- question.hypothesislist){ 
-						@if(hypothesis.selected){
-						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
--							checked="checked"> @hypothesis.text
+					}
+					<hr>
 
-						</label> 
-						}
-						@if(!hypothesis.selected){
-						<label class="radio">
-							<input type="radio" name="ocqanswer" value="@hypothesis.id" id="optionRadios"
--							> @hypothesis.text
-						</label> 
-						
-						}
-						}
-					</ul>
-					</div>
-					</div>
 				</div>
+				}
 			</div>
-			
-			
-			
-			} @if(question.typeOfQuestion==2){
-			<div class="row-fluid ">
-				<div class="span11">
-					<p class="text-warning">
-						<span class="label label-warning">Warning</span>Identify the correct answers (<strong>can
-						be more than one</strong>).
-					</p>
-
-					<div class="alert alert-info">
-						@for(hypothesis <- question.hypothesislist){ 
-						@if(hypothesis.selected){
-						<label
-							class="checkbox"> <input type="checkbox"
-							id="optionsRadios1" name="mcqanswers[@hypothesis.number]" value="@hypothesis.id" checked="checked">
-							@hypothesis.text
-						</label> }
-						@if(!hypothesis.selected){
-						<label
-							class="checkbox"> <input type="checkbox"
-							id="optionsRadios1"name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"">
-							@hypothesis.text
-						</label>
-						}
-						}
-					</div>
-				</div>
-			</div>
-			}
-			
-			<div class="row-fluid">
-				<div class="span11">
-					<p>
-						<button class="btn btn-success pull-right" type="submit">Save answer @question.number</button>
-					</p>
-				</div>
-			</div>
-			
-		}
-			<hr>
-			
 		</div>
-		}
-</div>
-</div>
 		<div class="row-fluid">
 			<div class="pagination pagination-centered pagination-small">
 				<ul>
@@ -795,38 +829,45 @@ function searchButton(){
 					} }
 				</ul>
 			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span11 pull-right">
+				<!-- Button to trigger modal -->
+				<div class="btn-group pull-right">
+					<a href="#submittest" role="button" class="btn btn-primary"
+						data-toggle="modal">Submit test</a> <a
+						href="@routes.StudentController.lesson(lesson.acronym,module.acronym)"
+						role="button" class="btn">Return to Lesson</a>
+				</div>
+
+
+				<!-- Modal -->
+				<div id="submittest" class="modal hide fade" tabindex="-1"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Confirmation</h3>
+					</div>
+					<div class="modal-body">
+						@if(!usertest.allQuestionsAnswered(usertest.id)){ <b>You
+							haven't completed the test.</b> }
+						<p>Are you sure you want to submit your test?</p>
+						<p>
+							<span class="label label-important">Important</span> This Action
+							is irreversible!
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						<a class="btn btn-primary"
+							href="@routes.StudentTestController.submitTest(test.id,lesson.acronym,module.acronym)">Confirm</a>
+					</div>
+				</div>
 			</div>
-			<div class="row-fluid">
-		<div class="span11 pull-right">
-			<!-- Button to trigger modal -->
-<div class="btn-group pull-right">
-<a href="#submittest" role="button" class="btn btn-primary" data-toggle="modal">Submit test</a>
-<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)" role="button" class="btn">Return to Lesson</a>
+		</div>
+
+	</div>
 </div>
 
- 
-<!-- Modal -->
-<div id="submittest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Confirmation</h3>
-  </div>
-  <div class="modal-body">
-   @if(!usertest.allQuestionsAnswered(usertest.id)){
-   	<b>You haven't completed the test.</b>
-   }
-    <p>Are you sure you want to submit your test?</p>
-    <p><span class="label label-important">Important</span> This Action is irreversible!</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a class="btn btn-primary" href="@routes.StudentTestController.submitTest(test.id,lesson.acronym,module.acronym)">Confirm</a>
-  </div>
-</div>
-		</div>
-		</div>
-	
-</div>
-</div>
-		
 }

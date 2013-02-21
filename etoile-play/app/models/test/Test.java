@@ -111,11 +111,29 @@ public class Test extends Model{
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 	}
+	
+	public String getBeginDateMMDDYYYY(){
+		Long yourmilliseconds = begin_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+	}
 
 	
 	public String getFinishDate(){
 		Long yourmilliseconds = finish_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+	}
+	
+	public String getFinishDateMMDDYYYY(){
+		Long yourmilliseconds = finish_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));

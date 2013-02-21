@@ -12,7 +12,6 @@ import models.Professor;
 import models.User;
 
 import com.avaje.ebean.Ebean;
-import com.sun.tools.internal.xjc.Language;
 
 import play.db.ebean.*;
 import play.data.format.Formats;

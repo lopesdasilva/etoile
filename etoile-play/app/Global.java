@@ -848,33 +848,66 @@ public class Global extends GlobalSettings {
 			ProfessorContent npc = new ProfessorContent();
 			npc.description="Nadine Peyriéras - Institut de Neurobiologie Alfred Fessard, CNRS UPR 3294, Av. de la Terrasse, 91198 Gif-sur-Yvette Cedex, France";
 			npc.title="Contact";
-			npc.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
+			npc.imageURL="http://www.nbcm.cnrs-gif.fr/index_clip_image004.jpg";
 			npc.save();
 			
+			ProfessorContent npc2 = new ProfessorContent();
+			npc2.description="http://www.inaf.cnrs-gif.fr/ned/equipe07/accueil_07.html";
+			npc2.title="URL";
+			npc2.imageURL="";
+			npc2.save();
+			
+			
 			Professor np = new Professor();
-			np.firstname="Jorge";
-			np.lastname="Louçã";
-			np.acronym="JorgeL";
-			np.email="email[at]gmail.com";
+			np.firstname="Nadine";
+			np.lastname="Peyriéras";
+			np.acronym="NadineP";
+			np.email="";
 			np.degree="Professor";
-			np.shortdescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
-			np.contact="ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
-					" Av. das Forças Armadas" +
-					"1649-026" +
-					"Lisboa Portugal";
-			np.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
+			np.shortdescription="";
+			np.contact="";
+			np.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
 			np.save();
 			
 			np.modules.add(module_six);
-			p.save();
+			np.save();
 			//module.save();
 			
 			np.contents.add(npc);
 			npc.professor=np;
+			np.contents.add(npc2);
+			npc2.professor=np;
 			np.save();
 			npc.save();
+			npc2.save();
 			
+			// 4. Jacques Demongeot
 			
+			ProfessorContent jdc = new ProfessorContent();
+			jdc.description="";
+			jdc.title="Contact";
+			jdc.imageURL="";
+			jdc.save();
+			
+			Professor jd = new Professor();
+			jd.firstname="Jacques";
+			jd.lastname="Demongeot";
+			jd.acronym="JDemongeot";
+			jd.email="";
+			jd.degree="Professor";
+			jd.shortdescription="";
+			jd.contact="Jacques Demongeot is presently director of the Laboratory TIMC (CNRS 5525) Techniques of Imaging, Modelling & Cognition and he is also head of the Institute of Bio-engineering (IFRT 130 IpV) at the University Joseph Fourier, Grenoble, France. He has MD and PhD in mathematics and has been appointed Chairman of Biomathematics at the Institut Universitaire de France in 1994. Jacques Demongeot is also responsible for the Department of Medical Information at the University Hospital of Grenoble (CHUG) and for the doctoral school of bio-engineering Health, Cognition & Environment. His main Research Interests are: medical imaging; bio-informatics;bio-modeling; biological complexity; systems biology.";
+			jd.imageURL="http://egealmeeting.lasalle-beauvais.fr/images/demongeot_jacques.jpg";
+			jd.save();
+			
+			jd.modules.add(module_five);
+			jd.save();
+			//module.save();
+			
+			jd.contents.add(jdc);
+			jdc.professor=jd;
+			jd.save();
+			jdc.save();
 			
 			
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++

@@ -7,10 +7,12 @@ import javax.persistence.*;
 import models.curriculum.Category;
 import models.manytomany.Usertest;
 import models.test.Test;
+import models.Language;
 import models.Professor;
 import models.User;
 
 import com.avaje.ebean.Ebean;
+import com.sun.tools.internal.xjc.Language;
 
 import play.db.ebean.*;
 import play.data.format.Formats;
@@ -64,6 +66,9 @@ public class Module extends Model {
 	
 	@ManyToOne
 	public University university;
+	
+	@ManyToOne
+	public Language language;
 	
 	//public Date created;
 

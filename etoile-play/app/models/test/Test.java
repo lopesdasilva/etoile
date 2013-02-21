@@ -1,9 +1,15 @@
 package models.test;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import models.Comment;
 import models.manytomany.Usertest;
@@ -97,4 +103,22 @@ public class Test extends Model{
 		return number;
 	}
 	
+	public String getBeginDate(){
+		Long yourmilliseconds = begin_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+	}
+
+	
+	public String getFinishDate(){
+		Long yourmilliseconds = finish_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+	}
 }

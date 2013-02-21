@@ -550,7 +550,22 @@ public class Global extends GlobalSettings {
 			lesson_net10.imageURL = "http://myenglishpages.com/blog/wp-content/uploads/2009/09/assessment.gif";
 			lesson_net10.save();
 		
+			//LANGUAGES +++++++++++++++++++++++++++++
+			Language l_one = new Language();
+			l_one.name = "Português";
+			l_one.save();
 			
+			Language l_two = new Language();
+			l_two.name = "English";
+			l_two.save();
+			
+			Language l_three = new Language();
+			l_two.name = "Français";
+			l_two.save();
+			
+			Language l_four = new Language();
+			l_four.name = "Español";
+			l_four.save();
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
@@ -563,6 +578,7 @@ public class Global extends GlobalSettings {
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
+			module_demo.language = l_two;
 			module_demo.save();
 			
 			lesson_one.module = module_demo;
@@ -597,6 +613,7 @@ public class Global extends GlobalSettings {
 			module_three.acronym="ness";
 			module_three.imageURL = "http://img138.imageshack.us/img138/9061/nesslogounequilibriumve.jpg";
 			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
+			module_three.language = l_two;
 			module_three.save();
 			
 			
@@ -616,6 +633,7 @@ public class Global extends GlobalSettings {
 			module_four.lessons.add(lesson_net8);
 			module_four.lessons.add(lesson_net9);
 			module_four.lessons.add(lesson_net10);
+			module_four.language = l_two;
 			module_four.save();
 			
 			lesson_net1.module = module_four;
@@ -644,6 +662,8 @@ public class Global extends GlobalSettings {
 			module_five.acronym="bioinformatics";
 			module_five.imageURL = "http://www.sussex.ac.uk/Users/andywu/gallery/rm_f.gif";
 			module_five.description = "<p>Attractors and robustness in Boolean automata networks. </p> <p>Application to living systems.</p>";
+			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
+			module_five.language = l_two;
 			module_five.save();
 			
 			Module module_six = new Module();

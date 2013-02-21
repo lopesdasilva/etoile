@@ -20,7 +20,10 @@ public class SubtopicReputation extends Model{
 	public Long id;
 	
 	@Constraints.Required
-	public Long reputation;
+	public Long reputationAsAStudent;
+	
+	@Constraints.Required
+	public Long reputationAsAMarker;
 	
 	@ManyToOne
 	public Curriculummodule subtopic;

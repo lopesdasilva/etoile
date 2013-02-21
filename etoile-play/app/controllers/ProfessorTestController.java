@@ -1,6 +1,8 @@
 package controllers;
 
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import models.User;
@@ -782,11 +784,31 @@ public class ProfessorTestController extends Controller {
 	public static Result changetestdates(String module_acronym, String lesson_acronym, Long test_id){
 		Module module = Module.findByAcronym(module_acronym);
 		User user = User.find.byId(session("email"));
+		Test test = Test.find.byId(test_id);
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<Date_Form> form = form(Date_Form.class).bindFromRequest();
-			System.out.println("DATAS: " + form.get().date);
-			String [] datas = new String[2];
+			System.out.println(form.get().date);
+			String string = form.get().date.replace(" ", "");
+			System.out.println(string);
+			String [] dates = string.split("-");
+			String [] begin_date = dates[0].split("/");
+			String [] finish_date = dates[1].split("/");
 			
+			System.out.println(begin_date[0]);
+			System.out.println(begin_date[1]);
+			System.out.println(begin_date[2]);
+
+			
+			Calendar begin_calendar = Calendar.getInstance();
+			begin_calendar.set(Integer.parseInt(begin_date[2]),(Integer.parseInt(begin_date[1]))-1, Integer.parseInt(begin_date[0]));
+
+			Calendar finish_calendar = Calendar.getInstance();
+			finish_calendar.set(Integer.parseInt(finish_date[2]),(Integer.parseInt(finish_date[1]))-1, Integer.parseInt(finish_date[0]));
+			
+			test.begin_date = new Date(begin_calendar.getTimeInMillis());
+			test.finish_date = new Date(finish_calendar.getTimeInMillis());
+			test.save();
 			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 

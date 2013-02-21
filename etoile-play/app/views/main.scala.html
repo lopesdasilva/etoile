@@ -96,9 +96,16 @@
 	}
 	</script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-	    $('#reservation').daterangepicker();
-	});
+			function dates(start, end) {
+				console.log(start);
+				
+// 		console.log(s);
+	    $('#reservation').daterangepicker({
+		    format:'dd/MM/yyyy',
+		    startDate: Date.parse(start),
+		    endDate: Date.parse(end),
+	    });
+	}
 	</script>
 	
 <script>

@@ -625,6 +625,14 @@ public class Global extends GlobalSettings {
 			lesson_net10.module = module_four;
 			lesson_net10.save();
 			
+			Module module_five = new Module();
+			module_five.name = "Boolean automata networks";
+			module_five.acronym="bool1";
+			module_five.imageURL = "http://www.sussex.ac.uk/Users/andywu/gallery/rm_f.gif";
+			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
+			module_five.save();
+			
+			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
 			Bibliography bibliography = new Bibliography();

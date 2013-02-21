@@ -690,9 +690,9 @@ public class Global extends GlobalSettings {
 			bibliography.save();
 			
 			bibliography = new Bibliography();
-			bibliography.title="THE ZEBRAFISH BOOK, 5th Edition";
+			bibliography.title="The Zebrafish Book a Guide for the Laboratory Use of Zebrafish Danio* (Brachydanio) Rerio, 5th Edition";
 			bibliography.link="http://zebrafish.org/zirc/orders/buyBookQ.php?item=Book&id=book&detail=The%20Zebrafish%20Book";
-			bibliography.description="A guide for the laboratory use of zebrafish";
+			bibliography.description="A guide for the laboratory use of zebrafish.";
 			bibliography.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
 			bibliography.module=module_six;
 			bibliography.save();
@@ -733,6 +733,12 @@ public class Global extends GlobalSettings {
 			content= new Content();
 			content.module=module_demo;
 			content.title="Recommended Background";
+			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
+			content.save();
+			
+			content= new Content();
+			content.module=module_six;
+			content.title="This module is not ready yet, please return soon.";
 			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
 			
@@ -823,6 +829,8 @@ public class Global extends GlobalSettings {
 			p.save();
 			pc2.save();
 			
+			// 2. PROFESSOR FOR TESTING
+			
 			User prof = new User();
 			prof.email = "prof@prof.pt";
 			prof.username="prof";
@@ -833,6 +841,40 @@ public class Global extends GlobalSettings {
 			prof.save();
 			p.user=prof;
 			p.save();
+			
+			
+			// 3. Nadine Peyriéras
+			
+			ProfessorContent npc = new ProfessorContent();
+			npc.description="Nadine Peyriéras - Institut de Neurobiologie Alfred Fessard, CNRS UPR 3294, Av. de la Terrasse, 91198 Gif-sur-Yvette Cedex, France";
+			npc.title="Contact";
+			npc.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
+			npc.save();
+			
+			Professor np = new Professor();
+			np.firstname="Jorge";
+			np.lastname="Louçã";
+			np.acronym="JorgeL";
+			np.email="email[at]gmail.com";
+			np.degree="Professor";
+			np.shortdescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
+			np.contact="ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
+					" Av. das Forças Armadas" +
+					"1649-026" +
+					"Lisboa Portugal";
+			np.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
+			np.save();
+			
+			np.modules.add(module_six);
+			p.save();
+			//module.save();
+			
+			np.contents.add(npc);
+			npc.professor=np;
+			np.save();
+			npc.save();
+			
+			
 			
 			
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++

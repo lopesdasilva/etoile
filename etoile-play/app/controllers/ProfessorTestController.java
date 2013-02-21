@@ -754,6 +754,8 @@ public class ProfessorTestController extends Controller {
 		test.text = form.get().text;
 		test.lesson = lesson;
 		test.expectedDuration=form.get().expectedDuration;
+		test.begin_date = new Date();
+		test.finish_date = new Date();
 		test.save();
 		
 		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));

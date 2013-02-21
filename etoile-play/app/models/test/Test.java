@@ -104,39 +104,51 @@ public class Test extends Model{
 	}
 	
 	public String getBeginDate(){
+		if(begin_date!=null){
 		Long yourmilliseconds = begin_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
+		}
+		return "";
 	}
 	
 	public String getBeginDateMMDDYYYY(){
+		if(begin_date!=null){
 		Long yourmilliseconds = begin_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
+		}
+		return "";
 	}
 
 	
 	public String getFinishDate(){
+		if(finish_date!=null){
 		Long yourmilliseconds = finish_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
+		}
+		return "";
 	}
 	
 	public String getFinishDateMMDDYYYY(){
+		if(finish_date != null){
 		Long yourmilliseconds = finish_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
+		}
+		return "";
 	}
 }

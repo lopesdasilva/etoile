@@ -14,8 +14,14 @@ var prevT;
 
 
 function validateUrl() {
-	var regexp = /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
-	var result = regexp.test(document.getElementsByName("urlInput")[0].value.toString());
+
+	var url=document.getElementsByName("urlInput")[0].value.toString();
+	if(url.search("http://")!=-1){
+	var url=url.slice(7,url.length);
+	}
+	console.log(url);
+	var regexp = /^[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
+	var result = regexp.test(url);
 	if(document.getElementsByName("urlInput")[0].value.toString().match("wikipedia")!=null) result=true;
 	if(result) {
 		$('#Loading').html("<img src=\"/assets/images/Loader.gif\"></img>");
@@ -70,13 +76,13 @@ function validateUrl() {
 			},
 			error: function(){ 
 				initAddUrl();
-				$("#ErrorMessage").empty().text("Page Not found.");
+				$("#ErrorMessage").empty().text("The page was not found");
 			}
 	    	});
 		return false;
 	}
 	else {
-		$("#ErrorMessage").empty().text("Not a valid url");
+		$("#ErrorMessage").empty().text("This is not a valid URL");
 		$("#formBlock").hide();
 		return false;
 	}
@@ -391,17 +397,17 @@ function searchButton(){
 						<h3 id="myModalLabel">Add new URL</h3>
 					</div>
 					<div class="modal-body">
-<div class="form-horizontal">
+<form class="form-horizontal">
 						<div class="control-group">
 							<label class="control-label" for="input01">New URL</label>
 							<div class="controls">
 								<input type="text" placeholder="Insert the new URL"
-									class="input-xlarge" name="urlInput">
-								<button id="triggerButton" onclick="return validateUrl();" class="btn">Load Data</button><div id="Loading"></div>
+									class="input-xlarge" name="urlInput" required>
+								<button id="triggerButton" onclick="return validateUrl();" class="btn btn-primary">Submit Url</button><div id="Loading"></div>
 								<label id="ErrorMessage" class="control-label"></label>
 							</div>
 						</div>
-</div>
+</form>
 
 					@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display: none;"){
 						<input type="hidden" name="url" value="">

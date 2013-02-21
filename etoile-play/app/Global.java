@@ -646,6 +646,14 @@ public class Global extends GlobalSettings {
 			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
 			module_five.save();
 			
+			Module module_six = new Module();
+			module_six.name = "Réseaux génétiques et morphodynamique cellulaire";
+			module_six.acronym="resgen";
+			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
+			module_demo.videoURL = "";
+			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
+			module_six.save();
+					
 			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
@@ -680,6 +688,16 @@ public class Global extends GlobalSettings {
 			bibliography.imageURL="http://www-personal.umich.edu/~mejn/networks-an-introduction/cover-s.jpg";
 			bibliography.module=module_demo;
 			bibliography.save();
+			
+			bibliography = new Bibliography();
+			bibliography.title="THE ZEBRAFISH BOOK, 5th Edition";
+			bibliography.link="http://zebrafish.org/zirc/orders/buyBookQ.php?item=Book&id=book&detail=The%20Zebrafish%20Book";
+			bibliography.description="A guide for the laboratory use of zebrafish";
+			bibliography.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
+			bibliography.module=module_six;
+			bibliography.save();
+			
+			
 			
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++

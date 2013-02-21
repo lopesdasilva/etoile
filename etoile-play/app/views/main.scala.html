@@ -10,6 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script>
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">  
 <!--  <link rel="stylesheet" href="@routes.Assets.at("stylesheets/themeetoile.css")">  -->
 
@@ -33,7 +34,7 @@
 
 
 </head>
-<body data-spy="scroll" data-target=".sidebar-nav">
+<body data-spy="scroll" data-target=".sidebar-nav" onload="changetab(document.location.href)">
 
 	<div class="container">
 	@content
@@ -47,7 +48,6 @@
 <!-- 	</footer> -->
 
 <script type="text/javascript" src="@routes.Assets.at("javascripts/widgets.js")"></script>
-<script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")"></script>
 <script src="https://raw.github.com/ReactiveRaven/jqBootstrapValidation/1.3.6/jqBootstrapValidation.js"></script>
 <!-- <script src="@routes.Assets.at("javascripts/prettify.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script> -->
@@ -72,14 +72,23 @@
 <script>
   $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 </script>
-	<script>
-function tabchanger()	{
-	console.log("Holaaaa");
-	$('#tabs a[href="#tests"]').tab('show');
-	$('#tabs a[href="#resources"]').tab('show');
-	$('#tabs a[href="#news"]').tab('show');
-	
-}
+	<script> function changetab (url){
+		console.log(url);
+	var queryStart   = url.indexOf("#")+1;
+	  var query      = url.substring(queryStart,url.length);
+
+	switch (query) {
+	case "news":
+		$('#tabs a[href="#news"]').tab('show');
+		break;
+	case "resources":
+		$('#tabs a[href="#resources"]').tab('show');
+		break;
+	case "tests":
+		$('#tabs a[href="#tests"]').tab('show');
+		break;
+	}
+	}
 	</script>
 	
   <link href="@routes.Assets.at("stylesheets/jquery.tweet.css")" rel="stylesheet"/>

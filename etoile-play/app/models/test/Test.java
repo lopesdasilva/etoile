@@ -55,6 +55,12 @@ public class Test extends Model{
 	@OneToMany
 	public List<Usertest> users;
 	
+	@Constraints.Required
+	public Date begin_date;
+	
+	@Constraints.Required
+	public Date finish_date;
+	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
 

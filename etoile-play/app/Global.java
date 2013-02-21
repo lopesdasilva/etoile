@@ -353,12 +353,15 @@ public class Global extends GlobalSettings {
 			g_two.number = 2;
 			g_two.save();
 			
+			Long date = new Long(1399999999);
+			
 			Test test_one = new Test();
 			test_one.published=true;
 			test_one.name = "First Sum Test";
 			test_one.expectedDuration="1,5 hours";
 			test_one.text = "Improve your Sum Skills!";
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			test_one.begin_date = new Date();
 			test_one.save();
 			
 			g.test = test_one;
@@ -368,6 +371,7 @@ public class Global extends GlobalSettings {
 			g_two.save();
 			
 			Test test_two = new Test();
+			test_two.begin_date = new Date();
 			test_two.published=true;
 			test_two.name="Final Sum Test";
 			test_two.expectedDuration="45 min";

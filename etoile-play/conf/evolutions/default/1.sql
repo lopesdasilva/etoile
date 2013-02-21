@@ -201,8 +201,8 @@ create table question (
   weight_to_lose            integer,
   number                    integer,
   type_of_question          integer,
-  question                  varchar(255),
-  answer_suggested_by_student varchar(255),
+  question                  TEXT,
+  answer_suggested_by_student TEXT,
   image_url                 TEXT,
   video_url                 TEXT,
   keywords                  varchar(255),
@@ -259,6 +259,8 @@ create table test (
   expected_duration         varchar(255),
   published                 tinyint(1) default 0,
   lesson_id                 bigint,
+  begin_date                datetime,
+  finish_date               datetime,
   constraint pk_test primary key (id))
 ;
 

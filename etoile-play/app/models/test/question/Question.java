@@ -68,9 +68,11 @@ public class Question extends Model {
 	
 	@Constraints.Required
     @Formats.NonEmpty
+	@Column(columnDefinition="TEXT")
 	public String question;
 	
 	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String answerSuggestedByStudent;
 	
 	

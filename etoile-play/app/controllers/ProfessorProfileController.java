@@ -1,9 +1,8 @@
 package controllers;
 
-import models.Professor;
+
 import models.ProfessorContent;
 import models.User;
-import controllers.ProfessorModuleController.Content_Form;
 import controllers.secured.SecuredProfessor;
 import play.data.Form;
 import play.mvc.Controller;
@@ -67,7 +66,9 @@ public class ProfessorProfileController  extends Controller {
 
 		if(SecuredProfessor.isProfessor(session("email"))){
 			ProfessorContent professorContent = ProfessorContent.find.byId(professorcontent_id);
+			if(professorContent!=null){
 			professorContent.delete();
+			}
 		}
 
 		return redirect(routes.ProfessorController.myprofile());

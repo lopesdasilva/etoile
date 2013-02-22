@@ -9,6 +9,7 @@ import models.User;
 import models.curriculum.Category;
 import models.curriculum.Curriculummodule;
 import models.manytomany.Usertest;
+import models.module.Content;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Answer;
@@ -102,10 +103,27 @@ public class ProfessorTestController extends Controller {
 	
 	//METHODS
 	public static Result addopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -123,10 +141,27 @@ public class ProfessorTestController extends Controller {
 	
 	public static Result addopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
 				
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -163,12 +198,33 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		System.out.println("Edit Open QuestionForm");
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -180,10 +236,35 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editopenquestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		System.out.println("EditOpenQuestion");
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -208,10 +289,29 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addonechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+				
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -227,10 +327,29 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addonechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -265,12 +384,36 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editonechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+			
+		
+		User user = User.find.byId(session("email"));
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
 				if(q.user!= null){
@@ -283,12 +426,35 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editonechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
+		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
@@ -318,11 +484,35 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addhypothesisform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
+		
 		Module module = Module.findByAcronym(module_acronym);
+		if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -335,11 +525,34 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addhypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
@@ -362,15 +575,41 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result changerightonechoiceanswer(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		Test test = Test.find.byId(test_id);
-		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		Question question = Question.find.byId(question_id);
-		User user = User.find.byId(session("email"));
-		Hypothesis hypothesis_selected = Hypothesis.find.byId(hypothesis_id);
 		
-		System.out.println("####" + question.hypothesislist.size());
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		Hypothesis hypothesis_selected = Hypothesis.find.byId(hypothesis_id);
+		if(hypothesis_selected==null){
+			redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		User user = User.find.byId(session("email"));
+		
+		
 		for(Hypothesis h: question.hypothesislist){
 			if(h.id != hypothesis_selected.id && h.user == null){
 				h.isCorrect = false;
@@ -385,13 +624,41 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result changerightmultiplechoiceanswer(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
-		User user = User.find.byId(session("email"));
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Hypothesis hypothesis_selected = Hypothesis.find.byId(hypothesis_id);
+		if(hypothesis_selected==null){
+			redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		
+		
+		User user = User.find.byId(session("email"));
 		
 		if(!hypothesis_selected.isCorrect){
 		hypothesis_selected.isCorrect=true;
@@ -405,10 +672,28 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addmultiplechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		Module module = Module.findByAcronym(module_acronym);
+	
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -424,10 +709,29 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addmultiplechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
-		Module module = Module.findByAcronym(module_acronym);
+	
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -463,11 +767,34 @@ public class ProfessorTestController extends Controller {
 	}
 
 	public static Result addmultiplehypothesisform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -480,11 +807,34 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result addmultiplehypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+	
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
@@ -506,11 +856,33 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result edithypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
-		Module module = Module.findByAcronym(module_acronym);
+	
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		User user = User.find.byId(session("email"));
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -529,13 +901,40 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editmultiplechoicehypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
-		User user = User.find.byId(session("email"));
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
+		if(hypothesis==null){
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		User user = User.find.byId(session("email"));
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
 			Form<newMultipleHypothesis_form> form = form(newMultipleHypothesis_form.class).bindFromRequest();
@@ -551,15 +950,41 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result removemultiplechoicehypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
-		System.out.println("REMOVEHYP");
 		
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
+		if(hypothesis==null){
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		
+		User user = User.find.byId(session("email"));
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 
 			hypothesis.delete();
@@ -572,13 +997,40 @@ public class ProfessorTestController extends Controller {
 	
 	public static Result removeonechoicehypothesis(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id, Long hypothesis_id){
 		
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
+		if(hypothesis==null){
+			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
+		}
+		
+		
+		User user = User.find.byId(session("email"));
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 
 			hypothesis.delete();
@@ -590,12 +1042,35 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result editmultiplechoicequestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
+		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			for(Question q: lesson.questions){
 				if(q.user!= null){
@@ -610,12 +1085,35 @@ public class ProfessorTestController extends Controller {
 	
 	
 	public static Result editmultiplechoicequestion(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		User user = User.find.byId(session("email"));
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		User user = User.find.byId(session("email"));
+		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
@@ -645,11 +1143,35 @@ public class ProfessorTestController extends Controller {
 	}
 
 	public static Result reusequestionadd(String module_acronym, String lesson_acronym, Long test_id, Long group_id, Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		Question old_question = Question.find.byId(question_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+	
+		Question old_question = question;
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -677,11 +1199,24 @@ public class ProfessorTestController extends Controller {
 	}
 		
 	public static Result publish(String module_acronym, String lesson_acronym, Long test_id){
-		Module module = Module.findByAcronym(module_acronym);
-
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test=Test.find.byId(test_id);
 			test.published=true;
 			test.save();
 			
@@ -692,11 +1227,27 @@ public class ProfessorTestController extends Controller {
 	}
 
 	public static Result unpublish(String module_acronym, String lesson_acronym, Long test_id){		
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
 
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test=Test.find.byId(test_id);
+			
 			test.published=false;
 			test.save();
 			
@@ -747,8 +1298,18 @@ public class ProfessorTestController extends Controller {
 	}
 		
 	public static Result addtest(String module_acronym, String lesson_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		Module module = Module.findByAcronym(module_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -771,13 +1332,28 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result edittesttitle(String module_acronym, String lesson_acronym, Long test_id){
-		System.out.println("Edit test title");
-
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
-			Test test=Test.find.byId(test_id);
+		
 			test.name=form.get().name;
 			test.text=form.get().text;
 			test.expectedDuration=form.get().expectedDuration;
@@ -790,23 +1366,31 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result changetestdates(String module_acronym, String lesson_acronym, Long test_id){
-		Module module = Module.findByAcronym(module_acronym);
-		User user = User.find.byId(session("email"));
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<Date_Form> form = form(Date_Form.class).bindFromRequest();
-			System.out.println(form.get().date);
 			String string = form.get().date.replace(" ", "");
-			System.out.println(string);
 			String [] dates = string.split("-");
 			String [] begin_date = dates[0].split("/");
 			String [] finish_date = dates[1].split("/");
-			
-			System.out.println(begin_date[0]);
-			System.out.println(begin_date[1]);
-			System.out.println(begin_date[2]);
-
 			
 			Calendar begin_calendar = Calendar.getInstance();
 			begin_calendar.set(Integer.parseInt(begin_date[2]),(Integer.parseInt(begin_date[1]))-1, Integer.parseInt(begin_date[0]));
@@ -829,11 +1413,26 @@ public class ProfessorTestController extends Controller {
 	
 	
 	public static Result edittest(String module_acronym, String lesson_acronym, Long test_id){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		Module module = Module.findByAcronym(module_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test=Test.find.byId(test_id);
 			
 			return ok(views.html.professor.testEdit.render(module,lesson,test));
 		}
@@ -843,11 +1442,26 @@ public class ProfessorTestController extends Controller {
 		
 	public static Result test(String module_acronym, String lesson_acronym, Long test_id){
 		
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test=Test.find.byId(test_id);
+			
 			for (Usertest usertest: test.users)
 			usertest.user.refresh();
 			return ok(views.html.professor.testGeneral.render(user,
@@ -860,13 +1474,31 @@ public class ProfessorTestController extends Controller {
 
 	public static Result gradetest(String module_acronym, String lesson_acronym,Long usertest_id, Long group_number){
 	
-	Module module = Module.findByAcronym(module_acronym);
-	Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		Usertest usertest=Usertest.find.byId(usertest_id);
+		if(usertest==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
+		if(questionGroup==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+		}
+	
 	User user = User.find.byId(session("email"));
 	if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		
-		Usertest usertest=Usertest.find.byId(usertest_id);
-		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
+		
+		
 		QuestionGroup group = usertest.test.groups.get((int) (group_number-1));
 	
 		
@@ -944,11 +1576,35 @@ public class ProfessorTestController extends Controller {
 }
 
 	public static Result markanswer(String module_acronym, String lesson_acronym,Long usertest_id, Long group_number, Long question_id){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Usertest usertest=Usertest.find.byId(usertest_id);
+		if(usertest==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
+		if(questionGroup==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+		}
+		
+		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+		}
+		
 		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
 		User user = User.find.byId(session("email"));
-		
-		Usertest usertest = Usertest.find.byId(usertest_id);
-		Question question = Question.find.byId(question_id);
 		Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id);
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
 		if(evaluation==null){
@@ -992,21 +1648,54 @@ public class ProfessorTestController extends Controller {
 	}
 	
 	public static Result submitreviewedtest(String module_acronym, String lesson_acronym, Long test_id, Long usertest_id){
-		System.out.println(test_id);
-		Usertest usertest = Usertest.find.byId(usertest_id);
+	
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Usertest usertest=Usertest.find.byId(usertest_id);
+		if(usertest==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		usertest.reviewd = true;
 		usertest.save();
 		System.out.println("Review Test submitted with: " + usertest.reputationAsAstudent);
-		return test(module_acronym, lesson_acronym, test_id);
+		return redirect(routes.ProfessorTestController.test(module_acronym, lesson_acronym, test_id));
+		}
+		
+				return redirect(routes.Application.index());
 	}
 
 	public static Result deletetest(Long test_id,String module_acronym, String lesson_acronym){
 		
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test= Test.find.byId(test_id);
 			test.delete();
 		}
 		//TODO: Criar ligacao pelo controlador do professor
@@ -1014,10 +1703,28 @@ public class ProfessorTestController extends Controller {
 	}
 
 	public static Result addgroup(String module_acronym, String lesson_acronym, Long test_id){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(session("email"));
-		Module module = Module.findByAcronym(module_acronym);
+		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Test test=Test.find.byId(test_id);
+		
 			Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
 
 			QuestionGroup questiongroup=new QuestionGroup();
@@ -1034,14 +1741,36 @@ public class ProfessorTestController extends Controller {
 		
 	public static Result deletegroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
 			
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
 			User user = User.find.byId(session("email"));
-			Module module = Module.findByAcronym(module_acronym);
+		
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 				
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
 				
 				questiongroup.delete();
-				Test test=Test.find.byId(test_id);
+				
 				int i=1;
 				for(QuestionGroup questiongroup_aux: test.groups){
 					questiongroup_aux.number=i;
@@ -1056,10 +1785,37 @@ public class ProfessorTestController extends Controller {
 	}
 		
 	public static Result removequestion(String module_acronym, String lesson_acronym, Long test_id,Long group_id, Long question_id){
-			User user = User.find.byId(session("email"));
-			Module module = Module.findByAcronym(module_acronym);
+			
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup group_aux = QuestionGroup.find.byId(group_id);
+		if(group_aux==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		Question question_aux = Question.find.byId(question_id);
+		if(question_aux==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		User user = User.find.byId(session("email"));
+			
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-				Test test=Test.find.byId(test_id);
+				
 				for(QuestionGroup group: test.groups){
 					if(group.id==group_id){
 						Question question=Question.find.byId(question_id);
@@ -1083,10 +1839,33 @@ public class ProfessorTestController extends Controller {
 		}
 		
 	public static Result editgroup(String module_acronym, String lesson_acronym, Long test_id,Long group_id){
-			User user = User.find.byId(session("email"));
-			Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup group = QuestionGroup.find.byId(group_id);
+		if(group==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
+		}
+		
+		
+		User user = User.find.byId(session("email"));
+			
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-				Test test=Test.find.byId(test_id);
+				
 				Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
 
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);

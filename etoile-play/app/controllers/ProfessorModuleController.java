@@ -83,7 +83,12 @@ public class ProfessorModuleController extends Controller {
 	
 	public static Result editmoduletitle(String module_acronym){
 		
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<ModuleTitle_Form> form = form(ModuleTitle_Form.class).bindFromRequest();
@@ -98,7 +103,12 @@ public class ProfessorModuleController extends Controller {
 
 	public static Result editmoduledescription(String module_acronym){
 
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<ModuleDescription_Form> form = form(ModuleDescription_Form.class).bindFromRequest();
@@ -114,9 +124,13 @@ public class ProfessorModuleController extends Controller {
 
 	
 	public static Result addbibliographyitem(String module_acronym){
-		Module module = Module.findByAcronym(module_acronym);
-		User user = User.find.byId(session("email"));
 		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Bibliography bibliographyItem= new Bibliography();
@@ -133,7 +147,13 @@ public class ProfessorModuleController extends Controller {
 	}
 	
 	public static Result addlesson(String module_acronym) throws java.sql.SQLException{
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		
@@ -160,11 +180,22 @@ public class ProfessorModuleController extends Controller {
 	}
 	
 	public static Result editbibliographyitem(String module_acronym,Long bibliography_id){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Bibliography bibliographyItem= Bibliography.find.byId(bibliography_id);
+		if (bibliography_id==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Bibliography bibliographyItem= Bibliography.find.byId(bibliography_id);
+			
 			Form<BibliographyItem_Form> form = form(BibliographyItem_Form.class).bindFromRequest();
 			bibliographyItem.title=form.get().title;
 			bibliographyItem.description=form.get().description;
@@ -178,13 +209,22 @@ public class ProfessorModuleController extends Controller {
 	}
 	
 	
-	public static Result deletebibliographyitem(String module_acronym,Long bibliography_item) {
-		Module module = Module.findByAcronym(module_acronym);
+	public static Result deletebibliographyitem(String module_acronym,Long bibliography_id) {
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Bibliography bibliographyItem= Bibliography.find.byId(bibliography_id);
+		if (bibliography_id==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
 		User user = User.find.byId(session("email"));
 	
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-		Bibliography bibliography = Bibliography.find.byId(bibliography_item);
-		bibliography.delete();
+			bibliographyItem.delete();
 		
 		}
 		
@@ -194,7 +234,13 @@ public class ProfessorModuleController extends Controller {
 	
 	public static Result addmoduledcontent(String module_acronym){
 
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		
+		
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -213,12 +259,21 @@ public class ProfessorModuleController extends Controller {
 	
 	
 	public static Result editmoduledcontent(String module_acronym, Long content_id){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Content content= Content.find.byId(content_id);
+		if (content==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
 
-		Module module = Module.findByAcronym(module_acronym);
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
-			Content content= Content.find.byId(content_id);
+			
 			content.title=form.get().title;
 			content.text=form.get().description;
 			content.save();
@@ -230,11 +285,19 @@ public class ProfessorModuleController extends Controller {
 	
 	public static Result deletemodulecontent(String module_acronym, Long content_id){
 
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Content content= Content.find.byId(content_id);
+		if (content==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			
-			Content content= Content.find.byId(content_id);
+
 			content.delete();
 		}
 
@@ -242,8 +305,6 @@ public class ProfessorModuleController extends Controller {
 		return redirect(routes.Application.module(module.acronym));
 	}
 	
-	//LESSON
-	
-	
+
 	
 }

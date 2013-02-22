@@ -192,7 +192,7 @@ models.test.Test) @main("etoile"){
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-calendar"></i></span>
-							<input name="date" id="reservation" required="required" onclick='dates("@test.getBeginDateMMDDYYYY()", "@test.getFinishDateMMDDYYYY()")' type="text" placeholder="" class="input-xlarge" required value="@test.getBeginDate() - @test.getFinishDate">
+							<input name="date" id="reservation" required="required" onclick='dates("@test.getBeginDateMMDDYYYY()", "@test.getFinishDateMMDDYYYY()")' type="text" placeholder="" class="input-xlarge"  pattern="\b(0?[1-9]|[12][0-9]|3[01])\/\b(0?[1-9]|1[0-2])\/[0-9]{4}\s-\s\b(0?[1-9]|[12][0-9]|3[01])\/\b(0?[1-9]|1[0-2])\/[0-9]{4}"  required value="@test.getBeginDate() - @test.getFinishDate">
 							<br><label class="control-label" for="markerlimitdate"><small>Marker limit date: @test.getMarkersLimitDate()</small> </label>
 							
 					</div>

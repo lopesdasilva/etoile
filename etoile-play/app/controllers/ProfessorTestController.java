@@ -32,6 +32,8 @@ import controllers.secured.SecuredProfessor;
 @Security.Authenticated(SecuredProfessor.class)
 public class ProfessorTestController extends Controller {
 	
+	
+	
 	//FORMS
 	public static class evaluation_Form {
 		
@@ -95,6 +97,8 @@ public class ProfessorTestController extends Controller {
 		public String question;
 		
 	}
+
+	private static long ONEWEEKINMILLIS=604800000;
 	
 	//METHODS
 	public static Result addopenquestionform(String module_acronym, String lesson_acronym, Long test_id, Long group_id){
@@ -756,6 +760,8 @@ public class ProfessorTestController extends Controller {
 		test.expectedDuration=form.get().expectedDuration;
 		test.begin_date = new Date();
 		test.finish_date = new Date();
+		Long markerlimitdate_millis = test.finish_date.getTime() + ONEWEEKINMILLIS;//data de fim do teste + 7 dias
+		test.markers_limit_date = new Date(markerlimitdate_millis);
 		test.save();
 		
 		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test.id));
@@ -810,6 +816,8 @@ public class ProfessorTestController extends Controller {
 			
 			test.begin_date = new Date(begin_calendar.getTimeInMillis());
 			test.finish_date = new Date(finish_calendar.getTimeInMillis());
+			
+			test.markers_limit_date = new Date(finish_calendar.getTimeInMillis()+ONEWEEKINMILLIS);
 			test.save();
 			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));

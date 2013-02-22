@@ -560,8 +560,8 @@ public class Global extends GlobalSettings {
 			l_two.save();
 			
 			Language l_three = new Language();
-			l_two.name = "Français";
-			l_two.save();
+			l_three.name = "Français";
+			l_three.save();
 			
 			Language l_four = new Language();
 			l_four.name = "Español";
@@ -672,6 +672,7 @@ public class Global extends GlobalSettings {
 			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
 			module_demo.videoURL = "";
 			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
+			module_six.language = l_three;
 			module_six.save();
 					
 			

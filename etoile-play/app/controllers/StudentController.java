@@ -66,7 +66,8 @@ public class StudentController extends Controller {
 			Module module = Module.findByAcronym(module_acronym);
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
-
+			module.language.refresh();
+			
 			if(DEBUG){
 				System.out.println("---USER: "+user+" is Student");
 			}
@@ -229,7 +230,7 @@ public class StudentController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		User user = User.find.byId(request().username());
-		
+		module.language.refresh();
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module));

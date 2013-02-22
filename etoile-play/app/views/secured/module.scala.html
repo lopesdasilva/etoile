@@ -55,7 +55,8 @@
 		<div class="span9">
 			<div class="hero-unit">
 				<h2>@module.name</h2>
-				@module.description
+				<br>@module.description
+				
 				<p>
 					@for(professor <- module.professors) { <a
 						href="@routes.Application.professorprofile(professor.acronym)">

@@ -70,6 +70,9 @@ public class Test extends Model{
 	@Constraints.Required
 	public Date finish_date;
 	
+	@Constraints.Required
+	public Date markers_limit_date;
+	
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
 
@@ -147,6 +150,18 @@ public class Test extends Model{
 		if(finish_date != null){
 		Long yourmilliseconds = finish_date.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+		}
+		return "";
+	}
+	
+	public String getMarkersLimitDate(){
+		if(begin_date!=null){
+		Long yourmilliseconds = markers_limit_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
         System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));

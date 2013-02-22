@@ -139,21 +139,20 @@ public static Result professorprofile(String professor_acronym) {
 	public static Result module(String module_acronym){
 		
 		Module module = Module.findByAcronym(module_acronym);
-		
+		module.language.refresh();
 		List<Category> categories = Category.getAllCategories();
-		
+		module.language.refresh();
 		
 		if(session("email")!=null){
 			if(Secured.isStudent(session("email"))){
 			return StudentController.module(module_acronym);
 			}
 			if (SecuredProfessor.isProfessor(session("email"))){
-
+				
 				//TODO Subsituir por modules
 				return ProfessorController.module(module_acronym);
 			}
 		}
-		
 		return ok(views.html.statics.module.render(categories,Continent.getAllContinents(),module));
 	}
 	

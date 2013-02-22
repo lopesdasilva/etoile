@@ -235,7 +235,7 @@ create table question_evaluation (
 create table question_group (
   id                        bigint auto_increment not null,
   test_id                   bigint,
-  question                  varchar(255),
+  question                  TEXT,
   image_url                 varchar(255),
   video_url                 varchar(255),
   number                    integer,
@@ -270,6 +270,7 @@ create table test (
   lesson_id                 bigint,
   begin_date                datetime,
   finish_date               datetime,
+  markers_limit_date        datetime,
   constraint pk_test primary key (id))
 ;
 

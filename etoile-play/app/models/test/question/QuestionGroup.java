@@ -3,6 +3,7 @@ package models.test.question;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -48,6 +49,7 @@ public class QuestionGroup extends Model {
 	
 	@Constraints.Required
     @Formats.NonEmpty
+    @Column(columnDefinition="TEXT")
 	public String question;
 	
 	@Constraints.Required

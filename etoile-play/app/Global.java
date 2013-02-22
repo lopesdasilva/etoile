@@ -137,7 +137,7 @@ public class Global extends GlobalSettings {
 			blog.header= "The Complex Systems Digital Campus goes to Latin-America and includes now 50 universities";
 			blog.text = "The Complex Systems Digital Campus network is getting stronger. Following contacts with the best universities is Latin-America, the network received new and enthusiastic members, including universities, from Argentina, Brazil, Chile, Colombia, just to name a few countries. The  Complex Systems Digital Campus network includes now 50 founding institutions.";
 			blog.alternateText = "The Complex Systems Digital Campus network is getting stronger... ";
-			blog.articleImageURL="http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
+			blog.articleImageURL="http://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Latin_America_(orthographic_projection).svg/250px-Latin_America_(orthographic_projection).svg.png";
 			try{
 				blog.date = new SimpleDateFormat("dd/MM/yyyy").parse("28/08/2012");
 			} catch (Exception ex){

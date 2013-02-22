@@ -58,7 +58,7 @@
 			@helper.form(routes.ProfessorProfileController.editprofile(),'class->"form-horizontal"){
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
+					aria-hidden="true">X</button>
 				<h3>Edit profile</h3>
 			</div>
 			<div class="modal-body">
@@ -114,8 +114,8 @@
 						<label class="control-label">Short Description</label>
 						<div class="controls">
 							<div class="textarea">
-								<textarea type="" name="shortdescription" class=""
-									style="margin: 0px; width: 269px; height: 200px;" required maxlength="200">@professor.shortdescription</textarea>
+								<textarea type="" name="shortdescription" class="span4" rows="4" 
+									style="resize: none" required maxlength="200">@professor.shortdescription</textarea>
 							</div>
 						</div>
 					</div>
@@ -140,9 +140,11 @@
 			<a href="#editContactModal" data-toggle="modal" role="button"
 				class="btn btn-warning btn-mini">Edit</a>
 			<p>@professor.contact</p>
-			<h4>Modules on étoile</h4>
-			@for(module <- professor.modules) { <a
-				href="@routes.Application.module(module.acronym)"><p>@module.name</p></a>
+			<h4>Modules on etoile</h4>
+			@for(module <- professor.modules) { 
+			 <p>
+             <a href="@routes.Application.module(module.acronym)"><span class="label label-info">@module.name</span></a>
+             </p>
 			}
 
 			<div id="editContactModal" class="modal hide fade" tabindex="-1"
@@ -338,8 +340,8 @@
 					<label class="control-label">Description</label>
 					<div class="controls">
 						<div class="textarea">
-							<textarea name="description" type="" class=""
-								style="margin: 0px; height: 109px; width: 269px;"></textarea>
+							<textarea name="description" type="" class="" required 
+								style="margin: 0px; height: 109px; width: 269px; resize: none"></textarea>
 						</div>
 					</div>
 				</div>

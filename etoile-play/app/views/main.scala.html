@@ -63,7 +63,7 @@
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-typeahead.js")"></script>
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-affix.js")"></script> -->
-<script src="@routes.Assets.at("javascripts/js/application.js")"></script>
+<!-- <script src="@routes.Assets.at("javascripts/js/application.js")"></script> -->
 <!-- <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ui.min.js")"></script> -->
 <!-- MathJax	 -->
 <script type="text/javascript"
@@ -96,9 +96,16 @@
 	}
 	</script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-	    $('#reservation').daterangepicker();
-	});
+			function dates(start, end) {
+				console.log("start: " + start);
+				
+// 		console.log(s);
+	    $('#reservation').daterangepicker({
+		    format:'dd/MM/yyyy',
+		    startDate: Date.parse(start),
+		    endDate: Date.parse(end),
+	    });
+	}
 	</script>
 	
 <script>

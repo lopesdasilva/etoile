@@ -550,7 +550,22 @@ public class Global extends GlobalSettings {
 			lesson_net10.imageURL = "http://myenglishpages.com/blog/wp-content/uploads/2009/09/assessment.gif";
 			lesson_net10.save();
 		
+			//LANGUAGES +++++++++++++++++++++++++++++
+			Language l_one = new Language();
+			l_one.name = "Português";
+			l_one.save();
 			
+			Language l_two = new Language();
+			l_two.name = "English";
+			l_two.save();
+			
+			Language l_three = new Language();
+			l_two.name = "Français";
+			l_two.save();
+			
+			Language l_four = new Language();
+			l_four.name = "Español";
+			l_four.save();
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
@@ -563,6 +578,7 @@ public class Global extends GlobalSettings {
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
+			module_demo.language = l_two;
 			module_demo.save();
 			
 			lesson_one.module = module_demo;
@@ -597,6 +613,7 @@ public class Global extends GlobalSettings {
 			module_three.acronym="ness";
 			module_three.imageURL = "http://img138.imageshack.us/img138/9061/nesslogounequilibriumve.jpg";
 			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
+			module_three.language = l_two;
 			module_three.save();
 			
 			
@@ -616,6 +633,7 @@ public class Global extends GlobalSettings {
 			module_four.lessons.add(lesson_net8);
 			module_four.lessons.add(lesson_net9);
 			module_four.lessons.add(lesson_net10);
+			module_four.language = l_two;
 			module_four.save();
 			
 			lesson_net1.module = module_four;
@@ -640,12 +658,22 @@ public class Global extends GlobalSettings {
 			lesson_net10.save();
 			
 			Module module_five = new Module();
-			module_five.name = "Boolean automata networks";
-			module_five.acronym="bool1";
+			module_five.name = "Bioinformatics";
+			module_five.acronym="bioinformatics";
 			module_five.imageURL = "http://www.sussex.ac.uk/Users/andywu/gallery/rm_f.gif";
+			module_five.description = "<p>Attractors and robustness in Boolean automata networks. </p> <p>Application to living systems.</p>";
 			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
+			module_five.language = l_two;
 			module_five.save();
 			
+			Module module_six = new Module();
+			module_six.name = "Réseaux génétiques et morphodynamique cellulaire";
+			module_six.acronym="resgen";
+			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
+			module_demo.videoURL = "";
+			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
+			module_six.save();
+					
 			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
@@ -681,6 +709,16 @@ public class Global extends GlobalSettings {
 			bibliography.module=module_demo;
 			bibliography.save();
 			
+			bibliography = new Bibliography();
+			bibliography.title="The Zebrafish Book a Guide for the Laboratory Use of Zebrafish Danio* (Brachydanio) Rerio, 5th Edition";
+			bibliography.link="http://zebrafish.org/zirc/orders/buyBookQ.php?item=Book&id=book&detail=The%20Zebrafish%20Book";
+			bibliography.description="A guide for the laboratory use of zebrafish.";
+			bibliography.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
+			bibliography.module=module_six;
+			bibliography.save();
+			
+			
+			
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			
@@ -715,6 +753,12 @@ public class Global extends GlobalSettings {
 			content= new Content();
 			content.module=module_demo;
 			content.title="Recommended Background";
+			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
+			content.save();
+			
+			content= new Content();
+			content.module=module_six;
+			content.title="This module is not ready yet, please return soon.";
 			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
 			
@@ -805,6 +849,8 @@ public class Global extends GlobalSettings {
 			p.save();
 			pc2.save();
 			
+			// 2. PROFESSOR FOR TESTING
+			
 			User prof = new User();
 			prof.email = "prof@prof.pt";
 			prof.username="prof";
@@ -815,6 +861,73 @@ public class Global extends GlobalSettings {
 			prof.save();
 			p.user=prof;
 			p.save();
+			
+			
+			// 3. Nadine Peyriéras
+			
+			ProfessorContent npc = new ProfessorContent();
+			npc.description="Nadine Peyriéras - Institut de Neurobiologie Alfred Fessard, CNRS UPR 3294, Av. de la Terrasse, 91198 Gif-sur-Yvette Cedex, France";
+			npc.title="Contact";
+			npc.imageURL="http://www.nbcm.cnrs-gif.fr/index_clip_image004.jpg";
+			npc.save();
+			
+			ProfessorContent npc2 = new ProfessorContent();
+			npc2.description="http://www.inaf.cnrs-gif.fr/ned/equipe07/accueil_07.html";
+			npc2.title="URL";
+			npc2.imageURL="";
+			npc2.save();
+			
+			
+			Professor np = new Professor();
+			np.firstname="Nadine";
+			np.lastname="Peyriéras";
+			np.acronym="NadineP";
+			np.email="";
+			np.degree="Professor";
+			np.shortdescription="";
+			np.contact="";
+			np.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
+			np.save();
+			
+			np.modules.add(module_six);
+			np.save();
+			//module.save();
+			
+			np.contents.add(npc);
+			npc.professor=np;
+			np.contents.add(npc2);
+			npc2.professor=np;
+			np.save();
+			npc.save();
+			npc2.save();
+			
+			// 4. Jacques Demongeot
+			
+			ProfessorContent jdc = new ProfessorContent();
+			jdc.description="";
+			jdc.title="Contact";
+			jdc.imageURL="";
+			jdc.save();
+			
+			Professor jd = new Professor();
+			jd.firstname="Jacques";
+			jd.lastname="Demongeot";
+			jd.acronym="JDemongeot";
+			jd.email="";
+			jd.degree="Professor";
+			jd.shortdescription="";
+			jd.contact="Jacques Demongeot is presently director of the Laboratory TIMC (CNRS 5525) Techniques of Imaging, Modelling & Cognition and he is also head of the Institute of Bio-engineering (IFRT 130 IpV) at the University Joseph Fourier, Grenoble, France. He has MD and PhD in mathematics and has been appointed Chairman of Biomathematics at the Institut Universitaire de France in 1994. Jacques Demongeot is also responsible for the Department of Medical Information at the University Hospital of Grenoble (CHUG) and for the doctoral school of bio-engineering Health, Cognition & Environment. His main Research Interests are: medical imaging; bio-informatics;bio-modeling; biological complexity; systems biology.";
+			jd.imageURL="http://egealmeeting.lasalle-beauvais.fr/images/demongeot_jacques.jpg";
+			jd.save();
+			
+			jd.modules.add(module_five);
+			jd.save();
+			//module.save();
+			
+			jd.contents.add(jdc);
+			jdc.professor=jd;
+			jd.save();
+			jdc.save();
 			
 			
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++

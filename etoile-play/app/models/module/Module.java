@@ -7,6 +7,7 @@ import javax.persistence.*;
 import models.curriculum.Category;
 import models.manytomany.Usertest;
 import models.test.Test;
+import models.Language;
 import models.Professor;
 import models.User;
 
@@ -64,6 +65,9 @@ public class Module extends Model {
 	
 	@ManyToOne
 	public University university;
+	
+	@ManyToOne
+	public Language language;
 	
 	//public Date created;
 

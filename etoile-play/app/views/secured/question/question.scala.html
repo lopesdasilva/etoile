@@ -11,27 +11,28 @@ var enable;
 var stepClick;
 var nextT;
 var prevT;
+var questionnumber;
 
-
-function validateUrl() {
+function validateUrl(questionnumber_aux) {
+	questionnumber=questionnumber_aux;
+	console.log(questionnumber);
 	
 	
-	
-	var url=document.getElementsByName("urlInput")[0].value.toString();
+	var url=document.getElementsByName("urlInput"+questionnumber)[0].value.toString();
 	if(url.search("http://")!=-1){
 	var url=url.slice(7,url.length);
 	}
 	console.log(url);
 	var regexp = /^[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
 	var result = regexp.test(url);
-	if(document.getElementsByName("urlInput")[0].value.toString().match("wikipedia")!=null) result=true;
+	if(document.getElementsByName("urlInput"+questionnumber)[0].value.toString().match("wikipedia")!=null) result=true;
 	if(result) {
-		$('#Loading').html("<img src=\"/assets/images/Loader.gif\"></img>");
+		$('#Loading'+questionnumber).html("<img src=\"/assets/images/Loader.gif\"></img>");
 		$("#ErrorMessage").empty();
 		$.ajax({
 			type: 'GET',
 			url: 'http://tina.iscpif.fr/getJsonFromUrl/textCrawler.php',
-			data: "url="+encodeURIComponent(document.getElementsByName("urlInput")[0].value.toString()),
+			data: "url="+encodeURIComponent(document.getElementsByName("urlInput"+questionnumber)[0].value.toString()),
 			contentType: "application/json",
 			dataType: 'jsonp',
 			success : function(data){ 
@@ -73,7 +74,7 @@ function validateUrl() {
 				document.getElementsByName("name")[0].value=data.title;
 				document.getElementsByName("descriptionUrl")[0].value=data.description;
 				//document.getElementsByName("image")[0].value=data.images;
-				$('#Loading').html("");
+				$('#Loading'+questionnumber).html("");
 				$("#formBlock").show(); 
 			},
 			error: function(){ 
@@ -92,12 +93,13 @@ function validateUrl() {
 }
 
 function initAddUrl(){
-	document.getElementsByName("urlInput")[0].value="";
+	document.getElementsByName("urlInput"+questionnumber)[0].value="";
 	document.getElementsByName("name")[0].value="";
 	document.getElementsByName("url")[0].value="";
 	document.getElementsByName("descriptionUrl")[0].value="";
 	document.getElementsByName("image")[0].value="";
 	$('#theImage').html("");
+	console.log(questionnumber);
 	$("#formBlock").hide();
 }
 
@@ -201,11 +203,16 @@ function searchButton(){
 
 <script>
 
-function UpdateMath (TeX) {	 
+function UpdateMath (TeX,number) {	 
 	 $("#answer").empty().text(TeX);
 	 MathJax.Hub.Typeset()
- 
+	 unsavedanswers(number);
 
+}
+
+function unsavedanswers(number){
+	console.log(number);
+	$("#unsavedanswers"+number).show();
 }
    
 </script>
@@ -428,17 +435,18 @@ function UpdateMath (TeX) {
 								<label class="control-label" for="input01">New URL</label>
 								<div class="controls">
 									<input type="text" placeholder="Insert the new URL"
-										class="input-xlarge" name="urlInput">
-									<button id="triggerButton" onclick="return validateUrl();" class="btn btn-primary">Submit Url</button><div id="Loading"></div>
+										class="input-xlarge" name="urlInput@question.number">
+									<button id="triggerButton" onclick="return validateUrl(@question.number);" class="btn btn-primary">Submit Url</button><div id="Loading@question.number"></div>
 
 										
-									<div id="Loading"></div>
+									<div id="Loading@question.number"></div>
 									<label id="ErrorMessage" class="control-label"></label>
 								</div>
 							</div>
 						</div>
 
 						@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display:none;"){ 
+						<fieldset>
 						<input type="hidden" name="url" value="">
 						<div class="control-group">
 							<label class="control-label" for="input01">Title</label>
@@ -475,6 +483,7 @@ function UpdateMath (TeX) {
 								<button type="submit" class="btn btn-success">Save</button>
 							</div>
 						</div>
+						</fieldset>
 						}
 
 					</div>
@@ -734,11 +743,11 @@ function UpdateMath (TeX) {
 						<div class="span11">
 							<div class="span6">
 
-								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onchange="UpdateMath(this.value)">@question.openanswer.answer</textarea>
+								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onchange="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
 							</div>
 							<div class="span6">
 								<div class="alert alert-block alert-success">
-									<button type="button" class="close" data-dismiss="alert">x</button>
+									<button id="save" type="button" class="close" data-dismiss="alert">x</button>
 									<h4>Your answer</h4>
 									<label id="answer" >@question.openanswer.answer</label>
 								</div>
@@ -752,7 +761,7 @@ function UpdateMath (TeX) {
 					<div class="row-fluid ">
 						<div class="span11">
 							<p class="text-warning">
-								<span class="label label-warning">Warning</span>Identify the
+								<span class="label label-warning">Warning</span> Identify the
 								correct answer (<strong>only one is the correct one</strong>).
 							</p>
 
@@ -761,12 +770,12 @@ function UpdateMath (TeX) {
 									<ul class="inputs-list">
 										@for(hypothesis <- question.hypothesislist){
 										@if(hypothesis.selected){
-										<label class="radio"> <input type="radio"
+										<label class="radio"> <input  type="radio"
 											name="ocqanswer" value="@hypothesis.id" id="optionRadios"
 											-							checked="checked"> @hypothesis.text
 
 										</label> } @if(!hypothesis.selected){
-										<label class="radio"> <input type="radio"
+										<label class="radio"> <input  onclick="unsavedanswers(@question.number)" type="radio"
 											name="ocqanswer" value="@hypothesis.id" id="optionRadios"-							>
 											@hypothesis.text
 										</label> } }
@@ -782,7 +791,7 @@ function UpdateMath (TeX) {
 					<div class="row-fluid ">
 						<div class="span11">
 							<p class="text-warning">
-								<span class="label label-warning">Warning</span>Identify the
+								<span class="label label-warning">Warning</span> Identify the
 								correct answers (<strong>can be more than one</strong>).
 							</p>
 
@@ -791,10 +800,10 @@ function UpdateMath (TeX) {
 								@if(hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox" id="optionsRadios1"
 									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"
-									checked="checked"> @hypothesis.text
+									checked="checked"  onclick="unsavedanswers(@question.number)"> @hypothesis.text
 								</label> } @if(!hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox" id="optionsRadios1"
-									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"">
+									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"  onclick="unsavedanswers(@question.number)">
 									@hypothesis.text
 								</label> } }
 							</div>
@@ -804,6 +813,11 @@ function UpdateMath (TeX) {
 
 					<div class="row-fluid">
 						<div class="span11">
+						<p>
+				<label id="unsavedanswers@question.number" style="display: none;" class="pull-right">
+				<span class="label label-important ">Important</span> Do not to forget to save your answer</label>
+				<br>
+				</p>
 							<p>
 								<button class="btn btn-success pull-right" type="submit">Save
 									answer @question.number</button>
@@ -833,7 +847,9 @@ function UpdateMath (TeX) {
 		<div class="row-fluid">
 			<div class="span11 pull-right">
 				<!-- Button to trigger modal -->
+				
 				<div class="btn-group pull-right">
+				
 					<a href="#submittest" role="button" class="btn btn-primary"
 						data-toggle="modal">Submit test</a> <a
 						href="@routes.StudentController.lesson(lesson.acronym,module.acronym)"
@@ -850,8 +866,8 @@ function UpdateMath (TeX) {
 						<h3 id="myModalLabel">Confirmation</h3>
 					</div>
 					<div class="modal-body">
-						@if(!usertest.allQuestionsAnswered(usertest.id)){ <b>You
-							haven't completed the test.</b> }
+						@if(!usertest.allQuestionsAnswered(usertest.id)){ <h4><b>You
+							haven't completed the test.</b></h4> }
 						<p>Are you sure you want to submit your test?</p>
 						<p>
 							<span class="label label-important">Important</span> This Action

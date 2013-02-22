@@ -1,9 +1,15 @@
 package models.test;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import models.Comment;
 import models.manytomany.Usertest;
@@ -41,6 +47,9 @@ public class Test extends Model{
 	
 	@Constraints.Required
 	public boolean published=false;
+	
+	@Constraints.Required
+	public boolean expired=false;
 
 	@ManyToOne
 	public Lesson lesson;
@@ -97,4 +106,52 @@ public class Test extends Model{
 		return number;
 	}
 	
+	public String getBeginDate(){
+		if(begin_date!=null){
+		Long yourmilliseconds = begin_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+		}
+		return "";
+	}
+	
+	public String getBeginDateMMDDYYYY(){
+		if(begin_date!=null){
+		Long yourmilliseconds = begin_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+		}
+		return "";
+	}
+
+	
+	public String getFinishDate(){
+		if(finish_date!=null){
+		Long yourmilliseconds = finish_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+		}
+		return "";
+	}
+	
+	public String getFinishDateMMDDYYYY(){
+		if(finish_date != null){
+		Long yourmilliseconds = finish_date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
+		return sdf.format(calendar.getTime());
+		}
+		return "";
+	}
 }

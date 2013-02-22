@@ -131,7 +131,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input required="required" name="name" type="text" placeholder="" class="input-xlarge" required>
+												<input required="required"  minlength="6" data-validation-minlength-message="A lesson name must have at least 6 characters"  name="name" type="text" placeholder="" class="input-xlarge" required>
 												<p class="help-block">Insert the news header</p>
 											</div>
 										</div>
@@ -347,7 +347,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Name</label>
 											<div class="controls">
-												<textarea name="name" type="text" placeholder="" class="input-xlarge"></textarea>
+												<input name="name" type="text" minlength="6" required  placeholder="" class="input-xlarge"></input>
 												<p class="help-block">Test name</p>
 											</div>
 										</div>
@@ -357,23 +357,15 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Description</label>
 											<div class="controls">
-												<textarea name="text" type="text" placeholder="" class="input-xlarge"></textarea>
+												<textarea name="text" required type="text" placeholder="" class="input-xlarge"></textarea>
 												<p class="help-block">Short description about the test</p>
 											</div>
 										</div>
 
-									<div class="input-append date" id="dp3" data-date="12-02-2012"
-										data-date-format="dd-mm-yyyy">
-										<input class="span2" size="16" type="text" value="12-02-2012">
-										<span class="add-on"><i class="icon-th"></i></span>
-									</div>
-
-
 									<!-- Text input-->
 										<label class="control-label" for="input01">Expected duration</label>
 										<div class="controls">
-											<input name="expectedDuration" type="text" 
-												class="input-xlarge disabled">
+											<input name="expectedDuration" required class="input-xlarge" type="text" class="input-xlarge" >
 											<p class="help-block">Estimated time for students complete the test</p>
 										</div>
 									

@@ -47,6 +47,9 @@ public class Test extends Model{
 	
 	@Constraints.Required
 	public boolean published=false;
+	
+	@Constraints.Required
+	public boolean expired=false;
 
 	@ManyToOne
 	public Lesson lesson;

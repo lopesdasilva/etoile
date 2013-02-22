@@ -266,6 +266,7 @@ create table test (
   test_image_url            TEXT,
   expected_duration         varchar(255),
   published                 tinyint(1) default 0,
+  expired                   tinyint(1) default 0,
   lesson_id                 bigint,
   begin_date                datetime,
   finish_date               datetime,

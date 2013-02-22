@@ -75,7 +75,7 @@ function validateUrl(questionnumber_aux) {
 				document.getElementsByName("descriptionUrl")[0].value=data.description;
 				//document.getElementsByName("image")[0].value=data.images;
 				$('#Loading'+questionnumber).html("");
-				$("#formBlock"+questionnumber).show(); 
+				$("#formBlock").show(); 
 			},
 			error: function(){ 
 				initAddUrl();
@@ -86,7 +86,7 @@ function validateUrl(questionnumber_aux) {
 	}
 	else {
 		$("#ErrorMessage").empty().text("Not a valid url");
-		$("#formBlock"+questionnumber).hide();
+		$("#formBlock").hide();
 		return false;
 	}
 	return false;
@@ -100,7 +100,7 @@ function initAddUrl(){
 	document.getElementsByName("image")[0].value="";
 	$('#theImage').html("");
 	console.log(questionnumber);
-	$("#formBlock"+questionnumber).hide();
+	$("#formBlock").hide();
 }
 
 function TwitterQuery(keywords){
@@ -445,8 +445,8 @@ function unsavedanswers(number){
 							</div>
 						</div>
 
-						@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"form",'style->"display:none;"){ 
-						<fieldset id="formBlock@question.number">
+						@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display:none;"){ 
+						<fieldset>
 						<input type="hidden" name="url" value="">
 						<div class="control-group">
 							<label class="control-label" for="input01">Title</label>
@@ -815,7 +815,7 @@ function unsavedanswers(number){
 						<div class="span11">
 						<p>
 				<label id="unsavedanswers@question.number" style="display: none;" class="pull-right">
-				<span class="label label-important ">Important</span> Do not to forget your answer</label>
+				<span class="label label-important ">Important</span> Do not to forget to save your answer</label>
 				<br>
 				</p>
 							<p>

@@ -11,28 +11,23 @@ var enable;
 var stepClick;
 var nextT;
 var prevT;
-var questionnumber;
 
-function validateUrl(questionnumber_aux) {
-	questionnumber=questionnumber_aux;
-	console.log(questionnumber);
-	
-	
-	var url=document.getElementsByName("urlInput"+questionnumber)[0].value.toString();
+function validateUrl(questionnumber) {
+	var url = document.getElementById("urlInput"+questionnumber).value;
 	if(url.search("http://")!=-1){
-	var url=url.slice(7,url.length);
+		url=url.slice(7,url.length);
 	}
-	console.log(url);
 	var regexp = /^[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
 	var result = regexp.test(url);
-	if(document.getElementsByName("urlInput"+questionnumber)[0].value.toString().match("wikipedia")!=null) result=true;
+	if(url.match("wikipedia")!=null) result=true;
 	if(result) {
 		$('#Loading'+questionnumber).html("<img src=\"/assets/images/Loader.gif\"></img>");
-		$("#ErrorMessage").empty();
+		$("#ErrorMessage"+questionnumber).empty();
 		$.ajax({
 			type: 'GET',
-			url: 'http://tina.iscpif.fr/getJsonFromUrl/textCrawler.php',
-			data: "url="+encodeURIComponent(document.getElementsByName("urlInput"+questionnumber)[0].value.toString()),
+			//url: 'http://tina.iscpif.fr/getJsonFromUrl/textCrawler.php',
+			url: 'http://localhost/getJsonFromUrl/textCrawler.php',
+			data: "url="+encodeURIComponent(url),
 			contentType: "application/json",
 			dataType: 'jsonp',
 			success : function(data){ 
@@ -47,60 +42,41 @@ function validateUrl(questionnumber_aux) {
 					images = data.images.split("|");
 					console.log(images.length);
 					if(images.length>1){
-						document.getElementsByName("image")[0].value=images[0];
-						$('#theImage').html("<img src=\""+images[0]+"\""+"</img>");
+						document.getElementById("image"+questionnumber).value=images[0];
+						$('#theImage'+questionnumber).html("<img src=\""+images[0]+"\""+"</img>");
 					}
 					else {
-						document.getElementsByName("image")[0].value=data.images;
-						$('#theImage').html("<img width=150 src=\""+data.images+"\""+"</img>");
+						document.getElementById("image"+questionnumber).value=data.images;
+						$('#theImage'+questionnumber).html("<img width=150 src=\""+data.images+"\""+"</img>");
 					}
-/*
-					if(data.images!=false){
-						images = data.images.split("|");
-						if(images.length>1){
-							document.getElementsByName("image")[0].value=images[0];				
-							$('#theImage').html("<img src=\""+images[0]+"\""+"</img>");
-							multipleImages=true;
-						}
-						else {
-							document.getElementsByName("image")[0].value=data.images;			
-							$('#theImage').html("<img width=150 src=\""+data.images+"\""+"</img>");
-						}
-					}
-*/
-				}
-
-				document.getElementsByName("url")[0].value=data.url;
-				document.getElementsByName("name")[0].value=data.title;
-				document.getElementsByName("descriptionUrl")[0].value=data.description;
-				//document.getElementsByName("image")[0].value=data.images;
+				document.getElementById("url"+questionnumber).value=data.url;
+				document.getElementById("name"+questionnumber).value=data.title;
+				document.getElementById("descriptionUrl"+questionnumber).value=data.description;
 				$('#Loading'+questionnumber).html("");
-				$("#formBlock").show(); 
-			},
+				$("#formBlock"+questionnumber).show(); 
+                                }
+                        },
 			error: function(){ 
 				initAddUrl();
-				$("#ErrorMessage").empty().text("Page Not found.");
+				$("#ErrorMessage"+questionnumber).empty().text("Page Not found.");
 			}
 	    	});
-		return false;
 	}
 	else {
-		$("#ErrorMessage").empty().text("Not a valid url");
-		$("#formBlock").hide();
-		return false;
+		$("#ErrorMessage"+questionnumber).empty().text("Not a valid url");
+		$("#formBlock"+questionnumber).hide();
 	}
-	return false;
-}
 
-function initAddUrl(){
-	document.getElementsByName("urlInput"+questionnumber)[0].value="";
-	document.getElementsByName("name")[0].value="";
-	document.getElementsByName("url")[0].value="";
-	document.getElementsByName("descriptionUrl")[0].value="";
-	document.getElementsByName("image")[0].value="";
-	$('#theImage').html("");
-	console.log(questionnumber);
-	$("#formBlock").hide();
+}
+function initAddUrl(questionnumber){
+	document.getElementById("urlInput"+questionnumber).value="";
+	document.getElementById("name"+questionnumber).value="";
+	document.getElementById("url"+questionnumber).value="";
+	document.getElementById("descriptionUrl"+questionnumber).value="";
+	document.getElementById("image"+questionnumber).value="";
+
+	$('#theImage'+questionnumber).html("");
+	$("#formBlock"+questionnumber).hide();
 }
 
 function TwitterQuery(keywords){
@@ -331,7 +307,7 @@ function unsavedanswers(number){
 									All URLs</a></li>
 
 							<li><a href="#ADDURL@question.number"
-								onclick="initAddUrl();" data-toggle="modal">Add new URL</a></li>
+								onclick="initAddUrl(@question.number);" data-toggle="modal">Add new URL</a></li>
 							<li><a href="#TwitterQuery"
 								onclick='TwitterQuery("@question.keywords");'
 								data-toggle="modal">Ask Twitter</a></li>
@@ -435,30 +411,29 @@ function unsavedanswers(number){
 								<label class="control-label" for="input01">New URL</label>
 								<div class="controls">
 									<input type="text" placeholder="Insert the new URL"
-										class="input-xlarge" name="urlInput@question.number">
-									<button id="triggerButton" onclick="return validateUrl(@question.number);" class="btn btn-primary">Submit Url</button><div id="Loading@question.number"></div>
+										class="input-xlarge" id="urlInput@question.number">
+									<button onclick="validateUrl(@question.number);" class="btn btn-primary">Submit Url</button><div id="Loading"></div>
 
 										
 									<div id="Loading@question.number"></div>
-									<label id="ErrorMessage" class="control-label"></label>
+									<label id="ErrorMessage@question.number" class="control-label"></label>
 								</div>
 							</div>
 						</div>
-
-						@helper.form(routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id),'class->"form-horizontal",'id->"formBlock",'style->"display:none;"){ 
+					<form action="@routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id)" method="POST" class="form-horizontal" id="formBlock@question.number" style="display:none;">
 						<fieldset>
-						<input type="hidden" name="url" value="">
+						<input type="hidden" id="url@question.number" name="url" value="">
 						<div class="control-group">
 							<label class="control-label" for="input01">Title</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" name="name" value="">
+								<input type="text" class="input-xlarge" id="name@question.number" name="name" value="">
 								<p class="help-block">URL title</p>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">Description</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" name="descriptionUrl"
+								<input type="text" class="input-xlarge" id="descriptionUrl@question.number" name="descriptionUrl"
 									value="">
 								<p class="help-block">A URL small description</p>
 							</div>
@@ -467,10 +442,10 @@ function unsavedanswers(number){
 							<!-- Text input-->
 							<label class="control-label" for="input01">Image url</label>
 							<div class="controls">
-								<input name="image" type="text" value="" class="input-xlarge"
+								<input id="image@question.number" name="image" type="text" value="" class="input-xlarge"
 									readOnly="true">
 								<p class="help-block">
-								<div id="theImage" width=10px></div>
+								<div id="theImage@question.number" width=10px></div>
 								</p>
 							</div>
 						</div>
@@ -484,7 +459,7 @@ function unsavedanswers(number){
 							</div>
 						</div>
 						</fieldset>
-						}
+					</form>
 
 					</div>
 				</div>

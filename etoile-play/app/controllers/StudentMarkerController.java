@@ -24,21 +24,21 @@ import controllers.secured.*;
 
 @Security.Authenticated(Secured.class)
 public class StudentMarkerController extends Controller {
-	
+
 	public static class MarkerEvaluation {
 
 		public Long answerscore;
-		
+
 		public String markercomment;
 	}
 
-	
-	
+
+
 	public static Result answersToMark(){
 		User user = User.find.byId(request().username());
 		List<Category> categories = Category.getAllCategories();
 		List<AnswerMarker> answersToMark = AnswerMarker.getByMarker(user.email);
-		
+
 		for(AnswerMarker a: answersToMark){
 			a.answer.group.refresh();
 			a.answer.group.test.refresh();
@@ -48,38 +48,52 @@ public class StudentMarkerController extends Controller {
 
 		return ok(views.html.secured.answerstomark.render(user, categories, answersToMark));
 	}
-	
+
 	public static Result answerToMark(Long answer_id){
-		User user = User.find.byId(request().username());
-		List<Category> categories = Category.getAllCategories();
 		Answer answer = Answer.find.byId(answer_id);
-		answer.group.refresh();
-		answer.openQuestion.refresh();
-		
-		
-		return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,form(MarkerEvaluation.class)));
-		
+		if(answer==null){
+			return redirect(routes.Application.index());
+		}
+		User user = User.find.byId(request().username());
+		if(Secured.isStudent(user.email)){
+
+			List<Category> categories = Category.getAllCategories();
+
+			answer.group.refresh();
+			answer.openQuestion.refresh();
+
+
+			return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,form(MarkerEvaluation.class)));
+		}
+		return redirect(routes.Application.index());
 	}
-	
+
 	public static Result markanswer(Long answer_id){
-		User user = User.find.byId(request().username());
-		Form<MarkerEvaluation> form = form(
-				MarkerEvaluation.class).bindFromRequest();
-		System.out.println("AnswerMarker" + form.get().answerscore);
-		
+
 		Answer answer = Answer.find.byId(answer_id);
-		
-		AnswerMarker answerMarker = AnswerMarker.getByAnswerAndUser(user.email,answer.id);
-		answerMarker.answer = answer;
-		answerMarker.answerscore = form.get().answerscore;
-		answerMarker.markercomment=form.get().markercomment;
-		answerMarker.user= user;
-		answerMarker.isMarked=true;
-		answerMarker.save();
-		answer.save();
-	
-		
-	return answersToMark();
+		if(answer==null){
+			return redirect(routes.Application.index());
+		}
+		User user = User.find.byId(request().username());
+
+		if(Secured.isStudent(user.email)){
+
+			Form<MarkerEvaluation> form = form(
+					MarkerEvaluation.class).bindFromRequest();
+			System.out.println("AnswerMarker" + form.get().answerscore);
+
+			AnswerMarker answerMarker = AnswerMarker.getByAnswerAndUser(user.email,answer.id);
+			answerMarker.answer = answer;
+			answerMarker.answerscore = form.get().answerscore;
+			answerMarker.markercomment=form.get().markercomment;
+			answerMarker.user= user;
+			answerMarker.isMarked=true;
+			answerMarker.save();
+			answer.save();
+			return redirect(routes.StudentMarkerController.answersToMark());
+		}
+		return redirect(routes.Application.index());
+
 	}
 
 }

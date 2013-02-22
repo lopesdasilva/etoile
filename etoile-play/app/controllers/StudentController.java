@@ -64,6 +64,12 @@ public class StudentController extends Controller {
 	public static Result module(String module_acronym) {
 		
 			Module module = Module.findByAcronym(module_acronym);
+			if (module==null){
+				System.out.println("The module does not exist.");
+				return redirect(routes.Application.modules());
+			}
+			
+			
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
 			module.language.refresh();
@@ -84,12 +90,20 @@ public class StudentController extends Controller {
 
 	public static Result signupmodule(String module_acronym) {
 		Module module = Module.findByAcronym(module_acronym);
+		if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
 
+		
+			
 		// Trying to add the module to user
 
-		if (!user.modules.contains(module)) {
+		if (Secured.isStudent(user.email) && !user.modules.contains(module)) {
 			user.modules.add(module);
 			user.save();
 			module.save();
@@ -117,16 +131,26 @@ public class StudentController extends Controller {
 		}
 
 		// Has this module
-		return ok(views.html.secured.module.render(user, categories, module));
+		return redirect(routes.Application.module(module_acronym));
 
 	}
 
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
 		if(Secured.isStudent(session("email"))){
 		Test test = models.test.Test.find.byId(test_id);
 		User user = User.find.byId(request().username());
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
@@ -225,10 +249,22 @@ public class StudentController extends Controller {
 	}
 	
 	public static Result lesson(String lesson_acronym, String module_acronym) {
-		if(Secured.isStudent(session("email"))){
-		List<Category> categories = Category.getAllCategories();
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		if(Secured.isStudent(session("email"))){
+			
+		List<Category> categories = Category.getAllCategories();
+		
+		
 		User user = User.find.byId(request().username());
 		module.language.refresh();
 		

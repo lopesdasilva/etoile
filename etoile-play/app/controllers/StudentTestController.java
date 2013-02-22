@@ -85,10 +85,26 @@ public class StudentTestController extends Controller {
 
 	
 	public static Result questionanalysis(Long question_number, Long test_id,String lesson_acronym,String module_acronym){
-			Test test = models.test.Test.find.byId(test_id);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.module(module_acronym)+"#tests");
+		}
+		
+		
+		
+		
 			User user = User.find.byId(request().username());
-			Module module = Module.findByAcronym(module_acronym);
-			Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+			
 			Usertest usertest = Usertest.findByUserAndTest(user.email,test.id);
 			
 //			List<Answer> test_answers = Answer.findByUserEmailAndTestId(user.email,
@@ -169,11 +185,33 @@ public class StudentTestController extends Controller {
 	
 	
 	public static Result question(int question_number, Long test_id,String lesson_acronym,String module_acronym){
-		if(Secured.isStudent(session("email"))){
-		Test test = models.test.Test.find.byId(test_id);
-		User user = User.find.byId(request().username());
-		Module module = Module.findByAcronym(module_acronym);
+		
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
+		
+		
+		
+		
+		User user = User.find.byId(request().username());
+		Test test_aux= Test.find.byId(test_id);
+		
+
+		if(Secured.isStudent(user.email) && user.isUserSignupTest(test) && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
@@ -279,13 +317,31 @@ public class StudentTestController extends Controller {
 		if (SecuredProfessor.isProfessor(session("email"))){
 			return ProfessorController.index();
 		}
-		return redirect(routes.Application.index());
+		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		
 	}
 	
 	public static Result postquestion(
 			int question_number, String module_acronym, String lesson_acronym, Long test_id,Long usertest_id,
 			Long question_id) {
+		
+		
+
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
 		
 		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
@@ -368,7 +424,28 @@ public class StudentTestController extends Controller {
 
 
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
+		
+
+
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test_aux = models.test.Test.find.byId(test_id);
+		if(test_aux==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(request().username());
+		if(Secured.isStudent(user.email) && test_aux.published && !test_aux.expired ){
+		
 		Usertest usertest= Usertest.findByUserAndTest(user.email, test_id);
 		usertest.submitted=true;
 		usertest.save();
@@ -479,7 +556,8 @@ public class StudentTestController extends Controller {
 		System.out.println("Reputação no Teste: " + usertest.reputationAsAstudent);
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
-
+		}
+		return redirect(routes.Application.index());
 	}
 
 	/**
@@ -491,9 +569,27 @@ public class StudentTestController extends Controller {
 	 */
 	public static Result addquestion(Long test_id, String lesson_acronym,
 			String module_acronym) {
+		
+		
+
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
 		User user = User.find.byId(request().username());
 		
-		Test test=Test.find.byId(test_id);
 		if(!user.isUserSignupTest(test)){
 			//signup in test
 			Usertest user_test = new Usertest();
@@ -516,8 +612,6 @@ public class StudentTestController extends Controller {
 		usertest.save();
 
 		List<Category> categories = Category.getAllCategories();
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 
 		Form<OpenQuestionSuggestion> form_question = form(
 				OpenQuestionSuggestion.class).bindFromRequest();
@@ -541,17 +635,56 @@ public class StudentTestController extends Controller {
 	}
 	
 	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
+		
 		URL url = URL.find.byId(url_id);
 		url.likes ++ ;
 
 		url.save();
 		
-		return question(question_number, test_id, lesson_acronym, module_acronym);
+		return redirect(routes.StudentTestController.question(question_number, test_id, lesson_acronym, module_acronym));
 		
 	}
 
 	
 	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ) throws IOException {
+		
+		
+		
+
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
+		
 		Form<URL_form> form = form(
 				URL_form.class).bindFromRequest();
 		
@@ -577,7 +710,7 @@ public class StudentTestController extends Controller {
 		
 		url.save();
 
-		return question(question_number, test_id, lesson_acronym, module_acronym);
+		return redirect(routes.StudentTestController.question(question_number, test_id, lesson_acronym, module_acronym));
 		
 	}
 	

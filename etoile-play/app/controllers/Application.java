@@ -139,7 +139,11 @@ public static Result professorprofile(String professor_acronym) {
 	public static Result module(String module_acronym){
 		
 		Module module = Module.findByAcronym(module_acronym);
-		module.language.refresh();
+		if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+
 		List<Category> categories = Category.getAllCategories();
 		module.language.refresh();
 		
@@ -159,6 +163,9 @@ public static Result professorprofile(String professor_acronym) {
 	public static Result lesson(String module_acronym, String lesson_acronym){
 		Module module = Module.findByAcronym(module_acronym);
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
 		List<Category> categories = Category.getAllCategories();
 		
 		if(session("email")!=null){

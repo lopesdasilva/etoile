@@ -124,7 +124,7 @@ public class User extends Model {
     }
     
     public boolean isUserSignupTest(Test t){
-    	System.out.println("ifEstou no signuptest");
+
     	boolean signup=false;
     	for(Usertest usertest: tests){
     		if(usertest.test.id==t.id)
@@ -132,6 +132,17 @@ public class User extends Model {
     	}
     	
     	return signup;
+    }
+    
+    public boolean userSuggestedQuestion(Test t){
+    	
+    	boolean suggested=false;
+    	for(Usertest usertest: tests){
+    		if(usertest.test.id==t.id)
+    			return usertest.inmodule;
+    	}
+    	
+    	return suggested;
     }
     
     public boolean haveAnswersToMark(){

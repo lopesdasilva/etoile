@@ -45,8 +45,15 @@ public class ProfessorController extends Controller {
 	}
 
 	public static Result module(String module_acronym) {
+
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+
+		
 			
-			Module module = Module.findByAcronym(module_acronym);
 			User user = User.find.byId(session("email"));
 			user.professorProfile.refresh();
 			List<Category> categories = Category.getAllCategories();
@@ -63,11 +70,21 @@ public class ProfessorController extends Controller {
 	}
 
 	public static Result lesson(String lesson_acronym, String module_acronym) {
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		user.professorProfile.refresh();
 		List<Category> categories = Category.getAllCategories();
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		
 		for(Question q: lesson.questions){
 			if(q.user!=null){

@@ -60,11 +60,11 @@ GET		/modules/:module/:lesson/testanalysis:test/:question		controllers.StudentTe
 
 #Modules
 ##CHECK THIS ROUTE
-GET		/modules						controllers.Application.modules()
+GET		/modules							controllers.Application.modules()
 GET  	/modules/:module					controllers.Application.module(module: String)
-GET	/modules/:module/signup				controllers.StudentController.signupmodule(module: String)
-GET    /:continent          controllers.Application.continent(continent: String)
-GET  	/modules/:module/lessons/:lesson					controllers.Application.lesson(module: String, lesson: String)
+GET		/modules/:module/signup				controllers.StudentController.signupmodule(module: String)
+GET     /:continent          				controllers.Application.continent(continent: String)
+GET  	/modules/:module/lessons/:lesson	controllers.Application.lesson(module: String, lesson: String)
 
 #Professor Module
 GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)

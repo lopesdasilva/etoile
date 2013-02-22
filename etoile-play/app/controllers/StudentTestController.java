@@ -342,11 +342,18 @@ public class StudentTestController extends Controller {
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
-		
-		User user = User.find.byId(request().username());
 		Question question = Question.find.byId(question_id);
+		if(question==null){
+				return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		User user = User.find.byId(request().username());
 		Usertest usertest=Usertest.find.byId(usertest_id);
-		
+		if(usertest==null || !usertest.user.email.equals(user.email)){
+			System.out.println(user);
+			System.out.println(usertest.user);
+			System.out.println("USERTEST!=USER");
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
 		
 		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
@@ -650,10 +657,13 @@ public class StudentTestController extends Controller {
 		if(test==null){
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
-		
-		
-		
 		URL url = URL.find.byId(url_id);
+		if(url==null){
+			return redirect(routes.StudentTestController.question(question_number, test_id, lesson_acronym, module_acronym));
+		}
+		
+		
+		
 		url.likes ++ ;
 
 		url.save();
@@ -663,7 +673,7 @@ public class StudentTestController extends Controller {
 	}
 
 	
-	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ) throws IOException {
+	public static Result addurl(int question_number, Long test_id,String lesson_acronym,String module_acronym,Long question_id ) {
 		
 		
 		
@@ -683,13 +693,16 @@ public class StudentTestController extends Controller {
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
-		
+		Question question = Question.find.byId(question_id);
+		if(question==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
 		
 		Form<URL_form> form = form(
 				URL_form.class).bindFromRequest();
 		
 		User user = User.find.byId(request().username());
-		Question question = Question.find.byId(question_id);
+		
 		System.out.println();
 		System.out.println("Url: "+form.get().url);
 		System.out.println("Title: "+form.get().name);

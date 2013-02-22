@@ -37,8 +37,12 @@ public class BlogController extends Controller {
 	}
 
 	
-	public static Result blog(Long blog) {
+	public static Result blog(Long blog_id) {
 		
+		Blog blog =Blog.find.byId(blog_id);
+		if(blog==null){
+			return redirect(routes.Application.news());
+		}
 		List<Category> categories = Category.getAllCategories();
 		if(session("email")!=null){
 
@@ -46,18 +50,24 @@ public class BlogController extends Controller {
 			
 			if (SecuredProfessor.isProfessor(session("email"))){
 				user.professorProfile.refresh();
-				return ok(views.html.professor.blog.render(user, Blog.find.byId(blog), form(Comment_Form.class)));
+				return ok(views.html.professor.blog.render(user, blog, form(Comment_Form.class)));
 			}
-						return ok(views.html.secured.blog.render(user, Blog.find.byId(blog),categories, form(Comment_Form.class)));
+						return ok(views.html.secured.blog.render(user, blog,categories, form(Comment_Form.class)));
 			
 			
 		}
-		return ok(views.html.blog.blog.render(Blog.find.byId(blog),categories,Continent.getAllContinents()));
+		return ok(views.html.blog.blog.render(blog,categories,Continent.getAllContinents()));
 		
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result postcomment(Long blog) {
+	public static Result postcomment(Long blog_id) {
+		
+		Blog blog =Blog.find.byId(blog_id);
+		if(blog==null){
+			return redirect(routes.Application.news());
+		}
+		
 		Form<Comment_Form> form = form(Comment_Form.class)
 				.bindFromRequest();
 		List<Category> categories = Category.getAllCategories();
@@ -66,10 +76,10 @@ public class BlogController extends Controller {
 		// New Comment
 		models.Comment c = new models.Comment();
 		c.text = form.get().comment;
-		c.blog = Blog.find.byId(blog);
+		c.blog = blog;
 		c.user = user;
 		c.date = new Date();
 		c.save();
-		return redirect(routes.BlogController.blog(blog));
+		return redirect(routes.BlogController.blog(blog_id));
 	}
 }

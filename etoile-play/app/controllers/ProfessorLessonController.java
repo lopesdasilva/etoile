@@ -78,8 +78,17 @@ public class ProfessorLessonController extends Controller {
 	
 	public static Result addlessonalert(String module_acronym, String lesson_acronym) {
 
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
@@ -115,11 +124,21 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result addlessoncontent(String module_acronym, String lesson_acronym){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
 		Form<NewContent_Form> form = form(NewContent_Form.class).bindFromRequest();
 	if(!(form.get().name==null || form.get().name.equals("") || form.get().name.length()<6)){
 		
-		Module module = Module.findByAcronym(module_acronym);
-		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		
 		User user = User.find.byId(session("email"));
 		
 		
@@ -146,8 +165,18 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result editlesson(String module_acronym, String lesson_acronym){
-		Module module = Module.findByAcronym(module_acronym);
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 		User user = User.find.byId(session("email"));
 		Form<LessonDescription_Form> form = form(LessonDescription_Form.class).bindFromRequest();
 		
@@ -165,11 +194,24 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result deletequestion(String module_acronym, String lesson_acronym,Long question_id){
-		Module module = Module.findByAcronym(module_acronym);
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
 
 		User user = User.find.byId(session("email"));
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 				Question question= Question.find.byId(question_id);
+				if(question==null){
+					return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
+				}
 				question.delete();
 				question.save();
 			}

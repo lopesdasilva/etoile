@@ -102,7 +102,9 @@ public static Result professorprofile(String professor_acronym) {
 
 	 public static Result continent(String continent_acronym){
 	    	Continent continent = Continent.findByAcronym(continent_acronym);
-	    
+	    	if(continent==null){
+	    		return redirect(routes.Application.index());
+	    	}
 	    	
 	    	List<Category> categories = Category.getAllCategories();
 	    	List <Continent> continents = Continent.getAllContinents();

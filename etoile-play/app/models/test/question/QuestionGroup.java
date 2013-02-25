@@ -65,4 +65,9 @@ public class QuestionGroup extends Model {
 	
 	public static Model.Finder<Long, QuestionGroup> find = new Model.Finder<Long, QuestionGroup>(
 			Long.class, QuestionGroup.class);
+	
+	 public static QuestionGroup findByTestAndGroupNumber(Long test_id,Long group_number) {
+	        return find.where().eq("test_id", test_id).eq("number",group_number).findUnique();
+	    }
+	
 }

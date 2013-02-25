@@ -134,10 +134,10 @@
         <legend class=""><h3>New Question</h3></legend>
       </div>			
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="question"></textarea>
+						<textarea  class="span12" rows="10" name="question" required minlength="10"></textarea>
 						<p></p>
 						<label>Model Answer</label>
-						<textarea  class="span12" rows="10" name="suggestedanswer"></textarea>
+						<textarea  class="span12" rows="10" name="suggestedanswer" required minlength="10"></textarea>
 						
 						<p><p>
 						
@@ -148,8 +148,8 @@
 								<label class="control-label" for="input01">Keywords</label>
 								<div class="controls">
 									<input name="keywords" type="text" value=""
-										class="input-xlarge">
-									<p class="help-block">Keywords related to this question</p>
+										class="input-xlarge" required>
+									<p class="help-block">Keywords related to this question, you can enter multiple keywords separated by commas</p>
 								</div>
 								</div>
 

@@ -1878,4 +1878,30 @@ public class ProfessorTestController extends Controller {
 		return redirect(routes.Application.module(module.acronym));
 
 		}
+	
+	public static Result preview(String module_acronym, String lesson_acronym,Long test_id, Long group_number){
+		
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		Test test=Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		QuestionGroup questionGroup=QuestionGroup.findByTestAndGroupNumber(test_id,group_number);
+		if(questionGroup==null){
+			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test.id));
+		}
+		
+		
+		return ok(views.html.professor.previewtest.render(module,lesson,test,questionGroup));
+	}
 }

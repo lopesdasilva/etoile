@@ -60,11 +60,11 @@
         <legend class=""><h3>Question @question.number</h3></legend>
       </div>			
 						<label >Question</label>
-						<textarea  class="span12" rows="10" name="question">@question.question</textarea>
+						<textarea required  minlength="10"  class="span12" rows="10" name="question">@question.question</textarea>
 						<p></p>
 						<label>Model Answer</label>
 						
-						<textarea  class="span12" rows="10" name="suggestedanswer">@question.answerSuggestedByStudent</textarea>
+						<textarea  class="span12" rows="10" name="suggestedanswer" required minlength="10" >@question.answerSuggestedByStudent</textarea>
 						
 						<p><p>
 						
@@ -74,8 +74,8 @@
 										<label class="control-label" for="input01">Keywords</label>
 										<div class="controls">
 											<input name="title" type="text" value="@question.keywords"
-												class="input-xlarge">
-											<p class="help-block">Keywords related to this question</p>
+												class="input-xlarge" required>
+											<p class="help-block">Keywords related to this question, you can enter multiple keywords separated by commas</p>
 										</div>
 									</div>
 									
@@ -131,7 +131,7 @@
 										<!-- Text input-->
 										<label class="control-label" for="input01">Weight</label>
 										<div class="controls">
-											<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="weight" value="@question.weight"></input><span class="add-on">%</span>
+											<input type="number" min="0" max="100" size="32" id="quantity" class="span2" name="weight" value="@question.weight" required ></input><span class="add-on">%</span>
 											
 											<p class="help-block">Weight of this question</p>
 										</div>

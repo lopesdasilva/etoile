@@ -116,12 +116,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		User user = User.find.byId(session("email"));
@@ -153,12 +153,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -211,17 +211,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=0 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -249,17 +249,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=0 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -302,12 +302,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 				
@@ -340,12 +340,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -397,17 +397,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 			
@@ -439,17 +439,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -498,17 +498,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !question.group.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -538,17 +538,18 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		
+		if(question==null || question.typeOfQuestion!=1 || !question.group.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -588,17 +589,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -637,17 +638,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=2 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -685,12 +686,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -722,12 +723,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -780,17 +781,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=2 || !question.group.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -820,17 +821,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=2 || !question.group.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -869,17 +870,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -914,12 +915,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -929,7 +930,7 @@ public class ProfessorTestController extends Controller {
 		}
 		
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
-		if(hypothesis==null){
+		if(question==null || question.typeOfQuestion!=2 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 		}
 		
@@ -963,17 +964,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=2 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1009,17 +1010,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=1 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1055,12 +1056,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1098,17 +1099,17 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
 		Question question = Question.find.byId(question_id);
-		if(question==null){
+		if(question==null || question.typeOfQuestion!=2 || !group.questions.contains(question)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1156,12 +1157,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1211,7 +1212,7 @@ public class ProfessorTestController extends Controller {
 		}
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1240,7 +1241,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1345,7 +1346,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1379,7 +1380,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1426,7 +1427,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1454,7 +1455,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1490,7 +1491,7 @@ public class ProfessorTestController extends Controller {
 		}
 		
 		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
-		if(questionGroup==null){
+		if(questionGroup==null || !usertest.test.groups.contains(questionGroup)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
 		}
 	
@@ -1689,7 +1690,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1716,7 +1717,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
@@ -1753,12 +1754,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1798,12 +1799,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group_aux = QuestionGroup.find.byId(group_id);
-		if(group_aux==null){
+		if(group_aux==null || test.groups.contains(group_aux)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1852,12 +1853,12 @@ public class ProfessorTestController extends Controller {
 		
 		
 		Test test = Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group = QuestionGroup.find.byId(group_id);
-		if(group==null){
+		if(group==null || !test.groups.contains(group)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1881,27 +1882,33 @@ public class ProfessorTestController extends Controller {
 	
 	public static Result preview(String module_acronym, String lesson_acronym,Long test_id, Long group_number){
 		
+		
+		
+			
 		Module module = Module.findByAcronym(module_acronym);if (module==null){
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
 		}
 		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		if (lesson==null){
+		if (lesson==null || !module.lessons.contains(lesson)){
 			return redirect(routes.Application.module(module_acronym));
 		}
 		
 		Test test=Test.find.byId(test_id);
-		if(test==null){
+		if(test==null|| !lesson.tests.contains(test)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup questionGroup=QuestionGroup.findByTestAndGroupNumber(test_id,group_number);
-		if(questionGroup==null){
+		if(questionGroup==null || !test.groups.contains(questionGroup)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test.id));
 		}
-		
-		
+		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		return ok(views.html.professor.previewtest.render(module,lesson,test,questionGroup));
+}
+		
+		return redirect(routes.Application.module(module.acronym));
 	}
 }

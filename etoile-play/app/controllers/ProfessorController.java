@@ -83,6 +83,7 @@ public class ProfessorController extends Controller {
 		
 		
 		User user = User.find.byId(session("email"));
+		if(session("email")!=null && SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)) {
 		user.professorProfile.refresh();
 		List<Category> categories = Category.getAllCategories();
 		
@@ -95,6 +96,8 @@ public class ProfessorController extends Controller {
 		
 		return ok(views.html.professor.lesson.render(user, categories, lesson,
 				module, form(ProfessorLessonController.NewAlert_Form.class)));
+		}
+		return redirect(routes.Application.module(module_acronym));
 	}
 
 	public static Result myprofile() {

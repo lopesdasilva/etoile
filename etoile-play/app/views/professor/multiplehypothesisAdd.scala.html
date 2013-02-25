@@ -79,7 +79,9 @@
 										<span class="btn-group pull-right">
 										<a class="btn btn-small btn-success disabled" href="#" data-toggle="modal" role="button">right</a>
 										<a class="btn btn-small btn-danger" href="@routes.ProfessorTestController.changerightmultiplechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" >wrong</a>
+									</span>
 										</td>
+										
 										}
 										@if(!hypothesis.isCorrect){
 										<td><p class="text-error">@hypothesis.text</p></td>
@@ -87,6 +89,7 @@
 										<span class="btn-group pull-right">
 										<a class="btn btn-small btn-success " href="@routes.ProfessorTestController.changerightmultiplechoiceanswer(module.acronym, lesson.acronym, test.id, group.id, question.id, hypothesis.id)" data-toggle="modal" role="button">right</a>
 										<a class="btn btn-small btn-danger disabled" href="#" data-toggle="modal" >wrong</a>
+										</span>
 										</td>										
 										}
 										
@@ -95,7 +98,7 @@
 										<a class="btn btn-small btn-success" href="#viewhypothesis@hypothesis.id" data-toggle="modal" role="button">view</a>
 										<a class="btn btn-small btn-warning" href="#edithypothesis@hypothesis.id" data-toggle="modal" >edit</a>
 										<a class="btn btn-small btn-danger"  href="@routes.ProfessorTestController.removemultiplechoicehypothesis(module.acronym,lesson.acronym, test.id, group.id,question.id, hypothesis.id)" data-toggle="modal" role="button">delete</a>
-
+										</span>
 						
 			
 										<div id="edithypothesis@hypothesis.id" class="modal hide fade">

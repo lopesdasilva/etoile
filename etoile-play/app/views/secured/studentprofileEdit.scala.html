@@ -48,12 +48,109 @@
 				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
 			<br> <small>@user.studentProfile.shortdescription</small>
 		</h2>
-
+		
 		<div id="editProfileModal" class="modal hide fade" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+			@helper.form(routes.StudentController.editprofile(),'class->"form-horizontal"){
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">X</button>
+				<h3>Edit profile</h3>
 			</div>
-			
+			<div class="modal-body">
+				<fieldset>
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">First Name</label>
+						<div class="controls">
+							<input type="text" name="firstname" placeholder="First Name"
+								class="input-xlarge" value="@user.studentProfile.firstname" required>
+							<p class="help-block">Please insert your first name</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Last Name</label>
+						<div class="controls">
+							<input type="text" name="lastname" placeholder="Last Name"
+								class="input-xlarge" value="@user.studentProfile.lastname" required>
+							<p class="help-block">Please insert your last name</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Contact</label>
+						<div class="controls">
+							<input type="text" name="contact" placeholder="Contact"
+								class="input-xlarge" value="@user.studentProfile.contact" required>
+							<p class="help-block">Please insert your contact</p>
+						</div>
+					</div>
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Address</label>
+						<div class="controls">
+							<input type="text" name="address" placeholder="Contact"
+								class="input-xlarge" value="@user.studentProfile.address" required>
+							<p class="help-block">Please insert your address</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Profile Image
+							url</label>
+						<div class="controls">
+							<input type="text" name="imageURL" placeholder="Image url"
+								class="input-xlarge" value="@user.studentProfile.imageURL"  >
+							<p class="help-block">Please insert the url to your picture</p>
+						</div>
+					</div>
+					
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Webpage URL</label>
+						<div class="controls">
+							<input type="text" name="webpage" placeholder="Webpage URL"
+								class="input-xlarge" value="@user.studentProfile.webpage" required >
+							<p class="help-block">Please insert the url of your webpage</p>
+						</div>
+					</div>
+					
+					<div class="control-group">
+
+						<!-- Textarea -->
+						<label class="control-label">Short Description</label>
+						<div class="controls">
+							<div class="textarea">
+								<textarea type="" name="shortdescription" class="span4" rows="4" 
+									style="resize: none" required maxlength="200">@user.studentProfile.shortdescription</textarea>
+							</div>
+						</div>
+					</div>
+					
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<a class="btn" data-dismiss="modal">Close</a>
+				<button class="btn btn-success">Save changes</button>
+			</div>
+			}
+
+
+		</div>
 		
+
 		</div>
 		
 		
@@ -63,7 +160,13 @@
 	<div class="span12 container">
 	<div class="span2 well">
 	<div class="row">
-		<div class="span2"><a href="#" class="thumbnail"><img src="@user.studentProfile.imageURL" alt=""></a></div>
+		@if(user.studentProfile.imageURL.length()>0){
+		<div class="span2"><a class="thumbnail"><img src="@user.studentProfile.imageURL" alt=""></a></div>
+		}
+		@if(user.studentProfile.imageURL.length()==0){
+		<div class="span2"><a class="thumbnail"><img src="http://forum.must.ac.ug/sites/default/files/default-avatar.png" alt=""></a></div>
+		}
+		
 	</div>
 	</div>
 	<div class="span8 well">
@@ -73,9 +176,9 @@
           	<p><strong>Name: @user.studentProfile.firstname @user.studentProfile.lastname</strong></p>
           	<p><strong>Username:</strong> @user.username</p>
           	<p><strong>Contact:</strong> @user.studentProfile.contact</p>
+          	<p><strong>Email:</strong> @user.email</p>
           	<p><strong>Address:</strong> @user.studentProfile.address</p>
-          	<p><strong>Webpage:</strong> @user.studentProfile.URL</p>
-          	<p><strong>Date of birth:</strong> @user.studentProfile.date_of_birth</p>
+          	<p><strong>Webpage:</strong> @user.studentProfile.webpage</p>
           	@if(user.studentProfile.male){
           	<p>Male from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span></p>
           	}
@@ -87,17 +190,91 @@
 	</div>
 	</div>
 	
-	<h3>About</h3>
+	<h3>About
+	<small><a href="#editAboutProfileModal" data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
+	</h3>
+	
+	<div id="editAboutProfileModal" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+			@helper.form(routes.StudentController.editprofileabout(),'class->"form-horizontal"){
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">X</button>
+				<h3>Edit profile</h3>
+			</div>
+			<div class="modal-body">
+				<fieldset>
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Scientific Area</label>
+						<div class="controls">
+							<input type="text" name="scientific_area" placeholder="Scientific Area"
+								class="input-xlarge" value="@user.studentProfile.scientific_area" required>
+							<p class="help-block">Please insert your Scientific Area</p>
+						</div>
+					</div>
+
+					<div class="control-group">
+
+						<!-- Text input-->
+						<label class="control-label" for="input01">Degree</label>
+						<div class="controls">
+							<input type="text" name="degree" placeholder="Degree"
+								class="input-xlarge" value="@user.studentProfile.degree" required>
+							<p class="help-block">Please insert your degree</p>
+						</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">University</label>
+								<div class="controls">
+									<select name="university"> 
+									@for(university <- models.module.University.getAllUniversities){
+										
+										<option >@university.name</option> 
+										
+										}
+									</select>
+									<p class="help-block">Choose your university</p>
+								</div>
+							</div>
+					
+
+					<div class="control-group">
+
+						<!-- Textarea -->
+						<label class="control-label">Description</label>
+						<div class="controls">
+							<div class="textarea">
+								<textarea type="" name="description" class="span4" rows="4" 
+									style="resize: none" required >@user.studentProfile.description</textarea>
+							</div>
+						</div>
+					</div>
+					
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<a class="btn" data-dismiss="modal">Close</a>
+				<button class="btn btn-success">Save changes</button>
+			</div>
+			}
+
+
+		</div>
+		
+	
+	
 	<div class="span11 well">
 	<div class="row">
 		<div class="span10">
 		<blockquote>
-          	<p><strong>Scientific Area:</strong> @user.studentProfile.area_cientifica</p>
+          	<p><strong>Scientific Area:</strong> @user.studentProfile.scientific_area</p>
           	<p><strong>Degree:</strong> @user.studentProfile.degree</p>
-          	<p><strong>Universities: </strong>
- 			@for(university <- user.studentProfile.universities){
-			<span class=" badge badge-warning">@university.name</span>
-			}
+          	<p><strong>University:<span class=" badge badge-warning">@user.studentProfile.university.name</span> </strong>
 			</p>
 			</blockquote>
           	<p> @user.studentProfile.description</p>
@@ -112,32 +289,35 @@
 		<div class="span10">
 		<div class="offset">
 		<blockquote>
+
 			<p><strong>Modules:</strong> 
 		@for(module<-user.modules){
           <span class=" badge badge-alert">@module.name</span>
           }
            </p>
-          	<p><strong>Tests:</strong>@user.tests.size()</p>
-          	<p><strong>Suggested questions:</strong>@user.openquestions.size()</p>
+          	<p><strong>Tests:</strong> @user.tests.size()</p>
+          	<p><strong>Suggested questions:</strong> @user.openquestions.size()</p>
           	<p><strong>Forum posts:</strong> - </p>
           	<p><strong>Suggested URLs:</strong> @user.urls.size()</p>
+          	<p><strong>Marked answers: </strong>@user.answerMarker.size()</p>
           </blockquote>
    
-     
+     		<section id="reputation">
           	<h2>My reputation:</h2>
 			<div class="">
 				<button type="button" class="close" data-toggle="collapse"
-							data-target="#reputationdetails">+</button>
-						<div class="span10">
+							data-target="#reputationdetails" >+</button>
+						<div class="span9">
 						<div class="progress progress-success progress-striped">
-					<div class="bar" style="width: 55%"></div>
+					<div class="bar"  style="width: @user.globalReputation%"></div>
 					
 				</div>
 				</div>
 						
-							<div id="reputationdetails" class="collapse row-fluid">
+							<div id="reputationdetails" class="collapse row-fluid in">
 							<div class="offset1">
 							<hr>
+							
 							@if(user.modules.size()>0){
 							<h2>Modules</h2>
 							@for(modulescore <- user.modulesscores){
@@ -167,16 +347,19 @@
 								</div>
 							}
 							}
-							
+					
 							</div>
 							</div>
 				
 				
 		</div>
+				</section>
 	</div>
 	</div>
 	
 	</div>
+</div>
+
 
 
 

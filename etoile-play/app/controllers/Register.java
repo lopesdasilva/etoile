@@ -62,10 +62,13 @@ public class Register extends Controller {
 	        	user.country=form.get().inputCountry;
 	        	user.account_type = 0;
 	        	user.studentProfile = student;
+	        	user.studentProfile.imageURL = "http://forum.must.ac.ug/sites/default/files/default-avatar.png";
 			SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  
 	        	
-	        	
+	        	student.firstname = user.name;
+	        	student.contact = user.email;
+	        	student.save();	        	
 	        	
 	       	 System.out.println("DEBUG**************START**************");
 			 System.out.println("New user registration");

@@ -771,9 +771,9 @@ public class Global extends GlobalSettings {
 			student.acronym = "rpaixao";
 			student.firstname = "Rúben";
 			student.lastname = "Paixão";
-			student.URL = "etoileplatform.net";
+			student.webpage = "etoileplatform.net";
 			student.imageURL = "http://2.bp.blogspot.com/-7uG34ulFY1E/TpETsOglfwI/AAAAAAAAA5s/_60xlIvDLgs/s1600/Aprenda+a+Aprender_2.jpg";
-			student.area_cientifica = "Tecnology";
+			student.scientific_area = "Tecnology";
 			student.contact = "rub@rub.pt";
 			student.date_of_birth = new Date();
 			student.description = "Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. ";
@@ -1032,14 +1032,9 @@ public class Global extends GlobalSettings {
 			university_fct.continent=europe;
 			university_fct.save();
 			
-			student.universities.add(university);
-			student.universities.add(university_fct);
+			student.university = university;
 			student.save();
-			
-			university.students.add(student);
-			university_fct.students.add(student);
-			university.save();
-			university_fct.save();
+
 			
 			//module.university=university;
 			module_three.university=university;
@@ -1097,7 +1092,7 @@ public class Global extends GlobalSettings {
 			
 
 			// CURRICULUM
-			createCurriculumComputerScience(user_rub);
+			createCurriculumComputerScience(user_rub,q);
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
 			
@@ -1224,7 +1219,7 @@ public class Global extends GlobalSettings {
 
 	// 5. CURRICULUM COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	private void createCurriculumComputerScience(User user_rub) {
+	private void createCurriculumComputerScience(User user_rub, Question q) {
 				
 		/* */
 		
@@ -1346,7 +1341,8 @@ public class Global extends GlobalSettings {
 		complexityClassesLesson.save();
 		algomodule.save();
 		
-		
+		q.subtopic = algomodule;
+		q.save();
 		
 		comcat.curriculummodules.add(algomodule);
 		algomodule.save();

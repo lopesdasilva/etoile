@@ -26,6 +26,8 @@ GET		/myprofile/deleteprofilecontent		controllers.ProfessorProfileController.del
 POST	/myprofile/editprofilecontent		controllers.ProfessorProfileController.editprofilecontent(content: Long)
 POST	/myprofile/editprofilecontact		controllers.ProfessorProfileController.editprofilecontact()
 POST	/myprofile/editprofil				controllers.ProfessorProfileController.editprofile()
+POST	/myprofile/editprofile				controllers.StudentController.editprofile()
+POST	/myprofile/editprofileabout			controllers.StudentController.editprofileabout()
 
 
 #Static pages

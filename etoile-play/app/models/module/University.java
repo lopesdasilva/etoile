@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import models.Student;
 import models.continent.Continent;
+import models.curriculum.Curriculummodule;
 
 
 import com.avaje.ebean.Ebean;
@@ -32,6 +33,7 @@ public class University extends Model {
 	public Long id;
 	
 	@Constraints.Required
+	@Column(unique=true)
 	public String name;
 	
 	@Constraints.Required
@@ -41,7 +43,7 @@ public class University extends Model {
 	@Column(columnDefinition="TEXT")
 	public String imageURL;
 
-	@ManyToMany
+	@OneToMany
 	public List<Student> students;
 	
 	@OneToMany
@@ -59,4 +61,8 @@ public class University extends Model {
 				.findList(); 
 		return universities; 
 	}
+	
+	public static University findByName(String name) {
+        return find.where().eq("name", name).findUnique();
+    }
 }

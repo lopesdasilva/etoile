@@ -55,14 +55,12 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 			@user.name<br>
 			from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span><br>
 			<h2>My reputation:</h2>
-			<h4>Level: Guru</h4>
-				
 			<div class="">
 				<button type="button" class="close" data-toggle="collapse"
 							data-target="#reputationdetails">+</button>
 						<div class="span10">
 						<div class="progress progress-success progress-striped">
-					<div class="bar" style="width: 55%"></div>
+					<div class="bar" style="width: @user.globalReputation%"></div>
 					
 				</div>
 				</div>
@@ -70,15 +68,18 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 							<div id="reputationdetails" class="collapse row-fluid">
 							<div class="offset1">
 							<blockquote>
-							<p>Marked questions: 10</p>
-							<p>Answered tests: 20</p>
-							<p>Forum participations: 55</p>
-							<p>Suggested questions: 20</p>
+							<p><strong>Tests:</strong> @user.tests.size()</p>
+          					<p><strong>Suggested questions:</strong> @user.openquestions.size()</p>
+          					<p><strong>Forum posts:</strong> - </p>
+          					<p><strong>Suggested URLs:</strong> @user.urls.size()</p>
+          					<p><strong>Marked answers: </strong>@user.answerMarker.size()</p>
 							</div>
 							</blockquote>
 							</div>
+							<a href="/myprofile#reputation"  class="btn btn-info pull-right"><i class="icon-tasks icon-white" ></i> Details about your reputation</a>
 						
 				</div>
+				
 			</div>
 	
 	@if(user.modules.size()!=0){

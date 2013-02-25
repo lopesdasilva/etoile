@@ -6,6 +6,7 @@ import java.util.List;
 
 import controllers.Application.Login;
 import controllers.BlogController.Comment_Form;
+import controllers.ProfessorProfileController.Profile_Form;
 import controllers.StudentTestController.OpenQuestionSuggestion;
 
 import models.Blog;
@@ -46,6 +47,22 @@ public class StudentController extends Controller {
 	/**
 	 * Display the homescreen.
 	 */
+	
+	public static class Profile_Form{
+		public String firstname;
+		public String lastname;
+		public String contact;
+		public String imageURL;
+		public String webpage;
+		public String shortdescription;
+		public String address;
+		
+		public String scientific_area;
+		public String degree; 
+		public String description;
+		public String university;
+	}
+	
 	public static Result index() {
 		if(Secured.isStudent(session("email"))){
 			List<Blog> blogs = Blog.getAllBlogs();
@@ -63,6 +80,37 @@ public class StudentController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
+	public static Result editprofile(){
+		if(Secured.isStudent(session("email"))){
+			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
+			User user = User.find.byId(session("email"));
+			user.studentProfile.webpage = form.get().webpage;
+			user.studentProfile.firstname=form.get().firstname;
+			user.studentProfile.lastname=form.get().lastname;
+			user.studentProfile.contact=form.get().contact;
+			user.studentProfile.imageURL=form.get().imageURL;
+			user.studentProfile.shortdescription=form.get().shortdescription;
+			user.studentProfile.address = form.get().address;
+			user.studentProfile.save();			
+			System.out.println("URL DPS D SAVE: " + user.studentProfile.webpage);
+		}
+		return redirect(routes.ProfessorController.myprofile());
+	}
+	
+	public static Result editprofileabout(){
+		if(Secured.isStudent(session("email"))){
+			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
+			User user = User.find.byId(session("email"));
+			user.studentProfile.scientific_area = form.get().scientific_area;
+			user.studentProfile.degree = form.get().degree;
+			user.studentProfile.university = University.findByName(form.get().university);
+			user.studentProfile.description = form.get().description;
+			user.studentProfile.save();
+			user.save();
+		}
+		return redirect(routes.ProfessorController.myprofile());
+	}
+	
 	public static Result module(String module_acronym) {
 		
 			Module module = Module.findByAcronym(module_acronym);

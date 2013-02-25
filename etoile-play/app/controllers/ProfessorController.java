@@ -108,6 +108,7 @@ public class ProfessorController extends Controller {
 			}else if(session("email") != null && Secured.isStudent(session("email"))){
 			User user = User.find.byId(session("email"));
 			user.studentProfile.refresh();
+			user.studentProfile.university.refresh();
 			for(SubtopicReputation sr :user.subtopicreputation){
 				sr.subtopic.refresh();
 			}

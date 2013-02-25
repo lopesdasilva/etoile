@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -44,13 +45,13 @@ public class Student extends Model {
 	public String lastname;
 
 	@Constraints.Required
-	public String area_cientifica;
+	public String scientific_area;
 	
 	@Constraints.Required
 	public String degree;
 	
-	@ManyToMany
-	public List<University> universities;
+	@ManyToOne
+	public University university;
 	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
@@ -62,7 +63,7 @@ public class Student extends Model {
 	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
-	public String URL;
+	public String webpage;
 
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")

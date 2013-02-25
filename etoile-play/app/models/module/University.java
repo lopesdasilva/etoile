@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import models.Student;
 import models.continent.Continent;
 
 
@@ -39,6 +41,8 @@ public class University extends Model {
 	@Column(columnDefinition="TEXT")
 	public String imageURL;
 
+	@ManyToMany
+	public List<Student> students;
 	
 	@OneToMany
 	public List<Module> modules;

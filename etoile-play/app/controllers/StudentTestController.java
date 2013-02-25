@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import models.SubtopicReputation;
 import models.User;
 import models.curriculum.Category;
 import models.manytomany.Usertest;
@@ -611,6 +612,25 @@ public class StudentTestController extends Controller {
 			user.save();
 			test.save();
 			user_test.save();
+			
+			for(QuestionGroup group: test.groups){
+				for(Question question: group.questions){
+					System.out.println("QUESTION: " + question.id);
+					if(question.subtopic!=null){
+					SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
+					System.out.println("SUBTOPIC_REPUTATIOn: " + subtopicreputation!=null);
+					if(subtopicreputation==null){
+						SubtopicReputation subtopicreputationuser = new SubtopicReputation();
+						subtopicreputationuser.subtopic = question.subtopic;
+						subtopicreputationuser.user = user;
+						subtopicreputationuser.reputationAsAMarker = new Long(0);
+						subtopicreputationuser.reputationAsAStudent = new Long(0);
+						subtopicreputationuser.save();
+					}
+				}
+				}
+					
+			}
 			
 		}
 		

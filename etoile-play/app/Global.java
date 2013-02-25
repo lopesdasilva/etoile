@@ -373,6 +373,7 @@ public class Global extends GlobalSettings {
 			test_one.testImageURL = "http://www.etoilecascadesideas.eu/wp-content/uploads/2012/10/img_globe4-294x300.jpg";
 			test_one.begin_date = new Date(date_milis1);
 			test_one.finish_date = new Date(date_milis2);
+			test_one.markers_limit_date = new Date(date_milis2+640800000);
 			test_one.save();
 			
 			g.test = test_one;
@@ -386,6 +387,7 @@ public class Global extends GlobalSettings {
 			Test test_two = new Test();
 			test_two.begin_date = new Date(date_milis1);
 			test_two.finish_date = new Date(date_milis2);
+			test_two.markers_limit_date = new Date(date_milis2+640800000);
 			test_two.published=true;
 			test_two.name="Final Sum Test";
 			test_two.expectedDuration="45 min";
@@ -765,14 +767,32 @@ public class Global extends GlobalSettings {
 			
 			
 			// USERS ++++++++++++++++++++++++++++++++++++++++++++
-
+			Student student = new Student();
+			student.acronym = "rpaixao";
+			student.firstname = "Rúben";
+			student.lastname = "Paixão";
+			student.URL = "etoileplatform.net";
+			student.imageURL = "http://2.bp.blogspot.com/-7uG34ulFY1E/TpETsOglfwI/AAAAAAAAA5s/_60xlIvDLgs/s1600/Aprenda+a+Aprender_2.jpg";
+			student.area_cientifica = "Tecnology";
+			student.contact = "rub@rub.pt";
+			student.date_of_birth = new Date();
+			student.description = "Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. Esta é a minha descrição. ";
+			student.male = true;
+			student.CSSId = 99999;
+			student.shortdescription = "Esta é a minha pequena descrição. ";
+			student.address = "Rua Antonio Jose Francisco nº20 2ºesq - 4851-152 Lisboa";
+			student.degree = "Master in telecomunications";
+			student.save();
 			
-			User user = new User();
-			user.email = "rub@rub.pt";
-			user.username="rub";
-			user.password = sha1.parseSHA1Password("123");
-			user.name = "Ruben";
-			user.account_type = 0;
+			User user_rub = new User();
+			user_rub.studentProfile = student;
+			user_rub.email = "rub@rub.pt";
+			user_rub.username="rub";
+			user_rub.password = sha1.parseSHA1Password("123");
+			user_rub.name = "Ruben";
+			user_rub.account_type = 0;
+			user_rub.country = "PT";
+			user_rub.globalReputation = new Long(0);
 //			user.modules.add(module);
 			//user.modules.add(module_two);
 //			user.modules.add(module_three);
@@ -781,23 +801,26 @@ public class Global extends GlobalSettings {
 //			module_three.save();
 //			user.answersToMark.add();
 //			user.answersToMark.add();
-			user.save();
+			user_rub.save();
 			
+
 			
 			Comment c = new Comment();
 			c.text = "Great! I can't wait to try it!";
 			c.blog = blog;
-			c.user = user;
+			c.user = user_rub;
 			c.date = new Date();
 			c.save();
 
 			
-			user = new User();
+			User user = new User();
 			user.email = "rui@rui.pt";
 			user.username="rui";
 			user.password = sha1.parseSHA1Password("123");
 			user.name = "Rui Lopes da Silva";
 			user.account_type = 0;
+			user.country = "PT";
+			user.globalReputation = new Long(0);
 //			user.modules.add(module);
 			//user.modules.add(module_two);
 //			module.save();
@@ -1002,6 +1025,22 @@ public class Global extends GlobalSettings {
 			university.continent=europe;
 			university.save();
 			
+			University university_fct = new University();
+			university_fct.name="FCT";
+			university_fct.acronym="fct";
+			university_fct.imageURL="http://tele1.dee.fct.unl.pt/mst_2010_2011/figs/logo_quadrado%20JMF.gif";
+			university_fct.continent=europe;
+			university_fct.save();
+			
+			student.universities.add(university);
+			student.universities.add(university_fct);
+			student.save();
+			
+			university.students.add(student);
+			university_fct.students.add(student);
+			university.save();
+			university_fct.save();
+			
 			//module.university=university;
 			module_three.university=university;
 			//module_two.university=university;
@@ -1058,7 +1097,7 @@ public class Global extends GlobalSettings {
 			
 
 			// CURRICULUM
-			createCurriculumComputerScience();
+			createCurriculumComputerScience(user_rub);
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
 			
@@ -1185,7 +1224,7 @@ public class Global extends GlobalSettings {
 
 	// 5. CURRICULUM COMPUTER SCIENCE ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	private void createCurriculumComputerScience() {
+	private void createCurriculumComputerScience(User user_rub) {
 				
 		/* */
 		
@@ -1306,6 +1345,7 @@ public class Global extends GlobalSettings {
 		algomodule.curriculumlessons.add(complexityClassesLesson);
 		complexityClassesLesson.save();
 		algomodule.save();
+		
 		
 		
 		comcat.curriculummodules.add(algomodule);

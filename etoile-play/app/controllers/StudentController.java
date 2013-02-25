@@ -9,6 +9,8 @@ import controllers.BlogController.Comment_Form;
 import controllers.StudentTestController.OpenQuestionSuggestion;
 
 import models.Blog;
+import models.Modulescore;
+import models.SubtopicReputation;
 import models.continent.Continent;
 import models.curriculum.Category;
 import models.Comment;
@@ -107,6 +109,14 @@ public class StudentController extends Controller {
 			user.modules.add(module);
 			user.save();
 			module.save();
+			
+			Modulescore modulescore = new Modulescore();
+			modulescore.module = module;
+			modulescore.user = user;
+			modulescore.score = 0;
+			modulescore.save();
+			
+			
 
 //			for (Lesson lesson : module.lessons) {
 //				for (Test test : lesson.tests) {

@@ -58,7 +58,7 @@
 		@for(comment <- blog.comments) {
 		<blockquote>
 			<p>@comment.text</p>
-			<small>By @comment.user on @comment.date</small>
+			<small>By @comment.user from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span> on @comment.date </small>
 		</blockquote>
 		}
  <hr>

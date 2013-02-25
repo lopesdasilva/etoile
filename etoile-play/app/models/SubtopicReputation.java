@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import models.curriculum.Curriculummodule;
+import models.module.Module;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -31,5 +32,11 @@ public class SubtopicReputation extends Model{
 	@ManyToOne
 	public User user;
 	
+	public static Model.Finder<Long, SubtopicReputation> find = new Model.Finder<Long, SubtopicReputation>(
+			Long.class, SubtopicReputation.class);
+	
+	public static SubtopicReputation findByUserAndTopic(String user_email, Long subtopic_id){
+		return find.where().eq("user_email", user_email).eq("subtopic_id", subtopic_id).findUnique();
+	}
 	
 }

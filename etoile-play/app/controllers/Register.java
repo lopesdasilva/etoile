@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.Application.Login;
+import models.Student;
 import models.User;
 import play.data.Form;
 import play.mvc.Controller;
@@ -50,6 +51,9 @@ public class Register extends Controller {
 		 if(form.hasErrors()) {
 	            return badRequest(register.render(form));
 	        } else {
+	        	Student student = new Student();
+	        	student.save();
+	        	
 	        	User user = new User();
 	        	user.name=form.get().inputName;
 	        	user.username=form.get().inputUsername;
@@ -57,8 +61,12 @@ public class Register extends Controller {
 	        	user.email=form.get().inputEmail;
 	        	user.country=form.get().inputCountry;
 	        	user.account_type = 0;
+	        	user.studentProfile = student;
 			SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  
+	        	
+	        	
+	        	
 	       	 System.out.println("DEBUG**************START**************");
 			 System.out.println("New user registration");
 			 System.out.println("User: "+form.get().inputUsername);

@@ -8,6 +8,7 @@ import models.curriculum.Category;
 import models.manytomany.Usertest;
 import models.test.Test;
 import models.Language;
+import models.Modulescore;
 import models.Professor;
 import models.User;
 
@@ -68,6 +69,9 @@ public class Module extends Model {
 	
 	@ManyToOne
 	public Language language;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Modulescore> modulescore;
 	
 	//public Date created;
 

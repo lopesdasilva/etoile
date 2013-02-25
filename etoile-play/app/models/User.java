@@ -3,6 +3,7 @@ package models;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 
 import models.test.Answer;
 import models.test.AnswerMarker;
@@ -57,6 +58,9 @@ public class User extends Model {
     @OneToOne
     public Professor professorProfile;
     
+    @OneToOne
+    public Student studentProfile;
+    
     
     
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -88,7 +92,13 @@ public class User extends Model {
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<SubtopicReputation> subtopicreputation;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Modulescore> modulesscores;
+	
     // -- Queries
+	
+	@Constraints.Required
+	public Long globalReputation;
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);
     

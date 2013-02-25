@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.Blog;
 import models.Professor;
+import models.SubtopicReputation;
 import models.continent.Continent;
 import models.curriculum.Category;
 import models.module.Lesson;
@@ -104,6 +105,13 @@ public class ProfessorController extends Controller {
 		if(session("email")!=null && SecuredProfessor.isProfessor(session("email"))) {
 			User user = User.find.byId(session("email"));
 			return ok(views.html.professor.professorprofileEdit.render(user.professorProfile));		
+			}else if(session("email") != null && Secured.isStudent(session("email"))){
+			User user = User.find.byId(session("email"));
+			user.studentProfile.refresh();
+			for(SubtopicReputation sr :user.subtopicreputation){
+				sr.subtopic.refresh();
+			}
+			return ok(views.html.secured.studentprofileEdit.render(user));	
 			}
 	
 		return Application.index();

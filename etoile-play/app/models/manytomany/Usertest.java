@@ -5,11 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.User;
-import models.module.Module;
-import models.module.Lesson;
 import models.test.Answer;
 import models.test.Test;
-import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 
 import com.avaje.ebean.Ebean;
@@ -58,6 +55,7 @@ public class Usertest extends Model{
 	public List<Answer> answers;
 	
 	public float progress=0;
+	
 	public String progressString="0%";
 	
 	

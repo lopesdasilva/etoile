@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import models.module.Module;
 
 
 import com.avaje.ebean.Ebean;
@@ -25,6 +28,9 @@ public class Forum extends Model {
 	
 	@OneToMany
 	public List<Topic> topics;
+	
+	@OneToOne
+	public Module module;
 	
 	public static Model.Finder<Long, Forum> find = new Model.Finder<Long, Forum>(
 			Long.class, Forum.class);

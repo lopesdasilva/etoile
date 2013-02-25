@@ -47,15 +47,27 @@ List[models.continent.Continent]) @main("etoile project") {
 
 		<div class="span9">
 			<h3>@blog.header</h3>
-			@blog.date <br> <img src="@blog.articleImageURL" height="200"
+			<img src="@blog.articleImageURL" height="200"
 				width="200" />
 
 			<p>@blog.text</p>
+								<div class="row-fluid">
+						<div class="span10">
+							<p></p>
+							<p>
+								<i class="icon-user"></i> by <a href="">Administrator</a> | <i
+									class="icon-calendar"></i> @blog.dateToString | <i
+									class="icon-comment"></i> <a href="@routes.BlogController.blog(blog.id)#comments">@blog.comments.size Comments</a> 
+									
+							</p>
+						</div>
 			<hr>
 
 
-
+<section id="comments" >
+@if(blog.comments.size!=0){
 			<h3>Comments</h3>
+			
 			@for(comment <- blog.comments) {
 			<div class="span9 offset1">
 				<blockquote>
@@ -64,7 +76,8 @@ List[models.continent.Continent]) @main("etoile project") {
 				</blockquote>
 			</div>
 			}
-
+			}
+</section>
 		</div>
 	</div>
 </div>

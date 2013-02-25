@@ -1,5 +1,6 @@
 package models;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.persistence.*;
@@ -45,6 +46,14 @@ public class Blog extends Model {
 	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)
 	public List<Comment> comments;
 
+	public String dateToString(){
+		
+		Long yourmilliseconds = date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("EE MMM yyyy",Locale.UK);
+        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+        calendar.setTimeInMillis(yourmilliseconds);
+		return sdf.format(calendar.getTime());
+	}
 	public static Model.Finder<Long, Blog> find = new Model.Finder<Long, Blog>(
 			Long.class, Blog.class);
 
@@ -54,4 +63,5 @@ public class Blog extends Model {
 				.findList(); 
 		return blogs; 
 	}
+	
 }

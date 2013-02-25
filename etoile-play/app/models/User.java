@@ -11,7 +11,9 @@ import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.URL;
+import models.forum.Topic;
 import models.manytomany.Usertest;
+import models.manytomany.Usertopic;
 import models.module.Module;
 
 import play.db.ebean.*;
@@ -61,6 +63,8 @@ public class User extends Model {
     @OneToOne
     public Student studentProfile;
     
+    @OneToMany(cascade = {CascadeType.ALL})
+	public List<Usertopic> topicssubscriptions;
     
     
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -94,6 +98,9 @@ public class User extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Modulescore> modulesscores;
+	
+	@OneToMany(cascade= {CascadeType.ALL})
+	public List<Topic> topics;
 	
     // -- Queries
 	

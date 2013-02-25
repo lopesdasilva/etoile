@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import models.curriculum.Category;
+import models.forum.Forum;
 import models.manytomany.Usertest;
 import models.test.Test;
 import models.Language;
@@ -72,6 +73,9 @@ public class Module extends Model {
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Modulescore> modulescore;
+	
+	@OneToOne
+	public Forum forum;
 	
 	//public Date created;
 

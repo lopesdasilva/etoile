@@ -1,5 +1,5 @@
-@(blogs: List[Blog],categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
-@main("etoile project") {
+@(user: User,module: models.module.Module,topic: models.forum.Topic) 
+@main("etoile"){
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -19,11 +19,11 @@
 					<li><a href="/modules">Modules</a>
 					</li>
 <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-					<li class="active"><a href="/news">News</a>
+					<li><a href="/news">News</a>
 					</li>
 					<li><a href="/about">About</a>
 					</li>
-					<li><a href="/contact">Contact</a>
+					<li class="active"><a href="/contact">Contact</a>
 					</li>
 				</ul>
 				<!--  
@@ -44,58 +44,23 @@
 
 <div class="container-fluid">
 <div class="row-fluid">
-		@staticmenu(categories,continents) 
-		
-		
-	 
+	@usermenu(user,models.curriculum.Category.getAllCategories)
+	<!--/span-->
 
-     <div class="span9" >
-			@for(blog <- blogs) {
-			
+		<div class="span9">
+			<div class="page-header">
+				<h3>
+					@topic.title<p><small>@module.name</small></p>
+				</h3>
+				<a href="@routes.ForumController.forum(module.acronym)"
+					class="btn btn-primary btn-small">Return to forum</a>
 
-			
-						<div class="row-fluid">
-						<div class="span10">
-							<h4>
-								<strong><a href="@routes.BlogController.blog(blog.id)">@blog.header</a></strong>
-							</h4>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span2">
-							<a href="@routes.BlogController.blog(blog.id)" class="thumbnail"> <img
-								src="@blog.articleImageURL" alt="">
-							</a>
-						</div>
-						<div class="span6">
-							<p>@blog.alternateText</p>
-							<p>
-								<a class="btn" href="@routes.BlogController.blog(blog.id)">Read
-									more</a>
-							</p>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span10">
-							<p></p>
-							<p>
-								<i class="icon-user"></i> by <a href="">Administrator</a> | <i
-									class="icon-calendar"></i> @blog.dateToString | <i
-									class="icon-comment"></i> <a href="@routes.BlogController.blog(blog.id)#comments">@blog.comments.size Comments</a> 
-									
-							</p>
-						</div>
-					</div>
-				
-			<hr>
-	}	
+
+
+			</div>
+
+
 		</div>
-		
-		
-		
-		
-
- </div>
- </div>
-
+	</div>
+</div>
 }

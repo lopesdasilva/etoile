@@ -1,0 +1,108 @@
+@(user: User,module: models.module.Module) 
+@main("etoile"){
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+					</li>
+					<li><a href="/modules">Modules</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li class="active"><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid">
+	@usermenu(user,models.curriculum.Category.getAllCategories)
+	<!--/span-->
+
+		<div class="span9">
+			<div class="page-header">
+				<h3>
+					Forum<p><small>@module.name</small></p>
+				</h3>
+				<a href="@routes.Application.module(module.acronym)"
+					class="btn btn-primary btn-small">Return to the begin of this module</a>
+				</div>
+				
+				<span class="row-fluid"></span>
+				<h4>Topics regarding this module:<small>
+<a hrf="" class="btn btn-success btn-small pull-right" ><i class="icon-plus icon-white"></i> Add topic</a></small>
+</h4>
+
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th class="span1"></th>
+      <th class="span8"></th>
+      <th class="span2"></th>
+      <th class="span3"></th>
+      <th class="span3"></th>
+    </tr>
+  </thead>
+  <tbody>
+  @for(topic <- module.forum.topics){
+  
+    
+    @if(!models.manytomany.Usertopic.findByUserAndTopic(user.email,topic.id).seen){
+      <tr  class="warning">
+      <td><span class="label label-success pull-right">New</span></td>
+      <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
+       <td><i class="icon-user"></i> @topic.starter</td>
+      <td><i class="icon-comment"></i> 0 replys</td>
+      <td><small>@topic.dateToString</small></td>
+       </tr>
+      }
+      @if(models.manytomany.Usertopic.findByUserAndTopic(user.email,topic.id).seen){
+      <tr>
+      <td></td>
+      <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
+      <td><i class="icon-user"></i> @topic.starter</td>
+      <td><i class="icon-comment"></i> 0 replys</td>
+      <td><small>@topic.dateToString</small></td>
+       </tr>
+      }
+   
+   }
+  </tbody>
+</table>
+
+
+		
+
+
+		</div>
+	</div>
+</div>
+}

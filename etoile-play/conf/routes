@@ -68,6 +68,12 @@ GET		/modules/:module/signup				controllers.StudentController.signupmodule(modul
 GET     /:continent          				controllers.Application.continent(continent: String)
 GET  	/modules/:module/lessons/:lesson	controllers.Application.lesson(module: String, lesson: String)
 
+#FORUM
+GET		/modules/:module/forum				controllers.ForumController.forum(module: String)
+GET		/modules/:module/forum/topic/:topic controllers.ForumController.topic(module: String, topic: Long)
+
+
+
 #Professor Module
 GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)
 POST /modules/:module/editbibliographyitem	controllers.ProfessorModuleController.editbibliographyitem(module: String, bibliography: Long)

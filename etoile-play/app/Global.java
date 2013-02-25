@@ -1,11 +1,6 @@
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.LinkedList;
-
 import org.joda.time.DateTime;
 
 import play.*;
@@ -20,7 +15,9 @@ import models.curriculum.Category;
 import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumlesson;
 import models.curriculum.Curriculumtopic;
+import models.forum.Forum;
 import models.forum.Topic;
+import models.manytomany.Usertopic;
 import models.module.Bibliography;
 import models.module.Content;
 import models.module.Lessonalert;
@@ -28,13 +25,11 @@ import models.module.Module;
 import models.module.Lesson;
 import models.module.Lessoncontent;
 import models.module.University;
-import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionGroup;
 import models.test.question.URL;
-import models.test.question.enums.QuestionType;
 
 public class Global extends GlobalSettings {
 	
@@ -583,6 +578,17 @@ public class Global extends GlobalSettings {
 			module_demo.language = l_two;
 			module_demo.save();
 			
+			Forum forum_one = new Forum();
+			forum_one.module=module_demo;
+			forum_one.save();
+			module_demo.forum=forum_one;
+			module_demo.save();
+			
+			
+			
+			
+			
+			
 			lesson_one.module = module_demo;
 			lesson_one.save();
 			
@@ -618,6 +624,11 @@ public class Global extends GlobalSettings {
 			module_three.language = l_two;
 			module_three.save();
 			
+			Forum forum = new Forum();
+			forum.module=module_three;
+			forum.save();
+			module_three.forum=forum;
+			module_three.save();
 			
 			Module module_four = new Module();
 			module_four.name = "Network Science";
@@ -636,6 +647,13 @@ public class Global extends GlobalSettings {
 			module_four.lessons.add(lesson_net9);
 			module_four.lessons.add(lesson_net10);
 			module_four.language = l_two;
+			module_four.save();
+			
+			
+			 forum = new Forum();
+			forum.module=module_four;
+			forum.save();
+			module_four.forum=forum;
 			module_four.save();
 			
 			lesson_net1.module = module_four;
@@ -668,6 +686,12 @@ public class Global extends GlobalSettings {
 			module_five.language = l_two;
 			module_five.save();
 			
+			forum = new Forum();
+			forum.module=module_five;
+			forum.save();
+			module_five.forum=forum;
+			module_five.save();
+			
 			Module module_six = new Module();
 			module_six.name = "Réseaux génétiques et morphodynamique cellulaire";
 			module_six.acronym="resgen";
@@ -677,6 +701,11 @@ public class Global extends GlobalSettings {
 			module_six.language = l_three;
 			module_six.save();
 					
+			forum = new Forum();
+			forum.module=module_six;
+			forum.save();
+			module_six.forum=forum;
+			module_six.save();
 			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
@@ -825,7 +854,29 @@ public class Global extends GlobalSettings {
 			//user.modules.add(module_two);
 //			module.save();
 			//module_two.save();
+			user.modules.add(module_demo);
 			user.save();
+			
+			module_demo.users.add(user);
+			module_demo.save();
+			
+			
+			
+			Usertopic usertopic = new Usertopic();
+			usertopic.user=user;
+			usertopic.save();
+			
+			Topic topic= new Topic();
+			topic.forum=forum_one;
+			topic.starter=user;
+			topic.title="First Topic";
+			topic.text="How do I get more reputation?";
+			topic.date=new Date();
+			topic.topicsubscriptions.add(usertopic);
+			topic.save();
+			
+			usertopic.topic=topic;
+			usertopic.save();
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			
@@ -885,6 +936,8 @@ public class Global extends GlobalSettings {
 			prof.save();
 			p.user=prof;
 			p.save();
+			
+			
 			
 			
 			// 3. Nadine Peyriéras
@@ -1347,6 +1400,9 @@ public class Global extends GlobalSettings {
 		comcat.curriculummodules.add(algomodule);
 		algomodule.save();
 		comcat.save();	
+		
+	
+		
 		
 	}
 

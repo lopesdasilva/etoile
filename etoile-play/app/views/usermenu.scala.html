@@ -1,4 +1,4 @@
-@(user: User,categories: List[models.curriculum.Category])
+@(user: User,categories: List[models.curriculum.Category],active:String)
 
 <div class="span3">
 	<div class="well sidebar-nav">
@@ -7,32 +7,48 @@
 			<li><a href="/myprofile">My Profile</a></li>
 		</ul>
 	</div>
-	<div class="well sidebar-nav" style="background: #0088CC;">
+	<div class="well sidebar-nav">
 			<ul class="nav nav-list">
-				<li class="nav-header" style="color: white; text-shadow: #0088CC;">My
-					Modules</li> @for(module <- user.modules) {
-				<li><a href="@routes.Application.module(module.acronym)"
-					style="text-shadow: #0088CC; color: #999999">@module.name</a></li> }
+				<li class="nav-header">My Modules</li> 
+				@for(module <- user.modules) {
+				@if(active.equals(module.acronym)){
+					<li class="active"><a><i class="icon-chevron-down" data-target="#@module.acronym" data-toggle="collapse"></i>@module.name</a></li>
+					<ul class="nav nav-list collapse in" id="@module.acronym"> 
+					<li><a href="@routes.ForumController.forum(module.acronym)">Forum</a></li>
+					<li><a href="@routes.Application.module(module.acronym)#lessons">Lessons</a></li>
+					</ul>
+				}@if(!active.equals(module.acronym)){
+					<li>
+					<span><i class="icon-chevron-down" data-target="#@module.acronym" data-toggle="collapse" ></i><a  href="@routes.Application.module(module.acronym)"> @module.name</a></span>
+					</li>
+					<ul class="nav nav-list collapse" id="@module.acronym"> 
+					<li><a href="@routes.ForumController.forum(module.acronym)">Forum</a></li>
+					<li><a href="@routes.Application.module(module.acronym)#lessons">Lessons</a></li>
+					</ul>
+					}
+					
+					
+					}
 			</ul>
 		</div>
-		
-		<div class="well sidebar-nav">
+
+	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
-		<li class="nav-header">
-		<span>
-		<i class="icon-pencil"></i>
-		My Tests 
-		<span class="caret pull-right" 	data-target="#test" data-toggle="collapse"></span>
-		</span>
-			<ul class="nav nav-list collapse in" id="test">
-				<li><a href="/ticket_list.cfm" title="This is a test to....">First Sum Test</a></li>
-				<li><a href="/account/" title="This is the final evaluation of Lesson number 2.">Final Sum Test</a></li>
-			</ul>
-			</li>
+			<li class="nav-header"><span> 
+					My Tests <span class="caret pull-right" data-target="#test"
+					data-toggle="collapse"></span>
+			</span>
+				<ul class="nav nav-list collapse in" id="test">
+					<li><a href="/ticket_list.cfm" title="This is a test to....">First
+							Sum Test</a></li>
+					<li><a href="/account/"
+						title="This is the final evaluation of Lesson number 2.">Final
+							Sum Test</a></li>
+				</ul></li>
 		</ul>
-		</div>
-		
-		@if(user.haveAnswersToMark()) {
+	</div>
+
+	@if(user.haveAnswersToMark()) {
 		<div class="well sidebar-nav" style="background: #DEDE04;">
 			<ul class="nav nav-list">
 				<li class="nav-header" style="color: white; text-shadow: #0088CC;">My

@@ -48,7 +48,7 @@
 <div class="container-fluid">
 
 	<div class="row-fluid">
-		@usermenu(user,categories)
+	@usermenu(user,models.curriculum.Category.getAllCategories,module.acronym)
 		<!--/span-->
 
 
@@ -70,8 +70,9 @@
 
 
 
-
-			<div class="row-fluid span20">
+			<section id="lessons">
+				<div class="row-fluid span20">
+			
 				<h3>Lessons</h3>
 			</div>
 			<div class="row-fluid span20">
@@ -106,6 +107,7 @@
 				<hr>
 				}
 			</div>
+			</section>
 
 			<div class="row-fluid span20">
 				<h3>Bibliography</h3>

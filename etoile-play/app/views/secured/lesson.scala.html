@@ -44,7 +44,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 </div>
 <div class="container-fluid">
 	<div class="row-fluid">
-		@usermenu(user,categories)
+	@usermenu(user,models.curriculum.Category.getAllCategories,module.acronym)
 
 		<div class="span9">
 			<div class="page-header">

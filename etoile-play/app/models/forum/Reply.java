@@ -1,7 +1,12 @@
 package models.forum;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +36,10 @@ public class Reply extends Model {
 	@ManyToOne
 	public User user;
 
+	
+	@Constraints.Required
+	public Date date;
+	
 	//public Date created;
 
 	public static Model.Finder<Long, Reply> find = new Model.Finder<Long, Reply>(
@@ -40,6 +49,14 @@ public class Reply extends Model {
 		List<Reply> replies = new ArrayList<Reply>();
 		replies = Ebean.find(Reply.class).findList(); 
 		return replies; 
+	}
+	
+	public String dateToString(){
+		Long yourmilliseconds = date.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm EE MMM yyyy",Locale.UK);
+		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
+		calendar.setTimeInMillis(yourmilliseconds);
+		return sdf.format(calendar.getTime());
 	}
 
 }

@@ -54,33 +54,40 @@
 				</h3>
 				<a href="@routes.ForumController.forum(module.acronym)"
 					class="btn btn-primary btn-small">Return to forum</a>
-			</div>
-			<div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="@topic.starter.studentProfile.imageURL" height="50" width="50">
-              </a>
-              <div class="media-body">
-                <h4 class="media-heading">Media heading</h4>
-                			@topic.text
-              </div>
-            </div>
-		
-			<hr>
-			@for(reply <- topic.replies){ 
-			 <div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="@reply.user.studentProfile.imageURL" height="50" width="50">
-              </a>
-              <div class="media-body">
-                <h4 class="media-heading">Media heading</h4>
-                		@reply.text 
-              </div>
-            </div>
-           <hr>
+			</div>		
 			
-	
-			}
+			@for(reply <- topic.replies){ 
+			
+
+			
+					<div class="row-fluid">
+						<div class="span2">
+							<a href="#" class="thumbnail"> <img
+								src="@reply.user.studentProfile.imageURL" alt="">
+							</a>
+						</div>
+						<div class="span10">
+							<p>	@reply.text</p>
+							
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span10">
+							<p></p>
+							<p>
+								<i class="icon-user"></i> by <a href="">@reply.user.username</a> | <i
+									class="icon-calendar"></i> @reply.dateToString | <i
+									class="icon-comment"></i> <a href="">@reply.user.replies.size posts</a> 
+									
+							</p>
+						</div>
+					</div>
+				
+			<hr>
+	}	
+		</div>
+			
+			
 		</div>
 	</div>
-</div>
 }

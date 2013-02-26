@@ -30,12 +30,6 @@ public class Topic extends Model {
 	
 	@Constraints.Required
 	public String title;
-
-	@Constraints.Required
-	@Constraints.MaxLength(value = 255)
-	@Column(columnDefinition="TEXT")
-	public String text;
-
 	@ManyToOne
 	public Forum forum;
 

@@ -1593,8 +1593,8 @@ public class ProfessorTestController extends Controller {
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
-		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
-		if(questionGroup==null){
+		QuestionGroup group=usertest.test.groups.get((int) (group_number-1));
+		if(group==null || !usertest.test.groups.contains(group)){
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		

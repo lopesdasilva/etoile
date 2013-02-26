@@ -311,9 +311,9 @@ public class StudentController extends Controller {
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
 		}
-		
+		User user = User.find.byId(request().username());
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		if (lesson==null){
+		if (lesson==null || !module.users.contains(user)){
 			return redirect(routes.Application.module(module_acronym));
 		}
 		
@@ -323,7 +323,7 @@ public class StudentController extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		
 		
-		User user = User.find.byId(request().username());
+		
 		module.language.refresh();
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,

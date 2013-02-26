@@ -896,7 +896,6 @@ public class Global extends GlobalSettings {
 			topic.forum=forum_one;
 			topic.starter=user;
 			topic.title="First Topic";
-			topic.text="How do I get more reputation?";
 			topic.date=new Date();
 			topic.topicsubscriptions.add(usertopic);
 			topic.save();
@@ -905,11 +904,57 @@ public class Global extends GlobalSettings {
 			usertopic.save();
 			
 			Reply reply = new Reply();
-			reply.text="Hi!, you need to do peermarking and solve tests.";
+			reply.text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis tellus libero, nec suscipit elit. Pellentesque vehicula felis nec ipsum dignissim imperdiet. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec condimentum, diam et rutrum ultricies, justo elit tempor elit, at tempor sapien tellus ac erat. Phasellus tempus fermentum ullamcorper. Quisque lacinia lorem eu risus aliquet commodo. Aliquam leo enim, scelerisque sed euismod ut, porttitor at lorem. Vestibulum euismod convallis tempor. Aliquam lacus libero, vehicula id porta nec, dignissim vel elit. Curabitur et dolor vel nisi mattis blandit. Nullam ornare lorem eu dui tempor luctus.";
+			reply.user=user;
+			reply.topic=topic;
+			reply.date=new Date();
+			reply.save();
+			user.replies.add(reply);
+			user.save();
+			
+			reply = new Reply();
+			reply.text="In hac habitasse platea dictumst. Quisque non nisl bibendum lectus luctus mollis. Donec hendrerit ullamcorper tortor dignissim mollis. Pellentesque a arcu eget sapien ultrices scelerisque ac ut augue. Praesent arcu magna, euismod nec rutrum nec, eleifend vitae tellus. Proin posuere suscipit blandit. In hac habitasse platea dictumst. Nam convallis nunc a dui dapibus in vulputate lectus vulputate. Suspendisse nec ligula leo, at pellentesque ligula. Maecenas consectetur metus eget sem consequat et vehicula ipsum pharetra. Nulla vel diam nisl, in aliquet felis. Cras non tempor justo. Donec eleifend ligula nec odio mollis vitae adipiscing elit congue. Curabitur ut turpis quis lorem malesuada ultricies. Sed magna mauris, consequat vel tincidunt non, ullamcorper ut sapien. Duis ut lacus quis dui condimentum venenatis eget id lorem.";
 			reply.user=user_rub;
+			reply.topic=topic;
+			reply.date=new Date();
 			reply.save();
 			user_rub.replies.add(reply);
 			user_rub.save();
+			topic.replies.add(reply);
+			topic.save();
+			
+			reply = new Reply();
+			reply.text="Praesent ut neque nec turpis lobortis pretium a vel leo. Sed viverra varius justo. Phasellus commodo nibh ut erat sollicitudin convallis. Duis lectus tortor, sagittis ultrices viverra eu, porta vel justo. In lobortis, tortor et dapibus pellentesque, mauris orci placerat libero, at posuere felis turpis vel elit. Donec tellus massa, condimentum in placerat ac, consectetur consequat nulla. Maecenas at odio a arcu consequat luctus. Integer id lectus lorem, quis aliquet magna. Integer ornare, massa a elementum viverra, tortor lectus interdum arcu, laoreet dapibus augue risus egestas metus. Vestibulum vel purus nec dolor ullamcorper venenatis a quis purus. Suspendisse dictum eleifend augue quis ultrices. Integer lacinia pulvinar dui non venenatis. Ut convallis tincidunt adipiscing. Donec id orci nec nisi pharetra iaculis sit amet vitae odio. Sed eget magna diam, vel placerat nunc.";
+			reply.user=user;
+			reply.topic=topic;
+			reply.date=new Date();
+			reply.save();
+			user.replies.add(reply);
+			user.save();
+			topic.replies.add(reply);
+			topic.save();
+			
+			reply = new Reply();
+			reply.text="Ut ultrices tristique nisi et mollis. Phasellus nec dolor laoreet risus malesuada aliquam sit amet eget massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent condimentum fermentum gravida. Fusce vel sapien massa, vitae tristique nibh. Integer sit amet elementum ante. Cras vel magna in ipsum faucibus convallis. In pellentesque pulvinar quam, nec laoreet sapien dignissim non. Quisque lacinia lorem velit, non dictum lorem.";
+			reply.user=user_rub;
+			reply.topic=topic;
+			reply.date=new Date();
+			reply.save();
+			user_rub.replies.add(reply);
+			user_rub.save();
+			topic.replies.add(reply);
+			topic.save();
+			
+			reply = new Reply();
+			reply.text="Phasellus vulputate libero sit amet elit tincidunt rhoncus. Donec arcu sem, adipiscing sit amet pretium in, sollicitudin eu orci. Morbi ac auctor tortor. Integer eu felis lacus, in dapibus quam. Curabitur elit elit, pharetra vitae dignissim non, euismod nec dolor. Nunc molestie laoreet ipsum sit amet suscipit. Cras non augue eget est faucibus auctor. Nulla pellentesque, neque ac condimentum scelerisque, odio eros facilisis nisl, in ornare purus nulla convallis lectus. Phasellus non odio nisl. Maecenas varius venenatis diam quis sagittis. Morbi dapibus, nisi ac convallis egestas, nulla leo tincidunt sem, sit amet consequat massa tortor ut libero.";
+			reply.user=user;
+			reply.topic=topic;
+			reply.date=new Date();
+			reply.save();
+			user.replies.add(reply);
+			user.save();
+			topic.replies.add(reply);
+			topic.save();
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			

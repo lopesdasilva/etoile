@@ -257,6 +257,7 @@ create table reply (
   text                      TEXT,
   topic_id                  bigint,
   user_email                varchar(255),
+  date                      datetime,
   constraint pk_reply primary key (id))
 ;
 
@@ -309,7 +310,6 @@ create table test (
 create table topic (
   id                        bigint auto_increment not null,
   title                     varchar(255),
-  text                      TEXT,
   forum_id                  bigint,
   starter_email             varchar(255),
   date                      datetime,

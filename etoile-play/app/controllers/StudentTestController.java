@@ -90,9 +90,9 @@ public class StudentTestController extends Controller {
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
 		}
-		
+		User user = User.find.byId(request().username());
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		if (lesson==null){
+		if (lesson==null || !module.users.contains(user)){
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
@@ -104,7 +104,7 @@ public class StudentTestController extends Controller {
 		
 		
 		
-			User user = User.find.byId(request().username());
+			
 			
 			Usertest usertest = Usertest.findByUserAndTest(user.email,test.id);
 			
@@ -193,8 +193,9 @@ public class StudentTestController extends Controller {
 			return redirect(routes.Application.modules());
 		}
 		
+		User user = User.find.byId(request().username());
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		if (lesson==null){
+		if (lesson==null || !module.users.contains(user)){
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
@@ -204,11 +205,7 @@ public class StudentTestController extends Controller {
 		}
 		
 		
-		
-		
-		
-		
-		User user = User.find.byId(request().username());
+	
 		Test test_aux= Test.find.byId(test_id);
 		
 
@@ -333,8 +330,9 @@ public class StudentTestController extends Controller {
 			return redirect(routes.Application.modules());
 		}
 		
+		User user = User.find.byId(request().username());
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
-		if (lesson==null){
+		if (lesson==null || !module.users.contains(user)){
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
@@ -347,7 +345,7 @@ public class StudentTestController extends Controller {
 		if(question==null){
 				return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
-		User user = User.find.byId(request().username());
+		
 		Usertest usertest=Usertest.find.byId(usertest_id);
 		if(usertest==null || !usertest.user.email.equals(user.email)){
 			System.out.println(user);

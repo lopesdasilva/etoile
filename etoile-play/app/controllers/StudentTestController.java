@@ -354,6 +354,8 @@ public class StudentTestController extends Controller {
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
+		
+		if(Secured.isStudent(user.email) && test.published && !test.expired && !usertest.submitted ){
 		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
@@ -423,7 +425,8 @@ public class StudentTestController extends Controller {
 			userTest.save();
 			System.out.println("Vou fazer redirect");
 			return redirect(routes.StudentTestController.question(question_number,test_id,lesson_acronym,module_acronym));
-
+		}
+		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 	}
 	
 	
@@ -448,11 +451,12 @@ public class StudentTestController extends Controller {
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
-		
 		User user = User.find.byId(request().username());
-		if(Secured.isStudent(user.email) && test_aux.published && !test_aux.expired ){
-		
 		Usertest usertest= Usertest.findByUserAndTest(user.email, test_id);
+		
+		if(Secured.isStudent(user.email) && test_aux.published && !test_aux.expired && !usertest.submitted ){
+		
+		
 		usertest.submitted=true;
 		usertest.save();
 		System.out.println("USERMAIL:" + user.email);

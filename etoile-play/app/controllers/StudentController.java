@@ -307,6 +307,7 @@ public class StudentController extends Controller {
 	}
 	
 	public static Result lesson(String lesson_acronym, String module_acronym) {
+		if(Secured.isStudent(session("email"))){
 		Module module = Module.findByAcronym(module_acronym);if (module==null){
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
@@ -318,7 +319,7 @@ public class StudentController extends Controller {
 		}
 		
 		
-		if(Secured.isStudent(session("email"))){
+		
 			
 		List<Category> categories = Category.getAllCategories();
 		

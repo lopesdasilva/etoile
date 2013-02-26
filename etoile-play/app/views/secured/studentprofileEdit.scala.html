@@ -274,7 +274,11 @@
 		<blockquote>
           	<p><strong>Scientific Area:</strong> @user.studentProfile.scientific_area</p>
           	<p><strong>Degree:</strong> @user.studentProfile.degree</p>
-          	<p><strong>University:<span class=" badge badge-warning">@user.studentProfile.university.name</span> </strong>
+          	<p><strong>University:
+          	@if(user.studentProfile.university!=null){
+          	<span class=" badge badge-warning">@user.studentProfile.university.name</span> 
+          	}
+          	</strong>
 			</p>
 			</blockquote>
           	<p> @user.studentProfile.description</p>

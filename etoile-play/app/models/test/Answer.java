@@ -28,6 +28,10 @@ public class Answer extends Model{
     @Column(columnDefinition="TEXT")
 	public String answer;
 	
+	@Constraints.Required
+    @Formats.NonEmpty
+	public boolean isSaved;
+	
 	@ManyToOne
 	public Question openQuestion;
 

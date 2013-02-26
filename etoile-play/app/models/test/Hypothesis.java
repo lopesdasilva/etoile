@@ -31,6 +31,10 @@ public class Hypothesis extends Model{
 	public boolean isCorrect;
 	
 	@Constraints.Required
+    @Formats.NonEmpty
+	public boolean isSaved;
+	
+	@Constraints.Required
 	public String questionImageURL;
 	
 

@@ -361,8 +361,12 @@ public class StudentTestController extends Controller {
 				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
 				System.out.println(last_answers.size());
+				if(!last_answers.get(0).isSaved){
+					changeTestProgress(test_id, usertest_id, user.email);
+				}
 				for(Hypothesis h : last_answers){
 					h.selected = false;
+					h.isSaved = true;
 					h.save();
 				}
 				if(form.get().ocqanswer!=null){
@@ -380,9 +384,12 @@ public class StudentTestController extends Controller {
 			}
 			
 			List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
-			
+			if(!last_answers.get(0).isSaved){
+				changeTestProgress(test_id, usertest_id, user.email);
+			}
 			for(Hypothesis h : last_answers){
 				h.selected = false;
+				h.isSaved = true;
 				h.save();
 				
 			}
@@ -390,6 +397,7 @@ public class StudentTestController extends Controller {
 			for(int h : form.get().mcqanswers){
 				if(h!=0){
 					for(Hypothesis hypothesis: last_answers){
+						hypothesis.isSaved = true;
 						if(hypothesis.id == h){
 							hypothesis.selected = true;
 							hypothesis.save();
@@ -404,31 +412,37 @@ public class StudentTestController extends Controller {
 			System.out.println("Open Answer: " + form.get().qanswer);
 			
 			Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id); // Resposta Guardada
+			if(!answer.isSaved){
+				changeTestProgress(test_id, usertest_id, user.email);
+			}
 			answer.answer = form.get().qanswer;
+			answer.isSaved = true;
 			answer.save();
 		}
 		
-			int totalNumQuestions=0;
-			Test t= Test.find.byId(test_id);
-			for (QuestionGroup g: t.groups){
-				totalNumQuestions+=g.questions.size();
-			}
 			
-
-			
-			
-			
-			Usertest userTest= Usertest.findByUserAndTest(user.email, test_id);
-			float progress = userTest.progress+ 100/totalNumQuestions;
-			System.out.println("progress: "+progress);
-			userTest.progress=progress;
-			userTest.save();
-			System.out.println("Vou fazer redirect");
 			return redirect(routes.StudentTestController.question(question_number,test_id,lesson_acronym,module_acronym));
 		}
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 	}
 	
+	public static void changeTestProgress(Long test_id, Long usertest_id, String user_email){
+		int totalNumQuestions=0;
+		Test t= Test.find.byId(test_id);
+		for (QuestionGroup g: t.groups){
+			totalNumQuestions+=g.questions.size();
+		}
+		Usertest userTest= Usertest.findByUserAndTest(user_email, test_id);
+		float progress = userTest.progress+ 100/totalNumQuestions;
+		System.out.println("progress: "+progress);
+		userTest.progress=progress;
+		if(userTest.progress == 99){
+			userTest.progress = progress+1;
+			
+		}
+		userTest.save();
+		System.out.println("Vou fazer redirect");
+	}
 	
 
 

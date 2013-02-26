@@ -85,6 +85,27 @@
 				
 			<hr>
 	}	
+	<div class="offset1">
+	<div class="row-fluid">
+						<div class="span2">
+							<a class="thumbnail"> <img
+								src="@user.studentProfile.imageURL">
+							</a>
+						</div>
+						
+					
+						<div class="span10">
+							@helper.form(routes.ForumController.addReply(module.acronym,topic.id)){
+							<textarea required class="span20" rows="6" name="reply"></textarea>
+							<p>
+								<button class="btn btn-success" >Post reply</button>
+							</p>
+								}
+						</div>
+					
+					</div>
+					
+	
 		</div>
 			
 			

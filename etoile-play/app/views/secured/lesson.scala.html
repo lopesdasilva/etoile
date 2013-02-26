@@ -123,33 +123,36 @@ models.module.Lesson, module: models.module.Module) @import helper._
 											<h3 id="myModalLabel">New question</h3>
 										</div>
 										@helper.form(routes.StudentTestController.addquestion(test.id,lesson.acronym,module.acronym)){
-											<fieldset>
+											
 												<div class="modal-body">
+												
+													
+														<div class="control-group">
+													<!-- Textarea -->
+										<label class="control-label" >In order to solve the
+															test you firstly need to suggest a <b>QUESTION</b>:</label>
+										<div class="controls">
+											<div class="textarea">
+												<textarea  type=""  ame="openquestionsuggestion" class="span20" rows="5"
+													 required style="resize: none"></textarea>
+											</div>
+										</div>
+										</div>
+													
 													<div class="control-group">
-
-														<!-- Textarea -->
-														<label class="control-label">In order to solve the
-															test you firstly need to suggest a <b>QUESTION</b>:
-															<div class="controls">
-																<div class="textarea">
-																	<textarea required class="span20 required" rows="5" name="openquestionsuggestion"
-																		style="resize: none" placeholder="Please insert your question suggestion."></textarea>
-																</div>
-															</div>
-													</div>
-													<div class="control-group">
-														<div class="controls">
-
-															In order to solve the test you firstly need to suggest an
-															<b>ANSWER</b> for your question:
-															<textarea required class="span20 required" rows="5"
-																name="openanswersuggestion"
-																placeholder="Please insert your answer suggestion."
-																style="resize: none"></textarea>
-
-
-														</div>
-													</div>
+													<!-- Textarea -->
+										<label class="control-label" >In order to solve the test you firstly need to suggest an
+															<b>ANSWER</b> for your question:</label>
+										<div class="controls">
+											<div class="textarea">
+												<textarea  type=""  name="openanswersuggestion" class="span20" rows="5"
+													 required style="resize: none"></textarea>
+											</div>
+										</div>
+										</div>
+													
+													
+												
 												</div>
 
 												<div class="modal-footer">
@@ -158,7 +161,6 @@ models.module.Lesson, module: models.module.Module) @import helper._
 
 													</div>
 												</div>
-											</fieldset>
 										}
 									</div>
 								<tr>

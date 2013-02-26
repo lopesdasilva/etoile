@@ -69,10 +69,10 @@ GET     /:continent          				controllers.Application.continent(continent: St
 GET  	/modules/:module/lessons/:lesson	controllers.Application.lesson(module: String, lesson: String)
 
 #FORUM
-GET		/modules/:module/forum				controllers.ForumController.forum(module: String)
-GET		/modules/:module/forum/topic/:topic controllers.ForumController.topic(module: String, topic: Long)
-
-
+GET		/modules/:module/forum							controllers.ForumController.forum(module: String)
+GET		/modules/:module/forum/topic/:topic 			controllers.ForumController.topic(module: String, topic: Long)
+GET		/modules/:module/forum/addtopic					controllers.ForumController.addtopic(module: String)
+GET		/modules/:module/forum/topic/:topic/addReply 	controllers.ForumController.addReply(module: String, topic: Long)
 
 #Professor Module
 GET /modules/:module/deletebibliographyitem controllers.ProfessorModuleController.deletebibliographyitem(module: String, bibliography: Long)

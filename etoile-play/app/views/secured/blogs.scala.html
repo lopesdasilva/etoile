@@ -49,28 +49,45 @@
 
 
 		<div class="span9" >
-			@for(blog <- blogs) {
-			<div class="row-fluid">
-				<a href="@routes.BlogController.blog(blog.id)"><h4>@blog.header</h4></a>
-				<div class="span2">
-					<img src="@blog.articleImageURL" height="100" width="100" />
-				</div>
-				<div class="span9">
-					<p>@blog.alternateText</p>
-					<p>
-						
-					</p>
-
-				</div>
-				
+		@for(blog <- blogs) {
+			
 
 			
-			</div>
-			<br>
-			<a class="btn btn-info" href="@routes.BlogController.blog(blog.id)">View
-							details &raquo;</a>
-				<hr>
-			}
+						<div class="row-fluid">
+						<div class="span10">
+							<h4>
+								<strong><a href="@routes.BlogController.blog(blog.id)">@blog.header</a></strong>
+							</h4>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span2">
+							<a href="@routes.BlogController.blog(blog.id)" class="thumbnail"> <img
+								src="@blog.articleImageURL" alt="">
+							</a>
+						</div>
+						<div class="span6">
+							<p>@blog.alternateText</p>
+							<p>
+								<a class="btn" href="@routes.BlogController.blog(blog.id)">Read
+									more</a>
+							</p>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span10">
+							<p></p>
+							<p>
+								<i class="icon-user"></i> by <a href="">Administrator</a> | <i
+									class="icon-calendar"></i> @blog.dateToString | <i
+									class="icon-comment"></i> <a href="@routes.BlogController.blog(blog.id)#comments">@blog.comments.size Comments</a> 
+									
+							</p>
+						</div>
+					</div>
+				
+			<hr>
+	}	
 		</div>
 
  </div>

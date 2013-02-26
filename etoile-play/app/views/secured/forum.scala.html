@@ -108,46 +108,37 @@
 										aria-hidden="true">X</button>
 									<h3>New Topic</h3>
 								</div>
-				<form class="form-horizontal">
-					<fieldset>
+				@helper.form(routes.ForumController.addtopic(module.acronym)){
+					
 						<div class="modal-body">
 							<div class="control-group">
 
 								<!-- Text input-->
-								<label class="control-label" for="input01">Text input</label>
+								<label class="control-label">Title</label>
 								<div class="controls">
-									<input type="text" placeholder="placeholder"
+									<input type="text" name="title"  maxlength="40" required placeholder="placeholder"
 										class="input-xlarge">
-									<p class="help-block">Supporting help text</p>
+									
 								</div>
 							</div>
 
 							<div class="control-group">
 
 								<!-- Textarea -->
-								<label class="control-label">Textarea</label>
-								<div class="controls">
-									<div class="textarea">
-										<textarea type="" class=""> </textarea>
-									</div>
-								</div>
-							</div>
-
-							<div class="control-group">
-								<label class="control-label">Button</label>
-
-								<!-- Button -->
-								<div class="controls">
-									<button class="btn btn-success">Button</button>
-								</div>
+										<label class="control-label">Group subject</label>
+										<div class="controls">
+											<div class="textarea">
+												<textarea name="reply" class="" class="span20" rows="5" required></textarea>
+											</div>
+										</div>
 							</div>
 						</div>
-
-					</fieldset>
-				</form>
-
-
-			</div>
+						<div class="modal-footer">
+							<div class="controls">
+								<button  class="btn btn-success">Add topic</button>
+					
+						</div>
+						</div>}</div>
 
 
 		</div>

@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table answer (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   answer                    TEXT,
   is_saved                  boolean,
   open_question_id          bigint,
@@ -17,18 +17,18 @@ create table answer (
 ;
 
 create table answer_marker (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   answerscore               bigint,
   markerscore               bigint,
   answer_id                 bigint,
   markercomment             TEXT,
   user_email                varchar(255),
-  is_marked                 boolean,
+  is_marked                 tinyint(1) default 0,
   constraint pk_answer_marker primary key (id))
 ;
 
 create table bibliography (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   title                     varchar(255),
   description               TEXT,
   image_url                 TEXT,
@@ -38,18 +38,18 @@ create table bibliography (
 ;
 
 create table blog (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   header                    varchar(255),
   alternate_header          varchar(255),
   text                      TEXT,
   alternate_text            TEXT,
   article_image_url         TEXT,
-  date                      timestamp,
+  date                      datetime,
   constraint pk_blog primary key (id))
 ;
 
 create table category (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   keyword                   varchar(255),
   name                      varchar(255),
   description               varchar(255),
@@ -58,16 +58,16 @@ create table category (
 ;
 
 create table comment (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   text                      TEXT,
   blog_id                   bigint,
   user_email                varchar(255),
-  date                      timestamp,
+  date                      datetime,
   constraint pk_comment primary key (id))
 ;
 
 create table content (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   title                     varchar(255),
   text                      TEXT,
   module_id                 bigint,
@@ -75,7 +75,7 @@ create table content (
 ;
 
 create table continent (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
   image_url                 TEXT,
@@ -83,7 +83,7 @@ create table continent (
 ;
 
 create table curriculumlesson (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   keyword                   varchar(255),
   name                      varchar(255),
   text                      TEXT,
@@ -92,7 +92,7 @@ create table curriculumlesson (
 ;
 
 create table curriculummodule (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   keyword                   varchar(255),
   name                      varchar(255),
   text                      TEXT,
@@ -102,7 +102,7 @@ create table curriculummodule (
 ;
 
 create table curriculumtopic (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   keyword                   varchar(255),
   text                      TEXT,
   constraint uq_curriculumtopic_keyword unique (keyword),
@@ -110,33 +110,34 @@ create table curriculumtopic (
 ;
 
 create table forum (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   description               varchar(255),
   module_id                 bigint,
   constraint pk_forum primary key (id))
 ;
 
 create table hypothesis (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   number                    integer,
   text                      varchar(255),
   is_correct                boolean,
   is_saved                  boolean,
+  is_correct                tinyint(1) default 0,
   question_image_url        varchar(255),
   question_id               bigint,
-  selected                  boolean,
+  selected                  tinyint(1) default 0,
   user_email                varchar(255),
   constraint pk_hypothesis primary key (id))
 ;
 
 create table language (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   constraint pk_language primary key (id))
 ;
 
 create table lesson (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   number                    integer,
   acronym                   varchar(255),
@@ -149,7 +150,7 @@ create table lesson (
 ;
 
 create table lessonalert (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      varchar(255),
   lesson_id                 bigint,
@@ -158,7 +159,7 @@ create table lessonalert (
 ;
 
 create table lessoncontent (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      varchar(255),
   lesson_id                 bigint,
@@ -168,7 +169,7 @@ create table lessoncontent (
 ;
 
 create table module (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
   duration                  varchar(255),
@@ -182,7 +183,7 @@ create table module (
 ;
 
 create table modulescore (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   score                     integer,
   module_id                 bigint,
   user_email                varchar(255),
@@ -190,7 +191,7 @@ create table modulescore (
 ;
 
 create table professor (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   email                     varchar(255),
   acronym                   varchar(255),
   firstname                 varchar(255),
@@ -204,7 +205,7 @@ create table professor (
 ;
 
 create table professor_content (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   title                     varchar(255),
   image_url                 TEXT,
   description               TEXT,
@@ -213,7 +214,7 @@ create table professor_content (
 ;
 
 create table question (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   lesson_id                 bigint,
   user_email                varchar(255),
   weight                    integer,
@@ -225,17 +226,17 @@ create table question (
   image_url                 TEXT,
   video_url                 TEXT,
   keywords                  varchar(255),
-  iscopy                    boolean,
+  iscopy                    tinyint(1) default 0,
   openanswer_id             bigint,
   subtopic_id               bigint,
   constraint pk_question primary key (id))
 ;
 
 create table question_evaluation (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   score                     double,
   percent                   integer,
-  is_correct                boolean,
+  is_correct                tinyint(1) default 0,
   usertest_id               bigint,
   question_id               bigint,
   answer_id                 bigint,
@@ -245,7 +246,7 @@ create table question_evaluation (
 ;
 
 create table question_group (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   test_id                   bigint,
   question                  TEXT,
   image_url                 varchar(255),
@@ -256,6 +257,7 @@ create table question_group (
 
 create table reply (
   id                        bigint not null,
+  id                        bigint auto_increment not null,
   text                      TEXT,
   topic_id                  bigint,
   user_email                varchar(255),
@@ -264,7 +266,7 @@ create table reply (
 ;
 
 create table student (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   email                     varchar(255),
   acronym                   varchar(255),
   firstname                 varchar(255),
@@ -278,15 +280,15 @@ create table student (
   contact                   TEXT,
   address                   TEXT,
   shortdescription          TEXT,
-  date_of_birth             timestamp,
+  date_of_birth             datetime,
   user_email                varchar(255),
-  male                      boolean,
+  male                      tinyint(1) default 0,
   cssid                     integer,
   constraint pk_student primary key (id))
 ;
 
 create table subtopic_reputation (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   reputation_as_astudent    bigint,
   reputation_as_amarker     bigint,
   subtopic_id               bigint,
@@ -295,22 +297,23 @@ create table subtopic_reputation (
 ;
 
 create table test (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   text                      TEXT,
   test_image_url            TEXT,
   expected_duration         varchar(255),
-  published                 boolean,
-  expired                   boolean,
+  published                 tinyint(1) default 0,
+  expired                   tinyint(1) default 0,
   lesson_id                 bigint,
-  begin_date                timestamp,
-  finish_date               timestamp,
-  markers_limit_date        timestamp,
+  begin_date                datetime,
+  finish_date               datetime,
+  markers_limit_date        datetime,
   constraint pk_test primary key (id))
 ;
 
 create table topic (
   id                        bigint not null,
+  id                        bigint auto_increment not null,
   title                     varchar(255),
   forum_id                  bigint,
   starter_email             varchar(255),
@@ -319,20 +322,20 @@ create table topic (
 ;
 
 create table url (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   adress                    TEXT,
   likes                     integer,
   name                      varchar(255),
   description               varchar(255),
   image_url                 TEXT,
-  added                     timestamp,
+  added                     datetime,
   question_id               bigint,
   user_email                varchar(255),
   constraint pk_url primary key (id))
 ;
 
 create table university (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   acronym                   varchar(255),
   image_url                 TEXT,
@@ -356,13 +359,13 @@ create table account (
 ;
 
 create table usertest (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   reputation_as_astudent    double,
   reputation_as_amarker     integer,
-  inmodule                  boolean,
-  submitted                 boolean,
-  expired                   boolean,
-  reviewd                   boolean,
+  inmodule                  tinyint(1) default 0,
+  submitted                 tinyint(1) default 0,
+  expired                   tinyint(1) default 0,
+  reviewd                   tinyint(1) default 0,
   user_email                varchar(255),
   test_id                   bigint,
   progress                  float,
@@ -488,6 +491,8 @@ create sequence usertest_seq;
 
 create sequence usertopic_seq;
 
+=======
+>>>>>>> Forum funcional na parte do estudante
 alter table answer add constraint fk_answer_openQuestion_1 foreign key (open_question_id) references question (id) on delete restrict on update restrict;
 create index ix_answer_openQuestion_1 on answer (open_question_id);
 alter table answer add constraint fk_answer_test_2 foreign key (test_id) references test (id) on delete restrict on update restrict;
@@ -596,6 +601,7 @@ create index ix_usertopic_user_52 on usertopic (user_email);
 
 
 alter table category_curriculummodule add constraint fk_category_curriculummodule__01 foreign key (category_id) references category (id) on delete restrict on update restrict;
+<<<<<<< HEAD
 
 alter table category_curriculummodule add constraint fk_category_curriculummodule__02 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
 
@@ -627,81 +633,100 @@ alter table account_module add constraint fk_account_module_module_02 foreign ke
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists answer;
+alter table category_curriculummodule add constraint fk_category_curriculummodule__02 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
 
-drop table if exists answer_marker;
+alter table curriculumlesson_curriculumtopic add constraint fk_curriculumlesson_curriculu_01 foreign key (curriculumlesson_id) references curriculumlesson (id) on delete restrict on update restrict;
 
-drop table if exists bibliography;
+alter table curriculumlesson_curriculumtopic add constraint fk_curriculumlesson_curriculu_02 foreign key (curriculumtopic_id) references curriculumtopic (id) on delete restrict on update restrict;
 
-drop table if exists blog;
+alter table curriculummodule_curriculumlesso add constraint fk_curriculummodule_curriculu_01 foreign key (curriculummodule_id) references curriculummodule (id) on delete restrict on update restrict;
 
-drop table if exists category;
+alter table curriculummodule_curriculumlesso add constraint fk_curriculummodule_curriculu_02 foreign key (curriculumlesson_id) references curriculumlesson (id) on delete restrict on update restrict;
 
-drop table if exists module_category;
+alter table module_category add constraint fk_module_category_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
-drop table if exists category_curriculummodule;
+alter table module_category add constraint fk_module_category_category_02 foreign key (category_id) references category (id) on delete restrict on update restrict;
 
-drop table if exists comment;
+alter table professor_module add constraint fk_professor_module_professor_01 foreign key (professor_id) references professor (id) on delete restrict on update restrict;
 
-drop table if exists content;
+alter table professor_module add constraint fk_professor_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
-drop table if exists continent;
+alter table question_group_question add constraint fk_question_group_question_qu_01 foreign key (question_group_id) references question_group (id) on delete restrict on update restrict;
 
-drop table if exists curriculumlesson;
+alter table question_group_question add constraint fk_question_group_question_qu_02 foreign key (question_id) references question (id) on delete restrict on update restrict;
 
-drop table if exists curriculumlesson_curriculumtopic;
+alter table account_module add constraint fk_account_module_account_01 foreign key (account_email) references account (email) on delete restrict on update restrict;
 
-drop table if exists curriculummodule;
+alter table account_module add constraint fk_account_module_module_02 foreign key (module_id) references module (id) on delete restrict on update restrict;
 
-drop table if exists curriculummodule_curriculumlesso;
+# --- !Downs
 
-drop table if exists curriculumtopic;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists forum;
+drop table answer;
 
-drop table if exists hypothesis;
+drop table answer_marker;
 
-drop table if exists language;
+drop table bibliography;
 
-drop table if exists lesson;
+drop table blog;
 
-drop table if exists lessonalert;
+drop table category;
 
-drop table if exists lessoncontent;
+drop table module_category;
 
-drop table if exists module;
+drop table category_curriculummodule;
 
-drop table if exists account_module;
+drop table comment;
 
-drop table if exists professor_module;
+drop table content;
 
-drop table if exists modulescore;
+drop table continent;
 
-drop table if exists professor;
+drop table curriculumlesson;
 
-drop table if exists professor_content;
+drop table curriculumlesson_curriculumtopic;
 
-drop table if exists question;
+drop table curriculummodule;
 
-drop table if exists question_group_question;
+drop table curriculummodule_curriculumlesso;
 
-drop table if exists question_evaluation;
+drop table curriculumtopic;
 
-drop table if exists question_group;
+drop table forum;
 
-drop table if exists reply;
+drop table hypothesis;
 
-drop table if exists student;
+drop table language;
+
+drop table lesson;
+
+drop table lessonalert;
+
+drop table lessoncontent;
+
+drop table module;
+
+drop table account_module;
+
+drop table professor_module;
+
+drop table modulescore;
+
 
 drop table if exists subtopic_reputation;
 
-drop table if exists test;
+drop table professor;
 
-drop table if exists topic;
+drop table professor_content;
 
-drop table if exists url;
+drop table question;
 
-drop table if exists university;
+drop table question_group_question;
+
+drop table question_evaluation;
+
+drop table question_group;
 
 drop table if exists account;
 
@@ -763,11 +788,20 @@ drop sequence if exists reply_seq;
 
 drop sequence if exists student_seq;
 
-drop sequence if exists subtopic_reputation_seq;
+drop table reply;
 
-drop sequence if exists test_seq;
+drop table student;
 
-drop sequence if exists topic_seq;
+drop table subtopic_reputation;
+
+drop table test;
+
+drop table topic;
+
+drop table url;
+
+drop table university;
+
 
 drop sequence if exists url_seq;
 
@@ -778,4 +812,12 @@ drop sequence if exists account_seq;
 drop sequence if exists usertest_seq;
 
 drop sequence if exists usertopic_seq;
+
+drop table account;
+
+drop table usertest;
+
+drop table usertopic;
+
+SET FOREIGN_KEY_CHECKS=1;
 

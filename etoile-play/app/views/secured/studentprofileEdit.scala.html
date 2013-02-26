@@ -67,7 +67,7 @@
 						<label class="control-label" for="input01">First Name</label>
 						<div class="controls">
 							<input type="text" name="firstname" placeholder="First Name"
-								class="input-xlarge" value="@user.studentProfile.firstname" required>
+								class="input-xlarge" value="@user.studentProfile.firstname" required maxlength="50">
 							<p class="help-block">Please insert your first name</p>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 						<label class="control-label" for="input01">Last Name</label>
 						<div class="controls">
 							<input type="text" name="lastname" placeholder="Last Name"
-								class="input-xlarge" value="@user.studentProfile.lastname" required>
+								class="input-xlarge" value="@user.studentProfile.lastname" required maxlength="50">
 							<p class="help-block">Please insert your last name</p>
 						</div>
 					</div>
@@ -89,7 +89,7 @@
 						<label class="control-label" for="input01">Contact</label>
 						<div class="controls">
 							<input type="text" name="contact" placeholder="Contact"
-								class="input-xlarge" value="@user.studentProfile.contact" required>
+								class="input-xlarge" value="@user.studentProfile.contact" required maxlength="50">
 							<p class="help-block">Please insert your contact</p>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 						<label class="control-label" for="input01">Address</label>
 						<div class="controls">
 							<input type="text" name="address" placeholder="Contact"
-								class="input-xlarge" value="@user.studentProfile.address" required>
+								class="input-xlarge" value="@user.studentProfile.address" required maxlength="80">
 							<p class="help-block">Please insert your address</p>
 						</div>
 					</div>
@@ -180,7 +180,7 @@
           	<p><strong>Address:</strong> @user.studentProfile.address</p>
           	<p><strong>Webpage:</strong> @user.studentProfile.webpage</p>
           	@if(user.studentProfile.male){
-          	<p>Male from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span></p>
+          	<p>Male from <span class="bfh-countries" data-country="@user.country" data-flags="false"></span></p>
           	}
           	@if(!user.studentProfile.male){
           	<p>Female from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span></p>
@@ -212,7 +212,7 @@
 						<label class="control-label" for="input01">Scientific Area</label>
 						<div class="controls">
 							<input type="text" name="scientific_area" placeholder="Scientific Area"
-								class="input-xlarge" value="@user.studentProfile.scientific_area" required>
+								class="input-xlarge" value="@user.studentProfile.scientific_area" required maxlength="80">
 							<p class="help-block">Please insert your Scientific Area</p>
 						</div>
 					</div>
@@ -223,7 +223,7 @@
 						<label class="control-label" for="input01">Degree</label>
 						<div class="controls">
 							<input type="text" name="degree" placeholder="Degree"
-								class="input-xlarge" value="@user.studentProfile.degree" required>
+								class="input-xlarge" value="@user.studentProfile.degree" required maxlength="80">
 							<p class="help-block">Please insert your degree</p>
 						</div>
 					</div>
@@ -250,7 +250,7 @@
 						<div class="controls">
 							<div class="textarea">
 								<textarea type="" name="description" class="span4" rows="4" 
-									style="resize: none" required >@user.studentProfile.description</textarea>
+									style="resize: none" required  minlength="40">@user.studentProfile.description</textarea>
 							</div>
 						</div>
 					</div>
@@ -307,7 +307,7 @@
           </blockquote>
    
      		<section id="reputation">
-          	<h2>My reputation:</h2>
+          	<h3>My reputation:</h3>
 			<div class="">
 				<button type="button" class="close" data-toggle="collapse"
 							data-target="#reputationdetails" >+</button>

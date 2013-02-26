@@ -961,28 +961,27 @@ public class Global extends GlobalSettings {
 			// 1. Jorge Louçã
 			
 			ProfessorContent pc = new ProfessorContent();
-			pc.description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et. Nam vel quam quis nulla euismod mollis. Cras eget lectus at ipsum blandit dictum. Nam ac nisi sapien. Phasellus tristique dui vel nunc viverra eu vestibulum enim tempus. Phasellus adipiscing dolor vulputate velit bibendum quis laoreet mi lacinia. Donec at elit sem, vel iaculis libero. Etiam vestibulum libero at mauris rutrum faucibus. Curabitur metus odio, aliquet at tristique eu, commodo sed nibh.";
-			pc.title="Lorem ipsum";
-			pc.imageURL="http://profesorbaker.files.wordpress.com/2011/02/cas.jpg";
+			pc.description = "Jorge Louçã teaches Computer Science at the IUL - Lisbon University Institute, where he runs the Master and Doctoral Programs in Complexity Sciences. His PhD is in Artificial Intelligence. He coordinates The Observatorium research team and his research interests concern modelling complex social systems through intensive data collection and analysis. He is particularly interested by knowledge generation models in large-scale communication networks. Recently he participated in the creation of the Unitwin network for the Complex Systems Digital Campus, involving institutions from Africa, Latin America and Europe.";
+			pc.title="Description";
+			pc.imageURL="";
 			pc.save();
 			
+			/*
 			ProfessorContent pc2 = new ProfessorContent();
 			pc2.description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et. Nam vel quam quis nulla euismod mollis. Cras eget lectus at ipsum blandit dictum. Nam ac nisi sapien. Phasellus tristique dui vel nunc viverra eu vestibulum enim tempus. Phasellus adipiscing dolor vulputate velit bibendum quis laoreet mi lacinia. Donec at elit sem, vel iaculis libero. Etiam vestibulum libero at mauris rutrum faucibus. Curabitur metus odio, aliquet at tristique eu, commodo sed nibh.";
 			pc2.title="Lorem ipsum";
 			pc2.imageURL="http://profesorbaker.files.wordpress.com/2011/02/cas.jpg";
 			pc2.save();
+			*/
 			
 			Professor p= new Professor();
 			p.firstname="Jorge";
 			p.lastname="Louçã";
 			p.acronym="JorgeL";
-			p.email="email[at]gmail.com";
+			p.email="Jorge.L@iscte.pt";
 			p.degree="Professor";
-			p.shortdescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et.";
-			p.contact="ISCTE - Instituto Universitário de Lisboa Departamento de Ciências e Tecnologias de Informação" +
-					" Av. das Forças Armadas" +
-					"1649-026" +
-					"Lisboa Portugal";
+			p.shortdescription=" teaches Computer Science at the IUL - Lisbon University Institute, where he runs the Master and Doctoral Programs in Complexity Sciences. His PhD is in Artificial Intelligence. He coordinates The Observatorium research team and his research interests concern modelling complex social systems through intensive data collection and analysis. He is particularly interested by knowledge generation models in large-scale communication networks. Recently he participated in the creation of the Unitwin network for the Complex Systems Digital Campus, involving institutions from Africa, Latin America and Europe.";
+			p.contact="ISCTE-IUL - Instituto Universitário de Lisboa - Departamento de Ciências e Tecnologias de Informação - Av. das Forças Armadas - 1649-026 - Lisboa Portugal";
 			p.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
 			p.save();
 			
@@ -997,10 +996,11 @@ public class Global extends GlobalSettings {
 			p.save();
 			pc.save();
 			
-			p.contents.add(pc2);
+			/*p.contents.add(pc2);
 			pc2.professor=p;
 			p.save();
 			pc2.save();
+			*/
 			
 			// 2. PROFESSOR FOR TESTING
 			
@@ -1105,6 +1105,7 @@ public class Global extends GlobalSettings {
 			jj.save();
 			
 			jj.modules.add(module_four);
+			jj.modules.add(module_three);
 			jj.save();
 			//module.save();
 			

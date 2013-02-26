@@ -3,6 +3,7 @@ package controllers;
 import controllers.secured.Secured;
 import models.User;
 import models.curriculum.Category;
+import models.forum.Reply;
 import models.forum.Topic;
 import models.manytomany.Usertopic;
 import models.module.Module;
@@ -48,9 +49,15 @@ public class ForumController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(Secured.isStudent(user.email)) {
-			Usertopic usertopic =Usertopic.findByUserAndTopic(user.email, topic_id);
+			Usertopic usertopic = Usertopic.findByUserAndTopic(user.email, topic_id);
 			usertopic.seen=true;
 			usertopic.save();
+			topic.starter.refresh();
+			for(Reply reply: topic.replies){
+				reply.refresh();
+				reply.user.refresh();
+				reply.user.studentProfile.refresh();
+			}
 			return ok(views.html.secured.topic.render(user,module,topic));
 		}
 		

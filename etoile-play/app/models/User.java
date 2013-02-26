@@ -11,6 +11,7 @@ import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
 import models.test.question.URL;
+import models.forum.Reply;
 import models.forum.Topic;
 import models.manytomany.Usertest;
 import models.manytomany.Usertopic;
@@ -101,6 +102,9 @@ public class User extends Model {
 	
 	@OneToMany(cascade= {CascadeType.ALL})
 	public List<Topic> topics;
+	
+	@OneToMany(cascade= {CascadeType.ALL})
+	public List<Reply> replies;
 	
     // -- Queries
 	

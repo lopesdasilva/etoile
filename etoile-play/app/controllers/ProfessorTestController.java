@@ -1490,17 +1490,16 @@ public class ProfessorTestController extends Controller {
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
-		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
-		if(questionGroup==null || !usertest.test.groups.contains(questionGroup)){
-			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+		QuestionGroup group=usertest.test.groups.get((int) (group_number-1));
+		if(group==null || !usertest.test.groups.contains(group)){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 	
 	User user = User.find.byId(session("email"));
 	if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		
 		
-		
-		QuestionGroup group = usertest.test.groups.get((int) (group_number-1));
+	
 	
 		
 		QuestionGroup group_aux = new QuestionGroup();
@@ -1596,12 +1595,12 @@ public class ProfessorTestController extends Controller {
 		
 		QuestionGroup questionGroup=QuestionGroup.find.byId(group_number);
 		if(questionGroup==null){
-			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		Question question = Question.find.byId(question_id);
 		if(question==null){
-			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, usertest.test.id));
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();

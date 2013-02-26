@@ -80,7 +80,7 @@
       <td><span class="label label-success pull-right">New</span></td>
       <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
        <td><i class="icon-user"></i> @topic.starter</td>
-      <td><i class="icon-comment"></i> 0 replys</td>
+      <td><i class="icon-comment"></i> @topic.replies.size replys</td>
       <td><small>@topic.dateToString</small></td>
        </tr>
       }
@@ -89,7 +89,7 @@
       <td></td>
       <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
       <td><i class="icon-user"></i> @topic.starter</td>
-      <td><i class="icon-comment"></i> 0 replys</td>
+      <td><i class="icon-comment"></i> @topic.replies.size replys</td>
       <td><small>@topic.dateToString</small></td>
        </tr>
       }

@@ -16,6 +16,7 @@ import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumlesson;
 import models.curriculum.Curriculumtopic;
 import models.forum.Forum;
+import models.forum.Reply;
 import models.forum.Topic;
 import models.manytomany.Usertopic;
 import models.module.Bibliography;
@@ -842,7 +843,26 @@ public class Global extends GlobalSettings {
 			c.save();
 
 			
+			student = new Student();
+			student.acronym = "";
+			student.firstname = "Rui";
+			student.lastname = "Lopes da Silva";
+			student.webpage = "http://etoileplatform.net";
+			student.imageURL = "http://placehold.it/150x150";
+			student.scientific_area = "Telecommunications";
+			student.contact = "rui@rui.pt";
+			student.date_of_birth = new Date();
+			student.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus accumsan libero non enim commodo egestas. Quisque semper dapibus augue aliquam semper. Sed laoreet vestibulum condimentum.";
+			student.male = true;
+			student.CSSId = -1;
+			student.shortdescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus accumsan libero non enim commodo egestas";
+			student.address = "Av. Forças Armadas - 4851-152 Lisboa";
+			student.degree = "Master in telecomunications";
+			student.save();
+			
+			
 			User user = new User();
+			user.studentProfile=student;
 			user.email = "rui@rui.pt";
 			user.username="rui";
 			user.password = sha1.parseSHA1Password("123");
@@ -856,6 +876,12 @@ public class Global extends GlobalSettings {
 			//module_two.save();
 			user.modules.add(module_demo);
 			user.save();
+			
+			Modulescore modulescore= new Modulescore();
+			modulescore.module=module_demo;
+			modulescore.user=user;
+			modulescore.score=0;
+			modulescore.save();
 			
 			module_demo.users.add(user);
 			module_demo.save();
@@ -877,6 +903,13 @@ public class Global extends GlobalSettings {
 			
 			usertopic.topic=topic;
 			usertopic.save();
+			
+			Reply reply = new Reply();
+			reply.text="Hi!, you need to do peermarking and solve tests.";
+			reply.user=user_rub;
+			reply.save();
+			user_rub.replies.add(reply);
+			user_rub.save();
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			

@@ -1,5 +1,7 @@
 package controllers;
 
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 import controllers.Application.Login;
 import models.Student;
 import models.User;
@@ -24,6 +26,9 @@ public class Register extends Controller {
 
 		public String firstName;
 		public String lastname;
+		
+		public String recaptcha_challenge_field;
+		public String recaptcha_response_field;
 		
 		public String validate() {
 			if(inputPassword.length()<6)
@@ -50,7 +55,13 @@ public class Register extends Controller {
 		 
 		 if(form.hasErrors()) {
 	            return badRequest(register.render(form));
-	        } else {
+	        }if(! validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field)){
+	       
+	        	 flash("captcha", "The captcha is wrong. Try again, please.");
+	        	 return ok(register.render(form(Register.NewUser.class)));
+	        }
+	        	else {
+	        
 	        	Student student = new Student();
 	        	student.save();
 	        	
@@ -63,7 +74,7 @@ public class Register extends Controller {
 	        	user.account_type = 0;
 	        	user.studentProfile = student;
 	        	user.studentProfile.imageURL = "http://forum.must.ac.ug/sites/default/files/default-avatar.png";
-			SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
+	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  
 	        	
 	        	student.firstname = user.name;
@@ -74,6 +85,7 @@ public class Register extends Controller {
 			 System.out.println("New user registration");
 			 System.out.println("User: "+form.get().inputUsername);
 			 System.out.println("Email: "+form.get().inputEmail);
+			 System.out.println("CAPTCHA: "+validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field));
 			 System.out.println("DEBUG**************END**************");
 	        	 flash("success", "User created!");
 	        	System.out.println("Registering");
@@ -81,4 +93,14 @@ public class Register extends Controller {
 				
 		 			return ok(login.render(form(Login.class)));
 	}
+	public static boolean validateCaptcha(String recaptcha_challenge_field, String recaptcha_response_field){
+		
+		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+		reCaptcha.setPrivateKey("6LcJht0SAAAAAAQ26lclTYNg3yyTtoRRfKTnebjN");
+		String remoteAddr = request().remoteAddress();
+
+		ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, recaptcha_challenge_field, recaptcha_response_field);
+		 return reCaptchaResponse.isValid();
+	}
+	
 }

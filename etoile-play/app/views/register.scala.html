@@ -59,15 +59,22 @@ $(document).ready(function() {
 
 			@if(registerForm.hasGlobalErrors) {
 			<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">×</button>
+			<button type="button" class="close" data-dismiss="alert">X</button>
 				<strong>Error!</strong> @registerForm.globalError.message
 			</div>
 			} @if(flash.contains("success")) {
 			<div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert">×</button>
+			<button type="button" class="close" data-dismiss="alert">X</button>
 				<strong>Success!</strong> @flash.get("success")
 			</div>
+			
+			} @if(flash.contains("captcha")) {
+			<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">X</button>
+				<strong>Error!</strong> @flash.get("captcha")
+			</div>
 			}
+			
 		<div class="control-group">
     <label class="control-label" for="inputName">Name</label>
     <div class="controls">
@@ -126,10 +133,28 @@ $(document).ready(function() {
         <span class="help-block"></span> 
     </div>
 </div>
-  
-  
-  
-  <div class="control-group">
+
+
+			<script type="text/javascript"
+				src="http://api.recaptcha.net/challenge?k=6LcJht0SAAAAAEKTTAB-uwbpjlhrrEV9VFfN5JeQ">
+				
+			</script>
+			<div class="control-group">
+				<div class="controls">
+					<noscript>
+						<iframe
+							src="http://api.recaptcha.net/noscript?k=6LcJht0SAAAAAEKTTAB-uwbpjlhrrEV9VFfN5JeQ"
+							height="300" width="500" frameborder="0"></iframe>
+						<br>
+						<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+						<input type="hidden" name="recaptcha_response_field"
+							value="manual_challenge">
+					</noscript>
+				</div>
+			</div>
+
+
+			<div class="control-group">
     <div class="controls">
       
       <button type="submit" class="btn btn-primary" >Sign up</button>

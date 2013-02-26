@@ -1027,7 +1027,7 @@ public class Global extends GlobalSettings {
 			npc.save();
 			
 			ProfessorContent npc2 = new ProfessorContent();
-			npc2.description="http://www.inaf.cnrs-gif.fr/ned/equipe07/accueil_07.html";
+			npc2.description="";
 			npc2.title="URL";
 			npc2.imageURL="";
 			npc2.save();
@@ -1037,10 +1037,10 @@ public class Global extends GlobalSettings {
 			np.firstname="Nadine";
 			np.lastname="Peyriéras";
 			np.acronym="NadineP";
-			np.email="";
+			np.email="peyriéras@inaf.cnrs-gif.fr";
 			np.degree="Professor";
 			np.shortdescription="";
-			np.contact="";
+			np.contact="Institut de Neurobiologie Alfred Fessard, CNRS UPR 3294 - Av. de la Terrasse, 91198 Gif-sur-Yvette Cedex, France - tel: (33) 1-69 82 41 42 fax: (33) 1-69 82 34 47 - http://www.inaf.cnrs-gif.fr/ned/equipe07/accueil_07.html";
 			np.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
 			np.save();
 			
@@ -1048,13 +1048,14 @@ public class Global extends GlobalSettings {
 			np.save();
 			//module.save();
 			
-			np.contents.add(npc);
+			/*np.contents.add(npc);
 			npc.professor=np;
 			np.contents.add(npc2);
 			npc2.professor=np;
 			np.save();
 			npc.save();
 			npc2.save();
+			*/
 			
 			// 4. Jacques Demongeot
 			

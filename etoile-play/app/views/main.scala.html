@@ -57,7 +57,7 @@
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-scrollspy.js")"></script> -->
 <script src="@routes.Assets.at("javascripts/bootstrap-tab.js")"></script>
 <script src="@routes.Assets.at("javascripts/bootstrap-tooltip.js")"></script>
-<!-- <script src="@routes.Assets.at("javascripts/bootstrap-popover.js")"></script> -->
+<script src="@routes.Assets.at("javascripts/bootstrap-popover.js")"></script>
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-button.js")"></script> -->
 <!-- <script src="@routes.Assets.at("javascripts/bootstrap-collapse.js")"></script> -->
 <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
@@ -118,6 +118,18 @@
 
   <link href="@routes.Assets.at("stylesheets/jquery.tweet.css")" rel="stylesheet"/>
   <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.tweet.js")"></script>
+  
+  <script>
+	$('.popover-test').popover({
+		target: "click"
+		});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.tip').tooltip();
+    });
+</script>
 	
 </body>
 

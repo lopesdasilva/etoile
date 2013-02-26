@@ -487,7 +487,16 @@ public class StudentTestController extends Controller {
 		int reputation = 0;
 		for(QuestionGroup g : test.groups){
 			for(Question q : g.questions){
+				boolean answered = false;
 				boolean bool = true;
+				List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
+				for(Hypothesis h : hypothesis_aux){
+					if(h.selected){
+						answered = true;
+					}
+				}
+				if(answered){
+				
 				if(q.typeOfQuestion==1){
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 						for(Hypothesis h : hypothesis){
@@ -530,7 +539,7 @@ public class StudentTestController extends Controller {
 				usertest.reputationAsAstudent = reputation;
 				usertest.inmodule = false;
 				usertest.save();
-				
+				}
 				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
 					QuestionEvaluation qe;
 					if(QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id)==null){
@@ -538,18 +547,22 @@ public class StudentTestController extends Controller {
 					}else{
 						qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
 					}
-				if(bool){
+				if(bool && answered){
 				qe.isCorrect=true;
 				qe.score = q.weight;
-				}else{
+				}else if(!bool && answered){
 					qe.score = -q.weightToLose;
+				}else{
+					qe.score = 0;
 				}
 				
 				qe.usertest = usertest;
 				qe.question = q;
 				qe.save();
 				}
+			
 			}
+			
 		}
 		
 		usertest.reviewd = false;

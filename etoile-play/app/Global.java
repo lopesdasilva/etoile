@@ -987,7 +987,7 @@ public class Global extends GlobalSettings {
 			p.save();
 			
 			p.modules.add(module_demo);
-			p.modules.add(module_four);
+			//p.modules.add(module_four);
 			p.modules.add(module_three);
 			p.save();
 			//module.save();
@@ -1059,7 +1059,7 @@ public class Global extends GlobalSettings {
 			// 4. Jacques Demongeot
 			
 			ProfessorContent jdc = new ProfessorContent();
-			jdc.description="";
+			jdc.description="Jacques Demongeot is presently director of the Laboratory TIMC (CNRS 5525) Techniques of Imaging, Modelling & Cognition and he is also head of the Institute of Bio-engineering (IFRT 130 IpV) at the University Joseph Fourier, Grenoble, France. He has MD and PhD in mathematics and has been appointed Chairman of Biomathematics at the Institut Universitaire de France in 1994. Jacques Demongeot is also responsible for the Department of Medical Information at the University Hospital of Grenoble (CHUG) and for the doctoral school of bio-engineering Health, Cognition & Environment. His main Research Interests are: medical imaging; bio-informatics;bio-modeling; biological complexity; systems biology.";
 			jdc.title="Contact";
 			jdc.imageURL="";
 			jdc.save();
@@ -1070,8 +1070,8 @@ public class Global extends GlobalSettings {
 			jd.acronym="JDemongeot";
 			jd.email="";
 			jd.degree="Professor";
-			jd.shortdescription="";
-			jd.contact="Jacques Demongeot is presently director of the Laboratory TIMC (CNRS 5525) Techniques of Imaging, Modelling & Cognition and he is also head of the Institute of Bio-engineering (IFRT 130 IpV) at the University Joseph Fourier, Grenoble, France. He has MD and PhD in mathematics and has been appointed Chairman of Biomathematics at the Institut Universitaire de France in 1994. Jacques Demongeot is also responsible for the Department of Medical Information at the University Hospital of Grenoble (CHUG) and for the doctoral school of bio-engineering Health, Cognition & Environment. His main Research Interests are: medical imaging; bio-informatics;bio-modeling; biological complexity; systems biology.";
+			jd.shortdescription=" is presently director of the Laboratory TIMC (CNRS 5525) Techniques of Imaging, Modelling & Cognition and he is also head of the Institute of Bio-engineering (IFRT 130 IpV) at the University Joseph Fourier, Grenoble, France. He has MD and PhD in mathematics and has been appointed Chairman of Biomathematics at the Institut Universitaire de France in 1994. Jacques Demongeot is also responsible for the Department of Medical Information at the University Hospital of Grenoble (CHUG) and for the doctoral school of bio-engineering Health, Cognition & Environment. His main Research Interests are: medical imaging; bio-informatics;bio-modeling; biological complexity; systems biology.";
+			jd.contact="University Joseph Fourier of Grenoble - Laboratoire TIMC - Institut d'Ingénierie de l'Information de Santé - Faculté de Médecine - 38706 La Tronche cedex - France";
 			jd.imageURL="http://egealmeeting.lasalle-beauvais.fr/images/demongeot_jacques.jpg";
 			jd.save();
 			
@@ -1083,6 +1083,34 @@ public class Global extends GlobalSettings {
 			jdc.professor=jd;
 			jd.save();
 			jdc.save();
+			
+			// 5. Jeffrey Johnson
+			
+			ProfessorContent jjc = new ProfessorContent();
+			jjc.description="Jeffrey Johnson is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
+			jjc.title="Description";
+			jjc.imageURL="";
+			jjc.save();
+			
+			Professor jj = new Professor();
+			jj.firstname="Jeffrey";
+			jj.lastname="Johnson";
+			jj.acronym="JJohnson";
+			jj.email="Jeff.Johnson@open.ac.uk";
+			jj.degree="Professor";
+			jj.shortdescription="is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
+			jj.contact="The Design Group, Faculty of Maths, Computing and Technology, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK  -  http://design.open.ac.uk/johnson/";
+			jj.imageURL="http://www.intellectbooks.co.uk/MediaManager/Image/User/Jeff%204_9535_1281717004.jpg";
+			jj.save();
+			
+			jj.modules.add(module_four);
+			jj.save();
+			//module.save();
+			
+			jj.contents.add(jjc);
+			jjc.professor=jj;
+			jj.save();
+			jjc.save();
 			
 			
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++

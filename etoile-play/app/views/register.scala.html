@@ -54,136 +54,186 @@ $(document).ready(function() {
 <h3>New user registration</h3>
 <div class="container">
  <div class="row">
-		<div class="span6" >
+		<div class="span6">
 			@helper.form(routes.Register.register,'class->"form-horizontal") {
 
 			@if(registerForm.hasGlobalErrors) {
 			<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">X</button>
+				<button type="button" class="close" data-dismiss="alert">X</button>
 				<strong>Error!</strong> @registerForm.globalError.message
 			</div>
 			} @if(flash.contains("success")) {
 			<div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert">X</button>
+				<button type="button" class="close" data-dismiss="alert">X</button>
 				<strong>Success!</strong> @flash.get("success")
 			</div>
-			
+
 			} @if(flash.contains("captcha")) {
 			<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">X</button>
+				<button type="button" class="close" data-dismiss="alert">X</button>
 				<strong>Error!</strong> @flash.get("captcha")
 			</div>
 			}
-			
-		<div class="control-group">
-    <label class="control-label" for="inputName">Name</label>
-    <div class="controls">
-      <input type="text"  name="inputName" id="Name" placeholder="Name"  required>
-      <span class="help-inline"></span>
-        <span class="help-block">Please write your name.</span>
-    </div>
-  </div>
 
 			<div class="control-group">
-    <label class="control-label" for="inputUsername">Username</label>
-    <div class="controls">
-      <input type="text" class="required" name="inputUsername" id="inputUsername" placeholder="Username"  required>
-      <span class="help-inline"></span>
-        <span class="help-block">Please choose a valid username.</span>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputEmail">Email</label>
-    <div class="controls">
-      <input type="email" name="inputEmail" placeholder="Email" type="email" required
-  data-validation-email-messagee= "You must enter your email address">
-      <span class="help-inline"></span>
-        <span class="help-block">Enter a valid email address.</span> 
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputPassword">Password</label>
-    <div class="controls">
-      <input type="password" id="inputPassword" name="inputPassword" placeholder="Password" required  minlength="6" data-validation-minlength-message="A password must be at least 6 characters.">
-       <span class="help-inline"></span>
-        <span class="help-block">A password must be at least 6 characters. </span> 
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
-    <div class="controls">
-      <input type="password" id="inputRepeatPassword" name="inputRepeatPassword" placeholder="Repeat Password"  data-validation-matches-match="inputPassword" 
-  data-validation-matches-message=
-    "Must match password entered above">
-       <span class="help-inline"></span>
-        <span class="help-block">Please repeat your password again. </span> 
-        
-    </div>
-  </div>
-  
-  
-  
-  
-  <div class="control-group">
-    <label class="control-label" for="profile_country">Country</label>
-    <div class="controls">
-    <select  id="countries1" class="input-medium" data-country="PT" name="inputCountry"></select>
-        <span class="help-inline"></span>
-        <span class="help-block"></span> 
-    </div>
-</div>
-
-
-			<script type="text/javascript"
-				src="http://api.recaptcha.net/challenge?k=6LcJht0SAAAAAEKTTAB-uwbpjlhrrEV9VFfN5JeQ">
-				
-			</script>
-			<div class="control-group">
+				<label class="control-label" for="inputName">Name</label>
 				<div class="controls">
-					<noscript>
-						<iframe
-							src="http://api.recaptcha.net/noscript?k=6LcJht0SAAAAAEKTTAB-uwbpjlhrrEV9VFfN5JeQ"
-							height="300" width="500" frameborder="0"></iframe>
-						<br>
-						<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-						<input type="hidden" name="recaptcha_response_field"
-							value="manual_challenge">
-					</noscript>
+					<input type="text" name="inputName" id="Name" placeholder="Name"
+						required> <span class="help-inline"></span> <span
+						class="help-block">Please write your name.</span>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="inputUsername">Username</label>
+				<div class="controls">
+					<input type="text" class="required" name="inputUsername"
+						id="inputUsername" placeholder="Username" required> <span
+						class="help-inline"></span> <span class="help-block">Please
+						choose a valid username.</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">Email</label>
+				<div class="controls">
+					<input type="email" name="inputEmail" placeholder="Email"
+						type="email" required
+						data-validation-email-messagee="You must enter your email address">
+					<span class="help-inline"></span> <span class="help-block">Enter
+						a valid email address.</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">Password</label>
+				<div class="controls">
+					<input type="password" id="inputPassword" name="inputPassword"
+						placeholder="Password" required minlength="6"
+						data-validation-minlength-message="A password must be at least 6 characters.">
+					<span class="help-inline"></span> <span class="help-block">A
+						password must be at least 6 characters. </span>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="inputRepeatPassword">Repeat
+					Password</label>
+				<div class="controls">
+					<input type="password" id="inputRepeatPassword"
+						name="inputRepeatPassword" placeholder="Repeat Password"
+						data-validation-matches-match="inputPassword"
+						data-validation-matches-message="Must match password entered above">
+					<span class="help-inline"></span> <span class="help-block">Please
+						repeat your password again. </span>
+
 				</div>
 			</div>
 
 
+
+
 			<div class="control-group">
-    <div class="controls">
-      
-      <button type="submit" class="btn btn-primary" >Sign up</button>
-      
-    </div>
-  </div>
-}
-</div>
-<div class="span6">
-			<div class="well">
-				  <p></p>
-              <legend>Already have an account? <a href="/login">Login now!</a></legend> 
-              If you don't have an account in the étoile platform, you can register quickly. There are many features that are available in the student's area. 
-              <p>
-                <ul>
-                <p>
-                  <li>Access to pedagogical resources for Master and PhD levels.</li>
-                </p>
-                <p>
-                  <li>Check your knowledge using the étoile evaluation tests.</li>
-                </p>
-                <p>
-                  <li>Interact with a worldwide community of students and scientific researchers within the <a href="digitalcampus">Digital Campus</a>.</li>
-                </p>
-              </ul>
-            </p>
-            </div>
+				<label class="control-label" for="profile_country">Country</label>
+				<div class="controls">
+					<select id="countries1" class="input-medium" data-country="PT"
+						name="inputCountry"></select> <span class="help-inline"></span> <span
+						class="help-block"></span>
+				</div>
 			</div>
-</div>
+
+
+			<script type="text/javascript">
+				var RecaptchaOptions = {
+					theme : 'custom',
+					custom_theme_widget : 'recaptcha_widget'
+				};
+			</script>
+
+			<div id="recaptcha_widget" style="display: none">
+				<div class="control-group">
+					<label class="control-label">reCAPTCHA</label>
+					<div class="controls">
+						<a id="recaptcha_image" href="#" class="thumbnail"></a>
+						<div class="recaptcha_only_if_incorrect_sol" style="color: red">Incorrect
+							please try again</div>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="recaptcha_only_if_image control-label">Enter
+						the words above:</label> <label
+						class="recaptcha_only_if_audio control-label">Enter the
+						numbers you hear:</label>
+
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="recaptcha_response_field"
+								class="input-recaptcha" name="recaptcha_response_field" /> <a
+								class="btn" href="javascript:Recaptcha.reload()"><i
+								class="icon-refresh"></i></a> <a class="btn recaptcha_only_if_image"
+								href="javascript:Recaptcha.switch_type('audio')"><i
+								title="Get an audio CAPTCHA" class="icon-headphones"></i></a> <a
+								class="btn recaptcha_only_if_audio"
+								href="javascript:Recaptcha.switch_type('image')"><i
+								title="Get an image CAPTCHA" class="icon-picture"></i></a> <a
+								class="btn" href="javascript:Recaptcha.showhelp()"><i
+								class="icon-question-sign"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script type="text/javascript"
+				src="https://www.google.com/recaptcha/api/challenge?k={6LcJht0SAAAAAEKTTAB-uwbpjlhrrEV9VFfN5JeQ}"></script>
+
+			<noscript>
+				<iframe src="<?php echo $recaptcha_noscript_url; ?>" height="300"
+					width="500" frameborder="0"></iframe>
+				<br>
+				<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+    </textarea>
+				<input type="hidden" name="recaptcha_response_field"
+					value="manual_challenge">
+			</noscript>
+
+
+
+			<div class="control-group">
+				<div class="controls">
+
+					<button type="submit" class="btn btn-primary">Sign up</button>
+
+				</div>
+			</div>
+			}
+		</div>
+		<div class="span6">
+			<div class="well">
+				<p></p>
+				<legend>
+					Already have an account? <a href="/login">Login now!</a>
+				</legend>
+				If you don't have an account in the étoile platform, you can
+				register quickly. There are many features that are available in the
+				student's area.
+				<p>
+				<ul>
+					<p>
+					<li>Access to pedagogical resources for Master and PhD levels.</li>
+					</p>
+					<p>
+					<li>Check your knowledge using the étoile evaluation tests.</li>
+					</p>
+					<p>
+					<li>Interact with a worldwide community of students and
+						scientific researchers within the <a href="digitalcampus">Digital
+							Campus</a>.
+					</li>
+					</p>
+				</ul>
+				</p>
+			</div>
+		</div>
+	</div>
 
 </div>
 

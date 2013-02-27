@@ -51,36 +51,39 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 
 		<div class="span9">
 			<div class="well">
-			<img src="http://forum.must.ac.ug/sites/default/files/default-avatar.png">
-			@user.name<br>
-			from <span class="bfh-countries" data-country="@user.country" data-flags="false"></span><br>
-			<h2>My reputation:</h2>
-			<div class="">
-				<button type="button" class="close" data-toggle="collapse"
-							data-target="#reputationdetails">+</button>
-						<div class="span10">
-						<div class="progress progress-success progress-striped">
+<!-- 			<button onclick="startTour();"></button> -->
+					<div class="row-fluid">
+						<div class="span2">
+							<a class="thumbnail"> <img
+								src="@user.studentProfile.imageURL" alt="">
+							</a>
+						</div>
+						<div class="span6">
+							<h4>@user.name</h4>
+						<blockquote id="stats">
+						<p>
+							Tests: @user.tests.size()<br>
+							Suggested questions: @user.openquestions.size()<br>
+							Forum posts: @user.replies.size<br>
+							Suggested URLs: @user.urls.size()<br>
+							Marked answers: @user.answerMarker.size()
+							</p>
+						</blockquote>
+
+					</div>
+					</div>
+			<h4>My reputation:</h4>
+				<div class="progress">
+  
 					<div class="bar" style="width: @user.globalReputation%"></div>
-					
-				</div>
-				</div>
-				
-							<div id="reputationdetails" class="collapse row-fluid">
-							<div class="offset1">
-							<blockquote>
-							<p><strong>Tests:</strong> @user.tests.size()</p>
-          					<p><strong>Suggested questions:</strong> @user.openquestions.size()</p>
-          					<p><strong>Forum posts:</strong> - </p>
-          					<p><strong>Suggested URLs:</strong> @user.urls.size()</p>
-          					<p><strong>Marked answers: </strong>@user.answerMarker.size()</p>
-							</div>
-							</blockquote>
-							</div>
-							<a href="/myprofile#reputation"  class="btn btn-info pull-right"><i class="icon-tasks icon-white" ></i> Details about your reputation</a>
+</div>
 						
-				</div>
+							
+							<a href="/myprofile#reputation"  class="btn btn-info pull-right"><i class="icon-tasks icon-white" ></i> Details about your reputation</a>
+					</div>	
 				
-			</div>
+				
+			
 	
 	@if(user.modules.size()!=0){
 			<div class="row-fluid">
@@ -129,4 +132,16 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+var tour = new Tour();
+tour.addStep({
+	  element: "stats", /* html element next to which the step popover should be shown */
+	  title: "teste", /* title of the popover */
+	  content: "test" /* content of the popover */
+	});
+
+function startTour(){
+	tour.start(true);
+}
+</script>
 }

@@ -84,7 +84,7 @@
 							<a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)">@lesson.name</a>
 						</h4>
 						<p>@lesson.shortDescription</p>
-						<blockquote>Number of published tests:
+						<blockquote>Number of published <a href="@routes.StudentController.lesson(lesson.acronym,module.acronym)#tests"> tests</a>:
 							@lesson.publishedTests(lesson)</blockquote>
 					</div>
 					<div class="span3">

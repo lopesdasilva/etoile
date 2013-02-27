@@ -85,7 +85,7 @@
 					<button class="btn btn-primary" type="submit">Login</button>
 					<p>
 					<div align="">
-						Forgot password? <a href="#">Click here to reset</a>
+						Forgot password? <a data-toggle="modal" href="#modalResetPassword" >Click here to reset</a>
 					</div>
 					<div align="">
 						New User? <a href="/register">Click here to
@@ -94,6 +94,44 @@
 				</div>
 			</div>
 			}
+			
+			<div id="modalResetPassword" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">X</button>
+				<h3>Reset your password.</h3>
+			</div>
+			<p></p>
+			<fieldset>
+						@helper.form(routes.Register.resetpassword(),'class->"form-horizontal"){
+			
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">Your e-mail: </label>
+					<div class="control-group">
+					<div class="controls" >
+						<input name="email" type="email" value=""
+							class="input-xlarge" required>
+						<p class="help-block">An e-mail will send to you with your new password!</p>
+					</div>
+					</div>
+					
+					<div class="control-group">
+					<label class="control-label"></label>
+
+					<!-- Button -->
+					<div class="controls">
+						<button class="btn btn-success">Send</button>
+					</div>
+				</div>
+				</div>
+				}
+				</fieldset>
+			
+			
+			</div>
+			
 		</div>
 			<div class="span6">
 			<div class="well">

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Random;
+
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 import controllers.Application.Login;
@@ -46,6 +48,40 @@ public class Register extends Controller {
 
 
 	}
+	
+	public static class register_Form {
+        
+        public String email;
+        
+	}
+	
+	public static Result resetpassword(){
+		 Form<register_Form> form = form(register_Form.class).bindFromRequest();
+		 String email = form.get().email;
+		 User user = User.findByEmail(email);
+		 if(user!=null){
+			 String new_password = getRandomPassword(6);
+			 user.password = sha1.parseSHA1Password(new_password);
+			 System.out.println("NEW PASSWORD: "+new_password);
+			 SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + new_password);
+			 user.save();
+		 }
+		 
+		 return ok(login.render(form(Login.class)));
+	}
+	
+	private static final String charset = "0123456789abcdefghijklmnopqrstuvwxyz";
+	public static String getRandomPassword(int length) {
+	    Random rand = new Random(System.currentTimeMillis());
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < length; i++) {
+	        int pos = rand.nextInt(charset.length());
+	        sb.append(charset.charAt(pos));
+	    }
+	    return sb.toString();
+	}
+	
+	
 	public static Result register2(){
 		 return ok(register.render(form(Register.NewUser.class)));
 	}

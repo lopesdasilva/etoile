@@ -18,6 +18,7 @@ POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout()
 GET		/register							controllers.Register.register2()
 POST	/register							controllers.Register.register()
+POST	/resetpassword						controllers.Register.resetpassword()
 
 #User
 GET		/myprofile							controllers.ProfessorController.myprofile()

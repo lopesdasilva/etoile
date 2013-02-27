@@ -1803,7 +1803,7 @@ public class ProfessorTestController extends Controller {
 		}
 		
 		QuestionGroup group_aux = QuestionGroup.find.byId(group_id);
-		if(group_aux==null || test.groups.contains(group_aux)){
+		if(group_aux==null || !test.groups.contains(group_aux)){
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		

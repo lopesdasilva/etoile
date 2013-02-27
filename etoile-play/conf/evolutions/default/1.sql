@@ -281,6 +281,7 @@ create table student (
   date_of_birth             datetime,
   user_email                varchar(255),
   male                      tinyint(1) default 0,
+  private_profile           tinyint(1) default 0,
   cssid                     integer,
   constraint pk_student primary key (id))
 ;

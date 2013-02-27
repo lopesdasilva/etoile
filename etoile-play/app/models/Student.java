@@ -87,6 +87,9 @@ public class Student extends Model {
 	public boolean male;
 	
 	@Constraints.Required
+	public boolean privateProfile;
+	
+	@Constraints.Required
 	public int CSSId;
 
 	public static Model.Finder<Long,Student> find = new Model.Finder(Long.class, Student.class);

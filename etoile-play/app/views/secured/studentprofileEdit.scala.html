@@ -1,24 +1,50 @@
 @(user: models.User) @main("etoile"){
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+
 	<div class="navbar-inner">
+
 		<div class="container">
+
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span>
+
 			</a>
+
 			<!-- <a class="brand" href="/">etoile platform</a> -->
+
 			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
 			<!-- Menu na barra de cima -->
+<<<<<<< HEAD
 			<div class="nav-collapse">
+=======
+
+			<div class="nav-collapse">
+
+>>>>>>> [StudentProfile] settings
 				<ul class="nav">
+
 					<li><a href="/">Home</a></li>
+
 					<li><a href="/digitalcampus">Digital Campus</a></li>
+<<<<<<< HEAD
 					<li><a href="/modules" id="topbarmodules">Modules</a></li>
 					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+=======
+
+					<li><a href="/modules" id="topbarmodules">Modules</a></li>
+
+					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
+
+>>>>>>> [StudentProfile] settings
 					<li><a href="/news">News</a></li>
+
 					<li><a href="/about">About</a></li>
+
 					<li><a href="/contact">Contact</a></li>
+<<<<<<< HEAD
 					<div class="btn-group pull-right">
                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> Settings <span class="caret"></span>
                                </a>
@@ -28,24 +54,50 @@
                                        <a href="#changePrivacy" data-toggle="modal" role="button" >Privacy Settings</a>
                                </ul>
                        </div>				
+=======
+
+					
+
+>>>>>>> [StudentProfile] settings
 				</ul>
+
 				<!--  
-				<div class="navbar-form pull-right">
-					<a href="login" role="button" class="btn btn-primary">Login</a>
+
+<div class="navbar-form pull-right">
+
+<a href="login" role="button" class="btn btn-primary">Login</a>
+
+</div>
+
+-->
+				<div class="btn-group pull-right">
+					<a class="btn dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"><i class="icon-cog icon-white"></i>
+						@user.studentProfile.firstname @user.studentProfile.lastname <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<!-- dropdown menu links -->
+						<a href="#changePassword" data-toggle="modal" role="button"><i class="icon-wrench"></i> Password
+							Settings</a>
+						<a href="#changePrivacy" data-toggle="modal" role="button"><i class="icon-lock"></i> Privacy
+							Settings</a>
+							<li class="divider"></li>
+							<a href="/logout" data-toggle="modal" role="button"><i class="icon-off"></i> Logout</a>
+					</ul>
 				</div>
-				-->
-				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="/login" role="button"
-						class="btn btn-primary">Login</a> }
-					@if(session.get("email")!=null) { <a href="/logout" role="button"
-						class="btn btn-primary">Logout</a> }
-				</form>
+
 			</div>
+
 			<!--/.nav-collapse -->
 
+
+
 		</div>
+
 	</div>
+
 </div>
+
+
 
 <div class="container">
 
@@ -55,8 +107,97 @@
 	<h2>
 			@user.studentProfile.firstname @user.studentProfile.lastname <small><a href="#editProfileModal"
 				data-toggle="modal" role="button" class="btn btn-warning btn-mini" id="editProfile">Edit Profile</a></small>
+
 			<br> <small>@user.studentProfile.shortdescription</small>
 		</h2>
+		
+		<div id="changePrivacy" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">X</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+			@helper.form(routes.StudentController.changeprivacy(),'class->"form-horizontal"){
+			<div class="control-group">
+			<div class="controls">
+			@if(user.studentProfile.privateProfile){
+			Private profile: <input  checked type="checkbox" name="privacy" value="1"  />
+			}else{
+			Private profile: <input type="checkbox" name="privacy" value="1"  />
+			}
+			</div>
+			</div>
+			
+			<div class="control-group">
+				<div class="controls">
+
+					<button type="submit" class="btn btn-primary">Save settings</button>
+
+				</div>
+			</div>
+			}
+			</div>
+			</div>
+			
+		
+		<div id="changePassword" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">X</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+			@helper.form(routes.StudentController.changepassword(),'class->"form-horizontal"){
+			
+			
+				<div class="control-group">
+				<label class="control-label" for="inputPassword">Password</label>
+				<div class="controls">
+					<input type="password" id="inputPassword" name="inputPassword"
+						placeholder="Password" required minlength="6"
+						data-validation-minlength-message="A password must be at least 6 characters.">
+					<span class="help-inline"></span> <span class="help-block">A
+						password must be at least 6 characters. </span>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="inputRepeatPassword">Repeat
+					Password</label>
+				<div class="controls">
+					<input type="password" id="inputRepeatPassword"
+						name="inputRepeatPassword" placeholder="Repeat Password"
+						data-validation-matches-match="inputPassword"
+						data-validation-matches-message="Must match password entered above">
+					<span class="help-inline"></span> <span class="help-block">Please
+						repeat your password again. </span>
+
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<div class="controls">
+
+					<button type="submit" class="btn btn-primary">Change Password</button>
+
+				</div>
+			</div>
+			
+			}
+			</div>
+			
+			</div>
+			
+			
+			
+			
 		
 		<div id="editProfileModal" class="modal hide fade" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

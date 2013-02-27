@@ -34,6 +34,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import scala.collection.mutable.ArrayLike;
 import views.html.*;
+import controllers.extra.SendMail;
+import controllers.extra.sha1;
 import controllers.secured.*;
 
 /**
@@ -62,6 +64,16 @@ public class StudentController extends Controller {
 		public String description;
 		public String university;
 	}
+	
+	public static class NewPassword_Form{
+		public String inputPassword;
+	}
+	
+	public static class Privacy_Form{
+		public int privacy;
+	}
+	
+	
 	
 	public static Result index() {
 		if(Secured.isStudent(session("email"))){
@@ -108,6 +120,37 @@ public class StudentController extends Controller {
 			user.studentProfile.description = form.get().description;
 			user.studentProfile.save();
 			user.save();
+		}
+		return redirect(routes.ProfessorController.myprofile());
+	}
+	
+	public static Result changepassword(){
+		if(Secured.isStudent(session("email"))){
+			User user = User.find.byId(session("email"));
+			Form<NewPassword_Form> form = form(NewPassword_Form.class).bindFromRequest();
+			user.password = sha1.parseSHA1Password(form.get().inputPassword);
+			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
+			user.save();
+		}
+		return redirect(routes.ProfessorController.myprofile());
+	}
+	
+	public static Result changeprivacy(){
+		if(Secured.isStudent(session("email"))){
+			System.out.println("CHANGE PW");
+			User user = User.find.byId(session("email"));
+			Form<Privacy_Form> form = form(Privacy_Form.class).bindFromRequest();
+			System.out.println(form.get().privacy); 
+			if(form.get().privacy==1){
+				System.out.println("entrei no 1");
+			user.studentProfile.privateProfile = true;
+			user.studentProfile.save();
+			}else{
+				System.out.println("entrei no 0");
+			user.studentProfile.privateProfile = false;
+			user.studentProfile.save();
+			}
+			
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}

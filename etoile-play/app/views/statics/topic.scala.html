@@ -1,7 +1,5 @@
-
-@(user: User,blog: Blog,categories: List[models.curriculum.Category],formComment : Form[BlogController.Comment_Form])
-@import helper._
-@main("etoile project") {
+@(module: models.module.Module,topic: models.forum.Topic) 
+@main("etoile"){
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -25,7 +23,7 @@
 					</li>
 					<li><a href="/about">About</a>
 					</li>
-					<li><a href="/contact">Contact</a>
+					<li class="active"><a href="/contact">Contact</a>
 					</li>
 				</ul>
 				<!--  
@@ -43,22 +41,33 @@
 		</div>
 	</div>
 </div>
- 
- <div class="container-fluid">
- 	<div class="row-fluid">
-	@usermenu(user,categories,"")
-	
- 
- <div class="span9">
-		<h3>@blog.header</h3>
-		<div class="row-fluid">
+
+<div class="container-fluid">
+<div class="row-fluid">
+	@staticmenu(models.curriculum.Category.getAllCategories,models.continent.Continent.getAllContinents())
+	<!--/span-->
+
+		<div class="span9">
+			<div class="page-header">
+				<h3>
+					@topic.title<p><small>@module.name</small></p>
+				</h3>
+				<a href="@routes.ForumController.forum(module.acronym)"
+					class="btn btn-primary btn-small">Return to forum</a>
+			</div>		
+			
+			@for(reply <- topic.replies){ 
+			
+
+			
+					<div class="row-fluid">
 						<div class="span2">
-							<a href="@routes.BlogController.blog(blog.id)" class="thumbnail"> <img
-								src="@blog.articleImageURL" alt="">
+							<a href="#" class="thumbnail"> <img
+								src="@reply.user.studentProfile.imageURL" alt="">
 							</a>
 						</div>
 						<div class="span10">
-							<p>@blog.text</p>
+							<p>	@reply.text</p>
 							
 						</div>
 					</div>
@@ -66,40 +75,18 @@
 						<div class="span10">
 							<p></p>
 							<p>
-								<i class="icon-user"></i> by <a href="">Administrator</a> | <i
-									class="icon-calendar"></i> @blog.dateToString | <i
-									class="icon-comment"></i> <a href="@routes.BlogController.blog(blog.id)#comments">@blog.comments.size Comments</a> 
+								<i class="icon-user"></i> by <a href="">@reply.user.username</a> | <i
+									class="icon-calendar"></i> @reply.dateToString | <i
+									class="icon-comment"></i> <a href="">@reply.user.replies.size posts</a> 
 									
 							</p>
 						</div>
 					</div>
-		@for(comment <- blog.comments) {
-		<blockquote>
-			<p>@comment.text</p>
-			<small>By @comment.user from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span> on @comment.date </small>
-		</blockquote>
-		}
- <hr>
-  <h3>Insert your comment below</h3>
-  
-   
-   @helper.form(routes.BlogController.postcomment(blog.id)) {
-   <div class="control-group">
- <div class="controls">
-  <textarea id="comment" name="comment" placeholder="Insert your comment" class="span8" required style="resize: none" rows="3"></textarea>
-        </div>
-    </div>   
-    <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn btn-primary">Submit</button>
-   
-    </div>
-    </div>
-     }
-  </div>
-  </div>
-  
- </div>
- </div>
-  </div>
+				
+			<hr>
+	}	
+			
+			
+		</div>
+	</div>
 }

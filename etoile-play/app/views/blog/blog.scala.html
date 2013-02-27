@@ -47,11 +47,18 @@ List[models.continent.Continent]) @main("etoile project") {
 
 		<div class="span9">
 			<h3>@blog.header</h3>
-			<img src="@blog.articleImageURL" height="200"
-				width="200" />
-
-			<p>@blog.text</p>
-								<div class="row-fluid">
+		<div class="row-fluid">
+						<div class="span2">
+							<a href="@routes.BlogController.blog(blog.id)" class="thumbnail"> <img
+								src="@blog.articleImageURL" alt="">
+							</a>
+						</div>
+						<div class="span10">
+							<p>@Html(blog.text)</p>
+							
+						</div>
+					</div>
+					<div class="row-fluid">
 						<div class="span10">
 							<p></p>
 							<p>
@@ -61,9 +68,7 @@ List[models.continent.Continent]) @main("etoile project") {
 									
 							</p>
 						</div>
-			<hr>
-
-
+					</div>
 <section id="comments" >
 @if(blog.comments.size!=0){
 			<h3>Comments</h3>

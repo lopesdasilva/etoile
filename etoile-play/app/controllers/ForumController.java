@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 import controllers.secured.Secured;
+import controllers.secured.SecuredProfessor;
 import models.User;
 import models.forum.Reply;
 import models.forum.Topic;
@@ -12,6 +13,7 @@ import models.module.Module;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 public class ForumController extends Controller {
 
@@ -28,12 +30,16 @@ public class ForumController extends Controller {
 	}
 	
 	public static Result forum(String module_acronym){
-		User user = User.find.byId(session("email"));
 		Module module = Module.findByAcronym(module_acronym);
-		if (module==null || !user.modules.contains(module)){
-			System.out.println("The module does not exist.");
+		if (module==null){
 			return redirect(routes.Application.modules());
-		}
+	}
+		if(session("email")!=null){
+		User user = User.find.byId(session("email"));
+		
+		 if(!user.modules.contains(module)){
+			 return redirect(routes.Application.modules());
+		 }
 		
 		
 		
@@ -54,10 +60,12 @@ public class ForumController extends Controller {
 			return ok(views.html.secured.forum.render(user,module));
 		}
 		
-		
-		return redirect(routes.Application.module(module_acronym));
+		}
+		module.forum.refresh();
+		return ok(views.html.statics.forum.render(module));
 	}
 	
+	@Security.Authenticated(SecuredProfessor.class)
 	public static Result addtopic(String module_acronym){
 		
 		Module module = Module.findByAcronym(module_acronym);
@@ -106,16 +114,24 @@ public class ForumController extends Controller {
 	
 	public static Result topic(String module_acronym,Long topic_id){
 	
-		User user = User.find.byId(session("email"));
 		Module module = Module.findByAcronym(module_acronym);
-		if (module==null || !user.modules.contains(module)){
-			System.out.println("The module does not exist.");
+		if (module==null){
 			return redirect(routes.Application.modules());
-		}
+	}
 		Topic topic = Topic.find.byId(topic_id);
 		if(topic==null || !module.forum.topics.contains(topic)){
 			return redirect(routes.ForumController.forum(module_acronym));
 		}
+		
+		if(session("email")!=null){
+		User user = User.find.byId(session("email"));
+		
+		 if(!user.modules.contains(module)){
+			 return redirect(routes.Application.modules());
+		 }
+				
+
+		
 		
 		
 		if(Secured.isStudent(user.email)) {
@@ -131,10 +147,19 @@ public class ForumController extends Controller {
 			user.studentProfile.refresh();
 			return ok(views.html.secured.topic.render(user,module,topic));
 		}
+		}
 		
-		return redirect(routes.Application.module(module_acronym));
+		topic.starter.refresh();
+		for(Reply reply: topic.replies){
+			reply.refresh();
+			reply.user.refresh();
+			reply.user.studentProfile.refresh();
+		}
+		
+		return ok(views.html.statics.topic.render(module,topic));
 	}
 	
+	@Security.Authenticated(Secured.class)
 	public static Result addReply(String module_acronym,Long topic_id){
 		
 		User user = User.find.byId(session("email"));

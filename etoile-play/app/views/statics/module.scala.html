@@ -136,7 +136,7 @@
 
 			@for(content <- module.contents) {
 			<h3>@content.title</h3>
-			<p>@content.text</p>
+			<p>@Html(content.text)</p>
 			<hr>
 			} @if(module.categories.size!=0) { @if(module.categories.size==1) {
 			<h3>Category</h3>

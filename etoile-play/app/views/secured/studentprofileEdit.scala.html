@@ -14,7 +14,7 @@
 				<ul class="nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="/digitalcampus">Digital Campus</a></li>
-					<li><a href="/modules">Modules</a></li>
+					<li><a href="/modules" id="topbarmodules">Modules</a></li>
 					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a></li>
 					<li><a href="/about">About</a></li>
@@ -45,7 +45,7 @@
 	<div class="page-header">
 	<h2>
 			@user.studentProfile.firstname @user.studentProfile.lastname <small><a href="#editProfileModal"
-				data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit Profile</a></small>
+				data-toggle="modal" role="button" class="btn btn-warning btn-mini" id="editProfile">Edit Profile</a></small>
 			<br> <small>@user.studentProfile.shortdescription</small>
 		</h2>
 		
@@ -143,7 +143,7 @@
 			</div>
 			<div class="modal-footer">
 				<a class="btn" data-dismiss="modal">Close</a>
-				<button class="btn btn-success">Save changes</button>
+				<button class="btn btn-success" id="editProfileSave">Save changes</button>
 			</div>
 			}
 
@@ -191,7 +191,7 @@
 	</div>
 	
 	<h3>About
-	<small><a href="#editAboutProfileModal" data-toggle="modal" role="button" class="btn btn-warning btn-mini">Edit</a></small>
+	<small><a href="#editAboutProfileModal" data-toggle="modal" role="button" class="btn btn-warning btn-mini" id="editAboutProfile">Edit</a></small>
 	</h3>
 	
 	<div id="editAboutProfileModal" class="modal hide fade" tabindex="-1"
@@ -259,7 +259,7 @@
 			</div>
 			<div class="modal-footer">
 				<a class="btn" data-dismiss="modal">Close</a>
-				<button class="btn btn-success">Save changes</button>
+				<button class="btn btn-success" id="editAboutProfileSave">Save changes</button>
 			</div>
 			}
 
@@ -363,8 +363,34 @@
 	
 	</div>
 </div>
+@if(!user.olduser){
+<script type="text/javascript">
 
+$(document).ready(function () {
 
-
+	var tour = new Tour({onEnd: function (tour) {tour.restart()}});
+	  tour.addStep({
+	  element: "#editProfile", /* html element next to which the step popover should be shown */
+	  title: "Profile", /* title of the popover */
+	  content: "Click here to edit your informations.", /* content of the popover */
+		  reflex: true
+	});
+	  tour.addStep({
+		  element: "#editAboutProfile", /* html element next to which the step popover should be shown */
+		  title: "Modules menu", /* title of the popover */
+		  content: "Now let's edit your education information.", /* content of the popover */
+			  reflex: true
+		});
+	  tour.addStep({
+		  element: "#topbarmodules", /* html element next to which the step popover should be shown */
+		  title: "Let's sign up a module", /* title of the popover */
+		  placement: "bottom",
+		  content: "Now click here to check out what modules there are in etoile, and apply in one of your choice." /* content of the popover */
+		});
+	  
+	  tour.start();
+});
+</script>
+}
 
 }

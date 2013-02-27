@@ -42,6 +42,9 @@ public class User extends Model {
     public String email;
     
     @Constraints.Required
+    public boolean olduser;
+    
+    @Constraints.Required
     public String name;
     
     @Constraints.Required

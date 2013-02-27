@@ -84,7 +84,7 @@
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
 
-			<div class="row-fluid">
+			<div class="row-fluid" id="modules">
 				<ul class="thumbnails">
 					@for(module <- modules) {
 					<li class="span4">
@@ -117,6 +117,21 @@
 		</div>
 		</div>
 </div>
-								
+@if(!user.olduser){
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+	var tour = new Tour({onEnd: function (tour) {tour.restart()}});
+	  tour.addStep({
+	  element: "#modules", /* html element next to which the step popover should be shown */
+	  title: "Modules", /* title of the popover */
+	  content: "This is the modules list, click on any of this modules to get more informations about them and sign up.", /* content of the popover */
+	  placement: "left"
+	});
+	  tour.restart();
+});
+</script>
+	}							
 		}
 		

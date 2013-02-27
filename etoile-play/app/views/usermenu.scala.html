@@ -3,13 +3,13 @@
 <div class="span3">
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
-			<li class="nav-header" title="This is the final evaluation of Lesson number 2.">@user.name</li>
-			<li><a href="/myprofile">My Profile</a></li>
+			<li class="nav-header" >@user.name</li>
+			<li><a href="/myprofile" id="profilemenu">My Profile</a></li>
 		</ul>
 	</div>
 	<div class="well sidebar-nav">
 			<ul class="nav nav-list">
-				<li class="nav-header">My Modules</li> 
+				<li class="nav-header"  id="modulesmenu">My Modules</li> 
 				@for(module <- user.modules) {
 				@if(active.equals(module.acronym)){
 					<li class="active"><a><i class="icon-chevron-down" data-target="#@module.acronym" data-toggle="collapse"></i>@module.name</a></li>

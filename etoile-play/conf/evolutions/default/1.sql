@@ -344,6 +344,7 @@ create table university (
 create table account (
   email                     varchar(255) not null,
   id                        bigint,
+  olduser                   tinyint(1) default 0,
   name                      varchar(255),
   password                  varchar(255),
   username                  varchar(255),

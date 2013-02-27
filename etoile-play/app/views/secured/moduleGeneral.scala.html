@@ -61,7 +61,7 @@
 					</div>
 					<div class="span2 offset3 pull-right">
 						<h2>
-							<a href="@routes.StudentController.signupmodule(module.acronym)" class="btn btn-info">Sign Up</a>
+							<a href="@routes.StudentController.signupmodule(module.acronym)" class="btn btn-info" id="signup">Sign Up</a>
 						</h2>
 					</div>
 				</div>
@@ -156,4 +156,22 @@
 
 			<p></p>
 		</div>
-		}
+		@if(!user.olduser){
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				var tour = new Tour({
+					onEnd : function(tour) {
+						tour.restart()
+					}
+				});
+				tour.addStep({
+					element : "#signup", /* html element next to which the step popover should be shown */
+					title : "Sign up", /* title of the popover */
+					content : "You can click here to signup this module.", /* content of the popover */
+					placement : "left"
+				});
+				tour.restart();
+			});
+		</script>
+		} }

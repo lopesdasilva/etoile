@@ -18,7 +18,7 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 				<ul class="nav">
 					<li class="active"><a href="/">Home</a></li>
 					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
-					<li><a href="/modules">Modules</a></li>
+					<li><a href="/modules" id="topbarmodules">Modules</a></li>
 					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
 					<li><a href="/news">News</a></li>
 					<li><a href="/about">About</a></li>
@@ -51,8 +51,7 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 
 		<div class="span9">
 			<div class="well">
-<!-- 			<button onclick="startTour();"></button> -->
-					<div class="row-fluid">
+				<div class="row-fluid">
 						<div class="span2">
 							<a class="thumbnail"> <img
 								src="@user.studentProfile.imageURL" alt="">
@@ -132,16 +131,43 @@ List[models.curriculum.Category]) @main("etoileplatform"){
 		</div>
 	</div>
 </div>
+@if(!user.olduser){
 <script type="text/javascript">
-var tour = new Tour();
-tour.addStep({
-	  element: "stats", /* html element next to which the step popover should be shown */
-	  title: "teste", /* title of the popover */
-	  content: "test" /* content of the popover */
-	});
 
-function startTour(){
-	tour.start(true);
-}
+$(document).ready(function () {
+
+	
+	console.log("starting tour")
+	var tour = new Tour();
+	  tour.addStep({
+	  element: "#stats", /* html element next to which the step popover should be shown */
+	  title: "Welcome, @user.name", /* title of the popover */
+	  content: "This is overview of your etoile statistics. Soon this will have more data." /* content of the popover */
+	});
+	  tour.addStep({
+		  element: "#profilemenu", /* html element next to which the step popover should be shown */
+		  title: "Profile menu", /* title of the popover */
+		  content: "Here you can complete your etoile profile." /* content of the popover */
+		});
+	  tour.addStep({
+		  element: "#modulesmenu", /* html element next to which the step popover should be shown */
+		  title: "Modules menu", /* title of the popover */
+		  content: "After you sign up in some modules to your account, they will appear here." /* content of the popover */
+		});
+	  tour.addStep({
+		  element: "#topbarmodules", /* html element next to which the step popover should be shown */
+		  title: "Sign up in new modules", /* title of the popover */
+		  placement: "bottom",
+		  content: "To sign up in new modules, click here and you will see all the modules available." /* content of the popover */
+		});
+	  tour.addStep({
+		  element: "#profilemenu", /* html element next to which the step popover should be shown */
+		  title: "Let's start using etoile", /* title of the popover */
+		  content: "To complete your profile click on My Profile, on the left." /* content of the popover */
+		});
+	  
+	  tour.restart();
+});
 </script>
+}
 }

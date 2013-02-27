@@ -92,7 +92,7 @@ public class StudentController extends Controller {
 			user.studentProfile.imageURL=form.get().imageURL;
 			user.studentProfile.shortdescription=form.get().shortdescription;
 			user.studentProfile.address = form.get().address;
-			user.studentProfile.save();			
+			user.studentProfile.save();	
 			System.out.println("URL DPS D SAVE: " + user.studentProfile.webpage);
 		}
 		return redirect(routes.ProfessorController.myprofile());
@@ -156,6 +156,7 @@ public class StudentController extends Controller {
 
 		if (Secured.isStudent(user.email) && !user.modules.contains(module)) {
 			user.modules.add(module);
+			user.olduser=true;
 			user.save();
 			module.save();
 			

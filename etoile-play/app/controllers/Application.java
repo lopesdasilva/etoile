@@ -36,6 +36,11 @@ public class Application extends Controller {
 	        }
 	        
 	    }
+	 
+	 public static Result tests(){
+		 
+		 return ok(views.html.statics.blank.render());
+	 }
 
 	public static Result index() {
 		

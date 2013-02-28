@@ -6,6 +6,8 @@
 GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")
 GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/images/glyphicons-halflings.png")
 
+GET		/tests					controllers.Application.tests()
+
 
 # Home page
 GET     /                           controllers.StudentController.index()

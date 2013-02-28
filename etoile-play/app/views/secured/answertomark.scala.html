@@ -13,7 +13,7 @@ models.test.Answer, question: models.test.question.Question, formMarkerEvaluatio
 			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
-			<div class="nav-collapse collapse">
+			<div class="nav-collapse">
 				<ul class="nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
@@ -31,8 +31,20 @@ models.test.Answer, question: models.test.question.Question, formMarkerEvaluatio
 				<form class="navbar-form pull-right">
 					@if( session.get("email")==null) { <a href="/login" role="button"
 						class="btn btn-primary">Login</a> }
-					@if(session.get("email")!=null) { <a href="/logout" role="button"
-						class="btn btn-primary">Logout</a> }
+					@if(session.get("email")!=null) { <div class="btn-group pull-right">
+					<a class="btn dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"><i class="icon-cog icon-white"></i>
+						@user.email <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<!-- dropdown menu links -->
+						<a href="@routes.StudentController.settings()#password" role="button"><i class="icon-wrench"></i> Password
+							Settings</a>
+						<a href="@routes.StudentController.settings()#privacy" role="button"><i class="icon-lock"></i> Privacy
+							Settings</a>
+							<li class="divider"></li>
+							<a href="/logout" role="button" ><i class="icon-off"></i> Logout</a>
+					</ul>
+				</div> }
 				</form>
 			</div>
 			<!--/.nav-collapse -->

@@ -412,6 +412,7 @@ public class StudentController extends Controller {
 		
 		// check this line
 		User user = User.find.byId(session("email"));
+		user.studentProfile.refresh();
 		return ok(views.html.secured.contact.render(user, categories));
 	}
 
@@ -433,8 +434,9 @@ public class StudentController extends Controller {
 		if (SecuredProfessor.isProfessor(session("email"))){
 			return ProfessorController.news();
 		}
-
-		return ok(views.html.secured.blogs.render(User.find.byId(session("email")),
+		User user = User.find.byId(session("email"));
+		user.studentProfile.refresh();
+		return ok(views.html.secured.blogs.render(user,
 				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}

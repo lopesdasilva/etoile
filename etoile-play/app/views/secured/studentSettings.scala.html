@@ -1,0 +1,176 @@
+@(user: models.User) @main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+
+	<div class="navbar-inner">
+
+		<div class="container">
+
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+
+			</a>
+
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+
+
+			<div class="nav-collapse">
+
+
+				<ul class="nav">
+
+					<li><a href="/">Home</a></li>
+
+					<li><a href="/digitalcampus">Digital Campus</a></li>
+
+					<li><a href="/modules" id="topbarmodules">Modules</a></li>
+					<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+
+
+					<li><a href="/modules" id="topbarmodules">Modules</a></li>
+
+					<!--   <li><a href="/curriculum">Curriculum</a></li>  -->
+
+
+					<li><a href="/news">News</a></li>
+
+					<li><a href="/about">About</a></li>
+
+					<li><a href="/contact">Contact</a></li>
+
+
+				</ul>
+
+				<!--  
+
+<div class="navbar-form pull-right">
+
+<a href="login" role="button" class="btn btn-primary">Login</a>
+
+</div>
+
+-->
+
+				<div class="btn-group pull-right">
+					<a class="btn dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"><i class="icon-cog icon-white"></i>
+						@user.studentProfile.firstname @user.studentProfile.lastname <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<!-- dropdown menu links -->
+						<a href="@routes.StudentController.settings()#password" role="button"><i class="icon-wrench"></i> Password
+							Settings</a>
+						<a href="@routes.StudentController.settings()#privacy" role="button"><i class="icon-lock"></i> Privacy
+							Settings</a>
+							<li class="divider"></li>
+							<a href="/logout" role="button"><i class="icon-off"></i> Logout</a>
+					</ul>
+				</div>
+
+			</div>
+
+			<!--/.nav-collapse -->
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="container">
+<div class="page-header">
+			<h2>
+			@user.studentProfile.firstname @user.studentProfile.lastname
+			<br><small>Settings</small>
+			</h2>
+</div>
+</div>
+
+<div class="span12 container">
+<section id="privacy">
+		<h3>Privacy settings</h3>
+		<hr>
+	@helper.form(routes.StudentController.changeprivacy(),'class->"form-horizontal"){
+	<div class="control-group">
+		<div class="controls">
+			@if(user.studentProfile.privateProfile){ Private profile: <input
+				checked type="checkbox" name="privacy" value="1" /> }else{ Private
+			profile: <input type="checkbox" name="privacy" value="1" /> }
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="controls">
+			Share Results: <input type="checkbox" name="privacy" value="1" disabled="disabled"/> 
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="controls">
+			Share my e-mail: <input type="checkbox" name="privacy" value="1" disabled="disabled"/> 
+		</div>
+	</div>
+
+
+	<div class="control-group">
+		<div class="controls">
+
+			<button type="submit" class="btn btn-primary">Save settings</button>
+
+		</div>
+	</div>
+	}
+
+</section>
+<section id="password">
+	<h3>Password settings</h3>
+<hr>
+	@helper.form(routes.StudentController.changepassword(),'class->"form-horizontal"){
+
+
+	<div class="control-group">
+		<label class="control-label" for="inputPassword">Password</label>
+		<div class="controls">
+			<input type="password" id="inputPassword" name="inputPassword"
+				placeholder="Password" required minlength="6"
+				data-validation-minlength-message="A password must be at least 6 characters.">
+			<span class="help-inline"></span> <span class="help-block">A
+				password must be at least 6 characters. </span>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label" for="inputRepeatPassword">Repeat
+			Password</label>
+		<div class="controls">
+			<input type="password" id="inputRepeatPassword"
+				name="inputRepeatPassword" placeholder="Repeat Password"
+				data-validation-matches-match="inputPassword"
+				data-validation-matches-message="Must match password entered above">
+			<span class="help-inline"></span> <span class="help-block">Please
+				repeat your password again. </span>
+
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+
+			<button type="submit" class="btn btn-primary">Change
+				Password</button>
+
+		</div>
+	</div>
+	<br><br><br>
+
+	}
+	</section>
+</div>
+
+}

@@ -110,6 +110,16 @@ public class StudentController extends Controller {
 		return redirect(routes.ProfessorController.myprofile());
 	}
 	
+	public static Result settings(){
+		System.out.println("Settings.");
+		if(Secured.isStudent(session("email"))){
+			User user = User.find.byId(session("email"));
+			user.studentProfile.refresh();
+			return ok(views.html.secured.studentSettings.render(user));
+		}
+		return null;
+	}
+	
 	public static Result editprofileabout(){
 		if(Secured.isStudent(session("email"))){
 			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
@@ -132,7 +142,7 @@ public class StudentController extends Controller {
 			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
 			user.save();
 		}
-		return redirect(routes.ProfessorController.myprofile());
+		return redirect(routes.StudentController.settings());
 	}
 	
 	public static Result changeprivacy(){
@@ -152,7 +162,7 @@ public class StudentController extends Controller {
 			}
 			
 		}
-		return redirect(routes.ProfessorController.myprofile());
+		return redirect(routes.StudentController.settings());
 	}
 	
 	public static Result module(String module_acronym) {
@@ -414,6 +424,7 @@ public class StudentController extends Controller {
 		}
 		
 		User user = User.find.byId(session("email"));
+		user.studentProfile.refresh();
 		return ok(views.html.secured.about.render(user, categories));
 	}
 	

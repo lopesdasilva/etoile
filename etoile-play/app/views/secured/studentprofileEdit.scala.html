@@ -61,12 +61,12 @@
 					</a>
 					<ul class="dropdown-menu">
 						<!-- dropdown menu links -->
-						<a href="#changePassword" data-toggle="modal" role="button"><i class="icon-wrench"></i> Password
+						<a href="@routes.StudentController.settings()#password" role="button"><i class="icon-wrench"></i> Password
 							Settings</a>
-						<a href="#changePrivacy" data-toggle="modal" role="button"><i class="icon-lock"></i> Privacy
+						<a href="@routes.StudentController.settings()#privacy" role="button"><i class="icon-lock"></i> Privacy
 							Settings</a>
 							<li class="divider"></li>
-							<a href="/logout" data-toggle="modal" role="button"><i class="icon-off"></i> Logout</a>
+							<a href="/logout" role="button" ><i class="icon-off"></i> Logout</a>
 					</ul>
 				</div>
 

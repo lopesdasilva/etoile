@@ -62,8 +62,12 @@
 			
 					<div class="row-fluid">
 						<div class="span2">
-							<a href="#" class="thumbnail"> <img
-								src="@reply.user.studentProfile.imageURL" alt="">
+							<a href="#" class="thumbnail">
+@if(reply.user.account_type==0){
+							<img src="@reply.user.studentProfile.imageURL" alt="">
+							}else{
+							<img src="@reply.user.professorProfile.imageURL" alt="">
+							}
 							</a>
 						</div>
 						<div class="span10">

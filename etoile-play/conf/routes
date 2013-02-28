@@ -48,7 +48,7 @@ POST	/news:blog/postcomment			controllers.BlogController.postcomment(blog: Long)
 
 #Professors
 GET		/professors/:professor			controllers.Application.professorprofile(professor: String)
-
+GET		/students/:student				controllers.Application.studentprofile(student: String)
 
 
 

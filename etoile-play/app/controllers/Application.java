@@ -65,6 +65,21 @@ public class Application extends Controller {
 				));
 	}
 	
+	public static Result studentprofile(String student_acronym){
+		if(session("email")!=null){
+			
+		Student student = Student.findByAcronym(student_acronym);
+		if(student==null){
+			return redirect(routes.Application.index());
+		}
+		student.user.refresh();
+		if(student.university!=null)
+		student.university.refresh();
+		return ok(views.html.statics.studentprofile.render(student));
+		}
+		return redirect(routes.Application.index());
+	}
+	
 public static Result professorprofile(String professor_acronym) {
 	
 		Professor professor = Professor.findByAcronym(professor_acronym);

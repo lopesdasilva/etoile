@@ -1,0 +1,188 @@
+@(student: models.Student) @main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+					</li>
+					<li><a href="/modules">Modules</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li class="active"><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container">
+
+
+
+	<div class="page-header">
+	<h2>
+			@student.firstname @student.lastname
+			<p><small>@student.shortdescription</small></p>
+		</h2>
+	</div>
+	
+	<div class="span12 container">
+	<div class="span2 well">
+	<div class="row">
+		@if(student.imageURL.length()>0){
+		<div class="span2"><a class="thumbnail"><img src="@student.imageURL" alt=""></a></div>
+		}
+		@if(student.imageURL.length()==0){
+		<div class="span2"><a class="thumbnail"><img src="http://forum.must.ac.ug/sites/default/files/default-avatar.png" alt=""></a></div>
+		}
+		
+	</div>
+	</div>
+	<div class="span8 well">
+	<div class="row">
+		<div class="span10">
+		<blockquote>
+          	<p><strong>Name: @student.firstname @student.lastname</strong></p>
+          	<p><strong>Username:</strong> @student.acronym</p>
+          	<p><strong>Contact:</strong> @student.contact</p>
+          	<p><strong>Address:</strong> @student.address</p>
+          	<p><strong>Webpage:</strong> <a href="@student.webpage" target="_blank">@student.webpage</a></p>
+          	@if(student.male){
+          	<p>Male from <span class="bfh-countries" data-country="@student.user.country" data-flags="false"></span></p>
+          	}else{
+          	<p>Female from <span class="bfh-countries" data-country="@student.user.country" data-flags="false"></span></p>
+          	}
+          	</blockquote>
+		</div>
+	</div>
+	</div>
+	
+	<h3>About</h3>
+	
+	<div class="span11 well">
+	<div class="row">
+		<div class="span10">
+		<blockquote>
+          	<p><strong>Scientific Area:</strong> @student.scientific_area</p>
+          	<p><strong>Degree:</strong> @student.degree</p>
+          	<p><strong>University:
+          	@if(student.university!=null){
+          	<span class=" badge badge-warning">@student.university.name</span> 
+          	}
+          	</strong>
+			</p>
+			</blockquote>
+          	<p> @student.description</p>
+			
+		</div>
+	</div>
+	</div>
+	
+	<h3>Activity in &eacutetoile</h3>
+	<div class="span11 well">
+	<div class="row">
+		<div class="span10">
+		<div class="offset">
+		<blockquote>
+
+			<p><strong>Modules:</strong> 
+		@for(module<-student.user.modules){
+          <span class=" badge badge-alert">@module.name</span>
+          }
+           </p>
+          	<p><strong>Tests:</strong> @student.user.tests.size()</p>
+          	<p><strong>Suggested questions:</strong> @student.user.openquestions.size()</p>
+          	<p><strong>Forum posts:</strong> - </p>
+          	<p><strong>Suggested URLs:</strong> @student.user.urls.size()</p>
+          	<p><strong>Marked answers: </strong>@student.user.answerMarker.size()</p>
+          </blockquote>
+   
+     		<section id="reputation">
+          	<h3>@student.acronym reputation:</h3>
+			<div class="">
+				<button type="button" class="close" data-toggle="collapse"
+							data-target="#reputationdetails" >+</button>
+						<div class="span9">
+						<div class="progress progress-success progress-striped">
+					<div class="bar"  style="width: @student.user.globalReputation%"></div>
+					
+				</div>
+				</div>
+						
+							<div id="reputationdetails" class="collapse row-fluid in">
+							<div class="offset1">
+							<hr>
+							
+							@if(student.user.modules.size()>0){
+							<h2>Modules</h2>
+							@for(modulescore <- student.user.modulesscores){
+							<h4>@modulescore.module.name: </h4>
+							@if(modulescore.score>=50){
+								<small>Score:<strong>@modulescore.score%</strong> </small> <div class="progress progress-success">
+									<div class="bar" style="width:@modulescore.score% "></div>
+								</div>
+								}
+							@if(modulescore.score<50){
+								<small>Score:<strong>@modulescore.score%</strong> </small> <div class="progress progress-danger">
+									<div class="bar" style="width:@modulescore.score% "></div>
+								</div>
+								}
+							}
+							}
+							@if(student.user.subtopicreputation.size()>0){
+							<hr>
+							<h2>Subtopics</h2>
+							@for(subtopicreputation <- student.user.subtopicreputation){
+							<h4>@subtopicreputation.subtopic.name:  </h4>
+								<small>As a student:<strong>@subtopicreputation.reputationAsAStudent%</strong></small> <div class="progress progress-info">
+									<div class="bar" style="width:@subtopicreputation.reputationAsAStudent% "></div>
+								</div>
+								<small>As a marker:<strong>@subtopicreputation.reputationAsAMarker%</strong></small> <div class="progress progress-warning">
+									<div class="bar" style="width:@subtopicreputation.reputationAsAMarker%"></div>
+								</div>
+							}
+							}
+					
+							</div>
+							</div>
+				
+				
+		</div>
+				</section>
+	</div>
+	</div>
+	
+	</div>
+</div>
+
+}

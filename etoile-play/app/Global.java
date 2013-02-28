@@ -798,7 +798,7 @@ public class Global extends GlobalSettings {
 			
 			// USERS ++++++++++++++++++++++++++++++++++++++++++++
 			Student student = new Student();
-			student.acronym = "rpaixao";
+			student.acronym = "rub";
 			student.firstname = "Rúben";
 			student.lastname = "Paixão";
 			student.webpage = "etoileplatform.net";
@@ -833,6 +833,9 @@ public class Global extends GlobalSettings {
 //			user.answersToMark.add();
 			user_rub.save();
 			
+			student.user=user_rub;
+			student.save();
+			
 
 			
 			Comment c = new Comment();
@@ -851,6 +854,7 @@ public class Global extends GlobalSettings {
 			student.imageURL = "http://placehold.it/150x150";
 			student.scientific_area = "Telecommunications";
 			student.contact = "rui@rui.pt";
+			student.acronym="rui";
 			student.date_of_birth = new Date();
 			student.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus accumsan libero non enim commodo egestas. Quisque semper dapibus augue aliquam semper. Sed laoreet vestibulum condimentum.";
 			student.male = true;
@@ -876,6 +880,8 @@ public class Global extends GlobalSettings {
 			//module_two.save();
 			user.modules.add(module_demo);
 			user.save();
+			student.user=user;
+			student.save();
 			
 			Modulescore modulescore= new Modulescore();
 			modulescore.module=module_demo;

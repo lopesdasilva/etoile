@@ -462,5 +462,12 @@ public class StudentController extends Controller {
 				categories,continents,continent,continent.universities));
 		   
 	}
+	public static Result olduser(){
+		User user = User.find.byId(session("email"));
+		user.olduser=!user.olduser;
+		user.save();
+		
+		return ok("done");
+	}
 
 }

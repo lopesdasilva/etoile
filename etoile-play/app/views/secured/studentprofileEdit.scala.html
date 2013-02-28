@@ -499,33 +499,7 @@
 	</div>
 </div>
 @if(!user.olduser){
-<script type="text/javascript">
-
-$(document).ready(function () {
-
-	var tour = new Tour({onEnd: function (tour) {tour.restart()}});
-	  tour.addStep({
-	  element: "#editProfile", /* html element next to which the step popover should be shown */
-	  title: "Profile", /* title of the popover */
-	  content: "Click here to edit your informations.", /* content of the popover */
-		  reflex: true
-	});
-	  tour.addStep({
-		  element: "#editAboutProfile", /* html element next to which the step popover should be shown */
-		  title: "Modules menu", /* title of the popover */
-		  content: "Now let's edit your education information.", /* content of the popover */
-			  reflex: true
-		});
-	  tour.addStep({
-		  element: "#topbarmodules", /* html element next to which the step popover should be shown */
-		  title: "Let's sign up a module", /* title of the popover */
-		  placement: "bottom",
-		  content: "Now click here to check out what modules there are in etoile, and apply in one of your choice." /* content of the popover */
-		});
-	  
-	  tour.start();
-});
-</script>
+<script src="@routes.Assets.at("javascripts/tour.js")"></script>
 }
 
 }

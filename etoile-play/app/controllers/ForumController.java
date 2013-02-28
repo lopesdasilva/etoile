@@ -33,39 +33,55 @@ public class ForumController extends Controller {
 		Module module = Module.findByAcronym(module_acronym);
 		if (module==null){
 			return redirect(routes.Application.modules());
-	}
-		if(session("email")!=null){
-		User user = User.find.byId(session("email"));
-		
-		 if(!user.modules.contains(module)){
-			 return redirect(routes.Application.modules());
-		 }
-		
-		
-		
-		if(Secured.isStudent(user.email)) {
-			for(Topic topic: module.forum.topics){
-			Usertopic usertopic= Usertopic.findByUserAndTopic(user.email, topic.id);
-					if(usertopic==null){
-						usertopic= new Usertopic();
-						usertopic.topic=topic;
-						usertopic.seen=false;
-						usertopic.user=user;
-						usertopic.save();
-					}
-			
-			}
-			module.forum.refresh();
-			
-			return ok(views.html.secured.forum.render(user,module));
 		}
-		
+		if(session("email")!=null){
+			User user = User.find.byId(session("email"));
+			if(Secured.isStudent(user.email)) {
+			if(!user.modules.contains(module)){
+				return redirect(routes.Application.modules());
+			}
+			for(Topic topic: module.forum.topics){
+				Usertopic usertopic= Usertopic.findByUserAndTopic(user.email, topic.id);
+				if(usertopic==null){
+					usertopic= new Usertopic();
+					usertopic.topic=topic;
+					usertopic.seen=false;
+					usertopic.user=user;
+					usertopic.save();
+				}
+				module.forum.refresh();
+
+			
+
+					return ok(views.html.secured.forum.render(user,module));
+				}
+
+			}if(SecuredProfessor.isProfessor(user.email) && SecuredProfessor.isOwner(user, module)){
+					
+					for(Topic topic: module.forum.topics){
+						Usertopic usertopic= Usertopic.findByUserAndTopic(user.email, topic.id);
+
+						if(usertopic==null){
+							usertopic= new Usertopic();
+							usertopic.topic=topic;
+							usertopic.seen=false;
+							usertopic.user=user;
+							usertopic.save();
+						}
+						module.forum.refresh();
+					}	
+					return ok(views.html.professor.forum.render(user,module));
+				
+
+				}
+			
+
 		}
 		module.forum.refresh();
 		return ok(views.html.statics.forum.render(module));
 	}
 	
-	@Security.Authenticated(SecuredProfessor.class)
+
 	public static Result addtopic(String module_acronym){
 		
 		Module module = Module.findByAcronym(module_acronym);
@@ -126,15 +142,13 @@ public class ForumController extends Controller {
 		if(session("email")!=null){
 		User user = User.find.byId(session("email"));
 		
-		 if(!user.modules.contains(module)){
-			 return redirect(routes.Application.modules());
-		 }
-				
-
-		
 		
 		
 		if(Secured.isStudent(user.email)) {
+		 if(!user.modules.contains(module)){
+			 return redirect(routes.Application.modules());
+		 }
+		
 			Usertopic usertopic = Usertopic.findByUserAndTopic(user.email, topic_id);
 			usertopic.seen=true;
 			usertopic.save();
@@ -146,6 +160,19 @@ public class ForumController extends Controller {
 			}
 			user.studentProfile.refresh();
 			return ok(views.html.secured.topic.render(user,module,topic));
+		}
+		if(SecuredProfessor.isProfessor(user.email) && SecuredProfessor.isOwner(user, module)){
+			Usertopic usertopic = Usertopic.findByUserAndTopic(user.email, topic_id);
+			usertopic.seen=true;
+			usertopic.save();
+			topic.starter.refresh();
+			for(Reply reply: topic.replies){
+				reply.refresh();
+				reply.user.refresh();
+				reply.user.studentProfile.refresh();
+			}
+			user.professorProfile.refresh();
+			return ok(views.html.professor.topic.render(user,module,topic));
 		}
 		}
 		

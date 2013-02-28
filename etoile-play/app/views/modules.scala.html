@@ -95,7 +95,9 @@
 				
 				<div id="mainwrapper">
 					@for(module <- modules) {
+					@if(module.university!=null){
 						@module.university.refresh()
+						}
 						<div id="box-2" class="box">
 							<div class="crop"><img id="image-2"
 								src="@module.imageURL" /></div>

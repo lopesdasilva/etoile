@@ -109,7 +109,9 @@
 								<p class="mini">
 									<small>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</small><br>
 									<small>Lessons: <a><b>@module.lessons.size()</b></a></small><br>
+									@if(module.university!=null){
 									<small>University: <a><b>@module.university.name</b></a></small><br>
+									}
 									<small>Professor: <a><b>@for(professor <- module.professors){@professor.firstname @professor.lastname, }</b></a></small><br>
 								</p>
 							</span>

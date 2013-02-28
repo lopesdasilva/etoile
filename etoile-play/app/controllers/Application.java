@@ -198,6 +198,15 @@ public static Result professorprofile(String professor_acronym) {
 				return ProfessorController.index();
 			}
 		}
+		
+		List<Module> modules_list = Module.getAllModules();
+		for(Module mod: modules_list){
+			mod.university.refresh();
+			mod.language.refresh();
+			for(Professor prof: mod.professors){
+				prof.refresh();
+		}
+		}
 		return ok(modules.render(Module.getAllModules(),Category.getAllCategories(),Continent.getAllContinents()));
 	}
 		

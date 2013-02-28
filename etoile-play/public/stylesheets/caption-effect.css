@@ -2,6 +2,24 @@ h4.mini{
 	margin: 1px;
 	font-weight:bold;
 }
+h4.mini{
+	margin: 1px;
+	border-top: 1px;
+}
+
+legend {
+   position:absolute;
+   left:0;
+   right:0;
+   bottom:5px;
+   text-align:center;
+   background:rgba(0, 0, 0, 0.75);
+   color: white;
+
+}
+
+.media-grid a {position:relative;}
+
 p.mini {
 	/*so things don't run into each other*/
 	margin: 0;
@@ -16,7 +34,7 @@ p.mini {
 #mainwrapper .box {
 	border: 5px solid #fff;
 	cursor: pointer;
-	height: 182px;
+	height: 150px;
 	float: left;
 	margin: 5px;
 	position: relative;
@@ -66,6 +84,14 @@ p.mini {
 	width: 170px;
 	height: 170px;	
 	top: -200px;
+	text-align: left;
+	padding: 15px;
+}
+
+#mainwrapper .box .zeca-caption {
+	width: 170px;
+	height: 200px;	
+	top: 70px;
 	text-align: left;
 	padding: 15px;
 }
@@ -157,6 +183,15 @@ p.mini {
 	transform: translateY(100%);
 }
 
+#mainwrapper .box:hover .zeca-caption {
+	-moz-transform: translateY(100%);
+	-o-transform: translateY(100%);
+	-webkit-transform: translateY(100%);
+	opacity: 1;
+	transform: translateY(100%);
+}
+
+
 /** Fade Caption :hover Behaviour **/
 #mainwrapper .box:hover .fade-caption, #mainwrapper .box:hover .scale-caption  {
 	opacity: 1;
@@ -202,3 +237,6 @@ p.mini {
 	-webkit-transform: translateX(200px);
 	transform: translateX(200px);
 }
+
+.crop { width: 200px; height: 240px; overflow: hidden; }
+.crop img { width: 100%; height: 100%; }

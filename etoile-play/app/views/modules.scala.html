@@ -98,9 +98,13 @@
 					@if(module.university!=null){
 						@module.university.refresh()
 						}
+						
 						<div id="box-2" class="box">
-							<div class="crop"><img id="image-2"
-								src="@module.imageURL" /></div>
+						
+							<div class="crop">
+								<img id="image-2"
+								src="@module.imageURL" />
+								</div>
 								
 								<div class="caption zeca-caption carousel-caption">
 										<small><h6>@module.name</h6></small>
@@ -108,16 +112,23 @@
 									
 							
 							<span class="caption full-caption">
+							
 								<p class="mini">
-									<small>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</small><br>
-									<small>Lessons: <a><b>@module.lessons.size()</b></a></small><br>
+								<a href="@routes.Application.module(module.acronym)">
+									<small><a href="@routes.Application.module(module.acronym)"><i class="icon-eye-open icon-white"></i> <b> View Module's page</b></a></small><br>
+									<small>Lessons: <a href="@routes.Application.module(module.acronym)"><b>@module.lessons.size()</b></a></small><br>
 									@if(module.university!=null){
-									<small>University: <a><b>@module.university.name</b></a></small><br>
+									<small>University: <a href="#"><b>@module.university.name</b></a></small><br>
 									}
-									<small>Professor: <a><b>@for(professor <- module.professors){@professor.firstname @professor.lastname, }</b></a></small><br>
+									<small>Lorem Ipsum is simply dummy text of the printing typesetting.</small><br>
+								</a>
 								</p>
+								
 							</span>
+							
+							
 						</div>
+											
 
 						}
 						</ul>

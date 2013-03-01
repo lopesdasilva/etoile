@@ -38,6 +38,10 @@ public class Module extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String description;
+	
+	@Constraints.Required
+	@Column(columnDefinition="TEXT")
+	public String short_description;
 
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")

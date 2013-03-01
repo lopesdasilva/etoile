@@ -173,10 +173,7 @@ create table module (
   acronym                   varchar(255),
   duration                  varchar(255),
   description               TEXT,
-<<<<<<< HEAD
   short_description         TEXT,
-=======
->>>>>>> contacts
   video_url                 TEXT,
   image_url                 TEXT,
   university_id             bigint,

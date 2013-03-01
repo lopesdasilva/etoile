@@ -46,9 +46,8 @@ p.mini {
 }
 /* Image Box Style */
 #mainwrapper .box {
-	border: 5px solid #333;
+	border: 5px solid #fff;
 	/*border-color: #333333;*/
-	border-bottom-color:#333333;
 	height: 150px;
 	float: left;
 	margin: 5px;
@@ -62,8 +61,8 @@ p.mini {
 
 #mainwrapper .box-footer {
 	border: 5px solid #fff;
-	background-color: #333333;
-	border-color: #333333;
+	/*background-color: #333333;
+	border-color: #333333;*/
 	cursor: pointer;
 	height: 30px;
 	float: left;

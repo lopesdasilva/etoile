@@ -17,8 +17,12 @@ h6.mini{
 	
 }
 
+html { background-color: #eaeaea; }
+
 .caption {
     text-align:center;
+    /*coordinated marking to match cell's padding*/
+	margin-bottom:.5em;
 }
 
 legend {

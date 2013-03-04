@@ -101,14 +101,16 @@
 				<ul class="thumbnails">
 				
 				<div id="mainwrapper">
+				<section id="modules">
 					@for(module <- modules) {
 					@if(module.university!=null){
 						@module.university.refresh()
 						}
 						
-						<div id="box-2" class="box">
-						
-							<div class="crop">
+						<a href="@routes.Application.module(module.acronym)">
+							<div id="box-2" class="box">
+							
+								<div class="crop">
 								<img id="image-2"
 								src="@module.imageURL" />
 								</div>
@@ -116,28 +118,26 @@
 								<div class="caption zeca-caption carousel-caption">
 										<small><h6 class="mini">@module.name</h6></small>
 									</div>
-									
-							
-							<span class="caption full-caption">
-							
-								<p class="mini">
-								<a href="@routes.Application.module(module.acronym)">
-									<small><a href="@routes.Application.module(module.acronym)"><i class="icon-eye-open icon-white"></i> <b> View details</b></a></small><br>
-									<small>Lessons: <a href="@routes.Application.module(module.acronym)"><b>@module.lessons.size()</b></a></small><br>
-									@if(module.university!=null){
-									<small>University: <a href="#"><b>@module.university.name</b></a></small><br>
-									}
-									<small>@module.short_description</small><br>
-								</a>
-								</p>
 								
-							</span>
-							
-							
-						</div>
+								<span
+									class="caption full-caption">
+									
+									@if(module.university!=null){
+									<small>University: <b>@module.university.name</b></small><br> 
+									}
+									with  @for(professor <- module.professors){
+									<small><b>@professor.firstname.charAt(0). @professor.lastname, </b> </small>
+									}<br>
+									<small>Lessons: <b>@module.lessons.size()</b></small><br>
+									<small>@module.short_description</small><br>
+								</span>
+							</div> 
+							</a>
+							 
 											
 
 						}
+						</section>
 						</ul>
 
 

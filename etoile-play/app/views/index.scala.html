@@ -59,32 +59,44 @@ List[models.module.Module]) @main("etoile project") {
 						@module.university.refresh()
 						}
 						
-						<a href="@routes.Application.module(module.acronym)">
-							<div id="box-2" class="box">
+						<div id="box-2" class="box">
 							
 								<div class="crop">
-								<img id="image-2"
+								<img id="png1"
 								src="@module.imageURL" />
 								</div>
+								
 								
 								<div class="caption zeca-caption carousel-caption">
 										<small><h6 class="mini">@module.name</h6></small>
 									</div>
-								
+									@if(module.professors.size()!=0){
+								<a href="@routes.Application.professorprofile(module.professors.get(0).acronym)">
+								<div class="caption zeca-caption-inv">
+
+									<div class="row-fluid">
+										<div class="span3">
+											<p> <img width="60px" src="@module.professors.get(0).imageURL"
+												alt="">
+											</p>
+										</div>
+										<div class="span8">
+											<p><h6 class="mini">@module.professors.get(0).firstname @module.professors.get(0).lastname @if(module.university!=null){from @module.university.name}</h6></p>
+											
+										</div>
+									</div>
+
+
+								</div>
+								</a>
+								}	
+								<a href="@routes.Application.module(module.acronym)">
 								<span
 									class="caption full-caption">
-									
-									@if(module.university!=null){
-									<small>University: <b>@module.university.name</b></small><br> 
-									}
-									with  @for(professor <- module.professors){
-									<small><b>@professor.firstname.charAt(0). @professor.lastname, </b> </small>
-									}<br>
-									<small>Lessons: <b>@module.lessons.size()</b></small><br>
 									<small>@module.short_description</small><br>
 								</span>
+								</a>
 							</div> 
-							</a>
 							 				
 
 						}

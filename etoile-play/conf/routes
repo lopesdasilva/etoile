@@ -3,11 +3,11 @@
 # ~~~~
 
 # Icons
-GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")
-GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/images/glyphicons-halflings.png")
+GET     /assets/images/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")
+GET     /assets/images/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/images/glyphicons-halflings.png")
 
 GET		/tests					controllers.Application.tests()
-
+GET     /document                   controllers.StudentTestController.document(test: Long)
 
 # Home page
 GET     /                           controllers.StudentController.index()

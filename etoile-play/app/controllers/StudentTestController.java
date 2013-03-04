@@ -26,6 +26,8 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import util.pdf.PDF;
+import views.html.document;
 import controllers.secured.*;
 
 
@@ -83,6 +85,22 @@ public class StudentTestController extends Controller {
 		public String image;
 	}
 
+	 public static Result document(Long test_id) {
+		 
+		 User user = User.find.byId(request().username());
+		 Test test = models.test.Test.find.byId(test_id);
+		 if(test==null){
+			 return redirect(routes.Application.index());
+			}
+		 Usertest usertest = Usertest.findByUserAndTest(user.email,test.id);
+		 if(usertest==null || usertest.inmodule || !usertest.submitted){
+			 return redirect(routes.Application.index());
+		 }
+		 usertest.user.refresh();
+		 usertest.test.refresh();
+		 System.out.println(usertest.test);
+	        return PDF.ok(document.render(usertest));
+	    }
 
 	
 	public static Result questionanalysis(Long question_number, Long test_id,String lesson_acronym,String module_acronym){

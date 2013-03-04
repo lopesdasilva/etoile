@@ -120,11 +120,12 @@ models.module.Lesson, module: models.module.Module) @import helper._
 						<table class="table table-striped" style="background: #DDDDDD;">
 							<thead>
 								<tr>
-									<th>Test-ID</th>
+									
 									<th>Test Name</th>
 									<th>Expected Duration</th>
 									<th>Evaluation</th>
 									<th>Question</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -177,7 +178,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										}
 									</div>
 								<tr>
-									<td>@test.id</td>
+									
 									<td>@test.name</td>
 									<td>@test.expectedDuration</td>
 									@if(user.isUserSignupTest(test)){ @for(usertest<-user.tests){
@@ -192,7 +193,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
 											test&raquo;</a></td> } @if(usertest.submitted){
 									<td><a class="btn btn-primary btn-small disabled" href="#">Test
-											submitted</a></td> } }
+											submitted</a>  </td>} }
 									<!-- IF2 -->
 									@if(usertest.test.id==test.id && !usertest.inmodule &&
 									usertest.submitted){ @if(!usertest.reviewd){
@@ -206,7 +207,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 										href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
 											test&raquo;</a></td> } @if(usertest.submitted){
 									<td><a class="btn btn-primary btn-small disabled" href="#">Test
-											submitted</a></td> } }
+											submitted</a> </td> } }
 									<!-- IF3 -->
 									@if(usertest.test.id==test.id && !usertest.inmodule &&
 									!usertest.submitted ){
@@ -216,7 +217,15 @@ models.module.Lesson, module: models.module.Module) @import helper._
 											question&raquo;</a></td>
 									<td><a class="btn btn-primary btn-small disabled">Solve
 											test&raquo;</a></td>
-									} } } @if(!user.isUserSignupTest(test)){
+									} 
+									
+									@if(usertest.test.id==test.id && !usertest.inmodule &&
+									usertest.submitted){<td> <a rel="tooltip" data-placement="bottom" class="tip"
+										href="@routes.StudentTestController.document(test.id)"
+										target="_blank" data-toggle="tooltip" title="Export to pdf"><i
+											class="icon-file"></i></a></td> }
+									
+									} } @if(!user.isUserSignupTest(test)){
 									<td>-</td>
 									<td><a href="#modal@test.id"
 										class="btn btn-danger btn-small" data-toggle="modal">Suggest
@@ -228,8 +237,8 @@ models.module.Lesson, module: models.module.Module) @import helper._
 
 									</div>
 
-									}
-
+									}<td></td>
+									
 								</tr>
 
 

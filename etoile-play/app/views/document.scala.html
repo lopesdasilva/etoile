@@ -1,0 +1,56 @@
+@(usertest: models.manytomany.Usertest)
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full">
+</script>
+</head>
+    <body>
+	    <p><b>User:</b> @usertest.user.username</p>
+	    <p><b>Email:</b> @usertest.user.email</p> 
+	    <p><b>Test:</b> @usertest.test.name</p> 
+	     <p><b>Progress:</b> @usertest.progress %</p> 
+		@for(group <- usertest.test.groups){
+		<p><b>Group @group.number - </b>
+		@group.question</p>
+		@for(question <- group.questions){
+		<div style="padding-left:5em">
+		
+		<p><b>Question @question.number - </b>
+		@question.question</p>
+		@if(question.typeOfQuestion==0){
+		<div style="padding-left:1em">
+		<b><i>@models.test.Answer.findByUserTestAndQuestion(usertest.id,question.id).answer</i></b>
+		</div>
+		} @if(question.typeOfQuestion==1){
+		@for(hyp <- question.hypothesislist){
+			<div style="padding-left:1em">
+				@if(hyp.selected){
+				<b><i>@hyp.text</i></b>
+				}
+				</div>
+		}
+		
+		}@if(question.typeOfQuestion==2){
+		@for(hyp <- question.hypothesislist){
+		@if(hyp.user==usertest.user){
+			<div style="padding-left:1em">
+				@if(hyp.selected){
+				<b><i>@hyp.text</i></b>
+				}
+				</div>
+		}
+		}
+		}
+		
+		</div>
+		}
+		
+		}
+
+
+    </body>
+</html>

@@ -573,6 +573,7 @@ public class Global extends GlobalSettings {
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";
 			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical goal or coherence.";
+			module_demo.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
@@ -623,6 +624,7 @@ public class Global extends GlobalSettings {
 			module_three.imageURL = "http://img138.imageshack.us/img138/9061/nesslogounequilibriumve.jpg";
 			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
 			module_three.language = l_two;
+			module_three.short_description ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
 			module_three.save();
 			
 			Forum forum = new Forum();
@@ -637,6 +639,7 @@ public class Global extends GlobalSettings {
 			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
 			module_four.description = "This module presents the State-of-the-Art in Network Science, including both theory and examples. ";
+			module_four.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
 			module_four.lessons.add(lesson_net1);
 			module_four.lessons.add(lesson_net2);
 			module_four.lessons.add(lesson_net3);
@@ -684,6 +687,7 @@ public class Global extends GlobalSettings {
 			module_five.imageURL = "http://www.sussex.ac.uk/Users/andywu/gallery/rm_f.gif";
 			module_five.description = "<p>Attractors and robustness in Boolean automata networks. </p> <p>Application to living systems.</p>";
 			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
+			module_five.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
 			module_five.language = l_two;
 			module_five.save();
 			
@@ -699,6 +703,7 @@ public class Global extends GlobalSettings {
 			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
 			module_demo.videoURL = "";
 			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
+			module_six.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
 			module_six.language = l_three;
 			module_six.save();
 					

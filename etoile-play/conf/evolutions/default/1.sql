@@ -338,6 +338,7 @@ create table university (
   name                      varchar(255),
   acronym                   varchar(255),
   image_url                 TEXT,
+  modulebanner_url          TEXT,
   continent_id              bigint,
   constraint uq_university_name unique (name),
   constraint pk_university primary key (id))

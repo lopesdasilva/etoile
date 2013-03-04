@@ -1189,6 +1189,7 @@ public class Global extends GlobalSettings {
 			university.name="ISCTE-IUL";
 			university.acronym="iscte-iul";
 			university.imageURL="http://noticias.universia.pt/pt/images/universia/i/is/isc/iscte_iul_logo.jpg";
+			university.modulebannerURL = "http://4.bp.blogspot.com/-IfeNT6e6mRQ/T6fSIa7xJdI/AAAAAAAAdPA/VHMCg_Mg7Go/s1600/ISCTE.jpg";
 			university.continent=europe;
 			university.save();
 			

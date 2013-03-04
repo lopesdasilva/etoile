@@ -94,20 +94,37 @@
 				<ul class="thumbnails">
 				
 				<div id="mainwrapper">
-						@for(module <- modules) { @if(module.university!=null){
-						@module.university.refresh() }
-						<a href="@routes.Application.module(module.acronym)">
+						@for(module <- modules) { 
+						@if(module.university!=null){
+						@module.university.refresh() 
+						}
+						
 							<div id="box-2" class="box">
 							
 								<div class="crop">
-								<img id="image-2"
+								<img id="png1"
 								src="@module.imageURL" />
 								</div>
+								
 								
 								<div class="caption zeca-caption carousel-caption">
 										<small><h6 class="mini">@module.name</h6></small>
 									</div>
-								
+									@if(module.university!=null){
+									@module.university.continent.refresh()
+								<a href="@routes.Application.continent(module.university.continent.acronym)">
+								<div class="caption zeca-caption-inv">
+										
+										@if(module.university.modulebannerURL){
+										<img id="png1" src="@module.university.modulebannerURL" />
+										}else{
+										<small><b>@module.university.name</b></small>
+										}
+										
+									</div>
+								</a>
+								}	
+								<a href="@routes.Application.module(module.acronym)">
 								<span
 									class="caption full-caption">
 									
@@ -120,8 +137,9 @@
 									<small>Lessons: <b>@module.lessons.size()</b></small><br>
 									<small>@module.short_description</small><br>
 								</span>
+								</a>
 							</div> 
-							</a>
+							
 							 
 							 } </ul>
 

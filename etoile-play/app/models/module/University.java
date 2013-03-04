@@ -42,6 +42,10 @@ public class University extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String imageURL;
+	
+	@Constraints.Required
+	@Column(columnDefinition="TEXT")
+	public String modulebannerURL;
 
 	@OneToMany
 	public List<Student> students;

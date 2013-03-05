@@ -1,5 +1,5 @@
-conf/application.conf
-conf/evolutions/default/1.sql
+application.conf
+1.sql
 
 # Extracted from https://github.com/ulrich/macaron-factory/blob/master/.gitignore
 # Ignore all dotfiles...

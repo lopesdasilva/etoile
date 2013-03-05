@@ -3,7 +3,7 @@ jQuery(function($) {
   tour.addStep({
   element: "#stats", /* html element next to which the step popover should be shown */
   title: "Welcome", /* title of the popover */
-  content: "This is overview of your etoile statistics. Soon this will have more data." /* content of the popover */
+  content: "This is an overview of your etoile statistics. Soon this will have more data." /* content of the popover */
 });
   tour.addStep({
 	  path: "/index",

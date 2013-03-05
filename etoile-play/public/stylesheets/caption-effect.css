@@ -39,7 +39,7 @@ html { background-color: #eaeaea; }
 	margin-bottom:.5em;
 }
 
-legend {
+/**legend {
    position:absolute;
    left:0;
    right:0;
@@ -48,7 +48,7 @@ legend {
    background:rgba(0, 0, 0, 0.75);
    color: white;
 
-}
+}**/
 
 .media-grid a {position:relative;}
 

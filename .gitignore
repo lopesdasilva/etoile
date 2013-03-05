@@ -1,5 +1,5 @@
-etoile-play/conf/application.conf
-etoile-play/conf/evolutions/default/1.sql
+conf/application.conf
+conf/evolutions/default/1.sql
 
 # Extracted from https://github.com/ulrich/macaron-factory/blob/master/.gitignore
 # Ignore all dotfiles...

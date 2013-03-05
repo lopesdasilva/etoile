@@ -573,7 +573,7 @@ public class Global extends GlobalSettings {
 			module_demo.imageURL = "http://www.naomiture.com/wp-content/uploads/2010/12/video-shoplocal-play.jpg";
 			module_demo.videoURL = "http://www.youtube.com/v/tvN1dp0qVcY";
 			module_demo.description = "This module demonstrates all the main functionalities of the Étoile Platform, both for professors and students. The module includes 2 lessons, one in mathematics and another in social sciences. Both lessons have tests, with different kind of questions. The contents of this module are only for demonstration, without any sort of pedagogical goal or coherence.";
-			module_demo.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
+			module_demo.short_description = "This module demonstrates all the main functionalities of the Étoile Platform";
 			module_demo.lessons.add(lesson_demo_one);
 			module_demo.lessons.add(lesson_one);
 			module_demo.lessons.add(lesson_two);
@@ -585,12 +585,7 @@ public class Global extends GlobalSettings {
 			forum_one.save();
 			module_demo.forum=forum_one;
 			module_demo.save();
-			
-			
-			
-			
-			
-			
+		
 			lesson_one.module = module_demo;
 			lesson_one.save();
 			
@@ -624,7 +619,7 @@ public class Global extends GlobalSettings {
 			module_three.imageURL = "http://img138.imageshack.us/img138/9061/nesslogounequilibriumve.jpg";
 			module_three.description = "This module introduces the main concepts in Non-Equilibrium Social Science.";
 			module_three.language = l_two;
-			module_three.short_description ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
+			module_three.short_description ="This module introduces the main concepts in Non-Equilibrium Social Science";
 			module_three.save();
 			
 			Forum forum = new Forum();
@@ -633,13 +628,15 @@ public class Global extends GlobalSettings {
 			module_three.forum=forum;
 			module_three.save();
 			
+			// MODULE NETWORK SCIENCE
+			
 			Module module_four = new Module();
 			module_four.name = "Network Science";
 			module_four.acronym="netsci_01";
 			module_four.imageURL = "http://herd.typepad.com/.a/6a00d83451e1dc69e2011278fba78928a4-pi";
 			module_four.videoURL = "http://www.youtube.com/v/10oQMHadGos ";
 			module_four.description = "This module presents the State-of-the-Art in Network Science, including both theory and examples. ";
-			module_four.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
+			module_four.short_description = "This module presents the State-of-the-Art in Network Science";
 			module_four.lessons.add(lesson_net1);
 			module_four.lessons.add(lesson_net2);
 			module_four.lessons.add(lesson_net3);
@@ -654,7 +651,7 @@ public class Global extends GlobalSettings {
 			module_four.save();
 			
 			
-			 forum = new Forum();
+			forum = new Forum();
 			forum.module=module_four;
 			forum.save();
 			module_four.forum=forum;
@@ -687,7 +684,7 @@ public class Global extends GlobalSettings {
 			module_five.imageURL = "http://www.sussex.ac.uk/Users/andywu/gallery/rm_f.gif";
 			module_five.description = "<p>Attractors and robustness in Boolean automata networks. </p> <p>Application to living systems.</p>";
 			module_five.description = "Attractors and robustness in Boolean automata networks. Application to living systems.";
-			module_five.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
+			module_five.short_description = "Attractors and robustness in Boolean automata networks";
 			module_five.language = l_two;
 			module_five.save();
 			
@@ -703,7 +700,7 @@ public class Global extends GlobalSettings {
 			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
 			module_demo.videoURL = "";
 			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
-			module_six.short_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit.";
+			module_six.short_description = "Etude comparée du rôle des structures médianes de l'embryon";
 			module_six.language = l_three;
 			module_six.save();
 					
@@ -965,6 +962,37 @@ public class Global extends GlobalSettings {
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			
+			
+			// 5. Jeffrey Johnson
+			
+			ProfessorContent jjc = new ProfessorContent();
+			jjc.description="Jeffrey Johnson is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
+			jjc.title="Description";
+			jjc.imageURL="";
+			jjc.save();
+			
+			Professor jj = new Professor();
+			jj.firstname="Jeffrey";
+			jj.lastname="Johnson";
+			jj.acronym="JJohnson";
+			jj.email="Jeff.Johnson@open.ac.uk";
+			jj.degree="Professor";
+			jj.shortdescription="is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
+			jj.contact="The Design Group, Faculty of Maths, Computing and Technology, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK  -  http://design.open.ac.uk/johnson/";
+			jj.imageURL="http://www.intellectbooks.co.uk/MediaManager/Image/User/Jeff%204_9535_1281717004.jpg";
+			jj.save();
+			
+			jj.modules.add(module_four);
+			jj.modules.add(module_three);
+			jj.save();
+			//module.save();
+			
+			jj.contents.add(jjc);
+			jjc.professor=jj;
+			jj.save();
+			jjc.save();
+			
+			
 			// 1. Jorge Louçã
 			
 			ProfessorContent pc = new ProfessorContent();
@@ -972,14 +1000,6 @@ public class Global extends GlobalSettings {
 			pc.title="Description";
 			pc.imageURL="";
 			pc.save();
-			
-			/*
-			ProfessorContent pc2 = new ProfessorContent();
-			pc2.description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas suscipit auctor velit sit amet consequat. In turpis augue, scelerisque a malesuada euismod, mollis eu enim. Maecenas sapien tellus, vehicula non aliquet id, pretium commodo risus. Donec enim augue, lacinia in varius quis, luctus a nibh. Fusce pretium viverra neque, ac congue tortor pretium et. Nam vel quam quis nulla euismod mollis. Cras eget lectus at ipsum blandit dictum. Nam ac nisi sapien. Phasellus tristique dui vel nunc viverra eu vestibulum enim tempus. Phasellus adipiscing dolor vulputate velit bibendum quis laoreet mi lacinia. Donec at elit sem, vel iaculis libero. Etiam vestibulum libero at mauris rutrum faucibus. Curabitur metus odio, aliquet at tristique eu, commodo sed nibh.";
-			pc2.title="Lorem ipsum";
-			pc2.imageURL="http://profesorbaker.files.wordpress.com/2011/02/cas.jpg";
-			pc2.save();
-			*/
 			
 			Professor p= new Professor();
 			p.firstname="Jorge";
@@ -1011,6 +1031,7 @@ public class Global extends GlobalSettings {
 			
 			// 2. PROFESSOR FOR TESTING
 			
+			// Jorge Louçã
 			User prof = new User();
 			prof.email = "prof@prof.pt";
 			prof.username="prof";
@@ -1022,8 +1043,19 @@ public class Global extends GlobalSettings {
 			p.user=prof;
 			p.save();
 			
+			// Jeff Johnson
+			User jeff = new User();
+			jeff.email = "Jeff.Johnson@open.ac.uk";
+			jeff.username="jeff";
+			jeff.password=sha1.parseSHA1Password("123");
+			jeff.name = "Professor";
+			jeff.account_type = 1;
+			jeff.professorProfile=jj;
+			jeff.save();
+			jj.user=jeff;
+			jj.save();
 			
-			
+
 			
 			// 3. Nadine Peyriéras
 			
@@ -1092,34 +1124,6 @@ public class Global extends GlobalSettings {
 			jd.save();
 			jdc.save();
 			
-			// 5. Jeffrey Johnson
-			
-			ProfessorContent jjc = new ProfessorContent();
-			jjc.description="Jeffrey Johnson is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
-			jjc.title="Description";
-			jjc.imageURL="";
-			jjc.save();
-			
-			Professor jj = new Professor();
-			jj.firstname="Jeffrey";
-			jj.lastname="Johnson";
-			jj.acronym="JJohnson";
-			jj.email="Jeff.Johnson@open.ac.uk";
-			jj.degree="Professor";
-			jj.shortdescription="is Professor of Complexity Science and Design. He joined the Open University in 1980 after three years as Senior Research Associate in the Geography Department of Cambridge University, and six years as Research Fellow in the Mathematics Department of Essex University.";
-			jj.contact="The Design Group, Faculty of Maths, Computing and Technology, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK  -  http://design.open.ac.uk/johnson/";
-			jj.imageURL="http://www.intellectbooks.co.uk/MediaManager/Image/User/Jeff%204_9535_1281717004.jpg";
-			jj.save();
-			
-			jj.modules.add(module_four);
-			jj.modules.add(module_three);
-			jj.save();
-			//module.save();
-			
-			jj.contents.add(jjc);
-			jjc.professor=jj;
-			jj.save();
-			jjc.save();
 			
 			
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1186,13 +1190,13 @@ public class Global extends GlobalSettings {
 			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++
 				
 				// 1. ISCTE-IUL ++++++++++++++++++++++++++++++++++++++
-			University university = new University();
-			university.name="ISCTE-IUL";
-			university.acronym="iscte-iul";
-			university.imageURL="http://noticias.universia.pt/pt/images/universia/i/is/isc/iscte_iul_logo.jpg";
-			university.modulebannerURL = "http://4.bp.blogspot.com/-IfeNT6e6mRQ/T6fSIa7xJdI/AAAAAAAAdPA/VHMCg_Mg7Go/s1600/ISCTE.jpg";
-			university.continent=europe;
-			university.save();
+			University iscte = new University();
+			iscte.name="ISCTE-IUL";
+			iscte.acronym="iscte-iul";
+			iscte.imageURL="http://noticias.universia.pt/pt/images/universia/i/is/isc/iscte_iul_logo.jpg";
+			iscte.modulebannerURL = "http://4.bp.blogspot.com/-IfeNT6e6mRQ/T6fSIa7xJdI/AAAAAAAAdPA/VHMCg_Mg7Go/s1600/ISCTE.jpg";
+			iscte.continent=europe;
+			iscte.save();
 			
 			University university_fct = new University();
 			university_fct.name="FCT";
@@ -1201,14 +1205,21 @@ public class Global extends GlobalSettings {
 			university_fct.continent=europe;
 			university_fct.save();
 			
-			student.university = university;
+			University ou = new University();
+			ou.name="Open University UK";
+			ou.acronym="ou";
+			ou.imageURL="http://www.open.ac.uk/includes/headers-footers/oulogo-56.jpg";
+			ou.continent=europe;
+			ou.save();
+			
+			student.university = iscte;
 			student.save();
 
 			
 			//module.university=university;
-			module_three.university=university;
+			module_three.university=iscte;
 			//module_two.university=university;
-			module_four.university=university;
+			module_four.university=ou;
 			//module.save();
 			//module_two.save();
 			module_three.save();

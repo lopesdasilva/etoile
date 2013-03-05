@@ -47,14 +47,15 @@ public class BlogController extends Controller {
 		if(session("email")!=null){
 
 			User user = User.find.byId(session("email"));
-			user.studentProfile.refresh();
 			if (SecuredProfessor.isProfessor(session("email"))){
 				user.professorProfile.refresh();
 				return ok(views.html.professor.blog.render(user, blog, form(Comment_Form.class)));
 			}
-						return ok(views.html.secured.blog.render(user, blog,categories, form(Comment_Form.class)));
-			
-			
+			user.studentProfile.refresh();
+
+			return ok(views.html.secured.blog.render(user, blog,categories, form(Comment_Form.class)));
+
+
 		}
 		return ok(views.html.blog.blog.render(blog,categories,Continent.getAllContinents()));
 		

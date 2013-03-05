@@ -56,7 +56,7 @@ public class Register extends Controller {
 	}
 	
 	public static Result resetpassword(){
-		 Form<register_Form> form = form(register_Form.class).bindFromRequest();
+		 Form<register_Form> form = Form.form(register_Form.class).bindFromRequest();
 		 String email = form.get().email;
 		 User user = User.findByEmail(email);
 		 if(user!=null){
@@ -67,7 +67,7 @@ public class Register extends Controller {
 			 user.save();
 		 }
 		 
-		 return ok(login.render(form(Login.class)));
+		 return ok(login.render(Form.form(Login.class)));
 	}
 	
 	private static final String charset = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -83,10 +83,10 @@ public class Register extends Controller {
 	
 	
 	public static Result register2(){
-		 return ok(register.render(form(Register.NewUser.class)));
+		 return ok(register.render(Form.form(Register.NewUser.class)));
 	}
 	public static Result register(){
-		 Form<NewUser> form = form(NewUser.class).bindFromRequest();
+		 Form<NewUser> form = Form.form(NewUser.class).bindFromRequest();
 
 		 
 		 if(form.hasErrors()) {
@@ -94,7 +94,7 @@ public class Register extends Controller {
 	        }if(! validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field)){
 	       
 	        	 flash("captcha", "The captcha is wrong. Try again, please.");
-	        	 return ok(register.render(form(Register.NewUser.class)));
+	        	 return ok(register.render(Form.form(Register.NewUser.class)));
 	        }
 	        	else {
 	        
@@ -129,7 +129,7 @@ public class Register extends Controller {
 	        	System.out.println("Registering");
 	        }
 				
-		 			return ok(login.render(form(Login.class)));
+		 			return ok(login.render(Form.form(Login.class)));
 	}
 	public static boolean validateCaptcha(String recaptcha_challenge_field, String recaptcha_response_field){
 		

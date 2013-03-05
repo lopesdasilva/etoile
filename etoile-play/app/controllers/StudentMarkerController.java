@@ -63,7 +63,7 @@ public class StudentMarkerController extends Controller {
 			answer.openQuestion.refresh();
 
 
-			return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,form(MarkerEvaluation.class)));
+			return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,Form.form(MarkerEvaluation.class)));
 		}
 		return redirect(routes.Application.index());
 	}
@@ -78,7 +78,7 @@ public class StudentMarkerController extends Controller {
 
 		if(Secured.isStudent(user.email)){
 
-			Form<MarkerEvaluation> form = form(
+			Form<MarkerEvaluation> form = Form.form(
 					MarkerEvaluation.class).bindFromRequest();
 			System.out.println("AnswerMarker" + form.get().answerscore);
 

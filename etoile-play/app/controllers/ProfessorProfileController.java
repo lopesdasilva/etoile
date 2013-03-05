@@ -34,7 +34,7 @@ public class ProfessorProfileController  extends Controller {
 
 	public static Result editprofile(){
 		if(SecuredProfessor.isProfessor(session("email"))){
-			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
+			Form<Profile_Form> form = Form.form(Profile_Form.class).bindFromRequest();
 			User user = User.find.byId(session("email"));
 			user.professorProfile.firstname=form.get().firstname;
 			user.professorProfile.lastname=form.get().lastname;
@@ -50,7 +50,7 @@ public class ProfessorProfileController  extends Controller {
 		if(SecuredProfessor.isProfessor(session("email"))){
 			User user = User.find.byId(session("email"));
 
-			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
+			Form<Content_Form> form = Form.form(Content_Form.class).bindFromRequest();
 			ProfessorContent professorContent= new ProfessorContent();
 			professorContent.description=form.get().description;
 			professorContent.imageURL=form.get().imageURL;
@@ -77,7 +77,7 @@ public class ProfessorProfileController  extends Controller {
 	public static Result editprofilecontent(Long professorcontent_id){
 
 		if(SecuredProfessor.isProfessor(session("email"))){
-			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
+			Form<Content_Form> form = Form.form(Content_Form.class).bindFromRequest();
 			ProfessorContent professorContent = ProfessorContent.find.byId(professorcontent_id);
 			professorContent.imageURL=form.get().imageURL;
 			professorContent.description=form.get().description;
@@ -90,7 +90,7 @@ public class ProfessorProfileController  extends Controller {
 	public static Result editprofilecontact(){
 		if(SecuredProfessor.isProfessor(session("email"))){
 			User user = User.find.byId(session("email"));
-			Form<Adress_Form> form = form(Adress_Form.class).bindFromRequest();
+			Form<Adress_Form> form = Form.form(Adress_Form.class).bindFromRequest();
 
 			user.professorProfile.contact=form.get().address;
 			user.professorProfile.save();

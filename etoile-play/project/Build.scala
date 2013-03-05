@@ -1,7 +1,6 @@
 import sbt._
 import Keys._
-import PlayProject._
-import cloudbees.Plugin._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -9,15 +8,17 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
+ 	javaCore,
+    javaJdbc,
+    javaEbean,
+	jdbc,
       "mysql" % "mysql-connector-java" % "5.1.18",
       "org.apache.commons" % "commons-email" % "1.2",
-  	  "pdf" % "pdf_2.9.1" % "0.2"
+  	    "pdf" % "pdf_2.10" % "0.4.1"
     )
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA)
+    val main = play.Project(appName, appVersion, appDependencies)
       // Add your own project settings here 
 		.settings(resolvers += Resolver.url("Violas Play Modules", url("http://www.joergviola.de/releases/"))(Resolver.ivyStylePatterns))
-	    .settings(cloudBeesSettings :_*)
-	    .settings(CloudBees.applicationId := Some("etoile"))     
 
 }

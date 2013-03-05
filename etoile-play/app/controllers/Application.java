@@ -237,7 +237,7 @@ public static Result professorprofile(String professor_acronym) {
      * Login page.
      */
     public static Result login() {
-        return ok(login.render(form(Login.class)));
+        return ok(login.render(Form.form(Login.class)));
     }
     
     /**
@@ -245,7 +245,7 @@ public static Result professorprofile(String professor_acronym) {
      */
     public static Result authenticate() {
     	
-        Form<Login> loginForm = form(Login.class).bindFromRequest();
+        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if(loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));
         } else {

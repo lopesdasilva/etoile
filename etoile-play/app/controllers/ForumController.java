@@ -95,8 +95,8 @@ public class ForumController extends Controller {
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
 		}
-		if((Secured.isStudent(user.email) && !user.modules.contains(module))|| SecuredProfessor.isProfessor(user.email)) {
-			Form<Topic_form> form = form(Topic_form.class).bindFromRequest();
+		if((Secured.isStudent(user.email) && user.modules.contains(module))|| SecuredProfessor.isProfessor(user.email)) {
+			Form<Topic_form> form = Form.form(Topic_form.class).bindFromRequest();
 
 
 			Topic topic = new Topic();
@@ -206,8 +206,8 @@ public class ForumController extends Controller {
 		}
 
 
-		if((Secured.isStudent(user.email) && !user.modules.contains(module))|| SecuredProfessor.isProfessor(user.email)) {
-			Form<Reply_form> form = form(Reply_form.class).bindFromRequest();
+		if((Secured.isStudent(user.email) && user.modules.contains(module))|| SecuredProfessor.isProfessor(user.email)) {
+			Form<Reply_form> form = Form.form(Reply_form.class).bindFromRequest();
 			Reply reply = new Reply();
 			reply.text=form.get().reply;
 			reply.user=user;

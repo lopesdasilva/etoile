@@ -869,7 +869,7 @@ public class Global extends GlobalSettings {
 			student.degree = "Master in telecomunications";
 			student.save();
 			
-			
+//			
 			User user = new User();
 			user.studentProfile=student;
 			user.email = "rui@rui.pt";
@@ -879,10 +879,6 @@ public class Global extends GlobalSettings {
 			user.account_type = 0;
 			user.country = "PT";
 			user.globalReputation = new Long(0);
-//			user.modules.add(module);
-			//user.modules.add(module_two);
-//			module.save();
-			//module_two.save();
 			user.modules.add(module_demo);
 			user.save();
 			student.user=user;
@@ -893,16 +889,16 @@ public class Global extends GlobalSettings {
 			modulescore.user=user;
 			modulescore.score=0;
 			modulescore.save();
-			
-			module_demo.users.add(user);
-			module_demo.save();
+//			
+//			module_demo.users.add(user);
+//			module_demo.save();
 			
 			
 			
 			Usertopic usertopic = new Usertopic();
 			usertopic.user=user;
 			usertopic.save();
-			
+//			
 			Topic topic= new Topic();
 			topic.forum=forum_one;
 			topic.starter=user;
@@ -910,9 +906,9 @@ public class Global extends GlobalSettings {
 			topic.date=new Date();
 			topic.topicsubscriptions.add(usertopic);
 			topic.save();
-			
-			usertopic.topic=topic;
-			usertopic.save();
+//			
+//			usertopic.topic=topic;
+//			usertopic.save();
 			
 			Reply reply = new Reply();
 			reply.text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis tellus libero, nec suscipit elit. Pellentesque vehicula felis nec ipsum dignissim imperdiet. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec condimentum, diam et rutrum ultricies, justo elit tempor elit, at tempor sapien tellus ac erat. Phasellus tempus fermentum ullamcorper. Quisque lacinia lorem eu risus aliquet commodo. Aliquam leo enim, scelerisque sed euismod ut, porttitor at lorem. Vestibulum euismod convallis tempor. Aliquam lacus libero, vehicula id porta nec, dignissim vel elit. Curabitur et dolor vel nisi mattis blandit. Nullam ornare lorem eu dui tempor luctus.";
@@ -920,52 +916,52 @@ public class Global extends GlobalSettings {
 			reply.topic=topic;
 			reply.date=new Date();
 			reply.save();
-			user.replies.add(reply);
-			user.save();
-			
+//			user.replies.add(reply);
+//			user.save();
+//			
 			reply = new Reply();
 			reply.text="In hac habitasse platea dictumst. Quisque non nisl bibendum lectus luctus mollis. Donec hendrerit ullamcorper tortor dignissim mollis. Pellentesque a arcu eget sapien ultrices scelerisque ac ut augue. Praesent arcu magna, euismod nec rutrum nec, eleifend vitae tellus. Proin posuere suscipit blandit. In hac habitasse platea dictumst. Nam convallis nunc a dui dapibus in vulputate lectus vulputate. Suspendisse nec ligula leo, at pellentesque ligula. Maecenas consectetur metus eget sem consequat et vehicula ipsum pharetra. Nulla vel diam nisl, in aliquet felis. Cras non tempor justo. Donec eleifend ligula nec odio mollis vitae adipiscing elit congue. Curabitur ut turpis quis lorem malesuada ultricies. Sed magna mauris, consequat vel tincidunt non, ullamcorper ut sapien. Duis ut lacus quis dui condimentum venenatis eget id lorem.";
 			reply.user=user_rub;
 			reply.topic=topic;
 			reply.date=new Date();
 			reply.save();
-			user_rub.replies.add(reply);
-			user_rub.save();
-			topic.replies.add(reply);
-			topic.save();
-			
+//			user_rub.replies.add(reply);
+//			user_rub.save();
+//			topic.replies.add(reply);
+//			topic.save();
+//			
 			reply = new Reply();
 			reply.text="Praesent ut neque nec turpis lobortis pretium a vel leo. Sed viverra varius justo. Phasellus commodo nibh ut erat sollicitudin convallis. Duis lectus tortor, sagittis ultrices viverra eu, porta vel justo. In lobortis, tortor et dapibus pellentesque, mauris orci placerat libero, at posuere felis turpis vel elit. Donec tellus massa, condimentum in placerat ac, consectetur consequat nulla. Maecenas at odio a arcu consequat luctus. Integer id lectus lorem, quis aliquet magna. Integer ornare, massa a elementum viverra, tortor lectus interdum arcu, laoreet dapibus augue risus egestas metus. Vestibulum vel purus nec dolor ullamcorper venenatis a quis purus. Suspendisse dictum eleifend augue quis ultrices. Integer lacinia pulvinar dui non venenatis. Ut convallis tincidunt adipiscing. Donec id orci nec nisi pharetra iaculis sit amet vitae odio. Sed eget magna diam, vel placerat nunc.";
 			reply.user=user;
 			reply.topic=topic;
 			reply.date=new Date();
 			reply.save();
-			user.replies.add(reply);
-			user.save();
-			topic.replies.add(reply);
-			topic.save();
-			
+//			user.replies.add(reply);
+//			user.save();
+//			topic.replies.add(reply);
+//			topic.save();
+//			
 			reply = new Reply();
 			reply.text="Ut ultrices tristique nisi et mollis. Phasellus nec dolor laoreet risus malesuada aliquam sit amet eget massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent condimentum fermentum gravida. Fusce vel sapien massa, vitae tristique nibh. Integer sit amet elementum ante. Cras vel magna in ipsum faucibus convallis. In pellentesque pulvinar quam, nec laoreet sapien dignissim non. Quisque lacinia lorem velit, non dictum lorem.";
 			reply.user=user_rub;
 			reply.topic=topic;
 			reply.date=new Date();
 			reply.save();
-			user_rub.replies.add(reply);
-			user_rub.save();
-			topic.replies.add(reply);
-			topic.save();
-			
+//			user_rub.replies.add(reply);
+//			user_rub.save();
+//			topic.replies.add(reply);
+//			topic.save();
+//			
 			reply = new Reply();
 			reply.text="Phasellus vulputate libero sit amet elit tincidunt rhoncus. Donec arcu sem, adipiscing sit amet pretium in, sollicitudin eu orci. Morbi ac auctor tortor. Integer eu felis lacus, in dapibus quam. Curabitur elit elit, pharetra vitae dignissim non, euismod nec dolor. Nunc molestie laoreet ipsum sit amet suscipit. Cras non augue eget est faucibus auctor. Nulla pellentesque, neque ac condimentum scelerisque, odio eros facilisis nisl, in ornare purus nulla convallis lectus. Phasellus non odio nisl. Maecenas varius venenatis diam quis sagittis. Morbi dapibus, nisi ac convallis egestas, nulla leo tincidunt sem, sit amet consequat massa tortor ut libero.";
 			reply.user=user;
 			reply.topic=topic;
 			reply.date=new Date();
 			reply.save();
-			user.replies.add(reply);
-			user.save();
-			topic.replies.add(reply);
-			topic.save();
+//			user.replies.add(reply);
+//			user.save();
+//			topic.replies.add(reply);
+//			topic.save();
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			
@@ -1129,12 +1125,12 @@ public class Global extends GlobalSettings {
 			// Comments  +++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-			Comment c1 = new Comment();
-			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-			c1.blog = blog;
-			c1.user = user;
-			c1.date = new Date();
-			c1.save();
+//			Comment c1 = new Comment();
+//			c1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et justo enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+//			c1.blog = blog;
+//			c1.user = user;
+//			c1.date = new Date();
+//			c1.save();
 			
 			
 			
@@ -1282,7 +1278,7 @@ public class Global extends GlobalSettings {
 			url1.added=new DateTime();
 			url1.likes=9;
 			url1.question=q;
-			url1.user=user;
+			url1.user=user_rub;
 			url1.save();
 			
 			
@@ -1294,7 +1290,7 @@ public class Global extends GlobalSettings {
 			url2.added=new DateTime();
 			url2.likes=53;
 			url2.question=q;
-			url2.user=user;
+			url2.user=user_rub;
 			url2.save();
 			
 			URL url3= new URL();
@@ -1305,7 +1301,7 @@ public class Global extends GlobalSettings {
 			url3.added=new DateTime();
 			url3.likes=50;
 			url3.question=q;
-			url3.user=user;
+			url3.user=user_rub;
 			url3.save();
 			
 			URL url4= new URL();
@@ -1315,7 +1311,7 @@ public class Global extends GlobalSettings {
 			url4.name="Sapo";
 			url4.added=new DateTime();
 			url4.question=q;
-			url4.user=user;
+			url4.user=user_rub;
 			url4.save();
 			
 			URL url5= new URL();
@@ -1326,7 +1322,7 @@ public class Global extends GlobalSettings {
 			url5.added=new DateTime();
 			url5.likes=23;
 			url5.question=q;
-			url5.user=user;
+			url5.user=user_rub;
 			url5.save();
 			
 			URL url6= new URL();
@@ -1337,7 +1333,7 @@ public class Global extends GlobalSettings {
 			url6.added=new DateTime();
 			url6.likes=100;
 			url6.question=q;
-			url6.user=user;
+			url6.user=user_rub;
 			url6.save();
 		}
 	}

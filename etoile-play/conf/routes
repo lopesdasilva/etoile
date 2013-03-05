@@ -53,14 +53,6 @@ GET		/professors/:professor			controllers.Application.professorprofile(professor
 GET		/students/:student				controllers.Application.studentprofile(student: String)
 
 
-
-#Admin
-GET		/admin							controllers.Administration.index()
-GET		/admin/createblog				controllers.Administration.createblog()
-POST	/admin/addblog					controllers.Administration.addblog()
-GET		/admin/removeblog				controllers.Administration.removeblog(blog: Long)
-GET		/admin/removeuser				controllers.Administration.removeuser(email: String)
-
 #Mark Answers
 GET		/answerstomark						controllers.StudentMarkerController.answersToMark()
 GET		/answerstomark/answer:answer		controllers.StudentMarkerController.answerToMark(answer: Long)

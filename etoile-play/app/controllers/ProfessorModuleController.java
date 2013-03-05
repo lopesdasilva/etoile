@@ -91,7 +91,7 @@ public class ProfessorModuleController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<ModuleTitle_Form> form = form(ModuleTitle_Form.class).bindFromRequest();
+			Form<ModuleTitle_Form> form = Form.form(ModuleTitle_Form.class).bindFromRequest();
 			module.name=form.get().title;
 			module.acronym=form.get().acronym;
 			module.save();
@@ -111,7 +111,7 @@ public class ProfessorModuleController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<ModuleDescription_Form> form = form(ModuleDescription_Form.class).bindFromRequest();
+			Form<ModuleDescription_Form> form = Form.form(ModuleDescription_Form.class).bindFromRequest();
 			module.description=form.get().description;
 			module.imageURL=form.get().imageURL;
 			module.videoURL=form.get().videoURL;
@@ -134,7 +134,7 @@ public class ProfessorModuleController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Bibliography bibliographyItem= new Bibliography();
-			Form<BibliographyItem_Form> form = form(BibliographyItem_Form.class).bindFromRequest();
+			Form<BibliographyItem_Form> form = Form.form(BibliographyItem_Form.class).bindFromRequest();
 			bibliographyItem.title=form.get().title;
 			bibliographyItem.description=form.get().description;
 			bibliographyItem.imageURL=form.get().imageURL;
@@ -158,7 +158,7 @@ public class ProfessorModuleController extends Controller {
 		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<LessonItem_Form> form = form(LessonItem_Form.class).bindFromRequest();
+			Form<LessonItem_Form> form = Form.form(LessonItem_Form.class).bindFromRequest();
 			
 			Lesson lesson = new Lesson();
 			lesson.acronym = form.get().acronym;
@@ -196,7 +196,7 @@ public class ProfessorModuleController extends Controller {
 
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
-			Form<BibliographyItem_Form> form = form(BibliographyItem_Form.class).bindFromRequest();
+			Form<BibliographyItem_Form> form = Form.form(BibliographyItem_Form.class).bindFromRequest();
 			bibliographyItem.title=form.get().title;
 			bibliographyItem.description=form.get().description;
 			bibliographyItem.imageURL=form.get().imageURL;
@@ -244,7 +244,7 @@ public class ProfessorModuleController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
+			Form<Content_Form> form = Form.form(Content_Form.class).bindFromRequest();
 			Content content= new Content();
 			content.title=form.get().title;
 			content.text=form.get().description;
@@ -272,7 +272,7 @@ public class ProfessorModuleController extends Controller {
 
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Content_Form> form = form(Content_Form.class).bindFromRequest();
+			Form<Content_Form> form = Form.form(Content_Form.class).bindFromRequest();
 			
 			content.title=form.get().title;
 			content.text=form.get().description;

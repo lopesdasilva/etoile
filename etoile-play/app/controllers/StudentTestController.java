@@ -376,7 +376,7 @@ public class StudentTestController extends Controller {
 		if(Secured.isStudent(user.email) && test.published && !test.expired && !usertest.submitted ){
 		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
-				Form<OneChoiceQuestionAnswer> form = form(OneChoiceQuestionAnswer.class).bindFromRequest();
+				Form<OneChoiceQuestionAnswer> form = Form.form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
 				System.out.println(last_answers.size());
 				if(!last_answers.get(0).isSaved){
@@ -396,7 +396,7 @@ public class StudentTestController extends Controller {
 			}else if(question.typeOfQuestion == 2) {
 			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE
 
-			Form<MultipleChoiceQuestionAnswer> form = form(MultipleChoiceQuestionAnswer.class).bindFromRequest();
+			Form<MultipleChoiceQuestionAnswer> form = Form.form(MultipleChoiceQuestionAnswer.class).bindFromRequest();
 			for (int h : form.get().mcqanswers) {
 				System.out.println("VALOR: " + h);
 			}
@@ -426,7 +426,7 @@ public class StudentTestController extends Controller {
 		} else {
 			//GUARDAR OPEN QUESTION - WORKING
 			
-			Form<QuestionAnswer> form = form(QuestionAnswer.class).bindFromRequest();
+			Form<QuestionAnswer> form = Form.form(QuestionAnswer.class).bindFromRequest();
 			System.out.println("Open Answer: " + form.get().qanswer);
 			
 			Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id); // Resposta Guardada
@@ -687,10 +687,10 @@ public class StudentTestController extends Controller {
 
 		List<Category> categories = Category.getAllCategories();
 
-		Form<OpenQuestionSuggestion> form_question = form(
+		Form<OpenQuestionSuggestion> form_question = Form.form(
 				OpenQuestionSuggestion.class).bindFromRequest();
 		
-		Form<OpenAnswerSuggestion> form_answer = form(
+		Form<OpenAnswerSuggestion> form_answer = Form.form(
 				OpenAnswerSuggestion.class).bindFromRequest();
 		
 		
@@ -765,7 +765,7 @@ public class StudentTestController extends Controller {
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
-		Form<URL_form> form = form(
+		Form<URL_form> form = Form.form(
 				URL_form.class).bindFromRequest();
 		
 		User user = User.find.byId(request().username());

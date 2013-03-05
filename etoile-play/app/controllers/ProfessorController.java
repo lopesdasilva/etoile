@@ -13,6 +13,7 @@ import models.module.Module;
 import models.test.question.Question;
 
 import models.User;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -96,7 +97,7 @@ public class ProfessorController extends Controller {
 		}
 		
 		return ok(views.html.professor.lesson.render(user, categories, lesson,
-				module, form(ProfessorLessonController.NewAlert_Form.class)));
+				module, Form.form(ProfessorLessonController.NewAlert_Form.class)));
 		}
 		return redirect(routes.Application.module(module_acronym));
 	}

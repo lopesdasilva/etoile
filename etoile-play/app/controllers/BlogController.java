@@ -49,11 +49,11 @@ public class BlogController extends Controller {
 			User user = User.find.byId(session("email"));
 			if (SecuredProfessor.isProfessor(session("email"))){
 				user.professorProfile.refresh();
-				return ok(views.html.professor.blog.render(user, blog, form(Comment_Form.class)));
+				return ok(views.html.professor.blog.render(user, blog, Form.form(Comment_Form.class)));
 			}
 			user.studentProfile.refresh();
 
-			return ok(views.html.secured.blog.render(user, blog,categories, form(Comment_Form.class)));
+			return ok(views.html.secured.blog.render(user, blog,categories, Form.form(Comment_Form.class)));
 
 
 		}
@@ -69,7 +69,7 @@ public class BlogController extends Controller {
 			return redirect(routes.Application.news());
 		}
 		
-		Form<Comment_Form> form = form(Comment_Form.class)
+		Form<Comment_Form> form = Form.form(Comment_Form.class)
 				.bindFromRequest();
 		List<Category> categories = Category.getAllCategories();
 		User user = User.find.byId(session("email"));

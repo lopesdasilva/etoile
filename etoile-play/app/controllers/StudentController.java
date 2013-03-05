@@ -95,7 +95,7 @@ public class StudentController extends Controller {
 
 	public static Result editprofile(){
 		if(Secured.isStudent(session("email"))){
-			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
+			Form<Profile_Form> form = Form.form(Profile_Form.class).bindFromRequest();
 			User user = User.find.byId(session("email"));
 			user.studentProfile.webpage = form.get().webpage;
 			user.studentProfile.firstname=form.get().firstname;
@@ -122,7 +122,7 @@ public class StudentController extends Controller {
 	
 	public static Result editprofileabout(){
 		if(Secured.isStudent(session("email"))){
-			Form<Profile_Form> form = form(Profile_Form.class).bindFromRequest();
+			Form<Profile_Form> form = Form.form(Profile_Form.class).bindFromRequest();
 			User user = User.find.byId(session("email"));
 			user.studentProfile.scientific_area = form.get().scientific_area;
 			user.studentProfile.degree = form.get().degree;
@@ -137,7 +137,7 @@ public class StudentController extends Controller {
 	public static Result changepassword(){
 		if(Secured.isStudent(session("email"))){
 			User user = User.find.byId(session("email"));
-			Form<NewPassword_Form> form = form(NewPassword_Form.class).bindFromRequest();
+			Form<NewPassword_Form> form = Form.form(NewPassword_Form.class).bindFromRequest();
 			user.password = sha1.parseSHA1Password(form.get().inputPassword);
 			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
 			user.save();
@@ -149,7 +149,7 @@ public class StudentController extends Controller {
 		if(Secured.isStudent(session("email"))){
 			System.out.println("CHANGE PW");
 			User user = User.find.byId(session("email"));
-			Form<Privacy_Form> form = form(Privacy_Form.class).bindFromRequest();
+			Form<Privacy_Form> form = Form.form(Privacy_Form.class).bindFromRequest();
 			System.out.println(form.get().privacy); 
 			if(form.get().privacy==1){
 				System.out.println("entrei no 1");

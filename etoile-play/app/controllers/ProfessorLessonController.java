@@ -93,7 +93,7 @@ public class ProfessorLessonController extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			System.out.println("Entrei");
-			Form<NewAlert_Form> form = form(NewAlert_Form.class).bindFromRequest();
+			Form<NewAlert_Form> form = Form.form(NewAlert_Form.class).bindFromRequest();
 			if(form.hasErrors()) {
 	            return badRequest(views.html.professor.lesson.render(user, categories, lesson,
 	    				module,form));
@@ -135,7 +135,7 @@ public class ProfessorLessonController extends Controller {
 			return redirect(routes.Application.module(module_acronym));
 		}
 		
-		Form<NewContent_Form> form = form(NewContent_Form.class).bindFromRequest();
+		Form<NewContent_Form> form = Form.form(NewContent_Form.class).bindFromRequest();
 	if(!(form.get().name==null || form.get().name.equals("") || form.get().name.length()<6)){
 		
 		
@@ -178,7 +178,7 @@ public class ProfessorLessonController extends Controller {
 		
 		
 		User user = User.find.byId(session("email"));
-		Form<LessonDescription_Form> form = form(LessonDescription_Form.class).bindFromRequest();
+		Form<LessonDescription_Form> form = Form.form(LessonDescription_Form.class).bindFromRequest();
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			lesson.acronym = form.get().acronym;

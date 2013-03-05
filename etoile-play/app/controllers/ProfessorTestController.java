@@ -165,7 +165,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 			Question question = new Question();
 //			q.group.add(group);
 			question.lesson = lesson;
@@ -268,7 +268,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 			question.question = form.get().question;
 			question.answerSuggestedByStudent = form.get().suggestedanswer;
 			question.keywords = form.get().keywords;
@@ -353,7 +353,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 			Question question = new Question();
 //			q.group.add(group);
 			question.lesson = lesson;
@@ -457,7 +457,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 //			q.group.add(group);
 			question.lesson = lesson;
 			question.question = form.get().question;
@@ -557,7 +557,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
-			Form<newHypothesis_form> form = form(newHypothesis_form.class).bindFromRequest();
+			Form<newHypothesis_form> form = Form.form(newHypothesis_form.class).bindFromRequest();
 			Hypothesis hypothesis = new Hypothesis();
 			if(question.hypothesislist.size()==0){
 				hypothesis.isCorrect = true;
@@ -736,7 +736,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 			Question question = new Question();
 //			q.group.add(group);
 			question.lesson = lesson;
@@ -839,7 +839,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
-			Form<newMultipleHypothesis_form> form = form(newMultipleHypothesis_form.class).bindFromRequest();
+			Form<newMultipleHypothesis_form> form = Form.form(newMultipleHypothesis_form.class).bindFromRequest();
 			System.out.println("CORRECT: " + form.get().isCorrect);
 
 			Hypothesis hypothesis = new Hypothesis();
@@ -888,7 +888,7 @@ public class ProfessorTestController extends Controller {
 		Hypothesis hypothesis = Hypothesis.find.byId(hypothesis_id);
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
-			Form<newMultipleHypothesis_form> form = form(newMultipleHypothesis_form.class).bindFromRequest();
+			Form<newMultipleHypothesis_form> form = Form.form(newMultipleHypothesis_form.class).bindFromRequest();
 			System.out.println("CORRECT: " + form.get().isCorrect);
 
 			hypothesis.number = question.hypothesislist.size()+1;
@@ -938,7 +938,7 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			
-			Form<newMultipleHypothesis_form> form = form(newMultipleHypothesis_form.class).bindFromRequest();
+			Form<newMultipleHypothesis_form> form = Form.form(newMultipleHypothesis_form.class).bindFromRequest();
 
 			hypothesis.number = question.hypothesislist.size()+1;
 			hypothesis.question = question;
@@ -1117,7 +1117,7 @@ public class ProfessorTestController extends Controller {
 		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Question_Form> form = form(Question_Form.class).bindFromRequest();
+			Form<Question_Form> form = Form.form(Question_Form.class).bindFromRequest();
 //			q.group.add(group);
 			question.lesson = lesson;
 			question.question = form.get().question;
@@ -1314,7 +1314,7 @@ public class ProfessorTestController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-		Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
+		Form<NewTest_Form> form = Form.form(NewTest_Form.class).bindFromRequest();
 		models.test.Test test = new models.test.Test();
 		test.name = form.get().name;
 		test.text = form.get().text;
@@ -1353,7 +1353,7 @@ public class ProfessorTestController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<NewTest_Form> form = form(NewTest_Form.class).bindFromRequest();
+			Form<NewTest_Form> form = Form.form(NewTest_Form.class).bindFromRequest();
 		
 			test.name=form.get().name;
 			test.text=form.get().text;
@@ -1387,7 +1387,7 @@ public class ProfessorTestController extends Controller {
 		User user = User.find.byId(session("email"));
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			Form<Date_Form> form = form(Date_Form.class).bindFromRequest();
+			Form<Date_Form> form = Form.form(Date_Form.class).bindFromRequest();
 			String string = form.get().date.replace(" ", "");
 			String [] dates = string.split("-");
 			String [] begin_date = dates[0].split("/");
@@ -1603,7 +1603,7 @@ public class ProfessorTestController extends Controller {
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
-		Form<evaluation_Form> form = form(evaluation_Form.class).bindFromRequest();
+		Form<evaluation_Form> form = Form.form(evaluation_Form.class).bindFromRequest();
 		User user = User.find.byId(session("email"));
 		Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id);
 		QuestionEvaluation evaluation = QuestionEvaluation.findByUserAndQuestion(usertest_id, question_id);
@@ -1725,7 +1725,7 @@ public class ProfessorTestController extends Controller {
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 		
-			Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
+			Form<NewGroup_Form> form = Form.form(NewGroup_Form.class).bindFromRequest();
 
 			QuestionGroup questiongroup=new QuestionGroup();
 			questiongroup.question=form.get().question;
@@ -1866,7 +1866,7 @@ public class ProfessorTestController extends Controller {
 			
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 				
-				Form<NewGroup_Form> form = form(NewGroup_Form.class).bindFromRequest();
+				Form<NewGroup_Form> form = Form.form(NewGroup_Form.class).bindFromRequest();
 
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
 				questiongroup.question=form.get().question;

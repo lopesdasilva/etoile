@@ -567,6 +567,7 @@ public class Global extends GlobalSettings {
 			
 			// MODULES +++++++++++++++++++++++++++++++++++++++++
 			
+			/*
 			Module module_demo = new Module();
 			module_demo.name = "Demo for testing the platform";
 			module_demo.acronym="demo1";
@@ -579,7 +580,9 @@ public class Global extends GlobalSettings {
 			module_demo.lessons.add(lesson_two);
 			module_demo.language = l_two;
 			module_demo.save();
+			 */
 			
+			/*
 			Forum forum_one = new Forum();
 			forum_one.module=module_demo;
 			forum_one.save();
@@ -591,6 +594,8 @@ public class Global extends GlobalSettings {
 			
 			lesson_two.module = module_demo;
 			lesson_two.save();
+			*/
+
 			
 			/*
 			Module module = new Module();
@@ -612,7 +617,7 @@ public class Global extends GlobalSettings {
 			module_two.description = "Statistics is the study of the collection, organization, analysis, interpretation, and presentation of data. It deals with all aspects of this, including the planning of... This module is empty for now. Would you like to propose a module on Statistics? Please contact the Étoile administrators (see 'Contacts' in the menu above).";
 			module_two.save();
 			*/
-			
+			/*
 			Module module_three = new Module();
 			module_three.name = "Non-Equilibrium Social Science";
 			module_three.acronym="ness";
@@ -621,12 +626,14 @@ public class Global extends GlobalSettings {
 			module_three.language = l_two;
 			module_three.short_description ="This module introduces the main concepts in Non-Equilibrium Social Science";
 			module_three.save();
-			
+			*/
 			Forum forum = new Forum();
+			/*
 			forum.module=module_three;
 			forum.save();
 			module_three.forum=forum;
 			module_three.save();
+			*/
 			
 			// MODULE NETWORK SCIENCE
 			
@@ -659,6 +666,7 @@ public class Global extends GlobalSettings {
 			
 			lesson_net1.module = module_four;
 			lesson_net1.save();
+			/*
 			lesson_net2.module = module_four;
 			lesson_net2.save();	
 			lesson_net3.module = module_four;
@@ -677,7 +685,8 @@ public class Global extends GlobalSettings {
 			lesson_net9.save();
 			lesson_net10.module = module_four;
 			lesson_net10.save();
-			
+			*/
+			/*
 			Module module_five = new Module();
 			module_five.name = "Bioinformatics";
 			module_five.acronym="bioinformatics";
@@ -693,12 +702,14 @@ public class Global extends GlobalSettings {
 			forum.save();
 			module_five.forum=forum;
 			module_five.save();
+			*/
 			
+			/*
 			Module module_six = new Module();
 			module_six.name = "Réseaux génétiques et morphodynamique cellulaire";
 			module_six.acronym="resgen";
 			module_six.imageURL = "http://www.icra.ca/home.nsf/pages/reseaux-genetiques/$file/Genetic_Networks.jpg";
-			module_demo.videoURL = "";
+			module_six.videoURL = "";
 			module_six.description = "Etude comparée du rôle des structures médianes de l'embryon (mésoderme et plaque préchordale), et des signaux qui en dépendent dans la régionalisation précoce du tube neural. Analyse de dynamique spatiale et temporelle de la morphogénèse cellulaire au cours de la formation du tube neural.";
 			module_six.short_description = "Etude comparée du rôle des structures médianes de l'embryon";
 			module_six.language = l_three;
@@ -709,9 +720,10 @@ public class Global extends GlobalSettings {
 			forum.save();
 			module_six.forum=forum;
 			module_six.save();
-			
+			*/
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
+			/*
 			Bibliography bibliography = new Bibliography();
 			bibliography.title="T. Bynum and S. Rogerdson, eds., Computer Ethics and Professional Res- ponsibility, (Wiley, 2003).";
 			bibliography.link="http://books.google.co.uk/books/about/Computer_Ethics_and_Professional_Respons.html?id=FOxqAjC8iHkC";
@@ -751,14 +763,14 @@ public class Global extends GlobalSettings {
 			bibliography.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
 			bibliography.module=module_six;
 			bibliography.save();
-			
+			*/
 			
 			
 			
 			// CONTENT FOR COURSES ++++++++++++++++++++++++++++++
 			
 			Content content;
-			
+			/*
 			content = new Content();
 			content.module=module_demo;
 			content.title="Textbook (Recommended)";
@@ -770,6 +782,7 @@ public class Global extends GlobalSettings {
 			content.title="Module description and objectives";
 			content.text="This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. This is the module description and objectives. ";
 			content.save();
+			*/
 			
 			/* 
 			content = new Content();
@@ -779,6 +792,7 @@ public class Global extends GlobalSettings {
 			content.save();
 			*/
 			
+			/*
 			content= new Content();
 			content.module=module_demo;
 			content.title="Module format";
@@ -790,13 +804,14 @@ public class Global extends GlobalSettings {
 			content.title="Recommended Background";
 			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
-			
+			*/
+			/*
 			content= new Content();
 			content.module=module_six;
 			content.title="This module is not ready yet, please return soon.";
 			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
-			
+			*/
 			
 			// USERS ++++++++++++++++++++++++++++++++++++++++++++
 			Student student = new Student();
@@ -876,13 +891,13 @@ public class Global extends GlobalSettings {
 			user.account_type = 0;
 			user.country = "PT";
 			user.globalReputation = new Long(0);
-			user.modules.add(module_demo);
+			//user.modules.add(module_demo);
 			user.save();
 			student.user=user;
 			student.save();
 			
 			Modulescore modulescore= new Modulescore();
-			modulescore.module=module_demo;
+			//modulescore.module=module_demo;
 			modulescore.user=user;
 			modulescore.score=0;
 			modulescore.save();
@@ -891,7 +906,7 @@ public class Global extends GlobalSettings {
 //			module_demo.save();
 			
 			
-			
+			/*
 			Usertopic usertopic = new Usertopic();
 			usertopic.user=user;
 			usertopic.save();
@@ -906,6 +921,7 @@ public class Global extends GlobalSettings {
 //			
 //			usertopic.topic=topic;
 //			usertopic.save();
+			
 			
 			Reply reply = new Reply();
 			reply.text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis tellus libero, nec suscipit elit. Pellentesque vehicula felis nec ipsum dignissim imperdiet. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec condimentum, diam et rutrum ultricies, justo elit tempor elit, at tempor sapien tellus ac erat. Phasellus tempus fermentum ullamcorper. Quisque lacinia lorem eu risus aliquet commodo. Aliquam leo enim, scelerisque sed euismod ut, porttitor at lorem. Vestibulum euismod convallis tempor. Aliquam lacus libero, vehicula id porta nec, dignissim vel elit. Curabitur et dolor vel nisi mattis blandit. Nullam ornare lorem eu dui tempor luctus.";
@@ -959,6 +975,8 @@ public class Global extends GlobalSettings {
 //			user.save();
 //			topic.replies.add(reply);
 //			topic.save();
+			*/
+
 			
 			// Professors +++++++++++++++++++++++++++++++++++++++++++++++++
 			
@@ -983,7 +1001,7 @@ public class Global extends GlobalSettings {
 			jj.save();
 			
 			jj.modules.add(module_four);
-			jj.modules.add(module_three);
+			//jj.modules.add(module_three);
 			jj.save();
 			//module.save();
 			
@@ -1012,10 +1030,12 @@ public class Global extends GlobalSettings {
 			p.imageURL="http://iscte.pt/~jmal/index_files/image003.jpg";
 			p.save();
 			
+			/*
 			p.modules.add(module_demo);
-			//p.modules.add(module_four);
+			p.modules.add(module_four);
 			p.modules.add(module_three);
 			p.save();
+			*/
 			//module.save();
 			
 			p.contents.add(pc);
@@ -1083,8 +1103,10 @@ public class Global extends GlobalSettings {
 			np.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
 			np.save();
 			
+			/*
 			np.modules.add(module_six);
 			np.save();
+			*/
 			//module.save();
 			
 			/*np.contents.add(npc);
@@ -1115,8 +1137,10 @@ public class Global extends GlobalSettings {
 			jd.imageURL="http://egealmeeting.lasalle-beauvais.fr/images/demongeot_jacques.jpg";
 			jd.save();
 			
+			/*
 			jd.modules.add(module_five);
 			jd.save();
+			*/
 			//module.save();
 			
 			jd.contents.add(jdc);
@@ -1215,7 +1239,7 @@ public class Global extends GlobalSettings {
 			student.university = iscte;
 			student.save();
 
-			
+			/*
 			//module.university=university;
 			module_three.university=iscte;
 			//module_two.university=university;
@@ -1224,7 +1248,7 @@ public class Global extends GlobalSettings {
 			//module_two.save();
 			module_three.save();
 			module_four.save();
-			
+			*/
 		
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			
@@ -1275,10 +1299,11 @@ public class Global extends GlobalSettings {
 			createCurriculumComputerScience(user_rub,q);
 			
 			// LINK COURSES -> CATEGORIES +++++++++++++++++++++++++++++++++++++
-			
+			/*
 			module_three.categories.add(soccat);
 			module_three.save();
 			soccat.save();
+			*/
 			
 			
 			URL url1= new URL();

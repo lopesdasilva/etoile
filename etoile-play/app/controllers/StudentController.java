@@ -76,14 +76,22 @@ public class StudentController extends Controller {
 	
 	
 	public static Result index() {
+		User user = User.find.byId(session("email"));
+	
+		
 		if(Secured.isStudent(session("email"))){
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: index");
+			System.out.println("User is student");
 			List<Blog> blogs = Blog.getAllBlogs();
-			User user = User.find.byId(session("email"));
+			
 			List<Category> categories = Category.getAllCategories();
 
 			user.studentProfile.refresh();
 			if(blogs.size()>3)
 				blogs=blogs.subList(0, 3);
+			System.out.println("*********   end:"+user.email+"***********");
 			return ok(home.render(user, blogs, categories));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
@@ -105,13 +113,16 @@ public class StudentController extends Controller {
 			user.studentProfile.shortdescription=form.get().shortdescription;
 			user.studentProfile.address = form.get().address;
 			user.studentProfile.save();	
-			System.out.println("URL DPS D SAVE: " + user.studentProfile.webpage);
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: editprofile");
+			System.out.println("Student profile saved");
+			System.out.println("*********   end:"+user.email+"***********");
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}
 	
 	public static Result settings(){
-		System.out.println("Settings.");
 		if(Secured.isStudent(session("email"))){
 			User user = User.find.byId(session("email"));
 			user.studentProfile.refresh();
@@ -130,6 +141,11 @@ public class StudentController extends Controller {
 			user.studentProfile.description = form.get().description;
 			user.studentProfile.save();
 			user.save();
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: editprofileabout");
+			System.out.println("Student profile about saved");
+			System.out.println("*********   end:"+user.email+"***********");
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}
@@ -139,27 +155,37 @@ public class StudentController extends Controller {
 			User user = User.find.byId(session("email"));
 			Form<NewPassword_Form> form = Form.form(NewPassword_Form.class).bindFromRequest();
 			user.password = sha1.parseSHA1Password(form.get().inputPassword);
-			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
+//			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
 			user.save();
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: changepassword");
+			System.out.println("Student password changed");
+			System.out.println("*********   end:"+user.email+"***********");
 		}
 		return redirect(routes.StudentController.settings());
 	}
 	
 	public static Result changeprivacy(){
 		if(Secured.isStudent(session("email"))){
-			System.out.println("CHANGE PW");
+		
 			User user = User.find.byId(session("email"));
 			Form<Privacy_Form> form = Form.form(Privacy_Form.class).bindFromRequest();
-			System.out.println(form.get().privacy); 
+			
 			if(form.get().privacy==1){
-				System.out.println("entrei no 1");
+			
 			user.studentProfile.privateProfile = true;
 			user.studentProfile.save();
 			}else{
-				System.out.println("entrei no 0");
+				
 			user.studentProfile.privateProfile = false;
 			user.studentProfile.save();
 			}
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: changeprivacy");
+			System.out.println("Student privacy changed to: "+user.studentProfile.privateProfile);
+			System.out.println("*********   end:"+user.email+"***********");
 			
 		}
 		return redirect(routes.StudentController.settings());
@@ -177,19 +203,26 @@ public class StudentController extends Controller {
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
 			module.language.refresh();
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: module");
+		
 			
-			if(DEBUG){
-				System.out.println("---USER: "+user+" is Student");
-			}
-			
-			if (!user.modules.contains(module))
+			if (!user.modules.contains(module)){
+				System.out.println("Student does not contains module: "+module.acronym);
+				System.out.println("Redirecting to general page with signup");
+				System.out.println("*********   end:"+user.email+"***********");
+				
 				return ok(views.html.secured.moduleGeneral.render(user, categories,
 						module));
-			else
-				// Has this module
+			}
+			else{
+				System.out.println("Student contains module: "+module.acronym);
+				System.out.println("Redirecting to module page with lesson: "+module.acronym);
+				System.out.println("*********   end:"+user.email+"***********");
 				return ok(views.html.secured.module
 						.render(user, categories, module));
-		
+			}
 	}
 
 	public static Result signupmodule(String module_acronym) {
@@ -208,41 +241,28 @@ public class StudentController extends Controller {
 		// Trying to add the module to user
 
 		if (Secured.isStudent(user.email) && !user.modules.contains(module)) {
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: StudentController.java");
+			System.out.println("Method: signupmodule");
+		
+			
 			user.modules.add(module);
 			user.olduser=true;
 			user.save();
 			module.save();
+			System.out.println("user signed up in module: "+module.acronym);
 			
 			Modulescore modulescore = new Modulescore();
 			modulescore.module = module;
 			modulescore.user = user;
 			modulescore.score = 0;
 			modulescore.save();
-			
-			
-
-//			for (Lesson lesson : module.lessons) {
-//				for (Test test : lesson.tests) {
-//					Usertest usertest = Usertest.findByUserAndTest(user.email,
-//							test.id);
-//					if (usertest == null) {
-//						Usertest user_test = new Usertest();
-//						user_test.user = user;
-//						user_test.test = test;
-//						user_test.expired = false;
-//						user_test.inmodule = false;
-//						user_test.submitted = false;
-//						user_test.save();
-//						user.tests.add(user_test);
-//						test.users.add(user_test);
-//						user.save();
-//						test.save();
-//						user_test.save();
-//					}
-//				}
-//			}
+			System.out.println("Modulescore created");
+	
 		}
-
+		
+		System.out.println("*********   end:"+user.email+"***********");
+		
 		// Has this module
 		return redirect(routes.Application.module(module_acronym));
 
@@ -266,7 +286,10 @@ public class StudentController extends Controller {
 		
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
-		
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: question");
+		System.out.println("Opening test: "+usertest.test.id);
 		List<Answer> test_answers = Answer.findByUserTestAndTestId(usertest.id,
 				test_id);
 		if (test_answers.isEmpty()) {
@@ -289,7 +312,6 @@ public class StudentController extends Controller {
 		
 		
 		if (question_number<=test.groups.size() && question_number>0){
-		System.out.println("A imprimir as questoes");
 		
 		QuestionGroup group = test.groups.get(question_number-1);
 		
@@ -317,10 +339,7 @@ public class StudentController extends Controller {
 			q_aux.urls=q.urls;
 			
 			
-			//q_aux.hypothesislist?????
 			group_aux.questions.add(q_aux);
-			
-			System.out.println("QUESTION: "+q.id);
 			if(q.typeOfQuestion==2 || q.typeOfQuestion == 1){
 				
 			List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
@@ -348,7 +367,8 @@ public class StudentController extends Controller {
 			
 			}
 		
-		
+		System.out.println("Test ok");
+		System.out.println("*********   end:"+user.email+"***********");
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
 		else
@@ -377,10 +397,15 @@ public class StudentController extends Controller {
 		
 			
 		List<Category> categories = Category.getAllCategories();
-		
-		
+	
 		
 		module.language.refresh();
+		
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: lesson");
+		System.out.println("module: "+module.acronym+" lesson: "+lesson.acronym);
+		System.out.println("*********   end:"+user.email+"***********");
 		
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module));
@@ -398,6 +423,11 @@ public class StudentController extends Controller {
 
 		// check this line
 		User user = User.find.byId(session("email"));
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: modules");
+		System.out.println("Redirecting to modules list");
+		System.out.println("*********   end:"+user.email+"***********");
 		return ok(views.html.secured.modules.render(user, allModules,
 				categories));
 	}
@@ -436,6 +466,12 @@ public class StudentController extends Controller {
 		}
 		User user = User.find.byId(session("email"));
 		user.studentProfile.refresh();
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: news");
+		System.out.println("Redirecting to news");
+		System.out.println("*********   end:"+user.email+"***********");
+		
 		return ok(views.html.secured.blogs.render(user,
 				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
 				));
@@ -457,8 +493,14 @@ public class StudentController extends Controller {
 	public static Result continent(List<Category> categories,
 			List<Continent> continents, Continent continent,
 			List<University> universities) {
-
-		return ok(views.html.secured.continent.render(User.find.byId(session("email")),
+		
+		User user=User.find.byId(session("email"));
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: lesson");
+		System.out.println("Redirect to continent: "+continent.acronym);
+		System.out.println("*********   end:"+user.email+"***********");
+		return ok(views.html.secured.continent.render(user,
 				categories,continents,continent,continent.universities));
 		   
 	}
@@ -466,6 +508,11 @@ public class StudentController extends Controller {
 		User user = User.find.byId(session("email"));
 		user.olduser=!user.olduser;
 		user.save();
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: StudentController.java");
+		System.out.println("Method: olduser");
+		System.out.println("User is now a old user, the tour is over");
+		System.out.println("*********   end:"+user.email+"***********");
 		
 		return ok("done");
 	}

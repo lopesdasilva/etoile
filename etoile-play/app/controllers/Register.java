@@ -60,12 +60,20 @@ public class Register extends Controller {
 		 String email = form.get().email;
 		 User user = User.findByEmail(email);
 		 if(user!=null){
+			 
+
 			 String new_password = getRandomPassword(6);
 			 user.password = sha1.parseSHA1Password(new_password);
 			 System.out.println("NEW PASSWORD: "+new_password);
-			 SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + new_password);
+//			 SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + new_password);
 			 user.save();
+				System.out.println("********* start:"+user.email+"***********");
+				System.out.println("Controller: Register.java");
+				System.out.println("Method: resetpassword");
+				System.out.println("User has a new password");
+				System.out.println("*********   end:"+user.email+"***********"); 
 		 }
+		 
 		 
 		 return ok(login.render(Form.form(Login.class)));
 	}
@@ -111,7 +119,7 @@ public class Register extends Controller {
 	        	user.studentProfile = student;
 	        	user.studentProfile.acronym=form.get().inputUsername;
 	        	user.studentProfile.imageURL = "http://forum.must.ac.ug/sites/default/files/default-avatar.png";
-	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
+//	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  
 	        	
 	        	student.firstname = user.name;
@@ -119,12 +127,15 @@ public class Register extends Controller {
 	        	student.user=user;
 	        	student.save();	        	
 	        	
-	       	 System.out.println("DEBUG**************START**************");
-			 System.out.println("New user registration");
-			 System.out.println("User: "+form.get().inputUsername);
-			 System.out.println("Email: "+form.get().inputEmail);
-			 System.out.println("CAPTCHA: "+validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field));
-			 System.out.println("DEBUG**************END**************");
+	        	
+
+				System.out.println("********************************");
+				System.out.println("Controller: Register.java");
+				System.out.println("Method: register");
+				 System.out.println("User: "+form.get().inputUsername);
+				 System.out.println("Email: "+form.get().inputEmail);
+				 System.out.println("CAPTCHA: "+validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field));
+				System.out.println("********************************");
 	        	 flash("success", "User created!");
 	        	System.out.println("Registering");
 	        }

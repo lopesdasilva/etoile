@@ -33,14 +33,18 @@ public class ProfessorController extends Controller {
 	
 	public static Result index() {
 		
-		
-		if(SecuredProfessor.isProfessor(session("email"))){
-		List<Blog> blogs = Blog.getAllBlogs();
 		User user = User.find.byId(session("email"));
+		if(SecuredProfessor.isProfessor(user.email)){
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: ProfessorController.java");
+			System.out.println("Method: index");
+			System.out.println("User is professor");
+		List<Blog> blogs = Blog.getAllBlogs();
+	
 		List<Category> categories = Category.getAllCategories();
 	
 		user.professorProfile.refresh();
-		
+		System.out.println("*********   end:"+user.email+"***********");
 		return ok(views.html.professor.homeprofessor.render(user, blogs, categories));
 		}
 		return StudentController.index(); 
@@ -59,13 +63,23 @@ public class ProfessorController extends Controller {
 			User user = User.find.byId(session("email"));
 			user.professorProfile.refresh();
 			List<Category> categories = Category.getAllCategories();
-			String[] profs_emails = Professor.getAllEmails();
-			System.out.println("numero de profs "+profs_emails.length);
-			System.out.println("email 0"+profs_emails[0]);
+
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: ProfessorController.java");
+			System.out.println("Method: module");
+			System.out.println("User is professor");
+			
 			if(SecuredProfessor.isOwner(user,module)){
+				
+				System.out.println("User is owner of module: "+module.id);
+				System.out.println("*********   end:"+user.email+"***********");
+				
 				return ok(views.html.professor.moduleGeneralEdit.render(user, categories,
 						module,Professor.getAllEmails()));
 			}
+			System.out.println("User is not owner of module: "+module.id);
+			
+			System.out.println("*********   end:"+user.email+"***********");
 			return ok(views.html.professor.moduleGeneral.render(user, categories,
 					module));
 		
@@ -86,6 +100,7 @@ public class ProfessorController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(session("email")!=null && SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)) {
+			
 		user.professorProfile.refresh();
 		List<Category> categories = Category.getAllCategories();
 		
@@ -95,6 +110,12 @@ public class ProfessorController extends Controller {
 				q.user.refresh();
 			}
 		}
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: ProfessorController.java");
+		System.out.println("Method: lesson");
+		System.out.println("User is professor");
+		System.out.println("User is owner of module: "+module.id);
+		System.out.println("*********   end:"+user.email+"***********");
 		
 		return ok(views.html.professor.lesson.render(user, categories, lesson,
 				module, Form.form(ProfessorLessonController.NewAlert_Form.class)));
@@ -115,6 +136,15 @@ public class ProfessorController extends Controller {
 			for(SubtopicReputation sr :user.subtopicreputation){
 				sr.subtopic.refresh();
 			}
+			
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: ProfessorController.java");
+			System.out.println("Method: myprofile");
+			System.out.println("User is professor");
+			System.out.println("Profile refreshed");
+			System.out.println("*********   end:"+user.email+"***********");
+			
+			
 			return ok(views.html.secured.studentprofileEdit.render(user));	
 			}
 	

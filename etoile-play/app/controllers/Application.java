@@ -48,6 +48,8 @@ public class Application extends Controller {
 
 	public static Result index() {
 		
+		
+		
 		if(session("email")!=null){
 			return StudentController.index();
 		}

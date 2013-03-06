@@ -11,8 +11,8 @@ object ApplicationBuild extends Build {
  	javaCore,
     javaJdbc,
     javaEbean,
-	jdbc,
-      "mysql" % "mysql-connector-java" % "5.1.18",
+    jdbc,
+"postgresql" % "postgresql" % "9.1-901.jdbc4",
       "org.apache.commons" % "commons-email" % "1.2",
   	    "pdf" % "pdf_2.10" % "0.4.1"
     )

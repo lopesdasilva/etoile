@@ -47,12 +47,19 @@ public class BlogController extends Controller {
 		if(session("email")!=null){
 
 			User user = User.find.byId(session("email"));
+			
 			if (SecuredProfessor.isProfessor(session("email"))){
 				user.professorProfile.refresh();
 				return ok(views.html.professor.blog.render(user, blog, Form.form(Comment_Form.class)));
 			}
 			user.studentProfile.refresh();
 
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: BlogController.java");
+			System.out.println("Method: blog");
+			System.out.println("opening blog: "+blog.id);
+			System.out.println("*********   end:"+user.email+"***********");
+			
 			return ok(views.html.secured.blog.render(user, blog,categories, Form.form(Comment_Form.class)));
 
 
@@ -74,6 +81,9 @@ public class BlogController extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		User user = User.find.byId(session("email"));
 
+		
+		
+		
 		// New Comment
 		models.Comment c = new models.Comment();
 		c.text = form.get().comment;
@@ -81,6 +91,13 @@ public class BlogController extends Controller {
 		c.user = user;
 		c.date = new Date();
 		c.save();
+		
+		System.out.println("********* start:"+user.email+"***********");
+		System.out.println("Controller: BlogController.java");
+		System.out.println("Method: blog");
+		System.out.println("opening blog: "+blog.id);
+		System.out.println("*********   end:"+user.email+"***********");
+		
 		return redirect(routes.BlogController.blog(blog_id));
 	}
 }

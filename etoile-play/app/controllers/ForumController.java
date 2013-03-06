@@ -43,6 +43,9 @@ public class ForumController extends Controller {
 				if(!user.modules.contains(module)){
 					return redirect(routes.Application.modules());
 				}
+				System.out.println("********* start:"+user.email+"***********");
+				System.out.println("Controller: ForumController.java");
+				System.out.println("Method: forum");
 				for(Topic topic: module.forum.topics){
 					Usertopic usertopic= Usertopic.findByUserAndTopic(user.email, topic.id);
 					if(usertopic==null){
@@ -51,17 +54,22 @@ public class ForumController extends Controller {
 						usertopic.seen=false;
 						usertopic.user=user;
 						usertopic.save();
+						System.out.println("Forumtopic created");
 					}
 
 				}
 				module.forum.refresh();
-
+				
+				System.out.println("opening forum: "+module.forum.id);
+				System.out.println("*********   end:"+user.email+"***********");
 
 
 				return ok(views.html.secured.forum.render(user,module));
 			}
 			if(SecuredProfessor.isProfessor(user.email) && SecuredProfessor.isOwner(user, module)){
-
+				System.out.println("********* start:"+user.email+"***********");
+				System.out.println("Controller: ForumController.java");
+				System.out.println("Method: forum");
 				for(Topic topic: module.forum.topics){
 					Usertopic usertopic= Usertopic.findByUserAndTopic(user.email, topic.id);
 
@@ -71,12 +79,18 @@ public class ForumController extends Controller {
 						usertopic.seen=false;
 						usertopic.user=user;
 						usertopic.save();
+						System.out.println("Forumtopic created");
+
 					}
 					module.forum.refresh();
 				}	
+				
+				
+				System.out.println("opening forum: "+module.forum.id);
+				System.out.println("*********   end:"+user.email+"***********");
 				return ok(views.html.professor.forum.render(user,module));
 
-
+				
 			}
 
 
@@ -97,8 +111,10 @@ public class ForumController extends Controller {
 		}
 		if((Secured.isStudent(user.email) && user.modules.contains(module))|| SecuredProfessor.isProfessor(user.email)) {
 			Form<Topic_form> form = Form.form(Topic_form.class).bindFromRequest();
-
-
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: ForumController.java");
+			System.out.println("Method: addtopic");
+			
 			Topic topic = new Topic();
 			topic.date=new Date();
 			topic.forum=module.forum;
@@ -106,11 +122,14 @@ public class ForumController extends Controller {
 			topic.title=form.get().title;
 			topic.save();
 
+			System.out.println("Topic created: "+topic.id);
 			Usertopic usertopic= new Usertopic();
 			usertopic.topic=topic;
 			usertopic.user=user;
 			usertopic.seen=false;
 			usertopic.save();
+			
+			System.out.println("Usertopic created: "+usertopic.id);
 
 			Reply reply= new Reply();
 			reply.date=new Date();
@@ -118,12 +137,13 @@ public class ForumController extends Controller {
 			reply.user=user;
 			reply.text=form.get().reply;
 			reply.save();
+			
+	
+			System.out.println("reply created: "+reply.id);
+			System.out.println("*********   end:"+user.email+"***********");
 
-			topic.replies.add(reply);
-			topic.topicsubscriptions.add(usertopic);
-			topic.save();
-
-
+			
+			
 			return redirect(routes.ForumController.topic(module.acronym, topic.id));
 		}
 
@@ -150,6 +170,7 @@ public class ForumController extends Controller {
 				if(!user.modules.contains(module)){
 					return redirect(routes.Application.modules());
 				}
+				
 
 				Usertopic usertopic = Usertopic.findByUserAndTopic(user.email, topic_id);
 				usertopic.seen=true;
@@ -161,6 +182,13 @@ public class ForumController extends Controller {
 					reply.user.studentProfile.refresh();
 				}
 				user.studentProfile.refresh();
+	
+				System.out.println("********* start:"+user.email+"***********");
+				System.out.println("Controller: ForumController.java");
+				System.out.println("Method: topic");
+				System.out.println("Topic: "+topic.id);
+				System.out.println("*********   end:"+user.email+"***********");
+				
 				return ok(views.html.secured.topic.render(user,module,topic));
 			}
 			if(SecuredProfessor.isProfessor(user.email) && SecuredProfessor.isOwner(user, module)){
@@ -168,6 +196,9 @@ public class ForumController extends Controller {
 				usertopic.seen=true;
 				usertopic.save();
 				topic.starter.refresh();
+				
+	
+
 				for(Reply reply: topic.replies){
 					reply.refresh();
 					reply.user.refresh();
@@ -177,6 +208,13 @@ public class ForumController extends Controller {
 						reply.user.professorProfile.refresh();
 				}
 				user.professorProfile.refresh();
+				
+				System.out.println("********* start:"+user.email+"***********");
+				System.out.println("Controller: ForumController.java");
+				System.out.println("Method: topic");
+				System.out.println("Topic: "+topic.id);
+				System.out.println("*********   end:"+user.email+"***********");
+				
 				return ok(views.html.professor.topic.render(user,module,topic));
 			}
 		}
@@ -214,6 +252,13 @@ public class ForumController extends Controller {
 			reply.date=new Date();
 			reply.topic=topic;
 			reply.save();
+			
+			System.out.println("********* start:"+user.email+"***********");
+			System.out.println("Controller: ForumController.java");
+			System.out.println("Method: topic");
+			System.out.println("Reply created: "+reply.id);
+			System.out.println("*********   end:"+user.email+"***********");
+			
 
 			return redirect(routes.ForumController.topic(module.acronym, topic.id));
 		}

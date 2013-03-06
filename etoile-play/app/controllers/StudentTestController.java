@@ -580,7 +580,6 @@ public class StudentTestController extends Controller {
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 					if(hypothesis.size() != 0){
 					for(Hypothesis h : hypothesis){
-						System.out.println(h.text);
 						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
 							 bool = false;
 						}

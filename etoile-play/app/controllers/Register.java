@@ -113,7 +113,7 @@ public class Register extends Controller {
 	        	user.name=form.get().inputName;
 	        	user.username=form.get().inputUsername;
 	        	user.password= sha1.parseSHA1Password( form.get().inputPassword);
-	        	user.email=form.get().inputEmail;
+	        	user.email=form.get().inputEmail.toLowerCase();
 	        	user.country=form.get().inputCountry;
 	        	user.account_type = 0;
 	        	user.studentProfile = student;
@@ -133,7 +133,7 @@ public class Register extends Controller {
 				System.out.println("Controller: Register.java");
 				System.out.println("Method: register");
 				 System.out.println("User: "+form.get().inputUsername);
-				 System.out.println("Email: "+form.get().inputEmail);
+				 System.out.println("Email: "+form.get().inputEmail.toLowerCase());
 				 System.out.println("CAPTCHA: "+validateCaptcha(form.get().recaptcha_challenge_field,form.get().recaptcha_response_field));
 				System.out.println("********************************");
 	        	 flash("success", "User created!");

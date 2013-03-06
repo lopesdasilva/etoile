@@ -33,7 +33,7 @@ POST	/myprofile/editprofile				controllers.StudentController.editprofile()
 POST	/myprofile/editprofileabout			controllers.StudentController.editprofileabout()
 POST	/myprofile/changepassword			controllers.StudentController.changepassword()
 POST	/myprofile/changeprivacy			controllers.StudentController.changeprivacy()
-GET	/myprofile/settings						controllers.StudentController.settings()
+GET		/myprofile/settings						controllers.StudentController.settings()
 POST	/olduser							controllers.StudentController.olduser()
 
 

@@ -30,7 +30,7 @@ public class Application extends Controller {
 	        public String password;
 	        
 	        public String validate() {
-	            if(User.authenticate(email, password) == null) {
+	            if(User.authenticate(email.toLowerCase(), password) == null) {
 	                return "Invalid user or password";
 	            }
 	            return null;
@@ -251,7 +251,7 @@ public static Result professorprofile(String professor_acronym) {
         if(loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));
         } else {
-            session("email", loginForm.get().email);
+            session("email", loginForm.get().email.toLowerCase());
             
             switch (User.find.byId(session("email")).account_type){
             case 0:

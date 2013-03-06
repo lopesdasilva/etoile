@@ -81,7 +81,7 @@
     <tr>
       <th class="span1"></th>
       <th class="span8"></th>
-      <th class="span2"></th>
+      <th class="span3"></th>
       <th class="span3"></th>
       <th class="span3"></th>
     </tr>
@@ -94,7 +94,7 @@
       <tr  class="warning">
       <td><span class="label label-success pull-right">New</span></td>
       <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
-       <td><i class="icon-user"></i> @topic.starter</td>
+       <td><i class="icon-user"></i> <a href="@routes.Application.studentprofile(topic.starter.username)">@topic.starter</a></td>
       <td><a href="@routes.ForumController.topic(module.acronym,topic.id)" > <i class="icon-comment"></i> @topic.replies.size replys</a></td>
       <td><small>@topic.dateToString</small></td>
        </tr>
@@ -103,7 +103,7 @@
       <tr>
       <td></td>
       <td><strong><a href="@routes.ForumController.topic(module.acronym,topic.id)" >@topic.title</a></strong></td>
-      <td><i class="icon-user"></i> @topic.starter</td>
+      <td><i class="icon-user"></i> <a href="@routes.Application.studentprofile(topic.starter.username)">@topic.starter</a></td>
       <td><a href="@routes.ForumController.topic(module.acronym,topic.id)" ><i class="icon-comment"></i> @topic.replies.size replys</a></td>
       <td><small>@topic.dateToString</small></td>
        </tr>

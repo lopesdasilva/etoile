@@ -45,7 +45,13 @@ public class StudentMarkerController extends Controller {
 			a.answer.group.test.lesson.refresh();
 			a.answer.group.test.lesson.module.refresh();
 		}
-
+		
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentMarkerController.java");
+        System.out.println("Method: answersToMark");
+        System.out.println("AnswersToMark will be rendered.");
+        System.out.println("*******   end:"+user.email+"*********");
+        
 		return ok(views.html.secured.answerstomark.render(user, categories, answersToMark));
 	}
 
@@ -61,8 +67,13 @@ public class StudentMarkerController extends Controller {
 
 			answer.group.refresh();
 			answer.openQuestion.refresh();
-
-
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: StudentMarkerController.java");
+	        System.out.println("Method: answerToMark");
+	        System.out.println("AnswerToMark will be rendered.");
+	        System.out.println("*******   end:"+user.email+"*********");
+			
 			return ok(views.html.secured.answertomark.render(user, categories, answer, answer.openQuestion,Form.form(MarkerEvaluation.class)));
 		}
 		return redirect(routes.Application.index());
@@ -80,7 +91,6 @@ public class StudentMarkerController extends Controller {
 
 			Form<MarkerEvaluation> form = Form.form(
 					MarkerEvaluation.class).bindFromRequest();
-			System.out.println("AnswerMarker" + form.get().answerscore);
 
 			AnswerMarker answerMarker = AnswerMarker.getByAnswerAndUser(user.email,answer.id);
 			answerMarker.answer = answer;
@@ -90,6 +100,14 @@ public class StudentMarkerController extends Controller {
 			answerMarker.isMarked=true;
 			answerMarker.save();
 			answer.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: StudentMarkerController.java");
+	        System.out.println("Method:  markanswer");
+	        System.out.println("AnswerMarked");
+	        System.out.println("answer: " + answer.id);
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 			return redirect(routes.StudentMarkerController.answersToMark());
 		}
 		return redirect(routes.Application.index());

@@ -41,7 +41,14 @@ public class ProfessorProfileController  extends Controller {
 			user.professorProfile.degree=form.get().degree;
 			user.professorProfile.imageURL=form.get().imageURL;
 			user.professorProfile.shortdescription=form.get().shortdescription;
-			user.professorProfile.save();			
+			user.professorProfile.save();		
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorProfileController.java");
+	        System.out.println("Method: editprofile");
+	        System.out.println("Profile edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}
@@ -56,6 +63,12 @@ public class ProfessorProfileController  extends Controller {
 			professorContent.imageURL=form.get().imageURL;
 			professorContent.professor=user.professorProfile;
 			professorContent.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorProfileController.java");
+	        System.out.println("Method: addprofilecontent");
+	        System.out.println("Profile content added");
+	        System.out.println("*******   end:"+user.email+"*********");
 
 			return redirect(routes.ProfessorController.myprofile());
 		}
@@ -63,11 +76,18 @@ public class ProfessorProfileController  extends Controller {
 	}
 
 	public static Result deleteprofilecontent(Long professorcontent_id){
-
+		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email"))){
 			ProfessorContent professorContent = ProfessorContent.find.byId(professorcontent_id);
 			if(professorContent!=null){
 			professorContent.delete();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorProfileController.java");
+	        System.out.println("Method: deleteprofilecontent");
+	        System.out.println("Profile content deleted");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 			}
 		}
 
@@ -75,13 +95,20 @@ public class ProfessorProfileController  extends Controller {
 	}
 
 	public static Result editprofilecontent(Long professorcontent_id){
-
+		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email"))){
 			Form<Content_Form> form = Form.form(Content_Form.class).bindFromRequest();
 			ProfessorContent professorContent = ProfessorContent.find.byId(professorcontent_id);
 			professorContent.imageURL=form.get().imageURL;
 			professorContent.description=form.get().description;
 			professorContent.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorProfileController.java");
+	        System.out.println("Method: editprofilecontent");
+	        System.out.println("Profile content edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 
 		return redirect(routes.ProfessorController.myprofile());
@@ -94,6 +121,13 @@ public class ProfessorProfileController  extends Controller {
 
 			user.professorProfile.contact=form.get().address;
 			user.professorProfile.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorProfileController.java");
+	        System.out.println("Method: editprofilecontact");
+	        System.out.println("Profile contact edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}

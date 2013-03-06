@@ -92,7 +92,6 @@ public class ProfessorLessonController extends Controller {
 		User user = User.find.byId(session("email"));
 		List<Category> categories = Category.getAllCategories();
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			System.out.println("Entrei");
 			Form<NewAlert_Form> form = Form.form(NewAlert_Form.class).bindFromRequest();
 			if(form.hasErrors()) {
 	            return badRequest(views.html.professor.lesson.render(user, categories, lesson,
@@ -110,6 +109,12 @@ public class ProfessorLessonController extends Controller {
 			
 			lessonalert.lesson = lesson;
 			lessonalert.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorLessonEdit.java");
+	        System.out.println("Method: addlessonalert");
+	        System.out.println("Lesson Alert added");
+	        System.out.println("*******   end:"+user.email+"*********");
 
 			List<User> users_list = module.users;
 			for(User u : users_list) {
@@ -143,7 +148,6 @@ public class ProfessorLessonController extends Controller {
 		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			System.out.println("Entrei");
 			
 			
 			Lessoncontent content = new Lessoncontent();
@@ -157,6 +161,13 @@ public class ProfessorLessonController extends Controller {
 			content.url = form.get().url;
 			content.lesson = lesson;
 			content.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorLessonEdit.java");
+	        System.out.println("Method: addlessonacontent");
+	        System.out.println("Lesson Content added");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		return redirect(routes.Application.lesson(module_acronym,lesson_acronym));
 	}
@@ -187,6 +198,13 @@ public class ProfessorLessonController extends Controller {
 			lesson.name = form.get().name;
 			lesson.shortDescription = form.get().shortdescription;
 			lesson.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorLessonEdit.java");
+	        System.out.println("Method: edit lesson");
+	        System.out.println("Lesson Edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		
 		
@@ -214,6 +232,13 @@ public class ProfessorLessonController extends Controller {
 				}
 				question.delete();
 				question.save();
+				
+				System.out.println("******* start:"+user.email+"*********");
+		        System.out.println("Controller: ProfessorLessonEdit.java");
+		        System.out.println("Method: deletequestion");
+		        System.out.println("Lesson Question deleted");
+		        System.out.println("*******   end:"+user.email+"*********");
+		        
 			}
 		
 		

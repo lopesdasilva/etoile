@@ -86,7 +86,7 @@ public class StudentTestController extends Controller {
 	}
 
 	 public static Result document(Long test_id) {
-		 
+
 		 User user = User.find.byId(request().username());
 		 Test test = models.test.Test.find.byId(test_id);
 		 if(test==null){
@@ -96,9 +96,15 @@ public class StudentTestController extends Controller {
 		 if(usertest==null || usertest.inmodule || !usertest.submitted){
 			 return redirect(routes.Application.index());
 		 }
+		 
+		 System.out.println("******* start:"+user.email+"*********");
+         System.out.println("Controller: StudentTestController.java");
+         System.out.println("Method: document");
+         System.out.println("PDF will be created");
+         System.out.println("*******   end:"+user.email+"*********");
+         
 		 usertest.user.refresh();
 		 usertest.test.refresh();
-		 System.out.println(usertest.test);
 	        return PDF.ok(document.render(usertest));
 	    }
 
@@ -193,6 +199,12 @@ public class StudentTestController extends Controller {
 				for(Question que : group_aux.questions){
 					evaluations.add(QuestionEvaluation.findByUserAndQuestion(usertest.id, que.id));
 				}
+				
+				 System.out.println("******* start:"+user.email+"*********");
+		         System.out.println("Controller: StudentTestController.java");
+		         System.out.println("Method: questionanalysis");
+		         System.out.println("Question analysis page will be rendered.");
+		         System.out.println("*******   end:"+user.email+"*********");
 				
 				return ok(views.html.secured.question.questionanalysis.render(user,module,lesson,test,group_aux,usertest, evaluations));
 				}else{
@@ -325,6 +337,12 @@ public class StudentTestController extends Controller {
 			
 			}
 		
+		 System.out.println("******* start:"+user.email+"*********");
+         System.out.println("Controller: StudentTestController.java");
+         System.out.println("Method: question");
+         System.out.println("Question will be rendered");
+         System.out.println("*******   end:"+user.email+"*********");
+		
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
 		else
@@ -366,19 +384,14 @@ public class StudentTestController extends Controller {
 		
 		Usertest usertest=Usertest.find.byId(usertest_id);
 		if(usertest==null || !usertest.user.email.equals(user.email)){
-			System.out.println(user);
-			System.out.println(usertest.user);
-			System.out.println("USERTEST!=USER");
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
 		
 		if(Secured.isStudent(user.email) && test.published && !test.expired && !usertest.submitted ){
-		System.out.println("TIPO DE QUESTAO: "+question.typeOfQuestion);
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = Form.form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
-				System.out.println(last_answers.size());
 				if(!last_answers.get(0).isSaved){
 					changeTestProgress(test_id, usertest_id, user.email);
 				}
@@ -393,13 +406,16 @@ public class StudentTestController extends Controller {
 				hypothesis.save();
 				}
 				
+				 System.out.println("******* start:"+user.email+"*********");
+		         System.out.println("Controller: StudentTestController.java");
+		         System.out.println("Method: postquestion");
+		         System.out.println("OneChoiceQuestion - answer saved.");
+		         System.out.println("*******   end:"+user.email+"*********");
+				
 			}else if(question.typeOfQuestion == 2) {
 			// GUARDAR ESCOLHA MULTIPLA E ONE CHOICE
 
 			Form<MultipleChoiceQuestionAnswer> form = Form.form(MultipleChoiceQuestionAnswer.class).bindFromRequest();
-			for (int h : form.get().mcqanswers) {
-				System.out.println("VALOR: " + h);
-			}
 			
 			List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
 			if(!last_answers.get(0).isSaved){
@@ -423,12 +439,15 @@ public class StudentTestController extends Controller {
 					}
 				}
 			}
+			 System.out.println("******* start:"+user.email+"*********");
+	         System.out.println("Controller: StudentTestController.java");
+	         System.out.println("Method: postquestion");
+	         System.out.println("MultipleChoiceQuestion - answer saved.");
+	         System.out.println("*******   end:"+user.email+"*********");
 		} else {
 			//GUARDAR OPEN QUESTION - WORKING
 			
-			Form<QuestionAnswer> form = Form.form(QuestionAnswer.class).bindFromRequest();
-			System.out.println("Open Answer: " + form.get().qanswer);
-			
+			Form<QuestionAnswer> form = Form.form(QuestionAnswer.class).bindFromRequest();			
 			Answer answer = Answer.findByUserTestAndQuestion(usertest.id, question_id); // Resposta Guardada
 			if(!answer.isSaved){
 				changeTestProgress(test_id, usertest_id, user.email);
@@ -436,6 +455,12 @@ public class StudentTestController extends Controller {
 			answer.answer = form.get().qanswer;
 			answer.isSaved = true;
 			answer.save();
+			
+			 System.out.println("******* start:"+user.email+"*********");
+	         System.out.println("Controller: StudentTestController.java");
+	         System.out.println("Method: postquestion");
+	         System.out.println("OpenQuestion - answer saved.");
+	         System.out.println("*******   end:"+user.email+"*********");
 		}
 		
 			
@@ -452,14 +477,12 @@ public class StudentTestController extends Controller {
 		}
 		Usertest userTest= Usertest.findByUserAndTest(user_email, test_id);
 		float progress = userTest.progress+ 100/totalNumQuestions;
-		System.out.println("progress: "+progress);
 		userTest.progress=progress;
 		if(userTest.progress == 99){
 			userTest.progress = progress+1;
 			
 		}
 		userTest.save();
-		System.out.println("Vou fazer redirect");
 	}
 	
 
@@ -491,8 +514,15 @@ public class StudentTestController extends Controller {
 		
 		usertest.submitted=true;
 		usertest.save();
-		System.out.println("USERMAIL:" + user.email);
-		System.out.println("Vou criar marker list..");
+
+			
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentTestController.java");
+        System.out.println("Method: submitTest");
+        System.out.println("Test submitted");
+        System.out.println("usertest: " + usertest.id);
+        System.out.println("*******   end:"+user.email+"*********");
+        
 		//Quando aluno submete o teste, é associado à sua lista answersToMark, todas as answers dos outros alunos ao mesmo teste.
 		//Para ser aletório temos q arranjar maneira de ser justo e de não haver muitas respostas dadas aos markers e outras ignoradas
 		//Isto é só um teste para ter qlq coisa a funcionar
@@ -546,14 +576,11 @@ public class StudentTestController extends Controller {
 						}else{
 							reputation = reputation - q.weightToLose;
 						}
-						System.out.println("Reputação após OC acertada: " + reputation);
 				}else if(q.typeOfQuestion==2){
-					System.out.println("CORRIGIR ESCOLHA MULTIPLA.");
 					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(user.email, q.id);
 					if(hypothesis.size() != 0){
 					for(Hypothesis h : hypothesis){
 						System.out.println(h.text);
-						System.out.println("SELECTED: "+ h.selected + "isCORRECT?: " + h.isCorrect);
 						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
 							 bool = false;
 						}
@@ -562,13 +589,11 @@ public class StudentTestController extends Controller {
 						bool = false;
 					}
 					if(bool){
-						System.out.println("MC - A somar weight..");
 						reputation = reputation + q.weight;
 					}else{
 						reputation = reputation - q.weightToLose;
 					}
 					
-					System.out.println("Reputação após MC acertada: " + reputation);
 
 				}
 				
@@ -601,14 +626,23 @@ public class StudentTestController extends Controller {
 			
 		}
 		
+		
+		
 		usertest.reviewd = false;
 		usertest.reputationAsAstudent = reputation;
 		usertest.inmodule = false;
 		usertest.save();
 		
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentTestController.java");
+        System.out.println("Method: submitTest");
+        System.out.println("Test Marked");
+        System.out.println("usertest: " + usertest.id);
+        System.out.println("test reputationAsAStudent: " + reputation);
+        System.out.println("*******   end:"+user.email+"*********");
 
-		SendMail.sendMail(user.email, "Congrats "+user.username+"!", "You've answer something"); 
-		System.out.println("Reputação no Teste: " + usertest.reputationAsAstudent);
+//		SendMail.sendMail(user.email, "Congrats "+user.username+"!", "You've answer something"); 
+
 		
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym));
 		}
@@ -662,10 +696,8 @@ public class StudentTestController extends Controller {
 			
 			for(QuestionGroup group: test.groups){
 				for(Question question: group.questions){
-					System.out.println("QUESTION: " + question.id);
 					if(question.subtopic!=null){
 					SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
-					System.out.println("SUBTOPIC_REPUTATIOn: " + subtopicreputation!=null);
 					if(subtopicreputation==null){
 						SubtopicReputation subtopicreputationuser = new SubtopicReputation();
 						subtopicreputationuser.subtopic = question.subtopic;
@@ -695,7 +727,7 @@ public class StudentTestController extends Controller {
 		
 		
 
-		System.out.println("MODULESIZE: " + lesson.questions.size());
+
 		Question new_question = new Question();
 		new_question.question = form_question.get().openquestionsuggestion;
 		new_question.answerSuggestedByStudent = form_answer.get().openanswersuggestion;
@@ -703,13 +735,19 @@ public class StudentTestController extends Controller {
 		new_question.user = user;
 		new_question.save();
 		lesson.save();
-
+		
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentTestController.java");
+        System.out.println("Method: addquestion");
+        System.out.println("new SuggestedQuestion added");
+        System.out.println("usertest: " + usertest.id + " - inmodule is true!");
+        System.out.println("*******   end:"+user.email+"*********");
 		
 		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym)+"#tests");
 	}
 	
 	public static Result voteurl(Long url_id, int question_number, Long test_id,String lesson_acronym,String module_acronym){
-		
+		User user = User.find.byId(session("email"));
 		Module module = Module.findByAcronym(module_acronym);if (module==null){
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
@@ -734,6 +772,13 @@ public class StudentTestController extends Controller {
 		url.likes ++ ;
 
 		url.save();
+		
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentTestController.java");
+        System.out.println("Method: voteurl");
+        System.out.println("URL voted.");
+        System.out.println("url: " + url.id);
+        System.out.println("*******   end:"+user.email+"*********");
 		
 		return redirect(routes.StudentTestController.question(question_number, test_id, lesson_acronym, module_acronym));
 		
@@ -769,13 +814,8 @@ public class StudentTestController extends Controller {
 				URL_form.class).bindFromRequest();
 		
 		User user = User.find.byId(request().username());
-		
-		System.out.println();
-		System.out.println("Url: "+form.get().url);
-		System.out.println("Title: "+form.get().name);
-		System.out.println("Descr: "+form.get().descriptionUrl);
-		System.out.println("ImageUrl: "+form.get().image);
-		System.out.println();
+
+
 
 		URL url = new URL();
 		url.added = new DateTime();
@@ -789,6 +829,13 @@ public class StudentTestController extends Controller {
 		url.user=user;
 		
 		url.save();
+		
+		System.out.println("******* start:"+user.email+"*********");
+        System.out.println("Controller: StudentTestController.java");
+        System.out.println("Method: addurl");
+        System.out.println("Url added");
+        System.out.println("url: " + url.id);
+        System.out.println("*******   end:"+user.email+"*********");
 
 		return redirect(routes.StudentTestController.question(question_number, test_id, lesson_acronym, module_acronym));
 		

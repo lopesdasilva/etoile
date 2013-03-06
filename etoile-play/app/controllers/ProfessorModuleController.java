@@ -95,6 +95,13 @@ public class ProfessorModuleController extends Controller {
 			module.name=form.get().title;
 			module.acronym=form.get().acronym;
 			module.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: editmoduletitle");
+	        System.out.println("Module title edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		
 		
@@ -116,6 +123,13 @@ public class ProfessorModuleController extends Controller {
 			module.imageURL=form.get().imageURL;
 			module.videoURL=form.get().videoURL;
 			module.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: editmoduledescription");
+	        System.out.println("Module descrpiton edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 
 
@@ -141,6 +155,13 @@ public class ProfessorModuleController extends Controller {
 			bibliographyItem.link=form.get().url;
 			bibliographyItem.module=module;
 			bibliographyItem.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: addbibliographyitem");
+	        System.out.println("bibliography item added");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 		
 		return redirect(routes.Application.module(module_acronym));
@@ -169,11 +190,17 @@ public class ProfessorModuleController extends Controller {
 			lesson.number = module.lessons.size() + 1;
 			lesson.module = module;
 			lesson.save();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: addlesson");
+	        System.out.println("New Lesson added");
+	        System.out.println("*******   end:"+user.email+"*********");
 
 			List<User> users_list = module.users;
-			for(User u : users_list) {
-				SendMail.sendMail(u.email, "[Etoile] New lesson in "+module_acronym+" module !", "blablablablablabl some new lesson called "+form.get().name); 
-			}
+//			for(User u : users_list) {
+//				SendMail.sendMail(u.email, "[Etoile] New lesson in "+module_acronym+" module !", "blablablablablabl some new lesson called "+form.get().name); 
+//			}
 		}
 		
 		return redirect(routes.Application.module(module_acronym));
@@ -203,6 +230,12 @@ public class ProfessorModuleController extends Controller {
 			bibliographyItem.link=form.get().url;
 			bibliographyItem.save();
 			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: editbibliographyitem");
+	        System.out.println("Bibliography item edited");
+	        System.out.println("*******   end:"+user.email+"*********");
+			
 		}
 		
 		return redirect(routes.Application.module(module_acronym));
@@ -225,7 +258,11 @@ public class ProfessorModuleController extends Controller {
 	
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			bibliographyItem.delete();
-		
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: deletebibliographyitem");
+	        System.out.println("Bibliography item deleted");
+	        System.out.println("*******   end:"+user.email+"*********");
 		}
 		
 		return redirect(routes.Application.module(module_acronym));
@@ -250,6 +287,14 @@ public class ProfessorModuleController extends Controller {
 			content.text=form.get().description;
 			content.module=module;
 			content.save();
+			
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: addmodulecontent");
+	        System.out.println("Module content Added");
+	        System.out.println("*******   end:"+user.email+"*********");
+	        
 		}
 
 
@@ -299,6 +344,12 @@ public class ProfessorModuleController extends Controller {
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 
 			content.delete();
+			
+			System.out.println("******* start:"+user.email+"*********");
+	        System.out.println("Controller: ProfessorModuleEdit.java");
+	        System.out.println("Method: deletemodulecontent");
+	        System.out.println("Module content deleted");
+	        System.out.println("*******   end:"+user.email+"*********");
 		}
 
 

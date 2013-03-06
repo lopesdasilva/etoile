@@ -99,6 +99,11 @@ public class ProfessorTestController extends Controller {
 		
 	}
 
+	public static class SuggestedQuestionRequired_Form{
+		public boolean required;
+		
+	}
+	
 	private static long ONEWEEKINMILLIS=604800000;
 	
 	//METHODS
@@ -1320,6 +1325,7 @@ public class ProfessorTestController extends Controller {
 		test.text = form.get().text;
 		test.lesson = lesson;
 		test.expectedDuration=form.get().expectedDuration;
+		test.suggestquestionrequired = true;
 		test.begin_date = new Date();
 		test.finish_date = new Date();
 		Long markerlimitdate_millis = test.finish_date.getTime() + ONEWEEKINMILLIS;//data de fim do teste + 7 dias
@@ -1365,7 +1371,42 @@ public class ProfessorTestController extends Controller {
 		
 		return redirect(routes.Application.module(module.acronym));
 	}
-	
+	public static Result changesuggestrequiredsettings(String module_acronym, String lesson_acronym, Long test_id){
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}
+		
+		
+		Test test = Test.find.byId(test_id);
+		if(test==null|| !lesson.tests.contains(test)){
+			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
+		}
+		
+		User user = User.find.byId(session("email"));
+		
+		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			Form<SuggestedQuestionRequired_Form> form = Form.form(SuggestedQuestionRequired_Form.class).bindFromRequest();
+			if(form.get().required){
+				test.suggestquestionrequired = true;
+				test.save();
+			}else{
+				test.suggestquestionrequired = false;
+				test.save();
+			}
+			
+			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+
+		}
+		
+		return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
+
+	}
 	public static Result changetestdates(String module_acronym, String lesson_acronym, Long test_id){
 		
 		Module module = Module.findByAcronym(module_acronym);if (module==null){

@@ -210,6 +210,29 @@ models.test.Test) @main("etoile"){
 					</div>
 				</div>
 			}
+			
+			@helper.form(routes.ProfessorTestController.changesuggestrequiredsettings(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
+		<h3>Suggested Question</h3>
+			<div class="control-group">
+				<div class="controls">
+					@if(test.suggestquestionrequired){ 
+					Required: <input checked type="checkbox" name="required" value="true" /> 
+					}else{
+					Required: <input type="checkbox" name="required" value="true" />
+					}
+				</div>
+			</div>
+			
+			<div class="control-group">
+					<label class="control-label"></label>
+
+					<!-- Button -->
+					<div class="controls">
+						<button class="btn btn-success">Save</button>
+					</div>
+				</div>
+				
+			}
 
 		</div> 
 
@@ -424,6 +447,7 @@ models.test.Test) @main("etoile"){
 		</div> } @if(test.published){
 			
 			<h3>Begin and finish Dates</h3>
+			@helper.form(routes.ProfessorTestController.changetestdates(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
 			<div class="control-group">
 				<label class="control-label" for="reservation">Reservation
 					dates:</label>
@@ -445,6 +469,31 @@ models.test.Test) @main("etoile"){
 						<button class="btn btn-success disabled">Save</button>
 					</div>
 				</div>
+				}
+				@helper.form(routes.ProfessorTestController.changesuggestrequiredsettings(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
+		<h3>Suggested Question</h3>
+			<div class="control-group">
+				<div class="controls">
+					@if(test.suggestquestionrequired){ 
+					Required: <input disabled="disabled" checked type="checkbox" name="required" value="true" /> 
+					}else{
+					Required: <input disabled="disabled" type="checkbox" name="required" value="true" />
+					}
+				</div>
+			</div>
+			
+			<div class="control-group">
+					<label class="control-label"></label>
+
+					<!-- Button -->
+					<div class="controls">
+						<button class="btn btn-success" disabled="disabled">Save</button>
+					</div>
+				</div>
+				
+			}
+				
+				
 
 		<div class="row">
 			<h3>Groups</h3>

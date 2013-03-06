@@ -648,6 +648,68 @@ public class StudentTestController extends Controller {
 		}
 		return redirect(routes.Application.index());
 	}
+	
+	public static Result signuptest(Long test_id, String lesson_acronym,String module_acronym) {
+		Module module = Module.findByAcronym(module_acronym);if (module==null){
+			System.out.println("The module does not exist.");
+			return redirect(routes.Application.modules());
+		}
+		
+		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
+		if (lesson==null){
+			return redirect(routes.Application.module(module_acronym));
+		}	
+		
+		Test test = models.test.Test.find.byId(test_id);
+		if(test==null){
+			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
+		}
+		
+		
+		User user = User.find.byId(request().username());
+		
+		if(!user.isUserSignupTest(test)){
+			//signup in test
+			Usertest user_test = new Usertest();
+			user_test.user = user;
+			user_test.test = test;
+			user_test.expired = false;
+			user_test.inmodule = false;
+			user_test.submitted = false;
+			user_test.save();
+			user.tests.add(user_test);
+			test.users.add(user_test);
+			user.save();
+			test.save();
+			user_test.save();
+			
+			for(QuestionGroup group: test.groups){
+				for(Question question: group.questions){
+					if(question.subtopic!=null){
+					SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
+					if(subtopicreputation==null){
+						SubtopicReputation subtopicreputationuser = new SubtopicReputation();
+						subtopicreputationuser.subtopic = question.subtopic;
+						subtopicreputationuser.user = user;
+						subtopicreputationuser.reputationAsAMarker = new Long(0);
+						subtopicreputationuser.reputationAsAStudent = new Long(0);
+						subtopicreputationuser.save();
+					}
+				}
+				}
+					
+			}
+			
+		}
+		
+		Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
+		usertest.inmodule = true;
+		usertest.save();
+
+		List<Category> categories = Category.getAllCategories();
+		
+		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym)+"#tests");
+	}
 
 	/**
 	 * Adiciona uma sugestão de questão por parte do aluno

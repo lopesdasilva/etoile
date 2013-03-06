@@ -50,6 +50,9 @@ public class Test extends Model{
 	
 	@Constraints.Required
 	public boolean expired=false;
+	
+	@Constraints.Required
+	public boolean suggestquestionrequired;
 
 	@ManyToOne
 	public Lesson lesson;

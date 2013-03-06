@@ -149,6 +149,8 @@ GET /curriculum/category:category					controllers.Application.categoryModules(ca
 #Lessons
 GET		/modules/:module/:lesson			controllers.StudentController.lesson(lesson: String, module: String)
 POST 	/modules/:module/:lesson/addquestion 				controllers.StudentTestController.addquestion(test: Long, lesson: String, module: String)
+GET 	/modules/:module/:lesson/signuptest 				controllers.StudentTestController.signuptest(test: Long, lesson: String, module: String)
+
 
 #Tests
 GET		/modules/:module/:lesson/test:test/:question		controllers.StudentTestController.question(question: Int,test: Long, lesson: String,module: String)

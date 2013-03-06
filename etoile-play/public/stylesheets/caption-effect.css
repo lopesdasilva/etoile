@@ -309,5 +309,8 @@ p.mini {
 	transform: translateX(200px);
 }
 
+.crop-portrait { width: 53px; height: 48px; overflow: hidden;border: 1px solid #021a40; border-radius: 5px; }
+.crop-portrait img { width: 100%; height: 100%; }
+
 .crop { width: 200px; height: 240px; overflow: hidden; }
 .crop img { width: 100%; height: 100%; }

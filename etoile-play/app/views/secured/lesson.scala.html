@@ -172,7 +172,9 @@ models.module.Lesson, module: models.module.Module) @import helper._
 												<div class="modal-footer">
 													<div class="controls">
 														<button type="submit" class="btn btn-info">Save</button>
-
+														@if(!test.suggestquestionrequired){
+														<a href="@routes.StudentTestController.signuptest(test.id, lesson.acronym, module.acronym)"  class="btn btn-danger">Ignore</a>
+														}
 													</div>
 												</div>
 										}
@@ -187,8 +189,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									@if(usertest.test.id==test.id && usertest.inmodule){
 									<td>-</td>
 
-									<td><a class="btn btn-success btn-small disabled">Question
-											suggested</a></td> @if(!usertest.submitted){
+									<td><a class="btn btn-success btn-small disabled">Signed Up</a></td> @if(!usertest.submitted){
 									<td><a class="btn btn-primary btn-small"
 										href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
 											test&raquo;</a></td> } @if(usertest.submitted){
@@ -201,8 +202,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									<td><a
 										href="@routes.StudentTestController.questionanalysis(1,test.id,lesson.acronym,module.acronym)">@usertest.reputationAsAstudent
 											/ 100</a></td> }
-									<td><a class="btn btn-success btn-small disabled">Question
-											suggested</a></td> @if(!usertest.submitted){
+									<td><a class="btn btn-success btn-small disabled">Signed Up</a></td> @if(!usertest.submitted){
 									<td><a class="btn btn-primary btn-small"
 										href="@routes.StudentTestController.question(1,test.id,lesson.acronym,module.acronym)">Solve
 											test&raquo;</a></td> } @if(usertest.submitted){
@@ -213,8 +213,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									!usertest.submitted ){
 									<td>-</td>
 									<td><a href="#modal@test.id"
-										class="btn btn-danger btn-small" data-toggle="modal">Suggest
-											question&raquo;</a></td>
+										class="btn btn-danger btn-small" data-toggle="modal">Sign up test&raquo;</a></td>
 									<td><a class="btn btn-primary btn-small disabled">Solve
 											test&raquo;</a></td>
 									} 
@@ -228,8 +227,7 @@ models.module.Lesson, module: models.module.Module) @import helper._
 									} } @if(!user.isUserSignupTest(test)){
 									<td>-</td>
 									<td><a href="#modal@test.id"
-										class="btn btn-danger btn-small" data-toggle="modal">Suggest
-											question&raquo;</a></td>
+										class="btn btn-danger btn-small" data-toggle="modal">Sign up test&raquo;</a></td>
 									<td><a class="btn btn-primary btn-small disabled">Solve
 											test&raquo;</a></td>
 									<!-- MODAL -->

@@ -95,6 +95,10 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 					@for(evaluation <- evaluations){
 					@if(evaluation.question == question){
 						<button disabled="disabled" class="btn btn-info">(+@evaluation.score)</button></h4>
+						@if(evaluation.evalutationcomment!=null){
+						<h5>Professor's comment about your answer:</h3>
+						<textarea disabled = "disabled" class="span50" rows="5" name="qanswer" style="resize:none">@evaluation.evalutationcomment</textarea><p></p>
+						}
 					}
 					}
 					}
@@ -102,7 +106,7 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 				</div>
 				<div class="span5">
 					<div class="btn-group pull-right">
-						<button class="btn btn-small btn-info  dropdown-toggle"
+						<button class="btn btn-small btn-info  dropdown-toggle" disabled="disabled"
 							data-toggle="dropdown">
 							help<span class="caret"></span>
 						</button>
@@ -136,7 +140,7 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 									 height="35" width="35">
 									}
 							<div class="media">
-								<a class="pull-left" href="@url.adress"> <img class="media-object"
+								<a class="pull-left"  href="@url.adress"> <img class="media-object"
 									src="@url.imageURL" height="70" width="70">
 								</a>
 								
@@ -465,9 +469,10 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 			<div class="row-fluid">
 				<div class="span11">
 					<div class="span12">
-
-						<textarea disabled = "disabled" class="span50" rows="10" name="qanswer">@question.openanswer.answer</textarea>
+						<textarea disabled = "disabled" class="span50" rows="10" name="qanswer" style="resize:none">@question.openanswer.answer</textarea>
 					</div>
+					
+					
 					
 				</div>
 			</div>

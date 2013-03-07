@@ -94,7 +94,7 @@
 				@for(curriculummodule <- category.curriculummodules) {
 				<section id="@category.keyword@curriculummodule.keyword">
 					<dt>
-					<h2><span class="label label-success">M</span>@curriculummodule.name</h2> 
+					<h4><span class="label label-success">M</span>@curriculummodule.name</h4> 
 					</dt>
 					<dd>
 					<p>@curriculummodule.text</p>
@@ -102,7 +102,7 @@
 					@for(curriculumlesson <- curriculummodule.curriculumlessons) {
 					<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
 						<dt>
-						<h3><span class="label label-info">L</span>@curriculumlesson.name</h3> 
+						<h5><span class="label label-info">L</span>@curriculumlesson.name</h5> 
 						</dt>
 						<dd>
 						<p>@curriculumlesson.text</p>
@@ -110,7 +110,7 @@
 							@for(curriculumtopic <- curriculumlesson.curriculumtopics)	{
 							<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
 								<dt>
-									<h4><span class="label label-warning">T</span>@curriculumtopic.text</h4>
+									<h6><span class="label label-warning">T</span>@curriculumtopic.text</h6>
 								</dt>
 								<!--  <dd>Topic Description</dd> -->
 

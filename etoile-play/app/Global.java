@@ -1252,6 +1252,28 @@ public class Global extends GlobalSettings {
 		
 			// CATEGORIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 			
+				// 1. Questions ++++++++++++++++++++++++++++++++++++++
+				Category questions = new Category();
+				questions.name = "Questions";
+				questions.description="The transversal questions of interdisciplinary integrative science.";
+				questions.keyword = "questions";
+				questions.save();
+				
+				// 2. Objects  ++++++++++++++++++++++++++++++++++++++
+				Category objects = new Category();
+				objects.name = "Objects";
+				objects.description="Questions related to specific objects and vertical domains of study.";
+				objects.keyword = "objects";
+				objects.save();
+				
+				// 3. Education, Training and Professional Practice ++++++++++++++++++++++++++++++++++++++
+				Category education = new Category();
+				education.name = "Education, Training and Professional Practice";
+				education.description="questions related to the practical problems of educating and reeducating large numbers of people in the new science, taking the science into applications in the private and public sectors, and understanding how the needs of global and local policy will direct and support the development of new science.e";
+				education.keyword = "education";
+				education.save();
+			
+			/*
 				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++
 			
 		    mathcat = new Category();
@@ -1291,7 +1313,7 @@ public class Global extends GlobalSettings {
 			comcat.keyword = "computer_science";
 			comcat.description="";
 			comcat.save();
-			
+			*/
 			
 			
 
@@ -1427,7 +1449,7 @@ public class Global extends GlobalSettings {
 	private void createCurriculumComputerScience(User user_rub, Question q) {
 				
 		/* */
-		
+		/*
 		// 5.1.1.3 Topic - Logical System
 		Curriculumtopic logicalSystemTopic= new Curriculumtopic();
 		logicalSystemTopic.keyword = "logical_system";
@@ -1552,7 +1574,7 @@ public class Global extends GlobalSettings {
 		comcat.curriculummodules.add(algomodule);
 		algomodule.save();
 		comcat.save();	
-		
+		*/
 	
 		
 		

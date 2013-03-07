@@ -1,5 +1,4 @@
-@(categories: List[models.curriculum.Category])
-@main("etoile"){
+@(categories: List[models.curriculum.Category]) @main("etoile"){
 
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
@@ -9,24 +8,22 @@
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span> </a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
-			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+			<a class="brand" href="/"><b><i>&eacute;</i>
+			</b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li><a href="/">Home</a>
+					<li><a href="/">Home</a></li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital
+							Campus</a>
 					</li>
-					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
 					</li>
-					<li><a href="/modules">Modules</a>
-					</li>
-<!-- 					  <li class="active"><a href="/curriculum">Curriculum</a></li>  -->
-					<li><a href="/news">News</a>
-					</li>
-					<li><a href="/about">About</a>
-					</li>
-					<li><a href="/contact">Contact</a>
-					</li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li class="active"><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<!--  
 				<div class="navbar-form pull-right">
@@ -34,8 +31,10 @@
 				</div>
 				-->
 				<form class="navbar-form pull-right">
-					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
-					@if(session.get("email")!=null) {<a href="/logout" role="button" class="btn btn-primary">Logout</a>}
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) {<a href="/logout" role="button"
+						class="btn btn-primary">Logout</a>}
 				</form>
 			</div>
 			<!--/.nav-collapse -->
@@ -46,94 +45,116 @@
 
 
 
-	<div class="container-fluid">
+<div class="container-fluid">
 	<div class="row-fluid">
 		<!-- Docs nav
     ================================================== -->
-		
-			<div class="span3  sidebar-nav">
-				<ul class="nav well nav-list affix">
-				<li class="nav-header">Curriculum</li>
-					 @for(category <- categories) {
-					<li><a href="#@category.keyword"><i class="icon-chevron-right"></i>@category.name</a></li>
 
-					}
-				</ul>
-			</div>
-			<div class="span9">
+		<div class="span3  sidebar-nav">
+			<ul class="nav well nav-list affix">
+				<li class="nav-header">Curriculum</li> @for(category <- categories) {
+				<li><a href="#@category.keyword">
+						<i class="icon-chevron-right"></i>@category.name</a>
+				</li> }
+			</ul>
+		</div>
+		<div class="span9">
 			<p>
-			</br>
-			The <b><i>&eacute;</i>toile curriculum</b> is based on the <i>Grand Challenges for Complex Systems Science</i> included 
-			in the <a href="http://www.complexssociety.eu/texts/roadmaps/CSS_Roadmap_2012-A.pdf" 
-			target="_blanc">ASSYST Roadmap for Complex Systems Science and its Applications 2012-2020</a>. 
-			These challenges are related to new challenges in ICT and formal aspects of complex systems science. 
-			 They are organised under three main categories: 
-			 <ol>
-				<li><b>Questions</b> - the transversal questions of interdisciplinary 
-			 integrative science;</li>
-				<li><b>Objects</b> - questions related to specific objects and vertical domains of study;</li>
-				<li><b>Education and Professional Practice</b> - questions related to the practical problems of educating and reeducating 
-			 large numbers of people in the new science, taking the science into applications in the private 
-			 and public sectors, and understanding how the needs of global and local policy will direct and support the
-			 development of new science.</li>
-			 </ol>
-			 Categories are composed by Topics, and those aggregate the Grand Challenges. The &eacute;toile modules relate 
-			 to the Grand Challenges, and these relations are represented by links in the curriculum.
-			 </p>
+				</br> The <b><i>&eacute;</i>toile curriculum</b> is based on the <i>Grand
+					Challenges for Complex Systems Science</i> included in the <a
+					href="http://www.complexssociety.eu/texts/roadmaps/CSS_Roadmap_2012-A.pdf"
+					target="_blanc">ASSYST Roadmap for Complex Systems Science and
+					its Applications 2012-2020</a>. These challenges are related to new
+				challenges in ICT and formal aspects of complex systems science.
+				They are organised under three main categories:
+			<ol>
+				<li><b>Questions</b> - the transversal questions of
+					interdisciplinary integrative science;</li>
+				<li><b>Objects</b> - questions related to specific objects and
+					vertical domains of study;</li>
+				<li><b>Education and Professional Practice</b> - questions
+					related to the practical problems of educating and reeducating
+					large numbers of people in the new science, taking the science into
+					applications in the private and public sectors, and understanding
+					how the needs of global and local policy will direct and support
+					the development of new science.</li>
+			</ol>
+			Categories are composed by Topics, and those aggregate the Grand
+			Challenges. The &eacute;toile modules relate to the Grand Challenges,
+			and these relations are represented by links in the curriculum.
+			</p>
 			<dl>
-			@for(category <- categories) {
-			<section id="@category.keyword">
+				@for(category <- categories) {
+				<section id="@category.keyword">
 				<dt>
-				<h1><span rel="tooltip" data-placement="top" title="This is a Category."class="label">C</span><a href="@routes.Application.categoryModules(category.id)">@category.name</a></h1>
-				
-		</dt>
-		
+					<h3>
+						<span rel="tooltip" data-placement="top"
+							title="This is a Category." class="label">Category</span><a
+							href="@routes.Application.categoryModules(category.id)">
+							@category.name</a>
+					</h3>
+				</dt>
 				<dd>
-				<p>@category.description</p>
-				<dl>
-				@for(curriculummodule <- category.curriculummodules) {
-				<section id="@category.keyword@curriculummodule.keyword">
-					<dt>
-					<h4><span class="label label-success">M</span>@curriculummodule.name</h4> 
-					</dt>
-					<dd>
-					<p>@curriculummodule.text</p>
+					<p>@category.description</p>
 					<dl>
-					@for(curriculumlesson <- curriculummodule.curriculumlessons) {
-					<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
+						@for(curriculummodule <- category.curriculummodules) {
+						<section id="@category.keyword@curriculummodule.keyword">
 						<dt>
-						<h5><span class="label label-info">L</span>@curriculumlesson.name</h5> 
+							<h4>
+								<span class="label label-success">Topic</span>
+								@curriculummodule.name
+							</h4>
 						</dt>
 						<dd>
-						<p>@curriculumlesson.text</p>
-						<dl>
-							@for(curriculumtopic <- curriculumlesson.curriculumtopics)	{
-							<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
+							<p>@curriculummodule.text</p>
+							<dl>
+								@for(curriculumlesson <- curriculummodule.curriculumlessons) {
+								<section
+									id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
 								<dt>
-									<h6><span class="label label-warning">T</span>@curriculumtopic.text</h6>
+									<h5>
+										<span class="label label-info">Challenge</span>
+										@curriculumlesson.name
+									</h5>
 								</dt>
-								<!--  <dd>Topic Description</dd> -->
-
-							}
-							</section>
-						</dl>
+								<dd>
+									<p>@curriculumlesson.text</p>
+									<dl>
+										@for(curriculumtopic <- curriculumlesson.curriculumtopics) {
+										<section
+											id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
+										<dt>
+											<h6>
+												<span class="label label-warning">n‹o estamos a usar
+													este</span> @curriculumtopic.text
+											</h6>
+										</dt>
+										<!--  <dd>Topic Description</dd> --> 
+										} 
+										</section>
+									</dl>
+								</dd>
+								} 
+							</dl>
 						</dd>
-				 
-				 	}
-				 	</section>
-				 	</dl></dd>
-				}
-				</section>
-				</dl></dd>
-				  
+						
+						</section>
+					</dl>
+				</dd>
+				} </section>
+			</dl>
+
+
 			</section>
-			}</dl>
+			}
+			</dd>
+			</dl>
 
 
 		</div>
-		</div>
-
 	</div>
-	
-	
+
+</div>
+
+
 }

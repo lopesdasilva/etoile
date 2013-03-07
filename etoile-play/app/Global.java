@@ -1259,19 +1259,133 @@ public class Global extends GlobalSettings {
 				questions.keyword = "questions";
 				questions.save();
 				
+				/*
+				 * Exemplo de tópico
+				// 1.1.2.3. Formal epistemology, experimentation, machine learning
+				Curriculumtopic formalEpistemologyTopic= new Curriculumtopic();
+				formalEpistemologyTopic.keyword = "formal_systems";
+				//formalSystemsTopic.name = "Formal System";
+				formalEpistemologyTopic.text = "Formal system:  notions of formal language, inference rule, premise, axiom and theorem.";
+				formalEpistemologyTopic.save();
+				*/
+				
+				// 1_1_1 Computer tools for exploration and formalization
+				Curriculumlesson lesson1_1_1 = new Curriculumlesson();
+				lesson1_1_1.keyword = "computer_tools";
+				lesson1_1_1.name = "Computer tools for exploration and formalization";
+				lesson1_1_1.text = "";
+				//lesson1_1_1.curriculumtopics.add(tp1);
+				//tp1.save();
+				lesson1_1_1.save();
+				
+				// 1_1_2 Computer assisted human interactions
+				Curriculumlesson lesson1_1_2 = new Curriculumlesson();
+				lesson1_1_2.keyword = "computer_human";
+				lesson1_1_2.name = "Computer assisted human interactions";
+				lesson1_1_2.text = "";
+				//lesson1_1_2.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_1_2.save();
+				
+				// 1.1 Formal epistemology, experimentation, machine learning
+				Curriculummodule module1_1 = new Curriculummodule();
+				module1_1.keyword = "epistemology";
+				module1_1.name = "Formal epistemology, experimentation, machine learning";
+				module1_1.text = "";
+				module1_1.curriculumlessons.add(lesson1_1_1);
+				lesson1_1_1.save();
+				module1_1.curriculumlessons.add(lesson1_1_2);
+				lesson1_1_2.save();
+				module1_1.save();
+				
+				// Adicionar um módulo a uma categoria
+				questions.curriculummodules.add(module1_1);
+				module1_1.save();
+				questions.save();
+				
+				/*
+				// 1_1_2 Computer assisted human interactions
+				Curriculumlesson lesson1_1_2 = new Curriculumlesson();
+				lesson1_1_2.keyword = "computer_human";
+				lesson1_1_2.name = "Computer assisted human interactions";
+				lesson1_1_2.text = "";
+				//lesson1_1_2.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_1_2.save();
+				*/
+				
+				// 1.2. Stochastic and multiscale dynamics, instabilities and robustness
+				Curriculummodule module1_2 = new Curriculummodule();
+				module1_2.keyword = "multiscale_dynamics";
+				module1_2.name = "Stochastic and multiscale dynamics, instabilities and robustness";
+				module1_2.text = "";
+				//module1_2.curriculumlessons.add(lesson1_2_1);
+				//lesson1_2_1.save();
+				//module1_2.curriculumlessons.add(lesson1_2_2);
+				//lesson1_2_2.save();
+				module1_2.save();
+
+				// Adicionar um módulo a uma categoria
+				questions.curriculummodules.add(module1_2);
+				module1_2.save();
+				questions.save();
+				
+				
+				// Ligar uma questão a um módulo
+				//q.subtopic = algomodule;
+				//q.save();
+				
+	
+				
+				
+				
 				// 2. Objects  ++++++++++++++++++++++++++++++++++++++
 				Category objects = new Category();
 				objects.name = "Objects";
-				objects.description="Questions related to specific objects and vertical domains of study.";
+				objects.description="Related to specific objects and vertical domains of study.";
 				objects.keyword = "objects";
 				objects.save();
 				
 				// 3. Education, Training and Professional Practice ++++++++++++++++++++++++++++++++++++++
 				Category education = new Category();
-				education.name = "Education, Training and Professional Practice";
-				education.description="questions related to the practical problems of educating and reeducating large numbers of people in the new science, taking the science into applications in the private and public sectors, and understanding how the needs of global and local policy will direct and support the development of new science.e";
+				education.name = "Education";
+				education.description="Education, training and professional practice in science.";
 				education.keyword = "education";
 				education.save();
+				
+				
+				
+				/*
+
+1.2. Stochastic and multiscale dynamics, instabilities and robustness
+Grand Challenges
+1. The cascade paradigm
+2. Random dynamical systems and stochastic bifurcations
+3. Phase transitions, emerging patterns and behavior
+4. Space-time scaling in physics and biology
+1.3. Collective behavior in homogeneous and heterogeneous systems
+Grand Challenges
+1 Collective dynamics of homogeneous and/or heterogeneous units
+2. Collective dynamics in heterogeneous environments
+3. Emergence of heterogeneity and differentiation processes, dynamical heterogeneity, information
+diffusion
+1.4. From optimal control to multiscale governance
+Grand challenges
+1. Extending the scope of optimal control
+2. Projecting complex dynamics into spaces of smaller dimension
+3. Projecting optimal control into high and multiscale dimension space
+4. Extending exploration / exploitation compromise to problem reformulation
+5. Co-adaptation of governance and stakeholders’ objectives
+5.1 The static dimension: governance in the context of heterogeneity of stakeholders,
+points of view and interests
+5.2 The dynamical dimension: evolution of stakeholders' objectives and viewpoints in the
+governance process
+1.5. Reconstruction of multiscale dynamics, emergence and immergence processes
+Grand challenges:
+1. Building common and pertinent references in the life sciences.
+2. Achieving coherence in the modeling of complex systems.
+				 * 
+				 */
 			
 			/*
 				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++

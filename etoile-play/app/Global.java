@@ -1256,7 +1256,7 @@ public class Global extends GlobalSettings {
 				Category questions = new Category();
 				questions.name = "Questions";
 				questions.description="The transversal questions of interdisciplinary integrative science.";
-				questions.keyword = "questions";
+				questions.keyword = "1_questions";
 				questions.save();
 				
 				/*
@@ -1271,7 +1271,7 @@ public class Global extends GlobalSettings {
 				
 				// 1_1_1 Computer tools for exploration and formalization
 				Curriculumlesson lesson1_1_1 = new Curriculumlesson();
-				lesson1_1_1.keyword = "computer_tools";
+				lesson1_1_1.keyword = "1_1_1_computer_tools";
 				lesson1_1_1.name = "Computer tools for exploration and formalization";
 				lesson1_1_1.text = "";
 				//lesson1_1_1.curriculumtopics.add(tp1);
@@ -1280,7 +1280,7 @@ public class Global extends GlobalSettings {
 				
 				// 1_1_2 Computer assisted human interactions
 				Curriculumlesson lesson1_1_2 = new Curriculumlesson();
-				lesson1_1_2.keyword = "computer_human";
+				lesson1_1_2.keyword = "1_1_2_computer_human";
 				lesson1_1_2.name = "Computer assisted human interactions";
 				lesson1_1_2.text = "";
 				//lesson1_1_2.curriculumtopics.add(tpx);
@@ -1289,7 +1289,7 @@ public class Global extends GlobalSettings {
 				
 				// 1.1 Formal epistemology, experimentation, machine learning
 				Curriculummodule module1_1 = new Curriculummodule();
-				module1_1.keyword = "epistemology";
+				module1_1.keyword = "1.1_epistemology";
 				module1_1.name = "Formal epistemology, experimentation, machine learning";
 				module1_1.text = "";
 				module1_1.curriculumlessons.add(lesson1_1_1);
@@ -1299,14 +1299,14 @@ public class Global extends GlobalSettings {
 				module1_1.save();
 				
 				// Adicionar um módulo a uma categoria
-				questions.curriculummodules.add(module1_1);
-				module1_1.save();
-				questions.save();
+				//questions.curriculummodules.add(module1_1);
+				//module1_1.save();
+				//questions.save();
 				
 				
 				// 1_2_1 The cascade paradigm
 				Curriculumlesson lesson1_2_1 = new Curriculumlesson();
-				lesson1_2_1.keyword = "cascade_paradigm";
+				lesson1_2_1.keyword = "1_2_1_cascade_paradigm";
 				lesson1_2_1.name = "The cascade paradigm";
 				lesson1_2_1.text = "";
 				//lesson1_2_1.curriculumtopics.add(tpx);
@@ -1315,7 +1315,7 @@ public class Global extends GlobalSettings {
 				
 				// 1_2_2 Random dynamical systems and stochastic bifurcations
 				Curriculumlesson lesson1_2_2 = new Curriculumlesson();
-				lesson1_2_2.keyword = "random_dynamical_systems";
+				lesson1_2_2.keyword = "1_2_2_random_dynamical_systems";
 				lesson1_2_2.name = "Random dynamical systems and stochastic bifurcations";
 				lesson1_2_2.text = "";
 				//lesson1_2_2.curriculumtopics.add(tpx);
@@ -1324,7 +1324,7 @@ public class Global extends GlobalSettings {
 				
 				// 1_2_3 Phase transitions, emerging patterns and behavior
 				Curriculumlesson lesson1_2_3 = new Curriculumlesson();
-				lesson1_2_3.keyword = "phase_transitions";
+				lesson1_2_3.keyword = "1_2_3_phase_transitions";
 				lesson1_2_3.name = "Phase transitions, emerging patterns and behavior";
 				lesson1_2_3.text = "";
 				//lesson1_2_3.curriculumtopics.add(tpx);
@@ -1333,7 +1333,7 @@ public class Global extends GlobalSettings {
 							
 				// 1_2_4 Space-time scaling in physics and biology
 				Curriculumlesson lesson1_2_4 = new Curriculumlesson();
-				lesson1_2_4.keyword = "space-time_scaling";
+				lesson1_2_4.keyword = "1_2_4_space-time_scaling";
 				lesson1_2_4.name = "Space-time scaling in physics and biology";
 				lesson1_2_4.text = "";
 				//lesson1_2_3.curriculumtopics.add(tpx);
@@ -1341,9 +1341,9 @@ public class Global extends GlobalSettings {
 				lesson1_2_4.save();
 				
 				
-				// 1.2. Stochastic and multiscale dynamics, instabilities and robustness
+				// 1_2 Stochastic and multiscale dynamics, instabilities and robustness
 				Curriculummodule module1_2 = new Curriculummodule();
-				module1_2.keyword = "multiscale_dynamics";
+				module1_2.keyword = "1_2_multiscale_dynamics";
 				module1_2.name = "Stochastic and multiscale dynamics, instabilities and robustness";
 				module1_2.text = "";
 				module1_2.curriculumlessons.add(lesson1_2_1);
@@ -1357,18 +1357,148 @@ public class Global extends GlobalSettings {
 				module1_2.save();
 
 				// Adicionar um módulo a uma categoria
+				//questions.curriculummodules.add(module1_2);
+				//module1_2.save();
+				//questions.save();
+
+				
+				// 1_3_1 Collective dynamics of homogeneous and/or heterogeneous units
+				Curriculumlesson lesson1_3_1 = new Curriculumlesson();
+				lesson1_3_1.keyword = "1_3_1_collective_dynamics";
+				lesson1_3_1.name = "Collective dynamics of homogeneous and/or heterogeneous units";
+				lesson1_3_1.text = "";
+				//lesson1_3_1.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_3_1.save();
+				
+				// 1_3_2 Collective dynamics in heterogeneous environments
+				Curriculumlesson lesson1_3_2 = new Curriculumlesson();
+				lesson1_3_2.keyword = "1_3_2_collective_dynamics_het_env";
+				lesson1_3_2.name = "Collective dynamics in heterogeneous environments";
+				lesson1_3_2.text = "";
+				//lesson1_3_2.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_3_2.save();
+				
+				// 1_3_3 Emergence of heterogeneity and differentiation processes, dynamical heterogeneity, information diffusion
+				Curriculumlesson lesson1_3_3 = new Curriculumlesson();
+				lesson1_3_3.keyword = "1_3_3_emergence_heterogeneity";
+				lesson1_3_3.name = "Emergence of heterogeneity and differentiation processes, dynamical heterogeneity, information diffusion";
+				lesson1_3_3.text = "";
+				//lesson1_3_3.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_3_3.save();
+				
+				// 1_3 Collective behavior in homogeneous and heterogeneous systems 
+				Curriculummodule module1_3 = new Curriculummodule();
+				module1_3.keyword = "1_3_collective_behavior";
+				module1_3.name = "Col1_3lective behavior in homogeneous and heterogeneous systems";
+				module1_3.text = "";
+				module1_3.curriculumlessons.add(lesson1_3_1);
+				lesson1_3_1.save();
+				module1_3.curriculumlessons.add(lesson1_3_2);
+				lesson1_3_2.save();
+				module1_3.curriculumlessons.add(lesson1_3_3);
+				lesson1_3_3.save();
+				module1_3.save();
+				
+				// Adicionar um módulo a uma categoria
+				//questions.curriculummodules.add(module1_3);
+				//module1_3.save();
+				//questions.save();
+				
+				// 1_4_1 Extending the scope of optimal control
+				Curriculumlesson lesson1_4_1 = new Curriculumlesson();
+				lesson1_4_1.keyword = "1_4_1_optimal_control";
+				lesson1_4_1.name = "Extending the scope of optimal control";
+				lesson1_4_1.text = "";
+				//lesson1_4_1.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_4_1.save();
+				
+				// 1_4_2 Projecting complex dynamics into spaces of smaller dimension
+				Curriculumlesson lesson1_4_2 = new Curriculumlesson();
+				lesson1_4_2.keyword = "1_4_2_complex_dynamics";
+				lesson1_4_2.name = "Projecting complex dynamics into spaces of smaller dimension";
+				lesson1_4_2.text = "";
+				//lesson1_4_2.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_4_2.save();
+				
+				// 1_4_3 Projecting optimal control into high and multiscale dimension space
+				Curriculumlesson lesson1_4_3 = new Curriculumlesson();
+				lesson1_4_3.keyword = "1_4_3_optimal_control";
+				lesson1_4_3.name = "Projecting optimal control into high and multiscale dimension space";
+				lesson1_4_3.text = "";
+				//lesson1_4_3.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_4_3.save();
+				
+				// 1_4_4 Extending exploration / exploitation compromise to problem reformulation
+				Curriculumlesson lesson1_4_4 = new Curriculumlesson();
+				lesson1_4_4.keyword = "1_4_4_exploration_exploitation";
+				lesson1_4_4.name = "Extending exploration / exploitation compromise to problem reformulation";
+				lesson1_4_4.text = "";
+				//lesson1_4_4.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_4_4.save();
+				
+				// 1_4_5 Co-adaptation of governance and stakeholders’ objectives
+				Curriculumlesson lesson1_4_5 = new Curriculumlesson();
+				lesson1_4_5.keyword = "1_4_5_co-adaptation_governance";
+				lesson1_4_5.name = "Co-adaptation of governance and stakeholders’ objectives";
+				lesson1_4_5.text = "";
+				//lesson1_4_5.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_4_5.save();
+				
+				// 1_4 From optimal control to multiscale governance 
+				Curriculummodule module1_4 = new Curriculummodule();
+				module1_4.keyword = "from_optimal_control_to_multiscale_governance";
+				module1_4.name = "From optimal control to multiscale governance";
+				module1_4.text = "";
+				module1_4.curriculumlessons.add(lesson1_4_1);
+				lesson1_4_1.save();
+				module1_4.curriculumlessons.add(lesson1_4_2);
+				lesson1_4_2.save();
+				module1_4.curriculumlessons.add(lesson1_4_3);
+				lesson1_4_3.save();
+				module1_4.curriculumlessons.add(lesson1_4_4);
+				lesson1_4_4.save();
+				module1_4.curriculumlessons.add(lesson1_4_5);
+				lesson1_4_5.save();
+				module1_4.save();
+				
+				
+				
+				// Adicionar os módulos à categoria "Questions"
+				questions.curriculummodules.add(module1_1);
+				module1_1.save();
 				questions.curriculummodules.add(module1_2);
 				module1_2.save();
+				questions.curriculummodules.add(module1_3);
+				module1_3.save();
+				questions.curriculummodules.add(module1_4);
+				module1_4.save();
 				questions.save();
-				
-				
-				// Ligar uma questão a um módulo
-				//q.subtopic = algomodule;
-				//q.save();
-				
-	
-				
-				
+						
+/*
+
+
+
+
+
+5.1 The static dimension: governance in the context of heterogeneity of stakeholders,
+points of view and interests
+5.2 The dynamical dimension: evolution of stakeholders' objectives and viewpoints in the
+governance process
+
+1.5. Reconstruction of multiscale dynamics, emergence and immergence processes
+Grand challenges:
+1. Building common and pertinent references in the life sciences.
+2. Achieving coherence in the modeling of complex systems.
+				 * 
+				 */
 				
 				// 2. Objects  ++++++++++++++++++++++++++++++++++++++
 				Category objects = new Category();
@@ -1384,36 +1514,9 @@ public class Global extends GlobalSettings {
 				education.keyword = "education";
 				education.save();
 				
-				
-				
-				/*
-
-
-
-
-1.3. Collective behavior in homogeneous and heterogeneous systems
-Grand Challenges
-1 Collective dynamics of homogeneous and/or heterogeneous units
-2. Collective dynamics in heterogeneous environments
-3. Emergence of heterogeneity and differentiation processes, dynamical heterogeneity, information
-diffusion
-1.4. From optimal control to multiscale governance
-Grand challenges
-1. Extending the scope of optimal control
-2. Projecting complex dynamics into spaces of smaller dimension
-3. Projecting optimal control into high and multiscale dimension space
-4. Extending exploration / exploitation compromise to problem reformulation
-5. Co-adaptation of governance and stakeholders’ objectives
-5.1 The static dimension: governance in the context of heterogeneity of stakeholders,
-points of view and interests
-5.2 The dynamical dimension: evolution of stakeholders' objectives and viewpoints in the
-governance process
-1.5. Reconstruction of multiscale dynamics, emergence and immergence processes
-Grand challenges:
-1. Building common and pertinent references in the life sciences.
-2. Achieving coherence in the modeling of complex systems.
-				 * 
-				 */
+				// Ligar uma questão a um módulo
+				//q.subtopic = algomodule;
+				//q.save();
 			
 			/*
 				// 1. MATHEMATICS ++++++++++++++++++++++++++++++++++++++

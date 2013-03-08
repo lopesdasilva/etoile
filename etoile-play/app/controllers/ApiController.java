@@ -12,6 +12,8 @@ import org.codehaus.jackson.node.ObjectNode;
 
 import flexjson.JSONSerializer;
 
+import models.Student;
+import models.User;
 import models.module.Content;
 import models.module.Module;
 import play.libs.Json;
@@ -56,8 +58,15 @@ public class ApiController extends Controller{
 
 	
 	return ok(postDetailsSerializer.serialize(obj));
-	
-	
-		
+
 	}
+	
+	public static Result getMyProfile(String acronym){
+		Student obj = Student.findByAcronym(acronym);
+		JSONSerializer postDetailsSerializer = new JSONSerializer();
+
+		
+		return ok(postDetailsSerializer.serialize(obj));
+	}
+	
 }

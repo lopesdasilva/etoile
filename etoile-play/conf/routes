@@ -167,6 +167,7 @@ POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTest
 
 #API
 GET /api/modules	controllers.ApiController.getModules()
+GET /api/myprofile/:acronym	controllers.ApiController.getMyProfile(acronym: String)
 
 
 

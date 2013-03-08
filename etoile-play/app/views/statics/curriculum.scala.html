@@ -87,12 +87,10 @@
 				@for(category <- categories) {
 				<section id="@category.keyword">
 				<dt>
-					<h3>
+					<h2>
 						<span rel="tooltip" data-placement="top"
-							title="This is a Category." class="label">Category</span><a
-							href="@routes.Application.categoryModules(category.id)">
-							@category.name</a>
-					</h3>
+							title="This is a Category." class="label">Category</span><a href="@routes.Application.categoryModules(category.id)">   @category.name</a>
+					</h2>
 				</dt>
 				<dd>
 					<p>@category.description</p>
@@ -101,21 +99,18 @@
 						<section id="@category.keyword@curriculummodule.keyword">
 						<dt>
 							<h4>
-								<span class="label label-success">Topic</span>
-								@curriculummodule.name
+								<span class="label label-success">Topic</span>   @curriculummodule.name
 							</h4>
 						</dt>
 						<dd>
 							<p>@curriculummodule.text</p>
 							<dl>
 								@for(curriculumlesson <- curriculummodule.curriculumlessons) {
-								<section
-									id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
+								<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
 								<dt>
-									<h5>
-										<span class="label label-info">Challenge</span>
-										@curriculumlesson.name
-									</h5>
+									<!--  <h4> -->
+										<span class="label label-info">Challenge</span>   @curriculumlesson.name
+									<!-- </h4> -->
 								</dt>
 								<dd>
 									<p>@curriculumlesson.text</p>
@@ -136,7 +131,7 @@
 								</dd>
 								} 
 							</dl>
-						</dd>
+						  </dd>
 						
 						</section>
 					</dl>

@@ -1303,26 +1303,57 @@ public class Global extends GlobalSettings {
 				module1_1.save();
 				questions.save();
 				
-				/*
-				// 1_1_2 Computer assisted human interactions
-				Curriculumlesson lesson1_1_2 = new Curriculumlesson();
-				lesson1_1_2.keyword = "computer_human";
-				lesson1_1_2.name = "Computer assisted human interactions";
-				lesson1_1_2.text = "";
-				//lesson1_1_2.curriculumtopics.add(tpx);
+				
+				// 1_2_1 The cascade paradigm
+				Curriculumlesson lesson1_2_1 = new Curriculumlesson();
+				lesson1_2_1.keyword = "cascade_paradigm";
+				lesson1_2_1.name = "The cascade paradigm";
+				lesson1_2_1.text = "";
+				//lesson1_2_1.curriculumtopics.add(tpx);
 				//tpx.save();
-				lesson1_1_2.save();
-				*/
+				lesson1_2_1.save();
+				
+				// 1_2_2 Random dynamical systems and stochastic bifurcations
+				Curriculumlesson lesson1_2_2 = new Curriculumlesson();
+				lesson1_2_2.keyword = "random_dynamical_systems";
+				lesson1_2_2.name = "Random dynamical systems and stochastic bifurcations";
+				lesson1_2_2.text = "";
+				//lesson1_2_2.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_2_2.save();
+				
+				// 1_2_3 Phase transitions, emerging patterns and behavior
+				Curriculumlesson lesson1_2_3 = new Curriculumlesson();
+				lesson1_2_3.keyword = "phase_transitions";
+				lesson1_2_3.name = "Phase transitions, emerging patterns and behavior";
+				lesson1_2_3.text = "";
+				//lesson1_2_3.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_2_3.save();
+							
+				// 1_2_4 Space-time scaling in physics and biology
+				Curriculumlesson lesson1_2_4 = new Curriculumlesson();
+				lesson1_2_4.keyword = "space-time_scaling";
+				lesson1_2_4.name = "Space-time scaling in physics and biology";
+				lesson1_2_4.text = "";
+				//lesson1_2_3.curriculumtopics.add(tpx);
+				//tpx.save();
+				lesson1_2_4.save();
+				
 				
 				// 1.2. Stochastic and multiscale dynamics, instabilities and robustness
 				Curriculummodule module1_2 = new Curriculummodule();
 				module1_2.keyword = "multiscale_dynamics";
 				module1_2.name = "Stochastic and multiscale dynamics, instabilities and robustness";
 				module1_2.text = "";
-				//module1_2.curriculumlessons.add(lesson1_2_1);
-				//lesson1_2_1.save();
-				//module1_2.curriculumlessons.add(lesson1_2_2);
-				//lesson1_2_2.save();
+				module1_2.curriculumlessons.add(lesson1_2_1);
+				lesson1_2_1.save();
+				module1_2.curriculumlessons.add(lesson1_2_2);
+				lesson1_2_2.save();
+				module1_2.curriculumlessons.add(lesson1_2_3);
+				lesson1_2_3.save();
+				module1_2.curriculumlessons.add(lesson1_2_4);
+				lesson1_2_4.save();
 				module1_2.save();
 
 				// Adicionar um módulo a uma categoria
@@ -1357,12 +1388,9 @@ public class Global extends GlobalSettings {
 				
 				/*
 
-1.2. Stochastic and multiscale dynamics, instabilities and robustness
-Grand Challenges
-1. The cascade paradigm
-2. Random dynamical systems and stochastic bifurcations
-3. Phase transitions, emerging patterns and behavior
-4. Space-time scaling in physics and biology
+
+
+
 1.3. Collective behavior in homogeneous and heterogeneous systems
 Grand Challenges
 1 Collective dynamics of homogeneous and/or heterogeneous units

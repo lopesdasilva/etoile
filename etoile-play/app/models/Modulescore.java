@@ -31,5 +31,13 @@ public class Modulescore extends Model{
 	@ManyToOne
 	public User user;
 	
+	public static Model.Finder<Long,Modulescore> find = new Model.Finder(Long.class, Modulescore.class);
+	
+	public static Modulescore findByUserAndModule(String email, String module_acronym) {
+		  User user =  User.findByEmail(email);
+		  Module module = Module.findByAcronym(module_acronym);
+		return find.where().eq("module", module).eq("user",user).findUnique();
+	}
+	
 	
 }

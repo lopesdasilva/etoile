@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import models.Modulescore;
 import models.User;
 import models.curriculum.Category;
 import models.curriculum.Curriculummodule;
@@ -1710,6 +1711,63 @@ public class ProfessorTestController extends Controller {
 		usertest.reviewd = true;
 		usertest.save();
 		System.out.println("Review Test submitted with: " + usertest.reputationAsAstudent);
+		
+		//Processamento de reputações...
+		//Processamento das reputações dos modulos
+		User student = usertest.user;
+
+	Modulescore modulescore = Modulescore.findByUserAndModule(student.email, module_acronym);
+//			Double new_modulescore =  (modulescore.score*lesson.tests.size() + usertest.reputationAsAstudent)/lesson.tests.size();
+//			int new_modulescore_int = new_modulescore.intValue(); 
+//			System.out.println("New Student Module Reputation: " + new_modulescore_int);
+//			modulescore.score = new_modulescore_int;
+//			modulescore.save();
+
+			
+			//test
+			
+			int soma = 0;
+			int count = 0;
+
+				for(Lesson l: module.lessons){
+					for(Test t: l.tests){
+						if(t.published){
+						count = count +1;
+						Usertest usertest_temp = Usertest.findByUserAndTest(student.email, t.id);
+						if(usertest_temp!=null && usertest_temp.reviewd){
+						soma = (int) (soma + usertest_temp.reputationAsAstudent);
+						}
+						}
+					}
+			}
+			
+			
+			Double average_module = (double) (soma/count);
+			int modulescore_new_score = average_module.intValue();
+			modulescore.score = modulescore_new_score;
+			modulescore.save();
+			System.out.println("SOMA= " + soma);
+			System.out.println("COUNT= " + count);
+			System.out.println("MODULEEEE CALCULOUS: " + modulescore_new_score);
+			
+		
+			
+		//Processamento da Reputação geral do aluno
+			int modulescores_sum = 0;
+			for(Module m: student.modules){
+				Modulescore mscore = Modulescore.findByUserAndModule(student.email, m.acronym);
+				modulescores_sum = modulescores_sum + mscore.score;
+			}
+			
+			Double new_globalreputation = (double) (modulescores_sum/student.modules.size());
+			long new_globalreputation_int = new_globalreputation.longValue();
+			System.out.println("New Student Global Reputation: " + new_globalreputation_int);
+			
+			student.globalReputation = new_globalreputation_int;
+			student.save();
+
+			
+		//Fim do processamento
 		return redirect(routes.ProfessorTestController.test(module_acronym, lesson_acronym, test_id));
 		}
 		

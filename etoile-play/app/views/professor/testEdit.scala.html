@@ -172,8 +172,12 @@ models.test.Test) @main("etoile"){
 
 
 	</div>
-
-
+@if(flash.contains("error")) {
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">X</button>
+				<strong>Error!</strong> @flash.get("error")
+			</div>
+}
 	<span class="span12">
 		<div class="row">
 			<h3>Statistics</h3>

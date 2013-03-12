@@ -1224,8 +1224,12 @@ public class ProfessorTestController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
+			if(test.groups.size()!=0){
 			test.published=true;
 			test.save();
+			} else{
+				 flash("error", "You can't publish a test without groups and questions.");
+			}
 			
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}

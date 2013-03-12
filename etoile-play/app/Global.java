@@ -1511,13 +1511,13 @@ public class Global extends GlobalSettings {
 				// 1_5 Reconstruction of multiscale dynamics, emergence and immergence processes
 				Curriculummodule module1_5 = new Curriculummodule();
 				module1_5.keyword = "1_5_from_optimal_control_to_multiscale_governance";
-				module1_5.name = "From optimal control to multiscale governance";
+				module1_5.name = "1.5 From optimal control to multiscale governance";
 				module1_5.text = "";
 				module1_5.curriculumlessons.add(lesson1_5_1);
 				lesson1_5_1.save();
 				module1_5.curriculumlessons.add(lesson1_5_2);
 				lesson1_5_2.save();
-				module1_4.save();
+				module1_5.save();
 				
 				
 				// 1.6.1 Using artificial complex systems for the understanding and regulation of natural complex systems
@@ -1554,6 +1554,145 @@ public class Global extends GlobalSettings {
 				lesson1_6_3.save();
 				module1_6.save();
 				
+				// 1.7.1 Coordinating huge open-access databases
+				Curriculumlesson lesson1_7_1 = new Curriculumlesson();
+				lesson1_7_1.keyword = "1_7_1_open-access_databases";
+				lesson1_7_1.name = "1.7.1 Coordinating huge open-access databases";
+				lesson1_7_1.text = "";
+				lesson1_7_1.save();
+				
+				// 1.7.2 Data security and privacy – understanding reputation and trust dynamics 
+				Curriculumlesson lesson1_7_2 = new Curriculumlesson();
+				lesson1_7_2.keyword = "1_7_2_data_security_privacy";
+				lesson1_7_2.name = "1.7.2 Data security and privacy – understanding reputation and trust dynamics";
+				lesson1_7_2.text = "";
+				lesson1_7_2.save();
+				
+				// 1.7.3 The Ultimate Google: new methods of search and data synthesis 
+				Curriculumlesson lesson1_7_3 = new Curriculumlesson();
+				lesson1_7_3.keyword = "1_7_3_ultimate_google";
+				lesson1_7_3.name = "1.7.3 The Ultimate Google: new methods of search and data synthesis";
+				lesson1_7_3.text = "";
+				lesson1_7_3.save();
+				
+				// 1.7.4 New computational architectures for massively parallel and distributed computation 
+				Curriculumlesson lesson1_7_4 = new Curriculumlesson();
+				lesson1_7_4.keyword = "1_7_4_parallel_distributed_computation";
+				lesson1_7_4.name = "1.7.4 New computational architectures for massively parallel and distributed computation";
+				lesson1_7_4.text = "";
+				lesson1_7_4.save();
+				
+				// 1.7.5 Self-configuring self-repairing ICT systems 
+				Curriculumlesson lesson1_7_5 = new Curriculumlesson();
+				lesson1_7_5.keyword = "1_7_5_self-repairing_ict";
+				lesson1_7_5.name = "1.7.5 Self-configuring self-repairing ICT systems";
+				lesson1_7_5.text = "";
+				lesson1_7_5.save();
+				
+				// 1.7.6 The dynamics of computation – sequential system dynamics 
+				Curriculumlesson lesson1_7_6 = new Curriculumlesson();
+				lesson1_7_6.keyword = "1_7_6_sequential_system_dynamics";
+				lesson1_7_6.name = "1.7.6 The dynamics of computation – sequential system dynamics";
+				lesson1_7_6.text = "";
+				lesson1_7_6.save();
+				
+				// 1.7 Petascale Computing
+				Curriculummodule module1_7 = new Curriculummodule();
+				module1_7.keyword = "1_7_petascale_computing";
+				module1_7.name = "1.7 Petascale Computing";
+				module1_7.text = "";
+				module1_7.curriculumlessons.add(lesson1_7_1);
+				lesson1_7_1.save();
+				module1_7.curriculumlessons.add(lesson1_7_2);
+				lesson1_7_2.save();
+				module1_7.curriculumlessons.add(lesson1_7_3);
+				lesson1_7_3.save();
+				module1_7.curriculumlessons.add(lesson1_7_4);
+				lesson1_7_4.save();
+				module1_7.curriculumlessons.add(lesson1_7_5);
+				lesson1_7_5.save();
+				module1_7.curriculumlessons.add(lesson1_7_6);
+				lesson1_7_6.save();
+				module1_7.save();
+				
+				// 1.8.1 New statistical theories for predication, experimentation and testing in complex systems
+				Curriculumlesson lesson1_8_1 = new Curriculumlesson();
+				lesson1_8_1.keyword = "1_8_1_new_statistical_theories";
+				lesson1_8_1.name = "1.8.1 New statistical theories for predication, experimentation and testing in complex systems";
+				lesson1_8_1.text = "";
+				lesson1_8_1.save();
+				
+				// 1.8.2 New mathematics for representing huge heterogeneous multilevel dynamics
+				Curriculumlesson lesson1_8_2 = new Curriculumlesson();
+				lesson1_8_2.keyword = "1_8_2_heterogeneous_multilevel_dynamics";
+				lesson1_8_2.name = "1.8.2 New mathematics for representing huge heterogeneous multilevel dynamics";
+				lesson1_8_2.text = "";
+				lesson1_8_2.save();
+				
+				// 1.8.3 From phenomenology to scientific theory: from correlation to entailment
+				Curriculumlesson lesson1_8_3 = new Curriculumlesson();
+				lesson1_8_3.keyword = "1_8_3_from_phenomenology_to_scientific_theory";
+				lesson1_8_3.name = "1.8.3 From phenomenology to scientific theory: from correlation to entailment";
+				lesson1_8_3.text = "";
+				lesson1_8_3.save();
+				
+				// 1.8.4 Logics and metalogics for integrative science
+				Curriculumlesson lesson1_8_4 = new Curriculumlesson();
+				lesson1_8_4.keyword = "1_8_4_logics_and_metalogics";
+				lesson1_8_4.name = "1.8.4 Logics and metalogics for integrative science";
+				lesson1_8_4.text = "";
+				lesson1_8_4.save();
+				
+				// 1.8.5 Creating demonstrators of complex systems science and its applications
+				Curriculumlesson lesson1_8_5 = new Curriculumlesson();
+				lesson1_8_5.keyword = "1_8_5_demonstrators";
+				lesson1_8_5.name = "1.8.5 Creating demonstrators of complex systems science and its applications";
+				lesson1_8_5.text = "";
+				lesson1_8_5.save();
+				
+				// 1.8.6 Devising new methods for rapid synthesis of heterogeneous domain-based science
+				Curriculumlesson lesson1_8_6 = new Curriculumlesson();
+				lesson1_8_6.keyword = "1_8_6_synthesis_of_heterogeneous_science";
+				lesson1_8_6.name = "1.8.6 Devising new methods for rapid synthesis of heterogeneous domain-based science";
+				lesson1_8_6.text = "";
+				lesson1_8_6.save();
+				
+				// 1.8.7 Devising new methods for information aggregation and processing, and social learning
+				Curriculumlesson lesson1_8_7 = new Curriculumlesson();
+				lesson1_8_7.keyword = "1_8_7_information_aggregation";
+				lesson1_8_7.name = "1.8.7 Devising new methods for information aggregation and processing, and social learning";
+				lesson1_8_7.text = "";
+				lesson1_8_7.save();
+				
+				// 1.8.8 New theories of risk and dynamical models of extreme events
+				Curriculumlesson lesson1_8_8 = new Curriculumlesson();
+				lesson1_8_8.keyword = "1_8_8_models_of_extreme_events";
+				lesson1_8_8.name = "1.8.8 New theories of risk and dynamical models of extreme events";
+				lesson1_8_8.text = "";
+				lesson1_8_8.save();
+				
+				// 1.8 Formal Aspects of Complex Systems Science
+				Curriculummodule module1_8 = new Curriculummodule();
+				module1_8.keyword = "1_8_formal_aspects";
+				module1_8.name = "1.8 Formal Aspects of Complex Systems Science";
+				module1_8.text = "";
+				module1_8.curriculumlessons.add(lesson1_8_1);
+				lesson1_8_1.save();
+				module1_8.curriculumlessons.add(lesson1_8_2);
+				lesson1_8_2.save();
+				module1_8.curriculumlessons.add(lesson1_8_3);
+				lesson1_8_3.save();
+				module1_8.curriculumlessons.add(lesson1_8_4);
+				lesson1_8_4.save();
+				module1_8.curriculumlessons.add(lesson1_8_5);
+				lesson1_8_5.save();
+				module1_8.curriculumlessons.add(lesson1_8_6);
+				lesson1_8_6.save();
+				module1_8.curriculumlessons.add(lesson1_8_7);
+				lesson1_8_7.save();
+				module1_8.curriculumlessons.add(lesson1_8_8);
+				lesson1_8_8.save();
+				module1_8.save();
 				
 				 				
 				// FIM DE QUESTIONS
@@ -1570,30 +1709,12 @@ public class Global extends GlobalSettings {
 				module1_5.save();
 				questions.curriculummodules.add(module1_6);
 				module1_6.save();
+				questions.curriculummodules.add(module1_7);
+				module1_7.save();
+				questions.curriculummodules.add(module1_8);
+				module1_8.save();
 				questions.save();
-						
-/*
 
-1.7 Petascale Computing
-Grand Challenges:
-1. Coordinating huge open-access databases.
-2. Data security and privacy – understanding reputation and trust dynamics.
-3. The Ultimate Google: new methods of search and data synthesis.
-4. New computational architectures for massively parallel and distributed computation
-5. Self-configuring self-repairing ICT systems
-6. The dynamics of computation – sequential system dynamics
-
-1.8 Formal Aspects of Complex Systems Science
-Grand Challenges
-1. New statistical theories for predication, experimentation and testing in complex systems
-2. New mathematics for representing huge heterogeneous multilevel dynamics
-3. From phenomenology to scientific theory: from correlation to entailment
-4. Logics and metalogics for integrative science
-5. Creating demonstrators of complex systems science and its applications
-6. Devising new methods for rapid synthesis of heterogeneous domain-based science
-7. Devise new methods for information aggregation and processing, and social learning.
-8. New theories of risk and dynamical models of extreme events
-*/
 				
 				
 				// 2. Objects  ++++++++++++++++++++++++++++++++++++++

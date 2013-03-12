@@ -29,6 +29,8 @@ public class Register extends Controller {
 		public String firstName;
 		public String lastname;
 		
+		public String gender;
+		
 		public String recaptcha_challenge_field;
 		public String recaptcha_response_field;
 		
@@ -118,6 +120,11 @@ public class Register extends Controller {
 	        	user.account_type = 0;
 	        	user.studentProfile = student;
 	        	user.studentProfile.acronym=form.get().inputUsername;
+	        	if(form.get().gender.equals("male")){
+	        		user.studentProfile.male = true;
+	        	}else{
+	        		user.studentProfile.male = false;
+	        	}
 	        	user.studentProfile.imageURL = "http://forum.must.ac.ug/sites/default/files/default-avatar.png";
 //	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  

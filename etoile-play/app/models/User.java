@@ -23,6 +23,7 @@ import play.data.validation.*;
 
 
 import controllers.extra.sha1;
+import flexjson.JSON;
 
 /**
  * User entity managed by Ebean
@@ -137,7 +138,18 @@ public class User extends Model {
     	System.out.println("User loggedin: "+email);
         return find.where()
             .eq("email", email)
-            .eq("password",sha1.parseSHA1Password(  password))
+            .eq("password",sha1.parseSHA1Password(password))
+            .findUnique();
+    }
+    
+    /**
+     * Authenticate a User.
+     */
+    public static User authenticateSHA1(String email, String password) {
+    	System.out.println("User loggedin: "+email);
+        return find.where()
+            .eq("email", email)
+            .eq("password",password)
             .findUnique();
     }
     
@@ -176,6 +188,19 @@ public class User extends Model {
     		}
     	}
     	return false;
+    	
+    	
+    }
+    
+    @JSON(include=true)
+    public List<Usertest> getOngoingTests(){
+    	List<Usertest> onGoing= new LinkedList<Usertest>();
+    	for(Usertest usertest: tests){
+    		if(usertest.inmodule){
+    			onGoing.add(usertest);
+    		}
+    	}
+    	return onGoing;
     }
 
 }

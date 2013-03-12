@@ -168,7 +168,8 @@ POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTest
 #API
 GET /api/modules	controllers.ApiController.getModules()
 GET /api/myprofile/:acronym	controllers.ApiController.getMyProfile(acronym: String)
-
+GET /api/dashboard	controllers.ApiController.getDashboard()
+POST /api/authenticate controllers.ApiController.authenticate()
 
 
 # Map static resources from the /public folder to the /assets URL path

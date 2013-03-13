@@ -1720,8 +1720,32 @@ public class Global extends GlobalSettings {
 				// 2. Objects  ++++++++++++++++++++++++++++++++++++++
 				Category objects = new Category();
 				objects.name = "Objects";
-				objects.description="Related to specific objects and vertical domains of study.";
-				objects.keyword = "objects";
+				objects.description="2. Related to specific objects and vertical domains of study.";
+				objects.keyword = "2_objects";
+				objects.save();
+				
+				/*
+				// 2.X.X AAA
+				Curriculumlesson lesson2_X_X = new Curriculumlesson();
+				lesson2_X_X.keyword = "2_X_X_AAA";
+				lesson2_X_X.name = "2.X.X AAA";
+				lesson2_X_X.text = "";
+				lesson2_X_X.save();
+				
+				// 2.X AAA
+				Curriculummodule module2_X = new Curriculummodule();
+				module1_6.keyword = "1_6_designing_artificial_complex_systems";
+				module1_6.name = "1.6 Designing artificial complex systems";
+				module1_6.text = "";
+				module1_6.curriculumlessons.add(lesson1_6_1);
+				lesson1_6_1.save();
+				module1_6.save();
+				*/
+				
+				// FIM DE OBJECTS
+				// Adicionar os módulos à categoria "Objects"
+				objects.curriculummodules.add(module2_1);
+				module2_1.save();
 				objects.save();
 				
 /*

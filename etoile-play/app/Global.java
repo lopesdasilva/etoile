@@ -1495,31 +1495,35 @@ public class Global extends GlobalSettings {
 				lesson1_5_1.keyword = "1_5_1_building_common_references";
 				lesson1_5_1.name = "1.5.1 Building common and pertinent references in the life sciences";
 				lesson1_5_1.text = "";
-				//lesson1_5_1.curriculumtopics.add(tpx);
-				//tpx.save();
 				lesson1_5_1.save();
 				
 				// 1.5.2 Achieving coherence in the modeling of complex systems
 				Curriculumlesson lesson1_5_2 = new Curriculumlesson();
-				lesson1_5_2.keyword = "1_5_1_coherence_modeling";
-				lesson1_5_2.name = "1.5.1 Building common and pertinent references in the life sciences";
+				lesson1_5_2.keyword = "1_5_2_coherence_modeling_complex_systems";
+				lesson1_5_2.name = "1.5.2 Achieving coherence in the modeling of complex systems";
 				lesson1_5_2.text = "";
-				//lesson1_5_2.curriculumtopics.add(tpx);
-				//tpx.save();
-				lesson1_5_2.save();				
+				lesson1_5_2.save();		
+				
+				// 1.5.3 Development of mathematical and computer formalisms for modeling multi-level and multiscales systems
+				Curriculumlesson lesson1_5_3 = new Curriculumlesson();
+				lesson1_5_3.keyword = "1_5_3_modeling_multi-level_systems";
+				lesson1_5_3.name = "1.5.3 Development of mathematical and computer formalisms for modeling multi-level and multiscales systems";
+				lesson1_5_3.text = "";
+				lesson1_5_3.save();				
 				
 				// 1_5 Reconstruction of multiscale dynamics, emergence and immergence processes
 				Curriculummodule module1_5 = new Curriculummodule();
-				module1_5.keyword = "1_5_from_optimal_control_to_multiscale_governance";
-				module1_5.name = "1.5 From optimal control to multiscale governance";
+				module1_5.keyword = "1_5_multiscale_dynamics";
+				module1_5.name = "1.5 Reconstruction of multiscale dynamics, emergence and immergence processes";
 				module1_5.text = "";
 				module1_5.curriculumlessons.add(lesson1_5_1);
 				lesson1_5_1.save();
 				module1_5.curriculumlessons.add(lesson1_5_2);
 				lesson1_5_2.save();
+				module1_5.curriculumlessons.add(lesson1_5_3);
+				lesson1_5_3.save();
 				module1_5.save();
-				
-				
+
 				// 1.6.1 Using artificial complex systems for the understanding and regulation of natural complex systems
 				Curriculumlesson lesson1_6_1 = new Curriculumlesson();
 				lesson1_6_1.keyword = "1_6_1_using_artificial_systems";
@@ -1719,128 +1723,417 @@ public class Global extends GlobalSettings {
 				
 				// 2. Objects  ++++++++++++++++++++++++++++++++++++++
 				Category objects = new Category();
-				objects.name = "Objects";
-				objects.description="2. Related to specific objects and vertical domains of study.";
+				objects.name = "2. Objects";
+				objects.description="Related to specific objects and vertical domains of study.";
 				objects.keyword = "2_objects";
 				objects.save();
 				
-				/*
-				// 2.X.X AAA
-				Curriculumlesson lesson2_X_X = new Curriculumlesson();
-				lesson2_X_X.keyword = "2_X_X_AAA";
-				lesson2_X_X.name = "2.X.X AAA";
-				lesson2_X_X.text = "";
-				lesson2_X_X.save();
+				// 2.1.1 Non-equilibrium statistical physics
+				Curriculumlesson lesson2_1_1 = new Curriculumlesson();
+				lesson2_1_1.keyword = "2_1_1_n_e_statistical_physics";
+				lesson2_1_1.name = "2.1.1 Non-equilibrium statistical physics";
+				lesson2_1_1.text = "";
+				lesson2_1_1.save();
 				
-				// 2.X AAA
-				Curriculummodule module2_X = new Curriculummodule();
-				module1_6.keyword = "1_6_designing_artificial_complex_systems";
-				module1_6.name = "1.6 Designing artificial complex systems";
-				module1_6.text = "";
-				module1_6.curriculumlessons.add(lesson1_6_1);
-				lesson1_6_1.save();
-				module1_6.save();
-				*/
+				// 2.1.2. Damage and fracture of heterogeneous materials
+				Curriculumlesson lesson2_1_2 = new Curriculumlesson();
+				lesson2_1_2.keyword = "2_1_2_heterogeneous_materials";
+				lesson2_1_2.name = "2.1.2 Damage and fracture of heterogeneous materials";
+				lesson2_1_2.text = "";
+				lesson2_1_2.save();
+				
+				// 2.1.3. Glassy dynamics: glasses, spin glasses and granular media
+				Curriculumlesson lesson2_1_3 = new Curriculumlesson();
+				lesson2_1_3.keyword = "2_1_3_glassy_dynamics";
+				lesson2_1_3.name = "2.1.3 Glassy dynamics: glasses, spin glasses and granular media";
+				lesson2_1_3.text = "";
+				lesson2_1_3.save();
+				
+				// 2.1.4. Bifurcations in turbulence: from dynamo action to slow dynamics
+				Curriculumlesson lesson2_1_4 = new Curriculumlesson();
+				lesson2_1_4.keyword = "2_1_4_bifurcations_in_turbulence";
+				lesson2_1_4.name = "2.2.4 Bifurcations in turbulence: from dynamo action to slow dynamics";
+				lesson2_1_4.text = "";
+				lesson2_1_4.save();
+				
+				// 2.1 Complex matter
+				Curriculummodule module2_1 = new Curriculummodule();
+				module2_1.keyword = "2_1_complex_matter";
+				module2_1.name = "2.1 Complex matter";
+				module2_1.text = "";
+				module2_1.curriculumlessons.add(lesson2_1_1);
+				lesson2_1_1.save();
+				module2_1.curriculumlessons.add(lesson2_1_2);
+				lesson2_1_2.save();
+				module2_1.curriculumlessons.add(lesson2_1_3);
+				lesson2_1_3.save();
+				module2_1.curriculumlessons.add(lesson2_1_4);
+				lesson2_1_4.save();
+				module2_1.save();
+				
+				// 2.2.1 Fluctuations and noise in biological systems
+				Curriculumlesson lesson2_2_1 = new Curriculumlesson();
+				lesson2_2_1.keyword = "2_2_1_fluctuations_and_noise";
+				lesson2_2_1.name = "2.2.1 Fluctuations and noise in biological systems";
+				lesson2_2_1.text = "";
+				lesson2_2_1.save();
+				
+				// 2.2.2 Stability in biology
+				Curriculumlesson lesson2_2_2 = new Curriculumlesson();
+				lesson2_2_2.keyword = "2_2_2_stability_in_biology";
+				lesson2_2_2.name = "2.2.2 Stability in biology";
+				lesson2_2_2.text = "";
+				lesson2_2_2.save();
+				
+				// 2.2.3 Multiscaling
+				Curriculumlesson lesson2_2_3 = new Curriculumlesson();
+				lesson2_2_3.keyword = "2_2_3_multiscaling";
+				lesson2_2_3.name = "2.2.3 Multiscaling";
+				lesson2_2_3.text = "";
+				lesson2_2_3.save();
+				
+				// 2.2.4 Human physiopathology
+				Curriculumlesson lesson2_2_4 = new Curriculumlesson();
+				lesson2_2_4.keyword = "2_2_4_human_physiopathology";
+				lesson2_2_4.name = "2.2.4 Human physiopathology";
+				lesson2_2_4.text = "";
+				lesson2_2_4.save();
+				
+				// 2.2 From molecules to organisms
+				Curriculummodule module2_2 = new Curriculummodule();
+				module2_2.keyword = "2_2_molecules_to_organisms";
+				module2_2.name = "2.2 From molecules to organisms";
+				module2_2.text = "";
+				module2_2.curriculumlessons.add(lesson2_2_1);
+				lesson2_2_1.save();
+				module2_2.curriculumlessons.add(lesson2_2_2);
+				lesson2_2_2.save();
+				module2_2.curriculumlessons.add(lesson2_2_3);
+				lesson2_2_3.save();
+				module2_2.curriculumlessons.add(lesson2_2_4);
+				lesson2_2_4.save();
+				module2_2.save();
+				
+				// 2.3.1 Investigating the relationship between the ontogenesis of a physiological function and its potential disorders
+				Curriculumlesson lesson2_3_1 = new Curriculumlesson();
+				lesson2_3_1.keyword = "2_3_1_ontogenesis_physiological_function";
+				lesson2_3_1.name = "2.3.1 Investigating the relationship between the ontogenesis of a physiological function and its potential disorders";
+				lesson2_3_1.text = "";
+				lesson2_3_1.save();
+				
+				// 2.3.2 Characterizing the contextual features determining the onset of operation, maintenance and modulation of a physiological function
+				Curriculumlesson lesson2_3_2 = new Curriculumlesson();
+				lesson2_3_2.keyword = "2_3_2_contextual_features";
+				lesson2_3_2.name = "2.3.2 Characterizing the contextual features determining the onset of operation, maintenance and modulation of a physiological function";
+				lesson2_3_2.text = "";
+				lesson2_3_2.save();
+				
+				// 2.3.3 Integrating multimodal measurements and observations of physiological activities at different spatial and temporal scales
+				Curriculumlesson lesson2_3_3 = new Curriculumlesson();
+				lesson2_3_3.keyword = "2_3_3_multimodal_measurements";
+				lesson2_3_3.name = "2.3.3 Integrating multimodal measurements and observations of physiological activities at different spatial and temporal scales";
+				lesson2_3_3.text = "";
+				lesson2_3_3.save();
+				
+				// 2.3 Physiological functions
+				Curriculummodule module2_3 = new Curriculummodule();
+				module2_3.keyword = "2_X_physiological_functions";
+				module2_3.name = "2.3 Physiological functions";
+				module2_3.text = "";
+				module2_3.curriculumlessons.add(lesson2_3_1);
+				lesson2_3_1.save();
+				module2_3.curriculumlessons.add(lesson2_3_2);
+				lesson2_3_2.save();
+				module2_3.curriculumlessons.add(lesson2_3_3);
+				lesson2_3_3.save();
+				module2_3.save();
+				
+				// 2.4.1 Develop observation and experimental systems for the reconstruction of the long-term dynamics of ecosystems
+				Curriculumlesson lesson2_4_1 = new Curriculumlesson();
+				lesson2_4_1.keyword = "2_4_1_long-term_dynamics_of_ecosystems";
+				lesson2_4_1.name = "2.4.1 Develop observation and experimental systems for the reconstruction of the long-term dynamics of ecosystems";
+				lesson2_4_1.text = "";
+				lesson2_4_1.save();
+				
+				// 2.4.2 Model the relationships between biodiversity, functioning and dynamics of the ecosystems
+				Curriculumlesson lesson2_4_2 = new Curriculumlesson();
+				lesson2_4_2.keyword = "2_4_2_biodiversity_functioning_and_dynamics";
+				lesson2_4_2.name = "2.4.2 Model the relationships between biodiversity, functioning and dynamics of the ecosystems";
+				lesson2_4_2.text = "";
+				lesson2_4_2.save();
+				
+				// 2.4.3 Associate integrative biology and ecology to decipher evolutionary mechanisms
+				Curriculumlesson lesson2_4_3 = new Curriculumlesson();
+				lesson2_4_3.keyword = "2_4_3_evolutionary_mechanisms";
+				lesson2_4_3.name = "2.4.3 Associate integrative biology and ecology to decipher evolutionary mechanisms";
+				lesson2_4_3.text = "";
+				lesson2_4_3.save();
+				
+				// 2.4.4 Simulate virtual landscapes (integration and coupling of biogeochemical and ecological models into dynamic landscape mock-ups)
+				Curriculumlesson lesson2_4_4 = new Curriculumlesson();
+				lesson2_4_4.keyword = "2_4_4_virtual_landscapes";
+				lesson2_4_4.name = "2.4.4 Simulate virtual landscapes (integration and coupling of biogeochemical and ecological models into dynamic landscape mock-ups)";
+				lesson2_4_4.text = "";
+				lesson2_4_4.save();
+				
+				// 2.4.5 Design decision-support systems for multifunctional ecosystems
+				Curriculumlesson lesson2_4_5 = new Curriculumlesson();
+				lesson2_4_5.keyword = "2_4_5_multifunctional_ecosystems";
+				lesson2_4_5.name = "2.4.5 Design decision-support systems for multifunctional ecosystems";
+				lesson2_4_5.text = "";
+				lesson2_4_5.save();
+				
+				// 2.4 Ecosystemic complexity
+				Curriculummodule module2_4 = new Curriculummodule();
+				module2_4.keyword = "2_4_ecosystemic_complexity";
+				module2_4.name = "2.4 Ecosystemic complexity";
+				module2_4.text = "";
+				module2_4.curriculumlessons.add(lesson2_4_1);
+				lesson2_4_1.save();
+				module2_4.curriculumlessons.add(lesson2_4_2);
+				lesson2_4_2.save();
+				module2_4.curriculumlessons.add(lesson2_4_3);
+				lesson2_4_3.save();
+				module2_4.curriculumlessons.add(lesson2_4_4);
+				lesson2_4_4.save();
+				module2_4.curriculumlessons.add(lesson2_4_5);
+				lesson2_4_5.save();
+				module2_4.save();
+				
+				// 2.5.1 Individual cognition, cognitive constraints and decision proceses
+				Curriculumlesson lesson2_5_1 = new Curriculumlesson();
+				lesson2_5_1.keyword = "2_5_1_individual_cognition";
+				lesson2_5_1.name = "2.5.1 Individual cognition, cognitive constraints and decision proceses";
+				lesson2_5_1.text = "";
+				lesson2_5_1.save();
+				
+				// 2.5.2 Modeling the dynamics of scientific communities
+				Curriculumlesson lesson2_5_2 = new Curriculumlesson();
+				lesson2_5_2.keyword = "2_5_2_dynamics_of_scientific_communities";
+				lesson2_5_2.name = "2.5.2 Modeling the dynamics of scientific communities";
+				lesson2_5_2.text = "";
+				lesson2_5_2.save();
+				
+				// 2.5.3 Society of the Internet, Internet of the society
+				Curriculumlesson lesson2_5_3 = new Curriculumlesson();
+				lesson2_5_3.keyword = "2_5_3_society_of_the_internet";
+				lesson2_5_3.name = "2.5.3 Society of the Internet, Internet of the society";
+				lesson2_5_3.text = "";
+				lesson2_5_3.save();
+				
+				// 2.5 From individual cognition to social cognition
+				Curriculummodule module2_5 = new Curriculummodule();
+				module2_5.keyword = "2_5_individual_social_cognition";
+				module2_5.name = "2.5 From individual cognition to social cognition";
+				module2_5.text = "";
+				module2_5.curriculumlessons.add(lesson2_5_1);
+				lesson2_5_1.save();
+				module2_5.curriculumlessons.add(lesson2_5_2);
+				lesson2_5_2.save();
+				module2_5.curriculumlessons.add(lesson2_5_3);
+				lesson2_5_3.save();
+				module2_5.save();
+				
+				// 2.6.1 Understanding dynamic conditions of innovation
+				Curriculumlesson lesson2_6_1 = new Curriculumlesson();
+				lesson2_6_1.keyword = "2_X_X_dynamic_conditions_of_innovation";
+				lesson2_6_1.name = "2.6.1 Understanding dynamic conditions of innovation";
+				lesson2_6_1.text = "";
+				lesson2_6_1.save();
+				
+				// 2.6.2 Modeling innovations and their rhythms
+				Curriculumlesson lesson2_6_2 = new Curriculumlesson();
+				lesson2_6_2.keyword = "2_X_X_innovations_and_their_rhythms";
+				lesson2_6_2.name = "2.6.2 Modeling innovations and their rhythms";
+				lesson2_6_2.text = "";
+				lesson2_6_2.save();
+				
+				// 2.6.3 Understanding the relation between cognition and innovation
+				Curriculumlesson lesson2_6_3 = new Curriculumlesson();
+				lesson2_6_3.keyword = "2_6_3_cognition_innovation";
+				lesson2_6_3.name = "2.6.3 Understanding the relation between cognition and innovation";
+				lesson2_6_3.text = "";
+				lesson2_6_3.save();
+				
+				// 2.6 Innovation, learning and co-evolution
+				Curriculummodule module2_6 = new Curriculummodule();
+				module2_6.keyword = "2_6_innovation_learning_co-evolution";
+				module2_6.name = "2.6 Innovation, learning and co-evolution";
+				module2_6.text = "";
+				module2_6.curriculumlessons.add(lesson2_6_1);
+				lesson2_6_1.save();
+				module2_6.curriculumlessons.add(lesson2_6_2);
+				lesson2_6_2.save();
+				module2_6.curriculumlessons.add(lesson2_6_3);
+				lesson2_6_3.save();
+				module2_6.save();
+				
+				// 2.7.1 Understanding territorial differentiation
+				Curriculumlesson lesson2_7_1 = new Curriculumlesson();
+				lesson2_7_1.keyword = "2_7_1_territorial_differentiation";
+				lesson2_7_1.name = "2.7.1 Understanding territorial differentiation";
+				lesson2_7_1.text = "";
+				lesson2_7_1.save();
+
+				// 2.7.2 Towards a reflexive territorial governance
+				Curriculumlesson lesson2_7_2 = new Curriculumlesson();
+				lesson2_7_2.keyword = "2_7_2_reflexive_territorial_governance";
+				lesson2_7_2.name = "2.7.2 Towards a reflexive territorial governance";
+				lesson2_7_2.text = "";
+				lesson2_7_2.save();
+				
+				// 2.7.3 Viability and observation of territories
+				Curriculumlesson lesson2_7_3 = new Curriculumlesson();
+				lesson2_7_3.keyword = "2_7_3_territories";
+				lesson2_7_3.name = "2.7.3 Viability and observation of territories";
+				lesson2_7_3.text = "";
+				lesson2_7_3.save();
+				
+				// 2.7 Territorial intelligence and sustainable development
+				Curriculummodule module2_7 = new Curriculummodule();
+				module2_7.keyword = "2_7_sustainable_development";
+				module2_7.name = "2.7 Territorial intelligence and sustainable development";
+				module2_7.text = "";
+				module2_7.curriculumlessons.add(lesson2_7_1);
+				lesson2_7_1.save();
+				module2_7.curriculumlessons.add(lesson2_7_2);
+				lesson2_7_2.save();
+				module2_7.curriculumlessons.add(lesson2_7_3);
+				lesson2_7_3.save();
+				module2_7.save();
+				
+				// 2.8.1 Local design for global properties (routing, control, confidentiality)
+				Curriculumlesson lesson2_8_1 = new Curriculumlesson();
+				lesson2_8_1.keyword = "2_8_1_local_design_for_global_properties";
+				lesson2_8_1.name = "2.8.1 Local design for global properties (routing, control, confidentiality)";
+				lesson2_8_1.text = "";
+				lesson2_8_1.save();
+				
+				// 2.8.2 Autonomic Computing (robustness, redundancy, fault tolerance)
+				Curriculumlesson lesson2_8_2 = new Curriculumlesson();
+				lesson2_8_2.keyword = "2_8_2_autonomic_computing";
+				lesson2_8_2.name = "2.8.2 Autonomic Computing (robustness, redundancy, fault tolerance)";
+				lesson2_8_2.text = "";
+				lesson2_8_2.save();
+				
+				// 2.8.3 New computational models: distributing processing and storage, fusion of spatial, temporal and/or multi-modal data, abstraction emergence
+				Curriculumlesson lesson2_8_3 = new Curriculumlesson();
+				lesson2_8_3.keyword = "2_8_3_new_computational_models";
+				lesson2_8_3.name = "2.8.3 New computational models: distributing processing and storage, fusion of spatial, temporal and/or multi-modal data, abstraction emergence";
+				lesson2_8_3.text = "";
+				lesson2_8_3.save();
+				
+				// 2.8.4 New programming paradigms: creation and grounding of symbols (including proof and validation)
+				Curriculumlesson lesson2_8_4 = new Curriculumlesson();
+				lesson2_8_4.keyword = "2_8_4_new_programming_paradigms";
+				lesson2_8_4.name = "2.8.4 New programming paradigms: creation and grounding of symbols (including proof and validation)";
+				lesson2_8_4.text = "";
+				lesson2_8_4.save();
+				
+				// 2.8. Ubiquitous computing
+				Curriculummodule module2_8 = new Curriculummodule();
+				module2_8.keyword = "2_8_ubiquitous_computing";
+				module2_8.name = "2.8 Ubiquitous computing";
+				module2_8.text = "";
+				module2_8.curriculumlessons.add(lesson2_8_1);
+				lesson2_8_1.save();
+				module2_8.curriculumlessons.add(lesson2_8_2);
+				lesson2_8_2.save();
+				module2_8.curriculumlessons.add(lesson2_8_3);
+				lesson2_8_3.save();
+				module2_8.curriculumlessons.add(lesson2_8_4);
+				lesson2_8_4.save();
+				module2_8.save();
+								
+				// 2.9.1 Understanding and reducing uncertainties
+				Curriculumlesson lesson2_9_1 = new Curriculumlesson();
+				lesson2_9_1.keyword = "2_9_1_understanding_and_reducing_uncertainties";
+				lesson2_9_1.name = "2.9.1 Understanding and reducing uncertainties";
+				lesson2_9_1.text = "";
+				lesson2_9_1.save();
+				
+				// 2.9.2 Out-of-equilibrium statistical physics of the Earth system
+				Curriculumlesson lesson2_9_2 = new Curriculumlesson();
+				lesson2_9_2.keyword = "2_9_2_statistical_physics_of_the_earth_system";
+				lesson2_9_2.name = "2.9.2 Out-of-equilibrium statistical physics of the Earth system";
+				lesson2_9_2.text = "";
+				lesson2_9_2.save();
+				
+				// 2.9.3 Geoscience, the Environment, Policy and Citizens
+				Curriculumlesson lesson2_9_3 = new Curriculumlesson();
+				lesson2_9_3.keyword = "2_9_3_geoscience_environment_policy_citizens";
+				lesson2_9_3.name = "2.9.3 Geoscience, the Environment, Policy and Citizens";
+				lesson2_9_3.text = "";
+				lesson2_9_3.save();
+				
+				// 2.9. Geosciences and the environment
+				Curriculummodule module2_9 = new Curriculummodule();
+				module2_9.keyword = "2_9_geosciences_and_the_environment";
+				module2_9.name = "2.9. Geosciences and the environment";
+				module2_9.text = "";
+				module2_9.curriculumlessons.add(lesson2_9_1);
+				lesson2_9_1.save();
+				module2_9.curriculumlessons.add(lesson2_9_2);
+				lesson2_9_2.save();
+				module2_9.curriculumlessons.add(lesson2_9_3);
+				lesson2_9_3.save();
+				module2_9.save();
+				
 				
 				// FIM DE OBJECTS
 				// Adicionar os módulos à categoria "Objects"
 				objects.curriculummodules.add(module2_1);
 				module2_1.save();
+				objects.curriculummodules.add(module2_2);
+				module2_2.save();
+				objects.curriculummodules.add(module2_3);
+				module2_3.save();
+				objects.curriculummodules.add(module2_4);
+				module2_4.save();
+				objects.curriculummodules.add(module2_5);
+				module2_5.save();
+				objects.curriculummodules.add(module2_6);
+				module2_6.save();
+				objects.curriculummodules.add(module2_7);
+				module2_7.save();
+				objects.curriculummodules.add(module2_8);
+				module2_8.save();
+				objects.curriculummodules.add(module2_9);
+				module2_9.save();
 				objects.save();
-				
-/*
-2.1. Complex matter
-Grand challenges
-1. Non-equilibrium statistical physics
-2. Damage and fracture of heterogeneous materials
-3. Glassy dynamics: glasses, spin glasses and granular media
-4. Bifurcations in turbulence: from dynamo action to slow dynamics
-
-2.2. From molecules to organisms
-Grand challenges
-1. Fluctuations and noise in biological systems
-2. Stability in biology
-3. Multiscaling
-4. Human physiopathology
-
-2.3. Physiological functions
-Grand challenges:
-1. Integrating multimodal measurements and observations of physiological activities at different
-spatial and temporal scales.
-2. Characterizing the contextual features determining the onset of operation, maintenance and
-modulation of a physiological function.
-3. Investigating the relationship between the ontogenesis of a physiological function and its
-potential disorders.
-
-2.4. Ecosystemic complexity
-Grand challenges:
-1. Develop observation and experimental systems for the reconstruction of the long-term dynamics
-of ecosystems.
-2. Model the relationships between biodiversity, functioning and dynamics of the ecosystems.
-3. Associate integrative biology and ecology to decipher evolutionary mechanisms.
-4. Simulate virtual landscapes (integration and coupling of biogeochemical and ecological models
-into dynamic landscape mock-ups).
-5. Design decision-support systems for multifunctional ecosystems
-
-2.5. From individual cognition to social cognition
-Grand Challenges
-1st Challenge: Individual cognition, cognitive constraints and decision proceses
-2nd Challenge: Modeling the dynamics of scientific communities
-3rd Challenge: Society of the Internet, Internet of the society
-
-2.6. Innovation, learning and co-evolution
-Grand challenges:
-1. Understanding dynamic conditions of innovation
-2. Modeling innovations and their rhythms
-3. Understanding the relation between cognition and innovation
-
-2.7. Territorial intelligence and sustainable development
-Grand challenges:
-1. Understanding territorial differentiation.
-2. Towards a reflexive territorial governance
-3. Viability and observation of territories
-
-2.8. Ubiquitous computing
-Grand Challenges
-1. Local design for global properties (routing, control, confidentiality)
-2. Autonomic Computing (robustness, redundancy, fault tolerance)
-3. New computational models: distributing processing and storage, fusion of spatial, temporal
-and/or multi-modal data, abstraction emergence
-4. New programming paradigms: creation and grounding of symbols (including proof and
-validation)
-
-2.9. Geosciences and the environment
-Grand Challenges
-1. Understanding and reducing uncertainties.
-2. Out-of-equilibrium statistical physics of the Earth system
-3. Geoscience, the Environment, Policy and Citizens
- * 
- * 				
- */
-				
-				
-				
 				
 				
 				
 				// 3. Education, Training and Professional Practice ++++++++++++++++++++++++++++++++++++++
 				Category education = new Category();
-				education.name = "Education";
+				education.name = "3. Education";
 				education.description="Education, training and professional practice in science.";
 				education.keyword = "education";
 				education.save();
 				
-/*
-3. Education, Training and Professional Practice
-3.1 Education and Training
-3.2 Professional Practice
-*/				
+				// 3.1 Education and Training
+				Curriculummodule module3_1 = new Curriculummodule();
+				module3_1.keyword = "3_1_education_and_training";
+				module3_1.name = "3.1 Education and Training";
+				module3_1.text = "";
+				module3_1.save();
 				
+				// 3.2 Professional Practice
+				Curriculummodule module3_2 = new Curriculummodule();
+				module3_2.keyword = "3_2_professional_practice";
+				module3_2.name = "3.2 Professional Practice";
+				module3_2.text = "";
+				module3_2.save();
 				
+				// FIM DE EDUCATION
+				// Adicionar os módulos à categoria "Education"
+				education.curriculummodules.add(module3_1);
+				module3_1.save();
+				education.curriculummodules.add(module3_2);
+				module3_2.save();
+				education.save();
 				
-				
-				
-				
+			
 				// Ligar uma questão a um módulo
 				//q.subtopic = algomodule;
 				//q.save();

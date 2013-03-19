@@ -3,7 +3,7 @@ jQuery(function($) {
   tour.addStep({
   element: "#stats", /* html element next to which the step popover should be shown */
   title: "Welcome", /* title of the popover */
-  content: "This is an overview of your etoile statistics. Soon this will have more data." /* content of the popover */
+  content: "This area presents an overview of your etoile statistics." /* content of the popover */
 });
   tour.addStep({
 	  path: "/index",
@@ -13,8 +13,8 @@ jQuery(function($) {
 	});
   tour.addStep({
 	  element: "#modulesmenu", /* html element next to which the step popover should be shown */
-	  title: "Modules menu", /* title of the popover */
-	  content: "After you sign up in some modules to your account, they will appear here." /* content of the popover */
+	  title: "My Modules", /* title of the popover */
+	  content: "This area presents the list of the modules where you signed up." /* content of the popover */
 	});
   tour.addStep({
 	  element: "#topbarmodules", /* html element next to which the step popover should be shown */

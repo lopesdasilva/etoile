@@ -45,6 +45,10 @@ public class University extends Model {
 	
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
+	public String adressURL;
+	
+	@Constraints.Required
+	@Column(columnDefinition="TEXT")
 	public String modulebannerURL;
 
 	@OneToMany

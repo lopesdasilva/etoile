@@ -1217,6 +1217,7 @@ public class Global extends GlobalSettings {
 			University iscte = new University();
 			iscte.name="ISCTE-IUL";
 			iscte.acronym="iscte-iul";
+			iscte.adressURL="http://iscte.iul.pt";
 			iscte.imageURL="http://noticias.universia.pt/pt/images/universia/i/is/isc/iscte_iul_logo.jpg";
 			iscte.modulebannerURL = "http://4.bp.blogspot.com/-IfeNT6e6mRQ/T6fSIa7xJdI/AAAAAAAAdPA/VHMCg_Mg7Go/s1600/ISCTE.jpg";
 			iscte.continent=europe;
@@ -1224,6 +1225,7 @@ public class Global extends GlobalSettings {
 			
 			University university_fct = new University();
 			university_fct.name="FCT";
+			university_fct.adressURL="http://fct.unl.pt";
 			university_fct.acronym="fct";
 			university_fct.imageURL="http://tele1.dee.fct.unl.pt/mst_2010_2011/figs/logo_quadrado%20JMF.gif";
 			university_fct.continent=europe;
@@ -1232,6 +1234,7 @@ public class Global extends GlobalSettings {
 			University ou = new University();
 			ou.name="Open University UK";
 			ou.acronym="ou";
+			ou.adressURL="http://www.open.ac.uk";
 			ou.imageURL="http://www.open.ac.uk/includes/headers-footers/oulogo-56.jpg";
 			ou.continent=europe;
 			ou.save();

@@ -118,7 +118,6 @@ public class Test extends Model{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 		}
 		return "";
@@ -130,7 +129,6 @@ public class Test extends Model{
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 		}
 		return "";
@@ -143,7 +141,6 @@ public class Test extends Model{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 		}
 		return "";
@@ -155,7 +152,6 @@ public class Test extends Model{
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 		}
 		return "";
@@ -167,7 +163,6 @@ public class Test extends Model{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-        System.out.println("GregorianCalendar -"+sdf.format(calendar.getTime()));
 		return sdf.format(calendar.getTime());
 		}
 		return "";

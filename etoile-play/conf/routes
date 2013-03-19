@@ -172,7 +172,7 @@ GET	/api/module/:module/lesson/:lesson controllers.ApiController.getLesson(modul
 GET /api/module/:module/lesson/:lesson/test/:test controllers.ApiController.getTest(module: String, lesson: String ,test: Long)
 GET /api/myprofile/:acronym	controllers.ApiController.getMyProfile(acronym: String)
 GET /api/dashboard	controllers.ApiController.getDashboard()
-GET /api/authenticate controllers.ApiController.authenticate()
+POST /api/authenticate controllers.ApiController.authenticate()
 
 
 # Map static resources from the /public folder to the /assets URL path

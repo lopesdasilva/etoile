@@ -33,10 +33,12 @@ public class ApiController extends Controller{
 
 	public static Result getModules() {
 
-		List<Module> obj = Module.find.all();
-		JSONSerializer postDetailsSerializer = new JSONSerializer().include("contents").exclude("*.class");
 
-		return ok(postDetailsSerializer.serialize(obj));
+	List<Module> obj = Module.find.all();
+	JSONSerializer postDetailsSerializer = new JSONSerializer().include("contents").exclude("*.class");
+	
+	return ok(postDetailsSerializer.serialize(obj)).as("application/json");
+
 
 	}
 
@@ -50,26 +52,29 @@ public class ApiController extends Controller{
 
 		String auth=request().getHeader(AUTHORIZATION);
 		if(auth!=null){
-			auth=auth.substring(6);
-			byte[] decodeAuth= new BASE64Decoder().decodeBuffer(auth);
-			String[] credString= new String(decodeAuth,"UTF-8").split(":");
 
-			String username=credString[0];
-			String password=credString[1];
+		auth=auth.substring(6);
+		byte[] decodeAuth= new BASE64Decoder().decodeBuffer(auth);
+		String[] credString= new String(decodeAuth,"UTF-8").split(":");
+		
+		String username=credString[0];
+		String password=credString[1];
+		
+		if (User.authenticateSHA1(username, password)!=null){
+			
+			User user=User.findByEmail(username);
+			JSONSerializer postDetailsSerializer = new JSONSerializer().include("modules","onGoingTests").exclude("password","*.class");
+//			getOngoingTests
+		
+			return ok(postDetailsSerializer.serialize(user)).as("application/json");
+			
+		} else{
+		ObjectNode result = Json.newObject();
+		result.put("status", "failure");
+		
+		return ok(result);
+		}
 
-			if (User.authenticateSHA1(username, password)!=null){
-
-				User user=User.findByEmail(username);
-				JSONSerializer postDetailsSerializer = new JSONSerializer().include("modules","onGoingTests").exclude("password","*.class");
-				
-				return ok(postDetailsSerializer.serialize(user));
-
-			} else{
-				ObjectNode result = Json.newObject();
-				result.put("status", "failure");
-
-				return ok(result);
-			}
 		}
 
 		return badRequest("Expecting Json data.");

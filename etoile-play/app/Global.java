@@ -1211,9 +1211,8 @@ public class Global extends GlobalSettings {
 			
 			
 			
-			// Universities ++++++++++++++++++++++++++++++++++++++++++++++++++++
+			// UNIVERSITIES ++++++++++++++++++++++++++++++++++++++++++++++++++++
 				
-				// 1. ISCTE-IUL ++++++++++++++++++++++++++++++++++++++
 			University iscte = new University();
 			iscte.name="ISCTE-IUL";
 			iscte.acronym="iscte-iul";
@@ -1238,6 +1237,62 @@ public class Global extends GlobalSettings {
 			ou.imageURL="http://www.open.ac.uk/includes/headers-footers/oulogo-56.jpg";
 			ou.continent=europe;
 			ou.save();
+			
+			University AIMSSenegal = new University();
+			AIMSSenegal.name="AIMS-Senegal";
+			AIMSSenegal.acronym="aims-Senegal";
+			// AIMSSenegal.url = "http://www.aims-senegal.sn"; 
+			AIMSSenegal.imageURL="http://aims-senegal.sn/assets/images/logo-news2.png";
+			AIMSSenegal.modulebannerURL = "";
+			AIMSSenegal.continent=africa;
+			AIMSSenegal.save();
+			
+			University CergyPontoise = new University();
+			CergyPontoise.name="Cergy-Pontoise";
+			CergyPontoise.acronym="cergy-pontoise";
+			//CergyPontoise.url = "http://www.u-cergy.fr";
+			CergyPontoise.imageURL="http://www.u-cergy.fr/_contents/ametys-internal%253Asites/www/ametys-internal%253Acontents/telechargement-galerie-de-photos/_metadata/photos/2/image/UCP_logo_violet.jpg";
+			CergyPontoise.modulebannerURL = "";
+			CergyPontoise.continent=europe;
+			CergyPontoise.save();
+			
+			/*
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.url = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.url = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.url = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.url = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			*/
 			
 			student.university = iscte;
 			student.save();

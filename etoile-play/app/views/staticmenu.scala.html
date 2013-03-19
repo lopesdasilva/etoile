@@ -12,8 +12,8 @@
 			<!--/.well -->
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
-					<li class="nav-header">Categories in the Curriculum
-						(@categories.size)</li> @for(category <- categories) {
+					<li class="nav-header"><a href="/curriculum">Curriculum in Complex Systems Sciences</a></li>
+					<li class="nav-header">Categories (@categories.size)</li> @for(category <- categories) {
 					<li><a href="/curriculum#@category.keyword">@category.name</a>
 					</li> }
 				</ul>
@@ -31,8 +31,9 @@
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 					<li class="nav-header">Digital Library</li>
-					<li><a href="/curriculum">Curriculum in Complex Systems
+					<!--<li><a href="/curriculum">Curriculum in Complex Systems
 							Sciences</a></li>
+					-->
 					<!--<li><a href="#">* Manuals - How to use the &eacute;toile Platform</a></li> -->
 					<!--   <li><a href="#">* Video: "&eacute;toile Cascades Ideas", Jeff Johnson at ECCS'11</a></li> -->
 					<!--   <li><a href="#">* Other resources</a></li> -->

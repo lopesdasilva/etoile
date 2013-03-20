@@ -658,10 +658,10 @@ public class Global extends GlobalSettings {
 			module_four.save();
 			
 			
-			forum = new Forum();
-			forum.module=module_four;
-			forum.save();
-			module_four.forum=forum;
+			Forum forum_four = new Forum();
+			forum_four.module=module_four;
+			forum_four.save();
+			module_four.forum=forum_four;
 			module_four.save();
 			
 			lesson_net1.module = module_four;
@@ -686,7 +686,7 @@ public class Global extends GlobalSettings {
 			lesson_net10.module = module_four;
 			lesson_net10.save();
 			*/
-			/*
+			
 			Module module_five = new Module();
 			module_five.name = "Bioinformatics";
 			module_five.acronym="bioinformatics";
@@ -697,14 +697,14 @@ public class Global extends GlobalSettings {
 			module_five.language = l_two;
 			module_five.save();
 			
-			forum = new Forum();
-			forum.module=module_five;
-			forum.save();
-			module_five.forum=forum;
+			Forum forum_five = new Forum();
+			forum_five.module=module_five;
+			forum_five.save();
+			module_five.forum=forum_five;
 			module_five.save();
-			*/
 			
-			/*
+			
+			
 			Module module_six = new Module();
 			module_six.name = "Réseaux génétiques et morphodynamique cellulaire";
 			module_six.acronym="resgen";
@@ -715,12 +715,12 @@ public class Global extends GlobalSettings {
 			module_six.language = l_three;
 			module_six.save();
 					
-			forum = new Forum();
-			forum.module=module_six;
-			forum.save();
-			module_six.forum=forum;
+			Forum forum_six = new Forum();
+			forum_six.module=module_six;
+			forum_six.save();
+			module_six.forum=forum_six;
 			module_six.save();
-			*/
+			
 			
 			// Bibliography +++++++++++++++++++++++++++++++++++++++++
 			/*
@@ -755,15 +755,16 @@ public class Global extends GlobalSettings {
 			bibliography.imageURL="http://www-personal.umich.edu/~mejn/networks-an-introduction/cover-s.jpg";
 			bibliography.module=module_demo;
 			bibliography.save();
-			
-			bibliography = new Bibliography();
-			bibliography.title="The Zebrafish Book a Guide for the Laboratory Use of Zebrafish Danio* (Brachydanio) Rerio, 5th Edition";
-			bibliography.link="http://zebrafish.org/zirc/orders/buyBookQ.php?item=Book&id=book&detail=The%20Zebrafish%20Book";
-			bibliography.description="A guide for the laboratory use of zebrafish.";
-			bibliography.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
-			bibliography.module=module_six;
-			bibliography.save();
 			*/
+			
+			Bibliography bibzebraf = new Bibliography();
+			bibzebraf.title="The Zebrafish Book a Guide for the Laboratory Use of Zebrafish Danio* (Brachydanio) Rerio, 5th Edition";
+			bibzebraf.link="http://zebrafish.org/zirc/orders/buyBookQ.php?item=Book&id=book&detail=The%20Zebrafish%20Book";
+			bibzebraf.description="A guide for the laboratory use of zebrafish.";
+			bibzebraf.imageURL="http://zebrafish.org/zirc/images/zfishbook.png";
+			bibzebraf.module=module_six;
+			bibzebraf.save();
+			
 			
 			
 			
@@ -805,13 +806,25 @@ public class Global extends GlobalSettings {
 			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
 			content.save();
 			*/
-			/*
-			content= new Content();
-			content.module=module_six;
-			content.title="This module is not ready yet, please return soon.";
-			content.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
-			content.save();
-			*/
+			
+			Content content_four_1 = new Content();
+			content_four_1.module=module_four;
+			content_four_1.title="This module is not ready yet, please return soon.";
+			content_four_1.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
+			content_four_1.save();
+			
+			Content content_five_1 = new Content();
+			content_five_1.module=module_five;
+			content_five_1.title="This module is not ready yet, please return soon.";
+			content_five_1.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
+			content_five_1.save();
+			
+			Content content_six_1 = new Content();
+			content_six_1.module=module_six;
+			content_six_1.title="This module is not ready yet, please return soon.";
+			content_six_1.text="Most of this module will be accessible to non-technical students. We will provide optional materials for those with some computer science background.";
+			content_six_1.save();
+			
 			
 			// USERS ++++++++++++++++++++++++++++++++++++++++++++
 			Student student = new Student();
@@ -1051,7 +1064,7 @@ public class Global extends GlobalSettings {
 			
 			// 2. PROFESSOR FOR TESTING
 			
-			// Jorge Louçã
+			// Prof
 			User prof = new User();
 			prof.email = "prof@prof.pt";
 			prof.username="prof";
@@ -1103,10 +1116,9 @@ public class Global extends GlobalSettings {
 			np.imageURL="http://public-files.prbb.org/prbb_actual/imatges/nadine.png";
 			np.save();
 			
-			/*
 			np.modules.add(module_six);
 			np.save();
-			*/
+			
 			//module.save();
 			
 			/*np.contents.add(npc);
@@ -1137,10 +1149,9 @@ public class Global extends GlobalSettings {
 			jd.imageURL="http://egealmeeting.lasalle-beauvais.fr/images/demongeot_jacques.jpg";
 			jd.save();
 			
-			/*
 			jd.modules.add(module_five);
 			jd.save();
-			*/
+
 			//module.save();
 			
 			jd.contents.add(jdc);
@@ -1222,6 +1233,7 @@ public class Global extends GlobalSettings {
 			iscte.continent=europe;
 			iscte.save();
 			
+			/*
 			University university_fct = new University();
 			university_fct.name="FCT";
 			university_fct.adressURL="http://fct.unl.pt";
@@ -1229,6 +1241,7 @@ public class Global extends GlobalSettings {
 			university_fct.imageURL="http://tele1.dee.fct.unl.pt/mst_2010_2011/figs/logo_quadrado%20JMF.gif";
 			university_fct.continent=europe;
 			university_fct.save();
+			*/
 			
 			University ou = new University();
 			ou.name="Open University UK";

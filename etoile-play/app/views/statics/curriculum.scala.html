@@ -8,8 +8,7 @@
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span> </a>
 			<!-- <a class="brand" href="/">etoile platform</a> -->
-			<a class="brand" href="/"><b><i>&eacute;</i>
-			</b>toile platform</a>
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse">
@@ -83,66 +82,43 @@
 			Challenges, that can still be divided into Topics. The &eacute;toile modules relate to the Grand Challenges,
 			and these relations are represented by links in the curriculum.
 			</p>
-			<dl>
-				@for(category <- categories) {
+			
+			@for(category <- categories) {
 				<section id="@category.keyword">
-				<dt>
 					<h2>
 						<span rel="tooltip" data-placement="top"
-							title="This is a Category." class="label">Category</span><a href="@routes.Application.categoryModules(category.id)">   @category.name</a>
+							title="This is a Category." 
+							class="label">Category</span><a href="@routes.Application.categoryModules(category.id)">   @category.name</a>
 					</h2>
-				</dt>
-				<dd>
 					<p>@category.description</p>
-					<dl>
+					
 						@for(curriculummodule <- category.curriculummodules) {
 						<section id="@category.keyword@curriculummodule.keyword">
-						<dt>
 							<h4>
-								<span class="label label-success offset1">Subject</span>   @curriculummodule.name
+								<blockquote><span class="label label-success">Subject</span>   @curriculummodule.name </blockquote>
 							</h4>
-						</dt>
-						<dd>
 							<p>@curriculummodule.text</p>
-							<dl>
+							
 								@for(curriculumlesson <- curriculummodule.curriculumlessons) {
 								<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
-								<dt>
-									<!--  <h4> -->
-										<span class="label label-info">Challenge</span>   @curriculumlesson.name
-									<!-- </h4> -->
-								</dt>
-								<dd>
+									<h6>
+										<blockquote><blockquote><span class="label label-info">Challenge</span>   @curriculumlesson.name</blockquote></blockquote>
+									</h6>
 									<p>@curriculumlesson.text</p>
-									<dl>
 										@for(curriculumtopic <- curriculumlesson.curriculumtopics) {
 										<section
 											id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword@curriculumtopic.keyword">
-										<dt>
-											<h6>
-												<span class="label label-warning">Topic</span> @curriculumtopic.text
-											</h6>
-										</dt>
+												<blockquote><blockquote><blockquote><span class="label label-warning">Topic</span>  @curriculumtopic.text</blockquote></blockquote></blockquote>
 										<!--  <dd>Topic Description</dd> --> 
-										} 
 										</section>
-									</dl>
-								</dd>
+										} 
 								</section>
 								} 
-							</dl>
-						  </dd>
+							</section>
+							} 
 						
-						</section>
-					</dl>
-				</dd>
-				} </section>
-			</dl>
-
-			}
-			</dd>
-			</dl>
-
+					</section>
+				} 
 
 		</div>
 	</div>

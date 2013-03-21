@@ -94,12 +94,12 @@ public class ApiController extends Controller{
 				ObjectNode result = Json.newObject();
 				result.put("status", "success");
 				result.put("message", "all good!");
-				return ok(result);
+				return ok(result).as("application/json");
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
 				result.put("error", "failed authentication");
-				return ok(result);
+				return ok(result).as("application/json");
 			}
 
 		}

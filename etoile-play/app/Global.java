@@ -1254,7 +1254,7 @@ public class Global extends GlobalSettings {
 			University AIMSSenegal = new University();
 			AIMSSenegal.name="AIMS-Senegal";
 			AIMSSenegal.acronym="aims-Senegal";
-			// AIMSSenegal.url = "http://www.aims-senegal.sn"; 
+			AIMSSenegal.adressURL = "http://www.aims-senegal.sn"; 
 			AIMSSenegal.imageURL="http://aims-senegal.sn/assets/images/logo-news2.png";
 			AIMSSenegal.modulebannerURL = "";
 			AIMSSenegal.continent=africa;
@@ -1263,17 +1263,25 @@ public class Global extends GlobalSettings {
 			University CergyPontoise = new University();
 			CergyPontoise.name="Cergy-Pontoise";
 			CergyPontoise.acronym="cergy-pontoise";
-			//CergyPontoise.url = "http://www.u-cergy.fr";
+			CergyPontoise.adressURL = "http://www.u-cergy.fr";
 			CergyPontoise.imageURL="http://www.u-cergy.fr/_contents/ametys-internal%253Asites/www/ametys-internal%253Acontents/telechargement-galerie-de-photos/_metadata/photos/2/image/UCP_logo_violet.jpg";
 			CergyPontoise.modulebannerURL = "";
 			CergyPontoise.continent=europe;
 			CergyPontoise.save();
 			
+			University nias = new University();
+			nias.name="NIAS - National Institute of Advanced Studies";
+			nias.acronym="NIAS";
+			nias.adressURL = "http://www.nias.res.in/aboutnias-people-faculty-rajeshkasturirangan.php";
+			nias.imageURL="http://www.nias.res.in/images/header-aboutnias-faculty.jpg";
+			nias.modulebannerURL = "";
+			nias.continent=asia;
+			nias.save();
 			/*
 			University X = new University();
 			X.name="X";
 			X.acronym="X";
-			x.url = "X";
+			x.adressURL = "X";
 			X.imageURL="X";
 			X.modulebannerURL = "X";
 			X.continent=X;
@@ -1282,7 +1290,7 @@ public class Global extends GlobalSettings {
 			University X = new University();
 			X.name="X";
 			X.acronym="X";
-			x.url = "X";
+			x.adressURL = "X";
 			X.imageURL="X";
 			X.modulebannerURL = "X";
 			X.continent=X;
@@ -1291,16 +1299,7 @@ public class Global extends GlobalSettings {
 			University X = new University();
 			X.name="X";
 			X.acronym="X";
-			x.url = "X";
-			X.imageURL="X";
-			X.modulebannerURL = "X";
-			X.continent=X;
-			X.save();
-			
-			University X = new University();
-			X.name="X";
-			X.acronym="X";
-			x.url = "X";
+			x.adressURL = "X";
 			X.imageURL="X";
 			X.modulebannerURL = "X";
 			X.continent=X;

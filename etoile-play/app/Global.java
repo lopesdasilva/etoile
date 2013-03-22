@@ -1277,6 +1277,43 @@ public class Global extends GlobalSettings {
 			nias.modulebannerURL = "";
 			nias.continent=asia;
 			nias.save();
+			
+			University rouen = new University();
+			rouen.name="Rouen Business School";
+			rouen.acronym="rouen";
+			rouen.adressURL = "http://www.rouenbs.fr/en/faculty/the-academic-departments/accounting-law-operations-and-information-management";
+			rouen.imageURL="http://www.iscte.pt/~jmal/etoile/images/rouen.jpg";
+			rouen.modulebannerURL = "";
+			rouen.continent=europe;
+			rouen.save();
+			
+			University diop = new University();
+			diop.name="Université Cheikh Antia Diop";
+			diop.acronym="diop";
+			diop.adressURL = "http://www.ucad.sn";
+			diop.imageURL="http://www.iscte.pt/~jmal/etoile/images/diop.jpg";
+			diop.modulebannerURL = "";
+			diop.continent=africa;
+			diop.save();
+			
+			University berger = new University();
+			berger.name="Université Gaston Berger";
+			berger.acronym="berger";
+			berger.adressURL = "http://www.ugb.sn";
+			berger.imageURL="http://www.iscte.pt/~jmal/etoile/images/berger.jpg";
+			berger.modulebannerURL = "";
+			berger.continent=africa;
+			berger.save();
+						
+			University paulista = new University();
+			paulista.name="Universidade Estadual Paulista";
+			paulista.acronym="paulista";
+			paulista.adressURL = "http://www.marilia.unesp.br";
+			paulista.imageURL="http://www.iscte.pt/~jmal/etoile/images/paulista.jpg";
+			paulista.modulebannerURL = "";
+			paulista.continent=southamerica;
+			paulista.save();
+			
 			/*
 			University X = new University();
 			X.name="X";
@@ -1286,7 +1323,9 @@ public class Global extends GlobalSettings {
 			X.modulebannerURL = "X";
 			X.continent=X;
 			X.save();
+			*/
 			
+			/*
 			University X = new University();
 			X.name="X";
 			X.acronym="X";
@@ -1295,7 +1334,53 @@ public class Global extends GlobalSettings {
 			X.modulebannerURL = "X";
 			X.continent=X;
 			X.save();
+			*/
 			
+			/*
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.adressURL = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			*/
+			
+			/*
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.adressURL = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			*/
+			
+			/*
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.adressURL = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			*/
+			
+			/*
+			University X = new University();
+			X.name="X";
+			X.acronym="X";
+			x.adressURL = "X";
+			X.imageURL="X";
+			X.modulebannerURL = "X";
+			X.continent=X;
+			X.save();
+			*/
+			
+			/*
 			University X = new University();
 			X.name="X";
 			X.acronym="X";

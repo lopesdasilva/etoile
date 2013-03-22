@@ -1273,7 +1273,7 @@ public class Global extends GlobalSettings {
 			nias.name="NIAS - National Institute of Advanced Studies";
 			nias.acronym="NIAS";
 			nias.adressURL = "http://www.nias.res.in/aboutnias-people-faculty-rajeshkasturirangan.php";
-			nias.imageURL="http://www.nias.res.in/images/header-aboutnias-faculty.jpg";
+			nias.imageURL="http://www.iscte.pt/~jmal/etoile/images/nias.jpg";
 			nias.modulebannerURL = "";
 			nias.continent=asia;
 			nias.save();

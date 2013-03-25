@@ -72,7 +72,7 @@ public class ApiController extends Controller{
 		ObjectNode result = Json.newObject();
 		result.put("status", "failure");
 		
-		return ok(result);
+		return ok(result).as("application/json");
 		}
 
 		}

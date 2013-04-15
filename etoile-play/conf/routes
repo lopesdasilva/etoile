@@ -167,6 +167,7 @@ POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTest
 
 #API
 GET /api/modules	controllers.ApiController.getModules()
+GET /api/news	controllers.ApiController.getNews()
 GET /api/module/:module controllers.ApiController.getModule(module: String)
 GET	/api/module/:module/lesson/:lesson controllers.ApiController.getLesson(module: String, lesson: String)
 GET /api/module/:module/lesson/:lesson/test/:test controllers.ApiController.getTest(module: String, lesson: String ,test: Long)

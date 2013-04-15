@@ -12,6 +12,7 @@ import org.codehaus.jackson.node.ObjectNode;
 import flexjson.JSONSerializer;
 
 
+import models.Blog;
 import models.Student;
 import models.User;
 import models.module.Content;
@@ -40,6 +41,13 @@ public class ApiController extends Controller{
 	return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 
 
+	}
+	
+	public static Result getNews(){
+		List<Blog> obj = Blog.getAllBlogs();
+		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class","comments");
+		
+		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 	}
 
 	public static Result getMyProfile(String acronym){

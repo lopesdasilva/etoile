@@ -53,7 +53,7 @@ public class ApiController extends Controller{
 	public static Result getMyProfile(String acronym){
 		Student obj = Student.findByAcronym(acronym);
 		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("password","user","*.class");
-		return ok(postDetailsSerializer.serialize(obj));
+		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 	}
 
 	public static Result getDashboard() throws IOException{
@@ -139,13 +139,13 @@ public class ApiController extends Controller{
 						"language")
 						.exclude("professors.user","*.class");
 
-				return ok(postDetailsSerializer.serialize(module));
+				return ok(postDetailsSerializer.serialize(module)).as("application/json");
 
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
 
-				return ok(result);
+				return ok(result).as("application/json");
 			}
 		}
 		return badRequest("Expecting Json data.");
@@ -173,14 +173,14 @@ public class ApiController extends Controller{
 								"module",
 								"*.class");
 			
-				return ok(postDetailsSerializer.serialize(lesson));
+				return ok(postDetailsSerializer.serialize(lesson)).as("application/json");
 				}
 			
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
 
-				return ok(result);
+				return ok(result).as("application/json");
 			}
 		}
 		return badRequest("Expecting Json data.");
@@ -208,14 +208,14 @@ public class ApiController extends Controller{
 								"lesson",
 								"*.class");
 			
-				return ok(postDetailsSerializer.serialize(test));
+				return ok(postDetailsSerializer.serialize(test)).as("application/json");
 				}
 			}
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
 
-				return ok(result);
+				return ok(result).as("application/json");
 			}
 		}
 		return badRequest("Expecting Json data.");

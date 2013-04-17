@@ -57,6 +57,8 @@ public class Application extends Controller {
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.getAllModules();
+		
+		modules.remove(Module.findByAcronym("demo1"));
 		if (modules.size()>3){
 		Collections.shuffle(modules);
 		modules=modules.subList(0, 3);

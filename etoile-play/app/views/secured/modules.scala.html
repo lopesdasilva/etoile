@@ -103,6 +103,7 @@
 				<div id="mainwrapper">
 				<section id="modules">
 					@for(module <- modules) {
+					@if(module.id != 998){
 					@if(module.university!=null){
 						@module.university.refresh()
 						}
@@ -147,7 +148,7 @@
 							</div> 
 							 
 											
-
+						}
 						}
 						</section>
 						</ul>

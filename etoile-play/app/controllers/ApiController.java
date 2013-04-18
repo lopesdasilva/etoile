@@ -15,10 +15,7 @@ import flexjson.JSONSerializer;
 import models.Blog;
 import models.Student;
 import models.User;
-import models.module.Content;
 import models.module.Lesson;
-import models.User;
-import models.manytomany.Usertest;
 import models.module.Module;
 import models.test.Test;
 

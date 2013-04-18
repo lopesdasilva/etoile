@@ -59,6 +59,7 @@ List[models.module.Module]) @main("etoile project") {
 				
 				<div id="mainwrapper">
 					@for(module <- modules) {
+					@if(module.id == 998){
 					@if(module.university!=null){
 						@module.university.refresh()
 						}
@@ -102,7 +103,7 @@ List[models.module.Module]) @main("etoile project") {
 								</a>
 							</div> 
 							 				
-
+						}
 						}
 						</ul>
 

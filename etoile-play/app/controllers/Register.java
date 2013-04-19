@@ -120,6 +120,7 @@ public class Register extends Controller {
 	        	user.account_type = 0;
 	        	user.studentProfile = student;
 	        	user.studentProfile.acronym=form.get().inputUsername;
+	        	user.olduser = true;
 	        	if(form.get().gender.equals("male")){
 	        		user.studentProfile.male = true;
 	        	}else{

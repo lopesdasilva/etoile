@@ -53,10 +53,10 @@ public class Application extends Controller {
 		if(session("email")!=null){
 			return StudentController.index();
 		}
-		List<Blog> blogs = Blog.getAllBlogs();
+		List<Blog> blogs = Blog.find.all();
 		List<Category> categories = Category.getAllCategories();
 		List <Continent> continents = Continent.getAllContinents();
-		List<Module> modules= Module.getAllModules();
+		List<Module> modules= Module.find.all();
 		
 		modules.remove(Module.findByAcronym("demo1"));
 		if (modules.size()>3){
@@ -117,7 +117,7 @@ public static Result professorprofile(String professor_acronym) {
 		}
 
 		return ok(views.html.blog.blogs.render(
-				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
+				Blog.find.all(),Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
 	
@@ -227,14 +227,14 @@ public static Result professorprofile(String professor_acronym) {
 			}
 		}
 		
-		List<Module> modules_list = Module.getAllModules();
+		List<Module> modules_list = Module.find.all();
 		for(Module mod: modules_list){
 			mod.language.refresh();
 			for(Professor prof: mod.professors){
 				prof.refresh();
 		}
 		}
-		return ok(modules.render(Module.getAllModules(),Category.getAllCategories(),Continent.getAllContinents()));
+		return ok(modules.render(Module.find.all(),Category.getAllCategories(),Continent.getAllContinents()));
 	}
 		
 	/**

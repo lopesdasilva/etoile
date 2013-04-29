@@ -39,7 +39,7 @@ public class ProfessorController extends Controller {
 			System.out.println("Controller: ProfessorController.java");
 			System.out.println("Method: index");
 			System.out.println("User is professor");
-		List<Blog> blogs = Blog.getAllBlogs();
+		List<Blog> blogs = Blog.find.all();
 	
 		List<Category> categories = Category.getAllCategories();
 	
@@ -162,7 +162,7 @@ public class ProfessorController extends Controller {
 		
 		User user = User.find.byId(session("email"));
 		user.professorProfile.refresh();
-		return ok(views.html.professor.blogs.render(user,Blog.getAllBlogs()));
+		return ok(views.html.professor.blogs.render(user,Blog.find.all()));
 	}
 
 	public static Result about() {

@@ -90,11 +90,11 @@ public class Module extends Model {
         return find.where().eq("acronym", acronym).findUnique();
     }
 
-	public static List<Module> getAllModules() {
-		List<Module> modules = new ArrayList<Module>();
-		modules = Ebean.find(Module.class).findList(); 
-		return modules; 
-	}
+//	public static List<Module> getAllModules() {
+//		List<Module> modules = new ArrayList<Module>();
+//		modules = Ebean.find(Module.class).findList(); 
+//		return modules; 
+//	}
 	
 	
 	public int getNumberOfQuestions(){

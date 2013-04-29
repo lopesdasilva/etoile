@@ -57,11 +57,12 @@ public class Blog extends Model {
 	public static Model.Finder<Long, Blog> find = new Model.Finder<Long, Blog>(
 			Long.class, Blog.class);
 
-	public static List<Blog> getAllBlogs() {
-		List<Blog> blogs = new ArrayList<Blog>();
-		blogs = Ebean.find(Blog.class)
-				.findList(); 
-		return blogs; 
-	}
+//	public static List<Blog> getAllBlogs() {
+//		List<Blog> blogs = new ArrayList<Blog>();
+//		Ebean.
+//		blogs = Ebean.find(Blog.class)
+//				.findList(); 
+//		return blogs; 
+//	}
 	
 }

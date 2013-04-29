@@ -84,7 +84,7 @@ public class StudentController extends Controller {
 			System.out.println("Controller: StudentController.java");
 			System.out.println("Method: index");
 			System.out.println("User is student");
-			List<Blog> blogs = Blog.getAllBlogs();
+			List<Blog> blogs = Blog.find.all();
 
 			List<Category> categories = Category.getAllCategories();
 
@@ -418,7 +418,7 @@ public class StudentController extends Controller {
 	}
 
 	public static Result modules() {
-		List<Module> allModules = Module.getAllModules();
+		List<Module> allModules = Module.find.all();
 		List<Category> categories = Category.getAllCategories();
 
 		// check this line
@@ -473,7 +473,7 @@ public class StudentController extends Controller {
 		System.out.println("*********   end:"+user.email+"***********");
 
 		return ok(views.html.secured.blogs.render(user,
-				Blog.getAllBlogs(),Category.getAllCategories(),Continent.getAllContinents()
+				Blog.find.all(),Category.getAllCategories(),Continent.getAllContinents()
 				));
 	}
 

@@ -886,6 +886,7 @@ public class StudentTestController extends Controller {
 		url.imageURL=form.get().image;
 		url.name=form.get().name;
 		url.likes=0;
+		System.out.println("question: " + question.question);
 		url.question=question;
 		url.user=user;
 		

@@ -131,7 +131,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input required="required"  minlength="6" data-validation-minlength-message="A lesson name must have at least 6 characters"  name="name" type="text" placeholder="" class="input-xlarge" required>
+												<input required="required"  minlength="6" maxlength="150" data-validation-minlength-message="A lesson name must have at least 6 characters"  name="name" type="text" placeholder="" class="input-xlarge" required>
 												<p class="help-block">Insert the news header</p>
 											</div>
 										</div>
@@ -210,7 +210,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">Title</label>
 											<div class="controls">
-												<input name="name" type="text" placeholder="" class="input-xlarge" required minlength="6">
+												<input name="name" type="text" placeholder="" class="input-xlarge" required minlength="6" maxlength="150">
 												<p class="help-block">Title</p>
 											</div>
 										</div>
@@ -233,7 +233,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<label class="control-label" for="input01">Image url</label>
 											<div class="controls">
 												<input name="imageURL" type="text" placeholder="" class="input-xlarge"
-													required>
+													>
 												<p class="help-block">New Alert item's image</p>
 											</div>
 										</div>
@@ -243,7 +243,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 											<!-- Text input-->
 											<label class="control-label" for="input01">URL</label>
 											<div class="controls">
-												<input name="url" type="text" placeholder="" class="input-xlarge"
+												<input name="url" type="text" placeholder="" required="required" class="input-xlarge"
 													>
 												<p class="help-block">New Alert item's url</p>
 											</div>
@@ -480,7 +480,7 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 								</thead>
 								<tbody>
 								@for(question <- lesson.questions){
-								@if(question.user!=null){
+								@if(question.user!=null && question.user.account_type==0){
 									<tr>
 										<td>@question.id</td>
 										<td>@question.user.name</td>

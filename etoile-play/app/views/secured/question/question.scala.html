@@ -432,7 +432,7 @@ function unsavedanswers(number){
 								</div>
 							</div>
 						</div>
-					<form action="@routes.StudentTestController.addurl(question.number, test.id, lesson.acronym, module.acronym, question.id)" method="POST" class="form-horizontal" id="formBlock@question.number" style="display:none;">
+					<form action="@routes.StudentTestController.addurl(group.number, test.id, lesson.acronym, module.acronym, question.id)" method="POST" class="form-horizontal" id="formBlock@question.number" style="display:none;">
 						<fieldset>
 						<input type="hidden" id="url@question.number" name="url" value="">
 						<div class="control-group">

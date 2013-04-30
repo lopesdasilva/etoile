@@ -79,11 +79,11 @@ public class Test extends Model{
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
 
-	public static List<Test> getAllTests() {
-		List<Test> tests = new ArrayList<Test>();
-		tests = Ebean.find(Test.class).findList(); 
-		return tests; 
-	}
+//	public static List<Test> getAllTests() {
+//		List<Test> tests = new ArrayList<Test>();
+//		tests = Ebean.find(Test.class).findList(); 
+//		return tests; 
+//	}
 	
 	
 	public boolean studentsEnrolled(Test t){

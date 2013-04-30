@@ -15,6 +15,7 @@ import flexjson.JSONSerializer;
 import models.Blog;
 import models.Student;
 import models.User;
+import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.Test;
@@ -160,14 +161,26 @@ public class ApiController extends Controller{
 			Module module=Module.findByAcronym(module_acronym);
 			if (User.authenticateSHA1(username, password)!=null && module!=null){
 			Lesson lesson=Lesson.findByAcronym(lesson_acronym);
+			
+
+			for(Test test: lesson.tests){
+				for( Usertest utest: test.users){
+					if(utest.user.username!=username)
+						test.users.remove(utest);
+				}
+			}
+			
+			
 			if (lesson!=null && module.lessons.contains(lesson)){
 			
 				JSONSerializer postDetailsSerializer = new JSONSerializer().include(
 						"tests",
 						"lessoncontents",
-						"lessonalerts")
+						"lessonalerts",
+						"tests.users")
 						.exclude(
 								"module",
+								"tests.users.user",
 								"*.class");
 			
 				return ok(postDetailsSerializer.serialize(lesson)).as("application/json");

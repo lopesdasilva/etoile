@@ -19,7 +19,7 @@ import models.module.Lesson;
 import models.module.Module;
 import models.test.Test;
 
-import play.api.db.DB;
+
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -31,8 +31,6 @@ public class ApiController extends Controller{
 
 
 	public static Result getModules() {
-//		DB.withConnection(arg0, arg1);
-//		System.out.println(""+Db.get);
 
 	List<Module> obj = Module.find.all();
 	JSONSerializer postDetailsSerializer = new JSONSerializer().include("contents").exclude("*.class");

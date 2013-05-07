@@ -18,7 +18,11 @@ import models.User;
 import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
+import models.test.Answer;
+import models.test.Hypothesis;
 import models.test.Test;
+import models.test.question.Question;
+import models.test.question.QuestionGroup;
 
 
 import play.libs.Json;
@@ -213,12 +217,45 @@ public class ApiController extends Controller{
 			Test test=Test.find.byId(test_id);
 				if(test!=null && lesson.tests.contains(test)){
 				JSONSerializer postDetailsSerializer = new JSONSerializer().include(
-						"groups")
+						"test.groups",
+						"test.groups.questions",
+						"test.groups.questions.hypothesislist")
 						.exclude(
 								"lesson",
+								"user",
+								"test.lesson",
+								"test.groups.questions.lesson",
+								"test.groups.questions.user",
+								"test.groups.questions.answerSuggestedByStudent",
+								"test.groups.questions.isCopy",
+								"test.groups.questions.hypothesislist.user",
+								"test.groups.questions.hypothesislist.isCorrect",
+								"test.groups.questions.hypothesislist.isSaved",
+								"test.groups.questions.hypothesislist.questionImageURL",
 								"*.class");
-			
-				return ok(postDetailsSerializer.serialize(test)).as("application/json");
+				Usertest userTest= Usertest.findByUserAndTest(username, test_id);
+
+				for(QuestionGroup group: userTest.test.groups){
+					for(Question question : group.questions){
+						switch(question.typeOfQuestion){
+						case 0:
+							question.openanswer=Answer.findByUserTestAndQuestion(userTest.id, question.id);
+							break;
+						case 1:
+							question.hypothesislist=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+							break;
+						case 2:
+							question.hypothesislist=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+							break;
+						}
+						
+					}
+				}
+				
+				if(userTest==null){
+					//TODO create new userTest
+				}
+				return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
 				}
 			}
 			} else{

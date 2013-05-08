@@ -3,6 +3,7 @@ package controllers;
 
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
@@ -166,14 +167,25 @@ public class ApiController extends Controller{
 			if (User.authenticateSHA1(username, password)!=null && module!=null){
 			Lesson lesson=Lesson.findByAcronym(lesson_acronym);
 			
-
+                System.out.println("tests size: "+lesson.tests.size());
+                Usertest aux=null;
 			for(Test test: lesson.tests){
+                                System.out.println("usertest size: "+test.users.size());
 				for( Usertest utest: test.users){
-					if(utest.user.username!=username)
-						test.users.remove(utest);
+                    System.out.println(username);
+					if(utest.user!=null){
+                         System.out.println(utest.user.email);
+                        if(utest.user.email==username){
+                            aux=utest;
+                        }
+                    }
+					test.users.remove(utest);
 				}
+                if(aux!=null){
+                    test.users.add(aux);
+                }
 			}
-			
+                
 			
 			if (lesson!=null && module.lessons.contains(lesson)){
 			

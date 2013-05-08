@@ -1719,8 +1719,10 @@ public class ProfessorTestController extends Controller {
 		//Processamento de reputações...
 		//Processamento das reputações dos modulos
 		User student = usertest.user;
-
+		
+		System.out.println("Module: "+module_acronym+"User: "+student.email);
 	Modulescore modulescore = Modulescore.findByUserAndModule(student.email, module_acronym);
+	
 //			Double new_modulescore =  (modulescore.score*lesson.tests.size() + usertest.reputationAsAstudent)/lesson.tests.size();
 //			int new_modulescore_int = new_modulescore.intValue(); 
 //			System.out.println("New Student Module Reputation: " + new_modulescore_int);

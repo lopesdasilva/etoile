@@ -324,8 +324,7 @@ function unsavedanswers(number){
 								onclick='TwitterQuery("@question.keywords");'
 								data-toggle="modal">Ask Twitter</a></li>
 							<li class="divider"></li>
-							<li><a href="#generalhelp" data-toggle="modal">General
-									help</a></li>
+							<li><a href="#generalhelp" data-toggle="modal">ASCIIMathML</a></li>
 						</ul>
 					</div>
 					<!-- /btn-group -->
@@ -490,7 +489,7 @@ function unsavedanswers(number){
 				<div id="generalhelp" class="modal hide fade">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">X</button>
-						<h3 id="myModalLabel">Help</h3>
+						<h3 id="myModalLabel">ASCIIMathML Help</h3>
 					</div>
 					<div class="modal-body">
 						<div class="tabbable" style="margin-bottom: 18px;">
@@ -519,27 +518,27 @@ function unsavedanswers(number){
 										</thead>
 										<tbody>
 											<tr>
-												<td>x^2+y_1+z_12^34</td>
+												<td><span class="asciimath2jax_ignore">`x^2+y_1+z_12^34`</span></td>
 												<td>`x^2+y_1+z_12^34`</td>
 											</tr>
 											<tr>
-												<td>sin^-1(x)</td>
+												<td><span class="asciimath2jax_ignore">`sin^-1(x)`</span></td>
 												<td>`sin^-1(x)`</td>
 											</tr>
 											<tr>
-												<td>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</td>
+												<td><span class="asciimath2jax_ignore">`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</span></td>
 												<td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
 											</tr>
 											<tr>
-												<td>f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n</td>
+												<td><span class="asciimath2jax_ignore">`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</span></td>
 												<td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
 											</tr>
 											<tr>
-												<td>int_0^1f(x)dx</td>
+												<td><span class="asciimath2jax_ignore">`int_0^1f(x)dx</td>
 												<td>`int_0^1f(x)dx`</td>
 											</tr>
 											<tr>
-												<td>bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)</td>
+												<td><span class="asciimath2jax_ignore">`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</span></td>
 												<td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
 											</tr>
 										</tbody>

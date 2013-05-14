@@ -119,7 +119,7 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 							<li><a href="#ADDURL@question.number" data-toggle="modal">Add
 									new URLs</a></li>
 									<li class="divider"></li>
-									<li><a href="#generalhelp" data-toggle="modal">General help</a></li>
+									<li><a href="#generalhelp" data-toggle="modal">ASCIIMathML</a></li>
 						</ul>
 					</div>
 					<!-- /btn-group -->
@@ -236,7 +236,7 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
 				<div id="generalhelp" class="modal hide fade">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">X</button>
-						<h3 id="myModalLabel">Help</h3>
+						<h3 id="myModalLabel">ASCIIMathML</h3>
 					</div>
 					<div class="modal-body">
 					<div class="tabbable" style="margin-bottom: 18px;">
@@ -247,43 +247,43 @@ usertest: models.manytomany.Usertest, evaluations: List[models.test.question.Que
               <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
                 <div class="tab-pane active" id="tab1">
                   <p>For mathematics written in this form, you mark your mathematical expressions by surrounding them in ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.</p>
-                  
-                   <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Type this</th>
-                  <th>See this</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> x^2+y_1+z_12^34</td>
-                  <td>`x^2+y_1+z_12^34`</td>
-                </tr>
-                <tr>
-                  <td>sin^-1(x)</td>
-                  <td>`sin^-1(x)`</td>
-                </tr>
-                <tr>
-                  <td>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</td>
-                  <td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
-                </tr>
-                 <tr>
-                  <td>f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n</td>
-                  <td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
-                </tr>
-                 <tr>
-                  <td>int_0^1f(x)dx</td>
-                  <td>`int_0^1f(x)dx`</td>
-                </tr>
-                 <tr>
-                  <td>bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)</td>
-                  <td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
-                </tr>
-              </tbody>
-            </table>
-                  
-                </div>
+
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Type this</th>
+												<th>See this</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`x^2+y_1+z_12^34`</span></td>
+												<td>`x^2+y_1+z_12^34`</td>
+											</tr>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`sin^-1(x)`</span></td>
+												<td>`sin^-1(x)`</td>
+											</tr>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</span></td>
+												<td>`d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h`</td>
+											</tr>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</span></td>
+												<td>`f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n`</td>
+											</tr>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`int_0^1f(x)dx</td>
+												<td>`int_0^1f(x)dx`</td>
+											</tr>
+											<tr>
+												<td><span class="asciimath2jax_ignore">`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</span></td>
+												<td>`bb{AB3}.bbb(AB].cc(AB).fr{AB}.tt[AB].sf(AB)`</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
                 <div class="tab-pane" id="tab2">
                   <p class="text-warning">
 						<span class="label label-warning">Info</span>Do not forget to surround your formula with ‚"back-ticks", i.e., <span class="asciimath2jax_ignore">`...`</span>.

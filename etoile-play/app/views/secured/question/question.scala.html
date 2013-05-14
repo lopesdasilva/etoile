@@ -189,11 +189,11 @@ function UpdateMath (TeX,number) {
 function unsavedanswers(number){
 	console.log(number);
 	$("#unsavedanswers"+number).show();
+	$("#savedanswerbutton"+number).hide();
+	$("#saveanswerbutton"+number).show();
 }
    
 </script>
-
-
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -806,7 +806,9 @@ function unsavedanswers(number){
 				<br>
 				</p>
 							<p>
-								<button class="btn btn-success pull-right" type="submit">Save
+								<button id ="savedanswerbutton@question.number" class="btn btn-success pull-right" disabled="disabled" type="submit">Saved
+									answer @question.number</button>
+									<button style="display: none;" id ="saveanswerbutton@question.number" class="btn btn-success pull-right" type="submit">Save
 									answer @question.number</button>
 							</p>
 						</div>

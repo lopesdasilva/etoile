@@ -618,14 +618,18 @@ public class ProfessorTestController extends Controller {
 		
 		
 		for(Hypothesis h: question.hypothesislist){
-			if(h.id != hypothesis_selected.id && h.user == null){
+//			if(h.id != hypothesis_selected.id && h.user == null){
 				h.isCorrect = false;
 				h.save();
-			}else{
-				h.isCorrect = true;
-				h.save();
-			}
+//			}else{
+//				h.isCorrect = true;
+//				h.save();
+//			}
 		}
+		
+		hypothesis_selected.isCorrect = true;
+		hypothesis_selected.save();
+		
 		return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 
 	}
@@ -996,6 +1000,13 @@ public class ProfessorTestController extends Controller {
 
 			hypothesis.delete();
 			
+			int i = 1;
+			for(Hypothesis h: question.hypothesislist){
+				h.number = i;
+				h.save();
+				i++;
+			}
+			
 			return redirect(routes.ProfessorTestController.addmultiplehypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 
 		}
@@ -1041,6 +1052,13 @@ public class ProfessorTestController extends Controller {
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 
 			hypothesis.delete();
+			
+			int i = 1;
+			for(Hypothesis h: question.hypothesislist){
+				h.number = i;
+				h.save();
+				i++;
+			}
 			
 			return redirect(routes.ProfessorTestController.addhypothesisform(module.acronym, lesson.acronym, test.id, group.id, question.id));
 

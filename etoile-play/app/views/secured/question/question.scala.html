@@ -179,10 +179,11 @@ function searchButton(){
 
 <script>
 
-function UpdateMath (TeX,number) {	 
-	 $("#answer").empty().text(TeX);
-	 MathJax.Hub.Typeset()
-	 unsavedanswers(number,0);
+function UpdateMath (TeX,number) {	
+	console.log(TeX)
+	 $("#answer"+ number).empty().text(TeX);
+	 MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+	 //unsavedanswers(number,0);
 
 }
 
@@ -793,13 +794,13 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 						<div class="span11">
 							<div class="span6">
 
-								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)" onchange="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
+								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)"  onmousemove="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
 							</div>
 							<div class="span6">
 								<div class="alert alert-block alert-success">
 									<button id="save" type="button" class="close" data-dismiss="alert">x</button>
 									<h4>Your answer</h4>
-									<label id="answer@question.id" >@question.openanswer.answer</label>
+									<label id="answer@question.number" >@question.openanswer.answer</label>
 								</div>
 
 							</div>

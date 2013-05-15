@@ -197,7 +197,7 @@ function unsavedanswers(number, typeOfQuestion){
 
 function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 	console.log("Question: " + question_id);
-	console.log(answer_text);
+	console.log(answer_text.value);
 	console.log(typeOfQuestion);
 	
 	// Use jQuery to make an Ajax call to /example
@@ -217,7 +217,7 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 	//var data = $('form').serialize();
 	if(typeOfQuestion==0){
 	var str1 = "/saveopenanswer/@usertest.id/";
-	var n = str1.concat(question_id+"/"+answer_text);
+	var n = str1.concat(question_id+"/"+answer_text.value);
 	$.post(n, callback); //POST
 		
 	}else{
@@ -794,7 +794,7 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 						<div class="span11">
 							<div class="span6">
 
-								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)"  onmousemove="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
+								<textarea class="span50" rows="10" id="qanswer@question.number" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)"  onmousemove="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
 							</div>
 							<div class="span6">
 								<div class="alert alert-block alert-success">
@@ -874,7 +874,7 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 									answer @question.number</button>
 									
 									@if(question.typeOfQuestion == 0){
-									<button style="display: none;" id ="saveanswerbutton@question.number" onclick="saveanswer(qanswer.value,@question.typeOfQuestion, @question.id, @question.number)" class="btn btn-success pull-right" type="submit">Save
+									<button style="display: none;" id ="saveanswerbutton@question.number" onclick="saveanswer(qanswer@question.number,@question.typeOfQuestion, @question.id, @question.number)" class="btn btn-success pull-right" type="submit">Save
 									answer @question.number</button>
 									}
 									@if(question.typeOfQuestion==1){

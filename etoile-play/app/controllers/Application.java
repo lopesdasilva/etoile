@@ -59,6 +59,8 @@ public class Application extends Controller {
 		List<Module> modules= Module.find.all();
 		
 		modules.remove(Module.findByAcronym("demo1"));
+		Module	m=Module.find.byId((long) 998);
+		modules.remove(m);
 		if (modules.size()>3){
 		Collections.shuffle(modules);
 		modules=modules.subList(0, 3);

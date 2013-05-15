@@ -1893,6 +1893,8 @@ public class ProfessorTestController extends Controller {
 				QuestionGroup questiongroup=QuestionGroup.find.byId(group_id);
 				
 				questiongroup.delete();
+				test.groups.remove(questiongroup);
+
 				
 				int i=1;
 				for(QuestionGroup questiongroup_aux: test.groups){
@@ -1916,17 +1918,20 @@ public class ProfessorTestController extends Controller {
 		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		if (lesson==null){
+			System.out.println("The lesson does not exist.");
 			return redirect(routes.Application.module(module_acronym));
 		}
 		
 		
 		Test test = Test.find.byId(test_id);
 		if(test==null|| !lesson.tests.contains(test)){
+			System.out.println("The this does not exist.");
 			return redirect(routes.Application.lesson(module_acronym,lesson_acronym)+"#tests");
 		}
 		
 		QuestionGroup group_aux = QuestionGroup.find.byId(group_id);
 		if(group_aux==null || !test.groups.contains(group_aux)){
+			System.out.println("The group does not exist.");
 			return redirect(routes.ProfessorTestController.edittest(module_acronym, lesson_acronym, test_id));
 		}
 		
@@ -1939,21 +1944,20 @@ public class ProfessorTestController extends Controller {
 			
 			if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 				
-				for(QuestionGroup group: test.groups){
-					if(group.id==group_id){
-						Question question=Question.find.byId(question_id);
-						group.questions.remove(question);	
-						group.save();
-						int i =1;
-						for(Question q: group.questions){
-							q.number=i;
-							q.save();
-							i++;
-							
-						}
-						}
-					}
+				QuestionGroup group = QuestionGroup.find.byId(group_id);
+				Question question=Question.find.byId(question_id);
+				group.questions.remove(question);
+				group.save();
 				
+				
+				//Sort questions
+				int i =1;
+				for(Question q: group.questions){
+					q.number=i;
+					q.save();
+					i++;
+					
+				}
 				
 			return redirect(routes.ProfessorTestController.edittest(module_acronym,lesson_acronym,test_id));
 		}

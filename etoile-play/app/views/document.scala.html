@@ -27,11 +27,13 @@
 		</div>
 		} @if(question.typeOfQuestion==1){
 		@for(hyp <- question.hypothesislist){
+		@if(hyp.user==usertest.user){
 			<div style="padding-left:1em">
 				@if(hyp.selected){
 				<b><i>@hyp.text</i></b>
 				}
 				</div>
+				}
 		}
 		
 		}@if(question.typeOfQuestion==2){

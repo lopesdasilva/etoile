@@ -11,6 +11,7 @@ import models.module.Module;
 import controllers.routes;
 
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -18,6 +19,9 @@ import controllers.secured.*;
 
 import controllers.extra.SendMail;
 import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ObjectNode;
 
 
 
@@ -167,6 +171,28 @@ public class ProfessorModuleController extends Controller {
 		return redirect(routes.Application.module(module_acronym));
 	}
 	
+	public static Result verifyLesson(String module_acronym) {
+		System.out.println("Verifing lesson acronym");
+		int i = request().uri().indexOf("value=");
+		int j= request().uri().indexOf("&field");
+		String a=request().uri().substring(i+"value=".length(),j);
+	
+		System.out.println(a);
+		System.out.println(request().username());
+		
+		ObjectNode result = Json.newObject();
+		result.put("value", a);
+		if(Lesson.findByAcronym(a)==null){
+		result.put("valid", 1);
+		}
+		else{
+			result.put("valid", 0);
+			result.put("message","This acronym already exists.");
+		}
+		return ok(result).as("application/json");
+	}
+	
+	
 	public static Result addlesson(String module_acronym) throws java.sql.SQLException{
 		
 		Module module = Module.findByAcronym(module_acronym);if (module==null){
@@ -181,6 +207,7 @@ public class ProfessorModuleController extends Controller {
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<LessonItem_Form> form = Form.form(LessonItem_Form.class).bindFromRequest();
 			
+			if(Lesson.findByAcronym(form.get().acronym)==null){
 			Lesson lesson = new Lesson();
 			lesson.acronym = form.get().acronym;
 			lesson.name = form.get().name;
@@ -190,7 +217,7 @@ public class ProfessorModuleController extends Controller {
 			lesson.number = module.lessons.size() + 1;
 			lesson.module = module;
 			lesson.save();
-			
+			}
 			System.out.println("******* start:"+user.email+"*********");
 	        System.out.println("Controller: ProfessorModuleEdit.java");
 	        System.out.println("Method: addlesson");

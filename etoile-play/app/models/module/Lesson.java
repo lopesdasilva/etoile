@@ -3,6 +3,7 @@ package models.module;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 
 import models.test.Answer;
 import models.test.Test;
@@ -16,6 +17,7 @@ import play.data.validation.*;
 
 @Entity
 public class Lesson extends Model{
+	
 	@Id
 	@GeneratedValue
 	public Long id;
@@ -26,6 +28,7 @@ public class Lesson extends Model{
 	@Constraints.Required
 	public int number;
 	
+	@Column(unique=true)
 	@Constraints.Required
 	public String acronym;
 	

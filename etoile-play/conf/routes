@@ -88,7 +88,7 @@ POST /modules/:module/:lesson/test:usertest/grade:question/markanswer	controller
 GET /modules/:module/:lesson/test:test/submitreviewedtest  controllers.ProfessorTestController.submitreviewedtest(module: String, lesson:String, test: Long, usertest: Long)
 GET /modules/:module/lesson/:lesson/deletetest			controllers.ProfessorTestController.deletetest(test: Long ,module: String ,lesson: String )
 POST /modules/:module/addlesson						controllers.ProfessorModuleController.addlesson(module: String)
-
+GET /modules/:module/verifyLesson			controllers.ProfessorModuleController.verifyLesson(module: String)
 
 #Professor Lesson
 POST /modules/:module/lesson/:lesson/addlessonalert		controllers.ProfessorLessonController.addlessonalert(module: String, lesson: String)

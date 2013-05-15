@@ -13,10 +13,11 @@ object ApplicationBuild extends Build {
     javaEbean,
     jdbc,
 "mysql" % "mysql-connector-java" % "5.1.18",
-"postgresql" % "postgresql" % "9.1-901.jdbc4",
+"com.jolbox" % "bonecp" % "0.8.0-rc1",
    "net.sf.flexjson" % "flexjson" % "2.1",
       "org.apache.commons" % "commons-email" % "1.2",
   	    "pdf" % "pdf_2.10" % "0.4.1"
+
     )
 
     val main = play.Project(appName, appVersion, appDependencies)

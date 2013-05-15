@@ -182,15 +182,80 @@ function searchButton(){
 function UpdateMath (TeX,number) {	 
 	 $("#answer").empty().text(TeX);
 	 MathJax.Hub.Typeset()
-	 unsavedanswers(number);
+	 unsavedanswers(number,0);
 
 }
 
-function unsavedanswers(number){
+function unsavedanswers(number, typeOfQuestion){
 	console.log(number);
+	console.log(typeOfQuestion);
 	$("#unsavedanswers"+number).show();
 	$("#savedanswerbutton"+number).hide();
 	$("#saveanswerbutton"+number).show();
+}
+
+function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
+	console.log("Question: " + question_id);
+	console.log(answer_text);
+	console.log(typeOfQuestion);
+	
+	// Use jQuery to make an Ajax call to /example
+	 
+	var callback = function(data) {
+	  console.log("Callback fired with: " + data);
+	  if(data == "saved"){
+		  console.log("EVERYTHING IS OK");
+		  $("#savedanswerbutton"+question_number).show();
+		  $("#saveanswerbutton"+question_number).hide();
+		  $("#unsavedanswers"+question_number).hide();
+	  }
+	};
+	// $.get is a non-blocking, asynchronous call
+	//$.get('/modules/:@module.acronym/:@lesson.acronym/test:@test.id/postquestion', callback); 
+	
+	//var data = $('form').serialize();
+	if(typeOfQuestion==0){
+	var str1 = "/saveopenanswer/@usertest.id/";
+	var n = str1.concat(question_id+"/"+answer_text);
+	$.post(n, callback); //POST
+		
+	}else{
+		console.log("size: " +answer_text.length);
+		var array = new Array();
+		var contador =0;
+		for(var i=0;i<answer_text.length;i++){
+			console.log(answer_text[i].value + " - " + answer_text[i].checked);
+			if(answer_text[i].checked){
+			array[contador] = answer_text[i].value;
+			contador++;
+			}
+			
+		}
+		
+		  jQuery.ajax({
+			  type: "POST",
+			  url: '/savemultiplechoiceanswer',
+			  data: JSON.stringify({"message": "["+array+"]",
+				  "question":question_id.toString()}),
+			  contentType : 'application/json',
+			  dataType: 'json',
+			  success: function (dataCheck) {
+				  console.log(dataCheck);
+	                  $("#savedanswerbutton"+question_number).show();
+	           		  $("#saveanswerbutton"+question_number).hide();
+	           		  $("#unsavedanswers"+question_number).hide();
+	                
+	            }
+			  
+			 }, callback);
+		  $("#savedanswerbutton"+question_number).show();
+   		  $("#saveanswerbutton"+question_number).hide();
+   		  $("#unsavedanswers"+question_number).hide();
+	}
+	 //jQuery.post("/modules/@module.acronym/@lesson.acronym/test@test.id/postquestion");
+	// When this line is executed, we are not garaunteed that the call to /example 
+	// has completed
+	console.log('This line may execute before the callback!');
 }
    
 </script>
@@ -688,8 +753,7 @@ function unsavedanswers(number){
 
 			</div>
 			<div class="control-group">
-				@helper.form(routes.StudentTestController.postquestion(group.number,
-				module.acronym, lesson.acronym,test.id,usertest.id,question.id)) {
+				
 				<div class="controls">
 
 					<div class="row-fluid">
@@ -729,13 +793,13 @@ function unsavedanswers(number){
 						<div class="span11">
 							<div class="span6">
 
-								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onchange="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
+								<textarea class="span50" rows="10" id="qanswer" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)" onchange="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
 							</div>
 							<div class="span6">
 								<div class="alert alert-block alert-success">
 									<button id="save" type="button" class="close" data-dismiss="alert">x</button>
 									<h4>Your answer</h4>
-									<label id="answer" >@question.openanswer.answer</label>
+									<label id="answer@question.id" >@question.openanswer.answer</label>
 								</div>
 
 							</div>
@@ -752,17 +816,17 @@ function unsavedanswers(number){
 							</p>
 
 							<div class="alert alert-info">
-								<div class="btn-group" data-toggle="buttons-radio">
+								<div onclick="unsavedanswers(@question.number, @question.typeOfQuestion)" class="btn-group" data-toggle="buttons-radio">
 									<ul class="inputs-list">
 										@for(hypothesis <- question.hypothesislist){
 										@if(hypothesis.selected){
-										<label class="radio"> <input  type="radio"
-											name="ocqanswer" value="@hypothesis.id" id="optionRadios"
+										<label class="radio"> <input  id="ocqanswer@question.number"  type="radio"
+											name="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"
 											-							checked="checked"> @hypothesis.text
 
 										</label> } @if(!hypothesis.selected){
-										<label class="radio"> <input  onclick="unsavedanswers(@question.number)" type="radio"
-											name="ocqanswer" value="@hypothesis.id" id="optionRadios"-							>
+										<label class="radio"> <input   type="radio"
+											name="ocqanswer@question.number" id="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"-							>
 											@hypothesis.text
 										</label> } }
 									</ul>
@@ -784,12 +848,12 @@ function unsavedanswers(number){
 							<div class="alert alert-info">
 								@for(hypothesis <- question.hypothesislist){
 								@if(hypothesis.selected){ <label class="checkbox"> <input
-									type="checkbox" id="optionsRadios1"
-									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"
-									checked="checked"  onclick="unsavedanswers(@question.number)"> @hypothesis.text
+									type="checkbox"  checked="checked"
+									name="mcqanswers@question.number" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
+									@hypothesis.text
 								</label> } @if(!hypothesis.selected){ <label class="checkbox"> <input
-									type="checkbox" id="optionsRadios1"
-									name="mcqanswers[@hypothesis.number]" value="@hypothesis.id"  onclick="unsavedanswers(@question.number)">
+									type="checkbox"
+									name="mcqanswers@question.number" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
 									@hypothesis.text
 								</label> } }
 							</div>
@@ -807,13 +871,24 @@ function unsavedanswers(number){
 							<p>
 								<button id ="savedanswerbutton@question.number" class="btn btn-success pull-right" disabled="disabled" type="submit">Saved
 									answer @question.number</button>
-									<button style="display: none;" id ="saveanswerbutton@question.number" class="btn btn-success pull-right" type="submit">Save
+									
+									@if(question.typeOfQuestion == 0){
+									<button style="display: none;" id ="saveanswerbutton@question.number" onclick="saveanswer(qanswer.value,@question.typeOfQuestion, @question.id, @question.number)" class="btn btn-success pull-right" type="submit">Save
 									answer @question.number</button>
+									}
+									@if(question.typeOfQuestion==1){
+									<button style="display: none;" id ="saveanswerbutton@question.number" onclick="saveanswer(ocqanswer@question.number,@question.typeOfQuestion, @question.id, @question.number)" class="btn btn-success pull-right" type="submit">Save
+									answer @question.number</button>
+									}
+									@if(question.typeOfQuestion==2){
+									<button style="display: none;" id ="saveanswerbutton@question.number" onclick="saveanswer(mcqanswers@question.number, @question.typeOfQuestion, @question.id, @question.number)" class="btn btn-success pull-right" type="submit">Save
+									answer @question.number</button>
+									}
 							</p>
 						</div>
 					</div>
 
-					}
+					
 					<hr>
 
 				</div>

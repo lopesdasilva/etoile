@@ -163,7 +163,9 @@ POST    /modules/:module/:lesson/test:test/postquestion     controllers.StudentT
 GET		/modules/:module/:lesson/submitTest					controllers.StudentTestController.submitTest(test: Long,lesson: String,module: String)
 GET 	/modules/:module/:lesson/test:test/:question/voteurl	controllers.StudentTestController.voteurl(url: Long, question: Int, test: Long, lesson: String, module: String)
 POST	/modules/:module/:lesson/test:test/:question/addurl controllers.StudentTestController.addurl(question: Int, test: Long, lesson: String, module: String, question_id: Long)
-
+#POST /modules/:module/:lesson/test:test/:usertest/saveanswer/:question/:answer_text	controllers.StudentTestController.saveanswer(module: String, lesson: String, test: Long,usertest: Long, question: Long, answer_text: String)
+POST /saveopenanswer/:usertest/:question/:answer_text	controllers.StudentTestController.saveopenanswer(usertest: Long, question: Long, answer_text: String)
+POST /savemultiplechoiceanswer 			controllers.StudentTestController.savemultiplechoiceanswer()
 
 #API
 GET /api/modules	controllers.ApiController.getModules()

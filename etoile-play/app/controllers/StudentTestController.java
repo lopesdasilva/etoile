@@ -1,10 +1,12 @@
 package controllers;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
 import org.joda.time.DateTime;
 
 import models.SubtopicReputation;
@@ -22,6 +24,8 @@ import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
 import models.test.question.URL;
 import play.api.Routes;
+import play.api.libs.json.Json;
+import play.api.libs.json.Reads;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -485,7 +489,78 @@ public class StudentTestController extends Controller {
 		userTest.save();
 	}
 	
+	public static Result saveopenanswer(Long usertest_id, Long question_id, String new_answer){
+		System.out.println("SaveQuestion!!");
+		System.out.println("UserTest: " + usertest_id);
+		System.out.println("Question: " + question_id);
+		System.out.println("New_answer: " + new_answer);
+		
+		User user = User.find.byId(request().username());
+		
+		Answer answer = Answer.findByUserTestAndQuestion(usertest_id, question_id);
+		answer.usertest.refresh();
+		System.out.println(answer.usertest.user.email + "-" + user.email);
+		
+		if(answer!= null && answer.usertest.user.email.equals(user.email)){
+		answer.answer = new_answer;
+		answer.save();
+		return ok("saved");
+		}
+		
+		
+		return ok("error");
+	}
+	
+	public static Result savemultiplechoiceanswer(){
+		System.out.println("savemultiplechoiceanswer method");
+		System.out.println(request().uri());
+		System.out.println(request().body().asJson());
+		
+		
+		JsonNode json =request().body().asJson();
+		if(json==null){
+			System.out.println("JSON NULL");
+			return badRequest("Expecting Json data.");
+		}else{
+			
+			System.out.println(json.findPath("message"));
+			System.out.println(json.findPath("message").getTextValue());
+			System.out.println(json.findPath("question").getTextValue());
+			Integer question_id = Integer.parseInt( json.findPath("question").getTextValue() );
+			User user = User.find.byId(request().username());
+			
+			List<Hypothesis> hypothesis_list = Hypothesis.findByUserEmailAndQuestion(user.email, (long)question_id);
+			
+			if(hypothesis_list.size() > 0){
+				String result= json.findPath("message").getTextValue().replace("[", "").replace("]", "");
+				
+				for(Hypothesis h: hypothesis_list){
+					h.selected = false;
+					h.save();
+				}
+				
+				if(result.length()!=0){
+				
+				String[] array=result.split(",");
 
+			
+			for(int i = 0 ; i != array.length; i++){
+				int hypothesis_id = Integer.parseInt(array[i]);
+				Hypothesis hypothesis = Hypothesis.find.byId((long)hypothesis_id);
+				hypothesis.selected = true;
+				hypothesis.save();
+			}
+		
+			return ok("saved");
+			
+			}
+			}
+		}
+//		
+//		//int[] intArray = gson.fromJson(null, int[].class);
+//		
+		return ok("error");
+	}
 
 	public static Result submitTest(Long test_id,String lesson_acronym, String module_acronym){
 		

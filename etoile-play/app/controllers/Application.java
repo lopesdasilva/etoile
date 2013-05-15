@@ -277,4 +277,6 @@ public static Result professorprofile(String professor_acronym) {
             routes.Application.index()
         );
     }
+
+    
 }

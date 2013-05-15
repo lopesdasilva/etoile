@@ -169,22 +169,16 @@ public class ApiController extends Controller{
 			
                 System.out.println("tests size: "+lesson.tests.size());
                 Usertest aux=null;
-			for(Test test: lesson.tests){
-                                System.out.println("usertest size: "+test.users.size());
-				for( Usertest utest: test.users){
-                    System.out.println(username);
-					if(utest.user!=null){
-                         System.out.println(utest.user.email);
-                        if(utest.user.email==username){
-                            aux=utest;
-                        }
-                    }
-					test.users.remove(utest);
-				}
-                if(aux!=null){
-                    test.users.add(aux);
-                }
-			}
+                
+                
+                
+                for(Test test: lesson.tests){
+                		test.users.removeAll(test.users);
+                		if(Usertest.findByUserAndTest(username, test.id)!=null){
+                		Usertest utest=Usertest.findByUserAndTest(username, test.id);
+                		test.users.add(utest);
+                		}
+                	}
                 
 			
 			if (lesson!=null && module.lessons.contains(lesson)){

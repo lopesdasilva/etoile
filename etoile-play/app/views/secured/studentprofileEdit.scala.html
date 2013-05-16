@@ -224,7 +224,7 @@
 						<label class="control-label" for="input01">Contact</label>
 						<div class="controls">
 							<input type="text" name="contact" placeholder="Contact"
-								class="input-xlarge" value="@user.studentProfile.contact" required maxlength="50">
+								class="input-xlarge" value="@user.studentProfile.contact" maxlength="50">
 							<p class="help-block">Please insert your contact</p>
 						</div>
 					</div>
@@ -234,7 +234,7 @@
 						<label class="control-label" for="input01">Address</label>
 						<div class="controls">
 							<input type="text" name="address" placeholder="Contact"
-								class="input-xlarge" value="@user.studentProfile.address" required maxlength="80">
+								class="input-xlarge" value="@user.studentProfile.address" maxlength="80">
 							<p class="help-block">Please insert your address</p>
 						</div>
 					</div>
@@ -257,7 +257,7 @@
 						<label class="control-label" for="input01">Webpage URL</label>
 						<div class="controls">
 							<input type="text" name="webpage" placeholder="Webpage URL"
-								class="input-xlarge" value="@user.studentProfile.webpage" required >
+								class="input-xlarge" value="@user.studentProfile.webpage" >
 							<p class="help-block">Please insert the url of your webpage</p>
 						</div>
 					</div>
@@ -269,7 +269,7 @@
 						<div class="controls">
 							<div class="textarea">
 								<textarea type="" name="shortdescription" class="span4" rows="4" 
-									style="resize: none" required maxlength="200">@user.studentProfile.shortdescription</textarea>
+									style="resize: none" maxlength="200">@user.studentProfile.shortdescription</textarea>
 							</div>
 						</div>
 					</div>
@@ -385,7 +385,7 @@
 						<div class="controls">
 							<div class="textarea">
 								<textarea type="" name="description" class="span4" rows="4" 
-									style="resize: none" required  minlength="40">@user.studentProfile.description</textarea>
+									style="resize: none"  minlength="40">@user.studentProfile.description</textarea>
 							</div>
 						</div>
 					</div>
@@ -483,8 +483,8 @@
 								</div>
 								<small>As a marker:<strong>@subtopicreputation.reputationAsAMarker%</strong></small> <div class="progress progress-warning">
 									<div class="bar" style="width:@subtopicreputation.reputationAsAMarker%"></div>
-								</div> -->
-							}
+								</div>
+							}-->
 							}
 					
 							</div>

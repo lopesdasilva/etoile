@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import org.joda.time.DateTime;
 
 import play.*;
+import play.mvc.*;
+import play.mvc.Http.RequestHeader;
 
 import com.avaje.ebean.*;
 
@@ -2604,4 +2606,9 @@ public class Global extends GlobalSettings {
 		Logger.info("Application shutdown...");
 
 	}
+	
+	 @Override
+	  public Result onError(RequestHeader request, Throwable t) {
+		 return badRequest();
+		 }  
 }

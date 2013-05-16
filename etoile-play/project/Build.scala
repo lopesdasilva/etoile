@@ -14,7 +14,6 @@ object ApplicationBuild extends Build {
     jdbc,
 "mysql" % "mysql-connector-java" % "5.1.18",
    "net.sf.flexjson" % "flexjson" % "2.1",
-   "com.jolbox" % "bonecp" % "0.8.0-rc1",
       "org.apache.commons" % "commons-email" % "1.2",
   	    "pdf" % "pdf_2.10" % "0.4.1"
 

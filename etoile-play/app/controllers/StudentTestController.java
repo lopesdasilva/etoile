@@ -489,9 +489,41 @@ public class StudentTestController extends Controller {
 		userTest.save();
 	}
 	
-	public static Result saveopenanswer(Long usertest_id, Long question_id, String new_answer){
+	public static Result saveopenanswer(){
 		System.out.println("SaveQuestion!!");
-		System.out.println("UserTest: " + usertest_id);
+		
+		System.out.println(request().uri());
+		System.out.println(request().body().asJson());
+		
+		JsonNode json =request().body().asJson();
+		if(json==null){
+			System.out.println("JSON NULL");
+			return badRequest("Expecting Json data.");
+		}else{
+			
+			System.out.println(json.findPath("usertest").getTextValue());
+			System.out.println(json.findPath("question").getTextValue());
+			System.out.println(json.findPath("answer").getTextValue());
+			
+			Integer question_id = Integer.parseInt( json.findPath("question").getTextValue() );
+			User user = User.find.byId(request().username());
+			Integer usertest_id = Integer.parseInt( json.findPath("usertest").getTextValue() );
+			
+			Answer answer = Answer.findByUserTestAndQuestion((long)usertest_id, (long)question_id);
+			answer.usertest.refresh();
+			System.out.println(answer.usertest.user.email + "-" + user.email);
+			
+			if(answer!= null && answer.usertest.user.email.equals(user.email)){
+			answer.answer = json.findPath("answer").getTextValue();
+			answer.save();
+			System.out.println("saved");
+			return ok("success");
+			}
+			return ok("error");
+			
+		}
+		
+		/*System.out.println("UserTest: " + usertest_id);
 		System.out.println("Question: " + question_id);
 		System.out.println("New_answer: " + new_answer);
 		
@@ -505,10 +537,9 @@ public class StudentTestController extends Controller {
 		answer.answer = new_answer;
 		answer.save();
 		return ok("saved");
-		}
+		}*/
 		
 		
-		return ok("error");
 	}
 	
 	public static Result savemultiplechoiceanswer(){

@@ -216,10 +216,32 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 	
 	//var data = $('form').serialize();
 	if(typeOfQuestion==0){
-	var str1 = "/saveopenanswer/@usertest.id/";
-	var n = str1.concat(question_id+"/"+answer_text.value);
-	$.post(n, callback); //POST
+	//var str1 = "/saveopenanswer/@usertest.id/";
+	//var n = str1.concat(question_id+"/"+answer_text.value);
+	//$.post(n, callback); //POST
+
+	
+		jQuery.ajax({
+			  type: "POST",
+			  url: '/saveopenanswer',
+			  data: JSON.stringify({"answer": answer_text.value,"usertest": "@usertest.id".toString(),
+				  "question":question_id.toString()}),
+			  contentType : 'application/json',
+			  dataType: 'html',
+			  success: function (dataCheck) {
+				  console.log("DATACHECK"+dataCheck);
+	                 $("#savedanswerbutton"+question_number).show();
+	           		 $("#saveanswerbutton"+question_number).hide();
+	           		 $("#unsavedanswers"+question_number).hide();
+	                
+	            }
+			  
+			 });
 		
+		  //$("#savedanswerbutton"+question_number).show();
+ 		  //$("#saveanswerbutton"+question_number).hide();
+ 		  //$("#unsavedanswers"+question_number).hide();
+ 		  
 	}else{
 		console.log("size: " +answer_text.length);
 		var array = new Array();
@@ -239,19 +261,21 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 			  data: JSON.stringify({"message": "["+array+"]",
 				  "question":question_id.toString()}),
 			  contentType : 'application/json',
-			  dataType: 'json',
+			  dataType: 'html',
 			  success: function (dataCheck) {
-				  console.log(dataCheck);
+				  console.log("DATACHECK"+dataCheck);
 	                  $("#savedanswerbutton"+question_number).show();
 	           		  $("#saveanswerbutton"+question_number).hide();
 	           		  $("#unsavedanswers"+question_number).hide();
 	                
 	            }
 			  
-			 }, callback);
-		  $("#savedanswerbutton"+question_number).show();
-   		  $("#saveanswerbutton"+question_number).hide();
-   		  $("#unsavedanswers"+question_number).hide();
+			 });
+		  
+		  //$("#savedanswerbutton"+question_number).show();
+   		  //$("#saveanswerbutton"+question_number).hide();
+   		  //$("#unsavedanswers"+question_number).hide();
+		  
 	}
 	 //jQuery.post("/modules/@module.acronym/@lesson.acronym/test@test.id/postquestion");
 	// When this line is executed, we are not garaunteed that the call to /example 

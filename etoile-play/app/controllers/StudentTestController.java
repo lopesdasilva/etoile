@@ -230,11 +230,13 @@ public class StudentTestController extends Controller {
 		User user = User.find.byId(request().username());
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		if (lesson==null || !module.users.contains(user)){
+			System.out.println("The lesson does not exist.");
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
 		Test test = models.test.Test.find.byId(test_id);
 		if(test==null){
+			System.out.println("The test does not exist.");
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
@@ -243,7 +245,7 @@ public class StudentTestController extends Controller {
 		Test test_aux= Test.find.byId(test_id);
 		
 
-		if(Secured.isStudent(user.email) && user.isUserSignupTest(test) && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
+		if(Secured.isStudent(user.email) && Usertest.findByUserAndTest(user.email, test_id)!=null && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
@@ -762,19 +764,24 @@ public class StudentTestController extends Controller {
 		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		if (lesson==null){
+			System.out.println("The lesson does not exist.");
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
 		Test test = models.test.Test.find.byId(test_id);
 		if(test==null){
+			System.out.println("The test does not exist.");
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
 		
 		User user = User.find.byId(request().username());
-		
-		if(!user.isUserSignupTest(test)){
+		System.out.println("Method: signuptest: ");
+		System.out.println("Checking if usertest exists");
+		if(Usertest.findByUserAndTest(user.email, test_id)==null){
+			System.out.println("Not exists: OK ");
 			//signup in test
+			
 			Usertest user_test = new Usertest();
 			user_test.user = user;
 			user_test.test = test;
@@ -805,13 +812,16 @@ public class StudentTestController extends Controller {
 					
 			}
 			
-		}
-		
-		Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
-		usertest.inmodule = true;
-		usertest.save();
 
-		List<Category> categories = Category.getAllCategories();
+			Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
+			usertest.inmodule = true;
+			usertest.save();
+
+			
+		}
+		System.out.println("Already exists: NOT OK ");
+
+		
 		
 		return redirect(routes.StudentController.lesson(lesson.acronym, module.acronym)+"#tests");
 	}
@@ -835,18 +845,25 @@ public class StudentTestController extends Controller {
 		
 		Lesson lesson = Lesson.findByAcronym(lesson_acronym);
 		if (lesson==null){
+			System.out.println("The lesson does not exist.");
+
 			return redirect(routes.Application.module(module_acronym));
 		}	
 		
 		Test test = models.test.Test.find.byId(test_id);
 		if(test==null){
+			System.out.println("The test does not exist.");
+
 			return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 		}
 		
 		
 		User user = User.find.byId(request().username());
-		
-		if(!user.isUserSignupTest(test)){
+		System.out.println("Method: addquestion: adding suggestion");
+		System.out.println("Checking if usertest exists");
+		if(Usertest.findByUserAndTest(user.email, test_id)==null){
+			System.out.println("Not exists: OK");
+
 			//signup in test
 			Usertest user_test = new Usertest();
 			user_test.user = user;

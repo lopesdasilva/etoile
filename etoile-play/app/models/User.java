@@ -161,13 +161,15 @@ public class User extends Model {
     
     public boolean isUserSignupTest(Test t){
 
-    	boolean signup=false;
-    	for(Usertest usertest: tests){
-    		if(usertest.test.id==t.id)
-    			signup=true;
-    	}
+    	return Usertest.findByUserAndTest(this.email, t.id)!=null;
     	
-    	return signup;
+//    	boolean signup=false;
+//    	for(Usertest usertest: tests){
+//    		if(usertest.test.id==t.id)
+//    			signup=true;
+//    	}
+//    	
+//    	return signup;
     }
     
     public boolean userSuggestedQuestion(Test t){

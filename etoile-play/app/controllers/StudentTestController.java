@@ -244,8 +244,14 @@ public class StudentTestController extends Controller {
 	
 		Test test_aux= Test.find.byId(test_id);
 		
-
-		if(Secured.isStudent(user.email) && Usertest.findByUserAndTest(user.email, test_id)!=null && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
+		
+//		System.out.println("usertest: " + Usertest.findByUserAndTest(user.email, test_id).id);
+//		System.out.println("inModule: "+Usertest.findByUserAndTest(user.email, test_id).inmodule);
+//		System.out.println("published: "+test_aux.published);
+//		System.out.println("expired: "+test_aux.expired);
+		
+		//if(Secured.isStudent(user.email) && user.isUserSignupTest(test) && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
+		if(Secured.isStudent(user.email) && Usertest.findByUserAndTest(user.email, test_id)!=null && Usertest.findByUserAndTest(user.email, test_id).inmodule && test_aux.published && !test_aux.expired ){
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
@@ -475,6 +481,8 @@ public class StudentTestController extends Controller {
 		return redirect(routes.StudentController.lesson(lesson_acronym,module_acronym)+"#tests");
 	}
 	
+
+	
 	public static void changeTestProgress(Long test_id, Long usertest_id, String user_email){
 		int totalNumQuestions=0;
 		Test t= Test.find.byId(test_id);
@@ -503,6 +511,8 @@ public class StudentTestController extends Controller {
 			return badRequest("Expecting Json data.");
 		}else{
 			
+			
+			
 			System.out.println(json.findPath("usertest").getTextValue());
 			System.out.println(json.findPath("question").getTextValue());
 			System.out.println(json.findPath("answer").getTextValue());
@@ -512,11 +522,18 @@ public class StudentTestController extends Controller {
 			Integer usertest_id = Integer.parseInt( json.findPath("usertest").getTextValue() );
 			
 			Answer answer = Answer.findByUserTestAndQuestion((long)usertest_id, (long)question_id);
+			
+			if(!answer.isSaved){
+				changeTestProgress((long)usertest_id, user.email);
+				
+			}
+			
 			answer.usertest.refresh();
 			System.out.println(answer.usertest.user.email + "-" + user.email);
 			
 			if(answer!= null && answer.usertest.user.email.equals(user.email)){
 			answer.answer = json.findPath("answer").getTextValue();
+			answer.isSaved = true;
 			answer.save();
 			System.out.println("saved");
 			return ok("success");
@@ -544,6 +561,23 @@ public class StudentTestController extends Controller {
 		
 	}
 	
+	public static void changeTestProgress(Long usertest_id, String user_email){
+		int totalNumQuestions=0;
+		Usertest userTest= Usertest.find.byId(usertest_id);
+		Test t= Test.find.byId(userTest.test.id);
+		for (QuestionGroup g: t.groups){
+			totalNumQuestions+=g.questions.size();
+		}
+		
+		float progress = userTest.progress+ 100/totalNumQuestions;
+		userTest.progress=progress;
+		if(userTest.progress == 99){
+			userTest.progress = progress+1;
+			
+		}
+		userTest.save();
+	}
+	
 	public static Result savemultiplechoiceanswer(){
 		System.out.println("savemultiplechoiceanswer method");
 		System.out.println(request().uri());
@@ -567,8 +601,12 @@ public class StudentTestController extends Controller {
 			if(hypothesis_list.size() > 0){
 				String result= json.findPath("message").getTextValue().replace("[", "").replace("]", "");
 				
+				if(!hypothesis_list.get(0).isSaved){
+					changeTestProgress((long)Integer.parseInt(json.findPath("usertest").getTextValue()), user.email);
+				}
 				for(Hypothesis h: hypothesis_list){
 					h.selected = false;
+					h.isSaved = true;
 					h.save();
 				}
 				

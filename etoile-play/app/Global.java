@@ -2609,6 +2609,6 @@ public class Global extends GlobalSettings {
 	
 	 @Override
 	  public Result onError(RequestHeader request, Throwable t) {
-		 return badRequest();
+		 return null;
 		 }  
 }

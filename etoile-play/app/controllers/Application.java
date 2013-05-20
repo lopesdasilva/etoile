@@ -43,13 +43,14 @@ public class Application extends Controller {
 		 return ok(views.html.statics.blank.render());
 	 }
 	 
-
+	 public static Result callErrorPage(){
+		 System.out.println("callErrorPage()");
+		 return ok(errorPage.render());
+	 }
 	 
 
 	public static Result index() {
-		
-		
-		
+		System.out.println("index");
 		if(session("email")!=null){
 			return StudentController.index();
 		}

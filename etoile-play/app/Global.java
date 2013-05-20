@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import play.*;
 import play.mvc.*;
 import play.mvc.Http.RequestHeader;
+import views.html.index;
 
 import com.avaje.ebean.*;
 
@@ -42,6 +43,9 @@ public class Global extends GlobalSettings {
 	public Category soccat;
 	public Category comcat;
 
+
+
+	
 	public void onStart(Application app) {
 		System.out.println(Ebean.find(Blog.class).findRowCount());
 		if (Ebean.find(Blog.class).findRowCount() == 0) {
@@ -2609,6 +2613,10 @@ public class Global extends GlobalSettings {
 	
 	 @Override
 	  public Result onError(RequestHeader request, Throwable t) {
-		 return null;
-		 }  
+		 System.out.println("OnError - Page Error");
+		 //index.render
+		 //return ok(errorPage.render());
+		 return controllers.Application.callErrorPage();
+		 		
+	 }  
 }

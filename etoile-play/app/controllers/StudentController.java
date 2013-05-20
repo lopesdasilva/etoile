@@ -137,7 +137,11 @@ public class StudentController extends Controller {
 			User user = User.find.byId(session("email"));
 			user.studentProfile.scientific_area = form.get().scientific_area;
 			user.studentProfile.degree = form.get().degree;
-			user.studentProfile.university = University.findByName(form.get().university);
+			
+			University university = University.findByName(form.get().university);
+			if(university != null){
+				user.studentProfile.university = university;
+			}
 			user.studentProfile.description = form.get().description;
 			user.studentProfile.save();
 			user.save();

@@ -137,12 +137,12 @@ public class ProfessorController extends Controller {
 				sr.subtopic.refresh();
 			}
 			
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: ProfessorController.java");
-			System.out.println("Method: myprofile");
-			System.out.println("User is professor");
-			System.out.println("Profile refreshed");
-			System.out.println("*********   end:"+user.email+"***********");
+//			System.out.println("********* start:"+user.email+"***********");
+//			System.out.println("Controller: ProfessorController.java");
+//			System.out.println("Method: myprofile");
+//			System.out.println("User is professor");
+//			System.out.println("Profile refreshed");
+//			System.out.println("*********   end:"+user.email+"***********");
 			
 			
 			return ok(views.html.secured.studentprofileEdit.render(user));	

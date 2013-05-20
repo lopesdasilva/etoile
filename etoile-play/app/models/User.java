@@ -98,6 +98,10 @@ public class User extends Model {
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<URL> urls;
 	
+	@ManyToMany	
+	@JoinTable(name="voters_url")
+	public List<URL> urls_voted;
+	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<SubtopicReputation> subtopicreputation;
 	

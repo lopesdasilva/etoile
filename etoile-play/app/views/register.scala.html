@@ -140,8 +140,32 @@ $(document).ready(function() {
 				</div>
 			</div>
 
+						<div class="control-group">
+								<label class="control-label">University</label>
+								<div class="controls">
+									<select name="university"> 
+									<option >-</option> 
+									@for(university <- models.module.University.getAllUniversities){			
+										<option >@university.name</option> 
 
+										}
+									</select>
+									<p class="help-block">Choose your university</p>
+								</div>
+							</div>
+							
+							<div class="control-group">
 
+						<!-- Text input-->
+						<label class="control-label" for="input01">Scientific domain</label>
+						<div class="controls">
+							<input type="text" name="scientific_area" placeholder="Scientific Area"
+								class="input-xlarge"  maxlength="80">
+							<p class="help-block">Please insert your Scientific Area</p>
+						</div>
+						</div>
+							
+							
 
 			<div class="control-group">
 				<label class="control-label" for="profile_country">Country</label>

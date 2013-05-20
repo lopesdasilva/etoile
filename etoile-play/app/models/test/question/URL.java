@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.joda.time.DateTime;
@@ -54,6 +56,9 @@ public class URL extends Model implements Comparable<URL> {
 	@ManyToOne
 	public User user;
 	
+	@ManyToMany
+	@JoinTable(name="voters_url")
+	public List<User> voters;
 	
 	
 	public static Model.Finder<Long, URL> find = new Model.Finder<Long, URL>(

@@ -444,9 +444,13 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 										<a href="@url.adress" target="_blank"><h4
 												class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
-										<small>@url.adress</small></br> </br>@url.description <a
-											href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
+										<small>@url.adress</small></br> </br>@url.description 
+										@if(!url.voters.contains(user)){
+										<a href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
 											class="btn btn-mini btn-primary pull-right">Like</a>
+											}else{
+											<span class="label label-info pull-right">You like this URL</span>
+											}
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>
@@ -478,9 +482,13 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 										<a href="@url.adress" target="_blank"><h4
 												class="media-heading">@url.name</h4></a>
 										<div class="media pull-right">@url.likes likes</div>
-										<small>@url.adress</small></br> </br>@url.description <a
-											href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
+										<small>@url.adress</small></br> </br>@url.description 
+										@if(!url.voters.contains(user)){
+										<a href="@routes.StudentTestController.voteurl(url.id, group.number,test.id, lesson.acronym,module.acronym)"
 											class="btn btn-mini btn-primary pull-right">Like</a>
+											}else{
+											<span class="label label-info pull-right">You like this URL</span>
+											}
 										<!-- Nested media object -->
 										<!-- <div class="media pull-right"></div> -->
 									</div>

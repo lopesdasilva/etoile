@@ -367,6 +367,7 @@
 								<label class="control-label">University</label>
 								<div class="controls">
 									<select name="university"> 
+									<option >-</option> 
 									@for(university <- models.module.University.getAllUniversities){
 										
 										<option >@university.name</option> 

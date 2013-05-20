@@ -7,6 +7,7 @@ import net.tanesha.recaptcha.ReCaptchaResponse;
 import controllers.Application.Login;
 import models.Student;
 import models.User;
+import models.module.University;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -30,6 +31,9 @@ public class Register extends Controller {
 		public String lastname;
 		
 		public String gender;
+		
+		public String scientific_area;
+		public String university;
 		
 		public String recaptcha_challenge_field;
 		public String recaptcha_response_field;
@@ -130,9 +134,13 @@ public class Register extends Controller {
 //	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
 	        	user.save();  
 	        	
+	        	University university = University.findByName(form.get().university);
+	        	
 	        	student.firstname = user.name;
 	        	student.contact = user.email;
 	        	student.user=user;
+	        	student.scientific_area = form.get().scientific_area;
+	        	student.university = university;
 	        	student.save();	        	
 	        	
 	        	

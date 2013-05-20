@@ -992,7 +992,8 @@ public class StudentTestController extends Controller {
 		
 		
 		url.likes ++ ;
-
+		url.voters.add(user);
+		
 		url.save();
 		
 		System.out.println("******* start:"+user.email+"*********");

@@ -826,7 +826,7 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 						<div class="span11">
 							<div class="span6">
 
-								<textarea class="span50" rows="10" id="qanswer@question.number" name="qanswer" onclick="unsavedanswers(@question.number, @question.typeOfQuestion)"  onmousemove="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
+								<textarea class="span50" rows="10" id="qanswer@question.number" name="qanswer" onfocus="unsavedanswers(@question.number, @question.typeOfQuestion)"  onmousemove="UpdateMath(this.value,@question.number);">@question.openanswer.answer</textarea>
 							</div>
 							<div class="span6">
 								<div class="alert alert-block alert-success">

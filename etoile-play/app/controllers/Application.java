@@ -50,7 +50,6 @@ public class Application extends Controller {
 	 
 
 	public static Result index() {
-		System.out.println("index");
 		if(session("email")!=null){
 			return StudentController.index();
 		}

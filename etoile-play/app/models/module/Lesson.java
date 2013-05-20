@@ -70,6 +70,9 @@ public class Lesson extends Model{
 	public static Lesson findByAcronym(String acronym) {
         return find.where().eq("acronym", acronym).findUnique();
     }
+	public static Lesson findByModuleAndAcronym(Long module_id,String acronym) {
+        return find.where().eq("acronym", acronym).eq("module_id", module_id).findUnique();
+    }
 
 	public static List<Lesson> getAllLessons() {
 		List<Lesson> lessons = new ArrayList<Lesson>();

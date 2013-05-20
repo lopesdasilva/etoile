@@ -175,14 +175,16 @@ public class ProfessorModuleController extends Controller {
 		System.out.println("Verifing lesson acronym");
 		int i = request().uri().indexOf("value=");
 		int j= request().uri().indexOf("&field");
-		String a=request().uri().substring(i+"value=".length(),j);
+		String lesson_acronym=request().uri().substring(i+"value=".length(),j);
 	
-		System.out.println(a);
+		System.out.println(lesson_acronym);
 		System.out.println(request().username());
 		
 		ObjectNode result = Json.newObject();
-		result.put("value", a);
-		if(Lesson.findByAcronym(a)==null){
+		result.put("value", lesson_acronym);
+		Module m= Module.findByAcronym(module_acronym);
+		System.out.println(m.name);
+		if(Lesson.findByModuleAndAcronym(m.id,lesson_acronym)==null){
 		result.put("valid", 1);
 		}
 		else{

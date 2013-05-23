@@ -243,18 +243,29 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
  		  //$("#unsavedanswers"+question_number).hide();
  		  
 	}else{
-		console.log("size: " +answer_text.length);
+		//console.log("size: " +answer_text.length);
 		var array = new Array();
 		var contador =0;
-		for(var i=0;i<answer_text.length;i++){
-			console.log(answer_text[i].value + " - " + answer_text[i].checked);
-			if(answer_text[i].checked){
-			array[contador] = answer_text[i].value;
+		var form_name = "form"+question_number;
+		console.log("form: "+form_name);
+		
+		var oForm = document.getElementById('form'+question_number);
+		if(oForm==null){
+			console.log("form is null");
+		}else{
+			console.log("form is not null");
+		}
+		with(oForm) {
+		for(var i=0;i<mcqanswers.length;i++){
+			console.log(mcqanswers[i].value + " - " + mcqanswers[i].checked);
+			if(mcqanswers[i].checked){
+			array[contador] = mcqanswers[i].value;
 			contador++;
+			console.log("for");
 			}
 			
 		}
-		
+		}
 		  jQuery.ajax({
 			  type: "POST",
 			  url: '/savemultiplechoiceanswer',
@@ -284,6 +295,8 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 }
    
 </script>
+
+
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -851,17 +864,19 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 							<div class="alert alert-info">
 								<div onclick="unsavedanswers(@question.number, @question.typeOfQuestion)" class="btn-group" data-toggle="buttons-radio">
 									<ul class="inputs-list">
+									<form id="form@question.number" name="form@question.number">
 										@for(hypothesis <- question.hypothesislist){
 										@if(hypothesis.selected){
 										<label class="radio"> <input  id="ocqanswer@question.number"  type="radio"
-											name="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"
+											name="mcqanswers" value="@hypothesis.id" id="optionRadios"
 											-							checked="checked"> @hypothesis.text
 
 										</label> } @if(!hypothesis.selected){
 										<label class="radio"> <input   type="radio"
-											name="ocqanswer@question.number" id="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"-							>
+											name="mcqanswers" id="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"-							>
 											@hypothesis.text
 										</label> } }
+										</form>
 									</ul>
 								</div>
 							</div>
@@ -879,16 +894,18 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 							</p>
 
 							<div class="alert alert-info">
+							<form id="form@question.number" name="form@question.number">
 								@for(hypothesis <- question.hypothesislist){
 								@if(hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox"  checked="checked"
-									name="mcqanswers@question.number" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
+									name="mcqanswers" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
 									@hypothesis.text
 								</label> } @if(!hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox"
-									name="mcqanswers@question.number" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
+									name="mcqanswers" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
 									@hypothesis.text
 								</label> } }
+								</form>
 							</div>
 						</div>
 					</div>

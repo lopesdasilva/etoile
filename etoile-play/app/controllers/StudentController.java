@@ -80,10 +80,6 @@ public class StudentController extends Controller {
 
 
 		if(Secured.isStudent(session("email"))){
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: index");
-			System.out.println("User is student");
 			List<Blog> blogs = Blog.find.all();
 
 			List<Category> categories = Category.getAllCategories();
@@ -91,7 +87,9 @@ public class StudentController extends Controller {
 			user.studentProfile.refresh();
 			if(blogs.size()>3)
 				blogs=blogs.subList(0, 3);
-			System.out.println("*********   end:"+user.email+"***********");
+			
+			
+			System.out.println("Class: StudentController; Method: index; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 			return ok(home.render(user, blogs, categories));
 		}
 		if (SecuredProfessor.isProfessor(session("email"))){
@@ -113,11 +111,7 @@ public class StudentController extends Controller {
 			user.studentProfile.shortdescription=form.get().shortdescription;
 			user.studentProfile.address = form.get().address;
 			user.studentProfile.save();	
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: editprofile");
-			System.out.println("Student profile saved");
-			System.out.println("*********   end:"+user.email+"***********");
+			System.out.println("Class: StudentController; Method: editprofile; Profiled saved; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}
@@ -126,6 +120,8 @@ public class StudentController extends Controller {
 		if(Secured.isStudent(session("email"))){
 			User user = User.find.byId(session("email"));
 			user.studentProfile.refresh();
+			
+			System.out.println("Class: StudentController; Method: settings; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 			return ok(views.html.secured.studentSettings.render(user));
 		}
 		return null;
@@ -145,11 +141,7 @@ public class StudentController extends Controller {
 			user.studentProfile.description = form.get().description;
 			user.studentProfile.save();
 			user.save();
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: editprofileabout");
-			System.out.println("Student profile about saved");
-			System.out.println("*********   end:"+user.email+"***********");
+			System.out.println("Class: StudentController; Method: editprofileabout; Profile about saved ;user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		}
 		return redirect(routes.ProfessorController.myprofile());
 	}
@@ -161,11 +153,7 @@ public class StudentController extends Controller {
 			user.password = sha1.parseSHA1Password(form.get().inputPassword);
 //			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
 			user.save();
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: changepassword");
-			System.out.println("Student password changed");
-			System.out.println("*********   end:"+user.email+"***********");
+			System.out.println("Class: StudentController; Method: changepassword; Password changed; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		}
 		return redirect(routes.StudentController.settings());
 	}
@@ -185,12 +173,7 @@ public class StudentController extends Controller {
 			user.studentProfile.privateProfile = false;
 			user.studentProfile.save();
 			}
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: changeprivacy");
-			System.out.println("Student privacy changed to: "+user.studentProfile.privateProfile);
-			System.out.println("*********   end:"+user.email+"***********");
-
+			System.out.println("Class: StudentController; Method: changeprivacy; privacy saved;user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		}
 		return redirect(routes.StudentController.settings());
 	}
@@ -207,23 +190,16 @@ public class StudentController extends Controller {
 			User user = User.find.byId(session("email"));
 			List<Category> categories = Category.getAllCategories();
 			module.language.refresh();
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: module");
 
 
 			if (!user.modules.contains(module)){
-				System.out.println("Student does not contains module: "+module.acronym);
-				System.out.println("Redirecting to general page with signup");
-				System.out.println("*********   end:"+user.email+"***********");
+				System.out.println("Class: StudentController; Method: module: "+module_acronym+" user does not contain this module redirecting to signup module page ;user: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 				return ok(views.html.secured.moduleGeneral.render(user, categories,
 						module));
 			}
 			else{
-				System.out.println("Student contains module: "+module.acronym);
-				System.out.println("Redirecting to module page with lesson: "+module.acronym);
-				System.out.println("*********   end:"+user.email+"***********");
+				System.out.println("Class: StudentController; Method: module: "+module_acronym+" redirecting to module page ;user: "+user.email+" browser: "+request().getHeader("user-agent"));
 				return ok(views.html.secured.module
 						.render(user, categories, module));
 			}
@@ -245,27 +221,24 @@ public class StudentController extends Controller {
 		// Trying to add the module to user
 
 		if (Secured.isStudent(user.email) && !user.modules.contains(module)) {
-			System.out.println("********* start:"+user.email+"***********");
-			System.out.println("Controller: StudentController.java");
-			System.out.println("Method: signupmodule");
+			
 
 
 			user.modules.add(module);
 			user.olduser=true;
 			user.save();
 			module.save();
-			System.out.println("user signed up in module: "+module.acronym);
+			
 
 			Modulescore modulescore = new Modulescore();
 			modulescore.module = module;
 			modulescore.user = user;
 			modulescore.score = 0;
 			modulescore.save();
-			System.out.println("Modulescore created");
+			System.out.println("Class: StudentController; Method: signupmodule: "+module_acronym+" signup complete: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 		}
 
-		System.out.println("*********   end:"+user.email+"***********");
 
 		// Has this module
 		return redirect(routes.Application.module(module_acronym));
@@ -290,10 +263,7 @@ public class StudentController extends Controller {
 
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: question");
-		System.out.println("Opening test: "+usertest.test.id);
+	
 		List<Answer> test_answers = Answer.findByUserTestAndTestId(usertest.id,
 				test_id);
 		if (test_answers.isEmpty()) {
@@ -371,8 +341,8 @@ public class StudentController extends Controller {
 
 			}
 
-		System.out.println("Test ok");
-		System.out.println("*********   end:"+user.email+"***********");
+		
+		System.out.println("Class: StudentController; Method: question: Test :"+test_id+" OK lesson: "+lesson.acronym+" module: "+module_acronym+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
 		else
@@ -405,11 +375,7 @@ public class StudentController extends Controller {
 
 		module.language.refresh();
 
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: lesson");
-		System.out.println("module: "+module.acronym+" lesson: "+lesson.acronym);
-		System.out.println("*********   end:"+user.email+"***********");
+		System.out.println("Class: StudentController; Method: lesson; lesson: "+lesson.acronym+" module: "+module_acronym+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 		return ok(views.html.secured.lesson.render(user, categories, lesson,
 				module));
@@ -427,11 +393,7 @@ public class StudentController extends Controller {
 
 		// check this line
 		User user = User.find.byId(session("email"));
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: modules");
-		System.out.println("Redirecting to modules list");
-		System.out.println("*********   end:"+user.email+"***********");
+		System.out.println("Class: StudentController; Method: modules; modules size: "+allModules.size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 		return ok(views.html.secured.modules.render(user, allModules,
 				categories));
 	}
@@ -470,11 +432,7 @@ public class StudentController extends Controller {
 		}
 		User user = User.find.byId(session("email"));
 		user.studentProfile.refresh();
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: news");
-		System.out.println("Redirecting to news");
-		System.out.println("*********   end:"+user.email+"***********");
+		System.out.println("Class: StudentController; Method: news; news size: "+Blog.find.all().size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 		return ok(views.html.secured.blogs.render(user,
 				Blog.find.all(),Category.getAllCategories(),Continent.getAllContinents()
@@ -499,11 +457,8 @@ public class StudentController extends Controller {
 			List<University> universities) {
 
 		User user=User.find.byId(session("email"));
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: lesson");
-		System.out.println("Redirect to continent: "+continent.acronym);
-		System.out.println("*********   end:"+user.email+"***********");
+		System.out.println("Class: StudentController; Method: continent; user: "+user.email+" browser: "+request().getHeader("user-agent"));
+
 		return ok(views.html.secured.continent.render(user,
 				categories,continents,continent,continent.universities));
 
@@ -512,11 +467,7 @@ public class StudentController extends Controller {
 		User user = User.find.byId(session("email"));
 		user.olduser=!user.olduser;
 		user.save();
-		System.out.println("********* start:"+user.email+"***********");
-		System.out.println("Controller: StudentController.java");
-		System.out.println("Method: olduser");
-		System.out.println("User is now a old user, the tour is over");
-		System.out.println("*********   end:"+user.email+"***********");
+		System.out.println("Class: StudentController; Method: oluser; user: "+user.email+" is now olduser browser: "+request().getHeader("user-agent"));
 
 		return ok("done");
 	}

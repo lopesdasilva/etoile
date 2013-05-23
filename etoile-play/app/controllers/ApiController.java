@@ -37,10 +37,10 @@ public class ApiController extends Controller{
 
 
 	public static Result getModules() {
-
+		
 	List<Module> obj = Module.find.all();
 	JSONSerializer postDetailsSerializer = new JSONSerializer().include("contents").exclude("*.class");
-	
+	System.out.println("Class: ApiController; Method: getModules; Modules size: "+obj.size());
 	return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 
 
@@ -49,15 +49,15 @@ public class ApiController extends Controller{
 	public static Result getNews(){
 		List<Blog> obj = Blog.find.all();
 		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class");
-		
+		System.out.println("Class: ApiController; Method: getNews; News size: "+obj.size());
 		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 	}
 
-	public static Result getMyProfile(String acronym){
-		Student obj = Student.findByAcronym(acronym);
-		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("password","user","*.class");
-		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
-	}
+//	public static Result getMyProfile(String acronym){
+//		Student obj = Student.findByAcronym(acronym);
+//		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("password","user","*.class");
+//		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
+//	}
 
 	public static Result getDashboard() throws IOException{
 
@@ -76,40 +76,44 @@ public class ApiController extends Controller{
 			User user=User.findByEmail(username);
 			JSONSerializer postDetailsSerializer = new JSONSerializer().include("modules","onGoingTests").exclude("password","*.class");
 //			getOngoingTests
-		
+			System.out.println("Class: ApiController; Method: getDashboard; User: "+username);
 			return ok(postDetailsSerializer.serialize(user)).as("application/json");
 			
 		} else{
 		ObjectNode result = Json.newObject();
 		result.put("status", "failure");
-		
+		System.out.println("Class: ApiController; Method: getDashboard; Failed wrong user or password.");
 		return ok(result).as("application/json");
 		}
 
 		}
-
+		System.out.println("Class: ApiController; Method: getDashboard; Request not JSON");
 		return badRequest("Expecting Json data.");
 	}
 
 	public static Result authenticate(){
 		JsonNode json =request().body().asJson();
 		if(json==null){
+			System.out.println("Class: ApiController; Method: autheticate; Request not JSON");
 			return badRequest("Expecting Json data.");
 		}
 		else{
 			String username= json.findPath("username").getTextValue();
 			String password= json.findPath("password").getTextValue();
 			if (username==null || password==null){
+				System.out.println("Class: ApiController; Method: autheicate; Password or Username not sent");
 				return badRequest("Missing parameteres");
 			}else if (User.authenticateSHA1(username, password)!=null){
 				ObjectNode result = Json.newObject();
 				result.put("status", "success");
 				result.put("message", "all good!");
+				System.out.println("Class: ApiController; Method: autheticate; User: "+username);
 				return ok(result).as("application/json");
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
 				result.put("error", "failed authentication");
+				System.out.println("Class: ApiController; Method: autheticate; Wrong user or password");
 				return ok(result).as("application/json");
 			}
 
@@ -141,16 +145,17 @@ public class ApiController extends Controller{
 						"categories",
 						"language")
 						.exclude("professors.user","*.class");
-
+				System.out.println("Class: ApiController; Method: getModule; Module: "+module.acronym);
 				return ok(postDetailsSerializer.serialize(module)).as("application/json");
 
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
-
+				System.out.println("Class: ApiController; Method: getModule; wrong user or password");
 				return ok(result).as("application/json");
 			}
 		}
+		System.out.println("Class: ApiController; Method: getModule; Request not JSON");
 		return badRequest("Expecting Json data.");
 	}
 	
@@ -171,13 +176,18 @@ public class ApiController extends Controller{
                 Usertest aux=null;
                 
                 
-                
-                for(Test test: lesson.tests){
+                lesson.tests.removeAll(lesson.tests);
+                for(Test test: Test.findByLessonId(lesson.id)){
+                	if(test.published){
                 		test.users.removeAll(test.users);
                 		if(Usertest.findByUserAndTest(username, test.id)!=null){
                 		Usertest utest=Usertest.findByUserAndTest(username, test.id);
                 		test.users.add(utest);
+                		lesson.tests.add(test);
                 		}
+                	}
+                	
+                	
                 	}
                 
 			
@@ -191,18 +201,22 @@ public class ApiController extends Controller{
 						.exclude(
 								"module",
 								"tests.users.user",
+								"tests.markersLimitDate",
+								"tests.markers_limit_date",
+								"test.published",
 								"*.class");
-			
+				System.out.println("Class: ApiController; Method: getLesson; Lesson: "+lesson.acronym);
 				return ok(postDetailsSerializer.serialize(lesson)).as("application/json");
 				}
 			
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
-
+				System.out.println("Class: ApiController; Method: getLesson; wrong user or password");
 				return ok(result).as("application/json");
 			}
 		}
+		System.out.println("Class: ApiController; Method: getLesson; Request not JSON");
 		return badRequest("Expecting Json data.");
 	}
 	
@@ -261,16 +275,18 @@ public class ApiController extends Controller{
 				if(userTest==null){
 					//TODO create new userTest
 				}
+				System.out.println("Class: ApiController; Method: getTest; test: "+test.id);
 				return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
 				}
 			}
 			} else{
 				ObjectNode result = Json.newObject();
 				result.put("status", "failure");
-
+				System.out.println("Class: ApiController; Method: getTest; wrong user or password");
 				return ok(result).as("application/json");
 			}
 		}
+		System.out.println("Class: ApiController; Method: getTest; Request not JSON");
 		return badRequest("Expecting Json data.");
 	}
 }

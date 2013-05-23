@@ -19,6 +19,8 @@ import models.test.question.QuestionGroup;
 
 import com.avaje.ebean.Ebean;
 
+import flexjson.JSON;
+
 import play.db.ebean.*;
 import play.data.format.Formats;
 import play.data.validation.*;
@@ -48,8 +50,6 @@ public class Test extends Model{
 	@Constraints.Required
 	public boolean published=false;
 	
-	@Constraints.Required
-	public boolean expired=false;
 	
 	@Constraints.Required
 	public boolean suggestquestionrequired;
@@ -79,13 +79,18 @@ public class Test extends Model{
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
 
-//	public static List<Test> getAllTests() {
-//		List<Test> tests = new ArrayList<Test>();
-//		tests = Ebean.find(Test.class).findList(); 
-//		return tests; 
-//	}
+	public static List<Test> findByLessonId(Long lesson_id) {
+		List<Test> tests = new ArrayList<Test>();
+		tests = find.where().eq("lesson_id",lesson_id).findList(); 
+		return tests; 
+	}
 	
 	
+	public boolean getExpired(){
+		return finish_date.before(new Date());
+	}
+	
+	@JSON(include=false)
 	public boolean studentsEnrolled(Test t){
 		for(Usertest userTest : t.users){
 			if(userTest.inmodule)
@@ -93,6 +98,7 @@ public class Test extends Model{
 		}
 		return false;
 	}
+	@JSON(include=false)
 	public int numberStudentsEnrolled(Test t){
 		int number=0;
 		for(Usertest userTest : t.users){
@@ -102,6 +108,7 @@ public class Test extends Model{
 		return number;
 	}
 	
+	@JSON(include=false)
 	public int numberOfQuestions(Test t){
 		int number=0;
 		for(QuestionGroup group: t.groups){
@@ -111,7 +118,7 @@ public class Test extends Model{
 		
 		return number;
 	}
-	
+	@JSON(include=false)
 	public String getBeginDate(){
 		if(begin_date!=null){
 		Long yourmilliseconds = begin_date.getTime();
@@ -122,7 +129,7 @@ public class Test extends Model{
 		}
 		return "";
 	}
-	
+	@JSON(include=false)
 	public String getBeginDateMMDDYYYY(){
 		if(begin_date!=null){
 		Long yourmilliseconds = begin_date.getTime();
@@ -134,7 +141,8 @@ public class Test extends Model{
 		return "";
 	}
 
-	
+	@JSON(include=false)
+
 	public String getFinishDate(){
 		if(finish_date!=null){
 		Long yourmilliseconds = finish_date.getTime();
@@ -145,7 +153,7 @@ public class Test extends Model{
 		}
 		return "";
 	}
-	
+	@JSON(include=false)
 	public String getFinishDateMMDDYYYY(){
 		if(finish_date != null){
 		Long yourmilliseconds = finish_date.getTime();
@@ -156,7 +164,7 @@ public class Test extends Model{
 		}
 		return "";
 	}
-	
+	@JSON(include=false)
 	public String getMarkersLimitDate(){
 		if(begin_date!=null){
 		Long yourmilliseconds = markers_limit_date.getTime();

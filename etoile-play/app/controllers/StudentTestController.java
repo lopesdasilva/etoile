@@ -101,11 +101,7 @@ public class StudentTestController extends Controller {
 			 return redirect(routes.Application.index());
 		 }
 		 
-		 System.out.println("******* start:"+user.email+"*********");
-         System.out.println("Controller: StudentTestController.java");
-         System.out.println("Method: document");
-         System.out.println("PDF will be created");
-         System.out.println("*******   end:"+user.email+"*********");
+		 System.out.println("Class: StudentTestController; Method: document; creating pdf for user: "+user.email+" usertest: "+usertest.id+" browser: "+request().getHeader("user-agent"));
          
 		 usertest.user.refresh();
 		 usertest.test.refresh();
@@ -204,12 +200,8 @@ public class StudentTestController extends Controller {
 					evaluations.add(QuestionEvaluation.findByUserAndQuestion(usertest.id, que.id));
 				}
 				
-				 System.out.println("******* start:"+user.email+"*********");
-		         System.out.println("Controller: StudentTestController.java");
-		         System.out.println("Method: questionanalysis");
-		         System.out.println("Question analysis page will be rendered.");
-		         System.out.println("*******   end:"+user.email+"*********");
-				
+
+		         System.out.println("Class: StudentTestController; Method: questionanalysis; questionanalysis "+user.email+" usertest: "+usertest.id+" browser: "+request().getHeader("user-agent"));
 				return ok(views.html.secured.question.questionanalysis.render(user,module,lesson,test,group_aux,usertest, evaluations));
 				}else{
 					return ok(views.html.statics.error.render());
@@ -251,7 +243,7 @@ public class StudentTestController extends Controller {
 //		System.out.println("expired: "+test_aux.expired);
 		
 		//if(Secured.isStudent(user.email) && user.isUserSignupTest(test) && user.userSuggestedQuestion(test) && test_aux.published && !test_aux.expired ){
-		if(Secured.isStudent(user.email) && Usertest.findByUserAndTest(user.email, test_id)!=null && Usertest.findByUserAndTest(user.email, test_id).inmodule && test_aux.published && !test_aux.expired ){
+		if(Secured.isStudent(user.email) && Usertest.findByUserAndTest(user.email, test_id)!=null && Usertest.findByUserAndTest(user.email, test_id).inmodule && test_aux.published && !test_aux.getExpired() ){
 		Usertest usertest = Usertest.findByUserAndTest(user.email,
 				test.id);
 		
@@ -348,13 +340,10 @@ public class StudentTestController extends Controller {
 			
 			
 			}
+
 		
-		 System.out.println("******* start:"+user.email+"*********");
-         System.out.println("Controller: StudentTestController.java");
-         System.out.println("Method: question");
-         System.out.println("Question will be rendered");
-         System.out.println("*******   end:"+user.email+"*********");
-		
+     	System.out.println("Class: StudentTestController; Method: question: Test :"+test_id+" OK lesson: "+lesson.acronym+" module: "+module_acronym+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
+         
 		return ok(views.html.secured.question.question.render(user,module,lesson,test,group_aux,usertest));
 		}
 		else
@@ -400,7 +389,7 @@ public class StudentTestController extends Controller {
 		}
 		
 		
-		if(Secured.isStudent(user.email) && test.published && !test.expired && !usertest.submitted ){
+		if(Secured.isStudent(user.email) && test.published && !test.getExpired() && !usertest.submitted ){
 			if(question.typeOfQuestion == 1){
 				Form<OneChoiceQuestionAnswer> form = Form.form(OneChoiceQuestionAnswer.class).bindFromRequest();
 				List<Hypothesis> last_answers = Hypothesis.findByUserEmailAndQuestion(user.email, question_id); // Respostas Guardadas
@@ -500,22 +489,14 @@ public class StudentTestController extends Controller {
 	}
 	
 	public static Result saveopenanswer(){
-		System.out.println("SaveQuestion!!");
-		
-		System.out.println(request().uri());
-		System.out.println(request().body().asJson());
 		
 		JsonNode json =request().body().asJson();
 		if(json==null){
-			System.out.println("JSON NULL");
+			System.out.println("Class: StudentTestController; Method: saveopenanswer; Request not JSON");
 			return badRequest("Expecting Json data.");
 		}else{
 			
 			
-			
-			System.out.println(json.findPath("usertest").getTextValue());
-			System.out.println(json.findPath("question").getTextValue());
-			System.out.println(json.findPath("answer").getTextValue());
 			
 			Integer question_id = Integer.parseInt( json.findPath("question").getTextValue() );
 			User user = User.find.byId(request().username());
@@ -535,9 +516,11 @@ public class StudentTestController extends Controller {
 			answer.answer = json.findPath("answer").getTextValue();
 			answer.isSaved = true;
 			answer.save();
-			System.out.println("saved");
+			
+			 System.out.println("Class: StudentTestController; Method: saveopenanswer; saved answer:"+answer.answer+" usertest: "+usertest_id+" user:"+ user.email+ "browser: "+request().getHeader("user-agent"));
 			return ok("success");
 			}
+			System.out.println("Class: StudentTestController; Method: saveopenanswer; failed  usertest: "+usertest_id+" user:"+ user.email+ "browser: "+request().getHeader("user-agent"));
 			return ok("error");
 			
 		}
@@ -579,10 +562,6 @@ public class StudentTestController extends Controller {
 	}
 	
 	public static Result savemultiplechoiceanswer(){
-		System.out.println("savemultiplechoiceanswer method");
-		System.out.println(request().uri());
-		System.out.println(request().body().asJson());
-		
 		
 		JsonNode json =request().body().asJson();
 		if(json==null){
@@ -590,9 +569,7 @@ public class StudentTestController extends Controller {
 			return badRequest("Expecting Json data.");
 		}else{
 			
-			System.out.println(json.findPath("message"));
-			System.out.println(json.findPath("message").getTextValue());
-			System.out.println(json.findPath("question").getTextValue());
+			
 			Integer question_id = Integer.parseInt( json.findPath("question").getTextValue() );
 			User user = User.find.byId(request().username());
 			
@@ -621,7 +598,7 @@ public class StudentTestController extends Controller {
 				hypothesis.selected = true;
 				hypothesis.save();
 			}
-		
+			System.out.println("Class: StudentTestController; Method: savemultiplechoiceanswer; saved  answer"+array+" question: "+question_id+" user:"+ user.email+ "browser: "+request().getHeader("user-agent"));
 			return ok("saved");
 			
 			}
@@ -629,7 +606,7 @@ public class StudentTestController extends Controller {
 		}
 //		
 //		//int[] intArray = gson.fromJson(null, int[].class);
-//		
+		
 		return ok("error");
 	}
 
@@ -655,7 +632,7 @@ public class StudentTestController extends Controller {
 		User user = User.find.byId(request().username());
 		Usertest usertest= Usertest.findByUserAndTest(user.email, test_id);
 		
-		if(Secured.isStudent(user.email) && test_aux.published && !test_aux.expired && !usertest.submitted ){
+		if(Secured.isStudent(user.email) && test_aux.published && !test_aux.getExpired() && !usertest.submitted ){
 		
 		
 		usertest.submitted=true;

@@ -54,7 +54,7 @@ public class Global extends GlobalSettings {
 			//INHERITANCE TESTS
 			
 			Question q = new Question();
-			q.question = " What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ?";
+			q.question = " What is the name of this formula:  `x = (-b +- sqrt(b^2-4ac))/(2a)` ?  ";
 			q.imageURL= "http://www.polymath-software.com/PolymathHelp/MatlabGraph.jpg";
 			q.videoURL= "http://www.youtube.com/v/mvOkMYCygps";
 			q.typeOfQuestion = 0;

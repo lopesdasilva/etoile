@@ -450,27 +450,29 @@ models.test.Test) @main("etoile"){
 			</table>
 		</div> } @if(test.published){
 			
-			<h3>Begin and finish Dates</h3>
-			@helper.form(routes.ProfessorTestController.changetestdates(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
+				@helper.form(routes.ProfessorTestController.changetestdates(module.acronym,lesson.acronym,test.id),'class->"form-horizontal"){
+		<h3>Begin and finish Dates</h3>
 			<div class="control-group">
-				<label class="control-label" for="reservation">Reservation
+				<label class="control-label" for="reservation">Test
 					dates:</label>
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-calendar"></i></span>
-							
-							<input disabled="disabled" id="reservation" required="required" name="date" type="text" placeholder="" class="input-xlarge" required value="@test.getBeginDate() - @test.getFinishDate">
+							<input name="date" id="reservation" required="required" onclick='dates("@test.getBeginDateMMDDYYYY()", "@test.getFinishDateMMDDYYYY()")' type="text" placeholder="" class="input-xlarge"  pattern="\b(0?[1-9]|[12][0-9]|3[01])\/\b(0?[1-9]|1[0-2])\/[0-9]{4}\s-\s\b(0?[1-9]|[12][0-9]|3[01])\/\b(0?[1-9]|1[0-2])\/[0-9]{4}"  required value="@test.getBeginDate() - @test.getFinishDate">
+							<br><label class="control-label" for="markerlimitdate"><small>Marker limit date: @test.getMarkersLimitDate()</small> </label>
 							
 					</div>
 				</div>
 			</div>
+			
+			
 			
 			<div class="control-group">
 					<label class="control-label"></label>
 
 					<!-- Button -->
 					<div class="controls">
-						<button class="btn btn-success disabled">Save</button>
+						<button class="btn btn-success">Save</button>
 					</div>
 				</div>
 				}

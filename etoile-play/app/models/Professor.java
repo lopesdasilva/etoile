@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 
 import com.avaje.ebean.Ebean;
 
@@ -60,9 +61,11 @@ public class Professor extends Model {
 	public User user;
 	
 	@OneToMany
+	@OrderBy("id")
 	public List<ProfessorContent> contents;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Module> modules;
 
 	public static Model.Finder<Long,Professor> find = new Model.Finder(Long.class, Professor.class);

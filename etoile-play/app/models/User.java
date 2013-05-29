@@ -69,20 +69,25 @@ public class User extends Model {
     public Student studentProfile;
     
     @OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Usertopic> topicssubscriptions;
     
     
 	@ManyToMany(cascade = {CascadeType.ALL})
 //	@JoinTable(name="account_module", joinColumns={@JoinColumn(name="account_email")}, inverseJoinColumns={@JoinColumn(name="module_id")})
+	@OrderBy("id")
 	public List<Module> modules;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Comment> comments;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Question> openquestions;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<AnswerMarker> answerMarker;
 	
     // -- Queries
@@ -90,28 +95,36 @@ public class User extends Model {
 	
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	List<Hypothesis> hypothesis;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Usertest> tests;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<URL> urls;
 	
 	@ManyToMany	
 	@JoinTable(name="voters_url")
+	@OrderBy("id")
 	public List<URL> urls_voted;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<SubtopicReputation> subtopicreputation;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Modulescore> modulesscores;
 	
 	@OneToMany(cascade= {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Topic> topics;
 	
 	@OneToMany(cascade= {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Reply> replies;
 	
     // -- Queries

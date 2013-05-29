@@ -13,6 +13,7 @@ import play.data.validation.*;
 
 @Entity
 public class Language extends Model {
+	
 	@Id
 	public Long id;
 
@@ -21,6 +22,7 @@ public class Language extends Model {
 	public String name;
 
 	@OneToMany
+	@OrderBy("id")
 	public List<Module> modules;
 	
 

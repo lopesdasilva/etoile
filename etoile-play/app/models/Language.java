@@ -13,6 +13,7 @@ import play.data.validation.*;
 
 @Entity
 public class Language extends Model {
+	
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
@@ -22,6 +23,7 @@ public class Language extends Model {
 	public String name;
 
 	@OneToMany
+	@OrderBy("id")
 	public List<Module> modules;
 	
 

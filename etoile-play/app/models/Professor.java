@@ -12,7 +12,6 @@ import models.module.Module;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import scala.collection.mutable.ArrayBuilder;
 
 @Entity 
 public class Professor extends Model {
@@ -53,9 +52,11 @@ public class Professor extends Model {
 	public User user;
 	
 	@OneToMany
+	@OrderBy("id")
 	public List<ProfessorContent> contents;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
+	@OrderBy("id")
 	public List<Module> modules;
 
 	public static Model.Finder<Long,Professor> find = new Model.Finder(Long.class, Professor.class);

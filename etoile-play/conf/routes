@@ -1,6 +1,11 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
+#TESTING
+GET /loaderio-49190389002c14da4e54f8762f1df395.txt  controllers.Assets.at(path="/public", file="/loaderio-067ddde84d7a2a84db56390772328fe6.txt")
+GET /loaderio-49190389002c14da4e54f8762f1df395/ 	controllers.Application.loaderTests()
+GET /loaderio-23349bf5ce435674e678350a496740f1/ controllers.Application.loaderTests1()
+
 
 # Icons
 GET     /assets/images/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")

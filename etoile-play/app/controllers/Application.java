@@ -47,8 +47,14 @@ public class Application extends Controller {
 		 System.out.println("callErrorPage()");
 		 return ok(errorPage.render());
 	 }
-	 
 
+ public static Result loaderTests1(){
+		 return ok("loaderio-23349bf5ce435674e678350a496740f1");
+	 }
+
+	 public static Result loaderTests(){
+		 return ok("loaderio-49190389002c14da4e54f8762f1df395");
+	 }
 	public static Result index() {
 		if(session("email")!=null){
 			return StudentController.index();

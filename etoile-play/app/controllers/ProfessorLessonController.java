@@ -116,10 +116,10 @@ public class ProfessorLessonController extends Controller {
 	        System.out.println("Lesson Alert added");
 	        System.out.println("*******   end:"+user.email+"*********");
 
-			List<User> users_list = module.users;
-			for(User u : users_list) {
-				SendMail.sendMail(u.email, "[Etoile] News in module "+module_acronym, "blablablablablabl some New from the professor "+user.email); 
-			}
+			//List<User> users_list = module.users;
+		//	for(User u : users_list) {
+		//		SendMail.sendMail(u.email, "[Etoile] News in module "+module_acronym, "blablablablablabl some New from the professor "+user.email); 
+		//	}
 			}
 		
 		}

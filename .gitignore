@@ -64,3 +64,10 @@ local.properties
 etoile-play/conf/application.conf
 
 etoile-play/conf/evolutions/default/1.sql
+
+#Intelijj 
+
+*.iml
+*.ipr
+*.iws
+.idea/

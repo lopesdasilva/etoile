@@ -21,7 +21,7 @@ import play.data.validation.*;
 public class Curriculummodule extends Model {
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 	

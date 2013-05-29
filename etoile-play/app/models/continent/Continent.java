@@ -3,11 +3,7 @@ package models.continent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
 
@@ -22,7 +18,7 @@ import play.db.ebean.Model;
 public class Continent extends Model {
 
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 	

@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import models.User;
 
@@ -23,6 +20,7 @@ import com.avaje.ebean.Ebean;
 public class Reply extends Model {
 	
 	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required

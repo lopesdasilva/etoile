@@ -1,9 +1,7 @@
 package models.manytomany;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+
 import models.User;
 import models.forum.Topic;
 import play.db.ebean.Model;
@@ -13,7 +11,7 @@ import play.db.ebean.Model;
 public class Usertopic extends Model {
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 	
 	@ManyToOne

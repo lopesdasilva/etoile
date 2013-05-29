@@ -3,13 +3,7 @@ package models.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import models.Student;
 import models.continent.Continent;
@@ -28,7 +22,7 @@ public class University extends Model {
 
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 	

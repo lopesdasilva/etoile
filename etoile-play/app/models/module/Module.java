@@ -22,7 +22,7 @@ import play.data.validation.*;
 @Entity
 public class Module extends Model {
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 

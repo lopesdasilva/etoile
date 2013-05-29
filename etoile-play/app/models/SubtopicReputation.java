@@ -1,9 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import models.curriculum.Curriculummodule;
 import models.module.Module;
@@ -16,7 +13,7 @@ import play.db.ebean.Model;
 public class SubtopicReputation extends Model{
 
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 	

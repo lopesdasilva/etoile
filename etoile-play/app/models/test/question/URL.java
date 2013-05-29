@@ -2,13 +2,7 @@ package models.test.question;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.joda.time.DateTime;
 
@@ -23,7 +17,7 @@ import play.db.ebean.Model;
 public class URL extends Model implements Comparable<URL> {
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 	
 	@Constraints.Required

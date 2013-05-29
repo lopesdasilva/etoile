@@ -3,11 +3,7 @@ package models.forum;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import models.module.Module;
 
@@ -19,7 +15,7 @@ import play.db.ebean.Model;
 @Entity
 public class Forum extends Model {
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 	
 	

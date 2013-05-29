@@ -15,8 +15,10 @@ import play.data.validation.*;
 
 @Entity
 public class Hypothesis extends Model{
+
+
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 	
 	public int number;

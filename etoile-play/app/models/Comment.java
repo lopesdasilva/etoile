@@ -11,7 +11,10 @@ import play.data.validation.*;
 
 @Entity
 public class Comment extends Model {
+
+
 	@Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required

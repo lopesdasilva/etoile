@@ -2,18 +2,7 @@ package models.test.question;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 import models.Blog;
@@ -31,8 +20,12 @@ import play.db.ebean.Model;
 
 @Entity
 public class QuestionGroup extends Model {
-	
-	//ASSOCIAÕES
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public Long id;
+
+    //ASSOCIAÕES
 	
 	@ManyToOne
 	public Test test;
@@ -43,9 +36,7 @@ public class QuestionGroup extends Model {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	public List<Answer> answers;
 	
-	@Id
-	@GeneratedValue
-	public Long id;
+
 	
 	@Constraints.Required
     @Formats.NonEmpty

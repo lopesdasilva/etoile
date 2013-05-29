@@ -28,7 +28,7 @@ import play.data.validation.*;
 @Entity
 public class Test extends Model{
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required

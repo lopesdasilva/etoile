@@ -19,7 +19,7 @@ import play.data.validation.*;
 public class Lesson extends Model{
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required

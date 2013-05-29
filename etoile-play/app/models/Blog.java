@@ -14,7 +14,7 @@ import play.data.validation.*;
 public class Blog extends Model {
 	
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required
@@ -44,6 +44,7 @@ public class Blog extends Model {
 	//public Date created;
 
 	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)
+    @OrderBy("id")
 	public List<Comment> comments;
 
 	public String dateToString(){

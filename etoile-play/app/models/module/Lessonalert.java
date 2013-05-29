@@ -15,7 +15,7 @@ import play.data.validation.*;
 @Entity
 public class Lessonalert extends Model{
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Long id;
 
 	@Constraints.Required

@@ -34,7 +34,6 @@ public class User extends Model {
 	
 	
     @Constraints.Required
-    @GeneratedValue
     public Long id;
 	
     @Id

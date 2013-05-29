@@ -1,9 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import models.User;
 import models.curriculum.Curriculummodule;
@@ -17,7 +14,7 @@ import play.db.ebean.Model;
 public class Modulescore extends Model{
 
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Formats.NonEmpty
 	public Long id;
 

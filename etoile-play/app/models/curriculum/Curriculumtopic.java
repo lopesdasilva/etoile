@@ -15,7 +15,7 @@ import play.data.validation.*;
 @Entity
 public class Curriculumtopic extends Model{
 	@Id
-	@GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
 	

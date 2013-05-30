@@ -41,7 +41,7 @@ public class ProfessorController extends Controller {
 			System.out.println("User is professor");
 		List<Blog> blogs = Blog.find.all();
 	
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 	
 		user.professorProfile.refresh();
 		System.out.println("*********   end:"+user.email+"***********");
@@ -62,7 +62,7 @@ public class ProfessorController extends Controller {
 			
 			User user = User.find.byId(session("email"));
 			user.professorProfile.refresh();
-			List<Category> categories = Category.getAllCategories();
+			List<Category> categories = Category.find.all();
 
 			System.out.println("********* start:"+user.email+"***********");
 			System.out.println("Controller: ProfessorController.java");
@@ -102,7 +102,7 @@ public class ProfessorController extends Controller {
 		if(session("email")!=null && SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)) {
 			
 		user.professorProfile.refresh();
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		
 		for(Question q: lesson.questions){
 			if(q.user!=null){

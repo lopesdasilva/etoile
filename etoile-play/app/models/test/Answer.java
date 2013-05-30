@@ -54,17 +54,19 @@ public class Answer extends Model{
 	public static Model.Finder<Long, Answer> find = new Model.Finder<Long, Answer>(
 			Long.class, Answer.class);
 
+    @OrderBy("id")
 	public static List<Answer> getAllOpenQuestions() {
 		List<Answer> questions = new ArrayList<Answer>();
 		questions = Ebean.find(Answer.class).findList(); 
 		return questions; 
 	}
-	
-	
+
+    @OrderBy("id")
     public static List<Answer> findByUserTestAndTestId(Long usertest_id,Long test_id) {
         return find.where().eq("usertest_id", usertest_id).eq("test_id", test_id).findList();
     }
-    
+
+    @OrderBy("id")
     public static List<Answer> findByUserEmailAndTestIdAndGroupId(String email,Long test_id,Long group_id) {
         return find.where().eq("user_email", email).eq("test_id", test_id).eq("group_id", group_id).findList();
     }

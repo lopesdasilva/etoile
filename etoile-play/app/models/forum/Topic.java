@@ -37,9 +37,11 @@ public class Topic extends Model {
 	public Date date;
 
 	@OneToMany
+    @OrderBy("id")
 	public List<Reply> replies;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Usertopic> topicsubscriptions;
 
 	//public Date created;
@@ -47,12 +49,14 @@ public class Topic extends Model {
 	public static Model.Finder<Long, Topic> find = new Model.Finder<Long, Topic>(
 			Long.class, Topic.class);
 
+    @OrderBy("id")
 	public static List<Topic> getAllTopics() {
 		List<Topic> topics = new ArrayList<Topic>();
 		topics = Ebean.find(Topic.class).findList(); 
 		return topics; 
 	}
 
+    @OrderBy("id")
 	public static List<Topic> findByForum(Long forum_id){
 		return find.where().eq("forum_id", forum_id).findList();
 	}

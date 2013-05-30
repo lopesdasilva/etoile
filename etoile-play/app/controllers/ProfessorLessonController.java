@@ -90,7 +90,7 @@ public class ProfessorLessonController extends Controller {
 		
 		
 		User user = User.find.byId(session("email"));
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
 			Form<NewAlert_Form> form = Form.form(NewAlert_Form.class).bindFromRequest();
 			if(form.hasErrors()) {

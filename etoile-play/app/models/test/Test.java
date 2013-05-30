@@ -58,13 +58,16 @@ public class Test extends Model{
 	public Lesson lesson;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<QuestionGroup> groups;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Answer> answers;
 
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Usertest> users;
 	
 	@Constraints.Required
@@ -79,6 +82,7 @@ public class Test extends Model{
 	public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(
 			Long.class, Test.class);
 
+    @OrderBy("id")
 	public static List<Test> findByLessonId(Long lesson_id) {
 		List<Test> tests = new ArrayList<Test>();
 		tests = find.where().eq("lesson_id",lesson_id).findList(); 

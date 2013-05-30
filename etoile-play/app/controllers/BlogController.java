@@ -43,7 +43,7 @@ public class BlogController extends Controller {
 		if(blog==null){
 			return redirect(routes.Application.news());
 		}
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		if(session("email")!=null){
 
 			User user = User.find.byId(session("email"));
@@ -78,7 +78,7 @@ public class BlogController extends Controller {
 		
 		Form<Comment_Form> form = Form.form(Comment_Form.class)
 				.bindFromRequest();
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		User user = User.find.byId(session("email"));
 
 		

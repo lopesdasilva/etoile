@@ -34,11 +34,14 @@ public class Continent extends Model {
 	
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<University> universities;
 	
 	public static Model.Finder<Long, Continent> find = new Model.Finder<Long, Continent>(
 			Long.class, Continent.class);
 
+
+    @OrderBy("id")
 	public static List<Continent> getAllContinents() {
 		List<Continent> continents = new ArrayList<Continent>();
 		continents = Ebean.find(Continent.class)

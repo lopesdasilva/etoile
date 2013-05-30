@@ -34,6 +34,7 @@ public class Curriculumlesson extends Model{
 	public Curriculummodule curriculummodule;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Curriculumtopic> curriculumtopics;
 	
 	public static Model.Finder<Long, Curriculumlesson> find = new Model.Finder<Long,Curriculumlesson>(

@@ -916,7 +916,7 @@ public class StudentTestController extends Controller {
 		usertest.inmodule = true;
 		usertest.save();
 
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 		Form<OpenQuestionSuggestion> form_question = Form.form(
 				OpenQuestionSuggestion.class).bindFromRequest();

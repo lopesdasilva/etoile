@@ -51,18 +51,22 @@ public class Hypothesis extends Model{
 	public static Model.Finder<Long, Hypothesis> find = new Model.Finder<Long, Hypothesis>(
 			Long.class, Hypothesis.class);
 
+
+    @OrderBy("id")
 	public static List<Hypothesis> getAllHypothesis() {
 		List<Hypothesis> questions = new ArrayList<Hypothesis>();
 		questions = Ebean.find(Hypothesis.class).findList(); 
 		return questions; 
 	}
-	
+
+    @OrderBy("id")
 	public static List<Hypothesis> findByUserEmailAndQuestion(String email,
 			Long question_id) {
 		return find.where().eq("user_email", email).eq("question_id", question_id)
 				.findList();
 	}
-	
+
+    @OrderBy("id")
 	public static List<Hypothesis> findByQuestion(Long question_id) {
 		return find.where().eq("user_email", null).eq("question_id", question_id)
 				.findList();

@@ -32,18 +32,14 @@ public class Category extends Model {
 	public String description;
 	
 	@ManyToMany(mappedBy="categories")
+    @OrderBy("id")
 	public List<Module> modules;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<Curriculummodule> curriculummodules;
+    @OrderBy("id")
+    public List<Curriculummodule> curriculummodules;
 	
 	public static Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(
 			Long.class, Category.class);
 
-	public static List<Category> getAllCategories() {
-		List<Category> categories = new ArrayList<Category>();
-		categories = Ebean.find(Category.class).findList(); 
-		return categories; 
-	}
-	
 }

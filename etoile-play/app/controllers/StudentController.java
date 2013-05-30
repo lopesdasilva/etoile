@@ -82,7 +82,7 @@ public class StudentController extends Controller {
 		if(Secured.isStudent(session("email"))){
 			List<Blog> blogs = Blog.find.all();
 
-			List<Category> categories = Category.getAllCategories();
+			List<Category> categories = Category.find.all();
 
 			user.studentProfile.refresh();
 			if(blogs.size()>3)
@@ -188,7 +188,7 @@ public class StudentController extends Controller {
 
 
 			User user = User.find.byId(session("email"));
-			List<Category> categories = Category.getAllCategories();
+			List<Category> categories = Category.find.all();
 			module.language.refresh();
 
 
@@ -214,7 +214,7 @@ public class StudentController extends Controller {
 
 
 		User user = User.find.byId(session("email"));
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 
 
@@ -370,7 +370,7 @@ public class StudentController extends Controller {
 
 
 
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 
 		module.language.refresh();
@@ -389,7 +389,7 @@ public class StudentController extends Controller {
 
 	public static Result modules() {
 		List<Module> allModules = Module.find.all();
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 		// check this line
 		User user = User.find.byId(session("email"));
@@ -399,7 +399,7 @@ public class StudentController extends Controller {
 	}
 
 	public static Result contact() {
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 		if (SecuredProfessor.isProfessor(session("email"))){
 			return ProfessorController.contact();
@@ -414,7 +414,7 @@ public class StudentController extends Controller {
 
 	public static Result about() {
 
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 
 		if (SecuredProfessor.isProfessor(session("email"))){
 			return ProfessorController.about();
@@ -435,7 +435,7 @@ public class StudentController extends Controller {
 		System.out.println("Class: StudentController; Method: news; news size: "+Blog.find.all().size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 		return ok(views.html.secured.blogs.render(user,
-				Blog.find.all(),Category.getAllCategories(),Continent.getAllContinents()
+				Blog.find.all(),Category.find.all(),Continent.getAllContinents()
 				));
 	}
 
@@ -446,7 +446,7 @@ public class StudentController extends Controller {
 		}
 
 		return ok(views.html.secured.digitalcampus.render(User.find.byId(session("email")),
-				Category.getAllCategories(),Continent.getAllContinents()
+                Category.find.all(),Continent.getAllContinents()
 				));
 
 

@@ -43,6 +43,8 @@ public class Reply extends Model {
 	public static Model.Finder<Long, Reply> find = new Model.Finder<Long, Reply>(
 			Long.class, Reply.class);
 
+
+    @OrderBy("id")
 	public static List<Reply> getAllReplies() {
 		List<Reply> replies = new ArrayList<Reply>();
 		replies = Ebean.find(Reply.class).findList(); 

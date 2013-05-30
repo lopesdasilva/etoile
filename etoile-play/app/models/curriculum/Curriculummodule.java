@@ -39,15 +39,19 @@ public class Curriculummodule extends Model {
 	public String text;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Curriculumlesson> curriculumlessons;
 
 	@ManyToMany (mappedBy="curriculummodules")
+    @OrderBy("id")
 	public List<Category> curriculumcategories;
 
 	@OneToMany
+    @OrderBy("id")
 	public List<Question> questions;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<SubtopicReputation> subtopicsreputation;
 
 	public static Model.Finder<Long, Curriculummodule> find = new Model.Finder<Long, Curriculummodule>(
@@ -57,6 +61,7 @@ public class Curriculummodule extends Model {
         return find.where().eq("name", name).findUnique();
     }
 
+    @OrderBy("id")
 	public static List<Curriculummodule> getAllModules() {
 		List<Curriculummodule> modules = new ArrayList<Curriculummodule>();
 		modules = Ebean.find(Curriculummodule.class).findList(); 

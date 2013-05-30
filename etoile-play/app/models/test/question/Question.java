@@ -89,12 +89,15 @@ public class Question extends Model {
 	//ARGUMENTOS ONE CHOICE QUESTION
 
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Hypothesis> hypothesislist;
 	
 	@OneToMany(cascade=CascadeType.ALL)
+    @OrderBy("id")
 	public List<URL> urls;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<QuestionEvaluation> questionevaluation;
 	
 	@ManyToOne

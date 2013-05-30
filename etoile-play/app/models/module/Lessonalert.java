@@ -39,6 +39,8 @@ public class Lessonalert extends Model{
 	public static Model.Finder<Long, Lessonalert> find = new Model.Finder<Long, Lessonalert>(
 			Long.class, Lessonalert.class);
 
+
+    @OrderBy("id")
 	public static List<Lessonalert> getAllTests() {
 		List<Lessonalert> alerts = new ArrayList<Lessonalert>();
 		alerts = Ebean.find(Lessonalert.class).findList(); 

@@ -46,6 +46,7 @@ public class Lessoncontent extends Model{
 	public static Model.Finder<Long, Lessoncontent> find = new Model.Finder<Long, Lessoncontent>(
 			Long.class, Lessoncontent.class);
 
+    @OrderBy("id")
 	public static List<Lessoncontent> getAllTests() {
 		List<Lessoncontent> tests = new ArrayList<Lessoncontent>();
 		tests = Ebean.find(Lessoncontent.class).findList(); 

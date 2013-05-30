@@ -46,9 +46,11 @@ public class University extends Model {
 	public String modulebannerURL;
 
 	@OneToMany
+    @OrderBy("id")
 	public List<Student> students;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Module> modules;
 	
 	@ManyToOne
@@ -57,6 +59,7 @@ public class University extends Model {
 	public static Model.Finder<Long, University> find = new Model.Finder<Long, University>(
 			Long.class, University.class);
 
+    @OrderBy("id")
 	public static List<University> getAllUniversities() {
 		List<University> universities = new ArrayList<University>();
 		universities = Ebean.find(University.class)

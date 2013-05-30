@@ -53,15 +53,19 @@ public class Lesson extends Model{
 	public Module module;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Test> tests;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Lessonalert> lessonalerts;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Question> questions;
 	
 	public static Model.Finder<Long, Lesson> find = new Model.Finder<Long, Lesson>(
@@ -74,6 +78,8 @@ public class Lesson extends Model{
         return find.where().eq("acronym", acronym).eq("module_id", module_id).findUnique();
     }
 
+
+    @OrderBy("id")
 	public static List<Lesson> getAllLessons() {
 		List<Lesson> lessons = new ArrayList<Lesson>();
 		lessons = Ebean.find(Lesson.class).findList(); 

@@ -38,9 +38,9 @@ public class ProfessorContent extends Model{
 	
 	public static Model.Finder<Long, ProfessorContent> find = new Model.Finder<Long, ProfessorContent>(
 			Long.class, ProfessorContent.class);
-	
-	
 
+
+    @OrderBy("id")
 	public static List<ProfessorContent> getAllContent() {
 		List<ProfessorContent> contents = new ArrayList<ProfessorContent>();
 		contents = Ebean.find(ProfessorContent.class).findList(); 

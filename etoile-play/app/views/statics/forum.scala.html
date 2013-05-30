@@ -44,7 +44,7 @@
 
 <div class="container-fluid">
 <div class="row-fluid">
-@staticmenu(models.curriculum.Category.getAllCategories,models.continent.Continent.getAllContinents())
+@staticmenu(models.curriculum.Category.find.all(),models.continent.Continent.getAllContinents())
 	
 	<!--/span-->
 

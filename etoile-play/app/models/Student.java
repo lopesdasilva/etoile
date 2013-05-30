@@ -73,6 +73,7 @@ public class Student extends Model {
 	public Date date_of_birth;
 	
 	@OneToOne
+    @OrderBy("id")
 	public User user;
 	
 	@Constraints.Required
@@ -86,6 +87,7 @@ public class Student extends Model {
 
 	public static Model.Finder<Long,Student> find = new Model.Finder(Long.class, Student.class);
 
+    @OrderBy("id")
 	public static String[] getAllEmails(){
 		
 		

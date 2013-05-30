@@ -40,6 +40,8 @@ public class Bibliography extends Model{
 	public static Model.Finder<Long, Bibliography> find = new Model.Finder<Long, Bibliography>(
 			Long.class, Bibliography.class);
 
+
+    @OrderBy("id")
 	public static List<Bibliography> getAllContent() {
 		List<Bibliography> contents = new ArrayList<Bibliography>();
 		contents = Ebean.find(Bibliography.class).findList(); 

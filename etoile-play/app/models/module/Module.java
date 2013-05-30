@@ -52,21 +52,27 @@ public class Module extends Model {
 	public String imageURL;
 	
 	@ManyToMany(mappedBy="modules")
+    @OrderBy("id")
 	public List<User> users;
 	
 	@ManyToMany(mappedBy="modules")
+    @OrderBy("id")
 	public List<Professor> professors;
 
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Lesson> lessons;
 
 	@ManyToMany (cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Category> categories;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Content> contents;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Bibliography> bibliography;
 	
 	@ManyToOne
@@ -76,6 +82,7 @@ public class Module extends Model {
 	public Language language;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Modulescore> modulescore;
 	
 	@OneToOne

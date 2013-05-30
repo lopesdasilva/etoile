@@ -65,7 +65,8 @@ public class QuestionEvaluation extends Model {
 			Long question_id) {
 		return find.where().eq("usertest_id", user_test_id).eq("question_id", question_id).findUnique();
 	}
-	
+
+    @OrderBy("id")
 	public static List<QuestionEvaluation> findByUserAndTest(Long user_test_id,
 			Long test_id) {
 		return find.where().eq("usertest_id", user_test_id).eq("test_id", test_id).findList();

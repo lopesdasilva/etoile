@@ -3,11 +3,7 @@ package models.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 
 import com.avaje.ebean.Ebean;
@@ -36,6 +32,8 @@ public class Content extends Model{
 	public static Model.Finder<Long, Content> find = new Model.Finder<Long, Content>(
 			Long.class, Content.class);
 
+
+    @OrderBy("id")
 	public static List<Content> getAllContent() {
 		List<Content> contents = new ArrayList<Content>();
 		contents = Ebean.find(Content.class).findList(); 

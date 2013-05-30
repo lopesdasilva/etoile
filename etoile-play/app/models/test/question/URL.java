@@ -52,6 +52,7 @@ public class URL extends Model implements Comparable<URL> {
 	
 	@ManyToMany
 	@JoinTable(name="voters_url")
+    @OrderBy("id")
 	public List<User> voters;
 	
 	
@@ -62,6 +63,7 @@ public class URL extends Model implements Comparable<URL> {
     /**
      * Retrieve a URLS from question.
      */
+    @OrderBy("id")
     public static List<URL> findByQuestion(long question_id) {
         return find.where().eq("question_id", question_id).findList();
     }

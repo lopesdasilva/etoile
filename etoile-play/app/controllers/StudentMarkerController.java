@@ -36,7 +36,7 @@ public class StudentMarkerController extends Controller {
 
 	public static Result answersToMark(){
 		User user = User.find.byId(request().username());
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		List<AnswerMarker> answersToMark = AnswerMarker.getByMarker(user.email);
 
 		for(AnswerMarker a: answersToMark){
@@ -63,7 +63,7 @@ public class StudentMarkerController extends Controller {
 		User user = User.find.byId(request().username());
 		if(Secured.isStudent(user.email)){
 
-			List<Category> categories = Category.getAllCategories();
+			List<Category> categories = Category.find.all();
 
 			answer.group.refresh();
 			answer.openQuestion.refresh();

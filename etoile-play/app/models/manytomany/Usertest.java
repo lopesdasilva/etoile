@@ -52,6 +52,7 @@ public class Usertest extends Model{
 	public Test test;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+    @OrderBy("id")
 	public List<Answer> answers;
 	
 	public float progress=0;

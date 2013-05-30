@@ -60,7 +60,7 @@ public class Application extends Controller {
 			return StudentController.index();
 		}
 		List<Blog> blogs = Blog.find.all();
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.find.all();
 		
@@ -82,7 +82,7 @@ public class Application extends Controller {
 		
 		
 		return ok(views.html.statics.curriculum.render(
-				Category.getAllCategories()
+                Category.find.all()
 				));
 	}
 	
@@ -115,7 +115,7 @@ public static Result professorprofile(String professor_acronym) {
 			return StudentController.digitalcampus();
 		}
 		return ok(views.html.statics.digitalcampus.render(
-				Category.getAllCategories(),Continent.getAllContinents()
+                Category.find.all(),Continent.getAllContinents()
 				));
 	}
 	public static Result news() {
@@ -125,13 +125,13 @@ public static Result professorprofile(String professor_acronym) {
 		}
 
 		return ok(views.html.blog.blogs.render(
-				Blog.find.all(),Category.getAllCategories(),Continent.getAllContinents()
+				Blog.find.all(),Category.find.all(),Continent.getAllContinents()
 				));
 	}
 	
 	public static Result categoryModules(Long category_id){
 		Category category = Category.find.byId(category_id);
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		return ok(categorymodules.render(category,categories));
 	}
 	
@@ -142,7 +142,7 @@ public static Result professorprofile(String professor_acronym) {
 	    		return redirect(routes.Application.index());
 	    	}
 	    	
-	    	List<Category> categories = Category.getAllCategories();
+	    	List<Category> categories = Category.find.all();
 	    	List <Continent> continents = Continent.getAllContinents();
 	    	
 	    	if(session("email")!=null){
@@ -160,7 +160,7 @@ public static Result professorprofile(String professor_acronym) {
 		
 		
 		return ok(views.html.statics.about.render(
-				Category.getAllCategories(),Continent.getAllContinents()
+				Category.find.all(),Continent.getAllContinents()
 				));
 	}
 	
@@ -169,7 +169,7 @@ public static Result professorprofile(String professor_acronym) {
 			return StudentController.contact();
 		}
 		return ok(views.html.statics.contact.render(
-				Category.getAllCategories(),Continent.getAllContinents()
+                Category.find.all(),Continent.getAllContinents()
 				));
 	}
 
@@ -182,7 +182,7 @@ public static Result professorprofile(String professor_acronym) {
 			return redirect(routes.Application.modules());
 		}
 
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		module.language.refresh();
 		
 		if(session("email")!=null){
@@ -204,7 +204,7 @@ public static Result professorprofile(String professor_acronym) {
 		if (lesson==null){
 			return redirect(routes.Application.module(module_acronym));
 		}
-		List<Category> categories = Category.getAllCategories();
+		List<Category> categories = Category.find.all();
 		
 		if(session("email")!=null){
 			if(Secured.isStudent(session("email"))){
@@ -242,7 +242,7 @@ public static Result professorprofile(String professor_acronym) {
 				prof.refresh();
 		}
 		}
-		return ok(modules.render(Module.find.all(),Category.getAllCategories(),Continent.getAllContinents()));
+		return ok(modules.render(Module.find.all(),Category.find.all(),Continent.getAllContinents()));
 	}
 		
 	/**

@@ -23,6 +23,7 @@ public class Forum extends Model {
 	public String description;
 	
 	@OneToMany
+    @OrderBy("id")
 	public List<Topic> topics;
 	
 	@OneToOne
@@ -31,6 +32,8 @@ public class Forum extends Model {
 	public static Model.Finder<Long, Forum> find = new Model.Finder<Long, Forum>(
 			Long.class, Forum.class);
 
+
+    @OrderBy("id")
 	public static List<Forum> getAllForums() {
 		List<Forum> forums = new ArrayList<Forum>();
 		forums = Ebean.find(Forum.class)

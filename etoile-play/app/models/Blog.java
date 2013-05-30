@@ -44,7 +44,7 @@ public class Blog extends Model {
 	//public Date created;
 
 	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Comment> comments;
 
 	public String dateToString(){

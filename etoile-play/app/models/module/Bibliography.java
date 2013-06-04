@@ -1,6 +1,7 @@
 package models.module;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -33,6 +34,10 @@ public class Bibliography extends Model{
 	
 	@Constraints.Required
 	public String link;
+
+    @Constraints.Required
+    @Formats.DateTime(pattern="dd/MM/yyyy")
+    public Date date= new Date();
 	
 	@ManyToOne
 	public Module module;

@@ -31,7 +31,7 @@ public class QuestionGroup extends Model {
 	public Test test;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("number")
 	public List<Question> questions;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})

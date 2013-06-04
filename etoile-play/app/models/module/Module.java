@@ -60,7 +60,7 @@ public class Module extends Model {
 	public List<Professor> professors;
 
 	@OneToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("number")
 	public List<Lesson> lessons;
 
 	@ManyToMany (cascade = {CascadeType.ALL})
@@ -68,11 +68,11 @@ public class Module extends Model {
 	public List<Category> categories;
 	
 	@OneToMany
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Content> contents;
 	
 	@OneToMany
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Bibliography> bibliography;
 	
 	@ManyToOne

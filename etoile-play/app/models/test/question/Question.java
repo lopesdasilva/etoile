@@ -89,7 +89,7 @@ public class Question extends Model {
 	//ARGUMENTOS ONE CHOICE QUESTION
 
 	@OneToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("number")
 	public List<Hypothesis> hypothesislist;
 	
 	@OneToMany(cascade=CascadeType.ALL)

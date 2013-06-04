@@ -435,7 +435,7 @@ public class StudentController extends Controller {
 		System.out.println("Class: StudentController; Method: news; news size: "+Blog.find.all().size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
 
 		return ok(views.html.secured.blogs.render(user,
-				Blog.find.all(),Category.find.all(),Continent.getAllContinents()
+				Blog.getAllBlogs(),Category.find.all(),Continent.getAllContinents()
 				));
 	}
 

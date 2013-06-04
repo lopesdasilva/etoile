@@ -37,7 +37,7 @@ public class Topic extends Model {
 	public Date date;
 
 	@OneToMany
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Reply> replies;
 	
 	@OneToMany

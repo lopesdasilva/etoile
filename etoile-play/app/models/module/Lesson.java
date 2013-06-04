@@ -53,15 +53,15 @@ public class Lesson extends Model{
 	public Module module;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("begin_date")
 	public List<Test> tests;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Lessoncontent> lessoncontents;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Lessonalert> lessonalerts;
 	
 	@OneToMany

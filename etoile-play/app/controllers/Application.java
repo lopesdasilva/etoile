@@ -125,7 +125,7 @@ public static Result professorprofile(String professor_acronym) {
 		}
 
 		return ok(views.html.blog.blogs.render(
-				Blog.find.all(),Category.find.all(),Continent.getAllContinents()
+				Blog.getAllBlogs(),Category.find.all(),Continent.getAllContinents()
 				));
 	}
 	

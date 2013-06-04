@@ -11,59 +11,59 @@ import play.db.ebean.*;
 import play.data.validation.*;
 
 @Entity
+
 public class Blog extends Model {
-	
-	@Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-	public Long id;
 
-	@Constraints.Required
-	public String header;
-	
-	@Constraints.Required
-	@Constraints.MaxLength(value = 45)
-	public String alternateHeader;
-	
-	@Constraints.Required
-	@Column(columnDefinition="TEXT")
-	public String text;
-	
-	@Constraints.Required
-	@Constraints.MaxLength(value = 255)
-	@Column(columnDefinition="TEXT")
-	public String alternateText;
-	
-	@Constraints.Required
-	@Column(columnDefinition="TEXT")
-	public String articleImageURL;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
-	@Constraints.Required
-	public Date date;
-	
-	//public Date created;
+    @Constraints.Required
+    public String header;
 
-	@OneToMany(mappedBy="blog", cascade=CascadeType.ALL)
+    @Constraints.Required
+    @Constraints.MaxLength(value = 45)
+    public String alternateHeader;
+
+    @Constraints.Required
+    @Column(columnDefinition = "TEXT")
+    public String text;
+
+    @Constraints.Required
+    @Constraints.MaxLength(value = 255)
+    @Column(columnDefinition = "TEXT")
+    public String alternateText;
+
+    @Constraints.Required
+    @Column(columnDefinition = "TEXT")
+    public String articleImageURL;
+
+
+    @Constraints.Required
+    public Date date;
+
+    //public Date created;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
     @OrderBy("date")
-	public List<Comment> comments;
+    public List<Comment> comments;
 
-	public String dateToString(){
-		
-		Long yourmilliseconds = date.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("EE MMM yyyy",Locale.UK);
+    public String dateToString() {
+
+        Long yourmilliseconds = date.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("EE MMM yyyy", Locale.UK);
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UK"));
         calendar.setTimeInMillis(yourmilliseconds);
-		return sdf.format(calendar.getTime());
-	}
-	public static Model.Finder<Long, Blog> find = new Model.Finder<Long, Blog>(
-			Long.class, Blog.class);
+        return sdf.format(calendar.getTime());
+    }
 
-//	public static List<Blog> getAllBlogs() {
-//		List<Blog> blogs = new ArrayList<Blog>();
-//		Ebean.
-//		blogs = Ebean.find(Blog.class)
-//				.findList(); 
-//		return blogs; 
-//	}
-	
+
+    public static Model.Finder<Long, Blog> find = new Model.Finder<Long, Blog>(
+            Long.class, Blog.class);
+
+    @OrderBy("date" )
+    public static List<Blog> getAllBlogs() {
+        return Blog.find.orderBy("date DESC").findList();
+    }
+
 }

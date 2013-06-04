@@ -23,7 +23,7 @@ public class Forum extends Model {
 	public String description;
 	
 	@OneToMany
-    @OrderBy("id")
+    @OrderBy("date")
 	public List<Topic> topics;
 	
 	@OneToOne

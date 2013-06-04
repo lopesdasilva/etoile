@@ -27,6 +27,10 @@ public class Lessoncontent extends Model{
     @Column(columnDefinition="TEXT")
 	public String text;
 
+    @Constraints.Required
+    @Formats.DateTime(pattern="dd/MM/yyyy")
+    public Date date= new Date();
+
 	@ManyToOne
 	public Lesson lesson;
 	

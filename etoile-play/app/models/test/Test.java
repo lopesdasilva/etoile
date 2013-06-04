@@ -58,7 +58,7 @@ public class Test extends Model{
 	public Lesson lesson;
 	
 	@OneToMany
-    @OrderBy("id")
+    @OrderBy("number")
 	public List<QuestionGroup> groups;
 	
 	@OneToMany

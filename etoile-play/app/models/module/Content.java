@@ -1,6 +1,7 @@
 package models.module;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -25,7 +26,11 @@ public class Content extends Model{
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String text;
-	
+
+    @Constraints.Required
+    @Formats.DateTime(pattern="dd/MM/yyyy")
+    public Date date= new Date();
+
 	@ManyToOne
 	public Module module;
 	

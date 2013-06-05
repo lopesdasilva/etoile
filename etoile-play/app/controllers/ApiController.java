@@ -420,4 +420,36 @@ public class ApiController extends Controller {
             }
         }
     }
+    
+    public static Result getListOfURLs(Long question_id) throws IOException {
+    	 String auth = request().getHeader(AUTHORIZATION);
+         if (auth != null) {
+             auth = auth.substring(6);
+             byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+             String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+             String username = credString[0];
+             String password = credString[1];
+             Question question = Question.find.byId(question_id);
+             if (User.authenticateSHA1(username, password) != null ) {
+            	 if(question != null){
+            		 System.out.println("question founded");
+            		 JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class","question","user","test","studentProfile","added");
+                     System.out.println("Class: ApiController; Method: getListOfURLs; Question: " + question.id);
+                     return ok(postDetailsSerializer.serialize(question.urls)).as("application/json");
+            	 
+            	 
+            	 }
+             }else{
+            	 ObjectNode result = Json.newObject();
+                 result.put("status", "failure");
+                 System.out.println("Class: ApiController; Method: getTest; wrong user or password");
+                 return ok(result).as("application/json");
+             }
+         }
+         
+         System.out.println("Class: ApiController; Method: getListOfURLs; Request not JSON");
+         return badRequest("Expecting Json data.");
+         
+    }
 }

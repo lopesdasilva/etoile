@@ -382,18 +382,33 @@ public class ApiController extends Controller {
                 JsonNode hyp_list = json.get("hypothesislist");
 
                 Iterator<JsonNode> a = hyp_list.getElements();
-                        System.out.println("Iterator "+a);
 
 
-                if (false) {
-                              return ok();
-                } else {
-                    ObjectNode result = Json.newObject();
-                    result.put("status", "failure");
-                    result.put("error", "failed saving answer not owned");
-                    System.out.println("Class: ApiController; Method: saveMutipleAnswer user does not own this hyp or hyp does not exists");
-                    return ok(result).as("application/json");
+                while (a.hasNext()) {
+
+                    JsonNode b = a.next();
+                    Long id = b.findPath("id").asLong();
+                    boolean selected = b.findPath("selected").asBoolean();
+
+                    Hypothesis h = Hypothesis.find.byId(id);
+                    if (h.user.email.equals(username)) {
+                        System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: "+id);
+                        h.selected = selected;
+                        h.save();
+                    } else {
+
+                        ObjectNode result = Json.newObject();
+                        result.put("status", "failure");
+                        result.put("error", "failed saving answer not owned");
+                        System.out.println("Class: ApiController; Method: saveMutipleAnswer user does not own this hyp or hyp does not exists");
+                        return ok(result).as("application/json");
+                    }
                 }
+                System.out.println("Class: ApiController; Method: saveMutipleAnswer; saved");
+                ObjectNode result = Json.newObject();
+                result.put("status", "success");
+                result.put("message", "saved");
+                return ok(result).as("application/json");
 
 
             } else {

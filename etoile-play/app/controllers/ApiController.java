@@ -311,13 +311,21 @@ public class ApiController extends Controller {
                 String answerText = json.findPath("answer_text").getTextValue();
                 Answer answer = Answer.find.byId(answer_id);
                 if (answer != null && username.equals(answer.usertest.user.email)) {
+                    if(!answer.isSaved){
+        				changeTestProgress((long)answer.usertest.id, username);
+        				answer.usertest.refresh();
+        				System.out.println("Test Progress: "+answer.usertest.progress);
+        			}
                     answer.answer = answerText;
+                    answer.isSaved = true;
                     answer.save();
+              
                     System.out.println("Class: ApiController; Method: saveanswer Answer: " + answer_id + " saved text: " + answerText);
 
                     ObjectNode result = Json.newObject();
                     result.put("status", "success");
                     result.put("message", "saved");
+                    result.put("test_progress",""+answer.usertest.progress);
                     return ok(result).as("application/json");
                 } else {
                     ObjectNode result = Json.newObject();
@@ -338,6 +346,23 @@ public class ApiController extends Controller {
         }
 
     }
+    
+    public static void changeTestProgress(Long usertest_id, String user_email){
+		int totalNumQuestions=0;
+		Usertest userTest= Usertest.find.byId(usertest_id);
+		Test t= Test.find.byId(userTest.test.id);
+		for (QuestionGroup g: t.groups){
+			totalNumQuestions+=g.questions.size();
+		}
+		
+		float progress = userTest.progress+ 100/totalNumQuestions;
+		userTest.progress=progress;
+		if(userTest.progress == 99){
+			userTest.progress = progress+1;
+			
+		}
+		userTest.save();
+	}
 
     public static Result saveMutipleAnswer() throws IOException {
         JsonNode json = request().body().asJson();

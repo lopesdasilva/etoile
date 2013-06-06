@@ -434,7 +434,7 @@ public class ApiController extends Controller {
              Question question = Question.find.byId(question_id);
              if (User.authenticateSHA1(username, password) != null ) {
             	 if(question != null){
-            		 System.out.println("question founded");
+            		 System.out.println("question found");
             		 JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class","question","user","test","studentProfile","added");
                      System.out.println("Class: ApiController; Method: getListOfURLs; Question: " + question.id);
                      return ok(postDetailsSerializer.serialize(question.urls)).as("application/json");

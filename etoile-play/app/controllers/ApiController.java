@@ -2,6 +2,7 @@ package controllers;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -452,4 +453,51 @@ public class ApiController extends Controller {
          return badRequest("Expecting Json data.");
          
     }
+    
+    public static Result likeURL(Long url_id) throws IOException {
+        JsonNode json = request().body().asJson();
+        System.out.println(request().body());
+        String auth = request().getHeader(AUTHORIZATION);
+        if (auth == null) {
+            System.out.println("Class: ApiController; Method: likeURL; Request not JSON");
+            return badRequest("Expecting Json data.");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+                User user = User.findByEmail(username);
+            	models.test.question.URL url = models.test.question.URL.find.byId(url_id);
+            	
+            	if(url.voters.contains(user)){
+            		ObjectNode result = Json.newObject();
+                    result.put("status", "error");
+                    result.put("message", "vote denied");
+                    result.put("url_likes",""+url.likes);
+                    return ok(result).as("application/json");
+            	}else{
+            		url.likes = url.likes+1;
+            		url.voters.add(user);
+            		url.save();
+                ObjectNode result = Json.newObject();
+                result.put("status", "success");
+                result.put("message", "voted");
+                result.put("url_likes",""+url.likes);
+                return ok(result).as("application/json");
+            	}
+
+
+            } else {
+                System.out.println("Class: ApiController; Method: likeURL; authentication failed");
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                result.put("error", "failed authentication");
+                return ok(result).as("application/json");
+            }
+        }
+    }
+    
 }

@@ -182,6 +182,7 @@ GET /api/module/:module/lesson/:lesson/test/:test controllers.ApiController.getT
 POST /api/saveanswer controllers.ApiController.saveQuestion()
 POST /api/savemultipleanswer controllers.ApiController.saveMutipleAnswer()
 GET /api/question/:question/geturls controllers.ApiController.getListOfURLs(question: Long)
+POST /api/likeurl/:url controllers.ApiController.likeURL(url: Long)
 
 GET /api/dashboard	controllers.ApiController.getDashboard()
 POST /api/authenticate controllers.ApiController.authenticate()

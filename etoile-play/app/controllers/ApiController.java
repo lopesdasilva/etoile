@@ -367,7 +367,6 @@ public class ApiController extends Controller {
 
     public static Result saveMutipleAnswer() throws IOException {
         JsonNode json = request().body().asJson();
-        System.out.println(request().body());
         String auth = request().getHeader(AUTHORIZATION);
         if (json == null || auth == null) {
             System.out.println("Class: ApiController; Method: saveMutipleAnswer; Request not JSON");
@@ -455,8 +454,6 @@ public class ApiController extends Controller {
     }
     
     public static Result likeURL(Long url_id) throws IOException {
-        JsonNode json = request().body().asJson();
-        System.out.println(request().body());
         String auth = request().getHeader(AUTHORIZATION);
         if (auth == null) {
             System.out.println("Class: ApiController; Method: likeURL; Request not JSON");

@@ -472,10 +472,11 @@ public class ApiController extends Controller {
                 User user = User.findByEmail(username);
             	models.test.question.URL url = models.test.question.URL.find.byId(url_id);
             	
+            	if(url != null){
             	if(url.voters.contains(user)){
             		ObjectNode result = Json.newObject();
-                    result.put("status", "error");
-                    result.put("message", "vote denied");
+                    result.put("status", "failure");
+                    result.put("message", "vote denied - already voted");
                     result.put("url_likes",""+url.likes);
                     return ok(result).as("application/json");
             	}else{
@@ -488,7 +489,13 @@ public class ApiController extends Controller {
                 result.put("url_likes",""+url.likes);
                 return ok(result).as("application/json");
             	}
-
+            	}else{
+            		ObjectNode result = Json.newObject();
+                    result.put("status", "failure");
+                    result.put("message", "invalid url");
+                    return ok(result).as("application/json");
+            	}
+            	
 
             } else {
                 System.out.println("Class: ApiController; Method: likeURL; authentication failed");

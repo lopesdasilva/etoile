@@ -477,7 +477,7 @@ public class ApiController extends Controller {
             		ObjectNode result = Json.newObject();
                     result.put("status", "failure");
                     result.put("message", "vote denied - already voted");
-                    result.put("url_likes",""+url.likes);
+                    result.put("url_likes",url.likes);
                     return ok(result).as("application/json");
             	}else{
             		url.likes = url.likes+1;
@@ -486,7 +486,7 @@ public class ApiController extends Controller {
                 ObjectNode result = Json.newObject();
                 result.put("status", "success");
                 result.put("message", "voted");
-                result.put("url_likes",""+url.likes);
+                result.put("url_likes",url.likes);
                 return ok(result).as("application/json");
             	}
             	}else{

@@ -348,6 +348,61 @@ public class ApiController extends Controller {
 
     }
     
+    public static Result register() throws IOException {
+    	System.out.println("register");
+        JsonNode json = request().body().asJson();
+        System.out.println(json.asText());
+        if (json == null) {
+            System.out.println("Class: ApiController; Method: saveQuestion; Request not JSON");
+            return badRequest("Expecting Json data.");
+        } else {
+
+        		String username = json.findPath("username").getTextValue();
+                String email = json.findPath("email").getTextValue();
+                String name = json.findPath("name").getTextValue();
+                boolean male = json.findPath("male").asBoolean();
+                String university = json.findPath("university").getTextValue();
+                String scientific_domain = json.findPath("scientific_domain").getTextValue();
+                String country = json.findPath("country").getTextValue();
+                
+    	        if(User.findByEmail(email) == null){
+	        	Student student = new Student();
+	        	student.male = male;
+	        	student.acronym = username;
+	        	student.firstname = name;
+	        	student.imageURL = "";
+	        	student.contact = email;
+	        	student.save();
+	        	
+                User user = new User();
+                user.username = username;
+                user.email = email;
+                user.name = name;
+                user.country = country;
+                user.olduser = true;
+	        	user.studentProfile = student;
+	        	user.studentProfile.acronym=username;
+	        	user.olduser = true;
+                user.save();
+                
+                student.user = user;
+                student.save();
+                
+                ObjectNode result = Json.newObject();
+                result.put("status", "success");
+                result.put("message", "created");
+                return ok(result).as("application/json");
+    	        }else{
+    	        	ObjectNode result = Json.newObject();
+                    result.put("status", "failed");
+                    result.put("message", "email already used");
+                    return ok(result).as("application/json");
+    	        }
+        }
+
+    }
+    
+    
     public static void changeTestProgress(Long usertest_id, String user_email){
 		int totalNumQuestions=0;
 		Usertest userTest= Usertest.find.byId(usertest_id);

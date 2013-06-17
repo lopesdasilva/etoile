@@ -353,6 +353,7 @@ public class ApiController extends Controller {
         } else {
 
         		String username = json.findPath("username").getTextValue();
+        		String password = json.findPath("password").getTextValue();
                 String email = json.findPath("email").getTextValue();
                 String name = json.findPath("name").getTextValue();
                 boolean male = json.findPath("male").asBoolean();
@@ -371,6 +372,7 @@ public class ApiController extends Controller {
 	        	
                 User user = new User();
                 user.username = username;
+                user.password = password;
                 user.email = email;
                 user.name = name;
                 user.country = country;

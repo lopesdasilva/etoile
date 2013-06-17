@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import models.Comment;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -52,12 +53,6 @@ public class ApiController extends Controller {
         System.out.println("Class: ApiController; Method: getNews; News size: " + obj.size());
         return ok(postDetailsSerializer.serialize(obj)).as("application/json");
     }
-
-//	public static Result getMyProfile(String acronym){
-//		Student obj = Student.findByAcronym(acronym);
-//		JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("password","user","*.class");
-//		return ok(postDetailsSerializer.serialize(obj)).as("application/json");
-//	}
 
     public static Result getDashboard() throws IOException {
 
@@ -312,21 +307,21 @@ public class ApiController extends Controller {
                 String answerText = json.findPath("answer_text").getTextValue();
                 Answer answer = Answer.find.byId(answer_id);
                 if (answer != null && username.equals(answer.usertest.user.email)) {
-                    if(!answer.isSaved){
-        				changeTestProgress((long)answer.usertest.id, username);
-        				answer.usertest.refresh();
-        				System.out.println("Test Progress: "+answer.usertest.progress);
-        			}
+                    if (!answer.isSaved) {
+                        changeTestProgress((long) answer.usertest.id, username);
+                        answer.usertest.refresh();
+                        System.out.println("Test Progress: " + answer.usertest.progress);
+                    }
                     answer.answer = answerText;
                     answer.isSaved = true;
                     answer.save();
-              
+
                     System.out.println("Class: ApiController; Method: saveanswer Answer: " + answer_id + " saved text: " + answerText);
 
                     ObjectNode result = Json.newObject();
                     result.put("status", "success");
                     result.put("message", "saved");
-                    result.put("test_progress",""+answer.usertest.progress);
+                    result.put("test_progress", "" + answer.usertest.progress);
                     return ok(result).as("application/json");
                 } else {
                     ObjectNode result = Json.newObject();
@@ -347,7 +342,7 @@ public class ApiController extends Controller {
         }
 
     }
-    
+
     public static Result register() throws IOException {
     	System.out.println("register");
         JsonNode json = request().body().asJson();
@@ -403,22 +398,26 @@ public class ApiController extends Controller {
     }
     
     
-    public static void changeTestProgress(Long usertest_id, String user_email){
-		int totalNumQuestions=0;
-		Usertest userTest= Usertest.find.byId(usertest_id);
-		Test t= Test.find.byId(userTest.test.id);
-		for (QuestionGroup g: t.groups){
-			totalNumQuestions+=g.questions.size();
-		}
-		
-		float progress = userTest.progress+ 100/totalNumQuestions;
-		userTest.progress=progress;
-		if(userTest.progress == 99){
-			userTest.progress = progress+1;
-			
-		}
-		userTest.save();
-	}
+
+
+
+    public static void changeTestProgress(Long usertest_id, String user_email) {
+        int totalNumQuestions = 0;
+        Usertest userTest = Usertest.find.byId(usertest_id);
+        Test t = Test.find.byId(userTest.test.id);
+        for (QuestionGroup g : t.groups) {
+            totalNumQuestions += g.questions.size();
+        }
+
+        float progress = userTest.progress + 100 / totalNumQuestions;
+        userTest.progress = progress;
+        if (userTest.progress == 99) {
+            userTest.progress = progress + 1;
+
+        }
+        userTest.save();
+    }
+
 
     public static Result saveMutipleAnswer() throws IOException {
         JsonNode json = request().body().asJson();
@@ -447,7 +446,7 @@ public class ApiController extends Controller {
 
                     Hypothesis h = Hypothesis.find.byId(id);
                     if (h.user.email.equals(username)) {
-                        System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: "+id);
+                        System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: " + id);
                         h.selected = selected;
                         h.save();
                     } else {
@@ -475,39 +474,39 @@ public class ApiController extends Controller {
             }
         }
     }
-    
-    public static Result getListOfURLs(Long question_id) throws IOException {
-    	 String auth = request().getHeader(AUTHORIZATION);
-         if (auth != null) {
-             auth = auth.substring(6);
-             byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
-             String[] credString = new String(decodeAuth, "UTF-8").split(":");
 
-             String username = credString[0];
-             String password = credString[1];
-             Question question = Question.find.byId(question_id);
-             if (User.authenticateSHA1(username, password) != null ) {
-            	 if(question != null){
-            		 System.out.println("question found");
-            		 JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class","question","user","test","studentProfile","added");
-                     System.out.println("Class: ApiController; Method: getListOfURLs; Question: " + question.id);
-                     return ok(postDetailsSerializer.serialize(question.urls)).as("application/json");
-            	 
-            	 
-            	 }
-             }else{
-            	 ObjectNode result = Json.newObject();
-                 result.put("status", "failure");
-                 System.out.println("Class: ApiController; Method: getTest; wrong user or password");
-                 return ok(result).as("application/json");
-             }
-         }
-         
-         System.out.println("Class: ApiController; Method: getListOfURLs; Request not JSON");
-         return badRequest("Expecting Json data.");
-         
+    public static Result getListOfURLs(Long question_id) throws IOException {
+        String auth = request().getHeader(AUTHORIZATION);
+        if (auth != null) {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            Question question = Question.find.byId(question_id);
+            if (User.authenticateSHA1(username, password) != null) {
+                if (question != null) {
+                    System.out.println("question found");
+                    JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class", "question", "user", "test", "studentProfile", "added");
+                    System.out.println("Class: ApiController; Method: getListOfURLs; Question: " + question.id);
+                    return ok(postDetailsSerializer.serialize(question.urls)).as("application/json");
+
+
+                }
+            } else {
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                System.out.println("Class: ApiController; Method: getTest; wrong user or password");
+                return ok(result).as("application/json");
+            }
+        }
+
+        System.out.println("Class: ApiController; Method: getListOfURLs; Request not JSON");
+        return badRequest("Expecting Json data.");
+
     }
-    
+
     public static Result likeURL(Long url_id) throws IOException {
         String auth = request().getHeader(AUTHORIZATION);
         if (auth == null) {
@@ -522,32 +521,32 @@ public class ApiController extends Controller {
             String password = credString[1];
             if (User.authenticateSHA1(username, password) != null) {
                 User user = User.findByEmail(username);
-            	models.test.question.URL url = models.test.question.URL.find.byId(url_id);
-            	
-            	if(url != null){
-            	if(url.voters.contains(user)){
-            		ObjectNode result = Json.newObject();
-                    result.put("status", "failure");
-                    result.put("message", "vote denied - already voted");
-                    result.put("url_likes",url.likes);
-                    return ok(result).as("application/json");
-            	}else{
-            		url.likes = url.likes+1;
-            		url.voters.add(user);
-            		url.save();
-                ObjectNode result = Json.newObject();
-                result.put("status", "success");
-                result.put("message", "voted");
-                result.put("url_likes",url.likes);
-                return ok(result).as("application/json");
-            	}
-            	}else{
-            		ObjectNode result = Json.newObject();
+                models.test.question.URL url = models.test.question.URL.find.byId(url_id);
+
+                if (url != null) {
+                    if (url.voters.contains(user)) {
+                        ObjectNode result = Json.newObject();
+                        result.put("status", "failure");
+                        result.put("message", "vote denied - already voted");
+                        result.put("url_likes", url.likes);
+                        return ok(result).as("application/json");
+                    } else {
+                        url.likes = url.likes + 1;
+                        url.voters.add(user);
+                        url.save();
+                        ObjectNode result = Json.newObject();
+                        result.put("status", "success");
+                        result.put("message", "voted");
+                        result.put("url_likes", url.likes);
+                        return ok(result).as("application/json");
+                    }
+                } else {
+                    ObjectNode result = Json.newObject();
                     result.put("status", "failure");
                     result.put("message", "invalid url");
                     return ok(result).as("application/json");
-            	}
-            	
+                }
+
 
             } else {
                 System.out.println("Class: ApiController; Method: likeURL; authentication failed");
@@ -558,5 +557,55 @@ public class ApiController extends Controller {
             }
         }
     }
-    
+
+    public static Result commentNews(Long blog_id) throws IOException {
+
+        JsonNode json = request().body().asJson();
+        String auth = request().getHeader(AUTHORIZATION);
+        if (json == null || auth == null) {
+            System.out.println("Class: ApiController; Method: saveQuestion; Request not JSON");
+            return badRequest("Expecting Json data.");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+
+                Blog blog = Blog.find.byId(blog_id);
+                if (blog != null) {
+                    String blog_comment = json.findPath("comment").getTextValue();
+                    Comment comment = new Comment();
+                    comment.blog = blog;
+                    comment.text = blog_comment;
+                    comment.user = User.findByEmail(username);
+                    comment.save();
+
+                    System.out.println("Class: ApiController; Method: commentNews; blog_id:" + blog_id + " Comment added: " + blog_comment + " user:" + username);
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "success");
+                    return ok(result).as("application/json");
+
+
+                } else {
+                    System.out.println("Class: ApiController; Method: commentNews; Blog does not exists");
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "failure");
+                    result.put("error", "Blog does not exists");
+                    return ok(result).as("application/json");
+                }
+
+            } else {
+                System.out.println("Class: ApiController; Method: commentNews; authentication failed");
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                result.put("error", "failed authentication");
+                return ok(result).as("application/json");
+            }
+        }
+
+    }
+
 }

@@ -29,7 +29,7 @@ public class Comment extends Model {
 	public User user;
 
 	@Constraints.Required
-	public Date date;
+	public Date date=new Date();
 	//public Date created;
 
 	public static Model.Finder<Long, Comment> find = new Model.Finder<Long, Comment>(

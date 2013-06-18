@@ -72,7 +72,7 @@
 						</thead>
 						<tbody>
 							@for(question <- lesson.questions){
-							@if(!question.iscopy){
+							@if(!question.iscopy && question.typeOfQuestion == 0){
 								
 							<tr>
 								<td>@question.question</td>

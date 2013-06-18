@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import models.Comment;
+import models.*;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -15,9 +15,6 @@ import org.codehaus.jackson.node.ObjectNode;
 import flexjson.JSONSerializer;
 
 
-import models.Blog;
-import models.Student;
-import models.User;
 import models.manytomany.Usertest;
 import models.module.Lesson;
 import models.module.Module;
@@ -344,7 +341,7 @@ public class ApiController extends Controller {
     }
 
     public static Result register() throws IOException {
-    	System.out.println("register");
+        System.out.println("register");
         JsonNode json = request().body().asJson();
         System.out.println(json.asText());
         if (json == null) {
@@ -352,24 +349,24 @@ public class ApiController extends Controller {
             return badRequest("Expecting Json data.");
         } else {
 
-        		String username = json.findPath("username").getTextValue();
-        		String password = json.findPath("password").getTextValue();
-                String email = json.findPath("email").getTextValue();
-                String name = json.findPath("name").getTextValue();
-                boolean male = json.findPath("male").asBoolean();
-                String university = json.findPath("university").getTextValue();
-                String scientific_domain = json.findPath("scientific_domain").getTextValue();
-                String country = json.findPath("country").getTextValue();
-                
-    	        if(User.findByEmail(email) == null){
-	        	Student student = new Student();
-	        	student.male = male;
-	        	student.acronym = username;
-	        	student.firstname = name;
-	        	student.imageURL = "";
-	        	student.contact = email;
-	        	student.save();
-	        	
+            String username = json.findPath("username").getTextValue();
+            String password = json.findPath("password").getTextValue();
+            String email = json.findPath("email").getTextValue();
+            String name = json.findPath("name").getTextValue();
+            boolean male = json.findPath("male").asBoolean();
+            String university = json.findPath("university").getTextValue();
+            String scientific_domain = json.findPath("scientific_domain").getTextValue();
+            String country = json.findPath("country").getTextValue();
+
+            if (User.findByEmail(email) == null) {
+                Student student = new Student();
+                student.male = male;
+                student.acronym = username;
+                student.firstname = name;
+                student.imageURL = "";
+                student.contact = email;
+                student.save();
+
                 User user = new User();
                 user.username = username;
                 user.password = password;
@@ -377,30 +374,27 @@ public class ApiController extends Controller {
                 user.name = name;
                 user.country = country;
                 user.olduser = true;
-	        	user.studentProfile = student;
-	        	user.studentProfile.acronym=username;
-	        	user.olduser = true;
+                user.studentProfile = student;
+                user.studentProfile.acronym = username;
+                user.olduser = true;
                 user.save();
-                
+
                 student.user = user;
                 student.save();
-                
+
                 ObjectNode result = Json.newObject();
                 result.put("status", "success");
                 result.put("message", "created");
                 return ok(result).as("application/json");
-    	        }else{
-    	        	ObjectNode result = Json.newObject();
-                    result.put("status", "failed");
-                    result.put("message", "email already used");
-                    return ok(result).as("application/json");
-    	        }
+            } else {
+                ObjectNode result = Json.newObject();
+                result.put("status", "failed");
+                result.put("message", "email already used");
+                return ok(result).as("application/json");
+            }
         }
 
     }
-    
-    
-
 
 
     public static void changeTestProgress(Long usertest_id, String user_email) {
@@ -610,4 +604,92 @@ public class ApiController extends Controller {
 
     }
 
+
+    public static Result signinTest(Long test_id) throws IOException {
+        JsonNode json = request().body().asJson();
+        String auth = request().getHeader(AUTHORIZATION);
+        if (json == null || auth == null) {
+            System.out.println("Class: ApiController; Method: signinTest; Request not JSON");
+            return badRequest("Expecting Json data; Auth failed");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+                Test test = Test.find.byId(test_id);
+                if (test != null) {
+                    String suggestedQuestion = json.findPath("suggested_question").getTextValue();
+                    String suggestedAnswer = json.findPath("suggested_answer").getTextValue();
+
+                    User user = User.findByEmail(username);
+                    //signup in test
+                    Usertest user_test = new Usertest();
+                    user_test.user = user;
+                    user_test.test = test;
+                    user_test.expired = false;
+                    user_test.inmodule = false;
+                    user_test.submitted = false;
+                    user_test.save();
+                    user.tests.add(user_test);
+                    test.users.add(user_test);
+                    user.save();
+                    test.save();
+                    user_test.save();
+
+                    for (QuestionGroup group : test.groups) {
+                        for (Question question : group.questions) {
+                            if (question.subtopic != null) {
+                                SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
+                                if (subtopicreputation == null) {
+                                    SubtopicReputation subtopicreputationuser = new SubtopicReputation();
+                                    subtopicreputationuser.subtopic = question.subtopic;
+                                    subtopicreputationuser.user = user;
+                                    subtopicreputationuser.reputationAsAMarker = new Long(0);
+                                    subtopicreputationuser.reputationAsAStudent = new Long(0);
+                                    subtopicreputationuser.save();
+                                }
+                            }
+                        }
+
+                    }
+
+                    Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
+                    usertest.inmodule = true;
+                    usertest.save();
+
+                    Question new_question = new Question();
+                    new_question.question = suggestedQuestion;
+                    new_question.answerSuggestedByStudent = suggestedAnswer;
+                    new_question.lesson = test.lesson;
+                    new_question.user = user;
+                    new_question.save();
+                    test.lesson.save();
+
+
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "success");
+                    result.put("message", "Question and answer suggested; user signed up in test");
+                    return ok(result).as("application/json");
+                } else {
+                    System.out.println("Class: ApiController; Method: signinTest; authentication failed");
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "failure");
+                    result.put("error", "test not found");
+                    return ok(result).as("application/json");
+                }
+
+
+            } else {
+                System.out.println("Class: ApiController; Method: signinTest; authentication failed");
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                result.put("error", "failed authentication");
+                return ok(result).as("application/json");
+            }
+        }
+
+    }
 }

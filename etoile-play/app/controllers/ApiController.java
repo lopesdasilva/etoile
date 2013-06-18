@@ -418,6 +418,8 @@ public class ApiController extends Controller {
     public static Result saveMutipleAnswer() throws IOException {
         JsonNode json = request().body().asJson();
         String auth = request().getHeader(AUTHORIZATION);
+        Long usertest_id = json.findPath("usertest").asLong();
+        System.out.println("usertest_id = " + usertest_id);
         if (json == null || auth == null) {
             System.out.println("Class: ApiController; Method: saveMutipleAnswer; Request not JSON");
             return badRequest("Expecting Json data.");
@@ -441,6 +443,18 @@ public class ApiController extends Controller {
                     boolean selected = b.findPath("selected").asBoolean();
 
                     Hypothesis h = Hypothesis.find.byId(id);
+                    
+                    List<Hypothesis> hypothesis_list = Hypothesis.findByUserEmailAndQuestion(username, h.question.id);
+        			if(hypothesis_list.size() > 0){
+        				if(!hypothesis_list.get(0).isSaved){
+        					changeTestProgress(usertest_id, username);
+        				}
+        				for(Hypothesis h_aux: hypothesis_list){
+        					h_aux.isSaved = true;
+        					h_aux.save();
+        				}
+        			}
+        				
                     if (h.user.email.equals(username)) {
                         System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: " + id);
                         h.selected = selected;
@@ -458,6 +472,7 @@ public class ApiController extends Controller {
                 ObjectNode result = Json.newObject();
                 result.put("status", "success");
                 result.put("message", "saved");
+                result.put("test_progress", "" + Usertest.find.byId(usertest_id).progress);
                 return ok(result).as("application/json");
 
 

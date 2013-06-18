@@ -22,6 +22,7 @@ import models.test.Answer;
 import models.test.Hypothesis;
 import models.test.Test;
 import models.test.question.Question;
+import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
 
 
@@ -831,5 +832,141 @@ public class ApiController extends Controller {
             }
         }
 
+    }
+    
+    public static Result submitTest(Long usertest_id) throws IOException {
+    	
+        String auth = request().getHeader(AUTHORIZATION);
+        if ( auth == null) {
+            System.out.println("Class: ApiController; Method: submitTest; Authentication failed");
+            return badRequest("Authentication failed");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+            	
+        
+            	Usertest usertest = Usertest.find.byId(usertest_id);
+            	
+            	if(usertest.submitted){
+            		System.out.println("Class: ApiController; Method: submitTest");
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "failure");
+                    result.put("error", "test already submitted");
+                    return ok(result).as("application/json");
+            	}
+            	usertest.user.refresh();
+            	System.out.println(usertest.user.email);
+            	System.out.println(username);
+            	if(usertest.user.email.equals(username)){
+            		Test test = usertest.test;
+            		//CORRIGIR TESTE
+            		int reputation = 0;
+            		for(QuestionGroup g : test.groups){
+            			for(Question q : g.questions){
+            				boolean answered = false;
+            				boolean bool = true;
+            				List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+            				for(Hypothesis h : hypothesis_aux){
+            					if(h.selected){
+            						answered = true;
+            					}
+            				}
+            				if(answered){
+            				
+            				if(q.typeOfQuestion==1){
+            					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+            						for(Hypothesis h : hypothesis){
+            							if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
+            								bool = false;
+            							}
+            						}
+            						
+            						if(bool){
+            							reputation = reputation + q.weight;
+            						}else{
+            							reputation = reputation - q.weightToLose;
+            						}
+            				}else if(q.typeOfQuestion==2){
+            					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+            					if(hypothesis.size() != 0){
+            					for(Hypothesis h : hypothesis){
+            						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
+            							 bool = false;
+            						}
+            					}
+            					}else{
+            						bool = false;
+            					}
+            					if(bool){
+            						reputation = reputation + q.weight;
+            					}else{
+            						reputation = reputation - q.weightToLose;
+            					}
+            					
+
+            				}
+            				
+            				usertest.reputationAsAstudent = reputation;
+            				usertest.inmodule = false;
+            				usertest.save();
+            				}
+            				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
+            					QuestionEvaluation qe;
+            					if(QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id)==null){
+            						 qe = new QuestionEvaluation();
+            					}else{
+            						qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
+            					}
+            				if(bool && answered){
+            				qe.isCorrect=true;
+            				qe.score = q.weight;
+            				}else if(!bool && answered){
+            					qe.score = -q.weightToLose;
+            				}else{
+            					qe.score = 0;
+            				}
+            				
+            				qe.usertest = usertest;
+            				qe.question = q;
+            				qe.save();
+            				}
+            			
+            			}
+            			
+            		}
+            		
+            		
+            		
+            		usertest.reviewd = false;
+            		usertest.reputationAsAstudent = reputation;
+            		usertest.inmodule = false;
+            		usertest.submitted = true;
+            		usertest.save();
+            		
+            		ObjectNode result = Json.newObject();
+                    result.put("status", "success");
+                    result.put("message", "test submited");
+                    return ok(result).as("application/json");
+            		
+            		
+            	}else{
+            		System.out.println("Class: ApiController; Method: submitTest; wrong usertest");
+                    return badRequest("Expecting Json data.");
+            	}
+            	
+            	
+            }else{
+            	 System.out.println("Class: ApiController; Method: submitTest; authentication failed");
+                 ObjectNode result = Json.newObject();
+                 result.put("status", "failure");
+                 result.put("error", "failed authentication");
+                 return ok(result).as("application/json");
+            }
+    }
     }
 }

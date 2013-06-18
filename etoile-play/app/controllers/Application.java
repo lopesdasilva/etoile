@@ -59,7 +59,7 @@ public class Application extends Controller {
 		if(session("email")!=null){
 			return StudentController.index();
 		}
-		List<Blog> blogs = Blog.find.all();
+		List<Blog> blogs = Blog.find.orderBy("date desc").findList();
 		List<Category> categories = Category.find.all();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.find.all();

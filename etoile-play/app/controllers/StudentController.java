@@ -80,7 +80,7 @@ public class StudentController extends Controller {
 
 
 		if(Secured.isStudent(session("email"))){
-			List<Blog> blogs = Blog.find.all();
+			List<Blog> blogs = Blog.find.orderBy("date desc").findList();
 
 			List<Category> categories = Category.find.all();
 

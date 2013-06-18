@@ -703,11 +703,12 @@ public class ApiController extends Controller {
             String password = credString[1];
             if (User.authenticateSHA1(username, password) != null) {
                 Test test = Test.find.byId(test_id);
-                if (test != null) {
+                User user = User.findByEmail(username);
+                if (test != null && user.modules.contains(test.lesson.module)) {
                     String suggestedQuestion = json.findPath("suggested_question").getTextValue();
                     String suggestedAnswer = json.findPath("suggested_answer").getTextValue();
 
-                    User user = User.findByEmail(username);
+
                     //signup in test
                     Usertest user_test = new Usertest();
                     user_test.user = user;

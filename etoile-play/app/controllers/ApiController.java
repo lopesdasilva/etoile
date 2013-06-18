@@ -249,28 +249,95 @@ public class ApiController extends Controller {
                                         "*.class");
                         Usertest userTest = Usertest.findByUserAndTest(username, test_id);
 
-                        for (QuestionGroup group : userTest.test.groups) {
-                            for (Question question : group.questions) {
-                                switch (question.typeOfQuestion) {
-                                    case 0:
-                                        question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
-                                        break;
-                                    case 1:
-                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                        break;
-                                    case 2:
-                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                        break;
+
+                        if (userTest == null && !test.suggestquestionrequired) {
+                            User user = User.findByEmail(username);
+                            //signup in test
+                            Usertest user_test = new Usertest();
+                            user_test.user = user;
+                            user_test.test = test;
+                            user_test.expired = false;
+                            user_test.inmodule = false;
+                            user_test.submitted = false;
+                            user_test.save();
+                            user.tests.add(user_test);
+                            test.users.add(user_test);
+                            user.save();
+                            test.save();
+                            user_test.save();
+
+                            for (QuestionGroup group : test.groups) {
+                                for (Question question : group.questions) {
+                                    if (question.subtopic != null) {
+                                        SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
+                                        if (subtopicreputation == null) {
+                                            SubtopicReputation subtopicreputationuser = new SubtopicReputation();
+                                            subtopicreputationuser.subtopic = question.subtopic;
+                                            subtopicreputationuser.user = user;
+                                            subtopicreputationuser.reputationAsAMarker = new Long(0);
+                                            subtopicreputationuser.reputationAsAStudent = new Long(0);
+                                            subtopicreputationuser.save();
+                                        }
+                                    }
                                 }
 
                             }
-                        }
 
-                        if (userTest == null) {
-                            //TODO create new userTest
+                            Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
+                            usertest.inmodule = true;
+                            usertest.save();
+
+                            userTest = Usertest.findByUserAndTest(username, test_id);
+
+                            if (userTest.answers.isEmpty()) {
+                                System.out.println("There is no answers creating.");
+                                for (QuestionGroup g : test.groups) {
+                                    for (Question q : g.questions) {
+                                        if (q.typeOfQuestion == 0) {
+                                            Answer empty_answer = new Answer();
+                                            empty_answer.answer = "No answer.";
+                                            empty_answer.openQuestion = q;
+                                            empty_answer.test = test;
+                                            empty_answer.usertest = usertest;
+                                            empty_answer.group = g;
+                                            empty_answer.openQuestion = q;
+                                            empty_answer.save();
+                                            test.answers.add(empty_answer);
+                                            test.save();
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+                            for (QuestionGroup group : userTest.test.groups) {
+                                for (Question question : group.questions) {
+                                    switch (question.typeOfQuestion) {
+                                        case 0:
+                                            question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
+                                            break;
+                                        case 1:
+                                            question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                            break;
+                                        case 2:
+                                            question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                            break;
+                                    }
+
+                                }
+                            }
+
+
+                            System.out.println("Class: ApiController; Method: getTest; test: " + test.id);
+                            return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
+                        } else {
+                            ObjectNode result = Json.newObject();
+                            result.put("status", "failure");
+                            result.put("error", "test requires suggestion");
+                            System.out.println("Class: ApiController; Method: getTest; test requires suggestion");
+                            return ok(result).as("application/json");
                         }
-                        System.out.println("Class: ApiController; Method: getTest; test: " + test.id);
-                        return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
                     }
                 }
             } else {
@@ -684,10 +751,68 @@ public class ApiController extends Controller {
                     test.lesson.save();
 
 
-                    ObjectNode result = Json.newObject();
-                    result.put("status", "success");
-                    result.put("message", "Question and answer suggested; user signed up in test");
-                    return ok(result).as("application/json");
+                    JSONSerializer postDetailsSerializer = new JSONSerializer().include(
+                            "test.groups",
+                            "test.groups.questions",
+                            "test.groups.questions.hypothesislist")
+                            .exclude(
+                                    "lesson",
+                                    "user",
+                                    "test.lesson",
+                                    "test.groups.questions.lesson",
+                                    "test.groups.questions.user",
+                                    "test.groups.questions.answerSuggestedByStudent",
+                                    "test.groups.questions.isCopy",
+                                    "test.groups.questions.hypothesislist.user",
+                                    "test.groups.questions.hypothesislist.isCorrect",
+                                    "test.groups.questions.hypothesislist.isSaved",
+                                    "test.groups.questions.hypothesislist.questionImageURL",
+                                    "test.groups.questions.openanswer.isSaved",
+                                    "test.groups.questions.openanswer.answerMarker",
+                                    "test.groups.questions.openanswer.questionevaluation",
+                                    "*.class");
+
+
+                    if (usertest.answers.isEmpty()) {
+                        System.out.println("There is no answers creating.");
+                        for (QuestionGroup g : test.groups) {
+                            for (Question q : g.questions) {
+                                if (q.typeOfQuestion == 0) {
+                                    Answer empty_answer = new Answer();
+                                    empty_answer.answer = "No answer.";
+                                    empty_answer.openQuestion = q;
+                                    empty_answer.test = test;
+                                    empty_answer.usertest = usertest;
+                                    empty_answer.group = g;
+                                    empty_answer.openQuestion = q;
+                                    empty_answer.save();
+                                    test.answers.add(empty_answer);
+                                    test.save();
+                                }
+                            }
+                        }
+
+
+                        for (QuestionGroup group : usertest.test.groups) {
+                            for (Question question : group.questions) {
+                                switch (question.typeOfQuestion) {
+                                    case 0:
+                                        question.openanswer = Answer.findByUserTestAndQuestion(usertest.id, question.id);
+                                        break;
+                                    case 1:
+                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                        break;
+                                    case 2:
+                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                        break;
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    return ok(postDetailsSerializer.serialize(usertest)).as("application/json");
                 } else {
                     System.out.println("Class: ApiController; Method: signinTest; authentication failed");
                     ObjectNode result = Json.newObject();

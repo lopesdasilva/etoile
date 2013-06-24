@@ -251,44 +251,94 @@ public class ApiController extends Controller {
                         Usertest userTest = Usertest.findByUserAndTest(username, test_id);
 
 
-                        if (userTest == null && !test.suggestquestionrequired) {
-                            User user = User.findByEmail(username);
-                            //signup in test
-                            Usertest user_test = new Usertest();
-                            user_test.user = user;
-                            user_test.test = test;
-                            user_test.expired = false;
-                            user_test.inmodule = false;
-                            user_test.submitted = false;
-                            user_test.save();
-                            user.tests.add(user_test);
-                            test.users.add(user_test);
-                            user.save();
-                            test.save();
-                            user_test.save();
+                        if (userTest == null) {
+                            if (test.suggestquestionrequired) {
+                                ObjectNode result = Json.newObject();
+                                result.put("status", "failure");
+                                result.put("error", "Test requires suggestion");
+                                System.out.println("Class: ApiController; Method: getTest;test requires suggestion");
+                                return ok(result).as("application/json");
+                            } else {
+                                User user = User.findByEmail(username);
+                                //signup in test
+                                Usertest user_test = new Usertest();
+                                user_test.user = user;
+                                user_test.test = test;
+                                user_test.expired = false;
+                                user_test.inmodule = false;
+                                user_test.submitted = false;
+                                user_test.save();
+                                user.tests.add(user_test);
+                                test.users.add(user_test);
+                                user.save();
+                                test.save();
+                                user_test.save();
 
-                            for (QuestionGroup group : test.groups) {
-                                for (Question question : group.questions) {
-                                    if (question.subtopic != null) {
-                                        SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
-                                        if (subtopicreputation == null) {
-                                            SubtopicReputation subtopicreputationuser = new SubtopicReputation();
-                                            subtopicreputationuser.subtopic = question.subtopic;
-                                            subtopicreputationuser.user = user;
-                                            subtopicreputationuser.reputationAsAMarker = new Long(0);
-                                            subtopicreputationuser.reputationAsAStudent = new Long(0);
-                                            subtopicreputationuser.save();
+                                for (QuestionGroup group : test.groups) {
+                                    for (Question question : group.questions) {
+                                        if (question.subtopic != null) {
+                                            SubtopicReputation subtopicreputation = SubtopicReputation.findByUserAndTopic(user.email, question.subtopic.id);
+                                            if (subtopicreputation == null) {
+                                                SubtopicReputation subtopicreputationuser = new SubtopicReputation();
+                                                subtopicreputationuser.subtopic = question.subtopic;
+                                                subtopicreputationuser.user = user;
+                                                subtopicreputationuser.reputationAsAMarker = new Long(0);
+                                                subtopicreputationuser.reputationAsAStudent = new Long(0);
+                                                subtopicreputationuser.save();
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
+                                usertest.inmodule = true;
+                                usertest.save();
+
+                                userTest = Usertest.findByUserAndTest(username, test_id);
+
+                                if (userTest.answers.isEmpty()) {
+                                    System.out.println("There is no answers creating.");
+                                    for (QuestionGroup g : test.groups) {
+                                        for (Question q : g.questions) {
+                                            if (q.typeOfQuestion == 0) {
+                                                Answer empty_answer = new Answer();
+                                                empty_answer.answer = "No answer.";
+                                                empty_answer.openQuestion = q;
+                                                empty_answer.test = test;
+                                                empty_answer.usertest = usertest;
+                                                empty_answer.group = g;
+                                                empty_answer.openQuestion = q;
+                                                empty_answer.save();
+                                                test.answers.add(empty_answer);
+                                                test.save();
+                                            }
                                         }
                                     }
                                 }
 
+                                for (QuestionGroup group : userTest.test.groups) {
+                                    for (Question question : group.questions) {
+                                        switch (question.typeOfQuestion) {
+                                            case 0:
+                                                question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
+                                                break;
+                                            case 1:
+                                                question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                break;
+                                            case 2:
+                                                question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                break;
+                                        }
+
+                                    }
+                                }
+
+
+                                System.out.println("Class: ApiController; Method: getTest; test: " + test.id);
+                                return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
                             }
-
-                            Usertest usertest = Usertest.findByUserAndTest(user.email, test_id);
-                            usertest.inmodule = true;
-                            usertest.save();
-
-                            userTest = Usertest.findByUserAndTest(username, test_id);
+                        } else {
 
                             if (userTest.answers.isEmpty()) {
                                 System.out.println("There is no answers creating.");
@@ -299,7 +349,7 @@ public class ApiController extends Controller {
                                             empty_answer.answer = "No answer.";
                                             empty_answer.openQuestion = q;
                                             empty_answer.test = test;
-                                            empty_answer.usertest = usertest;
+                                            empty_answer.usertest = userTest;
                                             empty_answer.group = g;
                                             empty_answer.openQuestion = q;
                                             empty_answer.save();
@@ -308,9 +358,8 @@ public class ApiController extends Controller {
                                         }
                                     }
                                 }
-
-
                             }
+
 
                             for (QuestionGroup group : userTest.test.groups) {
                                 for (Question question : group.questions) {
@@ -328,16 +377,8 @@ public class ApiController extends Controller {
 
                                 }
                             }
-
-
                             System.out.println("Class: ApiController; Method: getTest; test: " + test.id);
                             return ok(postDetailsSerializer.serialize(userTest)).as("application/json");
-                        } else {
-                            ObjectNode result = Json.newObject();
-                            result.put("status", "failure");
-                            result.put("error", "test requires suggestion");
-                            System.out.println("Class: ApiController; Method: getTest; test requires suggestion");
-                            return ok(result).as("application/json");
                         }
                     }
                 }
@@ -483,11 +524,9 @@ public class ApiController extends Controller {
     }
 
 
-    public static Result saveMutipleAnswer() throws IOException {
+    public static Result saveMutipleAnswer(Long usertest_id) throws IOException {
         JsonNode json = request().body().asJson();
         String auth = request().getHeader(AUTHORIZATION);
-        Long usertest_id = json.findPath("usertest").asLong();
-        System.out.println("usertest_id = " + usertest_id);
         if (json == null || auth == null) {
             System.out.println("Class: ApiController; Method: saveMutipleAnswer; Request not JSON");
             return badRequest("Expecting Json data.");
@@ -511,18 +550,18 @@ public class ApiController extends Controller {
                     boolean selected = b.findPath("selected").asBoolean();
 
                     Hypothesis h = Hypothesis.find.byId(id);
-                    
+
                     List<Hypothesis> hypothesis_list = Hypothesis.findByUserEmailAndQuestion(username, h.question.id);
-        			if(hypothesis_list.size() > 0){
-        				if(!hypothesis_list.get(0).isSaved){
-        					changeTestProgress(usertest_id, username);
-        				}
-        				for(Hypothesis h_aux: hypothesis_list){
-        					h_aux.isSaved = true;
-        					h_aux.save();
-        				}
-        			}
-        				
+                    if (hypothesis_list.size() > 0) {
+                        if (!hypothesis_list.get(0).isSaved) {
+                            changeTestProgress(usertest_id, username);
+                        }
+                        for (Hypothesis h_aux : hypothesis_list) {
+                            h_aux.isSaved = true;
+                            h_aux.save();
+                        }
+                    }
+
                     if (h.user.email.equals(username)) {
                         System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: " + id);
                         h.selected = selected;
@@ -753,68 +792,9 @@ public class ApiController extends Controller {
                     test.lesson.save();
 
 
-                    JSONSerializer postDetailsSerializer = new JSONSerializer().include(
-                            "test.groups",
-                            "test.groups.questions",
-                            "test.groups.questions.hypothesislist")
-                            .exclude(
-                                    "lesson",
-                                    "user",
-                                    "test.lesson",
-                                    "test.groups.questions.lesson",
-                                    "test.groups.questions.user",
-                                    "test.groups.questions.answerSuggestedByStudent",
-                                    "test.groups.questions.isCopy",
-                                    "test.groups.questions.hypothesislist.user",
-                                    "test.groups.questions.hypothesislist.isCorrect",
-                                    "test.groups.questions.hypothesislist.isSaved",
-                                    "test.groups.questions.hypothesislist.questionImageURL",
-                                    "test.groups.questions.openanswer.isSaved",
-                                    "test.groups.questions.openanswer.answerMarker",
-                                    "test.groups.questions.openanswer.questionevaluation",
-                                    "*.class");
+                  return getTest(test.lesson.module.acronym,test.lesson.acronym,test_id);
 
 
-                    if (usertest.answers.isEmpty()) {
-                        System.out.println("There is no answers creating.");
-                        for (QuestionGroup g : test.groups) {
-                            for (Question q : g.questions) {
-                                if (q.typeOfQuestion == 0) {
-                                    Answer empty_answer = new Answer();
-                                    empty_answer.answer = "No answer.";
-                                    empty_answer.openQuestion = q;
-                                    empty_answer.test = test;
-                                    empty_answer.usertest = usertest;
-                                    empty_answer.group = g;
-                                    empty_answer.openQuestion = q;
-                                    empty_answer.save();
-                                    test.answers.add(empty_answer);
-                                    test.save();
-                                }
-                            }
-                        }
-
-
-                        for (QuestionGroup group : usertest.test.groups) {
-                            for (Question question : group.questions) {
-                                switch (question.typeOfQuestion) {
-                                    case 0:
-                                        question.openanswer = Answer.findByUserTestAndQuestion(usertest.id, question.id);
-                                        break;
-                                    case 1:
-                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                        break;
-                                    case 2:
-                                        question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                        break;
-                                }
-
-                            }
-                        }
-                    }
-
-
-                    return ok(postDetailsSerializer.serialize(usertest)).as("application/json");
                 } else {
                     System.out.println("Class: ApiController; Method: signinTest; authentication failed");
                     ObjectNode result = Json.newObject();
@@ -834,11 +814,11 @@ public class ApiController extends Controller {
         }
 
     }
-    
+
     public static Result submitTest(Long usertest_id) throws IOException {
-    	
+
         String auth = request().getHeader(AUTHORIZATION);
-        if ( auth == null) {
+        if (auth == null) {
             System.out.println("Class: ApiController; Method: submitTest; Authentication failed");
             return badRequest("Authentication failed");
         } else {
@@ -849,125 +829,124 @@ public class ApiController extends Controller {
             String username = credString[0];
             String password = credString[1];
             if (User.authenticateSHA1(username, password) != null) {
-            	
-        
-            	Usertest usertest = Usertest.find.byId(usertest_id);
-            	
-            	if(usertest.submitted){
-            		System.out.println("Class: ApiController; Method: submitTest");
+
+
+                Usertest usertest = Usertest.find.byId(usertest_id);
+
+                if (usertest.submitted) {
+                    System.out.println("Class: ApiController; Method: submitTest");
                     ObjectNode result = Json.newObject();
                     result.put("status", "failure");
                     result.put("error", "test already submitted");
                     return ok(result).as("application/json");
-            	}
-            	usertest.user.refresh();
-            	System.out.println(usertest.user.email);
-            	System.out.println(username);
-            	if(usertest.user.email.equals(username)){
-            		Test test = usertest.test;
-            		//CORRIGIR TESTE
-            		int reputation = 0;
-            		for(QuestionGroup g : test.groups){
-            			for(Question q : g.questions){
-            				boolean answered = false;
-            				boolean bool = true;
-            				List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, q.id);
-            				for(Hypothesis h : hypothesis_aux){
-            					if(h.selected){
-            						answered = true;
-            					}
-            				}
-            				if(answered){
-            				
-            				if(q.typeOfQuestion==1){
-            					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
-            						for(Hypothesis h : hypothesis){
-            							if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool){
-            								bool = false;
-            							}
-            						}
-            						
-            						if(bool){
-            							reputation = reputation + q.weight;
-            						}else{
-            							reputation = reputation - q.weightToLose;
-            						}
-            				}else if(q.typeOfQuestion==2){
-            					List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
-            					if(hypothesis.size() != 0){
-            					for(Hypothesis h : hypothesis){
-            						if((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) ){
-            							 bool = false;
-            						}
-            					}
-            					}else{
-            						bool = false;
-            					}
-            					if(bool){
-            						reputation = reputation + q.weight;
-            					}else{
-            						reputation = reputation - q.weightToLose;
-            					}
-            					
+                }
+                usertest.user.refresh();
+                System.out.println(usertest.user.email);
+                System.out.println(username);
+                if (usertest.user.email.equals(username)) {
+                    Test test = usertest.test;
+                    //CORRIGIR TESTE
+                    int reputation = 0;
+                    for (QuestionGroup g : test.groups) {
+                        for (Question q : g.questions) {
+                            boolean answered = false;
+                            boolean bool = true;
+                            List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+                            for (Hypothesis h : hypothesis_aux) {
+                                if (h.selected) {
+                                    answered = true;
+                                }
+                            }
+                            if (answered) {
 
-            				}
-            				
-            				usertest.reputationAsAstudent = reputation;
-            				usertest.inmodule = false;
-            				usertest.save();
-            				}
-            				if(q.typeOfQuestion== 1 || q.typeOfQuestion == 2){
-            					QuestionEvaluation qe;
-            					if(QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id)==null){
-            						 qe = new QuestionEvaluation();
-            					}else{
-            						qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
-            					}
-            				if(bool && answered){
-            				qe.isCorrect=true;
-            				qe.score = q.weight;
-            				}else if(!bool && answered){
-            					qe.score = -q.weightToLose;
-            				}else{
-            					qe.score = 0;
-            				}
-            				
-            				qe.usertest = usertest;
-            				qe.question = q;
-            				qe.save();
-            				}
-            			
-            			}
-            			
-            		}
-            		
-            		
-            		
-            		usertest.reviewd = false;
-            		usertest.reputationAsAstudent = reputation;
-            		usertest.inmodule = false;
-            		usertest.submitted = true;
-            		usertest.save();
-            		
-            		ObjectNode result = Json.newObject();
+                                if (q.typeOfQuestion == 1) {
+                                    List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+                                    for (Hypothesis h : hypothesis) {
+                                        if ((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected) && bool) {
+                                            bool = false;
+                                        }
+                                    }
+
+                                    if (bool) {
+                                        reputation = reputation + q.weight;
+                                    } else {
+                                        reputation = reputation - q.weightToLose;
+                                    }
+                                } else if (q.typeOfQuestion == 2) {
+                                    List<Hypothesis> hypothesis = Hypothesis.findByUserEmailAndQuestion(username, q.id);
+                                    if (hypothesis.size() != 0) {
+                                        for (Hypothesis h : hypothesis) {
+                                            if ((h.isCorrect && !h.selected) || (!h.isCorrect && h.selected)) {
+                                                bool = false;
+                                            }
+                                        }
+                                    } else {
+                                        bool = false;
+                                    }
+                                    if (bool) {
+                                        reputation = reputation + q.weight;
+                                    } else {
+                                        reputation = reputation - q.weightToLose;
+                                    }
+
+
+                                }
+
+                                usertest.reputationAsAstudent = reputation;
+                                usertest.inmodule = false;
+                                usertest.save();
+                            }
+                            if (q.typeOfQuestion == 1 || q.typeOfQuestion == 2) {
+                                QuestionEvaluation qe;
+                                if (QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id) == null) {
+                                    qe = new QuestionEvaluation();
+                                } else {
+                                    qe = QuestionEvaluation.findByUserAndQuestion(usertest.id, q.id);
+                                }
+                                if (bool && answered) {
+                                    qe.isCorrect = true;
+                                    qe.score = q.weight;
+                                } else if (!bool && answered) {
+                                    qe.score = -q.weightToLose;
+                                } else {
+                                    qe.score = 0;
+                                }
+
+                                qe.usertest = usertest;
+                                qe.question = q;
+                                qe.save();
+                            }
+
+                        }
+
+                    }
+
+
+                    usertest.reviewd = false;
+                    usertest.reputationAsAstudent = reputation;
+                    usertest.inmodule = false;
+                    usertest.submitted = true;
+                    usertest.save();
+
+                    ObjectNode result = Json.newObject();
                     result.put("status", "success");
                     result.put("message", "test submited");
                     return ok(result).as("application/json");
-            		
-            		
-            	}else{
-            		System.out.println("Class: ApiController; Method: submitTest; wrong usertest");
+
+
+                } else {
+                    System.out.println("Class: ApiController; Method: submitTest; wrong usertest");
                     return badRequest("Expecting Json data.");
-            	}
-            	
-            	
-            }else{
-            	 System.out.println("Class: ApiController; Method: submitTest; authentication failed");
-                 ObjectNode result = Json.newObject();
-                 result.put("status", "failure");
-                 result.put("error", "failed authentication");
-                 return ok(result).as("application/json");
+                }
+
+
+            } else {
+                System.out.println("Class: ApiController; Method: submitTest; authentication failed");
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                result.put("error", "failed authentication");
+                return ok(result).as("application/json");
             }
-    }
+        }
     }
 }

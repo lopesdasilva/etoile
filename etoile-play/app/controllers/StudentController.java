@@ -391,10 +391,18 @@ public class StudentController extends Controller {
 		List<Module> allModules = Module.find.all();
 		List<Category> categories = Category.find.all();
 
+        List<Module> modulesToPresent = new LinkedList<Module>();
+
+
+        for(Module m: allModules){
+            if(m.published){
+                  modulesToPresent.add(m);
+            }
+        }
 		// check this line
 		User user = User.find.byId(session("email"));
-		System.out.println("Class: StudentController; Method: modules; modules size: "+allModules.size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
-		return ok(views.html.secured.modules.render(user, allModules,
+		System.out.println("Class: StudentController; Method: modules; modules size: "+modulesToPresent.size()+"; user: "+user.email+" browser: "+request().getHeader("user-agent"));
+		return ok(views.html.secured.modules.render(user, modulesToPresent,
 				categories));
 	}
 

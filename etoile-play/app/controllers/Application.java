@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import controllers.secured.Secured;
@@ -63,17 +64,21 @@ public class Application extends Controller {
 		List<Category> categories = Category.find.all();
 		List <Continent> continents = Continent.getAllContinents();
 		List<Module> modules= Module.find.all();
-		
-		modules.remove(Module.findByAcronym("demo1"));
-		Module	m=Module.find.byId((long) 998);
-		modules.remove(m);
+
+        List<Module> modulesToShow = new LinkedList<Module>();
+        for(Module m: modules){
+            if(m.published){
+                modulesToShow.add(m);
+            }
+        }
+
 		if (modules.size()>3){
 		Collections.shuffle(modules);
-		modules=modules.subList(0, 3);
+		modulesToShow=modulesToShow.subList(0, 3);
 		}
 		if(blogs.size()>3)
 		blogs=blogs.subList(0, 3);
-		return ok(index.render(blogs,categories,continents,modules));
+		return ok(index.render(blogs,categories,continents,modulesToShow));
 	}
 	
 
@@ -242,7 +247,14 @@ public static Result professorprofile(String professor_acronym) {
 				prof.refresh();
 		}
 		}
-		return ok(modules.render(Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+
+        List<Module> modulesToShow = new LinkedList<Module>();
+        for(Module m: modules_list){
+            if(m.published){
+                modulesToShow.add(m);
+            }
+        }
+		return ok(modules.render(modulesToShow,Category.find.all(),Continent.getAllContinents()));
 	}
 		
 	/**

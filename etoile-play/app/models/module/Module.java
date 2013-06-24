@@ -50,6 +50,9 @@ public class Module extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String imageURL;
+
+    @Constraints.Required
+    public boolean published;
 	
 	@ManyToMany(mappedBy="modules")
     @OrderBy("id")
@@ -66,7 +69,8 @@ public class Module extends Model {
 	@ManyToMany (cascade = {CascadeType.ALL})
     @OrderBy("id")
 	public List<Category> categories;
-	
+
+
 	@OneToMany
     @OrderBy("date")
 	public List<Content> contents;

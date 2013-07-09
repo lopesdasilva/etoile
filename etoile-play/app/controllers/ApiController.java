@@ -2,7 +2,6 @@ package controllers;
 
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,8 +23,10 @@ import models.test.Test;
 import models.test.question.Question;
 import models.test.question.QuestionEvaluation;
 import models.test.question.QuestionGroup;
+import models.test.question.URL;
 
 
+import org.joda.time.DateTime;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -51,6 +52,14 @@ public class ApiController extends Controller {
         System.out.println("Class: ApiController; Method: getNews; News size: " + obj.size());
         return ok(postDetailsSerializer.serialize(obj)).as("application/json");
     }
+
+    public static Result getNewsComments(Long blog_id) {
+        Blog blog = Blog.find.byId(blog_id);
+        JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("blog").exclude("*.class");
+        System.out.println("Class: ApiController; Method: getNewsComment; Comments Size: " + blog.comments.size());
+        return ok(postDetailsSerializer.serialize(blog.comments)).as("application/json");
+    }
+
 
     public static Result getDashboard() throws IOException {
 
@@ -620,8 +629,109 @@ public class ApiController extends Controller {
             }
         }
 
+        System.out.println("Class: ApiController; Method: getListOfTopURLs; Request not JSON");
+        return badRequest("Expecting Json data.");
+
+    }
+
+    public static Result getListOfTopURLs(Long question_id) throws IOException {
+        String auth = request().getHeader(AUTHORIZATION);
+        if (auth != null) {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            Question question = Question.find.byId(question_id);
+            if (User.authenticateSHA1(username, password) != null) {
+                if (question != null) {
+                    System.out.println("question found");
+                    JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class", "question", "user", "test", "studentProfile", "added");
+                    System.out.println("Class: ApiController; Method: getListOfTopURLs; Question: " + question.id);
+                    return ok(postDetailsSerializer.serialize(question.getTopUrls(question_id))).as("application/json");
+
+
+                }
+            } else {
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                System.out.println("Class: ApiController; Method: getListOfTopURLs; wrong user or password");
+                return ok(result).as("application/json");
+            }
+        }
+
         System.out.println("Class: ApiController; Method: getListOfURLs; Request not JSON");
         return badRequest("Expecting Json data.");
+
+    }
+
+    public static Result addURL(Long question_id) throws IOException {
+
+        JsonNode json = request().body().asJson();
+        String auth = request().getHeader(AUTHORIZATION);
+        if (json == null || auth == null) {
+            System.out.println("Class: ApiController; Method: addURL; Request not JSON");
+            return badRequest("Expecting Json data.");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+
+                Question question = Question.find.byId(question_id);
+                if (question != null) {
+                    String address = json.findPath("address").getTextValue();
+                    String description = json.findPath("description").getTextValue();
+                    String title = json.findPath("title").getTextValue();
+                    String image_url = json.findPath("image_url").getTextValue();
+
+                    User user = User.find.byId(username);
+
+
+
+                    URL url = new URL();
+                    url.description = description;
+                    url.name = title;
+                    url.imageURL = image_url;
+                    url.adress = address;
+                    url.question = question;
+                    url.user = user;
+                    url.likes = 0;
+                    url.added = new DateTime();
+                    url.save();
+
+
+                    System.out.println("URL: " + url.adress);
+                    System.out.println("URL: " + url.description);
+                    System.out.println("URL: " + url.name);
+                    System.out.println("URL: " + url.imageURL);
+
+                    System.out.println("Class: ApiController; Method: addURL; question_id:" + question_id + " url_added: " + address + " user:" + username);
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "success");
+                    return ok(result).as("application/json");
+
+
+                } else {
+                    System.out.println("Class: ApiController; Method: addURL; Question does not exists");
+                    ObjectNode result = Json.newObject();
+                    result.put("status", "failure");
+                    result.put("error", "Question does not exists");
+                    return ok(result).as("application/json");
+                }
+
+            } else {
+                System.out.println("Class: ApiController; Method: addURL; authentication failed");
+                ObjectNode result = Json.newObject();
+                result.put("status", "failure");
+                result.put("error", "failed authentication");
+                return ok(result).as("application/json");
+            }
+        }
 
     }
 
@@ -949,4 +1059,13 @@ public class ApiController extends Controller {
             }
         }
     }
+
+
+    public static Result getModuleForum(String module_acronym) {
+        Module module = Module.findByAcronym(module_acronym);
+        JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class").exclude("forum.module").exclude("forum.topics.starter.ongoingTests");
+        System.out.println("Class: ApiController; Method: getForum; Topics size: " + module.forum.topics.size());
+        return ok(postDetailsSerializer.serialize(module.forum.topics)).as("application/json");
+    }
+
 }

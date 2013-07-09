@@ -176,16 +176,21 @@ POST /savemultiplechoiceanswer 			controllers.StudentTestController.savemultiple
 #API
 GET /api/modules	controllers.ApiController.getModules()
 GET /api/news	controllers.ApiController.getNews()
+GET /api/news/:news/comments	controllers.ApiController.getNewsComments(news: Long)
 GET /api/module/:module controllers.ApiController.getModule(module: String)
 GET	/api/module/:module/lesson/:lesson controllers.ApiController.getLesson(module: String, lesson: String)
 GET /api/module/:module/lesson/:lesson/test/:test controllers.ApiController.getTest(module: String, lesson: String ,test: Long)
 POST /api/saveanswer controllers.ApiController.saveQuestion()
 POST /api/usertest/:usertest/savemultipleanswer controllers.ApiController.saveMutipleAnswer(usertest: Long)
 GET /api/question/:question/geturls controllers.ApiController.getListOfURLs(question: Long)
+GET /api/question/:question/gettopurls controllers.ApiController.getListOfTopURLs(question: Long)
+POST /api/question/:question/addurl controllers.ApiController.addURL(question: Long)
 POST /api/likeurl/:url controllers.ApiController.likeURL(url: Long)
 POST /api/signup/:test controllers.ApiController.signinTest(test: Long)
 POST /api/submittest/:test controllers.ApiController.submitTest(test: Long)
 POST /api/register controllers.ApiController.register()
+
+GET /api/module/:module/forum	controllers.ApiController.getModuleForum(module: String)
 
 POST /api/news/:blog/comment controllers.ApiController.commentNews(blog: Long)
 

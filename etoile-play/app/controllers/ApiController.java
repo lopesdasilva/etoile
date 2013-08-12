@@ -688,6 +688,7 @@ public class ApiController extends Controller {
                     String description = json.findPath("description").getTextValue();
                     String title = json.findPath("title").getTextValue();
                     String image_url = json.findPath("image_url").getTextValue();
+			System.out.println("title:" + title);
 
                     User user = User.find.byId(username);
 
@@ -1063,7 +1064,7 @@ public class ApiController extends Controller {
 
     public static Result getModuleForum(String module_acronym) {
         Module module = Module.findByAcronym(module_acronym);
-        JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class").exclude("forum.module").exclude("forum.topics.starter.ongoingTests");
+        JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class").exclude("starter").exclude("forum").include("replies").exclude("replies.user.ongoingTests");
         System.out.println("Class: ApiController; Method: getForum; Topics size: " + module.forum.topics.size());
         return ok(postDetailsSerializer.serialize(module.forum.topics)).as("application/json");
     }

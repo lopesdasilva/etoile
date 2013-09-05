@@ -7,7 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import models.*;
+import models.curriculum.Category;
+import models.curriculum.Curriculumlesson;
+import models.curriculum.Curriculummodule;
+import models.curriculum.Curriculumtopic;
+import models.module.Lessoncontent;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 
 
@@ -1067,6 +1073,70 @@ public class ApiController extends Controller {
         JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class").exclude("forum").include("replies").exclude("replies.user.ongoingTests").exclude("starter").exclude("replies.user.password");
         System.out.println("Class: ApiController; Method: getForum; Topics size: " + module.forum.topics.size());
         return ok(postDetailsSerializer.serialize(module.forum.topics)).as("application/json");
+    }
+
+    public static Result getCurriculumDendrogram(){
+        List<Category> categories = Category.find.all();
+
+        ObjectNode result = Json.newObject();
+        result.put("name", "Curriculum");
+        ArrayNode arrayNode = result.putArray("children");
+
+        for(Category c: categories){
+            ObjectNode row = Json.newObject();
+            row.put("name", c.name);
+            arrayNode.add(row);
+
+            ArrayNode arrayNode_CurriculumModules = row.putArray("children");
+            for(Curriculummodule cm: c.curriculummodules){
+                ObjectNode row_cm = Json.newObject();
+                row_cm.put("name", cm.name);
+                arrayNode_CurriculumModules.add(row_cm);
+
+                ArrayNode arrayNode_CurriculumLessons = row_cm.putArray("children");
+                for(Curriculumlesson cl: cm.curriculumlessons){
+                    ObjectNode row_cl = Json.newObject();
+                    row_cl.put("name", cl.name);
+                    arrayNode_CurriculumLessons.add(row_cl);
+
+                    ArrayNode arrayNode_CurriculumTopics = row_cl.putArray("children");
+                    for(Curriculumtopic ct: cl.curriculumtopics){
+                         ObjectNode row_ct = Json.newObject();
+                        row_ct.put("name", ct.text);
+                        arrayNode_CurriculumTopics.add(row_ct);
+                    }
+                }
+            }
+        }
+
+
+        return ok(result).as("application/json");
+    }
+
+    public static Result getModuleDendrogram(String module_acronym){
+        System.out.println("getModuleDendrogram: " + module_acronym);
+        Module module = Module.findByAcronym(module_acronym);
+
+        System.out.println("Module: " + module.name);
+        ObjectNode result = Json.newObject();
+        result.put("name", module.name);
+        ArrayNode arrayNode = result.putArray("children");
+
+        for(Lesson lesson: module.lessons){
+            ObjectNode row = Json.newObject();
+            row.put("name", lesson.name);
+            arrayNode.add(row);
+
+            ArrayNode arrayNode_lessonResources = row.putArray("children");
+            for(Lessoncontent lc: lesson.lessoncontents){
+                ObjectNode row_lc = Json.newObject();
+                row_lc.put("name", lc.name);
+                arrayNode_lessonResources.add(row_lc);
+            }
+        }
+
+        return ok(result).as("application/json");
+
     }
 
 }

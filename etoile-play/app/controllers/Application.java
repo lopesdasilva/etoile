@@ -19,6 +19,8 @@ import play.mvc.*;
 
 import util.pdf.PDF;
 import views.html.*;
+import views.html.statics.curriculumdendrogram;
+import views.html.statics.moduledendrogram;
 
 public class Application extends Controller {
 	
@@ -168,6 +170,8 @@ public static Result professorprofile(String professor_acronym) {
 				Category.find.all(),Continent.getAllContinents()
 				));
 	}
+
+
 	
 	public static Result contact() {
 		if(session("email")!=null){
@@ -296,5 +300,15 @@ public static Result professorprofile(String professor_acronym) {
         );
     }
 
+    public static Result curriculumdendrogram() {
+        List<Category> categories = Category.find.all();
+        return ok(curriculumdendrogram.render(categories));
+    }
+    public static Result moduledendrogram(String module_acronym) {
+        System.out.println("moduledendrogramm:"+module_acronym);
+        List<Category> categories = Category.find.all();
+        Module module = Module.findByAcronym(module_acronym);
+        return ok(moduledendrogram.render(categories, module));
+    }
     
 }

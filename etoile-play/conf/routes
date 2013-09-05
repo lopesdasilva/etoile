@@ -44,6 +44,8 @@ POST	/olduser							controllers.StudentController.olduser()
 
 #Static pages
 GET		/about						controllers.Application.about()
+GET		/curriculumdendrogram						controllers.Application.curriculumdendrogram()
+GET		/moduledendrogram/:module						controllers.Application.moduledendrogram(module: String)
 GET		/contact					controllers.Application.contact()
 GET		/curriculum					controllers.Application.curriculum()
 GET		/digitalcampus					controllers.Application.digitalcampus()
@@ -176,6 +178,8 @@ POST /savemultiplechoiceanswer 			controllers.StudentTestController.savemultiple
 #API
 GET /api/modules	controllers.ApiController.getModules()
 GET /api/news	controllers.ApiController.getNews()
+GET /api/curriculum	controllers.ApiController.getCurriculumDendrogram()
+GET /api/moduledendrogram/:module	controllers.ApiController.getModuleDendrogram(module: String)
 GET /api/news/:news/comments	controllers.ApiController.getNewsComments(news: Long)
 GET /api/module/:module controllers.ApiController.getModule(module: String)
 GET	/api/module/:module/lesson/:lesson controllers.ApiController.getLesson(module: String, lesson: String)

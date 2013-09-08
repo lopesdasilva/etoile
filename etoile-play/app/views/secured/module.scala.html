@@ -154,7 +154,13 @@
 			<h3>Categories</h3>
 			} @for(category <- module.categories){ <a
 				href="/curriculum#@category.keyword" class="">@category.name</a> } }
+				<h3>Lessons and resources</h3>
+            <iframe src="@routes.Application.moduledendrogram(module.acronym)" marginwidth="0" marginheight="0" scrolling="yes" width="700" height="700"></iframe>
+
+
 		</div>
+		
+		
 	</div>
 	</div>
 	}

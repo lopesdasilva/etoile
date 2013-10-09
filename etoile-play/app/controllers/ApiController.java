@@ -330,24 +330,75 @@ public class ApiController extends Controller {
                                             }
                                         }
                                     }
-                                }
 
-                                for (QuestionGroup group : userTest.test.groups) {
-                                    for (Question question : group.questions) {
-                                        switch (question.typeOfQuestion) {
-                                            case 0:
-                                                question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
-                                                break;
-                                            case 1:
-                                                question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                break;
-                                            case 2:
-                                                question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                break;
+                                    for (QuestionGroup group : userTest.test.groups) {
+                                        for (Question question : group.questions) {
+                                            switch (question.typeOfQuestion) {
+                                                case 0:
+                                                    question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
+                                                    break;
+                                                case 1:
+                                                    question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    if (hypothesis_aux.size()<1){
+                                                        for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
+                                                            Hypothesis new_h=new Hypothesis();
+                                                            new_h.number=h.number;
+                                                            new_h.question=h.question;
+                                                            new_h.text=h.text;
+                                                            new_h.user=user;
+                                                            new_h.isCorrect = h.isCorrect;
+                                                            new_h.save();
+                                                        }
+                                                        hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    }
+                                                    question.hypothesislist=hypothesis_aux;
+                                                    break;
+                                                case 2:
+                                                    question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    List<Hypothesis> hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    if (hypothesis_aux2.size()<1){
+                                                        for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
+                                                            Hypothesis new_h=new Hypothesis();
+                                                            new_h.number=h.number;
+                                                            new_h.question=h.question;
+                                                            new_h.text=h.text;
+                                                            new_h.user=user;
+                                                            new_h.isCorrect = h.isCorrect;
+                                                            new_h.save();
+                                                        }
+                                                        hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    }
+                                                    question.hypothesislist=hypothesis_aux2;
+                                                    break;
+                                            }
+
                                         }
+                                    }
 
+
+
+                                }  else{
+
+                                    for (QuestionGroup group : userTest.test.groups) {
+                                        for (Question question : group.questions) {
+                                            switch (question.typeOfQuestion) {
+                                                case 0:
+                                                    question.openanswer = Answer.findByUserTestAndQuestion(userTest.id, question.id);
+                                                    break;
+                                                case 1:
+                                                    question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    break;
+                                                case 2:
+                                                    question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    break;
+                                            }
+
+                                        }
                                     }
                                 }
+
+
 
 
                                 System.out.println("Class: ApiController; Method: getTest; test: " + test.id);

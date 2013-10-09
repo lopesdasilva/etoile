@@ -345,6 +345,8 @@ public class ApiController extends Controller {
                                                     for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
                                                         Hypothesis new_h=new Hypothesis();
                                                         new_h.number=h.number;
+                                                        new_h.isSaved = false;
+                                                        new_h.selected = false;
                                                         new_h.question=h.question;
                                                         new_h.text=h.text;
                                                         new_h.user=user;
@@ -644,16 +646,6 @@ public class ApiController extends Controller {
 
                     Hypothesis h = Hypothesis.find.byId(id);
 
-                    List<Hypothesis> hypothesis_list = Hypothesis.findByUserEmailAndQuestion(username, h.question.id);
-                    if (hypothesis_list.size() > 0) {
-                        if (!hypothesis_list.get(0).isSaved) {
-                            changeTestProgress(usertest_id, username);
-                        }
-                        for (Hypothesis h_aux : hypothesis_list) {
-                            h_aux.isSaved = true;
-                            h_aux.save();
-                        }
-                    }
 
                     if (h.user.email.equals(username)) {
                         System.out.println("Class: ApiController; Method: saveMutipleAnswer; hyp_id: " + id);
@@ -667,6 +659,19 @@ public class ApiController extends Controller {
                         System.out.println("Class: ApiController; Method: saveMutipleAnswer user does not own this hyp or hyp does not exists");
                         return ok(result).as("application/json");
                     }
+
+                    List<Hypothesis> hypothesis_list = Hypothesis.findByUserEmailAndQuestion(username, h.question.id);
+                    if (hypothesis_list.size() > 0) {
+                        if (!hypothesis_list.get(0).isSaved) {
+                            changeTestProgress(usertest_id, username);
+                        }
+                        for (Hypothesis h_aux : hypothesis_list) {
+                            h_aux.isSaved = true;
+                            h_aux.save();
+                        }
+                    }
+
+
                 }
                 System.out.println("Class: ApiController; Method: saveMutipleAnswer; saved");
                 ObjectNode result = Json.newObject();

@@ -40,6 +40,8 @@ POST	/myprofile/changepassword			controllers.StudentController.changepassword()
 POST	/myprofile/changeprivacy			controllers.StudentController.changeprivacy()
 GET		/myprofile/settings						controllers.StudentController.settings()
 POST	/olduser							controllers.StudentController.olduser()
+GET     /addResource                        controllers.StudentController.resource()
+POST     /addResource                        controllers.StudentController.addResource()
 
 
 #Static pages

@@ -1,4 +1,4 @@
-@(modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
+@(lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 
 @main("etoile project") {
 <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
@@ -25,6 +25,8 @@
 					</li>
 					<li><a href="/about">About</a>
 					</li>
+                    <li><a href="/statistics">Statistics</a>
+                    </li>
 					<li><a href="/contact">Contact</a>
 					</li>
 				</ul>
@@ -48,25 +50,50 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		@staticmenu(categories,continents)
-		
 
-		<div class="span9">
-			Number of modules: @modules.size()
-            Number of students: @Student.find.all().size()
+
+        <div class="span9">
+
+            <div class="page-header">
+                <h2>
+                    Statistics <br>
+                    <small>concerning the <i></i><b>é</b></i>toile platform and the <i></i><b>é</b></i>toile community</small>
+                </h2>
+
+            </div>
+
+            <p>Date and time of the statistics: @Calendar.getInstance().getTime() </p>
+
+            <br/>
+
+            <p>Number of registered students in <i></i><b>é</b></i>toile: @Student.find.all().size() </p>
+
+            <p>Number of modules in <i></i><b>é</b></i>toile: @modules.size()</p>
+
+            <p>Number of pedagogical resources (videos, texts, etc) specific to <i></i><b>é</b></i>toile: @lessonscontent.size()</p>
+
+            <p>Number of pedagogical resources (videos, texts, etc) linked by <i></i><b>é</b></i>toile: </p>
 
             @for(module <- modules){
             <p>
-
-                Nome do module: @module.name
-                Numero de estudantes: @module.users.size()
-               </p>
+                <br/>
+                Module: @module.name
+                <br/>
+                Signed-up students: @module.users.size()
+                <br/>
+                Lessons: @module.lessons.size()
+            </p>
             }
 
-			<div class="row-fluid">
 
-			</div>
-			
-		</div>
+        </div>
+
 	</div>
 </div>
 }
+
+<!-- falta colocar Resources de cada module -->
+<!-- falta considerar apenas os módulos visíveis -->
+<!-- falta gráfico com evolução dos alunos no tempo -->
+<!-- falta gráfico com evolução dos recursos no tempo -->
+

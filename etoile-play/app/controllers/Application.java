@@ -12,6 +12,7 @@ import models.*;
 import models.continent.Continent;
 import models.curriculum.Category;
 import models.module.Lesson;
+import models.module.Lessoncontent;
 import models.module.Module;
 import play.data.Form;
 import play.mvc.*;
@@ -265,7 +266,7 @@ public static Result professorprofile(String professor_acronym) {
     public static Result statistics(){
 
 
-        return ok(statistics.render(Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+        return ok(statistics.render(Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
     }
 
 		

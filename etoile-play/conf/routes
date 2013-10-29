@@ -49,6 +49,7 @@ GET		/moduledendrogram/:module						controllers.Application.moduledendrogram(mod
 GET		/contact					controllers.Application.contact()
 GET		/curriculum					controllers.Application.curriculum()
 GET		/digitalcampus					controllers.Application.digitalcampus()
+GET     /statistics                     controllers.Application.statistics()
 
 #Blog
 GET		/news							controllers.Application.news()

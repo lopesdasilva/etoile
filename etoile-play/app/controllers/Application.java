@@ -260,6 +260,14 @@ public static Result professorprofile(String professor_acronym) {
         }
 		return ok(modules.render(modulesToShow,Category.find.all(),Continent.getAllContinents()));
 	}
+
+    //CHECK THIS METHOD
+    public static Result statistics(){
+
+
+        return ok(statistics.render(Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+    }
+
 		
 	/**
      * Login page.

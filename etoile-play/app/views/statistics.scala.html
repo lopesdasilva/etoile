@@ -1,0 +1,72 @@
+@(modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent]) 
+
+@main("etoile project") {
+<link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+					</li>
+					<li><a href="/modules">Modules</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		@staticmenu(categories,continents)
+		
+
+		<div class="span9">
+			Number of modules: @modules.size()
+            Number of students: @Student.find.all().size()
+
+            @for(module <- modules){
+            <p>
+
+                Nome do module: @module.name
+                Numero de estudantes: @module.users.size()
+               </p>
+            }
+
+			<div class="row-fluid">
+
+			</div>
+			
+		</div>
+	</div>
+</div>
+}

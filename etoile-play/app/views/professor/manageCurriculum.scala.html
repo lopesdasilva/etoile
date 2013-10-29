@@ -117,7 +117,7 @@
                                                                               </br>
                                             @for(curriculumtopic <- curriculumlesson.curriculumtopics) {
                                             <p>
-                                                <a class="tip btn btn-small btn-danger" href=""
+                                                <a class="tip btn btn-small btn-danger" href="@routes.ProfessorController.deleteExternalResource(curriculumtopic.id)"
                                                    data-toggle="modal" role="button" rel="" data-placement="top" title="Delete"><i class="icon-remove icon-white" ></i> Delete</a>
                                                 <a href="@curriculumtopic.keyword" target="_blank">@curriculumtopic.text</a>
                                             </p>

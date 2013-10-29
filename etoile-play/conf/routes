@@ -19,6 +19,8 @@ GET     /                           controllers.StudentController.index()
 GET		/index						controllers.Application.index()
 GET		/						controllers.ProfessorController.index()
 GET		/managecurriculum					controllers.ProfessorController.manageCurriculum()
+GET /managecurriculum/deleteresource/:resource	controllers.ProfessorController.deleteExternalResource(resource: Long)
+
 
 # Authentication
 GET     /login                              controllers.Application.login()

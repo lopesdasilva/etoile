@@ -11,6 +11,7 @@ import models.curriculum.Category;
 import models.module.Lesson;
 import models.module.Module;
 import models.test.question.Question;
+import models.curriculum.Curriculumtopic;
 
 import models.User;
 import play.data.Form;
@@ -51,9 +52,15 @@ public class ProfessorController extends Controller {
 	}
 
     public static Result manageCurriculum() {
+        User user = User.find.byId(session("email"));
+        if(session("email")!=null && SecuredProfessor.isProfessor(session("email"))) {
         return ok(views.html.professor.manageCurriculum.render(
                 Category.find.all()
         ));
+        }
+
+        return Application.index();
+
     }
 
 	public static Result module(String module_acronym) {
@@ -156,6 +163,22 @@ public class ProfessorController extends Controller {
 	
 		return Application.index();
 	}
+
+    public static Result deleteExternalResource(long resource_id){
+       User user = User.find.byId(session("email"));
+        if(session("email")!=null && SecuredProfessor.isProfessor(session("email"))) {
+
+            Curriculumtopic resource = Curriculumtopic.find.byId(resource_id);
+            resource.delete();
+
+            return ok(views.html.professor.manageCurriculum.render(
+                    Category.find.all()
+            ));
+
+        }
+
+        return Application.index();
+    }
 
 	public static Result digitalcampus() {
 		User user = User.find.byId(session("email"));

@@ -1,0 +1,126 @@
+@(user: User,categories: List[models.curriculum.Category]) 
+@main("etoile"){
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a>
+					</li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+					</li>
+					<li><a href="/modules">Modules</a>
+					</li>
+<!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a>
+					</li>
+					<li class="active"><a href="/about">About</a>
+					</li>
+					<li><a href="/contact">Contact</a>
+					</li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> } 
+					@if(session.get("email")!=null) { 
+<div class="btn-group pull-right">
+					<a class="btn dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"><i class="icon-cog icon-white"></i>
+						@user.email <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<!-- dropdown menu links -->
+						<a href="@routes.StudentController.settings()#password" role="button"><i class="icon-wrench"></i> Password
+							Settings</a>
+						<a href="@routes.StudentController.settings()#privacy" role="button"><i class="icon-lock"></i> Privacy
+							Settings</a>
+							<li class="divider"></li>
+							<a href="/logout" role="button"><i class="icon-off"></i> Logout</a>
+					</ul>
+				</div>
+					 }
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid">
+@usermenu(user,categories,"")
+	<!--/span-->
+
+    <div class="span9">
+    @helper.form(routes.StudentController.addResource,'class->"form-horizontal") {
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Add new Resource</legend>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="resource_title">Title</label>
+                <div class="controls">
+                    <input id="resource_title" name="resource_title" type="text" placeholder="Resource title" class="input-xlarge" required>
+                    <p class="help-block">Insert the resource title</p>
+                </div>
+            </div>
+
+            <!-- Prepended text-->
+            <div class="control-group">
+                <label class="control-label" for="resource_address">Link</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on">http://</span>
+                        <input id="resource_address" name="resource_address" class="input-xlarge" placeholder="website url" type="text" required>
+                    </div>
+                    <p class="help-block">Insert the website url</p>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="control-group">
+                <label class="control-label" for="resource_challenge">Challenge</label>
+                <div class="controls">
+                    <select id="resource_challenge" name="resource_challenge" class="input-xlarge">
+                        @for(challenge <- models.curriculum.Curriculumlesson.find.all){
+                        <option value="@challenge.id">@challenge.name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="control-group">
+                <label class="control-label" for="resource_button"></label>
+                <div class="controls">
+                    <button id="resource_button" name="resource_button" class="btn btn-primary">Submit resource</button>
+                </div>
+            </div>
+
+        </fieldset>
+    }
+
+
+
+
+
+
+
+    </div>
+</div>
+</div>
+}

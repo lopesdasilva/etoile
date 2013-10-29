@@ -117,7 +117,9 @@
                                                                               </br>
                                             @for(curriculumtopic <- curriculumlesson.curriculumtopics) {
                                             <p>
-                                               <a href="@curriculumtopic.keyword" target="_blank">@curriculumtopic.text</a>
+                                                <a class="tip btn btn-small btn-danger" href=""
+                                                   data-toggle="modal" role="button" rel="" data-placement="top" title="Delete"><i class="icon-remove icon-white" ></i> Delete</a>
+                                                <a href="@curriculumtopic.keyword" target="_blank">@curriculumtopic.text</a>
                                             </p>
                                                   }
                                         </div>

@@ -4,6 +4,8 @@ import controllers.routes;
 
 import models.User;
 import models.curriculum.Category;
+import models.curriculum.Curriculumtopic;
+import models.curriculum.Curriculumlesson;
 import models.module.Bibliography;
 import models.module.Lesson;
 import models.module.Lessonalert;
@@ -55,6 +57,8 @@ public class ProfessorLessonController extends Controller {
 		public String imageURL;
 		
 		public String url;
+
+        public long resource_challenge;
 		
 	}
 	
@@ -129,7 +133,7 @@ public class ProfessorLessonController extends Controller {
 	}
 	
 	public static Result addlessoncontent(String module_acronym, String lesson_acronym){
-		
+
 		Module module = Module.findByAcronym(module_acronym);if (module==null){
 			System.out.println("The module does not exist.");
 			return redirect(routes.Application.modules());
@@ -148,7 +152,10 @@ public class ProfessorLessonController extends Controller {
 		
 		
 		if(SecuredProfessor.isProfessor(session("email")) && SecuredProfessor.isOwner(user,module)){
-			
+            String url=form.get().url;
+            if (!url.startsWith("https://") && !url.startsWith("http://")) {
+                url = "http://" + url;
+            }
 			
 			Lessoncontent content = new Lessoncontent();
 			content.name = form.get().name;
@@ -158,9 +165,23 @@ public class ProfessorLessonController extends Controller {
 			}else{
 				content.lessonContentImageURL = form.get().imageURL;
 			}
-			content.url = form.get().url;
+			content.url = url;
 			content.lesson = lesson;
 			content.save();
+
+
+
+            System.out.println("Challange: "+ form.get().resource_challenge);
+            models.curriculum.Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
+            Curriculumtopic externalResource = new Curriculumtopic();
+            externalResource.text = form.get().name;
+            externalResource.keyword = url;
+            externalResource.save();
+
+            challenge.curriculumtopics.add(externalResource);
+            challenge.save();
+
+
 			
 			System.out.println("******* start:"+user.email+"*********");
 	        System.out.println("Controller: ProfessorLessonEdit.java");

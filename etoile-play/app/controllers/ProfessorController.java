@@ -50,6 +50,12 @@ public class ProfessorController extends Controller {
 		return StudentController.index(); 
 	}
 
+    public static Result manageCurriculum() {
+        return ok(views.html.professor.manageCurriculum.render(
+                Category.find.all()
+        ));
+    }
+
 	public static Result module(String module_acronym) {
 
 		Module module = Module.findByAcronym(module_acronym);if (module==null){

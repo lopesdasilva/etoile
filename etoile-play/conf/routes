@@ -18,6 +18,7 @@ GET     /document                   controllers.StudentTestController.document(t
 GET     /                           controllers.StudentController.index()
 GET		/index						controllers.Application.index()
 GET		/						controllers.ProfessorController.index()
+GET		/managecurriculum					controllers.ProfessorController.manageCurriculum()
 
 # Authentication
 GET     /login                              controllers.Application.login()

@@ -11,6 +11,7 @@ import controllers.secured.SecuredProfessor;
 import models.*;
 import models.continent.Continent;
 import models.curriculum.Category;
+import models.curriculum.Curriculumtopic;
 import models.module.Lesson;
 import models.module.Lessoncontent;
 import models.module.Module;
@@ -266,7 +267,7 @@ public static Result professorprofile(String professor_acronym) {
     public static Result statistics(){
 
 
-        return ok(statistics.render(Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+        return ok(statistics.render(Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
     }
 
 		

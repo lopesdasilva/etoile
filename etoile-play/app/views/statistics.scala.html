@@ -1,4 +1,4 @@
-@(lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
+@(ressources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 
 @main("etoile project") {
 <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
@@ -72,7 +72,7 @@
 
             <p>Number of pedagogical resources (videos, texts, etc) specific to <i></i><b>é</b></i>toile: @lessonscontent.size()</p>
 
-            <!-- <p>Number of pedagogical resources (videos, texts, etc) linked by <i></i><b>é</b></i>toile: </p>  -->
+            <p>Number of pedagogical resources (videos, texts, etc) linked by <i></i><b>é</b></i>toile: @resources.size()</p>
 
             @for(module <- modules){
             <p>
@@ -81,7 +81,7 @@
                 <br/>
                 Signed-up students: @module.users.size()
                 <br/>
-                Lessons: @module.lessons.size()
+                Available lessons: @module.lessons.size()
             </p>
             }
 

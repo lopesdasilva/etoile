@@ -1,4 +1,4 @@
-@(resources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
+@(ressources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 
 @main("etoile project") {
 <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
@@ -72,17 +72,19 @@
 
             <p>Number of pedagogical resources (videos, texts, etc) specific to <i></i><b>é</b></i>toile: @lessonscontent.size()</p>
 
-            <p>Number of pedagogical resources (videos, texts, etc) linked by <i></i><b>é</b></i>toile: @ressources.size()</p>
+            <p>Number of pedagogical resources (videos, texts, etc) linked to <i></i><b>é</b></i>toile: @ressources.size()</p>
 
             @for(module <- modules){
-            <p>
-                <br/>
-                Module: @module.name
-                <br/>
-                Signed-up students: @module.users.size()
-                <br/>
-                Available lessons: @module.lessons.size()
-            </p>
+                @if( module.published ) {
+                    <p>
+                    <br/>
+                    Module: @module.name
+                    <br/>
+                    Signed-up students: @module.users.size()
+                    <br/>
+                    Available lessons: @module.lessons.size()
+                    </p>
+                }
             }
 
 
@@ -93,7 +95,5 @@
 }
 
 <!-- falta colocar Resources de cada module -->
-<!-- falta considerar apenas os módulos visíveis -->
 <!-- falta gráfico com evolução dos alunos no tempo -->
 <!-- falta gráfico com evolução dos recursos no tempo -->
-

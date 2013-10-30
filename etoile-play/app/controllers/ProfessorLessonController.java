@@ -156,7 +156,8 @@ public class ProfessorLessonController extends Controller {
             if (!url.startsWith("https://") && !url.startsWith("http://")) {
                 url = "http://" + url;
             }
-			
+
+            try{
 			Lessoncontent content = new Lessoncontent();
 			content.name = form.get().name;
 			content.text = form.get().text;
@@ -168,10 +169,14 @@ public class ProfessorLessonController extends Controller {
 			content.url = url;
 			content.lesson = lesson;
 			content.save();
+            }catch(Exception e){
+                flash("failed", "Resource not added.");
+            }
 
 
 
-            System.out.println("Challange: "+ form.get().resource_challenge);
+
+            try{
             models.curriculum.Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
             Curriculumtopic externalResource = new Curriculumtopic();
             externalResource.text = form.get().name;
@@ -180,9 +185,13 @@ public class ProfessorLessonController extends Controller {
 
             challenge.curriculumtopics.add(externalResource);
             challenge.save();
+            flash("success", "Resource added.");
+            }catch(Exception e){
+                flash("warning", "Resource added. Resource not added as a Curriculum resource because it already exists.");
+            }
 
 
-			
+
 			System.out.println("******* start:"+user.email+"*********");
 	        System.out.println("Controller: ProfessorLessonEdit.java");
 	        System.out.println("Method: addlessonacontent");

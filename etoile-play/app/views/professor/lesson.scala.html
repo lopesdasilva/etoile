@@ -77,6 +77,21 @@ models.module.Lesson, module: models.module.Module, newAlertForm: Form[Professor
 						
 				</div>
 				</br>
+                @if(flash.contains("success")) {
+                <div class="alert alert-success">
+                    <strong>Success!</strong> @flash.get("success")
+                </div>
+                }
+                @if(flash.contains("failed")) {
+                <div class="alert alert-error">
+                    <strong>Failed!</strong> @flash.get("failed")
+                </div>
+                }
+                @if(flash.contains("warning")){
+                <div class="alert alert-fail">
+                    <strong>Failed!</strong> @flash.get("warning")
+                </div>
+                 }
 				<div class="tabbable">
 					<!-- Only required for left/right tabs -->
 					<ul class="nav nav-tabs" id="tabs">

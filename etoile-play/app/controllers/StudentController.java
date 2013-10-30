@@ -460,7 +460,9 @@ public class StudentController extends Controller {
         if (!url.startsWith("https://") && !url.startsWith("http://")) {
             url = "http://" + url;
         }
+        List<Category> categories = Category.find.all();
 
+        try{
         Curriculumtopic resource = new Curriculumtopic();
         resource.text = form.get().resource_title;
         resource.keyword = url;
@@ -469,19 +471,32 @@ public class StudentController extends Controller {
         Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
         challenge.curriculumtopics.add(resource);
         challenge.save();
+        }catch(Exception e){
+            User user = User.find.byId(session("email"));
+
+            flash("failed", "Resource already exists.");
+
+            if (SecuredProfessor.isProfessor(session("email"))) {
+                user.professorProfile.refresh();
+                return ok(views.html.professor.addResource.render(user));
+            }
+            user.studentProfile.refresh();
+            return ok(views.html.secured.addResource.render(user, categories));
+        }
 
 
-        List<Category> categories = Category.find.all();
 
         if (SecuredProfessor.isProfessor(session("email"))) {
             User user = User.find.byId(session("email"));
             user.professorProfile.refresh();
+            flash("success", "Resource added.");
            return ok(views.html.professor.addResource.render(user));
         }
 
 
         User user = User.find.byId(session("email"));
         user.studentProfile.refresh();
+        flash("success", "Resource added.");
         return ok(views.html.secured.addResource.render(user, categories));
     }
 

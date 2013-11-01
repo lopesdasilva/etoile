@@ -1,4 +1,4 @@
-@(user: User,active: String)
+@(user: User,categories: List[models.curriculum.Category],active:String)
 
 	<div class="span3">
 			
@@ -38,4 +38,15 @@
 					}
 				</ul>
 			</div>
+
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header"><a href="/curriculum">Curriculum in Complex Systems Sciences</a></li>
+                    <li class="nav-header">Categories (@categories.size)</li>
+                    @for(category <- categories) {
+                    <li><a href="/curriculum#@category.keyword">@category.name</a></li>
+                    }
+                </ul>
+            </div>
+
 		</div>

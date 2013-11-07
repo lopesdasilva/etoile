@@ -70,13 +70,15 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>URL</th>
-                        <th>Reputation (1)</th>
+                        <th>Reputation - contributions to the Curriculum(1)</th>
                     </tr>
                     </thead>
                     <tbody>
                     @for(student <- models.Student.find.all()) {
                             <tr>
-                                <td>1</td>
+                                <td>
+                                    @(models.Student.find.all().indexOf(student)+1)
+                                </td>
                                 <td>@student.firstname @student.lastname</td>
                                 <td><a href="@student.webpage" target="_blank">link</a></td>
                                 <td>123</td>
@@ -87,12 +89,11 @@
 
             </di>
 
-            <p> <small> (1) The reputation index is related to the contributions of each student to the Curriculum pedagogical resources. </small>  </p>
+            <p> <small> (1) This index is related to the contributions of each student to the Curriculum, including new pedagogical resources and "likes" to the existing ones. </small>  </p>
 
         </div>
 
     </div>
 </div>
-}
 
-<!-- falta colocar Resources de cada module -->
+}

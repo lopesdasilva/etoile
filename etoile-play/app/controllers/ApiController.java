@@ -340,39 +340,39 @@ public class ApiController extends Controller {
                                                 break;
                                             case 1:
                                                 question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                if (hypothesis_aux.size()<1){
-                                                    for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
-                                                        Hypothesis new_h=new Hypothesis();
-                                                        new_h.number=h.number;
+                                                List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                if (hypothesis_aux.size() < 1) {
+                                                    for (Hypothesis h : Hypothesis.findByQuestion(question.id)) {
+                                                        Hypothesis new_h = new Hypothesis();
+                                                        new_h.number = h.number;
                                                         new_h.isSaved = false;
                                                         new_h.selected = false;
-                                                        new_h.question=h.question;
-                                                        new_h.text=h.text;
-                                                        new_h.user=user;
+                                                        new_h.question = h.question;
+                                                        new_h.text = h.text;
+                                                        new_h.user = user;
                                                         new_h.isCorrect = h.isCorrect;
                                                         new_h.save();
                                                     }
-                                                    hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, question.id);
                                                 }
-                                                question.hypothesislist=hypothesis_aux;
+                                                question.hypothesislist = hypothesis_aux;
                                                 break;
                                             case 2:
                                                 question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                List<Hypothesis> hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                if (hypothesis_aux2.size()<1){
-                                                    for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
-                                                        Hypothesis new_h=new Hypothesis();
-                                                        new_h.number=h.number;
-                                                        new_h.question=h.question;
-                                                        new_h.text=h.text;
-                                                        new_h.user=user;
+                                                List<Hypothesis> hypothesis_aux2 = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                if (hypothesis_aux2.size() < 1) {
+                                                    for (Hypothesis h : Hypothesis.findByQuestion(question.id)) {
+                                                        Hypothesis new_h = new Hypothesis();
+                                                        new_h.number = h.number;
+                                                        new_h.question = h.question;
+                                                        new_h.text = h.text;
+                                                        new_h.user = user;
                                                         new_h.isCorrect = h.isCorrect;
                                                         new_h.save();
                                                     }
-                                                    hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    hypothesis_aux2 = Hypothesis.findByUserEmailAndQuestion(username, question.id);
                                                 }
-                                                question.hypothesislist=hypothesis_aux2;
+                                                question.hypothesislist = hypothesis_aux2;
                                                 break;
                                         }
 
@@ -413,44 +413,42 @@ public class ApiController extends Controller {
                                                 break;
                                             case 1:
                                                 question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                List<Hypothesis> hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                if (hypothesis_aux.size()<1){
-                                                    for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
-                                                        Hypothesis new_h=new Hypothesis();
-                                                        new_h.number=h.number;
-                                                        new_h.question=h.question;
-                                                        new_h.text=h.text;
-                                                        new_h.user=user;
+                                                List<Hypothesis> hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                if (hypothesis_aux.size() < 1) {
+                                                    for (Hypothesis h : Hypothesis.findByQuestion(question.id)) {
+                                                        Hypothesis new_h = new Hypothesis();
+                                                        new_h.number = h.number;
+                                                        new_h.question = h.question;
+                                                        new_h.text = h.text;
+                                                        new_h.user = user;
                                                         new_h.isCorrect = h.isCorrect;
                                                         new_h.save();
                                                     }
-                                                    hypothesis_aux=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    hypothesis_aux = Hypothesis.findByUserEmailAndQuestion(username, question.id);
                                                 }
-                                                question.hypothesislist=hypothesis_aux;
+                                                question.hypothesislist = hypothesis_aux;
                                                 break;
                                             case 2:
                                                 question.hypothesislist = Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                List<Hypothesis> hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
-                                                if (hypothesis_aux2.size()<1){
-                                                    for (Hypothesis h: Hypothesis.findByQuestion(question.id)){
-                                                        Hypothesis new_h=new Hypothesis();
-                                                        new_h.number=h.number;
-                                                        new_h.question=h.question;
-                                                        new_h.text=h.text;
-                                                        new_h.user=user;
+                                                List<Hypothesis> hypothesis_aux2 = Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                if (hypothesis_aux2.size() < 1) {
+                                                    for (Hypothesis h : Hypothesis.findByQuestion(question.id)) {
+                                                        Hypothesis new_h = new Hypothesis();
+                                                        new_h.number = h.number;
+                                                        new_h.question = h.question;
+                                                        new_h.text = h.text;
+                                                        new_h.user = user;
                                                         new_h.isCorrect = h.isCorrect;
                                                         new_h.save();
                                                     }
-                                                    hypothesis_aux2=Hypothesis.findByUserEmailAndQuestion(username, question.id);
+                                                    hypothesis_aux2 = Hypothesis.findByUserEmailAndQuestion(username, question.id);
                                                 }
-                                                question.hypothesislist=hypothesis_aux2;
+                                                question.hypothesislist = hypothesis_aux2;
                                                 break;
                                         }
 
                                     }
                                 }
-
-
 
 
                             }
@@ -777,10 +775,9 @@ public class ApiController extends Controller {
                     String description = json.findPath("description").getTextValue();
                     String title = json.findPath("title").getTextValue();
                     String image_url = json.findPath("image_url").getTextValue();
-			System.out.println("title:" + title);
+                    System.out.println("title:" + title);
 
                     User user = User.find.byId(username);
-
 
 
                     URL url = new URL();
@@ -992,7 +989,7 @@ public class ApiController extends Controller {
                     test.lesson.save();
 
 
-                  return getTest(test.lesson.module.acronym,test.lesson.acronym,test_id);
+                    return getTest(test.lesson.module.acronym, test.lesson.acronym, test_id);
 
 
                 } else {
@@ -1158,33 +1155,33 @@ public class ApiController extends Controller {
         return ok(postDetailsSerializer.serialize(module.forum.topics)).as("application/json");
     }
 
-    public static Result getCurriculumDendrogram(){
+    public static Result getCurriculumDendrogram() {
         List<Category> categories = Category.find.all();
 
         ObjectNode result = Json.newObject();
         result.put("name", "Curriculum");
         ArrayNode arrayNode = result.putArray("children");
 
-        for(Category c: categories){
+        for (Category c : categories) {
             ObjectNode row = Json.newObject();
             row.put("name", c.name);
             arrayNode.add(row);
 
             ArrayNode arrayNode_CurriculumModules = row.putArray("children");
-            for(Curriculummodule cm: c.curriculummodules){
+            for (Curriculummodule cm : c.curriculummodules) {
                 ObjectNode row_cm = Json.newObject();
                 row_cm.put("name", cm.name);
                 arrayNode_CurriculumModules.add(row_cm);
 
                 ArrayNode arrayNode_CurriculumLessons = row_cm.putArray("children");
-                for(Curriculumlesson cl: cm.curriculumlessons){
+                for (Curriculumlesson cl : cm.curriculumlessons) {
                     ObjectNode row_cl = Json.newObject();
                     row_cl.put("name", cl.name);
                     arrayNode_CurriculumLessons.add(row_cl);
 
                     ArrayNode arrayNode_CurriculumTopics = row_cl.putArray("children");
-                    for(Curriculumtopic ct: cl.curriculumtopics){
-                         ObjectNode row_ct = Json.newObject();
+                    for (Curriculumtopic ct : cl.curriculumtopics) {
+                        ObjectNode row_ct = Json.newObject();
                         row_ct.put("name", ct.text);
                         arrayNode_CurriculumTopics.add(row_ct);
                     }
@@ -1196,7 +1193,7 @@ public class ApiController extends Controller {
         return ok(result).as("application/json");
     }
 
-    public static Result getModuleDendrogram(String module_acronym){
+    public static Result getModuleDendrogram(String module_acronym) {
         System.out.println("getModuleDendrogram: " + module_acronym);
         Module module = Module.findByAcronym(module_acronym);
 
@@ -1205,13 +1202,13 @@ public class ApiController extends Controller {
         result.put("name", module.name);
         ArrayNode arrayNode = result.putArray("children");
 
-        for(Lesson lesson: module.lessons){
+        for (Lesson lesson : module.lessons) {
             ObjectNode row = Json.newObject();
             row.put("name", lesson.name);
             arrayNode.add(row);
 
             ArrayNode arrayNode_lessonResources = row.putArray("children");
-            for(Lessoncontent lc: lesson.lessoncontents){
+            for (Lessoncontent lc : lesson.lessoncontents) {
                 ObjectNode row_lc = Json.newObject();
                 row_lc.put("name", lc.name);
                 arrayNode_lessonResources.add(row_lc);
@@ -1220,6 +1217,62 @@ public class ApiController extends Controller {
 
         return ok(result).as("application/json");
 
+    }
+
+    public static Result voteCurriculumResource(Long id) throws IOException {
+
+        //TODO: Check if user can vote and check if resource exists and actually vote, after ruben make is stuff
+
+
+        JsonNode json = request().body().asJson();
+        String auth = request().getHeader(AUTHORIZATION);
+        if (json == null || auth == null) {
+            System.out.println("Class: ApiController; Method: signinTest; Request not JSON");
+            return badRequest("Expecting Json data; Auth failed");
+        } else {
+            auth = auth.substring(6);
+            byte[] decodeAuth = new BASE64Decoder().decodeBuffer(auth);
+            String[] credString = new String(decodeAuth, "UTF-8").split(":");
+
+            String username = credString[0];
+            String password = credString[1];
+            if (User.authenticateSHA1(username, password) != null) {
+                User user = User.findByEmail(username);
+
+
+                //DELETETHIS
+                int likes = 1;
+                ObjectNode result = Json.newObject();
+
+                //TODO: Make a actual if clause
+                if (true) {
+                    result.put("status", "success");
+                    result.put("message", "voted");
+                    result.put("resource_likes", likes);
+                    return ok(result).as("application/json");
+                    //TODO: Check if id exists in the if below
+                } else {
+
+                    if (id == 0) {
+
+                        result.put("message", "Resource does not exist");
+                    }
+                    //TODO check if user already voted
+                    else if (false) {
+                        result.put("message", "You already voted on this resource");
+                    }
+                    result.put("status", "failed");
+                    result.put("resource_likes", likes);
+                    return ok(result).as("application/json");
+                }
+
+            }
+        }
+        System.out.println("Class: ApiController; Method: voteCurriculumResource; authentication failed");
+        ObjectNode result = Json.newObject();
+        result.put("status", "failure");
+        result.put("error", "failed authentication");
+        return ok(result).as("application/json");
     }
 
 }

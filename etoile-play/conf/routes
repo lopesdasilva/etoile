@@ -206,6 +206,9 @@ GET /api/module/:module/forum	controllers.ApiController.getModuleForum(module: S
 POST /api/news/:blog/comment controllers.ApiController.commentNews(blog: Long)
 
 
+POST /api/curriculumvote/:id controllers.ApiController.voteCurriculumResource(id: Long)
+
+
 GET /api/dashboard	controllers.ApiController.getDashboard()
 POST /api/authenticate controllers.ApiController.authenticate()
 

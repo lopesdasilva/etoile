@@ -169,6 +169,10 @@ public class ProfessorController extends Controller {
         if(session("email")!=null && SecuredProfessor.isProfessor(session("email"))) {
 
             Curriculumtopic resource = Curriculumtopic.find.byId(resource_id);
+
+            resource.user.commitmentReputation--;
+            resource.user.save();
+
             resource.delete();
 
             return ok(views.html.professor.manageCurriculum.render(

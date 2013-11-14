@@ -1245,7 +1245,6 @@ public class ApiController extends Controller {
 
 
                  Curriculumtopic resource=Curriculumtopic.find.byId(id);
-
                 ObjectNode result = Json.newObject();
 
                 //TODO: Make a actual if clause
@@ -1254,6 +1253,9 @@ public class ApiController extends Controller {
                     resource.likes+=1;
                     resource.voters.add(user);
                     resource.save();
+
+                    resource.user.commitmentReputation++;
+                    resource.user.save();
 
                     result.put("status", "success");
                     result.put("message", "voted");

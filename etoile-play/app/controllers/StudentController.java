@@ -474,8 +474,12 @@ public class StudentController extends Controller {
         resource.keyword = url;
         resource.user = user;
         resource.likes = 0;
-        resource.voters.add(user);
         resource.save();
+
+
+        resource.user.commitmentReputation++;
+        resource.user.save();
+
 
         Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
         challenge.curriculumtopics.add(resource);

@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import models.User;
 import models.test.Test;
 
 import com.avaje.ebean.Ebean;
@@ -26,6 +27,17 @@ public class Curriculumtopic extends Model{
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String text;
+
+    @Constraints.Required
+    public int likes=0;
+
+    @ManyToOne
+    public User user;
+
+    @ManyToMany
+    @JoinTable(name="voters_resources")
+    @OrderBy("id")
+    public List<User> voters;
 
 	@ManyToMany(mappedBy="curriculumtopics")
 	public Curriculumlesson curriculumlesson;

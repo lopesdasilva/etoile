@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.Constraint;
 
+import models.curriculum.Curriculumtopic;
 import models.test.Answer;
 import models.test.AnswerMarker;
 import models.test.Hypothesis;
@@ -105,10 +106,15 @@ public class User extends Model {
 	@OrderBy("id")
 	public List<URL> urls;
 	
-	@ManyToMany	
+	@ManyToMany
 	@JoinTable(name="voters_url")
 	@OrderBy("id")
 	public List<URL> urls_voted;
+
+    @ManyToMany
+    @JoinTable(name="voters_resources")
+    @OrderBy("id")
+    public List<Curriculumtopic> resources_voted;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	@OrderBy("id")

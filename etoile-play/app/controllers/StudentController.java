@@ -453,6 +453,7 @@ public class StudentController extends Controller {
     }
 
     public static Result addResource() {
+        User user = User.find.byId(session("email"));
         Form<Resource> form = Form.form(
                 Resource.class).bindFromRequest();
 
@@ -466,13 +467,15 @@ public class StudentController extends Controller {
         Curriculumtopic resource = new Curriculumtopic();
         resource.text = form.get().resource_title;
         resource.keyword = url;
+        resource.user = user;
+        resource.likes = 0;
+        resource.voters.add(user);
         resource.save();
 
         Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
         challenge.curriculumtopics.add(resource);
         challenge.save();
         }catch(Exception e){
-            User user = User.find.byId(session("email"));
 
             flash("failed", "Resource already exists.");
 
@@ -487,14 +490,12 @@ public class StudentController extends Controller {
 
 
         if (SecuredProfessor.isProfessor(session("email"))) {
-            User user = User.find.byId(session("email"));
             user.professorProfile.refresh();
             flash("success", "Resource added.");
            return ok(views.html.professor.addResource.render(user));
         }
 
 
-        User user = User.find.byId(session("email"));
         user.studentProfile.refresh();
         flash("success", "Resource added.");
         return ok(views.html.secured.addResource.render(user, categories));

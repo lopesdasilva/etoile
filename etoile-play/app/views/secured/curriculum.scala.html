@@ -1,0 +1,179 @@
+@(categories: List[models.curriculum.Category]) @main("etoile"){
+<script>
+    function voteCurriculumResource(resource_id){
+    console.log("resource id: " + resource_id);
+
+    jQuery.ajax({
+    type: "POST",
+    url: '/api/curriculumvote',
+    data: JSON.stringify({"id": resource_id}),
+    contentType : 'application/json',
+    dataType: 'html',
+    beforeSend: function (request)
+    {
+    request.setRequestHeader("Authorization", "Basic "+"@session().get("basic")" )
+    },
+    success: function (dataCheck) {
+    console.log("DATACHECK"+dataCheck)
+    console.log(resource_id)
+
+    var result = jQuery.parseJSON(dataCheck)
+
+    document.getElementById("curriculumVotes"+resource_id).innerHTML=result.resource_likes+ " Votes"
+
+    if(result.status==="failed")  {
+    alert(result.message)
+    }
+
+    }
+
+    });
+
+
+    }
+    </script>
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- <a class="brand" href="/">etoile platform</a> -->
+			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+			<!-- Menu na barra de cima -->
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="http://unitwin-cs.org" target="_blank">CS-Digital
+							Campus</a>
+					</li>
+					</li>
+					<li><a href="/modules">Modules</a></li>
+					<!-- 					  <li class="active"><a href="/curriculum">Curriculum</a></li>  -->
+					<li><a href="/news">News</a></li>
+					<li><a href="/about">About</a></li>
+                    <li><a href="/statistics">Statistics</a></li>
+                    <li><a href="/contact">Contact</a></li>
+				</ul>
+				<!--  
+				<div class="navbar-form pull-right">
+					<a href="login" role="button" class="btn btn-primary">Login</a>
+				</div>
+				-->
+				<form class="navbar-form pull-right">
+					@if( session.get("email")==null) { <a href="/login" role="button"
+						class="btn btn-primary">Login</a> }
+					@if(session.get("email")!=null) {<a href="/logout" role="button"
+						class="btn btn-primary">Logout</a>}
+				</form>
+			</div>
+			<!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<!-- Docs nav
+    ================================================== -->
+
+		<div class="span3  sidebar-nav">
+			<ul class="nav well nav-list affix">
+				<li class="nav-header">Curriculum</li> @for(category <- categories) {
+				<li><a href="#@category.keyword">
+						<i class="icon-chevron-right"></i>@category.name</a>
+				</li> }
+			</ul>
+		</div>
+		<div class="span9">
+			<p>
+				</br> The <b><i>&eacute;</i>toile curriculum</b> is based on the <i>Grand
+					Challenges for Complex Systems Science</i> included in the <a
+					href="http://www.complexssociety.eu/texts/roadmaps/CSS_Roadmap_2012-A.pdf"
+					target="_blanc">ASSYST Roadmap for Complex Systems Science and
+					its Applications 2012-2020</a>. These Challenges are related to new
+				challenges in ICT and formal aspects of complex systems science.
+				They are organised under three main Categories:
+			<ol>
+				<li><b>Questions</b> - the transversal questions of
+					interdisciplinary integrative science;</li>
+				<li><b>Objects</b> - questions related to specific objects and
+					vertical domains of study;</li>
+				<li><b>Education and Professional Practice</b> - questions
+					related to the practical problems of educating and reeducating
+					large numbers of people in the new science, taking the science into
+					applications in the private and public sectors, and understanding
+					how the needs of global and local policy will direct and support
+					the development of new science.</li>
+			</ol>
+			Categories are composed by Subjects, and those aggregate the Grand
+			Challenges, that can still be divided into Topics. The &eacute;toile modules relate to the Grand Challenges,
+			and these relations are represented by links in the curriculum.
+			</p>
+			<iframe src="@routes.Application.curriculumdendrogram()" marginwidth="0" marginheight="0" scrolling="yes" width="700" height="700"></iframe>
+			@for(category <- categories) {
+				<section id="@category.keyword">
+					<h2>
+						<span rel="tooltip" data-placement="top"
+							title="This is a Category." 
+							class="label">Category</span><a class="tip" rel="tooltip" title="Click to see category modules" href="@routes.Application.categoryModules(category.id)">   @category.name</a>
+					</h2>
+					<p>@category.description</p>
+					
+						@for(curriculummodule <- category.curriculummodules) {
+						<section id="@category.keyword@curriculummodule.keyword">
+							<h4>
+								<blockquote><span class="label label-success">Subject</span>   @curriculummodule.name </blockquote>
+							</h4>
+							<p>@curriculummodule.text</p>
+
+
+								@for(curriculumlesson <- curriculummodule.curriculumlessons) {
+								<section id="@category.keyword@curriculummodule.keyword@curriculumlesson.keyword">
+									<h6>
+										<blockquote><blockquote><span class="label label-info">Challenge</span>   @curriculumlesson.name</blockquote></blockquote>
+									</h6>
+									<p>@curriculumlesson.text</p>
+                                    @if(curriculumlesson.curriculumtopics.size() > 0){
+                                    <div class="alert">
+                                        <strong data-toggle="collapse" data-target="#@curriculumlesson.id">Click
+                                            to expand and view Resources</strong>
+                                        <button type="button" class="close" data-toggle="collapse"
+                                                data-target="#@curriculumlesson.id">-</button>
+
+                                        <div id="@curriculumlesson.id" class="collapse row-fluid">
+                                                                              </br>
+                                            @for(curriculumtopic <- curriculumlesson.curriculumtopics) {
+                                            <p>
+                                               <!-- inserir aqui botão -->
+
+                                               <a onclick="voteCurriculumResource(@curriculumtopic.id)" role="button" class="btn btn-warning btn-mini" id="curriculumVotes@curriculumtopic.id">@curriculumtopic.likes Votes</a>  <a href="@curriculumtopic.keyword" target="_blank">@curriculumtopic.text</a>
+                                            </p>
+                                                  }
+                                        </div>
+
+                                    </div>
+
+
+
+
+								}
+                                    }
+							</section>
+							} 
+						
+					</section>
+				} 
+
+		</div>
+	</div>
+
+</div>
+
+
+}

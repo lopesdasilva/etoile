@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import controllers.extra.sha1;
 import controllers.secured.Secured;
 import controllers.secured.SecuredProfessor;
 
@@ -15,10 +16,14 @@ import models.curriculum.Curriculumtopic;
 import models.module.Lesson;
 import models.module.Lessoncontent;
 import models.module.Module;
+import org.apache.commons.codec.binary.Base64;
 import play.data.Form;
+import play.libs.Crypto;
 import play.mvc.*;
 
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 import util.pdf.PDF;
 import views.html.*;
 import views.html.statics.curriculumdendrogram;
@@ -88,7 +93,9 @@ public class Application extends Controller {
 
 	
 	public static Result curriculum() {
-		
+        if(session("email")!=null){
+            return StudentController.curriculum();
+        }
 		
 		return ok(views.html.statics.curriculum.render(
                 Category.find.all()
@@ -295,7 +302,14 @@ public static Result professorprofile(String professor_acronym) {
             return badRequest(login.render(loginForm));
         } else {
             session("email", loginForm.get().email.toLowerCase());
-            
+
+            String authString =  loginForm.get().email.toLowerCase() + ":" +  sha1.parseSHA1Password(loginForm.get().password.toLowerCase());
+            System.out.println("auth string: " + authString);
+            byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+            String authStringEnc = new String(authEncBytes);
+
+            session("basic", authStringEnc);
+
             switch (User.find.byId(session("email")).account_type){
             case 0:
             	return redirect(routes.StudentController.index());

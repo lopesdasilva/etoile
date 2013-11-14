@@ -31,15 +31,15 @@ public class Curriculumtopic extends Model{
     @Constraints.Required
     public int likes=0;
 
-    @ManyToOne
+    @ManyToOne      (cascade = {CascadeType.ALL})
     public User user;
 
-    @ManyToMany
+    @ManyToMany (cascade = {CascadeType.ALL})
     @JoinTable(name="voters_resources")
     @OrderBy("id")
     public List<User> voters;
 
-	@ManyToMany(mappedBy="curriculumtopics")
+	@OneToMany(mappedBy="curriculumtopics", cascade = {CascadeType.ALL})
 	public Curriculumlesson curriculumlesson;
 	
 	

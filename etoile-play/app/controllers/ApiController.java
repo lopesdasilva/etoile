@@ -1219,13 +1219,15 @@ public class ApiController extends Controller {
 
     }
 
-    public static Result voteCurriculumResource(Long id) throws IOException {
+    public static Result voteCurriculumResource() throws IOException {
 
         //TODO: Check if user can vote and check if resource exists and actually vote, after ruben make is stuff
 
 
+
         JsonNode json = request().body().asJson();
         String auth = request().getHeader(AUTHORIZATION);
+
         if (json == null || auth == null) {
             System.out.println("Class: ApiController; Method: signinTest; Request not JSON");
             return badRequest("Expecting Json data; Auth failed");
@@ -1239,34 +1241,40 @@ public class ApiController extends Controller {
             if (User.authenticateSHA1(username, password) != null) {
                 User user = User.findByEmail(username);
 
+               Long id=json.findPath("id").asLong();
 
-                //DELETETHIS
-                int likes = 1;
+
+                 Curriculumtopic resource=Curriculumtopic.find.byId(id);
+
                 ObjectNode result = Json.newObject();
 
                 //TODO: Make a actual if clause
-                if (true) {
+                if (resource!=null && !resource.voters.contains(user)) {
+                    //VOTING
+                    resource.likes+=1;
+                    resource.voters.add(user);
+                    resource.save();
+
                     result.put("status", "success");
                     result.put("message", "voted");
-                    result.put("resource_likes", likes);
+                    result.put("resource_likes", resource.likes);
                     return ok(result).as("application/json");
-                    //TODO: Check if id exists in the if below
                 } else {
 
-                    if (id == 0) {
-
+                    if (resource==null) {
                         result.put("message", "Resource does not exist");
                     }
-                    //TODO check if user already voted
-                    else if (false) {
+                    else if (resource.voters.contains(user)) {
                         result.put("message", "You already voted on this resource");
+                        result.put("resource_likes", resource.likes);
                     }
                     result.put("status", "failed");
-                    result.put("resource_likes", likes);
+
                     return ok(result).as("application/json");
                 }
 
             }
+
         }
         System.out.println("Class: ApiController; Method: voteCurriculumResource; authentication failed");
         ObjectNode result = Json.newObject();

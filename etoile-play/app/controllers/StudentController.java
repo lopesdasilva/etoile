@@ -48,6 +48,11 @@ public class StudentController extends Controller {
 
     private final static boolean DEBUG = true;
 
+    public static Result curriculum() {
+        return ok(views.html.secured.curriculum.render(
+                Category.find.all()));
+    }
+
     /**
      * Display the homescreen.
      */

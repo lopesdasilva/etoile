@@ -112,8 +112,8 @@ public class User extends Model {
 	public List<URL> urls_voted;
 
     @ManyToMany (cascade = {CascadeType.ALL})
-    @JoinTable(name="voters_resources")
-    @OrderBy("id")
+ //   @JoinTable(name="voters_resources")
+  //  @OrderBy("id")
     public List<Curriculumtopic> resources_voted;
 
     @OneToMany (cascade = {CascadeType.ALL})

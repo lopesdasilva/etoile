@@ -483,8 +483,8 @@ public class StudentController extends Controller {
 
 
         Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
-        challenge.curriculumtopics.add(resource);
-        challenge.save();
+       // challenge.curriculumtopics.add(resource);
+        //challenge.save();
             resource.curriculumlesson=challenge;
             resource.save();
         }catch(Exception e){

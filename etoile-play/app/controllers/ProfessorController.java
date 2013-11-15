@@ -170,8 +170,10 @@ public class ProfessorController extends Controller {
 
             Curriculumtopic resource = Curriculumtopic.find.byId(resource_id);
 
-           // resource.user.commitmentReputation--;
-           // resource.user.save();
+
+            //retira 1 de reputacao ao eliminar
+            resource.user.commitmentReputation--;
+            resource.user.save();
 
             resource.delete();
 

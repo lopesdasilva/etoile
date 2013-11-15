@@ -33,7 +33,7 @@ public class Curriculumlesson extends Model{
 	@ManyToMany(mappedBy="curriculumlessons")
 	public Curriculummodule curriculummodule;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.DETACH})
     @OrderBy("id")
 	public List<Curriculumtopic> curriculumtopics;
 	

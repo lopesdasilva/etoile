@@ -1619,6 +1619,7 @@ public class Global extends GlobalSettings {
 				//topic1_4_5_1.name = "Static Dimension;
 				topic1_4_5_1.text = "1.4.5.1 The static dimension: governance in the context of heterogeneity of stakeholders, points of view and interests";
             topic1_4_5_1.user=user;
+            topic1_4_5_1.curriculumlesson=lesson1_4_5;
             topic1_4_5_1.save();
 				
 				// 1_4_5_2 The dynamical dimension: evolution of stakeholders' objectives and viewpoints in the governance process
@@ -1627,13 +1628,14 @@ public class Global extends GlobalSettings {
 				//topic1_4_5_2.name = "Dynamical Dimension;
 				topic1_4_5_2.text = "1.4.5.2 The dynamical dimension: evolution of stakeholders' objectives and viewpoints in the governance process";
             topic1_4_5_2.user=user;
+            topic1_4_5_2.curriculumlesson=lesson1_4_5;
 				topic1_4_5_2.save();
 				
-				lesson1_4_5.curriculumtopics.add(topic1_4_5_1);
-				topic1_4_5_1.save();
-				lesson1_4_5.curriculumtopics.add(topic1_4_5_2);
-				topic1_4_5_2.save();
-				lesson1_4_5.save();
+				//lesson1_4_5.curriculumtopics.add(topic1_4_5_1);
+				//topic1_4_5_1.save();
+				//lesson1_4_5.curriculumtopics.add(topic1_4_5_2);
+				//topic1_4_5_2.save();
+				//lesson1_4_5.save();
 
 				
 				// 1_4 From optimal control to multiscale governance 

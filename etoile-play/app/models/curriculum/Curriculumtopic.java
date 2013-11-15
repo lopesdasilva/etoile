@@ -39,7 +39,7 @@ public class Curriculumtopic extends Model{
     @OrderBy("id")
     public List<User> voters;
 
-	@OneToMany(mappedBy="curriculumtopics", cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	public Curriculumlesson curriculumlesson;
 	
 	

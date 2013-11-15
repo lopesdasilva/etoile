@@ -39,6 +39,7 @@ import views.html.*;
 import controllers.extra.SendMail;
 import controllers.extra.sha1;
 import controllers.secured.*;
+import views.html.home;
 
 /**
  * Manage StudentController related operations.
@@ -484,6 +485,8 @@ public class StudentController extends Controller {
         Curriculumlesson challenge = Curriculumlesson.find.byId(form.get().resource_challenge);
         challenge.curriculumtopics.add(resource);
         challenge.save();
+            resource.curriculumlesson=challenge;
+            resource.save();
         }catch(Exception e){
 
             flash("failed", "Resource already exists.");

@@ -74,11 +74,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @for(student <- models.Student.find.orderBy("user.commitmentReputation DESC").findList()) {
+                        @for((student, index) <- models.Student.find.orderBy("user.commitmentReputation DESC").findList().zipWithIndex){
                     @if(!student.user.tester){
                             <tr>
                                 <td>
-                                    @(models.Student.find.all().indexOf(student)+1)
+                                    @(index+1)
                                 </td>
                                 <td>@student.firstname @student.lastname</td>
                                 <td><a href="@student.webpage" target="_blank">link</a></td>

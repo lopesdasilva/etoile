@@ -1,4 +1,4 @@
-@(ressources: List[models.curriculum.Curriculumtopic], lessonscontent: List[models.module.Lessoncontent], modules: List[models.module.Module], categories: List[models.curriculum.Category], continents: List[models.continent.Continent])
+@(user: models.User, ressources: List[models.curriculum.Curriculumtopic], lessonscontent: List[models.module.Lessoncontent], modules: List[models.module.Module], categories: List[models.curriculum.Category], continents: List[models.continent.Continent])
 
 @main("etoile project") {
     <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
@@ -53,8 +53,16 @@
 
     <div class="container-fluid">
         <div class="row-fluid">
-            @staticmenu(categories, continents)
+            @if(user!=null && user.account_type == 0){
+            @usermenu(user,categories,"")
 
+            }
+            @if(user != null && user.account_type == 1){
+            @professormenu(user,"")
+            }
+            @if(user == null){
+            @staticmenu(categories,continents)
+            }
 
             <div class="span9">
 

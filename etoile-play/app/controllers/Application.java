@@ -281,16 +281,20 @@ public static Result professorprofile(String professor_acronym) {
 
     //CHECK THIS METHOD
     public static Result statistics(){
-
-
-        return ok(statistics.render(Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+        User user = null;
+    if(session("email")!=null){
+    user = User.find.byId(session("email"));
     }
-
+        return ok(statistics.render(user, Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+    }
     //CHECK THIS METHOD
     public static Result reputation(){
 
-
-        return ok(reputation.render(Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+        User user = null;
+        if(session("email")!=null){
+            user = User.find.byId(session("email"));
+        }
+        return ok(reputation.render(user, Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
     }
 
 		

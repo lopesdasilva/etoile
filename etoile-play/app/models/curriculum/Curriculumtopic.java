@@ -14,7 +14,7 @@ import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
-public class Curriculumtopic extends Model{
+public class Curriculumtopic extends Model implements Comparable<Curriculumtopic>{
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
@@ -52,5 +52,9 @@ public class Curriculumtopic extends Model{
 		lessons = Ebean.find(Curriculumtopic.class).findList(); 
 		return lessons; 
 	}
-	
+
+    @Override
+    public int compareTo(Curriculumtopic o) {
+        return (o.likes<likes ? -1 : (o.likes==likes ? 0 : 1));
+    }
 }

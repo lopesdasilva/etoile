@@ -34,7 +34,7 @@ public class Curriculumlesson extends Model{
 	public Curriculummodule curriculummodule;
 	
 	@OneToMany(cascade = {CascadeType.DETACH})
-    @OrderBy("id")
+    @OrderBy("likes DESC")
 	public List<Curriculumtopic> curriculumtopics;
 	
 	public static Model.Finder<Long, Curriculumlesson> find = new Model.Finder<Long,Curriculumlesson>(

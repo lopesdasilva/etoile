@@ -12,6 +12,8 @@ import controllers.secured.SecuredProfessor;
 import models.*;
 import models.continent.Continent;
 import models.curriculum.Category;
+import models.curriculum.Curriculumlesson;
+import models.curriculum.Curriculummodule;
 import models.curriculum.Curriculumtopic;
 import models.module.Lesson;
 import models.module.Lessoncontent;
@@ -96,9 +98,16 @@ public class Application extends Controller {
         if(session("email")!=null){
             return StudentController.curriculum();
         }
-		
-		return ok(views.html.statics.curriculum.render(
-                Category.find.all()
+        List<Category> curriculum = Category.find.all();
+     /*   for(Category cat: curriculum){
+            for(Curriculummodule mod:cat.curriculummodules){
+                        for(Curriculumlesson lesson:mod.curriculumlessons){
+                            Collections.sort(lesson.curriculumtopics);
+                        }
+            }
+        }  */
+		return ok(views.html.statics.curriculum.render(  curriculum
+
 				));
 	}
 	

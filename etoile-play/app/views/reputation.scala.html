@@ -57,20 +57,20 @@
             <div class="page-header">
                 <h2>
                     Reputation <br>
-                    <small>reputation of the <i></i><b>é</b></i>toile students concerning their commitment to the community </small>
+                    <small>reputation of students and professors concerning their commitment to the <i></i><b>é</b></i>toile  community </small>
                 </h2>
 
             </div>
 
             <di>
-
+                <p><h4>Students</h4></p>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>URL</th>
-                        <th>Reputation - contributions to the Curriculum(1)</th>
+                        <th>Webpage</th>
+                        <th>Reputation - contribution to the Curriculum (1)</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -91,7 +91,39 @@
 
             </di>
 
-            <p> <small> (1) This index is related to the contributions of each student to the Curriculum, including new pedagogical resources and "likes" to the existing ones. </small>  </p>
+            <p> <i> (1) This index is related to the contribution of each student to the Curriculum in <i></i><b>é</b></i>toile,
+                sharing new pedagogical resources and obtaining "likes" in this resources. </i>  </p>
+
+            <br></br>
+
+            <di>
+                <p><h4>Professors</h4></p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Webpage</th>
+                        <th>Reputation - contribution to the Modules (1)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for(professor <- models.Professor.find.all()) {
+                    <tr>
+                        <td>
+                            @(models.Professor.find.all().indexOf(professor)+1)
+                        </td>
+                        <td>@professor.firstname @professor.lastname</td>
+                        <td>link em étoile</td>
+                        <td>123</td>
+                    </tr>
+                    }
+                    </tbody>
+                </table>
+
+            </di>
+
+            <p> <i> (1) This index is related to the number of modules each professor is contributing to <i></i><b>é</b></i>toile. </i>  </p>
 
         </div>
 

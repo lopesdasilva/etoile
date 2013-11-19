@@ -1,134 +1,143 @@
-@(ressources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
+@(ressources: List[models.curriculum.Curriculumtopic], lessonscontent: List[models.module.Lessoncontent], modules: List[models.module.Module], categories: List[models.curriculum.Category], continents: List[models.continent.Continent])
 
 @main("etoile project") {
-<link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
-<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse"
-               data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> </a>
-            <!-- <a class="brand" href="/">etoile platform</a> -->
-            <a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+    <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse"
+                data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                class="icon-bar"></span> <span class="icon-bar"></span> </a>
+                    <!-- <a class="brand" href="/">etoile platform</a> -->
+                <a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
 
-            <!-- Menu na barra de cima -->
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li><a href="/">Home</a>
-                    </li>
-                    <li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
-                    </li>
-                    <li><a href="/modules">Modules</a>
-                    </li>
-                    <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
-                    <li><a href="/news">News</a>
-                    </li>
-                    <li><a href="/about">About</a>
-                    </li>
-                    <li><a href="/statistics">Statistics</a>
-                    </li>
-                    <li><a href="/contact">Contact</a>
-                    </li>
-                </ul>
-                <!--
+                    <!-- Menu na barra de cima -->
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li><a href="/">Home</a>
+                        </li>
+                        <li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+                        </li>
+                        <li><a href="/modules">Modules</a>
+                        </li>
+                            <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+                        <li><a href="/news">News</a>
+                        </li>
+                        <li><a href="/about">About</a>
+                        </li>
+                        <li><a href="/statistics">Statistics</a>
+                        </li>
+                        <li><a href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                        <!--
                 <div class="navbar-form pull-right">
                     <a href="login" role="button" class="btn btn-primary">Login</a>
                 </div>
                 -->
-                <form class="navbar-form pull-right">
-                    @if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> }
-                    @if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
-                </form>
-            </div>
-            <!--/.nav-collapse -->
+                    <form class="navbar-form pull-right">
+                        @if(session.get("email") == null) {
+                            <a href="/login" role="button" class="btn btn-primary">Login</a>
+                        }
+                        @if(session.get("email") != null) {
+                            <a href="/logout" role="button" class="btn btn-primary">Logout</a>
+                        }
+                    </form>
+                </div>
+                    <!--/.nav-collapse -->
 
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        @staticmenu(categories,continents)
+    <div class="container-fluid">
+        <div class="row-fluid">
+            @staticmenu(categories, continents)
 
 
-        <div class="span9">
+            <div class="span9">
 
-            <div class="page-header">
-                <h2>
-                    Reputation <br>
-                    <small>reputation of students and professors concerning their commitment to the <i></i><b>é</b></i>toile  community </small>
-                </h2>
+                <div class="page-header">
+                    <h2>
+                        Reputation <br>
+                        <small>reputation of students and professors concerning their commitment to the <i></i><b>
+                            é</b></i>toile  community </small>
+                    </h2>
 
-            </div>
+                </div>
 
-            <di>
-                <p><h4>Students</h4></p>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Webpage</th>
-                        <th>Reputation - contribution to the Curriculum (1)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @for((student, index) <- models.Student.find.orderBy("user.commitmentReputation DESC").findList().zipWithIndex){
-                    @if(!student.user.tester){
+                <di>
+                    <p><h4>Students</h4></p>
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>
-                                    @(index+1)
-                                </td>
-                                <td>@student.firstname @student.lastname</td>
-                                <td><a href="@student.webpage" target="_blank">link</a></td>
-                                <td>@student.user.commitmentReputation</td>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Webpage</th>
+                                <th>Reputation - contribution to the Curriculum (1)</th>
                             </tr>
-                    }
-                    }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @for((student, index) <- models.Student.find.orderBy("user.commitmentReputation DESC").findList().zipWithIndex) {
+                            @if(!student.user.tester) {
+                                <tr>
+                                    <td>
+                                    @(index + 1)
+                                    </td>
+                                    <td>@student.firstname @student.lastname</td>
+                                    <td><a href="@student.webpage" target="_blank">link</a></td>
+                                    <td>@student.user.commitmentReputation</td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
 
-            </di>
+                </di>
 
-            <p> <i> (1) This index is related to the contribution of each student to the Curriculum in <i></i><b>é</b></i>toile,
-                either sharing new pedagogical resources or obtaining "likes" in this resources. </i>  </p>
+                <p> <i> (1) This index is related to the contribution of each student to the Curriculum in <i></i><b>
+                    é</b></i>toile,
+                    either sharing new pedagogical resources or obtaining "likes" in this resources. </i>  </p>
 
-            <br></br>
+                <br></br>
 
-            <di>
-                <p><h4>Professors</h4></p>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <!-- <th>Webpage</th>  -->
-                        <th>Reputation - contribution to the Modules (1)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @for(professor <- models.Professor.find.all()) {
-                    <tr>
-                        <td>
-                            @(models.Professor.find.all().indexOf(professor)+1)
-                        </td>
-                        <td>@professor.firstname @professor.lastname</td>
-                        <!-- <td>link em étoile</td>  -->
-                        <td>@professor.user.commitmentReputation</td>
-                        <td>@professor.user.commitmentReputation</td>
-                    </tr>
-                    }
-                    </tbody>
-                </table>
+                <di>
+                    <p><h4>Professors</h4></p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
 
-            </di>
+                                <th>Reputation - contribution to the Modules (1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            <p> <i> (1) This index is related to the number of modules each professor is contributing to <i></i><b>é</b></i>toile. </i>  </p>
+                        @for((professor, index) <- models.Professor.find.orderBy("user.commitmentReputation DESC").findList().zipWithIndex) {
+                            @if(professor.user != null) {
+                                @professor.refresh()
+                                <tr>
+                                    <td>
+                                    @(index + 1)
+                                    </td>
+                                    <td>@professor.firstname @professor.lastname</td>
+                                    <td>@professor.user.commitmentReputation</td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+
+                </di>
+
+                <p> <i> (1) This index is related to the number of modules each professor is contributing to <i></i><b>
+                    é</b></i>toile. </i>  </p>
+
+            </div>
 
         </div>
-
     </div>
-</div>
 
 }

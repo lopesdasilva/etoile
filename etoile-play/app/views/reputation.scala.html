@@ -92,7 +92,7 @@
             </di>
 
             <p> <i> (1) This index is related to the contribution of each student to the Curriculum in <i></i><b>é</b></i>toile,
-                sharing new pedagogical resources and obtaining "likes" in this resources. </i>  </p>
+                either sharing new pedagogical resources or obtaining "likes" in this resources. </i>  </p>
 
             <br></br>
 
@@ -103,7 +103,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Webpage</th>
+                        <!-- <th>Webpage</th>  -->
                         <th>Reputation - contribution to the Modules (1)</th>
                     </tr>
                     </thead>
@@ -114,8 +114,9 @@
                             @(models.Professor.find.all().indexOf(professor)+1)
                         </td>
                         <td>@professor.firstname @professor.lastname</td>
-                        <td>link em étoile</td>
-                        <td>123</td>
+                        <!-- <td>link em étoile</td>  -->
+                        <td>@professor.user.commitmentReputation</td>
+                        <td>@professor.user.commitmentReputation</td>
                     </tr>
                     }
                     </tbody>

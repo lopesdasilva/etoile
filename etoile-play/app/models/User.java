@@ -59,6 +59,9 @@ public class User extends Model {
 
     @Constraints.Required
     public int account_type;
+
+    @Constraints.Required
+    public Date createDate;
     
     //Only if account_type=1
     //Professor profile
@@ -147,7 +150,9 @@ public class User extends Model {
     public boolean tester;
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);
-    
+
+
+
     /**
      * Retrieve all users.
      */

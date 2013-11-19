@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Date;
 import java.util.Random;
 
 import net.tanesha.recaptcha.ReCaptchaImpl;
@@ -125,6 +126,7 @@ public class Register extends Controller {
 	        	user.studentProfile = student;
 	        	user.studentProfile.acronym=form.get().inputUsername;
 	        	user.olduser = true;
+            user.createDate=new Date();
 	        	if(form.get().gender.equals("male")){
 	        		user.studentProfile.male = true;
 	        	}else{

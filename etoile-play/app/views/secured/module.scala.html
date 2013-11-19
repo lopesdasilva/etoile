@@ -73,10 +73,11 @@
 				<br>@module.description
 				
 				<p>
-					@for(professor <- module.professors) { <a
+					@for(professor <- module.professors) {
+                        @if(!professor.master){<a
 						href="@routes.Application.professorprofile(professor.acronym)">
 						<span class="label label-info">@professor</span>
-					</a> }
+					</a> }}
 				</p>
 				<p>
 					<!-- 					<a class="btn btn-primary btn-large" href="about">Learn more&raquo;</a> -->

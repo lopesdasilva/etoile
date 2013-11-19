@@ -47,7 +47,10 @@ public class Professor extends Model {
 	@Constraints.Required
 	@Column(columnDefinition="TEXT")
 	public String shortdescription;
-	
+
+    @Constraints.Required
+    public boolean master=false;
+
 	@OneToOne
 	public User user;
 	

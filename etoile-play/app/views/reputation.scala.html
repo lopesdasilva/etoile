@@ -74,7 +74,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Webpage</th>
                                 <th>Reputation - contribution to the Curriculum (1)</th>
                             </tr>
                         </thead>
@@ -85,8 +84,7 @@
                                     <td>
                                     @(index + 1)
                                     </td>
-                                    <td>@student.firstname @student.lastname</td>
-                                    <td><a href="@student.webpage" target="_blank">link</a></td>
+                                    <td><a href="/students/@student.user.username">@student.firstname @student.lastname</a></td>
                                     <td>@student.user.commitmentReputation</td>
                                 </tr>
                             }
@@ -122,7 +120,7 @@
                                     <td>
                                     @(index + 1)
                                     </td>
-                                    <td>@professor.firstname @professor.lastname</td>
+                                    <td><a href="/professors/@professor.acronym">@professor.firstname @professor.lastname</a></td>
                                     <td>@professor.user.commitmentReputation</td>
                                 </tr>
                             }

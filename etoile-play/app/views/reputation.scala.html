@@ -78,19 +78,19 @@
 
                 <p>
 
-                    The value <i>Reputation - contribution to the Curriculum</i> is related to the contributions of each student or
+                    The values in column <i>Reputation</i> are related to the contribution of each student or
                     professor to the Curriculum in <b>é</b></i>toile,
                     either by sharing new pedagogical resources, or by obtaining "likes" in this resources.
                 </p>
                 <p>
-                    Adding a new resource to the <b>é</b></i>toile Curriculum will add one point to your reputation.
+                    Adding a new resource to the <b>é</b></i>toile Curriculum will increase one point to your reputation.
                 </p>
                 <p>
-                    Obtaining a "like" in one of the resources you've added to the <b>é</b></i>toile Curriculum will add one point to
+                    Obtaining a "like" in one of the resources you've added to the <b>é</b></i>toile Curriculum will increase one point to
                     your reputation.
                 </p>
 
-                Go to: <a href="#table_reputation_students">students reputation</a> | <a href="#table_reputation_professors">professors reputation</a>
+                Go to table: <a href="#table_reputation_students">students reputation</a> | <a href="#table_reputation_professors">professors reputation</a>
 
                 <br></br> <br></br>
 
@@ -112,7 +112,10 @@
                                     <td>
                                     @(index + 1)
                                     </td>
-                                    <td><a href="/students/@student.user.username">@student.firstname @student.lastname</a></td>
+                                    <!-- the following line is to be activated latter -->
+                                    <!-- <td><a href="/students/@student.user.username">@student.firstname @student.lastname</a></td> -->
+                                    <!-- and this is to be removed -->
+                                    <td>@student.firstname @student.lastname</td>
                                     <td>@student.user.commitmentReputation</td>
                                 </tr>
                             }

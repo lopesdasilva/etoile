@@ -318,12 +318,12 @@
           	<p><strong>Email:</strong> @user.email</p>
           	<p><strong>Address:</strong> @user.studentProfile.address</p>
           	<p><strong>Webpage:</strong> @user.studentProfile.webpage</p>
-          	@if(user.studentProfile.male){
-          	<p>Male from <span class="bfh-countries" data-country="@user.country" data-flags="false"></span></p>
-          	}
-          	@if(!user.studentProfile.male){
-          	<p>Female from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span></p>
-          	}
+          	<!-- @if(user.studentProfile.male){                                                                            -->
+          	<!-- <p>Male from <span class="bfh-countries" data-country="@user.country" data-flags="false"></span></p>      -->
+          	<!-- }                                                                                                         -->
+          	<!-- @if(!user.studentProfile.male){                                                                            -->
+          	<!-- <p>Female from <span class="bfh-countries" data-country="@user.country" data-flags="true"></span></p>      -->
+          	<!-- }                                                                                                          -->
           	</blockquote>
 		</div>
 	</div>
@@ -439,65 +439,22 @@
           <span class=" badge badge-alert">@module.name</span>
           }
            </p>
-          	<p><strong>Tests:</strong> @user.tests.size()</p>
-          	<p><strong>Suggested questions:</strong> @user.openquestions.size()</p>
-          	<p><strong>Forum posts:</strong> @user.replies.size()</p>
-          	<p><strong>Suggested URLs:</strong> @user.urls.size()</p>
-          	<p><strong>Marked answers: </strong>@user.answerMarker.size()</p>
+          	<p><strong>Tests concluded:</strong> @user.tests.size()</p>
+          	<p><strong>Suggested questions in tests:</strong> @user.openquestions.size()</p>
+            <p><strong>Suggested URLs in tests:</strong> @user.urls.size()</p>
+            <hr>
+            <p><strong>Forum posts:</strong> @user.replies.size()</p>
+          	<!-- <p><strong>Marked answers in tests: </strong>@user.answerMarker.size()</p>   -->
           </blockquote>
    
-     		<section id="reputation">
-          	<h3>My reputation:</h3>
+     	    <section id="reputation">
+          	<h3>My reputation</h3>
 			<div class="">
-				<button type="button" class="close" data-toggle="collapse"
-							data-target="#reputationdetails" >+</button>
-						<div class="span9">
-						<div class="progress progress-success progress-striped">
-					<div class="bar"  style="width: @user.globalReputation%"></div>
-					
-				</div>
-				</div>
-						
-							<div id="reputationdetails" class="collapse row-fluid in">
-							<div class="offset1">
-							<hr>
-							
-							@if(user.modules.size()>0){
-							<h2>Modules</h2>
-							@for(modulescore <- user.modulesscores){
-							<h4>@modulescore.module.name: </h4>
-							@if(modulescore.score>=50){
-								<small>Score:<strong>@modulescore.score%</strong> </small> <div class="progress progress-success">
-									<div class="bar" style="width:@modulescore.score% "></div>
-								</div>
-								}
-							@if(modulescore.score<50){
-								<small>Score:<strong>@modulescore.score%</strong> </small> <div class="progress progress-danger">
-									<div class="bar" style="width:@modulescore.score% "></div>
-								</div>
-								}
-							}
-							}
-							@if(user.subtopicreputation.size()>0){
-							<!-- <hr>
-							<h2>Subtopics</h2>
-							@for(subtopicreputation <- user.subtopicreputation){
-							<h4>@subtopicreputation.subtopic.name:  </h4>
-								<small>As a student:<strong>@subtopicreputation.reputationAsAStudent%</strong></small> <div class="progress progress-info">
-									<div class="bar" style="width:@subtopicreputation.reputationAsAStudent% "></div>
-								</div>
-								<small>As a marker:<strong>@subtopicreputation.reputationAsAMarker%</strong></small> <div class="progress progress-warning">
-									<div class="bar" style="width:@subtopicreputation.reputationAsAMarker%"></div>
-								</div>
-							}-->
-							}
-					
-							</div>
-							</div>
-				
-				
+                <blockquote>
+				 <p><strong>Reputation regarding the suggested resources for the Curriculum:</strong> @user.commitmentReputation</p>
+                </blockquote>
 		</div>
-				</section>
+			</section>
 	</div>
 	</div>
 	

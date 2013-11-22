@@ -1,0 +1,79 @@
+@(user: models.User, ressources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
+
+@main("etoile platform") {
+<link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
+<div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse"
+               data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> </a>
+            <!-- <a class="brand" href="/">etoile platform</a> -->
+            <a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+
+            <!-- Menu na barra de cima -->
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li><a href="http://unitwin-cs.org" target="_blank">CS-Digital Campus</a></li>
+                    </li>
+                    <li><a href="/modules">Modules</a>
+                    </li>
+                    <!-- 					  <li><a href="/curriculum">Curriculum</a></li>  -->
+                    <li><a href="/news">News</a>
+                    </li>
+                    <li><a href="/about">About</a>
+                    </li>
+                    <li><a href="/statistics">Statistics</a>
+                    </li>
+                    <li><a href="/contact">Contact</a>
+                    </li>
+                </ul>
+                <!--
+                <div class="navbar-form pull-right">
+                    <a href="login" role="button" class="btn btn-primary">Login</a>
+                </div>
+                -->
+                <form class="navbar-form pull-right">
+                    @if( session.get("email")==null) { <a href="/login" role="button" class="btn btn-primary">Login</a> }
+                    @if(session.get("email")!=null) { <a href="/logout" role="button" class="btn btn-primary">Logout</a> }
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        @if(user!=null && user.account_type == 0){
+        @usermenu(user,categories,"")
+
+        }
+        @if(user != null && user.account_type == 1){
+        @professormenu(user,"")
+        }
+        @if(user == null){
+        @staticmenu(categories,continents)
+        }
+
+        <div class="span9">
+
+            <div class="page-header">
+                <h2>
+                    Statistics <br>
+                    <small>concerning the <i></i><b>é</b></i>toile platform and the <i></i><b>é</b></i>toile community</small>
+                </h2>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+}
+
+<!-- falta colocar Resources de cada module -->

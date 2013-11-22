@@ -56,6 +56,7 @@ GET		/curriculum					controllers.Application.curriculum()
 GET		/digitalcampus					controllers.Application.digitalcampus()
 GET     /statistics                     controllers.Application.statistics()
 GET     /reputation                    controllers.Application.reputation()
+GET     /help                           controllers.Application.help()
 
 #Blog
 GET		/news							controllers.Application.news()

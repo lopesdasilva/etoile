@@ -297,6 +297,16 @@ public static Result professorprofile(String professor_acronym) {
         return ok(reputation.render(user, Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
     }
 
+    //CHECK THIS METHOD
+    public static Result help(){
+
+        User user = null;
+        if(session("email")!=null){
+            user = User.find.byId(session("email"));
+        }
+        return ok(help.render(user, Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+    }
+
 		
 	/**
      * Login page.

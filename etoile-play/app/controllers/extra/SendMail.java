@@ -17,7 +17,7 @@ public class SendMail {
     private static String mailSMTPServer="smtp.gmail.com";  
     private static String mailSMTPServerPort="465";  
     private static String sysNick="etoileplatform@gmail.com";  
-    private static String sysPass="etoile2013";  
+    private static String sysPass="etoilestar";
       
     /* 
      * quando instanciar um Objeto ja sera atribuido o servidor SMTP do GMAIL  

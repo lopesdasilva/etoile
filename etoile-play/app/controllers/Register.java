@@ -72,7 +72,7 @@ public class Register extends Controller {
 			 String new_password = getRandomPassword(6);
 			 user.password = sha1.parseSHA1Password(new_password);
 			 System.out.println("NEW PASSWORD: "+new_password);
-//			 SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + new_password);
+             SendMail.sendMail(user.email, "Your password has been changed.", "Hello "+user.studentProfile.firstname+", \nYour password has been changed to: " + new_password + "\nThe Étoile team.");
 			 user.save();
 				System.out.println("********* start:"+user.email+"***********");
 				System.out.println("Controller: Register.java");
@@ -133,8 +133,7 @@ public class Register extends Controller {
 	        		user.studentProfile.male = false;
 	        	}
 	        	user.studentProfile.imageURL = "http://forum.must.ac.ug/sites/default/files/default-avatar.png";
-//	        	SendMail.sendMail(form.get().inputEmail, "Welcome to Etoile "+form.get().inputUsername+"!", "Thank you for join us, help us to do a better community :)");    
-	        	user.save();  
+	        	user.save();
 	        	
 	        	University university = University.findByName(form.get().university);
 	        	
@@ -143,11 +142,14 @@ public class Register extends Controller {
 	        	student.user=user;
 	        	student.scientific_area = form.get().scientific_area;
 	        	student.university = university;
-	        	student.save();	        	
-	        	
-	        	
+	        	student.save();
 
-				System.out.println("********************************");
+                SendMail.sendMail(user.email, "Welcome to Étoile Platform", "Welcome to Étoile "+user.studentProfile.firstname+", \nThank you for joining the Étoile Platform. Help us to do a better community! \nThe Étoile team.");
+
+
+
+
+            System.out.println("********************************");
 				System.out.println("Controller: Register.java");
 				System.out.println("Method: register");
 				 System.out.println("User: "+form.get().inputUsername);

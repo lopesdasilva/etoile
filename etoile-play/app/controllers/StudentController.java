@@ -166,7 +166,7 @@ public class StudentController extends Controller {
             User user = User.find.byId(session("email"));
             Form<NewPassword_Form> form = Form.form(NewPassword_Form.class).bindFromRequest();
             user.password = sha1.parseSHA1Password(form.get().inputPassword);
-//			SendMail.sendMail(user.email, "Your password has been changed, "+user.username+".", "Your new password is: " + form.get().inputPassword);
+			SendMail.sendMail(user.email, "Your password has been changed.", "Hello "+user.studentProfile.firstname+", \nYour password has been changed to: " + form.get().inputPassword + "\nThe Étoile team.");
             user.save();
             System.out.println("Class: StudentController; Method: changepassword; Password changed; user: " + user.email + " browser: " + request().getHeader("user-agent"));
         }

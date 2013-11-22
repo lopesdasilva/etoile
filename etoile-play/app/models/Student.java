@@ -106,4 +106,14 @@ public class Student extends Model {
 		return find.where().eq("acronym", acronym).findUnique();
 	}
 
+    public static int getNumberOfStudents() {
+        int i = 0;
+        for(Student student: Student.find.all()){
+            if(!student.user.tester){
+                i++;
+            }
+        }
+        return i;
+    }
+
 }

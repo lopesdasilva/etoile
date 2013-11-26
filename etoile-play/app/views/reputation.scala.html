@@ -148,7 +148,7 @@
                         <tbody>
 
                         @for((professor, index) <- models.Professor.find.orderBy("user.commitmentReputation DESC").findList().zipWithIndex) {
-                            @if(professor.user != null) {
+                            @if(professor.user != null && !professor.user.tester) {
                                 @professor.refresh()
                                 <tr>
                                     <td>

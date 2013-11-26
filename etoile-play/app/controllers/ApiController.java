@@ -44,11 +44,18 @@ public class ApiController extends Controller {
 
     public static Result getModules() {
 
+        List <Module> final_list = new LinkedList<Module>();
         List<Module> obj = Module.find.all();
         JSONSerializer postDetailsSerializer = new JSONSerializer().include("contents").exclude("*.class");
-        System.out.println("Class: ApiController; Method: getModules; Modules size: " + obj.size());
-        return ok(postDetailsSerializer.serialize(obj)).as("application/json");
 
+        for(Module m: obj){
+          if(m.published){
+            final_list.add(m);
+          }
+        }
+
+        System.out.println("Class: ApiController; Method: getModules; Modules size: " + final_list.size());
+        return ok(postDetailsSerializer.serialize(final_list)).as("application/json");
 
     }
 

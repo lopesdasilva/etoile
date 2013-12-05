@@ -82,9 +82,9 @@ public class Application extends Controller {
                 modulesToShow.add(m);
             }
         }
+        Collections.shuffle(modulesToShow);
 
-		if (modules.size()>3){
-		Collections.shuffle(modules);
+        if (modules.size()>3){
 		modulesToShow=modulesToShow.subList(0, 3);
 		}
 		if(blogs.size()>3)

@@ -1,7 +1,7 @@
 @(blogs: List[Blog], categories: List[models.curriculum.Category],
 continents: List[models.continent.Continent],modules:
 List[models.module.Module]) @main("etoile project") {
-<link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
+<link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -52,30 +52,47 @@ List[models.module.Module]) @main("etoile project") {
 				<br>
 				<br>
 				<br>
-				<p>
-					<a class="btn btn-primary pull-right" href="about">Learn more
-						&raquo;</a>
-				</p>
+                <br>
+                <br>
+                <br>
+
+
+
+
+                <table class="pull-right">
+                <tr>
+                    @*<td>*@
+                        @*<a target="_blank" href="https://play.google.com/store/apps/details?id=com.etoile.android">*@
+                            @*<img alt="Get it on Google Play" style="height: 40px;"*@
+                            @*src="https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png" /></a>*@
+                    @*</td>                        *@
+                    <td> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.etoile.android">
+                        <img alt="Get it on Google Play" style="height: 40px;"
+                        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+                    </a></td>
+                </tr>
+            </table>
+
 			</div>
 			<div class="row-fluid">
 				<h3>Modules</h3>
 				<div class="row-fluid">
 				<ul class="thumbnails">
-				
+
 				<div id="mainwrapper">
 					@for(module <- modules) {
 					@if(module.university!=null){
 						@module.university.refresh()
 						}
-						
+
 						<div id="box-2" class="box">
-							
+
 								<div class="crop">
 								<img id="png1"
 								src="@module.imageURL" />
 								</div>
-								
-								
+
+
 								<div class="caption zeca-caption carousel-caption">
 										<small><h6 class="mini">@module.name</h6></small>
 									</div>
@@ -91,23 +108,23 @@ List[models.module.Module]) @main("etoile project") {
 										</div>
 										<div class="span9">
 											<p><h6 class="mini">@module.professors.get(0).firstname @module.professors.get(0).lastname</h6></p>
-											
+
 										</div>
 									</div>
 
 
 								</div>
 								</a>
-								}	
+								}
 								<a href="@routes.Application.module(module.acronym)">
 								<span
 									class="caption full-caption">
 									<small>@module.short_description</small><br>
 								</span>
 								</a>
-							</div> 
-							 				
-						
+							</div>
+
+
 						}
 						</ul>
 

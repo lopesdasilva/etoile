@@ -1,6 +1,6 @@
 @(user: models.User, ressources: List[models.curriculum.Curriculumtopic],lessonscontent: List[models.module.Lessoncontent],modules: List[models.module.Module],categories: List[models.curriculum.Category],continents: List[models.continent.Continent])
 
-@main("etoile platform") {
+@main("éToile Platform") {
 <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" /> 
 <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
 	<div class="navbar-inner">
@@ -8,8 +8,8 @@
 			<a class="btn btn-navbar" data-toggle="collapse"
 				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 				class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			<!-- <a class="brand" href="/">etoile platform</a> -->
-			<a class="brand" href="/"><b><i>&eacute;</i></b>toile platform</a>
+			<!-- <a class="brand" href="/">éToile Platform</a> -->
+			<a class="brand" href="/">éToile Platform</a>
 
 			<!-- Menu na barra de cima -->
 			<div class="nav-collapse">
@@ -68,7 +68,7 @@
             <div class="page-header">
                 <h2>
                     Statistics <br>
-                    <small>concerning the <i></i><b>é</b></i>toile platform and the <i></i><b>é</b></i>toile community</small>
+                    <small>concerning the éToile platform and the éToile community</small>
                 </h2>
             </div>
 
@@ -77,13 +77,15 @@
 
             <br/>
 
-            <p>Number of registered students in <i></i><b>é</b></i>toile: @Student.getNumberOfStudents() </p>
+            <p>Number of registered students in éToile: @Student.getNumberOfStudents() </p>
+
 
             <p>Number of modules in <i></i><b>é</b></i>toile: @module.Module.getNumberOfPublishedModules() </p>
 
-            <p>Number of pedagogical resources (videos, texts, etc) specific to <i></i><b>é</b></i>toile: @lessonscontent.size()</p>
 
-            <p>Number of pedagogical resources (videos, texts, etc) linked to <i></i><b>é</b></i>toile: @ressources.size()</p>
+            <p>Number of internal pedagogical resources (videos, texts, etc), specific to éToile: @lessonscontent.size()</p>
+
+            <p>Number of external pedagogical resources (videos, texts, etc). linked to éToile: @ressources.size()</p>
 
             @for(module <- modules){
                 @if( module.published ) {

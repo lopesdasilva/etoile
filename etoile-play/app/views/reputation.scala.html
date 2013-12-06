@@ -1,6 +1,6 @@
 @(user: models.User, ressources: List[models.curriculum.Curriculumtopic], lessonscontent: List[models.module.Lessoncontent], modules: List[models.module.Module], categories: List[models.curriculum.Category], continents: List[models.continent.Continent])
 
-@main("eToile platform") {
+@main("éToile platform") {
     <link href="@routes.Assets.at("stylesheets/caption-effect.css")" rel="stylesheet" type="text/css" media="screen" />
     <div class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
         <div class="navbar-inner">
@@ -9,7 +9,7 @@
                 data-target=".nav-collapse"> <span class="icon-bar"></span> <span
                 class="icon-bar"></span> <span class="icon-bar"></span> </a>
                     <!-- <a class="brand" href="/">etoile platform</a> -->
-                <a class="brand" href="/"><b><i>&eacute;</i></b>Toile platform</a>
+                <a class="brand" href="/">éToile Platform</a>
 
                     <!-- Menu na barra de cima -->
                 <div class="nav-collapse">
@@ -71,7 +71,7 @@
                 <div class="page-header">
                     <h2>
                         Reputation <br>
-                        <small>reputation of students and professors concerning their commitment to the <i></i><b>
+                        <small>reputation of researchers, students and professors concerning their commitment to the <i></i><b>
                             é</b></i>Toile  community </small>
                     </h2>
 
@@ -80,28 +80,28 @@
 
                 <p>
 
-                    The values in column <i>Reputation</i> are related to the contribution of each student or
-                    professor to the Curriculum in <b>é</b></i>Toile,
+                    The values in column <i>Reputation</i> are related to the contribution of each researcher, student or
+                    professor to the Curriculum in éToile,
                     either by sharing new pedagogical resources, or by obtaining "likes" in these resources.
                 </p>
                 <p>
-                    Adding a new resource to the <b>é</b></i>Toile Curriculum will increase one point to your reputation.
+                    Adding a new resource to the éToile Curriculum will increase one point to your reputation.
                 </p>
                 <p>
-                    Obtaining a "like" in one of the resources you've added to the <b>é</b></i>Toile Curriculum will increase one point to
+                    Obtaining a "like" in one of the resources you've added to the éToile Curriculum will increase one point to
                     your reputation.
                 </p>
                 <p>
-                    Check the <a href="/help" target="_blank">Help</a> for an explanation about how to append resources to the <b>é</b></i>Toile Curriculum
+                    Check the <a href="/help" target="_blank">Help</a> for an explanation about how to append resources to the éToile Curriculum.
                 </p>
 
-                Go to table: <a href="#table_reputation_students">students reputation</a> | <a href="#table_reputation_professors">professors reputation</a>
+                Go to table: <a href="#table_reputation_students">researchers/students reputation</a> | <a href="#table_reputation_professors">professors reputation</a>
 
                 <br></br> <br></br>
 
 
                 <div id="table_reputation_students">
-                    <p><h4>Students</h4></p>
+                    <p><h4>Researchers/Students</h4></p>
                     <table class="table table-bordered">
                         <thead>
                             <tr>

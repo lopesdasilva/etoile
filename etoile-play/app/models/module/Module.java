@@ -129,4 +129,14 @@ public class Module extends Model {
 		}
 		return n;
 		}
+
+    public static int getNumberOfPublishedModules(){
+        int n = 0;
+        for(Module m: Module.find.all()){
+            if(m.published){
+             n++;
+            }
+        }
+        return n;
+    }
 }

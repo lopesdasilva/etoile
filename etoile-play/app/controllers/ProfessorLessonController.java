@@ -181,6 +181,7 @@ public class ProfessorLessonController extends Controller {
             Curriculumtopic externalResource = new Curriculumtopic();
             externalResource.text = form.get().name;
             externalResource.keyword = url;
+            externalResource.curriculumlesson = challenge;
             externalResource.save();
 
             challenge.curriculumtopics.add(externalResource);

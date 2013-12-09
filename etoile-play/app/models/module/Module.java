@@ -59,7 +59,6 @@ public class Module extends Model {
 	public List<User> users;
 	
 	@ManyToMany(mappedBy="modules")
-    @OrderBy("id")
 	public List<Professor> professors;
 
 	@OneToMany(cascade = {CascadeType.ALL})

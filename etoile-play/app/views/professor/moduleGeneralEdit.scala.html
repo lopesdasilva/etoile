@@ -363,11 +363,12 @@ models.module.Module,professors: Array[String]) @main("éToile Platform"){
 			</div>
 
 			@for(professor <- module.professors) {
+                @if(!professor.master){
 			<p>
 				<a href="@routes.Application.professorprofile(professor.acronym)">@professor</a>
 				@professor.shortdescription
 			</p>
-
+                }
 			}
 
 			<div class="row-fluid">

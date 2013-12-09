@@ -61,6 +61,9 @@ GET     /helpsignup                      controllers.Application.helpsignup()
 GET     /helpincreasereputation         controllers.Application.helpincreasereputation()
 GET     /helpappendresourcesstudents        controllers.Application.helpappendresourcesstudents()
 GET     /helpappendresourcesprofessors        controllers.Application.helpappendresourcesprofessors()
+GET     /helptablets                     controllers.Application.helptablets()
+
+
 
 
 #Blog

@@ -318,6 +318,16 @@ public static Result professorprofile(String professor_acronym) {
     }
 
     //CHECK THIS METHOD
+    public static Result helptablets(){
+
+        User user = null;
+        if(session("email")!=null){
+            user = User.find.byId(session("email"));
+        }
+        return ok(helptablets.render(user, Curriculumtopic.find.all(),Lessoncontent.find.all(),Module.find.all(),Category.find.all(),Continent.getAllContinents()));
+    }
+
+    //CHECK THIS METHOD
     public static Result helpincreasereputation(){
 
         User user = null;

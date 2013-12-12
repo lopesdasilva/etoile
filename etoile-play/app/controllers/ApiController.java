@@ -38,6 +38,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import sun.misc.BASE64Decoder;
 
+import javax.persistence.OrderBy;
+
 
 public class ApiController extends Controller {
 
@@ -60,7 +62,11 @@ public class ApiController extends Controller {
     }
 
     public static Result getNews() {
-        List<Blog> obj = Blog.find.all();
+
+        List<Blog> obj = Blog.find.orderBy().desc("date").findList();
+
+
+
         JSONSerializer postDetailsSerializer = new JSONSerializer().exclude("*.class");
         System.out.println("Class: ApiController; Method: getNews; News size: " + obj.size());
         return ok(postDetailsSerializer.serialize(obj)).as("application/json");

@@ -351,6 +351,7 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 	</div>
 </div>
 
+
 <div class="container">
 	<div class="well  ">
 
@@ -872,12 +873,12 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 										@if(hypothesis.selected){
 										<label class="radio"> <input  id="ocqanswer@question.number"  type="radio"
 											name="mcqanswers" value="@hypothesis.id" id="optionRadios"
-											-							checked="checked"> @hypothesis.text
+											-							checked="checked"> <p style="font-size:11.2px">@hypothesis.text</p>
 
 										</label> } @if(!hypothesis.selected){
 										<label class="radio"> <input   type="radio"
 											name="mcqanswers" id="ocqanswer@question.number" value="@hypothesis.id" id="optionRadios"-							>
-											@hypothesis.text
+											<p style="font-size:11.2px">@hypothesis.text</p>
 										</label> } }
 										</form>
 									</ul>
@@ -902,11 +903,11 @@ function saveanswer(answer_text, typeOfQuestion ,question_id, question_number){
 								@if(hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox"  checked="checked"
 									name="mcqanswers" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
-									@hypothesis.text
+                                <p style="font-size:11.2px">@hypothesis.text</p>
 								</label> } @if(!hypothesis.selected){ <label class="checkbox"> <input
 									type="checkbox"
 									name="mcqanswers" id="mcqanswers@question.number" value="@hypothesis.id"  onclick="unsavedanswers(@question.number, @question.typeOfQuestion)">
-									@hypothesis.text
+                                <p style="font-size:11.2px">@hypothesis.text</p>
 								</label> } }
 								</form>
 							</div>
